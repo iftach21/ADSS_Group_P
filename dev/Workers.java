@@ -6,42 +6,10 @@ public class Workers {
     private WindowType[] available;
     private int wage;
     private int phoneNUM;
+    private String personalinfo;
+    private boolean[] pro;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getContract() {
-        return contract;
-    }
-
-    public String getStart_date() {
-        return start_date;
-    }
-
-    public WindowType[] getAvailable() {
-        return available;
-    }
-
-    public int getWage() {
-        return wage;
-    }
-
-    public int getPhoneNUM() {
-        return phoneNUM;
-    }
-
-    @Override
-    public String toString() {
-        //todo: string it later
-        return "";
-    }
-
-    public Workers(int id, String name, String contract, String start_date, WindowType[] available, int wage, int phoneNUM) {
+    public Workers(int id, String name, String contract, String start_date, WindowType[] available, int wage, int phoneNUM, String personalinfo, boolean[] pro) {
         this.id = id;
         this.name = name;
         this.contract = contract;
@@ -49,5 +17,28 @@ public class Workers {
         this.available = available;
         this.wage = wage;
         this.phoneNUM = phoneNUM;
+        this.personalinfo = personalinfo;
+        this.pro = pro;
+    }
+    public static boolean removePro(){
+        //todo: i need to add here somethingh
+        return true;
+    }
+    public static boolean addprof(){
+        //todo: i need to add here somethingh
+        return true;
+    }
+
+    public static boolean canIShiftMange() {
+        //todo: i need to add here somethingh
+        return true;
+    }
+    public static boolean canICashier(){
+        //todo: i need to add here somethingh
+        return true;
+    }
+    public static boolean candrivetruck(){
+        //todo: i need to add here somethingh
+        return true;
     }
 }

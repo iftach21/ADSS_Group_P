@@ -1,54 +1,18 @@
 public class Shift {
     private String date;
-    private int day;
     private Workers[] workers;
-    private ShiftManager shiftManager;
+    private ShiftManager shiftManager;   //todo: i need to add here somethingh
+    private String log;
 
-    public Shift(String date, int day, Workers[] workers, ShiftManager shiftManager) {
+    public Shift(String date, Workers[] workers, ShiftManager shiftManager, String log) {
         this.date = date;
-        this.day = day;
-        this.shift = shift;
         this.workers = workers;
         this.shiftManager = shiftManager;
+        this.log = log;
     }
+    public static String print(){
+        //todo: i need to add here somethingh
+        return null;
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public ShiftType getShift() {
-        return shift;
-    }
-
-    public void setShift(ShiftType shift) {
-        this.shift = shift;
-    }
-
-    public Workers[] getWorkers() {
-        return workers;
-    }
-
-    public void setWorkers(Workers[] workers) {
-        this.workers = workers;
-    }
-
-    public ShiftManager getShiftManager() {
-        return shiftManager;
-    }
-
-    public void setShiftManager(ShiftManager shiftManager) {
-        this.shiftManager = shiftManager;
     }
 }

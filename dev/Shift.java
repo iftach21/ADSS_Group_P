@@ -1,11 +1,10 @@
 public class Shift {
     private String date;
     private int day;
-    private ShiftType shift;
     private Workers[] workers;
     private ShiftManager shiftManager;
 
-    public Shift(String date, int day, ShiftType shift, Workers[] workers, ShiftManager shiftManager) {
+    public Shift(String date, int day, Workers[] workers, ShiftManager shiftManager) {
         this.date = date;
         this.day = day;
         this.shift = shift;

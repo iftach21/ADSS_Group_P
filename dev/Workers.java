@@ -1,4 +1,4 @@
-abstract class Workers {
+public class Workers {
     private int id;
     private String name;
     private String contract;

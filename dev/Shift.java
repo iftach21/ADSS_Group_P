@@ -1,7 +1,7 @@
 public class Shift {
     private String date;
     private Workers[] workers;
-    private ShiftManager shiftManager;   //todo: i need to add here somethingh
+    private Workers shiftManager;   //todo: i need to add here somethingh
     private String log;
 
     public Shift(String date, Workers[] workers, ShiftManager shiftManager, String log) {
@@ -11,7 +11,7 @@ public class Shift {
         this.log = log;
     }
     public static String print(){
-        //todo: i need to add here somethingh
+        //todo: i need to add here something
         return null;
 
     }

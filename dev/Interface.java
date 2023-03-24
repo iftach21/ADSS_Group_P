@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
@@ -46,7 +47,15 @@ public class Interface {
             System.out.println("7: get monthly wage for employee");
             System.out.println("8: change employees contract");
             System.out.println("9: update employees bank number");
-            System.out.println("10: update take availble for employee");
+            System.out.println("10: update available for employee");
+            System.out.println("11: add new jobs for employee");
+            System.out.println("12: remove jobs for employee");
+
+            System.out.println("0: to exit the system ");
+
+            //todo: add switch case for everything
+
+
 
 
         }
@@ -54,6 +63,120 @@ public class Interface {
 
     }//login
 
+
+    //function for the "1" option in menu
+    public void createnewweeklyshift(int weeknum,int year){
+        //todo: complete
+        //checks if allready exist, if not will create new one
+        for(int i=0; i<weeklyShiftList.size();i++){
+            if((weeklyShiftList.get(i).getYear()) == year &&
+                    weeklyShiftList.get(i).getWeekNUm()==weeknum) {
+                //allready exist:
+                return;
+            }
+        }
+        weeklyShiftList.add(new WeeklyShift(weeknum,year));
+
+    }
+
+    //function for the "2"
+    public void addtoexistingweeklyshift(){
+        //todo: needs more function for later.
+    }
+
+    //function for the "3"
+    public void switchemployeeinashift(){
+        //todo: needs more function for later.
+    }
+
+    //function for the "4"
+    public void fireemployee(int id){
+        for(int i=0; i<allworkerslist.size();i++){
+            if(allworkerslist.get(i).getId()==id){
+                allworkerslist.remove(i);
+                break;
+            }
+        }
+    }
+
+
+    //function for the "5"
+    public void addemployee(Workers w){
+        allworkerslist.add(w);
+    }
+
+    //function for the "6"
+    public void addwagetoemployee(int id,int addedwage){
+        for(int i=0; i<allworkerslist.size();i++){
+            if(allworkerslist.get(i).getId()==id){
+                allworkerslist.get(i).setWage(addedwage + allworkerslist.get(i).getWage());
+
+            }
+        }
+    }
+
+    //function for the "7"
+    public void getwageforemployee(int id, int fromweek, int toweek){
+        Workers w;
+        for(int i=0; i<allworkerslist.size();i++) {
+            if (allworkerslist.get(i).getId() == id) {
+                w = allworkerslist.get(i);
+                break;
+            }
+        }
+        //now w is the employee i need
+        //todo: complete - go through all the weeklys and find the ones he worked in.
+        //todo: function needed :  howmuchhoursdidthisworkerdid(int id) -> forweeklyshift
+    }
+
+    //function for the "8"
+    public void changeemployeecontract(int id,String contract){
+        for(int i=0; i<allworkerslist.size();i++) {
+            if (allworkerslist.get(i).getId() == id) {
+                allworkerslist.get(i).setContract(contract);
+                break;
+            }
+        }
+    }
+
+    //function for the "9"
+    public void updateemployeesbank(int id,int newbanknum) {
+        for (int i = 0; i < allworkerslist.size(); i++) {
+            if (allworkerslist.get(i).getId() == id) {
+                allworkerslist.get(i).setBankNum(newbanknum);
+                break;
+            }
+        }
+    }
+
+
+    //function for the "10"
+    public void addavilableforemployee(int id, WindowType wt){
+        for(int i=0; i<allworkerslist.size();i++) {
+            if (allworkerslist.get(i).getId() == id) {
+                allworkerslist.get(i).addwindow(wt);
+                break;
+            }
+        }
+    }
+    public void removeavalbleforemployee(int id,WindowType wt){
+        for(int i=0; i<allworkerslist.size();i++) {
+            if (allworkerslist.get(i).getId() == id) {
+                allworkerslist.get(i).removewindow(wt);
+                break;
+            }
+        }
+    }
+
+
+    //function for the "11"
+    public void addnewproforemployee(int id, String pro){
+
+        //todo: complete accordingly
+    }
+
+    //function for the "12"
+    public void removeprofforemployee(int id,string pro){}
 
 
 

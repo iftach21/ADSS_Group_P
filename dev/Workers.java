@@ -6,10 +6,56 @@ public class Workers {
     private WindowType[] available;
     private int wage;
     private int phoneNUM;
+    private int bankNum;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getContract() {
+        return contract;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public WindowType[] getAvailable() {
+        return available;
+    }
+
+    public int getWage() {
+        return wage;
+    }
+
+    public int getPhoneNUM() {
+        return phoneNUM;
+    }
+
+    public String getPersonalinfo() {
+        return personalinfo;
+    }
+
+    public boolean[] getPro() {
+        return pro;
+    }
+
     private String personalinfo;
     private boolean[] pro;
 
-    public Workers(int id, String name, String contract, String start_date, WindowType[] available, int wage, int phoneNUM, String personalinfo, boolean[] pro) {
+    public void setBankNum(int bankNum) {
+        this.bankNum = bankNum;
+    }
+
+    public int getBankNum() {
+        return bankNum;
+    }
+
+    public Workers(int id, String name, String contract, String start_date, WindowType[] available, int wage, int phoneNUM, String personalinfo, boolean[] pro, int bankNum) {
         this.id = id;
         this.name = name;
         this.contract = contract;
@@ -19,6 +65,7 @@ public class Workers {
         this.phoneNUM = phoneNUM;
         this.personalinfo = personalinfo;
         this.pro = pro;
+        this.bankNum = bankNum;
     }
 
     public void setId(int id) {
@@ -57,25 +104,33 @@ public class Workers {
         this.pro = pro;
     }
 
-    public static boolean removePro(int inx){
+    public  boolean removePro(int inx){
         //todo: i need to add here somethingh
         return true;
     }
-    public static boolean addprof(){
+    public  boolean addprof(int inx){
         //todo: i need to add here somethingh
         return true;
     }
 
-    public static boolean canIShiftMange() {
+    public  boolean canIShiftMange() {
         //todo: i need to add here somethingh
         return true;
     }
-    public static boolean canICashier(){
+    public  boolean canICashier(){
         //todo: i need to add here somethingh
         return true;
     }
-    public static boolean candrivetruck(){
+    public  boolean candrivetruck(){
         //todo: i need to add here somethingh
+        return true;
+    }
+    public boolean addwindow(WindowType wt){
+        //todo: complete
+        return true;
+    }
+    public boolean removewindow(WindowType wt){
+        //todo: complete
         return true;
     }
 }

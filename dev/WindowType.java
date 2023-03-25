@@ -14,3 +14,4 @@ public enum WindowType {
     night6,
     night7;
 }
+

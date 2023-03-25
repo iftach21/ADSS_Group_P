@@ -107,13 +107,17 @@ public class Workers {
     public void setPro(boolean[] pro) {
         this.pro = pro;
     }
-
+    public int getID(){
+      return this.id;
+    }
     public  boolean removePro(int inx){
         //todo: i need to add here somethingh
+        this.pro[inx]=true;
         return true;
     }
     public  boolean addprof(int inx){
         //todo: i need to add here somethingh
+        this.pro[inx]=false;
         return true;
     }
 

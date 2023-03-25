@@ -71,19 +71,23 @@ public class Interface {
                     int weeknum = myObj.nextInt();  // Read user input
 
                     this.createnewweeklyshift(weeknum,yearans);
+                    break;
                 }
                 //-----------------------
                 //add to existing weekly shift
                 //-----------------------
                 case "2":{
                     //todo: complete later
+                    break;
                 }
                 //-----------------------
                 //switch employees in a shift
                 //-----------------------
                 case "3":{
                     //todo: complete later
+                    break;
                 }
+
                 //-----------------------
                 //fire employee
                 //-----------------------
@@ -91,15 +95,98 @@ public class Interface {
                     System.out.println("please enter id for the employee");
                     int idans = myObj.nextInt();  // Read user input
                     this.fireemployee(idans);
+                    break;
                 }
+
                 //-----------------------
                 //add new employee
                 //-----------------------
-                case "5":{}
-                case "6":{}
-                case "7":{}
-                case "8":{}
-                case "9":{}
+                case "5":{
+                    //Workers(int id, String name, String contract,
+                    // String start_date, int wage, int phoneNUM, String personalinfo, int bankNum)
+
+                    System.out.println("please enter id for the employee");
+                    int id = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter name for the employee");
+                    String name = myObj.nextLine();  // Read user input
+
+                    System.out.println("please enter contract for the employee");
+                    String contract = myObj.nextLine();  // Read user input
+
+                    System.out.println("please enter start_date for the employee");
+                    String start_date = myObj.nextLine();  // Read user input
+
+                    System.out.println("please enter wage for the employee");
+                    int wage = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter phoneNUM for the employee");
+                    int phoneNUM = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter personalinfo for the employee");
+                    String personalinfo = myObj.nextLine();  // Read user input
+
+                    System.out.println("please enter bankNum for the employee");
+                    int bankNum = myObj.nextInt();  // Read user input
+
+                    Workers w = new Workers(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum);
+
+                    this.addemployee(w);
+                    break;
+
+                }
+
+
+                //-----------------------
+                //change wage to employee
+                //-----------------------
+                case "6":{
+                    System.out.println("please enter id for the employee");
+                    int idans = myObj.nextInt();  // Read user input
+                    System.out.println("how much would you like to add/deduct?");
+                    int wageadd = myObj.nextInt();  // Read user input
+                    this.addwagetoemployee(idans,wageadd);
+                    break;
+                }
+
+
+                //-----------------------
+                //get monthly wage for employee
+                //-----------------------
+                case "7":{
+                    //todo: complete later
+                    break;
+                }
+
+
+                //-----------------------
+                //change employees contract
+                //-----------------------
+                case "8":{
+                    System.out.println("please enter id for the employee");
+                    int idans = myObj.nextInt();  // Read user input
+                    System.out.println("please enter new contract");
+                    String newcontract = myObj.nextLine();  // Read user input
+                    this.changeemployeecontract(idans,newcontract);
+                    break;
+                }
+
+
+                //-----------------------
+                //update employees bank number
+                //-----------------------
+                case "9":{
+                    System.out.println("please enter id for the employee");
+                    int idans = myObj.nextInt();  // Read user input
+                    System.out.println("please enter new bank num");
+                    int banknum = myObj.nextInt();  // Read user input
+                    this.updateemployeesbank(idans,banknum);
+                    break;
+                }
+
+                //-----------------------
+                //update available for employee
+                //-----------------------
                 case "10":{}
                 case "11":{}
                 case "12":{}

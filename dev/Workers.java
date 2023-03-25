@@ -63,7 +63,6 @@ public class Workers {
         this.name = name;
         this.contract = contract;
         this.start_date = start_date;
-        this.available = null;
         this.wage = wage;
         this.phoneNUM = phoneNUM;
         this.personalinfo = personalinfo;

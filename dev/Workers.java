@@ -1,12 +1,16 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Workers {
     private int id;
     private String name;
     private String contract;
     private String start_date;
-    private WindowType[] available;
+    private List<WindowType> available;
     private int wage;
     private int phoneNUM;
     private int bankNum;
+    private boolean[] pro;
 
     public int getId() {
         return id;
@@ -24,7 +28,7 @@ public class Workers {
         return start_date;
     }
 
-    public WindowType[] getAvailable() {
+    public List<WindowType> getAvailable() {
         return available;
     }
 
@@ -45,7 +49,6 @@ public class Workers {
     }
 
     private String personalinfo;
-    private boolean[] pro;
 
     public void setBankNum(int bankNum) {
         this.bankNum = bankNum;
@@ -55,16 +58,17 @@ public class Workers {
         return bankNum;
     }
 
-    public Workers(int id, String name, String contract, String start_date, WindowType[] available, int wage, int phoneNUM, String personalinfo, boolean[] pro, int bankNum) {
+    public Workers(int id, String name, String contract, String start_date, int wage, int phoneNUM, String personalinfo, int bankNum) {
         this.id = id;
         this.name = name;
         this.contract = contract;
         this.start_date = start_date;
-        this.available = available;
+        this.available = null;
         this.wage = wage;
         this.phoneNUM = phoneNUM;
         this.personalinfo = personalinfo;
-        this.pro = pro;
+        this.pro = new boolean[5];
+        Arrays.fill(pro, false);
         this.bankNum = bankNum;
     }
 
@@ -84,7 +88,7 @@ public class Workers {
         this.start_date = start_date;
     }
 
-    public void setAvailable(WindowType[] available) {
+    public void setAvailable(List<WindowType> available) {
         this.available = available;
     }
 
@@ -133,4 +137,16 @@ public class Workers {
         //todo: complete
         return true;
     }
+    public void addnewproforemployee(int id, String prof){
+
+        //todo: complete accordingly
+    }
+    public void removeprofforemployee(int id,String prof){}
+
+
+
+
+
+
+
 }

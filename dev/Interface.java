@@ -35,7 +35,8 @@ public class Interface {
         //                      main menu
         //
         //==================================================
-        while(true){
+        boolean exit = true;
+        while(exit){
             System.out.println("please choose what you would like to do:");
             System.out.println("and type the number accordingly");
             System.out.println("1: create new weekly shift");
@@ -53,8 +54,58 @@ public class Interface {
 
             System.out.println("0: to exit the system ");
 
-            //todo: add switch case for everything
+            //end of menu
 
+
+            Scanner myObj = new Scanner(System.in);
+            String ans = myObj.nextLine();  // Read user input
+
+            switch (ans){
+                //-----------------------
+                //create new weekly shift
+                //-----------------------
+                case "1":{
+                    System.out.println("please enter year");
+                    int yearans = myObj.nextInt();  // Read user input
+                    System.out.println("please enter week number");
+                    int weeknum = myObj.nextInt();  // Read user input
+
+                    this.createnewweeklyshift(weeknum,yearans);
+                }
+                //-----------------------
+                //add to existing weekly shift
+                //-----------------------
+                case "2":{
+                    //todo: complete later
+                }
+                //-----------------------
+                //switch employees in a shift
+                //-----------------------
+                case "3":{
+                    //todo: complete later
+                }
+                //-----------------------
+                //fire employee
+                //-----------------------
+                case "4":{
+                    System.out.println("please enter id for the employee");
+                    int idans = myObj.nextInt();  // Read user input
+                    this.fireemployee(idans);
+                }
+                //-----------------------
+                //add new employee
+                //-----------------------
+                case "5":{}
+                case "6":{}
+                case "7":{}
+                case "8":{}
+                case "9":{}
+                case "10":{}
+                case "11":{}
+                case "12":{}
+                case "0":{}
+                default:{}
+            }
 
 
 
@@ -66,7 +117,6 @@ public class Interface {
 
     //function for the "1" option in menu
     public void createnewweeklyshift(int weeknum,int year){
-        //todo: complete
         //checks if allready exist, if not will create new one
         for(int i=0; i<weeklyShiftList.size();i++){
             if((weeklyShiftList.get(i).getYear()) == year &&
@@ -176,7 +226,7 @@ public class Interface {
     }
 
     //function for the "12"
-    public void removeprofforemployee(int id,string pro){}
+    public void removeprofforemployee(int id,String pro){}
 
 
 

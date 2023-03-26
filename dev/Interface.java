@@ -278,10 +278,7 @@ public class Interface {
                 default:{ System.out.println("please enter valid input");}
             }
 
-
-
         }
-
 
     }//login
 
@@ -301,7 +298,7 @@ public class Interface {
     }
 
     //function for the "2"
-    public void addtoexistingweeklyshift(){
+    public void addtoexistingweeklyshift(int weeknum,int yearnum,WindowType wt){
         //todo: needs more function for later.
     }
 
@@ -350,7 +347,7 @@ public class Interface {
             }
         }
 
-
+        return 0;
     }
 
     //function for the "8"

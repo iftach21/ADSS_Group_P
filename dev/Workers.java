@@ -149,8 +149,10 @@ public class Workers {
         //todo: complete accordingly
     }
 
-    public void printallworkersforthewindow(int indxofprof,WindowType wt){
-        //todo: complete accordingly
+    public boolean caniworkat(WindowType wt){
+        //returns bool if can work on the windowtype.
+        return true;
+        //todo: complete
     }
 
 

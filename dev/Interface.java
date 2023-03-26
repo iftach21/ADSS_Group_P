@@ -421,7 +421,9 @@ public class Interface {
             }
         }
     }
-
+    public void printallworkersforthewindow(int indxofprof,WindowType wt){
+        //todo: complete accordingly
+    }
 
 
 

@@ -15,14 +15,14 @@ public class WeeklyShift {
         return year;
     }
 
-    public WeeklyShift(int weekNUm, int year, Shift[] dayShift, Shift[] nightShift) {
+    public WeeklyShift(int weekNUm, int year) {
         this.weekNUm = weekNUm;
         this.year = year;
-        this.dayShift = dayShift;
-        this.nightShift = nightShift;
+        this.dayShift = new Shift[7];
+        this.nightShift = new Shift[7];
     }
 
-    private  boolean changeWorker(Workers worker1,Workers worker2, WindowType shiftTime){
+    public  boolean changeWorker(Workers worker1,Workers worker2, WindowType shiftTime){
         if(shiftTime.ordinal()<7){
             if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getID())){
                 return false;}
@@ -43,7 +43,7 @@ public class WeeklyShift {
         return true;
     }
 
-    private  StringBuilder printSpesific(){
+    public  StringBuilder printSpesific(){
         StringBuilder pWeelShift= new StringBuilder();
         for (int i = 0; i < 7; i++){
             pWeelShift.append("Day:").append(i).append(dayShift[i].printShift());
@@ -51,9 +51,6 @@ public class WeeklyShift {
         }
         return pWeelShift;
     }
-//    private static boolean creatShift(){
-//        return true;
-//    }
 
 
     public int howMuchShiftWorkerDid(int id){
@@ -72,6 +69,7 @@ public class WeeklyShift {
         return countShift;
 
     }
+
 
 
 }

@@ -29,9 +29,9 @@ public class Shift {
     }
     public boolean checkIfWorkerInShift(int id){
         for (Workers worker:ArrWorkers){
-            if(worker.getID()==id){return false;}
+            if(worker.getID()==id){return true;}
         }
-        return true;
+        return false;
     }
     public boolean removalWorker(Workers currentWorker){
         int i=0;

@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Workers {
+    //todo: to add the licence type. and the function that's needed
     private int id;
     private String name;
     private String contract;
@@ -63,11 +64,10 @@ public class Workers {
         this.name = name;
         this.contract = contract;
         this.start_date = start_date;
-        this.available = null;
         this.wage = wage;
         this.phoneNUM = phoneNUM;
         this.personalinfo = personalinfo;
-        this.pro = new boolean[5];
+        this.pro = new boolean[5]; //todo: need to update this to bigger
         Arrays.fill(pro, false);
         this.bankNum = bankNum;
     }
@@ -141,13 +141,19 @@ public class Workers {
         //todo: complete
         return true;
     }
-    public void addnewproforemployee(int id, String prof){
+    public void addnewproforemployee(int id, int indxprof){
 
         //todo: complete accordingly
     }
-    public void removeprofforemployee(int id,String prof){}
+    public void removeprofforemployee(int id,int indxprof){
+        //todo: complete accordingly
+    }
 
-
+    public boolean caniworkat(WindowType wt){
+        //returns bool if can work on the windowtype.
+        return true;
+        //todo: complete
+    }
 
 
 

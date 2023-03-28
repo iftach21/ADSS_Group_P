@@ -11,13 +11,14 @@ public class Interface {
     private List<Workers> allworkerslist; //holds all the workers available
 
     public Interface() {
+        this.weeklyShiftList = new ArrayList<WeeklyShift>();
+        this.allworkerslist = new ArrayList<Workers>();
     }
     public void logIn(){
         //===============================
         //    login confirmation
         //===============================
-        this.weeklyShiftList = new ArrayList<WeeklyShift>();
-        this.allworkerslist = new ArrayList<Workers>();
+
         //scans the username and password:
 //        while(true) {
 //            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -416,8 +417,6 @@ public class Interface {
         }
 
     }//login
-
-
     //function for the "1" option in menu
     public void createnewweeklyshift(int weeknum,int year,int supernum){
         //checks if allready exist, if not will create new one
@@ -431,18 +430,14 @@ public class Interface {
         weeklyShiftList.add(new WeeklyShift(weeknum,year,supernum));
 
     }
-
     //function for the "2"
     public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,Workers w,int profindx){
             this.getweeklyshift(weeknum,year,supernum).addworkertoshift(w,wt,profindx);
             }
-
-
     //function for the "3"
     public void switchemployeeinashift(int weeknum,int yearnum,int supernum, WindowType wt,int prof, int id1, int id2){
         this.getweeklyshift(weeknum,yearnum,supernum).changeWorker(this.getworkerbyid(id1),this.getworkerbyid(id2),prof,wt);
     }
-
     //function for the "4"
     public void fireemployee(int id){
         for(int i=0; i<allworkerslist.size();i++){
@@ -452,18 +447,14 @@ public class Interface {
             }
         }
     }
-
-
     //function for the "5"
     public void addemployee(Workers w){
         allworkerslist.add(w);
     }
-
     //function for the "6"
     public void addwagetoemployee(int id,int addedwage){
         this.getworkerbyid(id).setWage(addedwage + this.getworkerbyid(id).getWage());
         }
-
     //function for the "7"
     public int getwageforemployee(int id, int week,int year){
 
@@ -480,25 +471,18 @@ public class Interface {
 
         return 0;
     }
-
     //function for the "8"
     public void changeemployeecontract(int id,String contract){
         this.getworkerbyid(id).setContract(contract);
         }
-
     //function for the "9"
     public void updateemployeesbank(int id,int newbanknum) {
         this.getworkerbyid(id).setBankNum(newbanknum);
         }
-
-
     //function for the "10"
     public void addavilableforemployee(int id, WindowType wt){
         this.getworkerbyid(id).addwindow(wt);
         }
-
-
-
     //function for the "11"
     public void addnewproforemployee(int id, int indx) {
 
@@ -512,23 +496,18 @@ public class Interface {
 
         this.getworkerbyid(id).addprof(indx);
     }
-
     //function for the "12"
     public void removeprofforemployee(int id,int pros){
         this.getworkerbyid(id).removePro(pros);
     }
-
     //function for the "13"
     public void removeavalbleforemployee(int id,WindowType wt){
             this.getworkerbyid(id).removewindow(wt);
             }
-
-
     //for function "14"
     public void printweeklyshift(int weeknum,int year,int supernum){
         System.out.println(this.getweeklyshift(weeknum,year,supernum).printSpesific());
     }
-
     public Workers getworkerbyid(int id) {
         for (int i = 0; i < allworkerslist.size(); i++) {
             if (allworkerslist.get(i).getId() == id) {
@@ -537,7 +516,6 @@ public class Interface {
         }
         return null;
     }
-
     public WeeklyShift getweeklyshift(int week,int year,int supernum){
         for(int i=0; i<weeklyShiftList.size();i++) {
             if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year &&supernum == weeklyShiftList.get(i).getSupernum()) {

@@ -365,7 +365,16 @@ public class Interface {
                 //14: show the weekly shift"
                 //-------------------------
                 case "14":{
-                    //todo: complete by printing the weekly one
+                    System.out.println("please enter year");
+                    int year = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter week number");
+                    int weeknum = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter super number");
+                    int supernum = myObj.nextInt();  // Read user input
+
+                    this.printweeklyshift(weeknum,year,supernum);
                 }
 
                 //exiting

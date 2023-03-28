@@ -1,4 +1,4 @@
-public class Tests {
+class Tests {
     public Tests() {
         this.TestWorkers();
         this.TestShift();
@@ -11,7 +11,8 @@ public class Tests {
         System.out.println("=======================");
         System.out.println("    Test for Workers");
         System.out.println("=======================");
-        Workers w = new Workers(1,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234);
+        Workers w = new Workers(1,"iftach","lotsofmoney",
+                "23.2.23",90,12345,"student",1234);
 
         //--------------------
         //    test 1
@@ -90,11 +91,11 @@ public class Tests {
         //--------------------
         //    test 3
         //--------------------
+
         //removing him and cheking again
         s.removalWorker(w);
         if(s.checkIfWorkerInShift(1)){System.out.println("Test 3 has failed!");}
         else{System.out.println("Test 3 has passed!");}
-
     }
 
     public void TestWeeklyShift(){

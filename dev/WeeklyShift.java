@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class WeeklyShift {
     private  int weekNUm;
     private int year;
+    private int supernum;
 
     private Shift[] dayShift;
     private Shift[] nightShift;
@@ -15,28 +16,30 @@ public class WeeklyShift {
         return year;
     }
 
-    public WeeklyShift(int weekNUm, int year) {
+    public WeeklyShift(int weekNUm, int year,int supernum) {
         this.weekNUm = weekNUm;
         this.year = year;
+        this.supernum = supernum;
         this.dayShift = new Shift[7];
         this.nightShift = new Shift[7];
     }
+    public int getSupernum(){return this.supernum;}
 
-    public  boolean changeWorker(Workers worker1,Workers worker2, WindowType shiftTime){
+    public  boolean changeWorker(Workers worker1,Workers worker2,int profindx, WindowType shiftTime){
         if(shiftTime.ordinal()<7){
-            if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getID())){
+            if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getId())){
                 return false;}
             else {
                 this.dayShift[shiftTime.ordinal()].removalWorker(worker1);
-                this.nightShift[shiftTime.ordinal()].insertToShift(worker2);
+                this.nightShift[shiftTime.ordinal()].insertToShift(worker2,profindx);
             }
         }
         else {
-            if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getID())){
+            if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getId())){
                 return false;}
             else {
                 this.dayShift[shiftTime.ordinal()].removalWorker(worker1);
-                this.dayShift[shiftTime.ordinal()].insertToShift(worker2);
+                this.dayShift[shiftTime.ordinal()].insertToShift(worker2,profindx);
             }
         }
 
@@ -69,7 +72,23 @@ public class WeeklyShift {
         return countShift;
 
     }
-
+    public void addworkertoshift(Workers newWorker, WindowType shiftTime, int profindx) {
+        if(shiftTime.ordinal()<7){
+            this.dayShift[shiftTime.ordinal()].insertToShift(newWorker,profindx);
+        }
+        else {
+            this.nightShift[shiftTime.ordinal()].insertToShift(newWorker,profindx);
+        }
+    }
+    public boolean checkifworkallready(int id, WindowType shiftTime){
+        if(shiftTime.ordinal()<7){
+            this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(id);
+        }
+        else {
+            this.nightShift[shiftTime.ordinal()].checkIfWorkerInShift(id);
+        }
+        return true;
+    }
 
 
 }

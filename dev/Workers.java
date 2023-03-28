@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Workers {
     //todo: to add the licence type. and the function that's needed
+    //todo: change personal info
     private int id;
     private String name;
     private String contract;
@@ -70,7 +71,7 @@ public class Workers {
         this.wage = wage;
         this.phoneNUM = phoneNUM;
         this.personalinfo = personalinfo;
-        this.pro = new boolean[7]; //todo: need to update this to bigger
+        this.pro = new boolean[7];
         Arrays.fill(pro, false);
         this.bankNum = bankNum;
         //todo: ofir

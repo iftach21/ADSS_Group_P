@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
-    //TODO need to make sure we have shiftmamanger
 
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
@@ -16,20 +16,22 @@ public class Interface {
         //===============================
         //    login confirmation
         //===============================
+        this.weeklyShiftList = new ArrayList<WeeklyShift>();
+        this.allworkerslist = new ArrayList<Workers>();
         //scans the username and password:
-        while(true) {
-            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter username");
-            String userName = myObj.nextLine();  // Read user input
-            System.out.println("Enter password");  // Output user input
-            String password = myObj.nextLine();  // Read user input
-            if(userName.equals(username)&&password.equals(passward)){
-                break;
-            }
-            else{
-                System.out.println("invalid input, please try again");  // Output user input
-            }
-        }
+//        while(true) {
+//            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+//            System.out.println("Enter username");
+//            String userName = myObj.nextLine();  // Read user input
+//            System.out.println("Enter password");  // Output user input
+//            String password = myObj.nextLine();  // Read user input
+//            if(userName.equals(username)&&password.equals(passward)){
+//                break;
+//            }
+//            else{
+//                System.out.println("invalid input, please try again");  // Output user input
+//            }
+//        }
         //=================================================
         //
         //                      main menu

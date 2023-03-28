@@ -76,4 +76,9 @@ public abstract class Supplier {
     public void setItems(Map<Item, Float> items) {
         this.items = items;
     }
+    public void add_Items(Item item,float num) {
+        items.put(item,num);
+    }
+    //add a fuction to cheak if item exist in list
+
 }

@@ -8,9 +8,9 @@ public class Shift {
     private Workers shiftManager;   //todo: i need to add here somethingh
     private String log;
 
-    public Shift(String date) {
+    public Shift(String date, Workers shiftManager) {
         this.date = date;
-        this.shiftManager = null;
+        this.shiftManager = shiftManager;
         this.log = " ";
         ArrayList<Workers>[] myArrayListArray = new ArrayList[7];
         for (int i = 0; i < 7; i++) {

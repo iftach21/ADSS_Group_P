@@ -11,11 +11,21 @@ public class Workers {
     private ArrayList<WindowType> available;
     private int wage;
     private int phoneNUM;
+
+    private String personalinfo;
     private int bankNum;
     //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker6.
     private boolean[] pro;
     //todo: ofir
     private String drivingLicense;
+
+    public String getDrivingLicense() {
+        return drivingLicense;
+    }
+
+    public void setDrivingLicense(String drivingLicense) {
+        this.drivingLicense = drivingLicense;
+    }
 
     public int getId() {
         return id;
@@ -52,7 +62,6 @@ public class Workers {
     public boolean[] getPro() {
         return pro;
     }
-    private String personalinfo;
 
     public void setBankNum(int bankNum) {
         this.bankNum = bankNum;

@@ -1,4 +1,4 @@
-public class Contract_Person {
+public class Contact_Person {
     String name;
     String Phone_number;
 

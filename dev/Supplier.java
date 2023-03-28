@@ -1,4 +1,4 @@
-public class Supplier {
+public abstract class Supplier {
     String name;
     String business_id;
     String Payment_method ;

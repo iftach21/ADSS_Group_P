@@ -3,8 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Workers {
-    //todo: to add the licence type. and the function that's needed
-    //todo: change personal info
+
     private int id;
     private String name;
     private String contract;

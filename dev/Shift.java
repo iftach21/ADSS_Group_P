@@ -8,7 +8,7 @@ public class Shift {
     private Workers shiftManager;   //todo: i need to add here somethingh
     private String log;
 
-    public Shift(String date, Workers shiftManager) {
+    public Shift(String date) {
         this.date = date;
         this.shiftManager = shiftManager;
         this.log = " ";

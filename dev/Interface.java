@@ -97,6 +97,7 @@ public class Interface {
 
                     System.out.println("please enter super number");
                     int supernum = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
 
                     System.out.println("please enter night or day");
                     String don = myObj.nextLine();  // Read user input
@@ -154,6 +155,7 @@ public class Interface {
 
                     System.out.println("please enter day number in the week");
                     int daynum = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
 
                     System.out.println("please enter night or day");
                     String don = myObj.nextLine();  // Read user input
@@ -197,6 +199,7 @@ public class Interface {
 
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
 
                     System.out.println("please enter name for the employee");
                     String name = myObj.nextLine();  // Read user input
@@ -211,7 +214,8 @@ public class Interface {
                     int wage = myObj.nextInt();  // Read user input
 
                     System.out.println("please enter phoneNUM for the employee");
-                    int phoneNUM = myObj.nextInt();  // Read user input
+                    int phoneNUM = myObj.nextInt();  // Read user input5
+                    myObj.nextLine();
 
                     System.out.println("please enter personalinfo for the employee");
                     String personalinfo = myObj.nextLine();  // Read user input
@@ -264,6 +268,8 @@ public class Interface {
                 case "8":{
                     System.out.println("please enter id for the employee");
                     int idans = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
+
                     System.out.println("please enter new contract");
                     String newcontract = myObj.nextLine();  // Read user input
                     this.changeemployeecontract(idans,newcontract);
@@ -289,8 +295,11 @@ public class Interface {
                 case "10":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
+
                     System.out.println("please enter day num");
                     int daynum = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
+
                     System.out.println("please enter day/night shift");
                     String nord = myObj.nextLine();  // Read user input
                     WindowTypeCreater wdc = new WindowTypeCreater();
@@ -306,6 +315,7 @@ public class Interface {
                 case "11":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
+
                     System.out.println("please enter int for the persons prof");
                     System.out.println("0=manager");
                     System.out.println("1=cashier");
@@ -335,6 +345,7 @@ public class Interface {
                 case "12":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
+
                     System.out.println("please enter int for the persons prof");
                     System.out.println("0=manager");
                     System.out.println("1=cashier");
@@ -356,8 +367,11 @@ public class Interface {
                 case "13":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
+
                     System.out.println("please enter day num");
                     int daynum = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
+
                     System.out.println("please enter day/night shift");
                     String nord = myObj.nextLine();  // Read user input
                     WindowTypeCreater wdc = new WindowTypeCreater();
@@ -384,9 +398,11 @@ public class Interface {
                 case "15":{
                     System.out.println("please enter id");
                     int id = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
 
                     System.out.println("please enter the new personal info");
                     String persoinfo = myObj.nextLine();  // Read user input
+
                     this.getworkerbyid(id).setPersonalinfo(persoinfo);
                     break;
                 }

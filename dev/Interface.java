@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
     //TODO need to make sure we have shiftmamanger
+    //todo: change personal info
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
 

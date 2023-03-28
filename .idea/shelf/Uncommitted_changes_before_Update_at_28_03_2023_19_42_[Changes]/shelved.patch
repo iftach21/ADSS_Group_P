@@ -1,0 +1,137 @@
+Index: dev/Contract.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Contract {\r\n    String Order_num;\r\n    Boolean Fulfilled;\r\n    Boolean Fully_Fullfleld;\r\n\r\n    public String getOrder_num() {\r\n        return Order_num;\r\n    }\r\n\r\n    public void setOrder_num(String order_num) {\r\n        Order_num = order_num;\r\n    }\r\n\r\n    public Boolean getFulfilled() {\r\n        return Fulfilled;\r\n    }\r\n\r\n    public void setFulfilled(Boolean fulfilled) {\r\n        Fulfilled = fulfilled;\r\n    }\r\n\r\n    public Boolean getFully_Fullfleld() {\r\n        return Fully_Fullfleld;\r\n    }\r\n\r\n    public void setFully_Fullfleld(Boolean fully_Fullfleld) {\r\n        Fully_Fullfleld = fully_Fullfleld;\r\n    }\r\n\r\n    public Contract(String order_num, Boolean fulfilled, Boolean fully_Fullfleld) {\r\n        Order_num = order_num;\r\n        Fulfilled = fulfilled;\r\n        Fully_Fullfleld = fully_Fullfleld;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/Contract.java b/dev/Contract.java
+--- a/dev/Contract.java	(revision 6dc2c7d05ee31861f8c54d55f9aa28ce4cf37252)
++++ b/dev/Contract.java	(date 1680021549857)
+@@ -3,33 +3,5 @@
+     Boolean Fulfilled;
+     Boolean Fully_Fullfleld;
+ 
+-    public String getOrder_num() {
+-        return Order_num;
+-    }
+-
+-    public void setOrder_num(String order_num) {
+-        Order_num = order_num;
+-    }
+ 
+-    public Boolean getFulfilled() {
+-        return Fulfilled;
+-    }
+-
+-    public void setFulfilled(Boolean fulfilled) {
+-        Fulfilled = fulfilled;
+-    }
+-
+-    public Boolean getFully_Fullfleld() {
+-        return Fully_Fullfleld;
+-    }
+-
+-    public void setFully_Fullfleld(Boolean fully_Fullfleld) {
+-        Fully_Fullfleld = fully_Fullfleld;
+-    }
+-
+-    public Contract(String order_num, Boolean fulfilled, Boolean fully_Fullfleld) {
+-        Order_num = order_num;
+-        Fulfilled = fulfilled;
+-        Fully_Fullfleld = fully_Fullfleld;
+-    }
+ }
+Index: dev/Contact_Person.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Contact_Person {\r\n    String name;\r\n    String Phone_number;\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/Contact_Person.java b/dev/Contact_Person.java
+--- a/dev/Contact_Person.java	(revision 6dc2c7d05ee31861f8c54d55f9aa28ce4cf37252)
++++ b/dev/Contact_Person.java	(date 1680021734739)
+@@ -2,4 +2,11 @@
+     String name;
+     String Phone_number;
+ 
++    public Contact_Person(String name,String phone_number) {
++        this.name = name;
++        this.Phone_number=phone_number;    }
++
++    public String getName() {
++        return name;
++    }
+ }
+Index: dev/Supplier.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public abstract class Supplier {\r\n    String name;\r\n    String business_id;\r\n    String Payment_method ;\r\n    String Suplier_ID;\r\n    Contact_Person person;\r\n    Contract contract;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/Supplier.java b/dev/Supplier.java
+--- a/dev/Supplier.java	(revision 6dc2c7d05ee31861f8c54d55f9aa28ce4cf37252)
++++ b/dev/Supplier.java	(date 1680021549873)
+@@ -1,8 +1,8 @@
+ public abstract class Supplier {
+-    String name;
+-    String business_id;
+-    String Payment_method ;
+-    String Suplier_ID;
+-    Contact_Person person;
+-    Contract contract;
++    private String name;
++    private String business_id;
++    private String Payment_method ;
++    private String Suplier_ID;
++    private Contact_Person person;
++    private Contract contract;
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"day\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"482e421e-609a-47a0-b79c-469797ae8ba1\" />\r\n        <option name=\"url\" value=\"https://github.com/iftach21/ADSS_Group_P.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NeI9zUNLgjzxbSv1ARiyXCyGjb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"\" />\r\n      <created>1680017976928</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680017976928</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"day\">\r\n      <created>1680020111731</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020111731</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"day\">\r\n      <created>1680020586548</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020586548</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"day\">\r\n      <created>1680021275648</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021275648</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"day\">\r\n      <created>1680021342190</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021342190</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"day\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"day\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6dc2c7d05ee31861f8c54d55f9aa28ce4cf37252)
++++ b/.idea/workspace.xml	(date 1680021573227)
+@@ -4,7 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="day" />
++    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="day">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -72,21 +76,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1680020586548</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="day">
+-      <created>1680021275648</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680021275648</updated>
+-    </task>
+-    <task id="LOCAL-00004" summary="day">
+-      <created>1680021342190</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680021342190</updated>
+-    </task>
+-    <option name="localTasksCounter" value="5" />
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">

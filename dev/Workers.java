@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Workers {
     //todo: to add the licence type. and the function that's needed
@@ -7,11 +8,14 @@ public class Workers {
     private String name;
     private String contract;
     private String start_date;
-    private List<WindowType> available;
+    private ArrayList<WindowType> available;
     private int wage;
     private int phoneNUM;
     private int bankNum;
+    //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker6.
     private boolean[] pro;
+    //todo: ofir
+    private String drivingLicense;
 
     public int getId() {
         return id;
@@ -48,7 +52,6 @@ public class Workers {
     public boolean[] getPro() {
         return pro;
     }
-
     private String personalinfo;
 
     public void setBankNum(int bankNum) {
@@ -67,11 +70,17 @@ public class Workers {
         this.wage = wage;
         this.phoneNUM = phoneNUM;
         this.personalinfo = personalinfo;
-        this.pro = new boolean[5]; //todo: need to update this to bigger
+        this.pro = new boolean[7]; //todo: need to update this to bigger
         Arrays.fill(pro, false);
         this.bankNum = bankNum;
-    }
+        //todo: ofir
+        this.drivingLicense = null;
 
+    }
+    //todo: ofir
+    public void drivingLicenseChange(String driverLicenseStatus){
+        this.drivingLicense=driverLicenseStatus;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -86,10 +95,6 @@ public class Workers {
 
     public void setStart_date(String start_date) {
         this.start_date = start_date;
-    }
-
-    public void setAvailable(List<WindowType> available) {
-        this.available = available;
     }
 
     public void setWage(int wage) {
@@ -107,57 +112,79 @@ public class Workers {
     public void setPro(boolean[] pro) {
         this.pro = pro;
     }
-    public int getID(){
-      return this.id;
-    }
+
     public  boolean removePro(int inx){
-        //todo: i need to add here somethingh
-        this.pro[inx]=true;
-        return true;
-    }
-    public  boolean addprof(int inx){
-        //todo: i need to add here somethingh
+        //todo: ofir
         this.pro[inx]=false;
         return true;
     }
+    public  boolean addprof(int inx){
+        this.pro[inx]=true;
+        return true;
+    }
+    public boolean caniworkatprofindx(int indx){
+        return this.pro[indx];
+    }
 
     public  boolean canIShiftMange() {
-        //todo: i need to add here somethingh
-        return true;
+
+        return this.pro[0];
     }
     public  boolean canICashier(){
-        //todo: i need to add here somethingh
-        return true;
+        return this.pro[1];
     }
-    public  boolean candrivetruck(){
-        //todo: i need to add here somethingh
-        return true;
+
+    public  boolean canIstoke(){
+        return this.pro[2];
+    }
+    public  boolean canIsecurity(){
+        return this.pro[3];
+    }
+    public  boolean canIcleaning(){
+        return this.pro[4];
+    }
+    public  boolean canIshelfstoking(){
+        return this.pro[5];
+    }
+    public  boolean canIgeneralworker(){
+        return this.pro[6];
+    }
+    //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker 6.
+
+    public  String candrivetruck(){
+        return this.drivingLicense;
     }
     public boolean addwindow(WindowType wt){
-        //todo: complete
+        this.available.add(wt);
         return true;
     }
     public boolean removewindow(WindowType wt){
-        //todo: complete
+        int inx=0;
+        for (WindowType windowType: this.available){
+            if(windowType==wt){
+                this.available.remove(inx);
+                break;
+            }
+            inx++;
+        }
         return true;
     }
-    public void addnewproforemployee(int id, int indxprof){
 
-        //todo: complete accordingly
-    }
-    public void removeprofforemployee(int id,int indxprof){
-        //todo: complete accordingly
-    }
 
-    public boolean caniworkat(WindowType wt){
+    public boolean canIworkat(WindowType wt) {
         //returns bool if can work on the windowtype.
-        return true;
-        //todo: complete
+        for (WindowType windowType : this.available) {
+            if (windowType == wt) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void print(){
+        String ans = "name: ";
+        ans +=this.name + " id: " + String.valueOf(this.id);
+        System.out.println(ans);
     }
     ///ofir
-
-
-
-
 
 }

@@ -9,8 +9,6 @@ public class Interface {
     private List<Workers> allworkerslist; //holds all the workers available
 
     public Interface() {
-        //this will just create the object
-        //todo: create employees and shifts later
     }
     public void logIn(){
         //===============================
@@ -52,6 +50,7 @@ public class Interface {
             System.out.println("11: add new jobs for employee");
             System.out.println("12: remove jobs for employee");
             System.out.println("13: remove available for employee");
+            System.out.println("14: show the weekly shift");
 
             System.out.println("0: to exit the system ");
 
@@ -70,23 +69,109 @@ public class Interface {
                     int yearans = myObj.nextInt();  // Read user input
                     System.out.println("please enter week number");
                     int weeknum = myObj.nextInt();  // Read user input
+                    System.out.println("please enter super number");
+                    int supernum = myObj.nextInt();  // Read user input
 
-                    this.createnewweeklyshift(weeknum,yearans);
+                    this.createnewweeklyshift(weeknum,yearans,supernum);
                     break;
                 }
                 //-----------------------
                 //add to existing weekly shift
                 //-----------------------
                 case "2":{
-                    //todo: complete later
+                    System.out.println("please enter year");
+                    int year = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter week number");
+                    int weeknum = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter day number in the week");
+                    int daynum = myObj.nextInt();  // Read user input
+
+
+
+                    System.out.println("please enter super number");
+                    int supernum = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter night or day");
+                    String don = myObj.nextLine();  // Read user input
+
+
+                    System.out.println("please enter int for the persons prof");
+                    System.out.println("0=manager");
+                    System.out.println("1=cashier");
+                    System.out.println("2=stoke");
+                    System.out.println("3=security");
+                    System.out.println("4=cleaning");
+                    System.out.println("5=shelf-stoking");
+                    System.out.println("6= general-worker");
+                    int prof = myObj.nextInt();  // Read user input
+
+
+                    //shows the user all of the people whom can work
+                    WindowTypeCreater wc = new WindowTypeCreater();
+                    for(int i=0;i<this.allworkerslist.size();i++){
+                        if(this.allworkerslist.get(i).caniworkatprofindx(prof) && this.allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum,don))){
+                            this.allworkerslist.get(i).print();
+                        }
+                    }
+                    System.out.println("please enter id");
+                    int id = myObj.nextInt();  // Read user input
+
+                    //checking if allready has shift at other super:
+                    for(int i =0;i<this.weeklyShiftList.size();i++){
+                        WeeklyShift w = this.weeklyShiftList.get(i);
+                        if(w.getYear()==year && w.getWeekNUm()==weeknum){
+                            if(w.checkifworkallready(id,wc.getwidowtype(daynum,don) )){
+                                System.out.println("the employee cant work at this time, pick some one else plz");
+                                return;
+                            }
+                        }
+                    }
+
+                    this.addtoexistingweeklyshift(weeknum,year,supernum,wc.getwidowtype(daynum,don),this.getworkerbyid(id),prof);
+
                     break;
                 }
+
+
                 //-----------------------
                 //switch employees in a shift
                 //-----------------------
                 case "3":{
-                    //todo: complete later
-                    break;
+                    System.out.println("please enter year");
+                    int year = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter week number");
+                    int weeknum = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter super number");
+                    int supernum = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter day number in the week");
+                    int daynum = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter night or day");
+                    String don = myObj.nextLine();  // Read user input
+                    WindowTypeCreater wt = new WindowTypeCreater();
+
+                    System.out.println("please enter int for the persons prof");
+                    System.out.println("0=manager");
+                    System.out.println("1=cashier");
+                    System.out.println("2=stoke");
+                    System.out.println("3=security");
+                    System.out.println("4=cleaning");
+                    System.out.println("5=shelf-stoking");
+                    System.out.println("6= general-worker");
+                    int prof = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter id for the employee you want to remove");
+                    int id1 = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter id for the employee you want to put in");
+                    int id2 = myObj.nextInt();  // Read user input
+
+                    this.switchemployeeinashift(weeknum,year,supernum,wt.getwidowtype(daynum,don),prof,id1,id2);
                 }
 
                 //-----------------------
@@ -159,7 +244,11 @@ public class Interface {
                     int id = myObj.nextInt();  // Read user input
                     System.out.println("what week num do you need?");
                     int weeknum = myObj.nextInt();  // Read user input
-                    int answage = this.getwageforemployee(id,weeknum);
+
+                    System.out.println("what year num do you need?");
+                    int year = myObj.nextInt();  // Read user input
+
+                    int answage = this.getwageforemployee(id,weeknum,year);
                     System.out.println(answage);
                     break;
                 }
@@ -272,6 +361,12 @@ public class Interface {
                     this.removeavalbleforemployee(id,wdc.getwidowtype(daynum,nord));
                     break;
                 }
+                //-------------------------
+                //14: show the weekly shift"
+                //-------------------------
+                case "14":{
+                    //todo: complete by printing the weekly one
+                }
 
                 //exiting
                 case "0":{ exit = false;break;}
@@ -284,7 +379,7 @@ public class Interface {
 
 
     //function for the "1" option in menu
-    public void createnewweeklyshift(int weeknum,int year){
+    public void createnewweeklyshift(int weeknum,int year,int supernum){
         //checks if allready exist, if not will create new one
         for(int i=0; i<weeklyShiftList.size();i++){
             if((weeklyShiftList.get(i).getYear()) == year &&
@@ -293,18 +388,19 @@ public class Interface {
                 return;
             }
         }
-        weeklyShiftList.add(new WeeklyShift(weeknum,year));
+        weeklyShiftList.add(new WeeklyShift(weeknum,year,supernum));
 
     }
 
     //function for the "2"
-    public void addtoexistingweeklyshift(int weeknum,int yearnum,WindowType wt){
-        //todo: needs more function for later.
-    }
+    public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,Workers w,int profindx){
+            this.getweeklyshift(weeknum,year,supernum).addworkertoshift(w,wt,profindx);
+            }
+
 
     //function for the "3"
-    public void switchemployeeinashift(){
-        //todo: needs more function for later.
+    public void switchemployeeinashift(int weeknum,int yearnum,int supernum, WindowType wt,int prof, int id1, int id2){
+        this.getweeklyshift(weeknum,yearnum,supernum).changeWorker(this.getworkerbyid(id1),this.getworkerbyid(id2),prof,wt);
     }
 
     //function for the "4"
@@ -325,19 +421,14 @@ public class Interface {
 
     //function for the "6"
     public void addwagetoemployee(int id,int addedwage){
-        for(int i=0; i<allworkerslist.size();i++){
-            if(allworkerslist.get(i).getId()==id){
-                allworkerslist.get(i).setWage(addedwage + allworkerslist.get(i).getWage());
-
-            }
+        this.getworkerbyid(id).setWage(addedwage + this.getworkerbyid(id).getWage());
         }
-    }
 
     //function for the "7"
-    public int getwageforemployee(int id, int week){
+    public int getwageforemployee(int id, int week,int year){
 
         for(int i=0; i<weeklyShiftList.size();i++) {
-            if(weeklyShiftList.get(i).getWeekNUm()==week){
+            if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year){
                int hm =  weeklyShiftList.get(i).howMuchShiftWorkerDid(id);
                 for(int j=0; i<allworkerslist.size();j++) {
                     if (allworkerslist.get(j).getId() == id) {
@@ -352,34 +443,19 @@ public class Interface {
 
     //function for the "8"
     public void changeemployeecontract(int id,String contract){
-        for(int i=0; i<allworkerslist.size();i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                allworkerslist.get(i).setContract(contract);
-                break;
-            }
+        this.getworkerbyid(id).setContract(contract);
         }
-    }
 
     //function for the "9"
     public void updateemployeesbank(int id,int newbanknum) {
-        for (int i = 0; i < allworkerslist.size(); i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                allworkerslist.get(i).setBankNum(newbanknum);
-                break;
-            }
+        this.getworkerbyid(id).setBankNum(newbanknum);
         }
-    }
 
 
     //function for the "10"
     public void addavilableforemployee(int id, WindowType wt){
-        for(int i=0; i<allworkerslist.size();i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                allworkerslist.get(i).addwindow(wt);
-                break;
-            }
+        this.getworkerbyid(id).addwindow(wt);
         }
-    }
 
 
 
@@ -394,45 +470,41 @@ public class Interface {
         //5=shelfstoking
         //6= generalworker
 
-        for (int i = 0; i < allworkerslist.size(); i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                allworkerslist.get(i).addprof(indx);
-                break;
-            }
-        }
+        this.getworkerbyid(id).addprof(indx);
     }
 
     //function for the "12"
     public void removeprofforemployee(int id,int pros){
-        for (int i = 0; i < allworkerslist.size(); i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                allworkerslist.get(i).removePro(pros);
-                break;
-            }
-        }
+        this.getworkerbyid(id).removePro(pros);
     }
 
     //function for the "13"
     public void removeavalbleforemployee(int id,WindowType wt){
-        for(int i=0; i<allworkerslist.size();i++) {
+            this.getworkerbyid(id).removewindow(wt);
+            }
+
+
+    //for function "14"
+    public void printweeklyshift(int weeknum,int year,int supernum){
+        System.out.println(this.getweeklyshift(weeknum,year,supernum).printSpesific());
+    }
+
+    public Workers getworkerbyid(int id) {
+        for (int i = 0; i < allworkerslist.size(); i++) {
             if (allworkerslist.get(i).getId() == id) {
-                allworkerslist.get(i).removewindow(wt);
-                break;
+                return allworkerslist.get(i);
             }
         }
-    }
-    public void printallworkersforthewindow(int indxofprof,WindowType wt){
-        //todo: complete accordingly
+        return null;
     }
 
+    public WeeklyShift getweeklyshift(int week,int year,int supernum){
+        for(int i=0; i<weeklyShiftList.size();i++) {
+            if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year &&supernum == weeklyShiftList.get(i).getSupernum()) {
+                return weeklyShiftList.get(i);}
 
-
-
-
-
-
-
-
-
+        }
+        return null;
+    }
 
 }//class

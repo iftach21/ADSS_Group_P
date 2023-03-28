@@ -1,47 +1,65 @@
-
 import java.util.ArrayList;
 public class Shift {
     private String date;
-    private ArrayList<Workers> ArrWorkers ;
+//    private ArrayList<Workers> ArrWorkers;
+
+    private ArrayList<Workers>[] workerInShift;
+
     private Workers shiftManager;   //todo: i need to add here somethingh
     private String log;
 
-    public Shift(String date, ArrayList<Workers> workers, Workers shiftManager, String log) {
+    public Shift(String date) {
         this.date = date;
-        this.ArrWorkers = workers;
-        this.shiftManager = shiftManager;
-        this.log = log;
+//        this.ArrWorkers = workers;
+        this.shiftManager = null;
+        this.log = " ";
+        ArrayList<Workers>[] myArrayListArray = new ArrayList[7];
+        for (int i = 0; i < 7; i++) {
+            myArrayListArray[i] = new ArrayList<Workers>();
+        }
     }
 
-    public StringBuilder printShift(){
+    public StringBuilder printShift() {
 
-        StringBuilder pShift= new StringBuilder();
-        for (Workers worker: this.ArrWorkers){
-            pShift.append("name:").append(worker.getName()).append(" ");
+        StringBuilder pShift = new StringBuilder();
+        int i;
+        for (i = 0; i <= 7;i++){
+            for (int j = 0; j < this.workerInShift[i].size(); j++) {
+                System.out.println("  worker " + this.workerInShift[i].get(j));
+            }
         }
         return pShift;
     }
-    public boolean insertToShift(Workers newWorker){
-        if (newWorker==null|| !checkIfWorkerInShift(newWorker.getID())){
+    public boolean insertToShift(Workers newWorker, int profindx){
+        if (newWorker==null|| !checkIfWorkerInShift(newWorker.getId())){
             return false;}
-        this.ArrWorkers.add(newWorker);
+        if (checkIfWorkerInShift(newWorker.getId())){
+            System.out.println("he is allready exist");
+            return false;
+
+        }
+        this.workerInShift[profindx].add(newWorker);
         return true;
     }
     public boolean checkIfWorkerInShift(int id){
-        for (Workers worker:ArrWorkers){
-            if(worker.getID()==id){return true;}
+        for (int i = 0; i <= 7;i++){
+            for (int j = 0; j < this.workerInShift[i].size(); j++) {
+                if( id==this.workerInShift[i].get(j).getId()){return true;}
+            }
         }
         return false;
     }
-    public boolean removalWorker(Workers currentWorker){
-        int i=0;
-        for (Workers worker:ArrWorkers){
-            if(worker.getID()==currentWorker.getID()){
-                ArrWorkers.remove(i);
-            return true;}
-            i++;
+    public boolean removalWorker(Workers currentWorker) {
+        if (checkIfWorkerInShift(currentWorker.getId())) {
+            return false;
         }
-        return false;
-
+        for (int i = 0; i <= 7;i++){
+            for (int j = 0; j < this.workerInShift[i].size(); j++) {
+                if( currentWorker.getId()==this.workerInShift[i].get(j).getId()){
+                    this.workerInShift[i].remove(j);
+                    return true;}
+            }
+        }
+        return true;
     }
 }

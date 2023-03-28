@@ -1,8 +1,8 @@
 public abstract class Supplier {
-    String name;
-    String business_id;
-    String Payment_method ;
-    String Suplier_ID;
-    Contact_Person person;
-    Contract contract;
+    private String name;
+    private String business_id;
+    private String Payment_method ;
+    private String Suplier_ID;
+    private Contact_Person person;
+    private Contract contract;
 }

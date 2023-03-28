@@ -1,19 +1,25 @@
+import java.util.Map;
+
 public abstract class Supplier {
     private String name;
     private String business_id;
-    private String Payment_method ;
+    private String Payment_method;
     private String Suplier_ID;
     private Contact_Person person;
     private Contract contract;
+    private Map<Item, Float> items;
 
-    public Supplier(String name, String business_id, String payment_method, String suplier_ID, Contact_Person person, Contract contract) {
+
+    public Supplier(String name, String business_id, String payment_method, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Float> items) {
         this.name = name;
         this.business_id = business_id;
         Payment_method = payment_method;
         Suplier_ID = suplier_ID;
         this.person = person;
         this.contract = contract;
+        this.items = items;
     }
+
 
     public String getName() {
         return name;
@@ -61,5 +67,13 @@ public abstract class Supplier {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public Map<Item, Float> getItems() {
+        return items;
+    }
+
+    public void setItems(Map<Item, Float> items) {
+        this.items = items;
     }
 }

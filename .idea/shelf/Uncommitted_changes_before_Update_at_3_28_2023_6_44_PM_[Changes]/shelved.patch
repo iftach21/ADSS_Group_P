@@ -1,0 +1,17 @@
+Index: dev/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/Item.java b/dev/Item.java
+new file mode 100644
+--- /dev/null	(date 1680018134405)
++++ b/dev/Item.java	(date 1680018134405)
+@@ -0,0 +1,7 @@
++import java.util.Date;
++
++public class Item {
++    String Name;
++    String CatalogNum;
++    Date ExpirationDate;
++}

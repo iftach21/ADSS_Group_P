@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="day">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="day">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Contact_Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contact_Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,14 +91,7 @@
       <option name="project" value="LOCAL" />
       <updated>1680021342190</updated>
     </task>
-    <task id="LOCAL-00005" summary="day">
-      <created>1680021534941</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1680021534941</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

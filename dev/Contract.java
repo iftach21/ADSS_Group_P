@@ -1,35 +1,31 @@
+import java.util.Map;
+
 public class Contract {
-    String Order_num;
-    Boolean Fulfilled;
-    Boolean Fully_Fullfilled;
+    Map<Item, Map<Integer, Double>> map;
+    Item[] ItemList;
 
-    public String getOrder_num() {
-        return Order_num;
+    public Contract(Map<Item, Map<Integer, Double>> map, Item[] itemList) {
+        this.map = map;
+        ItemList = itemList;
     }
 
-    public void setOrder_num(String order_num) {
-        Order_num = order_num;
+
+    public Map<Item, Map<Integer, Double>> getMap() {
+        return map;
     }
 
-    public Boolean getFulfilled() {
-        return Fulfilled;
+    public void setMap(Map<Item, Map<Integer, Double>> map) {
+        this.map = map;
     }
 
-    public void setFulfilled(Boolean fulfilled) {
-        Fulfilled = fulfilled;
+    public Item[] getItemList() {
+        return ItemList;
     }
 
-    public Boolean getFully_Fullfleld() {
-        return Fully_Fullfilled;
-    }
-
-    public void setFully_Fullfleld(Boolean fully_Fullfleld) {
-        Fully_Fullfilled = fully_Fullfleld;
-    }
-
-    public Contract(String order_num, Boolean fulfilled, Boolean fully_Fullfleld) {
-        Order_num = order_num;
-        Fulfilled = fulfilled;
-        Fully_Fullfilled = fully_Fullfleld;
+    public void setItemList(Item[] itemList) {
+        ItemList = itemList;
     }
 }
+
+
+

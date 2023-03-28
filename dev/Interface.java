@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
     //TODO need to make sure we have shiftmamanger
-    //todo: change personal info
+
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
 
@@ -53,6 +53,7 @@ public class Interface {
             System.out.println("12: remove jobs for employee");
             System.out.println("13: remove available for employee");
             System.out.println("14: show the weekly shift");
+            System.out.println("15: change personal info for employee");
 
             System.out.println("0: to exit the system ");
 
@@ -132,7 +133,6 @@ public class Interface {
                     }
 
                     this.addtoexistingweeklyshift(weeknum,year,supernum,wc.getwidowtype(daynum,don),this.getworkerbyid(id),prof);
-
                     break;
                 }
 
@@ -377,10 +377,21 @@ public class Interface {
                     int supernum = myObj.nextInt();  // Read user input
 
                     this.printweeklyshift(weeknum,year,supernum);
+                    break;
+                }
+                case "15":{
+                    System.out.println("please enter id");
+                    int id = myObj.nextInt();  // Read user input
+
+                    System.out.println("please enter the new personal info");
+                    String persoinfo = myObj.nextLine();  // Read user input
+                    this.getworkerbyid(id).setPersonalinfo(persoinfo);
+                    break;
                 }
 
                 //exiting
-                case "0":{ exit = false;break;}
+                case "0":{ exit = false;
+                    break;}
                 default:{ System.out.println("please enter valid input");}
             }
 

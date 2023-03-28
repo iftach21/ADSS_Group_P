@@ -10,7 +10,6 @@ public class Shift {
 
     public Shift(String date) {
         this.date = date;
-//        this.ArrWorkers = workers;
         this.shiftManager = null;
         this.log = " ";
         ArrayList<Workers>[] myArrayListArray = new ArrayList[7];
@@ -39,6 +38,10 @@ public class Shift {
 
         }
         this.workerInShift[profindx].add(newWorker);
+        if(profindx==0){this.shiftManager=newWorker;}
+        if(this.shiftManager==null){
+            System.out.println("this shift doesnt have shift manager");
+        }
         return true;
     }
     public boolean checkIfWorkerInShift(int id){

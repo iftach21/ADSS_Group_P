@@ -32,4 +32,8 @@ public class Contract {
         Fulfilled = fulfilled;
         Fully_Fullfilled = fully_Fullfleld;
     }
+    public void add_to_contract(Item item,int amount,double discount){
+        if(this.)
+
+    }
 }

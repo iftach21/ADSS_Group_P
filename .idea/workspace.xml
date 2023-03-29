@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="ofir">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ADSS_Group_P.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_P.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
     </list>
@@ -63,7 +64,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680021911771</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="ofir">
+      <created>1680022871718</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680022871718</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,25 +91,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ofir" />
     <option name="LAST_COMMIT_MESSAGE" value="ofir" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/Main.java</url>
-          <line>3</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/Interface.java</url>
-          <line>406</line>
-          <properties class="Interface">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

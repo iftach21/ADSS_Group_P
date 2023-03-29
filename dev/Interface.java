@@ -3,6 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
+    //todo: crete function to print all employees
 
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
@@ -57,6 +58,7 @@ public class Interface {
             System.out.println("13: remove available for employee");
             System.out.println("14: show the weekly shift");
             System.out.println("15: change personal info for employee");
+            System.out.println("16: show all employees");
 
             System.out.println("0: to exit the system ");
 
@@ -407,6 +409,13 @@ public class Interface {
                     this.getworkerbyid(id).setPersonalinfo(persoinfo);
                     break;
                 }
+                case "16":{
+                    for(int i =0;i<this.allworkerslist.size();i++){
+                        this.allworkerslist.get(i).print();
+                    }
+                    break;
+                }
+
 
                 //exiting
                 case "0":{ exit = false;

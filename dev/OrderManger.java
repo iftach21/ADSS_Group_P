@@ -1,17 +1,16 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class OrderManger {
 
-    private Order[] pending_for_apporval;
-    private Order[] pending_on_approval;
-    private  Order[] orders_history;
+    private List<Order> pending_for_apporval;
+    private List<Order> pending_on_approval;
+    private List<Order> orders_history;
 
-    public OrderManger(Order[] pending_for_apporval, Order[] pending_on_approval, Order[] orders_history) {
-        this.pending_for_apporval = pending_for_apporval;
-        this.pending_on_approval = pending_on_approval;
-        this.orders_history = orders_history;
+    public OrderManger() {
+
     }
 
     public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger){
@@ -37,11 +36,13 @@ public class OrderManger {
                     int amount=itemlist.get(item);
 
                     float base_price = supplier.getItems().get(item);
+                    int new_amount=0;
                     if(supplier.getContract().items_Map_discount.containsKey(item)){
                         //cheak how much max amount have a discount from the curr amount
                         for(int i=0; i<amount;i++){
                         if(supplier.getContract().items_Map_discount.get(item).containsKey(amount-i)){
                              discount = supplier.getContract().items_Map_discount.get(item).get(amount-i);
+                             new_amount=amount-i;
 
 
                             break;
@@ -50,7 +51,7 @@ public class OrderManger {
 
                         }
                     }
-                    cost+=amount*base_price*discount;
+                    cost+=new_amount*base_price*discount+((amount-new_amount)*base_price);
 
                 }
                 //if there a cheaps supplier
@@ -82,12 +83,14 @@ public class OrderManger {
                         float base_price = sup.getItems().get(item);
 
                         int amount=itemlist.get(item);
-
+                        int new_amount=0;
+                            //serch for discount
                         for(int i=0; i<amount;i++){
                             if(sup.getContract().items_Map_discount.get(item).containsKey(amount-i)){
-                                discount = sup.getContract().items_Map_discount.get(item).get(amount-i);}}
+                                discount = sup.getContract().items_Map_discount.get(item).get(amount-i);
+                            new_amount=amount-i;}}
 
-                        cost = (float) ((float)amount*base_price*discount);
+                        cost+=new_amount*base_price*discount+((amount-new_amount)*base_price);
 
                         if(items_costs.get(item)==null){
                            items_costs.remove(item);
@@ -107,10 +110,34 @@ public class OrderManger {
 
                 }
             }
+            for(Order order:this.pending_for_apporval){
+                for(Item item: items_costs.keySet()){
+                    if(order.getSupplier()==items_costs.get(item).getFirst()){
+                        order.add_item(item,itemlist.get(item));
+                        //add the cost of the item to the list
+                        order.setCost(order.getCost()+items_costs.get(item).getSecond());
+                        //remove form the holder list
+                        items_costs.remove(item);
+                    }
+
+
+                }
+
+            }
+            for(Item item:items_costs.keySet()){
+
+
+            }
+
 
 
 
         }
+        else{
+            Order order=new Order("1",itemlist,false,min_sup,min_cost);
+            this.pending_for_apporval.add(order);
+        }
+
 
 
     }

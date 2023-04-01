@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class OrderManger {
 
@@ -14,10 +11,11 @@ public class OrderManger {
     }
 
     public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger){
+        //if there is no supplier do nothing
         if(manger == null){
             return;
         }
-
+        //to find the min supplier(in case of one supplier have it all)
         Supplier min_sup=null;
         float min_cost=1000000000;
 
@@ -34,9 +32,9 @@ public class OrderManger {
                     double discount=1;
 
                     int amount=itemlist.get(item);
-
                     float base_price = supplier.getItems().get(item);
                     int new_amount=0;
+                    //if the supplier give a discount on the item serch for the biggest amount
                     if(supplier.getContract().items_Map_discount.containsKey(item)){
                         //cheak how much max amount have a discount from the curr amount
                         for(int i=0; i<amount;i++){
@@ -51,6 +49,7 @@ public class OrderManger {
 
                         }
                     }
+                    //add the item to the total price o
                     cost+=new_amount*base_price*discount+((amount-new_amount)*base_price);
 
                 }
@@ -110,6 +109,7 @@ public class OrderManger {
 
                 }
             }
+            //if there is all ready an open order that wait for the approvel
             for(Order order:this.pending_for_apporval){
                 for(Item item: items_costs.keySet()){
                     if(order.getSupplier()==items_costs.get(item).getFirst()){
@@ -121,11 +121,15 @@ public class OrderManger {
                     }
 
 
+
                 }
 
             }
+            List<Supplier> my_gang_supp = new ArrayList<>();
             for(Item item:items_costs.keySet()){
-
+                my_gang_supp.add(items_costs.get(item).getFirst());
+            }
+            for(Supplier supplier:my_gang_supp){
 
             }
 

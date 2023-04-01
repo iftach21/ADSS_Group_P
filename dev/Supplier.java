@@ -7,7 +7,7 @@ public abstract class Supplier {
     private String Suplier_ID;
     private Contact_Person person;
     private Contract contract;
-    private Map<Item, Pair<Integer,Float> items;
+    private Map<Item,Float> items;
 
 
     public Supplier(String name, String business_id, String payment_method, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Float> items) {

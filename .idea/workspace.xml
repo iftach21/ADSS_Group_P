@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <change afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +56,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="" />
+      <changelist id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
       <created>1680017976928</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

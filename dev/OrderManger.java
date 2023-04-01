@@ -1,3 +1,7 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class OrderManger {
 
     private Order[] pending_for_apporval;
@@ -10,46 +14,104 @@ public class OrderManger {
         this.orders_history = orders_history;
     }
 
-    public void add_item_to_Order(Item item, int amount, Supplier_Manger manger){
+    public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger){
         if(manger == null){
             return;
         }
-        float min_cost_for_amount_found=1000000000;
+
         Supplier min_sup=null;
-        ///check who is the suppler  that sell the lowest cost
-        for(Supplier sup :manger.suppliers){
-            float cost=0;
-            //if he has the item
-            if(sup.getItems().containsKey(item)){
-                //cheak if he have a discount on it
-                float cost_of_item= sup.getItems().get(item);
-                int amount_on_discount=0;
-                if(sup.getContract().items_Map_discount.containsKey(item)){
-                    for(int i=0;i<amount;i++){
-                        if(sup.getContract().items_Map_discount.get(item).containsKey(amount -i)){
-                            amount_on_discount =amount-i;
-                            cost= (float) (cost_of_item*amount_on_discount*sup.getContract().items_Map_discount.get(item).get(amount -i));
+        float min_cost=1000000000;
+
+
+        for(Supplier supplier: manger.getSuppliers()){
+
+            //cheak there is suppliers that have all the items
+            if(supplier.getItems().keySet().containsAll(itemlist.keySet())){
+                if(min_sup==null){
+                    min_sup=supplier;
+                }
+                float cost=0;
+                for(Item item :itemlist.keySet()){
+                    double discount=1;
+
+                    int amount=itemlist.get(item);
+
+                    float base_price = supplier.getItems().get(item);
+                    if(supplier.getContract().items_Map_discount.containsKey(item)){
+                        //cheak how much max amount have a discount from the curr amount
+                        for(int i=0; i<amount;i++){
+                        if(supplier.getContract().items_Map_discount.get(item).containsKey(amount-i)){
+                             discount = supplier.getContract().items_Map_discount.get(item).get(amount-i);
+
+
                             break;
+                        }
+
+
+                        }
+                    }
+                    cost+=amount*base_price*discount;
+
+                }
+                //if there a cheaps supplier
+                if(cost<min_cost){
+                    min_cost=cost;
+                    min_sup=supplier;
+                }
+
+
+
+
+
+            }
+
+
+
+        }
+        if(min_sup==null){
+            Map<Item,Pair<Supplier,Float>> items_costs =new HashMap<Item,Pair<Supplier,Float>>();
+            for(Supplier sup: manger.getSuppliers()){
+                for(Item item :itemlist.keySet()){
+                    if (!items_costs.containsKey(item)) {
+                        items_costs.put(item,null);
+                    }
+                    if(sup.getItems().containsKey(item)){
+                        double discount=1;
+                        float cost=0;
+
+                        float base_price = sup.getItems().get(item);
+
+                        int amount=itemlist.get(item);
+
+                        for(int i=0; i<amount;i++){
+                            if(sup.getContract().items_Map_discount.get(item).containsKey(amount-i)){
+                                discount = sup.getContract().items_Map_discount.get(item).get(amount-i);}}
+
+                        cost = (float) ((float)amount*base_price*discount);
+
+                        if(items_costs.get(item)==null){
+                           items_costs.remove(item);
+                           Pair<Supplier,Float>new_sup=new Pair<>(sup,cost);
+                           items_costs.put(item,new_sup);
+
+
+                        }
+                        else {
+                            if(items_costs.get(item).getSecond()>cost){
+                                items_costs.remove(item);
+                                Pair<Supplier,Float>new_sup=new Pair<>(sup,cost);
+                                items_costs.put(item,new_sup);
+                            }
                         }
                     }
 
-
-
                 }
-                cost+=amount-amount_on_discount*cost_of_item;
-                if(cost<min_cost_for_amount_found){
-                    min_sup=sup;
-                    min_cost_for_amount_found=cost;
-                }
-
             }
-        }
-        if(min_sup!=null){
 
-            Pair<Integer, Supplier> pair = new Pair<>(amount,min_sup);
-            for(Contract contract::)
 
-            return;
+
         }
+
+
     }
 }

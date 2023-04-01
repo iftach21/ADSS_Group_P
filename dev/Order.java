@@ -5,16 +5,16 @@ import java.util.Map;
 public class Order {
 
 
-    private String orderNum;
+    private int orderNum;
     private  Supplier supplier;
     private Map<Item,Integer> itemList;
 
     private Boolean fulfilled;
     private Float cost;
+    static int number =0;
 
-
-    public Order(String orderNum, Map<Item,Integer> itemList, Boolean fulfilled,Supplier supplier,float cost) {
-        this.orderNum = orderNum;
+    public Order( Map<Item,Integer> itemList, Boolean fulfilled,Supplier supplier,float cost) {
+        this.orderNum = number+1;
         if(itemList==null){
             this.itemList= new HashMap<Item,Integer>();
         }
@@ -28,13 +28,11 @@ public class Order {
 
     }
 
-    public String getOrderNum() {
+    public Integer getOrderNum() {
         return orderNum;
     }
 
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
-    }
+
 
     public Supplier getSupplier() {
         return supplier;

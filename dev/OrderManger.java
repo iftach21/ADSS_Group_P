@@ -130,6 +130,30 @@ public class OrderManger {
                 my_gang_supp.add(items_costs.get(item).getFirst());
             }
             for(Supplier supplier:my_gang_supp){
+                for(Item item :items_costs.keySet()){
+                    int counter=0;
+                    if(items_costs.get(item).getFirst()==supplier){
+                       for(Order order :this.pending_for_apporval){
+                          if(order.getSupplier()==supplier){
+                              counter=1;
+                              order.add_item(item,itemlist.get(item));
+                              order.setCost(order.getCost()+items_costs.get(item).getSecond());
+
+                          }
+
+
+                       }
+                       if(counter==0){
+                           Map<Item,Integer> item_map=new HashMap<>();
+                           item_map.put(item,itemlist.get(item));
+                           Order order_new =new Order(item_map,false,supplier,items_costs.get(item).getSecond());
+                           this.pending_for_apporval.add(order_new);
+                       }
+
+                    }
+
+                }
+
 
             }
 
@@ -138,7 +162,7 @@ public class OrderManger {
 
         }
         else{
-            Order order=new Order("1",itemlist,false,min_sup,min_cost);
+            Order order=new Order(itemlist,false,min_sup,min_cost);
             this.pending_for_apporval.add(order);
         }
 

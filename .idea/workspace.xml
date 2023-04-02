@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="ofir">
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="empley login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/WeeklyShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Workers.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Workers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +71,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680022871718</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="empley login">
+      <created>1680441264039</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680441264039</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,6 +97,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ofir" />
-    <option name="LAST_COMMIT_MESSAGE" value="ofir" />
+    <MESSAGE value="empley login" />
+    <option name="LAST_COMMIT_MESSAGE" value="empley login" />
   </component>
 </project>

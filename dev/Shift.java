@@ -40,7 +40,7 @@ public class Shift {
      * insert an employee on shift
      */
     public boolean insertToShift(Workers newWorker, int profindx){
-        if (newWorker==null|| !checkIfWorkerInShift(newWorker.getId())){
+        if (newWorker==null|| checkIfWorkerInShift(newWorker.getId())){
             return false;}
         if (checkIfWorkerInShift(newWorker.getId())){
             System.out.println("he is allready exist");

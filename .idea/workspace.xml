@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="new case 16: for priting all emp">
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="ofir">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,14 +70,7 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680022871718</updated>
     </task>
-    <task id="LOCAL‎-00003" summary="new case 16: for priting all emp">
-      <created>1680078114501</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL‎-00003" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1680078114501</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,7 +89,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ofir" />
-    <MESSAGE value="new case 16: for priting all emp" />
-    <option name="LAST_COMMIT_MESSAGE" value="new case 16: for priting all emp" />
+    <option name="LAST_COMMIT_MESSAGE" value="ofir" />
   </component>
 </project>

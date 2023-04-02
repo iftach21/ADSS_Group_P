@@ -28,10 +28,11 @@ public class Shift {
     public StringBuilder printShift() {
 
         StringBuilder pShift = new StringBuilder();
+
         int i;
         for (i = 0; i < 7;i++){
             for (int j = 0; j < this.workerInShift[i].size(); j++) {
-                System.out.println("  worker " + this.workerInShift[i].get(j));
+                pShift.append("worker: ").append(this.workerInShift[i].get(j).getName());
             }
         }
         return pShift;

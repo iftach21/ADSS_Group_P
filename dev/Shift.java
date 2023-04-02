@@ -15,10 +15,11 @@ public class Shift {
         this.date = date;
         this.shiftManager = shiftManager;
         this.log = " ";
-        ArrayList<Workers>[] myArrayListArray = new ArrayList[7];
+        this.workerInShift = new ArrayList[7];
         for (int i = 0; i < 7; i++) {
-            myArrayListArray[i] = new ArrayList<Workers>();
+            workerInShift[i] = new ArrayList<Workers>();
         }
+
     }
 
     /**
@@ -28,7 +29,7 @@ public class Shift {
 
         StringBuilder pShift = new StringBuilder();
         int i;
-        for (i = 0; i <= 7;i++){
+        for (i = 0; i < 7;i++){
             for (int j = 0; j < this.workerInShift[i].size(); j++) {
                 System.out.println("  worker " + this.workerInShift[i].get(j));
             }
@@ -57,7 +58,7 @@ public class Shift {
      * check If Worker In Shift
      */
     public boolean checkIfWorkerInShift(int id){
-        for (int i = 0; i <= 7;i++){
+        for (int i = 0; i < 7;i++){
             for (int j = 0; j < this.workerInShift[i].size(); j++) {
                 if( id==this.workerInShift[i].get(j).getId()){return true;}
             }
@@ -71,7 +72,7 @@ public class Shift {
         if (checkIfWorkerInShift(currentWorker.getId())) {
             return false;
         }
-        for (int i = 0; i <= 7;i++){
+        for (int i = 0; i < 7;i++){
             for (int j = 0; j < this.workerInShift[i].size(); j++) {
                 if( currentWorker.getId()==this.workerInShift[i].get(j).getId()){
                     this.workerInShift[i].remove(j);

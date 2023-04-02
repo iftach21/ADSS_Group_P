@@ -4,22 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="adding test for Shift.class" />
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="===">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ADSS_Group_P.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_P.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JUnit5 Test Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,20 +28,9 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="" />
-    </key>
-  </component>
   <component name="RunManager" selected="JUnit.ShiftTest.TestInsertToShift">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -75,20 +59,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkersTest.testAddingAndRemovingWindows" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkersTest" />
-      <option name="METHOD_NAME" value="testAddingAndRemovingWindows" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ShiftTest.TestInsertToShift" />
-        <item itemvalue="JUnit.WorkersTest.testAddingAndRemovingWindows" />
         <item itemvalue="JUnit.WorkersTest.testAddingAndRemovingProf" />
         <item itemvalue="Application.Main" />
       </list>
@@ -118,21 +91,7 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680022871718</updated>
     </task>
-    <task id="LOCAL‎-00003" summary="added test for workers class">
-      <created>1680444236443</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL‎-00003" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1680444236443</updated>
-    </task>
-    <task id="LOCAL‎-00004" summary="adding test for Shift.class">
-      <created>1680445387056</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL‎-00004" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1680445387056</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,9 +110,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ofir" />
-    <MESSAGE value="rapping up in the main with emp loging" />
-    <MESSAGE value="added test for workers class" />
-    <MESSAGE value="adding test for Shift.class" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding test for Shift.class" />
+    <option name="LAST_COMMIT_MESSAGE" value="ofir" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/ShiftTest.java</url>
+          <line>7</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

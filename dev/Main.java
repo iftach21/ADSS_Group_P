@@ -3,6 +3,7 @@ public class Main {
         Interface in = new Interface();
         in.logIn();
     }
+
     public static void initiation(Interface in){
         //creation of 6 workers:
         Workers work1=new Workers(1,"work1","q","e",1,586012012,"o",11);
@@ -49,10 +50,6 @@ public class Main {
 
     }
 }
-//first thing: creating new shift and adding 3 new employees:
-//emp1 shiftman (0)
-//emp2 cashier (1)
-//emp3 ------ (2)
-//then printing the shift-> checking if correct
+
 
 

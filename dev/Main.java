@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("are you employee or Manager?");
         System.out.println("1 = employee");
-        System.out.println("2 = Manager");
+        System.out.println("2 = Manager ");
 
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int ans = myObj.nextInt();

@@ -93,14 +93,13 @@ public class Interface {
                     System.out.println("please enter week number");
                     int weeknum = myObj.nextInt();  // Read user input
 
-                    System.out.println("please enter day number in the week");
-                    int daynum = myObj.nextInt();  // Read user input
-
-
 
                     System.out.println("please enter super number");
                     int supernum = myObj.nextInt();  // Read user input
                     myObj.nextLine();
+
+                    System.out.println("please enter day number in the week");
+                    int daynum = myObj.nextInt();  // Read user input
 
                     System.out.println("please enter night or day");
                     String don = myObj.nextLine();  // Read user input
@@ -115,6 +114,13 @@ public class Interface {
                     System.out.println("5=shelf-stoking");
                     System.out.println("6= general-worker");
                     int prof = myObj.nextInt();  // Read user input
+
+                    System.out.println("Do you want to keep it empty for now?\n 1=yes,0=no");
+                    int skipp = myObj.nextInt();  // Read user input
+                    if(skipp==1){break;}
+
+
+
 
 
                     //shows the user all of the people whom can work

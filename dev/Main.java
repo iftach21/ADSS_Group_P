@@ -1,7 +1,21 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        System.out.println("are you employee or Manager?");
+        System.out.println("1 = employee");
+        System.out.println("2 = Manager");
+
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        int ans = myObj.nextInt();
         Interface in = new Interface();
-        in.logIn();
+        myObj.nextLine();
+
+        //worker log in
+        if(ans==1){in.logInWorker();}
+
+        //manager login
+        else{in.logIn();}
     }
 
     public static void initiation(Interface in){

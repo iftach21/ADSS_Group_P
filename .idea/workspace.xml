@@ -4,26 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="rapping up in the main with emp loging">
-      <change afterPath="$PROJECT_DIR$/dev/WorkersTest.java" afterDir="false" />
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="ofir">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Interface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Shift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Shift.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Workers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Workers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WorkersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WorkersTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JUnit5 Test Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,25 +30,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.WorkersTest.testAddingAndRemovingWindows">
+}</component>
+  <component name="RunManager" selected="JUnit.ShiftTest.TestInsertToShift">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_P" />
@@ -62,21 +45,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkersTest.testAddingAndRemovingProf" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShiftTest.TestInsertToShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkersTest" />
-      <option name="METHOD_NAME" value="testAddingAndRemovingProf" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WorkersTest.testAddingAndRemovingWindows" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkersTest" />
-      <option name="METHOD_NAME" value="testAddingAndRemovingWindows" />
+      <option name="MAIN_CLASS_NAME" value="ShiftTest" />
+      <option name="METHOD_NAME" value="TestInsertToShift" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -84,8 +57,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.WorkersTest.testAddingAndRemovingWindows" />
-        <item itemvalue="JUnit.WorkersTest.testAddingAndRemovingProf" />
+        <item itemvalue="JUnit.ShiftTest.TestInsertToShift" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -133,7 +105,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ofir" />
-    <MESSAGE value="rapping up in the main with emp loging" />
-    <option name="LAST_COMMIT_MESSAGE" value="rapping up in the main with emp loging" />
+    <option name="LAST_COMMIT_MESSAGE" value="ofir" />
   </component>
 </project>

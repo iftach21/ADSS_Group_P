@@ -16,6 +16,9 @@ public class WeeklyShift {
         return year;
     }
 
+    /**
+     * Creating a weekly shift
+     */
     public WeeklyShift(int weekNUm, int year,int supernum) {
         this.weekNUm = weekNUm;
         this.year = year;
@@ -25,6 +28,9 @@ public class WeeklyShift {
     }
     public int getSupernum(){return this.supernum;}
 
+    /**
+     * Replacing an employee on shift with another employee
+     */
     public  boolean changeWorker(Workers worker1,Workers worker2,int profindx, WindowType shiftTime){
         if(shiftTime.ordinal()<7){
             if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getId())){
@@ -45,7 +51,9 @@ public class WeeklyShift {
 
         return true;
     }
-
+    /**
+     * Returns a string of all employees when employed
+     */
     public  StringBuilder printSpesific(){
         StringBuilder pWeelShift= new StringBuilder();
         for (int i = 0; i < 7; i++){
@@ -55,7 +63,9 @@ public class WeeklyShift {
         return pWeelShift;
     }
 
-
+    /**
+     * Returns the amount of shifts an employee has do
+     */
     public int howMuchShiftWorkerDid(int id){
         //given id tells hm shift did the worker did
         int countShift=0;
@@ -72,6 +82,9 @@ public class WeeklyShift {
         return countShift;
 
     }
+    /**
+     * Add an employee to a shift
+     */
     public void addworkertoshift(Workers newWorker, WindowType shiftTime, int profindx) {
         if(shiftTime.ordinal()<7){
             this.dayShift[shiftTime.ordinal()].insertToShift(newWorker,profindx);
@@ -80,6 +93,9 @@ public class WeeklyShift {
             this.nightShift[shiftTime.ordinal()].insertToShift(newWorker,profindx);
         }
     }
+    /**
+     * Checks if a worker is on shift
+     */
     public boolean checkifworkallready(int id, WindowType shiftTime){
         if(shiftTime.ordinal()<7){
             this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(id);

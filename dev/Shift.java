@@ -5,9 +5,12 @@ public class Shift {
 
     private ArrayList<Workers>[] workerInShift;
 
-    private Workers shiftManager;   //todo: i need to add here somethingh
+    private Workers shiftManager;
     private String log;
 
+    //
+    // Creating a shift
+    //
     public Shift(String date) {
         this.date = date;
         this.shiftManager = shiftManager;
@@ -18,6 +21,9 @@ public class Shift {
         }
     }
 
+    /**
+     *Prints the shift
+     */
     public StringBuilder printShift() {
 
         StringBuilder pShift = new StringBuilder();
@@ -29,6 +35,9 @@ public class Shift {
         }
         return pShift;
     }
+    /**
+     * insert an employee on shift
+     */
     public boolean insertToShift(Workers newWorker, int profindx){
         if (newWorker==null|| !checkIfWorkerInShift(newWorker.getId())){
             return false;}
@@ -44,6 +53,9 @@ public class Shift {
         }
         return true;
     }
+    /**
+     * check If Worker In Shift
+     */
     public boolean checkIfWorkerInShift(int id){
         for (int i = 0; i <= 7;i++){
             for (int j = 0; j < this.workerInShift[i].size(); j++) {
@@ -52,6 +64,9 @@ public class Shift {
         }
         return false;
     }
+    /**
+     * removal Worker from Shift
+     */
     public boolean removalWorker(Workers currentWorker) {
         if (checkIfWorkerInShift(currentWorker.getId())) {
             return false;

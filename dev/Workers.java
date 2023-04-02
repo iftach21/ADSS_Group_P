@@ -16,8 +16,24 @@ public class Workers {
     private int bankNum;
     //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker6.
     private boolean[] pro;
-    //todo: ofir
+
     private String drivingLicense;
+    public Workers(int id, String name, String contract, String start_date, int wage, int phoneNUM, String personalinfo, int bankNum) {
+        this.id = id;
+        this.name = name;
+        this.contract = contract;
+        this.start_date = start_date;
+        this.wage = wage;
+        this.phoneNUM = phoneNUM;
+        this.personalinfo = personalinfo;
+        this.pro = new boolean[7];
+        Arrays.fill(pro, false);
+        this.bankNum = bankNum;
+
+        this.drivingLicense = null;
+
+    }
+
 
     public String getDrivingLicense() {
         return drivingLicense;
@@ -70,23 +86,10 @@ public class Workers {
     public int getBankNum() {
         return bankNum;
     }
+    /**
+     * Create an employee
+     */
 
-    public Workers(int id, String name, String contract, String start_date, int wage, int phoneNUM, String personalinfo, int bankNum) {
-        this.id = id;
-        this.name = name;
-        this.contract = contract;
-        this.start_date = start_date;
-        this.wage = wage;
-        this.phoneNUM = phoneNUM;
-        this.personalinfo = personalinfo;
-        this.pro = new boolean[7];
-        Arrays.fill(pro, false);
-        this.bankNum = bankNum;
-        //todo: ofir
-        this.drivingLicense = null;
-
-    }
-    //todo: ofir
     public void drivingLicenseChange(String driverLicenseStatus){
         this.drivingLicense=driverLicenseStatus;
     }
@@ -122,15 +125,23 @@ public class Workers {
         this.pro = pro;
     }
 
+    /**
+     * remove a profession to an employee
+     */
     public  boolean removePro(int inx){
-        //todo: ofir
         this.pro[inx]=false;
         return true;
     }
+    /**
+     * Adding a profession to an employee
+     */
     public  boolean addprof(int inx){
         this.pro[inx]=true;
         return true;
     }
+    /**
+     * Check if the employee is qualified to do a certain job
+     */
     public boolean caniworkatprofindx(int indx){
         return this.pro[indx];
     }
@@ -163,10 +174,16 @@ public class Workers {
     public  String candrivetruck(){
         return this.drivingLicense;
     }
+    /**
+     * Add time an employee can work
+     */
     public boolean addwindow(WindowType wt){
         this.available.add(wt);
         return true;
     }
+    /**
+     *  Removing time the employee is free to work
+     */
     public boolean removewindow(WindowType wt){
         int inx=0;
         for (WindowType windowType: this.available){
@@ -179,7 +196,9 @@ public class Workers {
         return true;
     }
 
-
+    /**
+     * Checks if the employee can work, if he is free
+     */
     public boolean canIworkat(WindowType wt) {
         //returns bool if can work on the windowtype.
         for (WindowType windowType : this.available) {
@@ -189,11 +208,14 @@ public class Workers {
         }
         return false;
     }
+    /**
+     * Printing works
+     */
     public void print(){
         String ans = "name: ";
         ans +=this.name + " id: " + String.valueOf(this.id);
         System.out.println(ans);
     }
-    ///ofir
+
 
 }

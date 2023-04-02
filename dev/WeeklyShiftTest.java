@@ -33,6 +33,7 @@ class WeeklyShiftTest {
 
     @Test
     void checkifworkallready() {
+        //reguraly checking
         WeeklyShift ws = new WeeklyShift(1,1,1);
         assertFalse(ws.checkifworkallready(1,WindowType.night1));
 

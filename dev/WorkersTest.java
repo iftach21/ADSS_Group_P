@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WorkersTest {
 
     @Test
-    public void testAddingAndRemovingProf(){
+    public void testAddingProf(){
         Workers w = new Workers(1,"iftach","lotsofmoney",
                 "23.2.23",90,12345,"student",1234);
         w.addprof(0);
@@ -18,6 +18,15 @@ class WorkersTest {
         //removing
         w.removePro(0);
 
+        assertFalse(w.caniworkatprofindx(0));
+    }
+
+    @Test
+    void testRemovingProf(){
+        Workers w = new Workers(1,"iftach","lotsofmoney",
+                "23.2.23",90,12345,"student",1234);
+        w.addprof(0);
+        w.removePro(0);
         assertFalse(w.caniworkatprofindx(0));
     }
 

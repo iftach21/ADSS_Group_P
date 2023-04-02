@@ -62,8 +62,8 @@ public class WeeklyShift {
     public  StringBuilder printSpesific(){
         StringBuilder pWeelShift= new StringBuilder();
         for (int i = 0; i < 7; i++){
-            pWeelShift.append("Day:").append(i).append(dayShift[i].printShift());
-            pWeelShift.append("Night:").append(i).append(dayShift[i].printShift());
+            pWeelShift.append(" Day ").append(i+1).append(": ").append(dayShift[i].printShift()).append(",");
+            pWeelShift.append(" Night ").append(i+1).append(": ").append(nightShift[i].printShift());
         }
         return pWeelShift;
     }

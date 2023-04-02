@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added test for WeeklyShift.class">
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="adding nothing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ShiftTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ShiftTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/WeeklyShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/WeeklyShiftTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShiftTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/WorkersTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WorkersTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Shift.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/ShiftTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/ShiftTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShiftTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShiftTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WorkersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WorkersTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,19 +39,32 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.WorkersTest.testAddingAndRemovingProf">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ADSS_Group_P" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.WeeklyShiftTest.printWeeklyShift">
     <configuration name="ShiftTest.TestInsertToShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ShiftTest" />
       <option name="METHOD_NAME" value="TestInsertToShift" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShiftTest.TestPrintShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ShiftTest" />
+      <option name="METHOD_NAME" value="TestPrintShift" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WeeklyShiftTest.printWeeklyShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WeeklyShiftTest" />
+      <option name="METHOD_NAME" value="printWeeklyShift" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -61,11 +80,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="WorkersTest.testRemovingProf" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WorkersTest" />
+      <option name="METHOD_NAME" value="testRemovingProf" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.WeeklyShiftTest.printWeeklyShift" />
+        <item itemvalue="JUnit.ShiftTest.TestPrintShift" />
+        <item itemvalue="JUnit.WorkersTest.testRemovingProf" />
         <item itemvalue="JUnit.WorkersTest.testAddingAndRemovingProf" />
         <item itemvalue="JUnit.ShiftTest.TestInsertToShift" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -128,7 +159,28 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680449009308</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL‎-00008" summary="added test for WeeklyShift.class">
+      <created>1680449059142</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680449059142</updated>
+    </task>
+    <task id="LOCAL‎-00009" summary="hoping it will work">
+      <created>1680449159258</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680449159258</updated>
+    </task>
+    <task id="LOCAL‎-00010" summary="adding nothing">
+      <created>1680449354132</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680449354132</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +201,19 @@
     <MESSAGE value="ofir" />
     <MESSAGE value="vv" />
     <MESSAGE value="added test for WeeklyShift.class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added test for WeeklyShift.class" />
+    <MESSAGE value="hoping it will work" />
+    <MESSAGE value="adding nothing" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding nothing" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/WeeklyShiftTest.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

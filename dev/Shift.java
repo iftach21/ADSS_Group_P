@@ -32,7 +32,7 @@ public class Shift {
         int i;
         for (i = 0; i < 7;i++){
             for (int j = 0; j < this.workerInShift[i].size(); j++) {
-                pShift.append("worker: ").append(this.workerInShift[i].get(j).getName());
+                pShift.append("name: ").append(this.workerInShift[i].get(j).getName()).append(" id: ").append(this.workerInShift[i].get(j).getId());
             }
         }
         return pShift;

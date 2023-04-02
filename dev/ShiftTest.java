@@ -30,7 +30,7 @@ class ShiftTest {
         StringBuilder print= s.printShift();
         System.out.println(print);
         StringBuilder o=new StringBuilder();
-        o.append("worker: iftach");
+        o.append("name: iftach id: 1");
         assertEquals(print.toString(),o.toString());
 
     }

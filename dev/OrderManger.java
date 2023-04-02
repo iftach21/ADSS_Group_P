@@ -162,8 +162,17 @@ public class OrderManger {
 
         }
         else{
-            Order order=new Order(itemlist,false,min_sup,min_cost);
-            this.pending_for_apporval.add(order);
+            int counter=1;
+            for(Order order :this.pending_for_apporval){
+                if(order.getSupplier()==min_sup){
+                    counter=2;
+                    for(Item item:itemlist.keySet()){
+                    order.add_item(item,itemlist.get(item));}
+                    order.setCost(order.getCost()+min_cost);}}
+
+            if(counter==1){
+            Order order_1=new Order(itemlist,false,min_sup,min_cost);
+            this.pending_for_apporval.add(order_1);}
         }
 
 

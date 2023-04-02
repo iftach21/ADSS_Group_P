@@ -21,6 +21,7 @@ class WorkersTest {
         assertFalse(w.caniworkatprofindx(0));
     }
 
+
     @Test
     public void testAddingAndRemovingWindows(){
         Workers w = new Workers(1,"iftach","lotsofmoney",

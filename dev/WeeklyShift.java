@@ -25,6 +25,11 @@ public class WeeklyShift {
         this.supernum = supernum;
         this.dayShift = new Shift[7];
         this.nightShift = new Shift[7];
+        for(int i=0;i< 7;i++){
+            dayShift[i] = new Shift(" "+i + " /" + weekNUm);
+            nightShift[i] = new Shift(" "+i + " /" + weekNUm);
+        }
+
     }
     public int getSupernum(){return this.supernum;}
 
@@ -37,15 +42,15 @@ public class WeeklyShift {
                 return false;}
             else {
                 this.dayShift[shiftTime.ordinal()].removalWorker(worker1);
-                this.nightShift[shiftTime.ordinal()].insertToShift(worker2,profindx);
+                this.dayShift[shiftTime.ordinal()].insertToShift(worker2,profindx);
             }
         }
         else {
-            if(!this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(worker1.getId())){
+            if(!this.nightShift[shiftTime.ordinal()-7].checkIfWorkerInShift(worker1.getId())){
                 return false;}
             else {
-                this.dayShift[shiftTime.ordinal()].removalWorker(worker1);
-                this.dayShift[shiftTime.ordinal()].insertToShift(worker2,profindx);
+                this.nightShift[shiftTime.ordinal()-7].removalWorker(worker1);
+                this.nightShift[shiftTime.ordinal()-7].insertToShift(worker2,profindx);
             }
         }
 
@@ -74,7 +79,7 @@ public class WeeklyShift {
                 countShift++;
             }
         }
-        for(Shift nShift:this.dayShift) {
+        for(Shift nShift:this.nightShift) {
             if (nShift.checkIfWorkerInShift(id)) {
                 countShift++;
             }
@@ -90,7 +95,7 @@ public class WeeklyShift {
             this.dayShift[shiftTime.ordinal()].insertToShift(newWorker,profindx);
         }
         else {
-            this.nightShift[shiftTime.ordinal()].insertToShift(newWorker,profindx);
+            this.nightShift[shiftTime.ordinal()-7].insertToShift(newWorker,profindx);
         }
     }
     /**
@@ -98,12 +103,11 @@ public class WeeklyShift {
      */
     public boolean checkifworkallready(int id, WindowType shiftTime){
         if(shiftTime.ordinal()<7){
-            this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(id);
+           return this.dayShift[shiftTime.ordinal()].checkIfWorkerInShift(id);
         }
         else {
-            this.nightShift[shiftTime.ordinal()].checkIfWorkerInShift(id);
+            return this.nightShift[shiftTime.ordinal()-7].checkIfWorkerInShift(id);
         }
-        return true;
     }
 
 

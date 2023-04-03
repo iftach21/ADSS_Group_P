@@ -9,6 +9,7 @@ public class Main {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int ans = myObj.nextInt();
         Interface in = new Interface();
+        initiation(in);
         myObj.nextLine();
 
         //worker log in

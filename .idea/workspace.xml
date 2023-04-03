@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="finishing upppp">
-      <change beforePath="$PROJECT_DIR$/dev/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Shift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/WeeklyShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShift.java" afterDir="false" />
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added ability to set time for each shift">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Workers.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Workers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Tests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,14 +27,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.WorkersTest">
+}]]></component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ADSS_Group_P" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ShiftTest.TestPrintShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -62,16 +75,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkersTest.testAddingAndRemovingProf" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkersTest" />
-      <option name="METHOD_NAME" value="testAddingAndRemovingProf" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="WorkersTest.testRemovingProf" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -84,11 +87,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.WorkersTest" />
         <item itemvalue="JUnit.WeeklyShiftTest.printWeeklyShift" />
         <item itemvalue="JUnit.ShiftTest.TestPrintShift" />
         <item itemvalue="JUnit.WorkersTest.testRemovingProf" />
-        <item itemvalue="JUnit.WorkersTest.testAddingAndRemovingProf" />
       </list>
     </recent_temporary>
   </component>
@@ -172,7 +175,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680449354132</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL‎-00011" summary="added ability to set time for each shift">
+      <created>1680515049402</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680515049402</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,7 +205,8 @@
     <MESSAGE value="added test for WeeklyShift.class" />
     <MESSAGE value="hoping it will work" />
     <MESSAGE value="adding nothing" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding nothing" />
+    <MESSAGE value="added ability to set time for each shift" />
+    <option name="LAST_COMMIT_MESSAGE" value="added ability to set time for each shift" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

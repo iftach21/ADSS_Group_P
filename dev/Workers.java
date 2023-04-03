@@ -28,6 +28,7 @@ public class Workers {
         this.personalinfo = personalinfo;
         this.pro = new boolean[7];
         Arrays.fill(pro, false);
+        pro[6] = true;
         this.bankNum = bankNum;
         this.available = new ArrayList<WindowType>();
         this.drivingLicense = null;

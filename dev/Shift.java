@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 public class Shift {
     private String date;
-//    private ArrayList<Workers> ArrWorkers;
 
     private ArrayList<Workers>[] workerInShift;
 
     private Workers shiftManager;
     private String log;
+    private String startTime;
 
     //
     // Creating a shift
@@ -19,6 +19,7 @@ public class Shift {
         for (int i = 0; i < 7; i++) {
             workerInShift[i] = new ArrayList<Workers>();
         }
+        startTime = "8:00";
 
     }
 
@@ -81,5 +82,9 @@ public class Shift {
             }
         }
         return true;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }

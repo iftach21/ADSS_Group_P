@@ -3,7 +3,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
-    //todo: crete function to print all employees
+    /**
+     * This class allows the users interact with the internal classes.
+     * allows creating weeklyShift and workers to update when they can work.
+     */
 
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
@@ -96,13 +99,22 @@ public class Interface {
 
                     System.out.println("please enter super number");
                     int supernum = myObj.nextInt();  // Read user input
-                    myObj.nextLine();
+
 
                     System.out.println("please enter day number in the week");
                     int daynum = myObj.nextInt();  // Read user input
+                    myObj.nextLine();
 
                     System.out.println("please enter night or day");
                     String don = myObj.nextLine();  // Read user input
+
+                    System.out.println("what time would you like it to start?");
+                    String starttime = myObj.nextLine();  // Read user input
+                    WindowTypeCreater wc = new WindowTypeCreater();
+
+                    //setting the time.
+                    getweeklyshift(weeknum,year,supernum).setTimeForShift(starttime,wc.getwidowtype(daynum,don));
+
 
 
                     System.out.println("please enter int for the persons prof");
@@ -123,8 +135,8 @@ public class Interface {
 
 
 
-                    //shows the user all of the people whom can work
-                    WindowTypeCreater wc = new WindowTypeCreater();
+                    //shows the user all the people whom can work
+
                     for(int i=0;i<this.allworkerslist.size();i++){
                         if(this.allworkerslist.get(i).caniworkatprofindx(prof) && this.allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum,don))){
                             this.allworkerslist.get(i).print();

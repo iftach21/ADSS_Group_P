@@ -109,6 +109,14 @@ public class WeeklyShift {
             return this.nightShift[shiftTime.ordinal()-7].checkIfWorkerInShift(id);
         }
     }
+    public void setTimeForShift(String newtime, WindowType st){
+        if(st.ordinal()<7){
+             this.dayShift[st.ordinal()].setStartTime(newtime);
+        }
+        else {
+             this.nightShift[st.ordinal()-7].setStartTime(newtime);
+        }
+    }
 
 
 }//end class

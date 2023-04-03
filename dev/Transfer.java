@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Transfer {
     private LocalDate _dateOfTransfer;
@@ -10,9 +11,12 @@ public class Transfer {
     private String _driverName;
     private Site _source;
     private List<Site> _destinations;
-    private Map<String, Map<String, Integer>> _orderItems;
+    private Map<Site, Map<String, Integer>> _orderItems;
+    private Map<Site, Integer> _weights;
+    private boolean _isAlreadyLeft;
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<String, Map<String, Integer>> orderItems)
+
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<String, Integer>> orderItems, Map<Site, Integer> weights)
     {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
@@ -21,19 +25,48 @@ public class Transfer {
         this._source = source;
         this._destinations = destinations;
         this._orderItems = orderItems;
+        this._weights = weights;
+        this._isAlreadyLeft = false;
     }
 
-    public void updateTransferItems(Map<String, Map<String, Integer>> itemsToDelete)
+    public void removeTransferItems(Map<Site, Map<String, Integer>> itemsToDelete)
     {
-        for (String supplier : itemsToDelete.keySet()) {
-            for (String product : itemsToDelete.get(supplier).keySet())
+        for (Site site : itemsToDelete.keySet()) {
+            for (String product : itemsToDelete.get(site).keySet())
             {
-                _orderItems.get(supplier).put(product, _orderItems.get(supplier).get(product) - itemsToDelete.get(supplier).get(product));
-                if (_orderItems.get(supplier).get(product) == 0) {
-                    _orderItems.get(supplier).remove(product);
-                    _orderItems.remove(supplier);
+                _orderItems.get(site).put(product, _orderItems.get(site).get(product) - itemsToDelete.get(site).get(product));
+                if (_orderItems.get(site).get(product) == 0) {
+                    _orderItems.get(site).remove(product);
+                    _orderItems.remove(site);
                 }
             }
+        }
+    }
+
+    public void addTransferItems(Map<Site, Map<String, Integer>> itemsToAdd){
+        for (Site site : itemsToAdd.keySet()) {
+            if(_orderItems.containsKey(site)) {
+                for (String product : itemsToAdd.get(site).keySet()) {
+                    if (_orderItems.get(site).containsKey(product)) {
+                        Integer x = _orderItems.get(site).get(product);
+                        _orderItems.get(site).put(product, x + itemsToAdd.get(site).get(product));
+                    } else {
+                        _orderItems.get(site).put(product, itemsToAdd.get(site).get(product));
+                    }
+                }
+            }
+            else {
+                _orderItems.put(site, itemsToAdd.get(site));
+            }
+        }
+    }
+
+    public void updateTransferDestinations(Set<Site> sites)
+    {
+        for(Site site: sites)
+        {
+            if (!_destinations.contains(site))
+                this._destinations.add(site);
         }
     }
 
@@ -50,5 +83,21 @@ public class Transfer {
     public void createDocument()
     {
 
+    }
+
+    public LocalDate getDateOfTransfer(){
+        return this._dateOfTransfer;
+    }
+
+    public LocalTime getLeavingTime(){
+        return this._leavingTime;
+    }
+
+    public List<Site> getDestinations(){
+        return this._destinations;
+    }
+
+    public Site getSource(){
+        return this._source;
     }
 }

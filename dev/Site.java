@@ -1,5 +1,6 @@
 public class Site {
-    //private siteType _type;
+    private int _siteId;
+    private siteType _type;
     private String _siteName;
     private String _address;
     private String _phoneNumber;
@@ -15,5 +16,14 @@ public class Site {
 
     public String getSiteName(){
         return this._siteName;
+    }
+
+    public siteType getSiteType()
+    {
+        return _type;
+    }
+
+    public int getSiteId(){
+        return _siteId;
     }
 }

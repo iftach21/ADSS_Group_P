@@ -11,12 +11,12 @@ public class Transfer {
     private String _driverName;
     private Site _source;
     private List<Site> _destinations;
-    private Map<Site, Map<String, Integer>> _orderItems;
+    private Map<Site, Map<Item_mock, Integer>> _orderItems;
     private Map<Site, Integer> _weights;
     private boolean _isAlreadyLeft;
 
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<String, Integer>> orderItems, Map<Site, Integer> weights)
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, Map<Site, Integer> weights)
     {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
@@ -29,10 +29,10 @@ public class Transfer {
         this._isAlreadyLeft = false;
     }
 
-    public void removeTransferItems(Map<Site, Map<String, Integer>> itemsToDelete)
+    public void removeTransferItems(Map<Site, Map<Item_mock, Integer>> itemsToDelete)
     {
         for (Site site : itemsToDelete.keySet()) {
-            for (String product : itemsToDelete.get(site).keySet())
+            for (Item_mock product : itemsToDelete.get(site).keySet())
             {
                 _orderItems.get(site).put(product, _orderItems.get(site).get(product) - itemsToDelete.get(site).get(product));
                 if (_orderItems.get(site).get(product) == 0) {
@@ -43,10 +43,10 @@ public class Transfer {
         }
     }
 
-    public void addTransferItems(Map<Site, Map<String, Integer>> itemsToAdd){
+    public void addTransferItems(Map<Site, Map<Item_mock, Integer>> itemsToAdd){
         for (Site site : itemsToAdd.keySet()) {
             if(_orderItems.containsKey(site)) {
-                for (String product : itemsToAdd.get(site).keySet()) {
+                for (Item_mock product : itemsToAdd.get(site).keySet()) {
                     if (_orderItems.get(site).containsKey(product)) {
                         Integer x = _orderItems.get(site).get(product);
                         _orderItems.get(site).put(product, x + itemsToAdd.get(site).get(product));

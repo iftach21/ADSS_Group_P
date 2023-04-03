@@ -16,7 +16,7 @@ public class TransferController {
         _documentsCounter = 0;
     }
 
-    public void createTransfers(Map<Site, Map<String, Integer>> orderItems, Integer orderDestinationBranchId){
+    public void createTransfers(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationBranchId){
         System.out.println("Hello manager, We have the a new order. Please choose 1/2:");
         System.out.println("1. Add this order into an existing transfer");
         System.out.println("2. Create a new transfer to this order");
@@ -87,8 +87,18 @@ public class TransferController {
 
     }
 
-    public void findDriverAndTruck(){
+    public void findDriverAndTruck(Map<Site, Map<Item_mock, Integer>> orderItems){
         List<Driver> availableDrivers = dc.getAvailableDrivers();
-        //if(availableDrivers.get(0).)
+
+        availableDrivers.sort(Comparator.comparing(Driver::getLicenseType));
+        for (Site site : orderItems.keySet()) {
+            for (Item_mock product : orderItems.get(site).keySet())
+            {
+
+            }
+        }
+
+        Driver ChosenDriver;
+
     }
 }

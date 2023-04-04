@@ -57,4 +57,9 @@ public class Truck {
     {
         _truckWeight = _truckNetoWeight;
     }
+
+    public String getTruckModel()
+    {
+        return _truckModel;
+    }
 }

@@ -1,12 +1,12 @@
 public class Item_mock {
 
-    private ItemTemp _temp;
+    private TempLevel _temp;
 
-    public Item_mock(ItemTemp temp){
+    public Item_mock(TempLevel temp){
         this._temp = temp;
     }
 
-    public ItemTemp getItemTemp(){
+    public TempLevel getItemTemp(){
         return this._temp;
     }
 }

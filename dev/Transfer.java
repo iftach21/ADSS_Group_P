@@ -61,7 +61,7 @@ public class Transfer {
         }
     }
 
-    public void updateTransferDestinations(Set<Site> sites)
+    public void addTransferDestinations(Set<Site> sites)
     {
         for(Site site: sites)
         {
@@ -70,12 +70,18 @@ public class Transfer {
         }
     }
 
+    public void addTransferDestinations(Site site)
+    {
+        if (!_destinations.contains(site))
+            this._destinations.add(site);
+    }
+
     public void updateTransferTruck(int truck_LicenseNumber)
     {
         _truck_LicenseNumber = truck_LicenseNumber;
     }
 
-    public void updateTransferDestinations(List<Site> destinationsToDelete)
+    public void removeTransferDestinations(List<Site> destinationsToDelete)
     {
         _destinations.removeAll(destinationsToDelete);
     }

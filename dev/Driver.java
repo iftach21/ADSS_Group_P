@@ -1,11 +1,11 @@
 public class Driver {
 
-    private licenseType _license_type;
+    private DriverLicense _driversLicense;
     private String _driverName;
     private boolean _isAvailable;
 
-    public Driver(licenseType license_type, String driverName, boolean isAvailable){
-        this._license_type = license_type;
+    public Driver(DriverLicense driversLicense, String driverName, boolean isAvailable){
+        this._driversLicense = driversLicense;
         this._driverName = driverName;
         this._isAvailable = isAvailable;
     }
@@ -18,7 +18,19 @@ public class Driver {
         this._isAvailable = val;
     }
 
-    public licenseType getLicenseType(){
-        return _license_type;
+    public DriverLicense getDriverLicense(){
+        return _driversLicense;
+    }
+
+    public boolean checkLicenseWithItemTemp(TempLevel itemTemp)
+    {
+        if (itemTemp.compareTo(_driversLicense.getLicenseTempCapacity()) > 0)
+            return false;
+        return true;
+    }
+
+    public String getDriverName()
+    {
+        return _driverName;
     }
 }

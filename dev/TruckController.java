@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TruckController {
-    private Map<Integer, Truck> _trucks;
+    public Map<Integer, Truck> _trucks;
 
     public TruckController(Map<Integer, Truck> trucks)
     {

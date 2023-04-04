@@ -1,4 +1,4 @@
-public enum ItemTemp {
+public enum TempLevel {
     regular,
     cold,
     frozen

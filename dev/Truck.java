@@ -4,10 +4,10 @@ public class Truck {
     private int _truckNetoWeight;
     private int _truckWeight;
     private int _truck_maxWeight;
-    private int _coolingCapacity;
+    private TempLevel _coolingCapacity;
     private boolean _isCurrentlyUsed;
 
-    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, int coolingCapacity, boolean isCurrentlyUsed)
+    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity, boolean isCurrentlyUsed)
     {
         this._truck_licenseNumber = truck_licenseNumber;
         this._truckModel = truckModel;
@@ -50,4 +50,6 @@ public class Truck {
     public boolean isLightWeight(){
         return this._truck_maxWeight>=3.5 && this._truck_maxWeight<=7.9;
     }
+
+    public TempLevel getTempCapacity(){return _coolingCapacity;}
 }

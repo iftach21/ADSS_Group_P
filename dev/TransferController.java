@@ -104,7 +104,7 @@ public class TransferController {
             weights.put(sites[i], 0);
         }
 
-        Transfer newTransfer = new Transfer(transferDate, leavingTime, chosenTruck.getLicenseNumber(), chosenDriver.getDriverName(), sourceSite, destinationSites, orderItems, weights);
+        Transfer newTransfer = new Transfer(transferDate, leavingTime, chosenTruck.getLicenseNumber(), chosenDriver.getDriverName(), sourceSite, destinationSites, orderItems, weights, _documentsCounter);
         _transfers.put(_documentsCounter, newTransfer);
         _documentsCounter++;
 

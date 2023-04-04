@@ -26,4 +26,16 @@ public class Site {
     public int getSiteId(){
         return _siteId;
     }
+
+    public String getSiteAddress(){
+        return _address;
+    }
+
+    public String get_contactName(){
+        return _contactName;
+    }
+
+    public String get_phoneNumber(){
+        return _phoneNumber;
+    }
 }

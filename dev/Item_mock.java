@@ -1,5 +1,6 @@
 public class Item_mock {
 
+    private String _itemName;
     private TempLevel _temp;
 
     public Item_mock(TempLevel temp){
@@ -8,5 +9,10 @@ public class Item_mock {
 
     public TempLevel getItemTemp(){
         return this._temp;
+    }
+
+    public String getItemName()
+    {
+        return _itemName;
     }
 }

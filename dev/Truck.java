@@ -23,9 +23,9 @@ public class Truck {
         return _truckWeight;
     }
 
-    public void updateWeight(int weightToAdd)
+    public void updateWeight(int weightToUpdate)
     {
-        _truckWeight += weightToAdd;
+        _truckWeight = weightToUpdate;
     }
 
     public boolean checkWeightCapacity()
@@ -52,4 +52,9 @@ public class Truck {
     }
 
     public TempLevel getTempCapacity(){return _coolingCapacity;}
+
+    public void resetTruckWeight()
+    {
+        _truckWeight = _truckNetoWeight;
+    }
 }

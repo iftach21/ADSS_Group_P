@@ -7,7 +7,7 @@ import java.util.Set;
 public class Transfer {
     private LocalDate _dateOfTransfer;
     private LocalTime _leavingTime;
-    private int _truck_LicenseNumber;
+    private int _truckLicenseNumber;
     private String _driverName;
     private Site _source;
     private List<Site> _destinations;
@@ -20,7 +20,7 @@ public class Transfer {
     {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
-        this._truck_LicenseNumber = truck_LicenseNumber;
+        this._truckLicenseNumber = truck_LicenseNumber;
         this._driverName = driverName;
         this._source = source;
         this._destinations = destinations;
@@ -78,7 +78,7 @@ public class Transfer {
 
     public void updateTransferTruck(int truck_LicenseNumber)
     {
-        _truck_LicenseNumber = truck_LicenseNumber;
+        _truckLicenseNumber = truck_LicenseNumber;
     }
 
     public void removeTransferDestinations(List<Site> destinationsToDelete)
@@ -103,7 +103,16 @@ public class Transfer {
         return this._destinations;
     }
 
+    public Map<Site, Map<Item_mock, Integer>> getOrderItems(){
+        return _orderItems;
+    }
+
     public Site getSource(){
         return this._source;
+    }
+
+    public int getTruckLicenseNumber()
+    {
+        return _truckLicenseNumber;
     }
 }

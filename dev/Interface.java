@@ -3,8 +3,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
-    //todo: crete function to print all employees
-
     private static final String Manager_Passward = "M12345"; // the password for manager the system
     private static final String Manager_Username = "Manager"; // the username for manager the system
 

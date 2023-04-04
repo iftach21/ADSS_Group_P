@@ -88,9 +88,9 @@ public class Transfer {
         _truckLicenseNumber = truck_LicenseNumber;
     }
 
-    public void removeTransferDestinations(List<Site> destinationsToDelete)
+    public void removeTransferDestination(Site destinationToDelete)
     {
-        _destinations.removeAll(destinationsToDelete);
+        _destinations.remove(destinationToDelete);
     }
 
     public void createDocument()

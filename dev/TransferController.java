@@ -52,7 +52,8 @@ public class TransferController {
             weights.put(sites[i], 0);
         }
 
-        Transfer newTransfer = new Transfer(transferDate, leavingTime, chosenTruck.getLicenseNumber(), chosenDriver.getDriverName(), sourceSite, destinationSites, orderItems, weights, _documentsCounter);
+        Transfer newTransfer = new Transfer(transferDate, leavingTime, chosenTruck.getLicenseNumber(), chosenDriver.getDriverName(), sourceSite, destinationSites, orderItems, _documentsCounter);
+        newTransfer.createDocument();
         _transfers.put(_documentsCounter, newTransfer);
         _documentsCounter++;
 
@@ -83,6 +84,7 @@ public class TransferController {
             System.out.println("Please enter the weight of the truck: ");
             truckWeight = scanner.nextInt();
             transferTruck.updateWeight(truckWeight);
+            newTransfer.documentUpdateTruckWeight(truckWeight, newTransfer.getSource());
 
             while (!transferTruck.checkWeightCapacity() && !transferRearranged)
             {
@@ -106,6 +108,8 @@ public class TransferController {
                 System.out.println("Please enter the weight of the truck: ");
                 truckWeight = scanner.nextInt();
                 transferTruck.updateWeight(truckWeight);
+                newTransfer.documentUpdateTruckWeight(truckWeight, transferDest.get(i));
+
 
                 while (!transferTruck.checkWeightCapacity() && !transferRearranged)
                 {

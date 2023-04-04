@@ -17,12 +17,12 @@ public class Transfer {
     private Site _source;
     private List<Site> _destinations;
     private Map<Site, Map<Item_mock, Integer>> _orderItems;
-    private Map<Site, Integer> _weights;
+    //private Map<Site, Integer> _weights;
     private boolean _isAlreadyLeft;
     private int _transferId;
 
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, Map<Site, Integer> weights, int transferId)
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId)
     {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
@@ -31,7 +31,7 @@ public class Transfer {
         this._source = source;
         this._destinations = destinations;
         this._orderItems = orderItems;
-        this._weights = weights;
+        //this._weights = weights;
         this._isAlreadyLeft = false;
         this._transferId = transferId;
     }
@@ -136,7 +136,7 @@ public class Transfer {
         }
     }
 
-    public void updateTruckWeight(int weight, Site site) {
+    public void documentUpdateTruckWeight(int weight, Site site) {
         String fileName = "transfer_" + _transferId +"Document.txt";
         try {
             List<String> lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);

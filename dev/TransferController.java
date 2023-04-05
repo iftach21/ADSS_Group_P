@@ -10,10 +10,13 @@ public class TransferController {
     private DriverController dc;
     private SiteController sc;
 
-    public TransferController()
+    public TransferController(TruckController tc, DriverController dc, SiteController sc)
     {
         _transfers = new HashMap<>();
         _documentsCounter = 0;
+        this.tc = tc;
+        this.dc = dc;
+        this.sc = sc;
     }
 
     public void createNewTransfer(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId)
@@ -30,7 +33,7 @@ public class TransferController {
         Driver chosenDriver = findDriver(orderItems);
 
         //choose truck by the chosen driver
-        Truck chosenTruck = findTruckByDriver(chosenDriver);
+        Truck chosenTruck = findTruckByDriver(chosenDriver, orderItems);
 
         System.out.println("Please choose source site from the next options (enter number): ");
         Site[] sites = orderItems.keySet().toArray(new Site[0]);
@@ -41,7 +44,10 @@ public class TransferController {
         Site sourceSite = sites[sourceSiteNum-1];
 
 
-        List<Site> destinationSites = Arrays.asList(sites);
+        List<Site> tempList = Arrays.asList(sites);
+
+        List<Site> destinationSites = new ArrayList<>(tempList);
+
         destinationSites.remove(sourceSite);
 
         destinationSites.add(sc.getSiteById(orderDestinationSiteId));
@@ -71,14 +77,24 @@ public class TransferController {
             Scanner scanner = new Scanner(System.in);
             Truck transferTruck = tc._trucks.get(newTransfer.getTruckLicenseNumber());
 
+            transferTruck.setTruckUnavailable();
+
             System.out.println("The transfer starts now");
+            System.out.println("The truck chosen to the transfer is: ");
+            System.out.println("License Number: " + transferTruck.getLicenseNumber());
+            System.out.println("Truck Model: " + transferTruck.getTruckModel());
+            System.out.println("Truck Max Weight: " + transferTruck.getMaxWeight());
+            System.out.println("Truck Cooling Capacity: " + transferTruck.getTempCapacity());
+            System.out.println("------------------------------------------------------------");
+
+
             System.out.print("The truck's driver start his drive from "+ newTransfer.getSource().getSiteName() + ", ");
             System.out.println("And he is picking up the following items: ");
 
             Map<Site, Map<Item_mock, Integer>> transferOrderItems = newTransfer.getOrderItems();
             Map<Item_mock, Integer> sourceItems = transferOrderItems.get(newTransfer.getSource());
             for (Item_mock item : sourceItems.keySet()) {
-                System.out.println("Item name" + item.getItemName() + ", Quantity: " + sourceItems.get(item));
+                System.out.println("Item name " + item.getItemName() + ", Quantity: " + sourceItems.get(item));
             }
 
             System.out.println("Please enter the weight of the truck: ");
@@ -115,7 +131,7 @@ public class TransferController {
                 {
                     transferRearranged = true;
                     rearrangeTransfer(newTransfer);
-                    System.out.println("The transfer will restart from the source all over again, after the rearrangement");
+                    System.out.println("The transfer rearranged. It will begin again shortly!");
                 }
             }
 
@@ -123,7 +139,7 @@ public class TransferController {
                 continue;
             else
             {
-                System.out.println("The truck arrived to it's final destination: " + transferDest.get(transferDest.size() - 1));
+                System.out.println("The truck arrived to it's final destination: " + transferDest.get(transferDest.size() - 1).getSiteName());
                 System.out.println("It will unload all the items here.");
                 transferTruck.resetTruckWeight();
                 break;
@@ -145,21 +161,21 @@ public class TransferController {
         if (selectedOption == 1)
         {
             System.out.println("These are the transfer destinations. Please choose one destination to remove: ");
-            for (int i = 0; i < transfer.getDestinations().size(); i++)
+            for (int i = 0; i < transfer.getDestinations().size() - 1; i++)
             {
-                System.out.println(i + "." + transfer.getDestinations().get(i).getSiteName());
+                System.out.println((i + 1) + "." + transfer.getDestinations().get(i).getSiteName());
             }
             int destToRemove = scanner.nextInt();
 
-            transfer.removeTransferDestination(transfer.getDestinations().get(destToRemove));
+            transfer.removeTransferDestination(transfer.getDestinations().get(destToRemove - 1));
 
         }
         else if (selectedOption == 2)
         {
-            System.out.println("These are the available trucks. Please choose on the trucks, by type its license number: ");
-            for (Integer LicenseNum : tc._trucks.keySet())
+            System.out.println("These are the available trucks. Please choose one of the trucks, by type its license number: ");
+            for (Integer LicenseNum : tc.getAllAvailableTrucks().keySet())
             {
-                System.out.println("License number: " + LicenseNum + "Truck Model: " + tc._trucks.get(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity());
+                System.out.println("License number: " + LicenseNum + ", Truck Model: " + tc._trucks.get(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc._trucks.get(LicenseNum).getTruckWeightType());
             }
 
             int chosenTruck = scanner.nextInt();
@@ -171,28 +187,33 @@ public class TransferController {
             Map<Site, Map<Item_mock, Integer>> orderItemsToDelete = new HashMap<>();
             boolean removeMoreDestinations = true;
 
-            System.out.println("These are the destinations the driver pick up items for. Please choose by enter the index number, the destination you would like to drop items from:");
             List<Site> allDestinations = transfer.getDestinations();
             List<Site> allDestToReduceItems = new ArrayList<>();
-            while (removeMoreDestinations && allDestinations.size() > 0)
+            while (removeMoreDestinations)
             {
+                if (allDestinations.size() - 1 == 0) {
+                    System.out.println("there are no more destinations to drop items from.");
+                    break;
+                }
+                System.out.println("These are the destinations the driver pick up items for. Please choose by enter the index number, the destination you would like to drop items from:");
                 Site destToReduceItems;
-                for (int i = 0; i < allDestinations.size(); i++) {
-                    System.out.println(i + ". " + allDestinations.get(i));
+                for (int i = 0; i < allDestinations.size() - 1; i++) {
+                    System.out.println((i+1) + ". " + allDestinations.get(i).getSiteName());
                 }
 
                 //get input dest from the manager
                 int chosenIndexDest = scanner.nextInt();
-                destToReduceItems = transfer.getDestinations().get(chosenIndexDest);
+                destToReduceItems = transfer.getDestinations().get(chosenIndexDest - 1);
 
                 //add the destination to the list of destinations we remove
                 allDestToReduceItems.add(destToReduceItems);
 
                 //remove the destination from all destinations list
-                allDestinations.remove(chosenIndexDest);
+                allDestinations.remove(chosenIndexDest - 1);
 
                 //ask if the manager would like to remove products from another destination
-                System.out.println("Would you like to remove products from another destination? press 'y' for yes and 'n' for no");
+                System.out.println("Would you like to remove products from another destination? press 'y' for yes and 'n' for no.");
+                System.out.println("Note that in the next step, you will choose the quantity of the items to drop from each destination you selected.");
                 char yesOrNoInput = scanner.next().charAt(0);
 
                 if (yesOrNoInput == 'n')
@@ -207,17 +228,17 @@ public class TransferController {
 
                 while(removeMoreItems && items.length > 0)
                 {
-                    System.out.println("Please choose an item you would like to reduce his quantity: ");
+                    System.out.println("Please choose an item you would like to reduce his quantity from the site " + destToReduceFrom.getSiteName());
                     for (int i = 0; i < items.length; i++)
                     {
-                        System.out.println(i + ". " + items[i].getItemName());
+                        System.out.println((i + 1) + ". " + items[i].getItemName());
                     }
 
                     //
                     int chosenIndexItem = scanner.nextInt();
-                    Item_mock itemToReduceQuantity = items[chosenIndexItem];
+                    Item_mock itemToReduceQuantity = items[chosenIndexItem - 1];
 
-                    System.out.println("And now, please choose how much you would like to reduce from this item: ");
+                    System.out.println("And now, please choose how much " + itemToReduceQuantity.getItemName() + " would you like to reduce: ");
                     System.out.println("Current quantity: " + itemToChosenDest.get(itemToReduceQuantity));
                     int chooseQuantity = scanner.nextInt();
 
@@ -255,14 +276,7 @@ public class TransferController {
             }
         });
 
-        TempLevel currMinTemp = TempLevel.regular;
-        for (Site site : orderItems.keySet()) {
-            for (Item_mock product : orderItems.get(site).keySet())
-            {
-                if (product.getItemTemp().compareTo(currMinTemp) > 0)
-                    currMinTemp = product.getItemTemp();
-            }
-        }
+        TempLevel currMinTemp = lowestTempItem(orderItems);
 
         chosenDriver = null;
 
@@ -281,7 +295,7 @@ public class TransferController {
             throw new NoSuchElementException("There is no available driver for this transfer");
     }
 
-    public Truck findTruckByDriver(Driver chosenDriver) {
+    public Truck findTruckByDriver(Driver chosenDriver, Map<Site, Map<Item_mock, Integer>> orderItems) {
         Map<Integer, Truck> availableTrucks;
 
         if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.lightWeight)
@@ -305,8 +319,10 @@ public class TransferController {
 
         Truck chosenTruck = null;
 
+        TempLevel currMinTemp = lowestTempItem(orderItems);
+
         for (Integer truckId: availableTrucks.keySet()) {
-            if (availableTrucks.get(truckId).getTempCapacity().compareTo(chosenDriver.getDriverLicense().getLicenseTempCapacity()) <= 0)
+            if (availableTrucks.get(truckId).getTempCapacity().compareTo(chosenDriver.getDriverLicense().getLicenseTempCapacity()) <= 0 && availableTrucks.get(truckId).getTempCapacity().compareTo(currMinTemp) >= 0)
             {
                 chosenTruck = availableTrucks.get(truckId);
                 break;
@@ -320,5 +336,17 @@ public class TransferController {
 
     }
 
+    public TempLevel lowestTempItem(Map<Site, Map<Item_mock, Integer>> orderItems)
+    {
+        TempLevel currMinTemp = TempLevel.regular;
+        for (Site site : orderItems.keySet()) {
+            for (Item_mock product : orderItems.get(site).keySet())
+            {
+                if (product.getItemTemp().compareTo(currMinTemp) > 0)
+                    currMinTemp = product.getItemTemp();
+            }
+        }
+        return currMinTemp;
+    }
 
 }

@@ -42,5 +42,17 @@ public class TruckController {
         return availableTrucks;
     }
 
+    public Map<Integer, Truck> getAllAvailableTrucks()
+    {
+        Map<Integer, Truck> availableTrucks;
+        availableTrucks = getAvailableTrucksOfHeavyWeight();
+        Map<Integer, Truck> availableTrucksMiddleWeight = getAvailableTrucksOfMiddleWeight();
+        Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight();
+        availableTrucksMiddleWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
+        availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
+
+        return availableTrucks;
+    }
+
 
 }

@@ -6,8 +6,9 @@ public class Site {
     private String _phoneNumber;
     private String _contactName;
 
-    public Site(String siteName, String address, String phoneNumber, String contactName)
+    public Site(int siteId, String siteName, String address, String phoneNumber, String contactName)
     {
+        this._siteId = siteId;
         this._siteName = siteName;
         this._address = address;
         this._phoneNumber = phoneNumber;

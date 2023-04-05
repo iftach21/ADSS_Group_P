@@ -62,4 +62,19 @@ public class Truck {
     {
         return _truckModel;
     }
+
+    public weightType getTruckWeightType()
+    {
+        if (_truck_maxWeight>=3.5 && this._truck_maxWeight<=7.9)
+            return weightType.lightWeight;
+        else if (_truck_maxWeight>=8 && this._truck_maxWeight<=15.9)
+            return weightType.mediumWeight;
+        else
+            return weightType.heavyWeight;
+    }
+
+    public void setTruckUnavailable()
+    {
+        _isCurrentlyUsed = true;
+    }
 }

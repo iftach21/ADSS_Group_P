@@ -8,18 +8,19 @@ public class Main {
 
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int ans = myObj.nextInt();
-        Interface in = new Interface();
+        BossInterface in = new BossInterface();
+        WorkerInterface win = new WorkerInterface();
         initiation(in);
         myObj.nextLine();
 
         //worker log in
-        if(ans==1){in.logInWorker();}
+        if(ans==1){win.logInWorker();}
 
         //manager login
         else{in.logIn();}
     }
 
-    public static void initiation(Interface in){
+    public static void initiation(BossInterface in){
         //creation of 6 workers:
         Workers work1=new Workers(1,"work1","q","e",1,586012012,"o",11);
         Workers work2=new Workers(2,"work2","q","e",1,586012012,"o",11);

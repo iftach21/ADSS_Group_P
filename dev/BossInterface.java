@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
-public class Interface {
+public class BossInterface {
     /**
      * This class allows the users interact with the internal classes.
      * allows creating weeklyShift and workers to update when they can work.
@@ -10,13 +7,12 @@ public class Interface {
 
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
+    private WeeklyShiftAndWorkersManager controller;
 
-    private List<WeeklyShift> weeklyShiftList; //holds all the weeklyshifts
-    private List<Workers> allworkerslist; //holds all the workers available
 
-    public Interface() {
-        this.weeklyShiftList = new ArrayList<WeeklyShift>();
-        this.allworkerslist = new ArrayList<Workers>();
+
+    public BossInterface() {
+        this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
     public void logIn(){
         //===============================
@@ -83,7 +79,7 @@ public class Interface {
                     System.out.println("please enter super number");
                     int supernum = myObj.nextInt();  // Read user input
 
-                    this.createnewweeklyshift(weeknum,yearans,supernum);
+                    controller.createnewweeklyshift(weeknum,yearans,supernum);
                     break;
                 }
                 //-----------------------
@@ -113,7 +109,7 @@ public class Interface {
                     WindowTypeCreater wc = new WindowTypeCreater();
 
                     //setting the time.
-                    getweeklyshift(weeknum,year,supernum).setTimeForShift(starttime,wc.getwidowtype(daynum,don));
+                    controller.getweeklyshift(weeknum,year,supernum).setTimeForShift(starttime,wc.getwidowtype(daynum,don));
 
 
 
@@ -136,27 +132,17 @@ public class Interface {
 
 
                     //shows the user all the people whom can work
+                    controller.printAllWorkersWhoCanWork(prof,daynum,don);
 
-                    for(int i=0;i<this.allworkerslist.size();i++){
-                        if(this.allworkerslist.get(i).caniworkatprofindx(prof) && this.allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum,don))){
-                            this.allworkerslist.get(i).print();
-                        }
-                    }
                     System.out.println("please enter id");
                     int id = myObj.nextInt();  // Read user input
 
                     //checking if allready has shift at other super:
-                    for(int i =0;i<this.weeklyShiftList.size();i++){
-                        WeeklyShift w = this.weeklyShiftList.get(i);
-                        if(w.getYear()==year && w.getWeekNUm()==weeknum){
-                            if(w.checkifworkallready(id,wc.getwidowtype(daynum,don) )){
-                                System.out.println("the employee cant work at this time, pick some one else plz");
-                                return;
-                            }
-                        }
-                    }
+                    if(controller.IsWorkingAllready(id,weeknum,year,daynum,don)){
+                    System.out.println("the employee cant work at this time, pick some one else plz");}
+                    else{
 
-                    this.addtoexistingweeklyshift(weeknum,year,supernum,wc.getwidowtype(daynum,don),this.getworkerbyid(id),prof);
+                    controller.addtoexistingweeklyshift(weeknum,year,supernum,wc.getwidowtype(daynum,don),controller.getworkerbyid(id),prof);}
                     break;
                 }
 
@@ -198,7 +184,7 @@ public class Interface {
                     System.out.println("please enter id for the employee you want to put in");
                     int id2 = myObj.nextInt();  // Read user input
 
-                    this.switchemployeeinashift(weeknum,year,supernum,wt.getwidowtype(daynum,don),prof,id1,id2);
+                    controller.switchemployeeinashift(weeknum,year,supernum,wt.getwidowtype(daynum,don),prof,id1,id2);
                 }
 
                 //-----------------------
@@ -207,7 +193,7 @@ public class Interface {
                 case "4":{
                     System.out.println("please enter id for the employee");
                     int idans = myObj.nextInt();  // Read user input
-                    this.fireemployee(idans);
+                    controller.fireemployee(idans);
                     break;
                 }
 
@@ -246,7 +232,7 @@ public class Interface {
 
                     Workers w = new Workers(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum);
 
-                    this.addemployee(w);
+                    controller.addemployee(w);
                     break;
 
                 }
@@ -260,7 +246,7 @@ public class Interface {
                     int idans = myObj.nextInt();  // Read user input
                     System.out.println("how much would you like to add/deduct?");
                     int wageadd = myObj.nextInt();  // Read user input
-                    this.addwagetoemployee(idans,wageadd);
+                    controller.addwagetoemployee(idans,wageadd);
                     break;
                 }
 
@@ -277,7 +263,7 @@ public class Interface {
                     System.out.println("what year num do you need?");
                     int year = myObj.nextInt();  // Read user input
 
-                    int answage = this.getwageforemployee(id,weeknum,year);
+                    int answage = controller.getwageforemployee(id,weeknum,year);
                     System.out.println(answage);
                     break;
                 }
@@ -293,7 +279,7 @@ public class Interface {
 
                     System.out.println("please enter new contract");
                     String newcontract = myObj.nextLine();  // Read user input
-                    this.changeemployeecontract(idans,newcontract);
+                    controller.changeemployeecontract(idans,newcontract);
                     break;
                 }
 
@@ -306,7 +292,7 @@ public class Interface {
                     int idans = myObj.nextInt();  // Read user input
                     System.out.println("please enter new bank num");
                     int banknum = myObj.nextInt();  // Read user input
-                    this.updateemployeesbank(idans,banknum);
+                    controller.updateemployeesbank(idans,banknum);
                     break;
                 }
 
@@ -325,7 +311,7 @@ public class Interface {
                     String nord = myObj.nextLine();  // Read user input
                     WindowTypeCreater wdc = new WindowTypeCreater();
 
-                    this.addavilableforemployee(id,wdc.getwidowtype(daynum,nord));
+                    controller.addavilableforemployee(id,wdc.getwidowtype(daynum,nord));
                     break;
 
                 }
@@ -354,7 +340,7 @@ public class Interface {
                     //5=shelfstoking
                     //6= generalworker
 
-                    this.addnewproforemployee(id,prof);
+                    controller.addnewproforemployee(id,prof);
 
                     break;
                 }
@@ -377,7 +363,7 @@ public class Interface {
                     System.out.println("6= general-worker");
                     int prof = myObj.nextInt();  // Read user input
 
-                    this.removeprofforemployee(id,prof);
+                    controller.removeprofforemployee(id,prof);
 
                     break;
                 }
@@ -397,7 +383,7 @@ public class Interface {
                     String nord = myObj.nextLine();  // Read user input
                     WindowTypeCreater wdc = new WindowTypeCreater();
 
-                    this.removeavalbleforemployee(id,wdc.getwidowtype(daynum,nord));
+                    controller.removeavalbleforemployee(id,wdc.getwidowtype(daynum,nord));
                     break;
                 }
                 //-------------------------
@@ -413,7 +399,7 @@ public class Interface {
                     System.out.println("please enter super number");
                     int supernum = myObj.nextInt();  // Read user input
 
-                    this.printweeklyshift(weeknum,year,supernum);
+                    controller.printweeklyshift(weeknum,year,supernum);
                     break;
                 }
                 case "15":{
@@ -424,13 +410,11 @@ public class Interface {
                     System.out.println("please enter the new personal info");
                     String persoinfo = myObj.nextLine();  // Read user input
 
-                    this.getworkerbyid(id).setPersonalinfo(persoinfo);
+                    controller.getworkerbyid(id).setPersonalinfo(persoinfo);
                     break;
                 }
                 case "16":{
-                    for(int i =0;i<this.allworkerslist.size();i++){
-                        this.allworkerslist.get(i).print();
-                    }
+                    controller.printall();
                     break;
                 }
 
@@ -444,144 +428,8 @@ public class Interface {
         }
 
     }//login
-    //function for the "1" option in menu
-    public void createnewweeklyshift(int weeknum,int year,int supernum){
-        //checks if allready exist, if not will create new one
-        for(int i=0; i<weeklyShiftList.size();i++){
-            if((weeklyShiftList.get(i).getYear()) == year &&
-                    weeklyShiftList.get(i).getWeekNUm()==weeknum) {
-                //allready exist:
-                return;
-            }
-        }
-        weeklyShiftList.add(new WeeklyShift(weeknum,year,supernum));
 
-    }
-    //function for the "2"
-    public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,Workers w,int profindx){
-            this.getweeklyshift(weeknum,year,supernum).addworkertoshift(w,wt,profindx);
-            }
-    //function for the "3"
-    public void switchemployeeinashift(int weeknum,int yearnum,int supernum, WindowType wt,int prof, int id1, int id2){
-        this.getweeklyshift(weeknum,yearnum,supernum).changeWorker(this.getworkerbyid(id1),this.getworkerbyid(id2),prof,wt);
-    }
-    //function for the "4"
-    public void fireemployee(int id){
-        for(int i=0; i<allworkerslist.size();i++){
-            if(allworkerslist.get(i).getId()==id){
-                allworkerslist.remove(i);
-                break;
-            }
-        }
-    }
-    //function for the "5"
-    public void addemployee(Workers w){
-        allworkerslist.add(w);
-    }
-    //function for the "6"
-    public void addwagetoemployee(int id,int addedwage){
-        this.getworkerbyid(id).setWage(addedwage + this.getworkerbyid(id).getWage());
-        }
-    //function for the "7"
-    public int getwageforemployee(int id, int week,int year){
 
-        for(int i=0; i<weeklyShiftList.size();i++) {
-            if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year){
-               int hm =  weeklyShiftList.get(i).howMuchShiftWorkerDid(id);
-                for(int j=0; i<allworkerslist.size();j++) {
-                    if (allworkerslist.get(j).getId() == id) {
-                        return hm * allworkerslist.get(j).getWage();
-                    }
-                }
-            }
-        }
-
-        return 0;
-    }
-    //function for the "8"
-    public void changeemployeecontract(int id,String contract){
-        this.getworkerbyid(id).setContract(contract);
-        }
-    //function for the "9"
-    public void updateemployeesbank(int id,int newbanknum) {
-        this.getworkerbyid(id).setBankNum(newbanknum);
-        }
-    //function for the "10"
-    public void addavilableforemployee(int id, WindowType wt){
-        this.getworkerbyid(id).addwindow(wt);
-        }
-    //function for the "11"
-    public void addnewproforemployee(int id, int indx) {
-
-        //0=manager
-        //1=cashier
-        //2=stoke
-        //3=security
-        //4=cleaning
-        //5=shelfstoking
-        //6= generalworker
-
-        this.getworkerbyid(id).addprof(indx);
-    }
-    //function for the "12"
-    public void removeprofforemployee(int id,int pros){
-        this.getworkerbyid(id).removePro(pros);
-    }
-    //function for the "13"
-    public void removeavalbleforemployee(int id,WindowType wt){
-            this.getworkerbyid(id).removewindow(wt);
-            }
-    //for function "14"
-    public void printweeklyshift(int weeknum,int year,int supernum){
-        System.out.println(this.getweeklyshift(weeknum,year,supernum).printSpesific());
-    }
-    public Workers getworkerbyid(int id) {
-        for (int i = 0; i < allworkerslist.size(); i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                return allworkerslist.get(i);
-            }
-        }
-        return null;
-    }
-    public WeeklyShift getweeklyshift(int week,int year,int supernum){
-        for(int i=0; i<weeklyShiftList.size();i++) {
-            if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year &&supernum == weeklyShiftList.get(i).getSupernum()) {
-                return weeklyShiftList.get(i);}
-
-        }
-        return null;
-    }
-    public void logInWorker() {
-        System.out.println("Please insert ID:");
-        Scanner myObj = new Scanner(System.in);
-        int id = myObj.nextInt();  // Read user input
-        System.out.println("Press 1 to removeaval or 2 to add  available ");
-        int c = myObj.nextInt();  // Read user input
-        if (c==1){
-
-            System.out.println("please enter day num");
-            int daynum = myObj.nextInt();  // Read user input
-            myObj.nextLine();
-
-            System.out.println("please enter day/night shift");
-            String nord = myObj.nextLine();  // Read user input
-            WindowTypeCreater wdc = new WindowTypeCreater();
-
-            this.removeavalbleforemployee(id,wdc.getwidowtype(daynum,nord));
-        }
-        else{
-            System.out.println("please enter day num");
-            int daynum = myObj.nextInt();  // Read user input
-            myObj.nextLine();
-
-            System.out.println("please enter day/night shift");
-            String nord = myObj.nextLine();  // Read user input
-            WindowTypeCreater wdc = new WindowTypeCreater();
-
-            this.addavilableforemployee(id,wdc.getwidowtype(daynum,nord));
-        }
-
-    }
 
 }//class
 

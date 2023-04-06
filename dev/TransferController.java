@@ -30,10 +30,12 @@ public class TransferController {
         LocalTime leavingTime = LocalTime.now();
 
         //choose driver for transfer
-        Driver chosenDriver = findDriver(orderItems);
+        TempLevel currMinTemp = lowestTempItem(orderItems);
+        Driver chosenDriver = dc.findDriver(currMinTemp);
 
         //choose truck by the chosen driver
-        Truck chosenTruck = findTruckByDriver(chosenDriver, orderItems);
+        currMinTemp = lowestTempItem(orderItems);
+        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp);
 
         System.out.println("Please choose source site from the next options (enter number): ");
         Site[] sites = orderItems.keySet().toArray(new Site[0]);
@@ -491,78 +493,6 @@ public class TransferController {
         }
     }
 
-    public Driver findDriver(Map<Site, Map<Item_mock, Integer>> orderItems){
-        Driver chosenDriver;
-
-        List<Driver> availableDrivers = dc.getAvailableDrivers();
-
-        Collections.sort(availableDrivers, new Comparator<Driver>() {
-            @Override
-            public int compare(Driver d1, Driver d2) {
-                return d1.getDriverLicense().compareTo(d2.getDriverLicense());
-            }
-        });
-
-        TempLevel currMinTemp = lowestTempItem(orderItems);
-
-        chosenDriver = null;
-
-        for (int i = 0; i < availableDrivers.size(); i++)
-        {
-            if (availableDrivers.get(i).checkLicenseWithItemTemp(currMinTemp))
-            {
-                chosenDriver = availableDrivers.get(i);
-                break;
-            }
-        }
-
-        if (chosenDriver != null)
-            return chosenDriver;
-        else
-            throw new NoSuchElementException("There is no available driver for this transfer");
-    }
-
-    public Truck findTruckByDriver(Driver chosenDriver, Map<Site, Map<Item_mock, Integer>> orderItems) {
-        Map<Integer, Truck> availableTrucks;
-
-        if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.lightWeight)
-        {
-            availableTrucks = tc.getAvailableTrucksOfLightWeight();
-        }
-        else if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.mediumWeight)
-        {
-            availableTrucks = tc.getAvailableTrucksOfMiddleWeight();
-            Map<Integer, Truck> availableTrucksLightWeight = tc.getAvailableTrucksOfLightWeight();
-            availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
-        }
-        else
-        {
-            availableTrucks = tc.getAvailableTrucksOfHeavyWeight();
-            Map<Integer, Truck> availableTrucksMiddleWeight = tc.getAvailableTrucksOfMiddleWeight();
-            Map<Integer, Truck> availableTrucksLightWeight = tc.getAvailableTrucksOfLightWeight();
-            availableTrucksMiddleWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
-            availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
-        }
-
-        Truck chosenTruck = null;
-
-        TempLevel currMinTemp = lowestTempItem(orderItems);
-
-        for (Integer truckId: availableTrucks.keySet()) {
-            if (availableTrucks.get(truckId).getTempCapacity().compareTo(chosenDriver.getDriverLicense().getLicenseTempCapacity()) <= 0 && availableTrucks.get(truckId).getTempCapacity().compareTo(currMinTemp) >= 0)
-            {
-                chosenTruck = availableTrucks.get(truckId);
-                break;
-            }
-        }
-
-        if (chosenTruck != null)
-            return chosenTruck;
-        else
-            throw new NoSuchElementException("There is no available truck for this transfer");
-
-    }
-
     public TempLevel lowestTempItem(Map<Site, Map<Item_mock, Integer>> orderItems)
     {
         TempLevel currMinTemp = TempLevel.regular;
@@ -575,5 +505,4 @@ public class TransferController {
         }
         return currMinTemp;
     }
-
 }

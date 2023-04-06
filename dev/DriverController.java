@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DriverController {
 
@@ -22,4 +21,35 @@ public class DriverController {
         }
         return availableDrivers;
     }
+
+    public Driver findDriver(TempLevel currMinTemp){
+        Driver chosenDriver;
+
+        List<Driver> availableDrivers = getAvailableDrivers();
+
+        Collections.sort(availableDrivers, new Comparator<Driver>() {
+            @Override
+            public int compare(Driver d1, Driver d2) {
+                return d1.getDriverLicense().compareTo(d2.getDriverLicense());
+            }
+        });
+
+        chosenDriver = null;
+
+        for (int i = 0; i < availableDrivers.size(); i++)
+        {
+            if (availableDrivers.get(i).checkLicenseWithItemTemp(currMinTemp))
+            {
+                chosenDriver = availableDrivers.get(i);
+                break;
+            }
+        }
+
+        if (chosenDriver != null)
+            return chosenDriver;
+        else
+            throw new NoSuchElementException("There is no available driver for this transfer");
+    }
+
+
 }

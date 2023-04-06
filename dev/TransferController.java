@@ -40,9 +40,27 @@ public class TransferController {
         for(int i=0; i<sites.length; i++){
             System.out.println(i+1 + ". " + sites[i].getSiteName());
         }
-        int sourceSiteNum = scanner.nextInt();
-        Site sourceSite = sites[sourceSiteNum-1];
-
+        Site sourceSite;
+        while(true)
+        {
+            try {
+                int sourceSiteNum = scanner.nextInt();
+                if (sourceSiteNum <= sites.length && sourceSiteNum >= 1)
+                {
+                    sourceSite = sites[sourceSiteNum-1];
+                    break;
+                }
+                else
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - " + sites.length);
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - " + sites.length);
+                scanner.next();
+            }
+        }
 
         List<Site> tempList = Arrays.asList(sites);
 
@@ -94,12 +112,31 @@ public class TransferController {
             Map<Site, Map<Item_mock, Integer>> transferOrderItems = newTransfer.getOrderItems();
             Map<Item_mock, Integer> sourceItems = transferOrderItems.get(newTransfer.getSource());
             for (Item_mock item : sourceItems.keySet()) {
-                System.out.println("Item name " + item.getItemName() + ", Quantity: " + sourceItems.get(item));
+                System.out.println("Item name: " + item.getItemName() + ", Quantity: " + sourceItems.get(item));
             }
 
             System.out.println("Please enter the weight of the truck: ");
-            truckWeight = scanner.nextInt();
-            transferTruck.updateWeight(truckWeight);
+            while(true)
+            {
+                try {
+                    truckWeight = scanner.nextInt();
+                    if (truckWeight >=0)
+                    {
+                        transferTruck.updateWeight(truckWeight);
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a positive whole number");
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter a positive whole number");
+                    scanner.next();
+                }
+
+            }
             newTransfer.documentUpdateTruckWeight(truckWeight, newTransfer.getSource());
 
             while (!transferTruck.checkWeightCapacity() && !transferRearranged)
@@ -120,12 +157,30 @@ public class TransferController {
 
                 Map<Item_mock, Integer> destItems = transferOrderItems.get(transferDest.get(i));
                 for (Item_mock item : destItems.keySet()) {
-                    System.out.println("Item name " + item.getItemName() + ", Quantity: " + destItems.get(item));
+                    System.out.println("Item name: " + item.getItemName() + ", Quantity: " + destItems.get(item));
                 }
 
                 System.out.println("Please enter the weight of the truck: ");
-                truckWeight = scanner.nextInt();
-                transferTruck.updateWeight(truckWeight);
+                while(true)
+                {
+                    try {
+                        truckWeight = scanner.nextInt();
+                        if (truckWeight >=0)
+                        {
+                            transferTruck.updateWeight(truckWeight);
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a positive whole number");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a positive whole number");
+                        scanner.next();
+                    }
+                }
                 newTransfer.documentUpdateTruckWeight(truckWeight, transferDest.get(i));
 
 
@@ -158,7 +213,26 @@ public class TransferController {
         System.out.println("1. Change the transfer destinations");
         System.out.println("2. Change the transfer truck");
         System.out.println("3. Drop transfer Items");
-        int selectedOption = scanner.nextInt();
+        int selectedOption;
+        while(true)
+        {
+            try {
+                selectedOption = scanner.nextInt();
+                if (selectedOption <= 3 && selectedOption >= 1)
+                {
+                    break;
+                }
+                else
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - 3");
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - 3");
+                scanner.next();
+            }
+        }
 
         if (selectedOption == 1)
         {
@@ -167,7 +241,27 @@ public class TransferController {
             {
                 System.out.println((i + 1) + "." + transfer.getDestinations().get(i).getSiteName());
             }
-            int destToRemove = scanner.nextInt();
+
+            int destToRemove;
+            while(true)
+            {
+                try {
+                    destToRemove = scanner.nextInt();
+                    if (transfer.getDestinations().size() - 1 <= 3 && destToRemove >= 1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - " + (transfer.getDestinations().size() - 1));
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - " + (transfer.getDestinations().size() - 1));
+                    scanner.next();
+                }
+            }
 
             transfer.removeTransferDestination(transfer.getDestinations().get(destToRemove - 1));
 
@@ -180,7 +274,27 @@ public class TransferController {
                 System.out.println("License number: " + LicenseNum + ", Truck Model: " + tc._trucks.get(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc._trucks.get(LicenseNum).getTruckWeightType());
             }
 
-            int chosenTruck = scanner.nextInt();
+            int chosenTruck;
+
+            while(true)
+            {
+                try {
+                    chosenTruck = scanner.nextInt();
+                    if (tc.getAllAvailableTrucks().containsKey(chosenTruck))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid license number");
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid license number");
+                    scanner.next();
+                }
+            }
 
             transfer.updateTransferTruck(chosenTruck);
         }
@@ -204,19 +318,60 @@ public class TransferController {
                 }
 
                 //get input dest from the manager
-                int chosenIndexDest = scanner.nextInt();
-                destToReduceItems = transfer.getDestinations().get(chosenIndexDest - 1);
+                int chosenIndexDest;
+
+                while(true)
+                {
+                    try {
+                        chosenIndexDest = scanner.nextInt();
+                        if (chosenIndexDest >= 1 && chosenIndexDest <= (allDestinations.size() - 1))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - " + (allDestinations.size() - 1));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - " + (allDestinations.size() - 1));
+                        scanner.next();
+                    }
+                }
+
+                destToReduceItems = allDestinations.get(chosenIndexDest - 1);
 
                 //add the destination to the list of destinations we remove
                 allDestToReduceItems.add(destToReduceItems);
 
                 //remove the destination from all destinations list
-                allDestinations.remove(chosenIndexDest - 1);
+                allDestinations.remove(destToReduceItems);
 
                 //ask if the manager would like to remove products from another destination
                 System.out.println("Would you like to remove products from another destination? press 'y' for yes and 'n' for no.");
                 System.out.println("Note that in the next step, you will choose the quantity of the items to drop from each destination you selected.");
-                char yesOrNoInput = scanner.next().charAt(0);
+                char yesOrNoInput;
+
+                while(true)
+                {
+                    try {
+                        yesOrNoInput = scanner.next().charAt(0);
+                        if (yesOrNoInput == 'y' || yesOrNoInput == 'Y' || yesOrNoInput == 'n' || yesOrNoInput == 'n')
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. Please enter 'y' or 'n'");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. Please enter 'y' or 'n'");
+                        scanner.next();
+                    }
+                }
 
                 if (yesOrNoInput == 'n')
                     removeMoreDestinations = false;
@@ -227,6 +382,7 @@ public class TransferController {
                 Map<Item_mock, Integer> itemToChosenDest = transfer.getOrderItems().get(destToReduceFrom);
                 Item_mock[] items = itemToChosenDest.keySet().toArray(new Item_mock[0]);
                 boolean removeMoreItems = true;
+                Map<Item_mock, Integer> howMuchToReduce = new HashMap<>();
 
                 while(removeMoreItems && items.length > 0)
                 {
@@ -237,27 +393,88 @@ public class TransferController {
                     }
 
                     //
-                    int chosenIndexItem = scanner.nextInt();
+                    int chosenIndexItem;
+
+                    while(true)
+                    {
+                        try {
+                            chosenIndexItem = scanner.nextInt();
+                            if (chosenIndexItem >= 1 && chosenIndexItem <= items.length)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - " + items.length);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 1 - " + items.length);
+                            scanner.next();
+                        }
+                    }
+
                     Item_mock itemToReduceQuantity = items[chosenIndexItem - 1];
 
                     System.out.println("And now, please choose how much " + itemToReduceQuantity.getItemName() + " would you like to reduce: ");
                     System.out.println("Current quantity: " + itemToChosenDest.get(itemToReduceQuantity));
-                    int chooseQuantity = scanner.nextInt();
+                    int chooseQuantity;
+
+                    while(true)
+                    {
+                        try {
+                            chooseQuantity = scanner.nextInt();
+                            if (chooseQuantity >= 0 && chooseQuantity <= itemToChosenDest.get(itemToReduceQuantity))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 0 - " + itemToChosenDest.get(itemToReduceQuantity));
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a number between 0 - " + itemToChosenDest.get(itemToReduceQuantity));
+                            scanner.next();
+                        }
+                    }
 
                     //items to reduce and the quantity to reduce
-                    Map<Item_mock, Integer> howMuchToReduce = new HashMap<>();
                     howMuchToReduce.put(itemToReduceQuantity, chooseQuantity);
-
-                    //add to the reduction map
-                    orderItemsToDelete.put(destToReduceFrom, howMuchToReduce);
 
                     //check if he wants to reduce more items from this site
                     System.out.println("Would you like to remove more products from this destination? press 'y' for yes and 'n' for no");
-                    char yesOrNoInput = scanner.next().charAt(0);
+                    char yesOrNoInput;
+
+                    while(true)
+                    {
+                        try {
+                            yesOrNoInput = scanner.next().charAt(0);
+                            if (yesOrNoInput == 'y' || yesOrNoInput == 'Y' || yesOrNoInput == 'n' || yesOrNoInput == 'n')
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                System.out.println("Sorry transfer manager, but your input is illegal. Please enter 'y' or 'n'");
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. Please enter 'y' or 'n'");
+                            scanner.next();
+                        }
+                    }
 
                     if (yesOrNoInput == 'n')
                         removeMoreItems = false;
                 }
+
+                //add to the reduction map
+                orderItemsToDelete.put(destToReduceFrom, howMuchToReduce);
+
             }
 
             //now remove all the items you gained

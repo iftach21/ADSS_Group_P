@@ -146,9 +146,9 @@ public class TransferController {
                 System.out.println("The transfer will restart from the source all over again, after the rearrangement");
             }
 
-            if (transferRearranged)
+            if (transferRearranged) {
                 continue;
-
+            }
             List<Site> transferDest = newTransfer.getDestinations();
             for (int i=0; i<transferDest.size() - 1 && !transferRearranged; i++)
             {
@@ -192,8 +192,9 @@ public class TransferController {
                 }
             }
 
-            if (transferRearranged)
+            if (transferRearranged) {
                 continue;
+            }
             else
             {
                 System.out.println("The truck arrived to it's final destination: " + transferDest.get(transferDest.size() - 1).getSiteName());
@@ -263,8 +264,8 @@ public class TransferController {
                 }
             }
 
+            transfer.documentRemoveDestination(transfer.getDestinations().get(destToRemove - 1));
             transfer.removeTransferDestination(transfer.getDestinations().get(destToRemove - 1));
-
         }
         else if (selectedOption == 2)
         {
@@ -297,6 +298,7 @@ public class TransferController {
             }
 
             transfer.updateTransferTruck(chosenTruck);
+            transfer.documentUpdateTruckNumber();
         }
         else if (selectedOption == 3)
         {
@@ -479,7 +481,13 @@ public class TransferController {
 
             //now remove all the items you gained
             transfer.removeTransferItems(orderItemsToDelete);
+            transfer.documentUpdateOrderItems();
 
+        }
+
+        transfer.documentUpdateTruckWeight(null, transfer.getSource());
+        for(int i=0; i<transfer.getDestinations().size()-1; i++){
+            transfer.documentUpdateTruckWeight(null, transfer.getDestinations().get(i));
         }
     }
 

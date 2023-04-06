@@ -117,8 +117,10 @@ public class TransferController {
             {
                 System.out.print("The truck's driver just arrived to: "+ transferDest.get(i).getSiteName() + ", ");
                 System.out.println("And he is picking up the following items: ");
-                for (Item_mock item : sourceItems.keySet()) {
-                    System.out.println("Item name" + item.getItemName() + ", Quantity: " + sourceItems.get(item));
+
+                Map<Item_mock, Integer> destItems = transferOrderItems.get(transferDest.get(i));
+                for (Item_mock item : destItems.keySet()) {
+                    System.out.println("Item name " + item.getItemName() + ", Quantity: " + destItems.get(item));
                 }
 
                 System.out.println("Please enter the weight of the truck: ");
@@ -187,7 +189,7 @@ public class TransferController {
             Map<Site, Map<Item_mock, Integer>> orderItemsToDelete = new HashMap<>();
             boolean removeMoreDestinations = true;
 
-            List<Site> allDestinations = transfer.getDestinations();
+            List<Site> allDestinations = new ArrayList<>(transfer.getDestinations());
             List<Site> allDestToReduceItems = new ArrayList<>();
             while (removeMoreDestinations)
             {

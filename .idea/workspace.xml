@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added ability to set time for each shift">
-      <change afterPath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/WorkerInterface.java" afterDir="false" />
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added layers and controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/BossInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,7 +189,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680515049402</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL‎-00012" summary="added layers and controller">
+      <created>1680765736255</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680765736255</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +220,8 @@
     <MESSAGE value="hoping it will work" />
     <MESSAGE value="adding nothing" />
     <MESSAGE value="added ability to set time for each shift" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ability to set time for each shift" />
+    <MESSAGE value="added layers and controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="added layers and controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

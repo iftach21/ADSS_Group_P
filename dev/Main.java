@@ -36,40 +36,12 @@ public class Main {
         milk1Percent.addSpecificItem(milk7);
         milk1Percent.addSpecificItem(milk8);
 
-        System.out.println(milk1.toString());
-        System.out.println(milk2.toString());
-        System.out.println(milk3.toString());
-        System.out.println(milk4.toString());
-
-        System.out.println();
-
-        System.out.println(milk5.toString());
-        System.out.println(milk6.toString());
-        System.out.println(milk7.toString());
-        System.out.println(milk8.toString());
-
-        System.out.println();
+        milk3Percent.addNewPrice(1, 2);
+        milk3Percent.addNewPrice(3, 4);
+        milk3Percent.addNewPrice(5, 6);
 
         System.out.println(milk3Percent.toString());
 
-        System.out.println();
-
-        System.out.println(milk1Percent.toString());
-
-        System.out.println();
-
-        milk3Percent.removeSpecificItem(milk2);
-        milk3Percent.removeSpecificItem(milk3);
-
-        milk1Percent.removeSpecificItem(milk6);
-        milk1Percent.removeSpecificItem(milk7);
-        milk1Percent.removeSpecificItem(milk8);
-
-        System.out.println(milk3Percent.toString());
-
-        System.out.println();
-
-        System.out.println(milk1Percent.toString());
 
         /*
         Interface in = new Interface();

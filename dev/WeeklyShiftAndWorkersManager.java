@@ -150,6 +150,11 @@ public class WeeklyShiftAndWorkersManager {
         return false;
     }
 
+    public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm){
+        WindowTypeCreater wc = new WindowTypeCreater();
+        getweeklyshift(weeknum,year,supernum).addreqtoshift(wc.getwidowtype(daynum,don),prof,hm);
+    }
+
 
 
 

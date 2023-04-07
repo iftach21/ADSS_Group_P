@@ -98,6 +98,16 @@ public class WeeklyShift {
             this.nightShift[shiftTime.ordinal()-7].insertToShift(newWorker,profindx);
         }
     }
+    public void addreqtoshift(WindowType shiftTime, int profindx,int hm){
+        if(shiftTime.ordinal()<7){
+            this.dayShift[shiftTime.ordinal()].addreq(profindx,hm);
+        }
+        else {
+            this.nightShift[shiftTime.ordinal()-7].addreq(profindx,hm);
+        }
+    }
+
+
     /**
      * Checks if a worker is on shift
      */

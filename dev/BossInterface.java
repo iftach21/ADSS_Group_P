@@ -80,8 +80,54 @@ public class BossInterface {
                     int supernum = myObj.nextInt();  // Read user input
 
                     controller.createnewweeklyshift(weeknum,yearans,supernum);
+
+                    //now letting you add some:
+                    System.out.println("now you can create shift req");
+                    int innerans = 1;
+                    WindowTypeCreater wc = new WindowTypeCreater();
+
+
+
+                    while(innerans==1){
+
+                        System.out.println("please enter day number in the week");
+                        int daynum = myObj.nextInt();  // Read user input
+                        myObj.nextLine();
+
+                        System.out.println("please enter night or day");
+                        String don = myObj.nextLine();  // Read user input
+
+                        System.out.println("what time would you like it to start?");
+                        String starttime = myObj.nextLine();  // Read user input
+
+                        //set the time for the shift:
+                        controller.getweeklyshift(weeknum,yearans,supernum).setTimeForShift(starttime,wc.getwidowtype(daynum,don));
+
+
+                        System.out.println("please enter int for the persons prof");
+                        System.out.println("0=manager");
+                        System.out.println("1=cashier");
+                        System.out.println("2=stoke");
+                        System.out.println("3=security");
+                        System.out.println("4=cleaning");
+                        System.out.println("5=shelf-stoking");
+                        System.out.println("6= general-worker");
+                        int prof = myObj.nextInt();  // Read user input
+
+                        System.out.println("how much would you like from that type?");
+                        int hm = myObj.nextInt();  // Read user input
+
+                        controller.addreqtoweeklyshift(weeknum,yearans,supernum,daynum,don,prof,hm);
+
+                        System.out.println("would you like to keep going? \n 1= yes, 0= no");
+                        innerans = myObj.nextInt();  // Read user input
+                    }
+
+
                     break;
                 }
+
+
                 //-----------------------
                 //add to existing weekly shift
                 //-----------------------
@@ -104,13 +150,7 @@ public class BossInterface {
                     System.out.println("please enter night or day");
                     String don = myObj.nextLine();  // Read user input
 
-                    System.out.println("what time would you like it to start?");
-                    String starttime = myObj.nextLine();  // Read user input
                     WindowTypeCreater wc = new WindowTypeCreater();
-
-                    //setting the time.
-                    controller.getweeklyshift(weeknum,year,supernum).setTimeForShift(starttime,wc.getwidowtype(daynum,don));
-
 
 
                     System.out.println("please enter int for the persons prof");
@@ -123,9 +163,7 @@ public class BossInterface {
                     System.out.println("6= general-worker");
                     int prof = myObj.nextInt();  // Read user input
 
-                    System.out.println("Do you want to keep it empty for now?\n 1=yes,0=no");
-                    int skipp = myObj.nextInt();  // Read user input
-                    if(skipp==1){break;}
+
 
 
 

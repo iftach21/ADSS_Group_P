@@ -3,6 +3,7 @@ public class Shift {
     private String date;
 
     private ArrayList<Workers>[] workerInShift;
+    private ShiftRequirement shiftRequirement;
 
     private Workers shiftManager;
     private String log;
@@ -20,6 +21,7 @@ public class Shift {
             workerInShift[i] = new ArrayList<Workers>();
         }
         startTime = "8:00";
+        shiftRequirement = new ShiftRequirement();
 
     }
 
@@ -86,5 +88,10 @@ public class Shift {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+
+    public void addreq(int profindx,int req){
+        shiftRequirement.setReq(profindx,req);
     }
 }

@@ -64,6 +64,39 @@ public class Main {
         //adding to worker 6
         controller.addnewproforemployee(6,6);
 
+        //adding avialble for empl:
+
+        //addin for work1
+        controller.addavilableforemployee(1,WindowType.night1);
+        controller.addavilableforemployee(1,WindowType.day5);
+
+        //woerker2
+        controller.addavilableforemployee(2,WindowType.night1);
+        controller.addavilableforemployee(2,WindowType.day5);
+
+        //worker3
+        controller.addavilableforemployee(3,WindowType.night1);
+
+
+        //worker5
+        controller.addavilableforemployee(5,WindowType.night1);
+
+        //creatingnew weeklyshift:
+        controller.createnewweeklyshift(1,1,1);
+
+        //adding emp to it:
+        //for night1:
+        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work1,0);
+        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work2,1);
+        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work5,5);
+        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work3,3);
+
+        //for day5:
+        controller.addtoexistingweeklyshift(1,1,1,WindowType.day5,work1,0);
+        controller.addtoexistingweeklyshift(1,1,1,WindowType.day5,work2,2);
+
+
+
     }
 }
 

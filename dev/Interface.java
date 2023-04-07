@@ -14,33 +14,36 @@ public class Interface {
     public Interface() {
 //        this.allworkerslist = new ArrayList<Workers>();
     }
-    public void logIn(){
+    public void logIn() {
         //===============================
         //    login confirmation
         //===============================
 
         //scans the username and password:
-//        while(true) {
-//            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-//            System.out.println("Enter username");
-//            String userName = myObj.nextLine();  // Read user input
-//            System.out.println("Enter password");  // Output user input
-//            String password = myObj.nextLine();  // Read user input
-//            if(userName.equals(Manager_Username)&&password.equals(Manager_Passward) || userName.equals(Worker_Username)&&password.equals(Worker_Passward)){
-//                break;
-//            }
-//            else{
-//                System.out.println("invalid input, please try again");  // Output user input
-//            }
-//        }
+        String userName;
+        while (true) {
+            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("Enter username");
+            userName = myObj.nextLine();
+            System.out.println("Enter password");  // Output user input
+            String password = myObj.nextLine();  // Read user input
+            if (userName.equals(Manager_Username) && password.equals(Manager_Passward) || userName.equals(Worker_Username) && password.equals(Worker_Passward)) {
+                break;
+            } else {
+                System.out.println("invalid input, please try again");  // Output user input
+            }
+        }
         //=================================================
         //
         //                      main menu
         //
         //==================================================
 
-        //for Manager
-//        if (userName.equals(Manager_Username)) {
+        /*
+        Manager's Interface -- START
+        This interface will allow the manager to use the full functions of the system.
+         */
+        if (userName.equals(Manager_Username)) {
             boolean exit = true;
             while (exit) {
                 System.out.println("Please choose what you would like to do:");
@@ -66,11 +69,9 @@ public class Interface {
                     //-----------------------
                     //Provide a product shortage report
                     //-----------------------
-                    case "1":
-                    {
+                    case "1": {
                         boolean flag = true;
-                        while (flag)
-                        {
+                        while (flag) {
                             System.out.println("which report to provide:");
                             System.out.println("1: To all products");
                             System.out.println("2: By Category");
@@ -80,8 +81,7 @@ public class Interface {
                             Scanner Second_obj = new Scanner(System.in);
                             String Sub_Ans = Second_obj.nextLine();  // Read user input
 
-                            switch (Sub_Ans)
-                            {
+                            switch (Sub_Ans) {
                                 case "1":
 //                                    this.Shortge_Report("All");
                                     break;
@@ -115,8 +115,7 @@ public class Interface {
                     //-----------------------
                     //Update inventory
                     //-----------------------
-                    case "2":
-                    {
+                    case "2": {
 //                        this.Update_Stock();
                         break;
                     }
@@ -124,11 +123,9 @@ public class Interface {
                     //-----------------------
                     //Provide an inventory counting report
                     //-----------------------
-                    case "3":
-                    {
+                    case "3": {
                         boolean flag = true;
-                        while (flag)
-                        {
+                        while (flag) {
                             System.out.println("which report to provide:");
                             System.out.println("1: To all products");
                             System.out.println("2: By Category");
@@ -138,8 +135,7 @@ public class Interface {
                             Scanner Second_obj = new Scanner(System.in);
                             String Sub_Ans = Second_obj.nextLine();  // Read user input
 
-                            switch (Sub_Ans)
-                            {
+                            switch (Sub_Ans) {
                                 case "1":
 //                                    this.Inventory_Report("All");
                                     break;
@@ -173,11 +169,9 @@ public class Interface {
                     //-----------------------
                     //Provide a defective products report
                     //-----------------------
-                    case "4":
-                    {
+                    case "4": {
                         boolean flag = true;
-                        while (flag)
-                        {
+                        while (flag) {
                             System.out.println("which report to provide:");
                             System.out.println("1: To all products");
                             System.out.println("2: By Category");
@@ -187,8 +181,7 @@ public class Interface {
                             Scanner Second_obj = new Scanner(System.in);
                             String Sub_Ans = Second_obj.nextLine();  // Read user input
 
-                            switch (Sub_Ans)
-                            {
+                            switch (Sub_Ans) {
                                 case "1":
 //                                    this.Defective_Report("All");
                                     break;
@@ -222,11 +215,9 @@ public class Interface {
                     //-----------------------
                     //Update discount on products
                     //-----------------------
-                    case "5":
-                    {
+                    case "5": {
                         boolean flag = true;
-                        while (flag)
-                        {
+                        while (flag) {
                             System.out.println("For which products to update:");
                             System.out.println("1: To all products");
                             System.out.println("2: By Category");
@@ -236,8 +227,7 @@ public class Interface {
                             Scanner Second_obj = new Scanner(System.in);
                             String Sub_Ans = Second_obj.nextLine();  // Read user input
 
-                            switch (Sub_Ans)
-                            {
+                            switch (Sub_Ans) {
                                 case "1":
 //                                    this.Update_discount("All");
                                     break;
@@ -271,8 +261,7 @@ public class Interface {
                     //-----------------------
                     //Place an order from a supplier
                     //-----------------------
-                    case "6":
-                    {
+                    case "6": {
 //                        this.Place_Order();
                         break;
                     }
@@ -291,11 +280,9 @@ public class Interface {
                     //-----------------------
                     //Provide a price history report for a product
                     //-----------------------
-                    case "8":
-                    {
+                    case "8": {
                         boolean flag = true;
-                        while (flag)
-                        {
+                        while (flag) {
                             System.out.println("which history report to provide:");
                             System.out.println("1: To all products");
                             System.out.println("2: By Category");
@@ -305,8 +292,7 @@ public class Interface {
                             Scanner Second_obj = new Scanner(System.in);
                             String Sub_Ans = Second_obj.nextLine();  // Read user input
 
-                            switch (Sub_Ans)
-                            {
+                            switch (Sub_Ans) {
                                 case "1":
 //                                    this.History_Report("All");
                                     break;
@@ -362,7 +348,14 @@ public class Interface {
                 }
             }
         }
-    }//login
+        /*
+        Manager's interface -- END
+         */
+    }}
+
+    //login
+
+
 
 
 

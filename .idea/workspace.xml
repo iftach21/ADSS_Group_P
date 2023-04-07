@@ -7,7 +7,7 @@
     <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="adding shift req and then some more">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/BossInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/BossInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +211,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680857454250</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL‎-00015" summary="adding shift req and then some more">
+      <created>1680864292786</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL‎-00015" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680864292786</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

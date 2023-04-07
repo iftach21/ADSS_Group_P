@@ -101,7 +101,7 @@ public class BossInterface {
                         String starttime = myObj.nextLine();  // Read user input
 
                         //set the time for the shift:
-                        controller.getweeklyshift(weeknum,yearans,supernum).setTimeForShift(starttime,wc.getwidowtype(daynum,don));
+                        controller.settimeforweeklyshift(weeknum,yearans,supernum,daynum,don,starttime);
 
 
                         System.out.println("please enter int for the persons prof");

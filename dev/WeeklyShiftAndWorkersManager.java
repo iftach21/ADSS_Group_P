@@ -15,14 +15,6 @@ public class WeeklyShiftAndWorkersManager {
     }
     //function for the "1" option in menu
     public void createnewweeklyshift(int weeknum,int year,int supernum){
-        //checks if allready exist, if not will create new one
-        for(int i=0; i<weeklyShiftList.size();i++){
-            if((weeklyShiftList.get(i).getYear()) == year &&
-                    weeklyShiftList.get(i).getWeekNUm()==weeknum) {
-                //allready exist:
-                return;
-            }
-        }
         weeklyShiftList.add(new WeeklyShift(weeknum,year,supernum));
 
     }
@@ -155,11 +147,10 @@ public class WeeklyShiftAndWorkersManager {
         getweeklyshift(weeknum,year,supernum).addreqtoshift(wc.getwidowtype(daynum,don),prof,hm);
     }
 
-
-
-
-
-
+    public void settimeforweeklyshift(int weeknum, int year,int supernum, int daynum,String don, String startime){
+        WindowTypeCreater wc = new WindowTypeCreater();
+        getweeklyshift(weeknum,year,supernum).setTimeForShift(startime,wc.getwidowtype(daynum,don));
+    }
 
 
 

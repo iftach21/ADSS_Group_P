@@ -12,12 +12,27 @@ public class Main {
         WorkerInterface win = new WorkerInterface();
         initiation();
         myObj.nextLine();
+        boolean connectionActive = true;
 
-        //worker log in
-        if(ans==1){win.logInWorker();}
+        while(connectionActive){
+        try {
+            //worker log in
+            if (ans == 1) {
 
-        //manager login
-        else{in.logIn();}
+                win.logInWorker();
+            }
+
+            //manager login
+            if(ans==2){in.logIn();}
+
+            else{connectionActive=false;}
+        }
+        catch (Exception exception){
+            System.out.println("Oh no! something went wrong! error 404.\n please try again and contact the IT-team");
+        }
+
+
+        }
     }
 
     public static void initiation(){

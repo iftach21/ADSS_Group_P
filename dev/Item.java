@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.time.Instant;
+import java.util.List;
 
 public class Item {
     private String name;
@@ -10,6 +11,8 @@ public class Item {
     private int amount = 0;
     private TempLevel temperature;
 
+    private List<specificItem> specificItemList;
+
 
     public Item(String name, String catalogNum, double weight, String catalogName, TempLevel temperature, int minQuantity)
     {
@@ -19,6 +22,7 @@ public class Item {
         this.catalogName = catalogName;
         this.temperature = temperature;
         this.minQuantity = minQuantity;
+        this.specificItemList = specificItemList;
 
     }
 

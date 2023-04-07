@@ -1,20 +1,20 @@
 import java.time.Instant;
 import java.util.Date;
 
-public class specificItem extends Item{
+public class specificItem{
 
+    private int itemID;
     private final Date expirationDate;
     private boolean isDefected = false;
-    private int itemID;
     private Location location;
 
-    public specificItem(String name, String catalogNum, double weight, String catalogName, TempLevel temperature, int minQuantity, Date expirationDate, boolean isDefected, int itemID, Location location) {
-        super(name, catalogNum, weight, catalogName, temperature, minQuantity);
+    public specificItem(int itemID, Date expirationDate, boolean isDefected, Location location) {
+        this.itemID = itemID;
         this.expirationDate = expirationDate;
         this.isDefected = isDefected;
-        this.itemID = itemID;
         this.location = location;
     }
+
 
     public void setDefected(boolean defected) {
         isDefected = defected;
@@ -42,4 +42,12 @@ public class specificItem extends Item{
         return isDefected;
     }
 
+    @Override
+    public String toString() {
+        return "specificItem : " +
+                "Expiration Date: " + expirationDate +
+                ", isDefected: " + isDefected +
+                ", itemID: " + itemID +
+                ", location: " + location;
+    }
 }

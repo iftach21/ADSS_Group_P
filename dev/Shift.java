@@ -94,4 +94,8 @@ public class Shift {
     public void addreq(int profindx,int req){
         shiftRequirement.setReq(profindx,req);
     }
+    public void printreq(){
+        System.out.println("Start time for the shift: " + this.startTime);
+        shiftRequirement.printreq();
+    }
 }

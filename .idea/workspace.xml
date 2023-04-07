@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="adding shift req and then some more">
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="sorting our">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/BossInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/BossInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ShiftRequirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ShiftRequirement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/WeeklyShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShift.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/WorkerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WorkerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +221,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680864292786</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎-00016" summary="sorting our">
+      <created>1680866059550</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL‎-00016" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680866059550</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +255,8 @@
     <MESSAGE value="added layers and controller" />
     <MESSAGE value="added starter" />
     <MESSAGE value="adding shift req and then some more" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding shift req and then some more" />
+    <MESSAGE value="sorting our" />
+    <option name="LAST_COMMIT_MESSAGE" value="sorting our" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

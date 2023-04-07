@@ -14,4 +14,15 @@ public class ShiftRequirement {
         return reqarray[profindex];
     }
 
+    public void printreq(){
+        System.out.println("req list:");
+        System.out.println("managers: " + reqarray[0]);
+        System.out.println("cashier "+reqarray[1]);
+        System.out.println("stoke" +reqarray[2]);
+        System.out.println("security " + reqarray[3]);
+        System.out.println("cleaning " +reqarray[4]);
+        System.out.println("shelf-stoking " +reqarray[5]);
+        System.out.println("general-worker " +reqarray[6]);
+    }
+
 }//endclass

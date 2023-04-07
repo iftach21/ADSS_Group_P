@@ -128,5 +128,14 @@ public class WeeklyShift {
         }
     }
 
+    public void printweeklyreq(){
+        for (int i = 0; i < 7; i++){
+            System.out.println("day: "+ i);
+            dayShift[i].printreq();
+            System.out.println("night: "+ i);
+            nightShift[i].printreq();
+        }
+    }
+
 
 }//end class

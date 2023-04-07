@@ -151,6 +151,10 @@ public class WeeklyShiftAndWorkersManager {
         WindowTypeCreater wc = new WindowTypeCreater();
         getweeklyshift(weeknum,year,supernum).setTimeForShift(startime,wc.getwidowtype(daynum,don));
     }
+    public void printweeklyreq(int weeknum, int year,int supernum){
+        getweeklyshift(weeknum,year,supernum).printweeklyreq();
+
+    }
 
 
 

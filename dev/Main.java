@@ -33,6 +33,11 @@ public class Main {
 
         System.out.println(milk3Percent.toString());
 
+        milk3Percent.removeSpecificItem(milk2);
+        milk3Percent.removeSpecificItem(milk3);
+
+        System.out.println(milk3Percent.toString());
+
         /*
         Interface in = new Interface();
         in.logIn();

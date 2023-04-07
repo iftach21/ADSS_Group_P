@@ -66,10 +66,17 @@ public class Item {
     }
 
     //Method 2: addSpecificItem
-    //This functions recieves a specific item, and adds it into the list of general items.
+    //This method receives a specific item, and adds it into the list of general items.
     //I.e. The general item is 'Milk 3%', and the specific item is one specific bottle
     public void addSpecificItem(specificItem item) {
+        this.amount ++;
         specificItemList.add(item);
     }
 
+    //Method 3: removeSpecificItem
+    //This method removes a specific item from the specificItemsList
+    public void removeSpecificItem(specificItem item) {
+        amount --;
+        specificItemList.remove(item);
+    }
 }

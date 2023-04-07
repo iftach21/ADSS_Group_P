@@ -12,7 +12,7 @@ public class Interface {
 
 
     public Interface() {
-        this.allworkerslist = new ArrayList<Workers>();
+//        this.allworkerslist = new ArrayList<Workers>();
     }
     public void logIn(){
         //===============================
@@ -40,7 +40,7 @@ public class Interface {
         //==================================================
 
         //for Manager
-        if (userName.equals(Manager_Username)) {
+//        if (userName.equals(Manager_Username)) {
             boolean exit = true;
             while (exit) {
                 System.out.println("Please choose what you would like to do:");
@@ -83,21 +83,21 @@ public class Interface {
                             switch (Sub_Ans)
                             {
                                 case "1":
-                                    this.Shortge_Report("All");
+//                                    this.Shortge_Report("All");
                                     break;
 
                                 case "2":
                                     System.out.println("Please enter the category you would like to provide a shortage report for:");
                                     Scanner Category = new Scanner(System.in);
                                     String Cat_ans = Category.nextLine();
-                                    this.Shortge_Report(Cat_ans);
+//                                    this.Shortge_Report(Cat_ans);
                                     break;
 
                                 case "3":
                                     System.out.println("Please enter the product you would like to provide a shortage report for:");
                                     Scanner Product = new Scanner(System.in);
                                     String Pro_ans = Product.nextLine();
-                                    this.Shortge_Report(Pro_ans);
+//                                    this.Shortge_Report(Pro_ans);
                                     break;
 
                                 case "0":
@@ -117,7 +117,7 @@ public class Interface {
                     //-----------------------
                     case "2":
                     {
-                        this.Update_Stock();
+//                        this.Update_Stock();
                         break;
                     }
 
@@ -141,21 +141,21 @@ public class Interface {
                             switch (Sub_Ans)
                             {
                                 case "1":
-                                    this.Inventory_Report("All");
+//                                    this.Inventory_Report("All");
                                     break;
 
                                 case "2":
                                     System.out.println("Please enter the category you would like to provide a inventory counting report for:");
                                     Scanner Category = new Scanner(System.in);
                                     String Cat_ans = Category.nextLine();
-                                    this.Inventory_Report(Cat_ans);
+//                                    this.Inventory_Report(Cat_ans);
                                     break;
 
                                 case "3":
                                     System.out.println("Please enter the product you would like to provide a inventory counting report for:");
                                     Scanner Product = new Scanner(System.in);
                                     String Pro_ans = Product.nextLine();
-                                    this.Inventory_Report(Pro_ans);
+//                                    this.Inventory_Report(Pro_ans);
                                     break;
 
                                 case "0":
@@ -190,21 +190,21 @@ public class Interface {
                             switch (Sub_Ans)
                             {
                                 case "1":
-                                    this.Defective_Report("All");
+//                                    this.Defective_Report("All");
                                     break;
 
                                 case "2":
                                     System.out.println("Please enter the category you would like to provide a defective products report for:");
                                     Scanner Category = new Scanner(System.in);
                                     String Cat_ans = Category.nextLine();
-                                    this.Defective_Report(Cat_ans);
+//                                    this.Defective_Report(Cat_ans);
                                     break;
 
                                 case "3":
                                     System.out.println("Please enter the product you would like to provide a defective products report for:");
                                     Scanner Product = new Scanner(System.in);
                                     String Pro_ans = Product.nextLine();
-                                    this.Defective_Report(Pro_ans);
+//                                    this.Defective_Report(Pro_ans);
                                     break;
 
                                 case "0":
@@ -239,21 +239,21 @@ public class Interface {
                             switch (Sub_Ans)
                             {
                                 case "1":
-                                    this.Update_discount("All");
+//                                    this.Update_discount("All");
                                     break;
 
                                 case "2":
                                     System.out.println("Please enter the category you would like to provide a defective products report for:");
                                     Scanner Category = new Scanner(System.in);
                                     String Cat_ans = Category.nextLine();
-                                    this.Update_discount(Cat_ans);
+//                                    this.Update_discount(Cat_ans);
                                     break;
 
                                 case "3":
                                     System.out.println("Please enter the product you would like to provide a defective products report for:");
                                     Scanner Product = new Scanner(System.in);
                                     String Pro_ans = Product.nextLine();
-                                    this.Update_discount(Pro_ans);
+//                                    this.Update_discount(Pro_ans);
                                     break;
 
                                 case "0":
@@ -273,10 +273,9 @@ public class Interface {
                     //-----------------------
                     case "6":
                     {
-                        this.Place_Order();
+//                        this.Place_Order();
                         break;
                     }
-
 
                     //-----------------------
                     //Update product details
@@ -285,7 +284,7 @@ public class Interface {
                         System.out.println("please enter catalog number:");
                         Scanner Second_obj = new Scanner(System.in);
                         String Sub_Ans = Second_obj.nextLine();  // Read user input
-                        this.Update_Details();
+//                        this.Update_Details();
                         break;
                     }
 
@@ -309,21 +308,21 @@ public class Interface {
                             switch (Sub_Ans)
                             {
                                 case "1":
-                                    this.History_Report("All");
+//                                    this.History_Report("All");
                                     break;
 
                                 case "2":
                                     System.out.println("Please enter the category you would like to provide a history report for:");
                                     Scanner Category = new Scanner(System.in);
                                     String Cat_ans = Category.nextLine();
-                                    this.History_Report(Cat_ans);
+//                                    this.History_Report(Cat_ans);
                                     break;
 
                                 case "3":
                                     System.out.println("Please enter the product you would like to provide a history report for:");
                                     Scanner Product = new Scanner(System.in);
                                     String Pro_ans = Product.nextLine();
-                                    this.History_Report(Pro_ans);
+//                                    this.History_Report(Pro_ans);
                                     break;
 
                                 case "0":
@@ -345,7 +344,7 @@ public class Interface {
                         System.out.println("please enter catalog number:");
                         Scanner Second_obj = new Scanner(System.in);
                         String Sub_Ans = Second_obj.nextLine();  // Read user input
-                        this.Insert_Defective();
+//                        this.Insert_Defective();
                         break;
                     }
 
@@ -368,4 +367,4 @@ public class Interface {
 
 
 
-}//class
+ //class

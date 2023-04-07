@@ -12,6 +12,7 @@ public class Item {
     private TempLevel temperature;
     private Location location;
     private boolean isDefected = false;
+    private int specificId;
 
 
 

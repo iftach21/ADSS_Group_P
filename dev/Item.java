@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.Instant;
 import java.util.List;
@@ -6,7 +7,7 @@ public class Item {
     private String name;
     private String catalogNum;
     private double weight;
-    private String catalogName;
+    private String manufacturer;
     private int minQuantity;
     private int amount = 0;
     private TempLevel temperature;
@@ -14,16 +15,15 @@ public class Item {
     private List<specificItem> specificItemList;
 
 
-    public Item(String name, String catalogNum, double weight, String catalogName, TempLevel temperature, int minQuantity)
+    public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity)
     {
         this.name = name;
         this.catalogNum = catalogNum;
         this.weight = weight;
-        this.catalogName = catalogName;
+        this.manufacturer = manufacturer;
         this.temperature = temperature;
         this.minQuantity = minQuantity;
-        this.specificItemList = specificItemList;
-
+        this.specificItemList = new ArrayList<specificItem>();
     }
 
 
@@ -47,5 +47,29 @@ public class Item {
         return amount;
     }
 
+    //Method 1: toString
+    //This method prints the general items list
+    @Override
+    public String toString() {
+        String generalItem = "General Item : " +
+                "name: " + name + '\'' +
+                ", catalogNum: '" + catalogNum + '\'' +
+                ", weight: " + weight +
+                ", manufacturer: '" + manufacturer + '\'' +
+                ", minQuantity: " + minQuantity +
+                ", amount: " + amount +
+                ", temperature: " + temperature;
+        for (int i = 0; i < this.specificItemList.size(); i++){
+            generalItem += "\n" + this.specificItemList.get(i);
+        }
+        return generalItem;
+    }
+
+    //Method 2: addSpecificItem
+    //This functions recieves a specific item, and adds it into the list of general items.
+    //I.e. The general item is 'Milk 3%', and the specific item is one specific bottle
+    public void addSpecificItem(specificItem item) {
+        specificItemList.add(item);
+    }
 
 }

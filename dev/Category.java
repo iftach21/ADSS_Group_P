@@ -6,7 +6,7 @@ public class Category {
     private String categoryNum;
     private String subCategoryName;
     private int subCategoryNum;
-    private Map<String,Map<String,List<Item>>> Products;
+
 
 
     public Category(String categoryName, String categoryNum, String subCategoryName, int subCategoryNum) {

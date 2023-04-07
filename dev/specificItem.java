@@ -45,9 +45,9 @@ public class specificItem{
     @Override
     public String toString() {
         return "specificItem : " +
-                "Expiration Date: " + expirationDate +
+                "item ID : " + itemID +
+                ", Expiration Date: " + expirationDate +
                 ", isDefected: " + isDefected +
-                ", itemID: " + itemID +
                 ", location: " + location;
     }
 }

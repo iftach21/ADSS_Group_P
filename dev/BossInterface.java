@@ -20,19 +20,19 @@ public class BossInterface {
         //===============================
 
         //scans the username and password:
-//        while(true) {
-//            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-//            System.out.println("Enter username");
-//            String userName = myObj.nextLine();  // Read user input
-//            System.out.println("Enter password");  // Output user input
-//            String password = myObj.nextLine();  // Read user input
-//            if(userName.equals(username)&&password.equals(passward)){
-//                break;
-//            }
-//            else{
-//                System.out.println("invalid input, please try again");  // Output user input
-//            }
-//        }
+       while(true) {
+           Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("Enter username");
+            String userName = myObj.nextLine();  // Read user input
+            System.out.println("Enter password");  // Output user input
+            String password = myObj.nextLine();  // Read user input
+            if(userName.equals(username)&&password.equals(passward)){
+                break;
+          }
+            else{
+               System.out.println("invalid input, please try again");  // Output user input
+           }
+           }
         //=================================================
         //
         //                      main menu

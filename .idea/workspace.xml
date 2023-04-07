@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added starter">
-      <change afterPath="$PROJECT_DIR$/dev/ShiftRequirement.java" afterDir="false" />
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="adding shift req and then some more">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/BossInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/BossInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Shift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/WeeklyShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/WeeklyShiftAndWorkersManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Interface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Workers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Workers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +204,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680765957877</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎-00014" summary="adding shift req and then some more">
+      <created>1680857454250</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1680857454250</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,7 +237,8 @@
     <MESSAGE value="added ability to set time for each shift" />
     <MESSAGE value="added layers and controller" />
     <MESSAGE value="added starter" />
-    <option name="LAST_COMMIT_MESSAGE" value="added starter" />
+    <MESSAGE value="adding shift req and then some more" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding shift req and then some more" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

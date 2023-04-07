@@ -370,13 +370,6 @@ public class BossInterface {
                     System.out.println("5=shelf-stoking");
                     System.out.println("6= general-worker");
                     int prof = myObj.nextInt();  // Read user input
-                    //0=manager
-                    //1=cashier
-                    //2=stoke
-                    //3=security
-                    //4=cleaning
-                    //5=shelfstoking
-                    //6= generalworker
 
                     controller.addnewproforemployee(id,prof);
 

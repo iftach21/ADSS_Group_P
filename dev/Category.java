@@ -1,7 +1,4 @@
-
 import java.util.List;
-import java.util.Map;
-
 import java.util.ArrayList;
 
 
@@ -12,18 +9,17 @@ public class Category {
     private List<subCategory> subCategoriesList;
 
 
-
-
-
-
     public Category(String categoryName) {
         this.categoryName = categoryName;
         this.subCategoriesList = new ArrayList<subCategory>();
-
     }
 
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     @Override

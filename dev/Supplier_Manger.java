@@ -27,10 +27,16 @@ public class Supplier_Manger {
         }
     }
     public void update_contact_preson(String name_1,String name_2,String phone_number) {
+        boolean flag = false;
         for(Supplier suppleir :this.suppliers){
             if(suppleir.getName().equals(name_1)){
                 suppleir.update_contact_person(name_2,phone_number);
-    }}}
+                flag = true;
+    }}
+    if(!flag)
+    {
+        System.out.println("There is no supplier with that name");
+    }}
     public void add_item_to_contract(Item item,int amount,float price ,String name_1){
         for(Supplier suppleir :this.suppliers){
             if(suppleir.getName().equals(name_1)){

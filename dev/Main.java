@@ -121,9 +121,10 @@ public class Main {
                             System.out.println("2.SHOTEF+30");
                             System.out.println("3.SHOTEF+60");
                             String payment = scanner.next();
+                            int paymentNum;
                             while(true)
                             {
-                                int paymentNum;
+
                                 try
                                 {
                                     paymentNum = Integer.parseInt(payment);
@@ -140,6 +141,7 @@ public class Main {
                                 catch(Exception ignored)
                                 {}
                             }
+
                             System.out.println("Supplier ID");
                             String id = scanner.next();
                             System.out.println("Contact name");
@@ -153,19 +155,19 @@ public class Main {
                             System.out.println("3.delivery supplier on non fixed days");
                             int option_4 = scanner.nextInt();
                             if (option_4 == 1) {
-                                NonDeliveringSupplier supplier = new NonDeliveringSupplier(name, business_id, payment, id, con_person, null, null);
+                                NonDeliveringSupplier supplier = new NonDeliveringSupplier(name, business_id, paymentNum, id, con_person, null, null);
                                 supplier_manger.getSuppliers().add(supplier);
                             } else if (option_4 == 2) {
                                 System.out.println("day:");
                                 String day = scanner.next();
                                 WindowType day_window = WindowType.valueOf(day.toUpperCase());
-                                FixedDaySupplier supplier = new FixedDaySupplier(day_window, name, business_id, payment, id, con_person, null, null);
+                                FixedDaySupplier supplier = new FixedDaySupplier(day_window, name, business_id, paymentNum, id, con_person, null, null);
                                 supplier_manger.getSuppliers().add(supplier);
 
                             } else if (option_4 == 3) {
                                 System.out.println("days to deliver:");
                                 int day = scanner.nextInt();
-                                NonFixedDaySupplier supplier = new NonFixedDaySupplier(day, name, business_id, payment, id, con_person, null, null);
+                                NonFixedDaySupplier supplier = new NonFixedDaySupplier(day, name, business_id, paymentNum, id, con_person, null, null);
                                 supplier_manger.getSuppliers().add(supplier);
                             }
                             break;

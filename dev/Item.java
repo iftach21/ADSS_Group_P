@@ -6,6 +6,7 @@ import java.util.List;
 public class Item {
     private String name;
     private String catalogNum;
+    private String categoryName;
     private double weight;
     private String manufacturer;
     private int minQuantity;
@@ -25,8 +26,32 @@ public class Item {
         this.minQuantity = minQuantity;
         this.specificItemList = new ArrayList<specificItem>();
         this.priceHistoryList = new ArrayList<PriceHistory>();
+        this.categoryName = null;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setCatalogNum(String catalogNum) {
+        this.catalogNum = catalogNum;
+    }
+
+    public void setMinQuantity(int minQuantity) {
+        this.minQuantity = minQuantity;
+    }
+
+    public void setTemperature(TempLevel temperature) {
+        this.temperature = temperature;
+    }
+
+    public String getCatalogNum() {
+        return catalogNum;
+    }
 
     public void setAmount(int amount) {
         this.amount = amount;

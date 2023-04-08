@@ -33,7 +33,6 @@ public class Order {
         }
         this.cost=cost;
         this.supplier=supplier;
-        this.itemList = itemList;
         this.Store_number=store_number;
         this.currentDate= LocalDate.now();
 

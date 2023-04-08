@@ -16,6 +16,7 @@ public class Contract {
     public Contract(Map<Item, Map<Integer, Double>> items_Map_discount, double total_discount) {
 
         if(items_Map_discount==null){
+            Map<Integer, Double> item_map=new HashMap<Integer, Double>();
             this.items_Map_discount = new HashMap<Item,Map<Integer, Double>>();
         }
         else {

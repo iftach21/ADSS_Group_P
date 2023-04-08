@@ -11,8 +11,8 @@ public class Item {
     private int minQuantity;
     private int amount = 0;
     private TempLevel temperature;
-
     private List<specificItem> specificItemList;
+    private List<PriceHistory> priceHistoryList;
 
 
     public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity)
@@ -24,6 +24,7 @@ public class Item {
         this.temperature = temperature;
         this.minQuantity = minQuantity;
         this.specificItemList = new ArrayList<specificItem>();
+        this.priceHistoryList = new ArrayList<PriceHistory>();
     }
 
 
@@ -59,6 +60,12 @@ public class Item {
                 ", minQuantity: " + minQuantity +
                 ", amount: " + amount +
                 ", temperature: " + temperature;
+
+        int lastPriceHistory = this.priceHistoryList.size() - 1;
+
+        generalItem += "\n" + "Sold for: " + this.priceHistoryList.get(lastPriceHistory).getSellPrice() +
+                " Bought for: " + this.priceHistoryList.get(lastPriceHistory).getBuyPrice() +
+        " Last price update: " + this.priceHistoryList.get(lastPriceHistory).getCurrentDate();
         for (int i = 0; i < this.specificItemList.size(); i++){
             generalItem += "\n" + this.specificItemList.get(i);
         }
@@ -78,5 +85,13 @@ public class Item {
     public void removeSpecificItem(specificItem item) {
         amount --;
         specificItemList.remove(item);
+    }
+
+    //Method 4: addNewPrice
+    //This method updates the price, and adds it into the history
+    public void addNewPrice(double buyPrice, double sellPrice){
+        Date currentDate = new Date();
+        PriceHistory currentPrice = new PriceHistory(buyPrice, sellPrice, currentDate);
+        this.priceHistoryList.add(currentPrice);
     }
 }

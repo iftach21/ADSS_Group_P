@@ -14,7 +14,7 @@ public class BossInterface {
     public BossInterface() {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
-    public void logIn(){
+    public void logIn() throws Exception {
         //===============================
         //    login confirmation
         //===============================
@@ -452,7 +452,9 @@ public class BossInterface {
 
                 //exiting
                 case "0":{ exit = false;
-                    break;}
+
+                    throw new ExitExeption();
+                    }
                 default:{ System.out.println("please enter valid input");}
             }
 

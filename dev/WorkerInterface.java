@@ -6,7 +6,7 @@ public class WorkerInterface {
     public WorkerInterface() {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
-    public void logInWorker() {
+    public void logInWorker() throws ExitExeption {
         int ans = 1;
         Scanner myObj = new Scanner(System.in);
         while (ans == 1) {
@@ -65,7 +65,7 @@ public class WorkerInterface {
 
 
             if (whattodo == 0) {
-                ans = whattodo;
+                throw new ExitExeption();
             }
 
         }

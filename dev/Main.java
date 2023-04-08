@@ -2,20 +2,21 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("are you employee or Manager?");
-        System.out.println("1 = employee");
-        System.out.println("2 = Manager ");
 
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        int ans = myObj.nextInt();
-        BossInterface in = new BossInterface();
-        WorkerInterface win = new WorkerInterface();
-        initiation();
-        myObj.nextLine();
         boolean connectionActive = true;
 
         while(connectionActive){
         try {
+            System.out.println("are you employee or Manager?");
+            System.out.println("1 = employee");
+            System.out.println("2 = Manager ");
+
+            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+            int ans = myObj.nextInt();
+            BossInterface in = new BossInterface();
+            WorkerInterface win = new WorkerInterface();
+            initiation();
+            myObj.nextLine();
             //worker log in
             if (ans == 1) {
 
@@ -26,6 +27,9 @@ public class Main {
             if(ans==2){in.logIn();}
 
             else{connectionActive=false;}
+        }
+        catch(ExitExeption idnt){
+            continue;
         }
         catch (Exception exception){
             System.out.println("Oh no! something went wrong! error 404.\n please try again and contact the IT-team");

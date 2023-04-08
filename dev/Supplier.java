@@ -112,9 +112,12 @@ public abstract class Supplier {
             this.items.remove(item);}
         }
     }
-    public void print_supply(){
-        System.out.println(this.getItems().keySet());
-    }
+   public void print_items(){
+        for(Item item :items.keySet()){
+            System.out.println(item.getName());
+        }
+
+   }
 
 
 }

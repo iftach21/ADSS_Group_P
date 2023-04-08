@@ -1,10 +1,13 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+
+
 
 public class Category {
     private String categoryName;
     private int amount = 0;
     private List<subCategory> subCategoriesList;
+
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
@@ -13,6 +16,10 @@ public class Category {
 
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     @Override

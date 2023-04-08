@@ -64,7 +64,7 @@ public class Item {
 
         generalItem += "\n" + "Sold for: " + this.priceHistoryList.get(lastPriceHistory).getSellPrice() +
                 " Bought for: " + this.priceHistoryList.get(lastPriceHistory).getBuyPrice() +
-        " Last update: " + this.priceHistoryList.get(lastPriceHistory).getCurrentDate();
+        " Last price update: " + this.priceHistoryList.get(lastPriceHistory).getCurrentDate();
         for (int i = 0; i < this.specificItemList.size(); i++){
             generalItem += "\n" + this.specificItemList.get(i);
         }

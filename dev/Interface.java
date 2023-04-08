@@ -61,7 +61,6 @@ public class Interface {
 
                 //end of menu
 
-
                 Scanner myObj = new Scanner(System.in);
                 String ans = myObj.nextLine();  // Read user input
 

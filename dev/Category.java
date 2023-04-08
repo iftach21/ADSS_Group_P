@@ -1,29 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
     private String categoryName;
-    private String categoryNum;
-    private String subCategoryName;
-    private int subCategoryNum;
+    private int amount = 0;
+    private List<subCategory> subCategoriesList;
 
-    public Category(String categoryName, String categoryNum, String subCategoryName, int subCategoryNum) {
+    public Category(String categoryName) {
         this.categoryName = categoryName;
-        this.categoryNum = categoryNum;
-        this.subCategoryName = subCategoryName;
-        this.subCategoryNum = subCategoryNum;
+        this.subCategoriesList = new ArrayList<subCategory>();
     }
 
     public String getCategoryName() {
         return categoryName;
     }
 
-    public String getCategoryNum() {
-        return categoryNum;
+    @Override
+    public String toString() {
+        String categoryString = "Category name: " + categoryName + ", Amount of sub-categories: " + amount;
+        for (int i = 0; i < this.subCategoriesList.size(); i++){
+            categoryString += '\n';
+            categoryString += this.subCategoriesList.get(i).toString();
+        }
+        return categoryString;
     }
 
-    public String getSubCategoryName() {
-        return subCategoryName;
-    }
-
-    public int getSubCategoryNum() {
-        return subCategoryNum;
+    public void addSubCategory(subCategory subCategory) {
+        this.amount ++;
+        subCategoriesList.add(subCategory);
     }
 }

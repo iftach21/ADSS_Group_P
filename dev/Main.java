@@ -8,14 +8,15 @@ public class Main {
         // -------------------------------------------------------
         // Interface and user login prompt
         // -------------------------------------------------------
-        /*
+        
         Interface in = new Interface();
         in.logIn();
-         */
+
         // -------------------------------------------------------
         // Demo categories, general items, and specific items for demonstration
         // -------------------------------------------------------
 
+        /*
         //Super-categories
         Category dairyCategory = new Category("Dairy");
 
@@ -78,7 +79,7 @@ public class Main {
         //System.out.println(milksSubCat.toString());
 
         //System.out.println(milk3Percent.toString());
-
+        */
 
     }
 

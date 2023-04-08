@@ -101,6 +101,7 @@ public class Interface {
 
                                 case "0":
                                     System.out.println("Going back to the Main Menu");
+                                    flag = false;
                                     break;
 
                                 default:
@@ -155,6 +156,7 @@ public class Interface {
 
                                 case "0":
                                     System.out.println("Going back to the Main Menu");
+                                    flag = false;
                                     break;
 
                                 default:
@@ -201,6 +203,7 @@ public class Interface {
 
                                 case "0":
                                     System.out.println("Going back to the Main Menu");
+                                    flag = false;
                                     break;
 
                                 default:
@@ -247,6 +250,7 @@ public class Interface {
 
                                 case "0":
                                     System.out.println("Going back to the Main Menu");
+                                    flag = false;
                                     break;
 
                                 default:
@@ -312,6 +316,7 @@ public class Interface {
 
                                 case "0":
                                     System.out.println("Going back to the Main Menu");
+                                    flag = false;
                                     break;
 
                                 default:

@@ -79,40 +79,9 @@ public class Main {
                         case 1:
                             System.out.println("name:");
                             String name = scanner.next();
-//                            while(true)
-//                            {
-//                                try
-//                                {
-//                                    double number = Double.parseDouble(name);
-//                                    System.out.println("A supplier name cannot be a number");
-//                                    System.out.println("name:");
-//                                    name = scanner.next();
-//                                }
-//                                catch (NumberFormatException e)
-//                                {
-//                                    break;
-//                                }
-//                            }
                             name = checkName(name);
                             System.out.println("business id:");
                             String business_id = scanner.next();
-//                            while(true)
-//                            {
-//                                int counter = 0;
-//                                for (int i = 0; i < business_id.length(); i++) {
-//                                    if (!Character.isDigit(business_id.charAt(i))) {
-//                                        System.out.println("A business id has to be numbers only");
-//                                        break;
-//                                    }
-//                                    else {counter ++;}
-//                                }
-//                                if(counter == business_id.length()){break;}
-//                                else
-//                                {
-//                                    System.out.println("business id:");
-//                                    business_id = scanner.next();
-//                                }
-//                            }
                             business_id = checkNumber(business_id);
                             System.out.println("Payment method:");
                             System.out.println("1.SHOTEF");
@@ -144,63 +113,12 @@ public class Main {
 
                             System.out.println("Supplier ID");
                             String id = scanner.next();
-                            id = checkNumber(business_id);
-//                            while(true)
-//                            {
-//                                int counter = 0;
-//                                for (int i = 0; i < id.length(); i++) {
-//                                    if (!Character.isDigit(id.charAt(i))) {
-//                                        System.out.println("A Supplier id has to be numbers only");
-//                                        break;
-//                                    }
-//                                    else {counter ++;}
-//                                }
-//                                if(counter == id.length()){break;}
-//                                else
-//                                {
-//                                    System.out.println("Supplier id:");
-//                                    id = scanner.next();
-//                                }
-//                            }
+                            id = checkNumber(id);
                             System.out.println("Contact name");
                             String contact_name = scanner.next();
                             contact_name = checkName(contact_name);
-//                            while(true)
-//                            {
-//                                int counter = 0;
-//                                for (int i = 0; i < contact_name.length(); i++) {
-//                                    if (Character.isDigit(contact_name.charAt(i))) {
-//                                        System.out.println("A Contact name has to be letters only");
-//                                        break;
-//                                    }
-//                                    else {counter ++;}
-//                                }
-//                                if(counter == contact_name.length()){break;}
-//                                else
-//                                {
-//                                    System.out.println("Contact name:");
-//                                    contact_name = scanner.next();
-//                                }
-//                            }
                             System.out.println("number");
                             String phone_number = scanner.next();
-//                            while(true)
-//                            {
-//                                int counter = 0;
-//                                for (int i = 0; i < phone_number.length(); i++) {
-//                                    if (!Character.isDigit(phone_number.charAt(i))) {
-//                                        System.out.println("A phone number has to be numbers only");
-//                                        break;
-//                                    }
-//                                    else {counter ++;}
-//                                }
-//                                if(counter == phone_number.length()){break;}
-//                                else
-//                                {
-//                                    System.out.println("Supplier id:");
-//                                    phone_number = scanner.next();
-//                                }
-//                            }
                             phone_number = checkNumber(phone_number);
                             Contact_Person con_person = new Contact_Person(contact_name, phone_number);
                             System.out.println("type:");
@@ -530,6 +448,7 @@ public class Main {
                             System.out.println("Redirecting back to main menu");
                             break;
                     }
+                    break;
                 case 3:
                     System.out.println("Thank you and goodbye");
                     System.exit(0);

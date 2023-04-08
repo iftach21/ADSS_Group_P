@@ -151,12 +151,13 @@ public class OrderManger {
             }}
         //add it to the order's
         pending_for_apporval.add(min_order);
-        for(Item item :itemlist.keySet()){
+        Iterator<Item> iter = itemlist.keySet().iterator();
+        while (iter.hasNext()) {
+            Item item = iter.next();
             assert min_sup != null;
-            if(min_sup.getItems().containsKey(item)){
-                itemlist.remove(item);
+            if (min_sup.getItems().containsKey(item)) {
+                iter.remove();
             }
-
         }
         //reucsive call to cheak to supplie the other items
         if(itemlist.keySet().size()>0){

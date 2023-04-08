@@ -12,6 +12,7 @@ public class Item {
     private int minQuantity;
     private int amount = 0;
     private TempLevel temperature;
+    private Location location = Location.Storage;
     private List<specificItem> specificItemList;
     private List<PriceHistory> priceHistoryList;
 

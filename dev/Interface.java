@@ -3,6 +3,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Interface {
+    // -------------------------------------------------------
+    // Users login information
+    // -------------------------------------------------------
     private static final String Manager_Passward = "M12345"; // the password for manager the system
     private static final String Manager_Username = "Manager"; // the username for manager the system
 
@@ -12,38 +15,56 @@ public class Interface {
 
 
     public Interface() {
-//        this.allworkerslist = new ArrayList<Workers>();
+
     }
     public void logIn() {
-        //===============================
-        //    login confirmation
-        //===============================
+        // -------------------------------------------------------
+        // Login confirmation
+        // Check if the user's login information is valid, and prompts a menu for the correct user,
+        // either a storage worker or the storage manager
+        // -------------------------------------------------------
 
-        //scans the username and password:
+        //Scans the username and password
+
+        System.out.println("Welcome to 'Super-Li's' storage management system! Please log-in.");
+
         String userName;
         while (true) {
-            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+            Scanner myObj = new Scanner(System.in);
             System.out.println("Enter username");
             userName = myObj.nextLine();
-            System.out.println("Enter password");  // Output user input
-            String password = myObj.nextLine();  // Read user input
+            System.out.println("Enter password");
+            String password = myObj.nextLine();
+            //Checks the login information to be matched with any of the users
             if (userName.equals(Manager_Username) && password.equals(Manager_Passward) || userName.equals(Worker_Username) && password.equals(Worker_Passward)) {
                 break;
-            } else {
-                System.out.println("invalid input, please try again");  // Output user input
+                //If the user name does not exists, ask the user to re-enter his credentials
+            }
+            //If such a username does not exist
+            else if (!userName.equals(Manager_Username) && !userName.equals(Worker_Username)){
+                System.out.println("Such a user does not exist. Please try again.");
+            }
+            //If the password is incorrect
+            else if (!password.equals(Manager_Passward) && !password.equals(Worker_Passward)){
+                System.out.println("Incorrect password. Please try again.");
+            }
+            //Else
+            else {
+                System.out.println("Invalid input. please try again.");
             }
         }
-        //=================================================
-        //
-        //                      main menu
-        //
-        //==================================================
 
-        /*
-        Manager's Interface -- START
-        This interface will allow the manager to use the full functions of the system.
-         */
+
+        // -------------------------------------------------------
+        // Main Menu
+        // -------------------------------------------------------
+
+        // -------------------------------------------------------
+        // Manager's Main Menu
+        // The full warehouse main menu, including all of the available options
+        // -------------------------------------------------------
         if (userName.equals(Manager_Username)) {
+
             boolean exit = true;
             while (exit) {
                 System.out.println("Please choose what you would like to do:");
@@ -352,9 +373,11 @@ public class Interface {
                 }
             }
         }
-        /*
-        Manager's interface -- END
-         */
+
+        if (userName.equals(Worker_Username)) {
+            System.out.println("Worker interface");
+        }
+
     }}
 
     //login

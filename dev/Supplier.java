@@ -82,6 +82,13 @@ public abstract class Supplier {
         Pair<Integer,Float> pair=new Pair<Integer,Float>(num,cost);
         items.put(item,pair);
     }
+    public void update_contact_person(String name ,String number){
+        Contact_Person contact_person=new Contact_Person(name,number);
+        this.person=contact_person;
+    }
+    public void add_total_discount(double discount){
+        this.contract.total_discount=discount;
+    }
 
 
 }

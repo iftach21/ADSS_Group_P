@@ -1,7 +1,9 @@
 import java.util.Date;
 import java.util.Scanner;
-import java.util.function.Supplier;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,9 +24,11 @@ public class Main {
                     System.out.println("1.add new supplier");
                     System.out.println("2.remove supplier");
                     System.out.println("3.Update contact to supplier");
-                    System.out.println("4.add Item to Supllier");
-                    System.out.println("5.remove item from Supllier");
+                    System.out.println("4.add Item to Supplier");
+                    System.out.println("5.remove item from Supplier");
                     System.out.println("6.Update item on Contract");
+                    System.out.println("7.print all suppliers");
+
                     int option_1 = scanner.nextInt();
                     switch (option_1){
                         case 1:
@@ -74,6 +78,7 @@ public class Main {
 
 
                         case 3:
+
                             System.out.println("name of the supplier:");
                             String name_s1= scanner.next();
                             System.out.println("name of the new contact:");
@@ -84,6 +89,7 @@ public class Main {
                             break;
 
                         case 4:
+
                             System.out.println("name of the supplier:");
                             String name_s3 =scanner.next();
                             System.out.println("Item name:");
@@ -92,11 +98,50 @@ public class Main {
                             String catalogNum = scanner.next();
                             System.out.println("Item weight:");
                             double weight =scanner.nextDouble();
+                            System.out.println("catlog Name");
+                            String catalogName=scanner.next();
+                            System.out.println("temperature");
+                            double temp=scanner.nextDouble();
+
                             System.out.println("exprison date:");
-                            Date expirationDate =scanner.next();
+                            String expirationDate_s =scanner.next();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            Date expirationDate = null;
+                            try {
+                                 expirationDate = dateFormat.parse(expirationDate_s);
+                            } catch (ParseException e) {
+                                System.out.println("Invalid date format. Please enter a date in the format dd/MM/yyyy");
+                            }
+                            //create the new item
+                            Item item=new Item(item_name,catalogNum,expirationDate,weight,catalogNum,temp);
+                            System.out.println("base price per unit");
+                            float price=scanner.nextFloat();
+                            System.out.println("amount that can be supplier");
+                            int amount =scanner.nextInt();
+                            supplier_manger.add_item_to_supplier(name_s3,item,amount,price);
+                            break;
 
+                        case 5:
+                            System.out.println("name of the supplier:");
+                            String name_s4 =scanner.next();
+                            System.out.println("name of the item");
+                            String item_c5 =scanner.next();
+                            supplier_manger.remove_item_to_supplier(name_s4,item_c5);
+                            break;
 
-
+                        case 6:
+                            System.out.println("name of the supplier:");
+                            String name_s6 =scanner.next();
+                            System.out.println("name of the item");
+                            String item_c6 =scanner.next();
+                            System.out.println("amount:");
+                            int amount_6= scanner.nextInt();
+                            System.out.println("discount:");
+                            double discount_6=scanner.nextDouble();
+                            supplier_manger.add_item_discount_to_supplier(name_s6,item_c6,amount_6,discount_6);
+                            break;
+                        case 7:
+                            supplier_manger.print_all_suppliers_names();
 
 
                     }
@@ -116,15 +161,15 @@ public class Main {
                     option_1 = scanner.nextInt();
                     switch (option_1){
                         case 1:
+                            break;
 
                     }
-            }
+
 
                     // TODO: Add code to handle the Order manager option
-
                 default:
                     System.out.println("Invalid option selected");
         }
     }
-}
+}}
 

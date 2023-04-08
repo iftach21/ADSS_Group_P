@@ -82,12 +82,25 @@ public abstract class Supplier {
         Pair<Integer,Float> pair=new Pair<Integer,Float>(num,cost);
         items.put(item,pair);
     }
+    public  void add_item_to_contract(String name,int num,double discount){
+        for(Item item : items.keySet()){
+            if(item.getName().equals(name)){
+
+            this.contract.add_to_contract(item,num,discount);}
+    }}
     public void update_contact_person(String name ,String number){
         Contact_Person contact_person=new Contact_Person(name,number);
         this.person=contact_person;
     }
     public void add_total_discount(double discount){
         this.contract.total_discount=discount;
+    }
+    public  void remove_item(String item_to_remove){
+        for(Item item :items.keySet()){
+            if(item.getName().equals(item_to_remove)){
+            this.contract.remove_by_item(item);
+            this.items.remove(item);}
+        }
     }
 
 

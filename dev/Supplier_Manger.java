@@ -42,4 +42,29 @@ public class Supplier_Manger {
             }
         }
     }
+    public void add_item_to_supplier(String name_1 ,Item item,int amount,float price){
+        for(Supplier suppleir :this.suppliers){
+            if(suppleir.getName().equals(name_1)){
+                suppleir.add_Items(item,amount,price);
+            }
+    }}
+    public void remove_item_to_supplier(String name_1 ,String item){
+            for(Supplier suppleir :this.suppliers){
+                if(suppleir.getName().equals(name_1)){
+                    suppleir.remove_item(item);
+                }
+            }
+
 }
+    public void print_all_suppliers_names(){
+        for(Supplier supplier: suppliers){
+            System.out.println("" + supplier.getName());
+        }
+    }
+
+    public void add_item_discount_to_supplier(String name_1, String item, int amount ,double discount){
+        for(Supplier suppleir :this.suppliers){
+            if(suppleir.getName().equals(name_1)){
+                suppleir.add_item_to_contract(item,amount,discount);
+    }
+}}}

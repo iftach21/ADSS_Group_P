@@ -262,6 +262,7 @@ public class Main {
                     System.out.println("1.add new Order");
                     System.out.println("2.approve order");
                     System.out.println("3.print all order number");
+                    System.out.println("4.print all order's from supplier");
 
                     option_1 = scanner.nextInt();
                     switch (option_1) {
@@ -320,6 +321,28 @@ public class Main {
                         case 3:
                             orderManger.print_all_orders_num();
                             break;
+                        case 4:
+                            System.out.println("Type supplier name :");
+                            String supplier=scanner.next();
+                            System.out.println("order waiting for approvel :");
+                            for(Order order:orderManger.getPending_for_apporval()){
+                                if(order.getSupplier().getName().equals(supplier)){
+                                 System.out.println(order.getOrderNum());}
+                            }
+                            System.out.println("order approved and waiting for shipment :");
+                            for(Order order:orderManger.getApproval()){
+                                if(order.getSupplier().getName().equals(supplier)){
+                                    System.out.println(order.getOrderNum());}
+                            }
+                            System.out.println("order history");
+                            for(Order order:orderManger.getApproval()){
+                                if(order.getSupplier().getName().equals(supplier)){
+                                    System.out.println(order.getOrderNum());}
+                            }
+                            break;
+
+
+
 
                     }
                 case 3:

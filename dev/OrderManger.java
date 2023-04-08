@@ -6,176 +6,154 @@ public class OrderManger {
     private List<Order> pending_on_approval;
     private List<Order> orders_history;
 
+    public List<Order> getPending_for_apporval() {
+        return pending_for_apporval;
+    }
+
+    public void setPending_for_apporval(List<Order> pending_for_apporval) {
+        this.pending_for_apporval = pending_for_apporval;
+    }
+
+    public List<Order> getPending_on_approval() {
+        return pending_on_approval;
+    }
+
+    public void setPending_on_approval(List<Order> pending_on_approval) {
+        this.pending_on_approval = pending_on_approval;
+    }
+
+    public List<Order> getOrders_history() {
+        return orders_history;
+    }
+
+    public void setOrders_history(List<Order> orders_history) {
+        this.orders_history = orders_history;
+    }
+
     public OrderManger() {
 
     }
+    public void move_from_pending_to_approvel(Order order){
 
-    public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger){
+    }
+
+    public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger,int number_store){
         //if there is no supplier do nothing
         if(manger == null){
             return;
         }
         //to find the min supplier(in case of one supplier have it all)
         Supplier min_sup=null;
-        float min_cost=1000000000;
+        Order min_order = null;
+        float min_cost = 0;
+        //to cheak who have the max items in each call to the function
+        int number_of_item=0;
+        int trigger=0;
 
 
         for(Supplier supplier: manger.getSuppliers()){
 
-            //cheak there is suppliers that have all the items
-            if(supplier.getItems().keySet().containsAll(itemlist.keySet())){
-                if(min_sup==null){
-                    min_sup=supplier;
+            Set<Item> commonElements = new HashSet<>(supplier.getItems().keySet());
+            commonElements.retainAll(itemlist.keySet());
+
+            int numOfCommonElements = commonElements.size();
+
+            if(numOfCommonElements>0 && (number_of_item<=numOfCommonElements)){
+
+                for(Item item:itemlist.keySet()){
+                    if(supplier.getItems().containsKey(item)){
+
+                    if(itemlist.get(item)>supplier.getItems().get(item).getFirst()){
+                        trigger=1;
+                    }
+
+                }}
+
+                //if the supplier dont have the right amount;
+                if(trigger==1){
+                    continue;
                 }
-                float cost=0;
+
+                //make a new order to be cheak if there is better
+                Order order=new Order(null,supplier,0,number_store);
                 for(Item item :itemlist.keySet()){
+                    if(supplier.getItems().containsKey(item)){
                     double discount=1;
 
                     int amount=itemlist.get(item);
-                    float base_price = supplier.getItems().get(item);
+                    float base_price = supplier.getItems().get(item).getSecond();
                     int new_amount=0;
+                    float cost=0;
                     //if the supplier give a discount on the item serch for the biggest amount
                     if(supplier.getContract().items_Map_discount.containsKey(item)){
                         //cheak how much max amount have a discount from the curr amount
                         for(int i=0; i<amount;i++){
-                        if(supplier.getContract().items_Map_discount.get(item).containsKey(amount-i)){
-                             discount = supplier.getContract().items_Map_discount.get(item).get(amount-i);
-                             new_amount=amount-i;
+                            if(supplier.getContract().items_Map_discount.get(item).containsKey(amount-i)){
+                                discount = supplier.getContract().items_Map_discount.get(item).get(amount-i);
+                                new_amount=amount-i;
 
 
-                            break;
-                        }
+                                break;
+                            }
 
 
                         }
                     }
                     //add the item to the total price o
-                    cost+=new_amount*base_price*discount+((amount-new_amount)*base_price);
+                    cost= (float) (new_amount*base_price*discount+((amount-new_amount)*base_price));
+                    order.add_item(item,amount,cost);
+
 
                 }
-                //if there a cheaps supplier
-                if(cost<min_cost){
-                    min_cost=cost;
-                    min_sup=supplier;
-                }
-
 
 
 
 
             }
+               if(number_of_item<numOfCommonElements){
+                   number_of_item=numOfCommonElements;
+                   min_sup=supplier;
+                   min_cost=order.getCost();
+                   min_order=order;
+               }
+               else {
+                   if(min_cost>order.getCost()){
+                       min_sup=supplier;
+                       min_cost=order.getCost();
+                       min_order=order;
+
+                   }
+               }
 
 
+
+
+
+            }}
+        //add it to the order's
+        pending_for_apporval.add(min_order);
+        for(Item item :itemlist.keySet()){
+            assert min_sup != null;
+            if(min_sup.getItems().containsKey(item)){
+                itemlist.remove(item);
+            }
 
         }
-        if(min_sup==null){
-            Map<Item,Pair<Supplier,Float>> items_costs =new HashMap<Item,Pair<Supplier,Float>>();
-            for(Supplier sup: manger.getSuppliers()){
-                for(Item item :itemlist.keySet()){
-                    if (!items_costs.containsKey(item)) {
-                        items_costs.put(item,null);
-                    }
-                    if(sup.getItems().containsKey(item)){
-                        double discount=1;
-                        float cost=0;
-
-                        float base_price = sup.getItems().get(item);
-
-                        int amount=itemlist.get(item);
-                        int new_amount=0;
-                            //serch for discount
-                        for(int i=0; i<amount;i++){
-                            if(sup.getContract().items_Map_discount.get(item).containsKey(amount-i)){
-                                discount = sup.getContract().items_Map_discount.get(item).get(amount-i);
-                            new_amount=amount-i;}}
-
-                        cost+=new_amount*base_price*discount+((amount-new_amount)*base_price);
-
-                        if(items_costs.get(item)==null){
-                           items_costs.remove(item);
-                           Pair<Supplier,Float>new_sup=new Pair<>(sup,cost);
-                           items_costs.put(item,new_sup);
-
-
-                        }
-                        else {
-                            if(items_costs.get(item).getSecond()>cost){
-                                items_costs.remove(item);
-                                Pair<Supplier,Float>new_sup=new Pair<>(sup,cost);
-                                items_costs.put(item,new_sup);
-                            }
-                        }
-                    }
-
-                }
-            }
-            //if there is all ready an open order that wait for the approvel
-            for(Order order:this.pending_for_apporval){
-                for(Item item: items_costs.keySet()){
-                    if(order.getSupplier()==items_costs.get(item).getFirst()){
-                        order.add_item(item,itemlist.get(item));
-                        //add the cost of the item to the list
-                        order.setCost(order.getCost()+items_costs.get(item).getSecond());
-                        //remove form the holder list
-                        items_costs.remove(item);
-                    }
-
-
-
-                }
-
-            }
-            List<Supplier> my_gang_supp = new ArrayList<>();
-            for(Item item:items_costs.keySet()){
-                my_gang_supp.add(items_costs.get(item).getFirst());
-            }
-            for(Supplier supplier:my_gang_supp){
-                for(Item item :items_costs.keySet()){
-                    int counter=0;
-                    if(items_costs.get(item).getFirst()==supplier){
-                       for(Order order :this.pending_for_apporval){
-                          if(order.getSupplier()==supplier){
-                              counter=1;
-                              order.add_item(item,itemlist.get(item));
-                              order.setCost(order.getCost()+items_costs.get(item).getSecond());
-
-                          }
-
-
-                       }
-                       if(counter==0){
-                           Map<Item,Integer> item_map=new HashMap<>();
-                           item_map.put(item,itemlist.get(item));
-                           Order order_new =new Order(item_map,false,supplier,items_costs.get(item).getSecond());
-                           this.pending_for_apporval.add(order_new);
-                       }
-
-                    }
-
-                }
-
-
-            }
-
-
-
-
+        //reucsive call to cheak to supplie the other items
+        if(itemlist.keySet().size()>0){
+            assing_Orders_to_Suppliers(itemlist,manger,number_store);
         }
         else{
-            int counter=1;
-            for(Order order :this.pending_for_apporval){
-                if(order.getSupplier()==min_sup){
-                    counter=2;
-                    for(Item item:itemlist.keySet()){
-                    order.add_item(item,itemlist.get(item));}
-                    order.setCost(order.getCost()+min_cost);}}
-
-            if(counter==1){
-            Order order_1=new Order(itemlist,false,min_sup,min_cost);
-            this.pending_for_apporval.add(order_1);}
+            return;
         }
+
 
 
 
     }
 }
+
+
+
+
+

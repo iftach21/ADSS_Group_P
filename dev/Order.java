@@ -1,22 +1,32 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDate;
 
 public class Order {
 
-
+    LocalDate currentDate;
     private int orderNum;
     private  Supplier supplier;
-    private Map<Item,Integer> itemList;
+    private Map<Item,Pair<Integer,Float>> itemList;
 
-    private Boolean fulfilled;
     private Float cost;
+    private int  Store_number;
     static int number =0;
+    public int getStore_number() {
+        return Store_number;
+    }
 
-    public Order( Map<Item,Integer> itemList, Boolean fulfilled,Supplier supplier,float cost) {
+    public void setStore_number(int store_number) {
+        Store_number = store_number;
+    }
+
+
+
+    public Order( Map<Item,Pair<Integer,Float>>itemList,Supplier supplier,float cost,int store_number) {
         this.orderNum = number+1;
         if(itemList==null){
-            this.itemList= new HashMap<Item,Integer>();
+            this.itemList= new HashMap<Item,Pair<Integer,Float>>();
         }
         else {
             this.itemList= itemList;
@@ -24,7 +34,8 @@ public class Order {
         this.cost=cost;
         this.supplier=supplier;
         this.itemList = itemList;
-        this.fulfilled = fulfilled;
+        this.Store_number=store_number;
+        this.currentDate= LocalDate.now();
 
     }
 
@@ -42,24 +53,17 @@ public class Order {
         this.supplier = supplier;
     }
 
-    public Map<Item, Integer> getItemList() {
+    public Map<Item,Pair<Integer,Float>> getItemList() {
         return itemList;
     }
 
-    public void setItemList(Map<Item, Integer> itemList) {
+    public void setItemList(Map<Item,Pair<Integer,Float>> itemList) {
         this.itemList = itemList;
     }
 
-    public Boolean getFulfilled() {
-        return fulfilled;
-    }
+    public float getCost() {
 
-    public void setFulfilled(Boolean fulfilled) {
-        this.fulfilled = fulfilled;
-    }
-
-    public Float getCost() {
-        return cost;
+        return (float) (cost*supplier.getContract().total_discount);
     }
 
     public void setCost(Float cost) {
@@ -68,11 +72,14 @@ public class Order {
 
     //This fuction is to remove an item to the order
     public void remove_item(Item item){
+        this.cost-=this.itemList.get(item).getSecond();
         this.itemList.remove(item);
 
     }
-    public void add_item(Item item ,int amount){
-        this.itemList.put(item,amount);
+    public void add_item(Item item ,int amount,float cost){
+        Pair<Integer,Float> pair=new Pair(amount,cost);
+        this.cost+=cost;
+        this.itemList.put(item,pair);
     }
 
 

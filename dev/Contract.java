@@ -1,35 +1,65 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Contract {
-    String Order_num;
-    Boolean Fulfilled;
-    Boolean Fully_Fullfilled;
+    public Map<Item,Map<Integer,Double>> items_Map_discount;
+    public double total_discount;
 
-    public String getOrder_num() {
-        return Order_num;
+    public void setTotal_discount(double total_discount) {
+        this.total_discount = total_discount;
     }
 
-    public void setOrder_num(String order_num) {
-        Order_num = order_num;
+    public double getTotal_discount() {
+        return total_discount;
     }
 
-    public Boolean getFulfilled() {
-        return Fulfilled;
+    public Contract(Map<Item, Map<Integer, Double>> items_Map_discount, double total_discount) {
+
+        if(items_Map_discount==null){
+            this.items_Map_discount = new HashMap<Item,Map<Integer, Double>>();
+        }
+        else {
+        this.items_Map_discount = items_Map_discount;
+        }
+        this.total_discount=total_discount;
+
     }
 
-    public void setFulfilled(Boolean fulfilled) {
-        Fulfilled = fulfilled;
+
+
+    public Map<Item, Map<Integer, Double>> getItems_Map_discount() {
+        return items_Map_discount;
     }
 
-    public Boolean getFully_Fullfleld() {
-        return Fully_Fullfilled;
+    public void setItems_Map_discount(Map<Item, Map<Integer, Double>> items_Map_discount) {
+        this.items_Map_discount = items_Map_discount;
     }
 
-    public void setFully_Fullfleld(Boolean fully_Fullfleld) {
-        Fully_Fullfilled = fully_Fullfleld;
-    }
+    //add an item to the contract
+    public void add_to_contract(Item item, int amount, double discount){
+        //if the item has a discount
+        if(this.items_Map_discount.containsKey(item)){
+            //if the amount is in the map
+            if(this.items_Map_discount.get(item).containsKey(amount))
+                this.items_Map_discount.get(item).replace(amount,discount);
+            else{
+                this.items_Map_discount.get(item).put(amount,discount);
+            }}
+        else{
+            Map<Integer,Double> map =new HashMap<Integer, Double>() ;
+            map.put(amount,discount);
+            this.items_Map_discount.put(item,map);
+            }
 
-    public Contract(String order_num, Boolean fulfilled, Boolean fully_Fullfleld) {
-        Order_num = order_num;
-        Fulfilled = fulfilled;
-        Fully_Fullfilled = fully_Fullfleld;
+
+
+    }
+    //remove an item from the contract
+    public void remove_by_item(Item item) {
+        this.items_Map_discount.remove(item);
+    }
+    //remove an amount from the items contract
+    public void remove_by_amount(Item item ,int amount){
+        this.items_Map_discount.get(item).remove(amount);
     }
 }

@@ -7,10 +7,10 @@ public abstract class Supplier {
     private String Suplier_ID;
     private Contact_Person person;
     private Contract contract;
-    private Map<Item, Float> items;
+    private Map<Item,Pair<Integer,Float>>items;
 
 
-    public Supplier(String name, String business_id, String payment_method, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Float> items) {
+    public Supplier(String name, String business_id, String payment_method, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;
         Payment_method = payment_method;
@@ -19,6 +19,8 @@ public abstract class Supplier {
         this.contract = contract;
         this.items = items;
     }
+
+
 
 
     public String getName() {
@@ -69,16 +71,37 @@ public abstract class Supplier {
         this.contract = contract;
     }
 
-    public Map<Item, Float> getItems() {
+    public Map<Item,Pair<Integer,Float>> getItems() {
         return items;
     }
 
-    public void setItems(Map<Item, Float> items) {
+    public void setItems(Map<Item, Pair<Integer,Float>> items) {
         this.items = items;
     }
-    public void add_Items(Item item,float num) {
-        items.put(item,num);
+    public void add_Items(Item item,int num,float cost) {
+        Pair<Integer,Float> pair=new Pair<Integer,Float>(num,cost);
+        items.put(item,pair);
     }
-    //add a fuction to cheak if item exist in list
+    public  void add_item_to_contract(String name,int num,double discount){
+        for(Item item : items.keySet()){
+            if(item.getName().equals(name)){
+
+            this.contract.add_to_contract(item,num,discount);}
+    }}
+    public void update_contact_person(String name ,String number){
+        Contact_Person contact_person=new Contact_Person(name,number);
+        this.person=contact_person;
+    }
+    public void add_total_discount(double discount){
+        this.contract.total_discount=discount;
+    }
+    public  void remove_item(String item_to_remove){
+        for(Item item :items.keySet()){
+            if(item.getName().equals(item_to_remove)){
+            this.contract.remove_by_item(item);
+            this.items.remove(item);}
+        }
+    }
+
 
 }

@@ -1,0 +1,267 @@
+Index: dev/Order.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\nimport java.time.LocalDate;\r\n\r\npublic class Order {\r\n\r\n    LocalDate currentDate;\r\n    private int orderNum;\r\n    private  Supplier supplier;\r\n    private Map<Item,Pair<Integer,Float>> itemList;\r\n\r\n    private Float cost;\r\n    private int  Store_number;\r\n    static int number =0;\r\n    public int getStore_number() {\r\n        return Store_number;\r\n    }\r\n\r\n    public void setStore_number(int store_number) {\r\n        Store_number = store_number;\r\n    }\r\n\r\n\r\n\r\n    public Order( Map<Item,Pair<Integer,Float>>itemList,Supplier supplier,float cost,int store_number) {\r\n        this.orderNum = number+1;\r\n        if(itemList==null){\r\n            this.itemList= new HashMap<Item,Pair<Integer,Float>>();\r\n        }\r\n        else {\r\n            this.itemList= itemList;\r\n        }\r\n        this.cost=cost;\r\n        this.supplier=supplier;\r\n        this.itemList = itemList;\r\n        this.Store_number=store_number;\r\n        this.currentDate= LocalDate.now();\r\n\r\n    }\r\n\r\n    public Integer getOrderNum() {\r\n        return orderNum;\r\n    }\r\n\r\n\r\n\r\n    public Supplier getSupplier() {\r\n        return supplier;\r\n    }\r\n\r\n    public void setSupplier(Supplier supplier) {\r\n        this.supplier = supplier;\r\n    }\r\n\r\n    public Map<Item,Pair<Integer,Float>> getItemList() {\r\n        return itemList;\r\n    }\r\n\r\n    public void setItemList(Map<Item,Pair<Integer,Float>> itemList) {\r\n        this.itemList = itemList;\r\n    }\r\n\r\n    public float getCost() {\r\n\r\n        return (float) (cost*supplier.getContract().total_discount);\r\n    }\r\n\r\n    public void setCost(Float cost) {\r\n        this.cost = cost;\r\n    }\r\n\r\n    //This fuction is to remove an item to the order\r\n    public void remove_item(Item item){\r\n        this.cost-=this.itemList.get(item).getSecond();\r\n        this.itemList.remove(item);\r\n\r\n    }\r\n    public void add_item(Item item ,int amount,float cost){\r\n        Pair<Integer,Float> pair=new Pair(amount,cost);\r\n        this.cost+=cost;\r\n        this.itemList.put(item,pair);\r\n    }\r\n\r\n\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/Order.java b/dev/Order.java
+--- a/dev/Order.java	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ b/dev/Order.java	(date 1680960143051)
+@@ -9,7 +9,6 @@
+     private int orderNum;
+     private  Supplier supplier;
+     private Map<Item,Pair<Integer,Float>> itemList;
+-
+     private Float cost;
+     private int  Store_number;
+     static int number =0;
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]/shelved.patch	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ /dev/null	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
+@@ -1,93 +0,0 @@
+-Index: dev/SupplierCard.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/dev/SupplierCard.java b/dev/SupplierCard.java
+-new file mode 100644
+---- /dev/null	(date 1680026135374)
+-+++ b/dev/SupplierCard.java	(date 1680026135374)
+-@@ -0,0 +1,32 @@
+-+import java.util.Scanner;
+-+
+-+public class SupplierCard {
+-+    public Supplier createSupplier ()
+-+    {
+-+        Scanner scanner = new Scanner(System.in);
+-+        String contactName;
+-+        String phoneNumber;
+-+        System.out.println("Enter the contact name");
+-+        contactName = scanner.nextLine();
+-+        System.out.println("Enter the contact phone number");
+-+        phoneNumber = scanner.nextLine();
+-+        Contact_Person contact = new Contact_Person(contactName,phoneNumber);
+-+
+-+        String supName;
+-+        String id;
+-+        String payment;
+-+        Contact_Person person;
+-+        boolean isDelivering;
+-+        System.out.println("Enter the supplier name");
+-+        supName = scanner.nextLine();
+-+        System.out.println("Enter the id of the supplier");
+-+        id = scanner.nextLine();
+-+        System.out.println("Enter the payment method");
+-+        payment = scanner.next();
+-+        System.out.println("Is the supplier delivering by itself?");
+-+        String input = scanner.nextLine();
+-+        isDelivering = Boolean.parseBoolean(input);
+-+
+-+
+-+    }
+-+}
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6\" name=\"Changes\" comment=\"df\">\r\n      <change beforePath=\"$PROJECT_DIR$/dev/Supplier.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dev/Supplier.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"482e421e-609a-47a0-b79c-469797ae8ba1\" />\r\n        <option name=\"url\" value=\"https://github.com/iftach21/ADSS_Group_P.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NeI9zUNLgjzxbSv1ARiyXCyGjb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"\" />\r\n      <created>1680017976928</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680017976928</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"day\">\r\n      <created>1680020111731</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020111731</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"day\">\r\n      <created>1680020586548</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020586548</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"day\">\r\n      <created>1680021275648</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021275648</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"day\">\r\n      <created>1680021342190</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021342190</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"day\">\r\n      <created>1680021534941</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021534941</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"df\">\r\n      <created>1680022366512</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680022366512</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"day\" />\r\n    <MESSAGE value=\"df\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"df\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision aad68761967614de031a12c41e0b4204ab394cdd)
+-+++ b/.idea/workspace.xml	(date 1680023087025)
+-@@ -4,8 +4,12 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="df">
+--      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
+-+    <list default="true" id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="day">
+-+      <change afterPath="$PROJECT_DIR$/dev/SupplierCard.java" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_03_2023_19_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_03_2023_19_37__Changes_.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_03_2023_19_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_03_2023_19_39__Changes_.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_03_2023_19_42__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_03_2023_19_42__Changes_.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -95,14 +99,7 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1680021534941</updated>
+-     </task>
+--    <task id="LOCAL-00006" summary="df">
+--      <created>1680022366512</created>
+--      <option name="number" value="00006" />
+--      <option name="presentableId" value="LOCAL-00006" />
+--      <option name="project" value="LOCAL" />
+--      <updated>1680022366512</updated>
+--    </task>
+--    <option name="localTasksCounter" value="7" />
+-+    <option name="localTasksCounter" value="6" />
+-     <servers />
+-   </component>
+-   <component name="Vcs.Log.Tabs.Properties">
+-@@ -118,7 +115,6 @@
+-   </component>
+-   <component name="VcsManagerConfiguration">
+-     <MESSAGE value="day" />
+--    <MESSAGE value="df" />
+--    <option name="LAST_COMMIT_MESSAGE" value="df" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="day" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]/shelved.patch	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ /dev/null	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
+@@ -1,32 +0,0 @@
+-Index: dev/SupplierCard.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/dev/SupplierCard.java b/dev/SupplierCard.java
+-new file mode 100644
+---- /dev/null	(date 1680022758377)
+-+++ b/dev/SupplierCard.java	(date 1680022758377)
+-@@ -0,0 +1,3 @@
+-+public class SupplierCard {
+-+    public Supplier createSupplier (String name, String id)
+-+}
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"day\">\r\n      <change beforePath=\"$PROJECT_DIR$/dev/Contract.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dev/Contract.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"482e421e-609a-47a0-b79c-469797ae8ba1\" />\r\n        <option name=\"url\" value=\"https://github.com/iftach21/ADSS_Group_P.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NeI9zUNLgjzxbSv1ARiyXCyGjb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"\" />\r\n      <created>1680017976928</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680017976928</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"day\">\r\n      <created>1680020111731</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020111731</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"day\">\r\n      <created>1680020586548</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020586548</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"day\">\r\n      <created>1680021275648</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021275648</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"day\">\r\n      <created>1680021342190</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021342190</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"day\">\r\n      <created>1680021534941</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021534941</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"day\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"day\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 0091e51d9cdb2e263fdb18edb932f104016f1656)
+-+++ b/.idea/workspace.xml	(date 1680022715209)
+-@@ -5,7 +5,7 @@
+-   </component>
+-   <component name="ChangeListManager">
+-     <list default="true" id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="day">
+--      <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/dev/SupplierCard.java" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM__Changes_.xml	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ /dev/null	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]" date="1680026203157" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 3/28/2023 8:56 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]/shelved.patch	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ /dev/null	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
+@@ -1,32 +0,0 @@
+-Index: dev/SupplierCard.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/dev/SupplierCard.java b/dev/SupplierCard.java
+-new file mode 100644
+---- /dev/null	(date 1680022761264)
+-+++ b/dev/SupplierCard.java	(date 1680022761264)
+-@@ -0,0 +1,3 @@
+-+public class SupplierCard {
+-+    public Supplier createSupplier (String name, String id)
+-+}
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"day\">\r\n      <change beforePath=\"$PROJECT_DIR$/dev/Contract.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dev/Contract.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"482e421e-609a-47a0-b79c-469797ae8ba1\" />\r\n        <option name=\"url\" value=\"https://github.com/iftach21/ADSS_Group_P.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NeI9zUNLgjzxbSv1ARiyXCyGjb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"\" />\r\n      <created>1680017976928</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680017976928</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"day\">\r\n      <created>1680020111731</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020111731</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"day\">\r\n      <created>1680020586548</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020586548</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"day\">\r\n      <created>1680021275648</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021275648</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"day\">\r\n      <created>1680021342190</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021342190</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"day\">\r\n      <created>1680021534941</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021534941</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"day\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"day\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 8aaa84108947ae0010936efa74c899cc73f7bfd7)
+-+++ b/.idea/workspace.xml	(date 1680022761279)
+-@@ -5,7 +5,7 @@
+-   </component>
+-   <component name="ChangeListManager">
+-     <list default="true" id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="day">
+--      <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/dev/SupplierCard.java" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM__Changes_.xml	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ /dev/null	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]" date="1680022761488" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 3/28/2023 7:59 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM__Changes_.xml	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ /dev/null	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]" date="1680022830069" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 3/28/2023 8:00 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6\" name=\"Changes\" comment=\"df\">\r\n      <change afterPath=\"$PROJECT_DIR$/dev/SupplierCard.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"482e421e-609a-47a0-b79c-469797ae8ba1\" />\r\n        <option name=\"url\" value=\"https://github.com/iftach21/ADSS_Group_P.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NeI9zUNLgjzxbSv1ARiyXCyGjb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d1443203-3365-411c-801c-1f21ad59b240\" name=\"Changes\" comment=\"\" />\r\n      <created>1680017976928</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680017976928</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"day\">\r\n      <created>1680020111731</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020111731</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"day\">\r\n      <created>1680020586548</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020586548</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"day\">\r\n      <created>1680021275648</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021275648</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"day\">\r\n      <created>1680021342190</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021342190</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"day\">\r\n      <created>1680021534941</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021534941</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"df\">\r\n      <created>1680022366512</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680022366512</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"day\" />\r\n    <MESSAGE value=\"df\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"df\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 626d05c0c7d741f5dfbccfe74a04e18d3ddb7883)
++++ b/.idea/workspace.xml	(date 1680960515116)
+@@ -5,8 +5,14 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="df">
+-      <change afterPath="$PROJECT_DIR$/dev/SupplierCard.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_7_59_PM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_00_PM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_28_2023_8_56_PM__Changes_.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Order.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -55,7 +61,7 @@
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="d1443203-3365-411c-801c-1f21ad59b240" name="Changes" comment="" />
++      <changelist id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="df" />
+       <created>1680017976928</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />

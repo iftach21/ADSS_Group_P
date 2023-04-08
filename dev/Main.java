@@ -16,6 +16,7 @@ public class Main {
             System.out.println("1.Supplier manger");
             System.out.println("2.Order manger");
             int option = scanner.nextInt();
+            
 
             switch (option) {
                 case 1:

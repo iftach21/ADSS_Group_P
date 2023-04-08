@@ -9,7 +9,6 @@ public class Order {
     private int orderNum;
     private  Supplier supplier;
     private Map<Item,Pair<Integer,Float>> itemList;
-
     private Float cost;
     private int  Store_number;
     static int number =0;

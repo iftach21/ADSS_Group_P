@@ -153,6 +153,7 @@ public class Main {
                             System.out.println("1.Non delivery supplier");
                             System.out.println("2.delivery supplier on fixed days");
                             System.out.println("3.delivery supplier on non fixed days");
+
                             int option_4 = scanner.nextInt();
                             if (option_4 == 1) {
                                 NonDeliveringSupplier supplier = new NonDeliveringSupplier(name, business_id, paymentNum, id, con_person, null, null);

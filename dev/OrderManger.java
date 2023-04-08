@@ -3,8 +3,16 @@ import java.util.*;
 public class OrderManger {
 
     private List<Order> pending_for_apporval;
-    private List<Order> pending_on_approval;
+    private List<Order> approval;
     private List<Order> orders_history;
+
+    public List<Order> getApproval() {
+        return approval;
+    }
+
+    public void setApproval(List<Order> approval) {
+        this.approval = approval;
+    }
 
     public List<Order> getPending_for_apporval() {
         return pending_for_apporval;
@@ -14,13 +22,6 @@ public class OrderManger {
         this.pending_for_apporval = pending_for_apporval;
     }
 
-    public List<Order> getPending_on_approval() {
-        return pending_on_approval;
-    }
-
-    public void setPending_on_approval(List<Order> pending_on_approval) {
-        this.pending_on_approval = pending_on_approval;
-    }
 
     public List<Order> getOrders_history() {
         return orders_history;
@@ -34,8 +35,22 @@ public class OrderManger {
 
     }
     public void move_from_pending_to_approvel(Order order){
+        if(pending_for_apporval.contains(order)){
+            pending_for_apporval.remove(order);
+            approval.add(order);
+
+        }
 
     }
+    public void move_from_approvel_to_history(Order order){
+        if(approval.contains(order)){
+            approval.remove(order);
+            orders_history.add(order);
+
+        }
+
+    }
+
 
     public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger,int number_store){
         //if there is no supplier do nothing

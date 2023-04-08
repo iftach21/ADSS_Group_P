@@ -37,22 +37,22 @@ public class OrderManger {
         this.pending_for_apporval=new ArrayList<Order>();
 
     }
-    public void move_from_pending_to_approvel(int order_num){
-        for(Order order :pending_for_apporval){
-        if(order.getOrderNum().equals(order_num)){
-            pending_for_apporval.remove(order);
-            approval.add(order);
-
+    public void move_from_pending_to_approvel(int order_num) {
+        Iterator<Order> iter = pending_for_apporval.iterator();
+        while (iter.hasNext()) {
+            Order order = iter.next();
+            if (order.getOrderNum().equals(order_num)) {
+                iter.remove();
+                approval.add(order);
+            }
         }
+    }
 
-    }}
-    public void move_from_approvel_to_history(Order order){
-        if(approval.contains(order)){
+    public void moveFromApprovalToHistory(Order order) {
+        if (order != null && approval.contains(order)) {
             approval.remove(order);
             orders_history.add(order);
-
         }
-
     }
 
 

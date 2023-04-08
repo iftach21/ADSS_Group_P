@@ -80,6 +80,11 @@ public class Order {
         this.cost+=cost;
         this.itemList.put(item,pair);
     }
+    public void print_items(){
+        for(Item item :this.itemList.keySet()){
+            System.out.println(item.getName());
+        }
+    }
 
 
 

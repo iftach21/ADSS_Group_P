@@ -1,5 +1,4 @@
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +11,7 @@ public class Main {
         Supplier_Manger supplier_manger=new Supplier_Manger();
 
         while (true){
+            //main menu
             System.out.println("Hello this is the manger_suppliers board press on the right option");
             System.out.println("1.Supplier manger");
             System.out.println("2.Order manger");
@@ -19,7 +19,7 @@ public class Main {
 
             switch (option) {
                 case 1:
-
+                    //supplier menu to maipulate them and their items
                     System.out.println("You selected Supplier manger");
                     System.out.println("1.add new supplier");
                     System.out.println("2.remove supplier");
@@ -145,6 +145,7 @@ public class Main {
                             break;
                         case 7:
                             supplier_manger.print_all_suppliers_names();
+                            break;
 
 
                     }
@@ -158,14 +159,68 @@ public class Main {
 
                     // TODO: Add code to handle the Supplier manager option
                 case 2:
+                    //orders menu to add new and to approve them
                     System.out.println("You selected Order manger");
                     System.out.println("1.add new Order");
                     System.out.println("2.approve order");
-                    System.out.println("2.print all order number");
+                    System.out.println("3.print all order number");
 
                     option_1 = scanner.nextInt();
                     switch (option_1){
                         case 1:
+                            Map<Item,Integer>itemlist=new HashMap<Item,Integer>();
+                            System.out.println("store number:" );
+                            int store_number=scanner.nextInt();
+
+
+                            while (true){
+                                System.out.println("1.add item to list");
+                                System.out.println("2.done and ready to go to orders");
+                                int option_11=scanner.nextInt();
+
+                                //add item to the order list
+                                if(option_11==1){
+                                    System.out.println("Item name:");
+                                    String item_name =scanner.next();
+                                    System.out.println("Item catlog number:");
+                                    String catalogNum = scanner.next();
+                                    System.out.println("Item weight:");
+                                    double weight =scanner.nextDouble();
+                                    System.out.println("catlog Name");
+                                    String catalogName=scanner.next();
+                                    System.out.println("temperature");
+                                    double temp=scanner.nextDouble();
+
+                                    System.out.println("exprison date:");
+                                    String expirationDate_s =scanner.next();
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date expirationDate = null;
+                                    try {
+                                        expirationDate = dateFormat.parse(expirationDate_s);
+                                    } catch (ParseException e) {
+                                        System.out.println("Invalid date format. Please enter a date in the format dd/MM/yyyy");
+                                    }
+                                    //create the new item
+                                    Item item=new Item(item_name,catalogNum,expirationDate,weight,catalogNum,temp);
+                                    System.out.println("amount:");
+                                    int amount_21=scanner.nextInt();
+                                    itemlist.put(item,amount_21);
+
+                                }
+                                if(option_11==2){
+                                    orderManger.assing_Orders_to_Suppliers(itemlist,supplier_manger,store_number);
+                                    break;
+                                }
+                            }
+                            break;
+                        case 2:
+                            orderManger.print_all_orders_num();
+                            System.out.println("Type order number from the option :");
+                            int order_2= scanner.nextInt();
+                            orderManger.move_from_pending_to_approvel(order_2);
+                            break;
+                        case 3:
+                            orderManger.print_all_orders_num();
                             break;
 
                     }

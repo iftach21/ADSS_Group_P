@@ -318,7 +318,7 @@ class OrderMangerTest {
     }
  //test 8
     @Test
-    void order_delete(){
+    void order_move_to_history(){
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
@@ -364,4 +364,35 @@ class OrderMangerTest {
         ordermanger.moveFromApprovalToHistory(ordermanger.getApproval().get(0));
         assertEquals(1,ordermanger.getOrders_history().size());
     }
-}
+    @Test
+    //test 9
+    void manipule_supplier(){
+        var ordermanger=new OrderManger();
+        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+
+        Item item1 = new Item("Apple", "1001", new Date(123456789), 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", new Date(234567890), 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", new Date(345678901), 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", new Date(456789012), 0.3, "Seafood", -2.0);
+
+        maplist.put(item1,100);
+        maplist.put(item2,100);
+        maplist.put(item3,100);
+        maplist.put(item4,100);
+
+        Supplier_Manger masupplier=new Supplier_Manger();
+        Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
+        supplier_1.add_Items(item1,100,100);
+        supplier_1.add_item_to_contract(item1.getName(),100,0.1);
+        supplier_1.add_Items(item2,100,100);
+        supplier_1.add_Items(item3,100,100);
+        supplier_1.add_Items(item4,100,100);
+        supplier_1.add_total_discount(0.5);
+        supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
+        supplier_1.update_contact_person("omer" ,"020323");
+        assertEquals("omer",supplier_1.getPerson().getName());
+        supplier_1.remove_item(item1.getName());
+        assertFalse(supplier_1.getItems().containsKey(item1));
+
+}}

@@ -14,6 +14,7 @@ public class Item {
     private List<specificItem> specificItemList;
     private List<PriceHistory> priceHistoryList;
 
+
     public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity)
     {
         this.name = name;

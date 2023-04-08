@@ -75,7 +75,7 @@ public class interfaceManager {
                 //Update inventory
                 //-----------------------
                 case "2": {
-//                        this.Update_Stock();
+                    System.out.println("This function is not yet available in the current version of the system.");
                     break;
                 }
 

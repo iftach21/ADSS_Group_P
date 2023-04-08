@@ -52,18 +52,21 @@ public class Main {
                             int option_4 =scanner.nextInt();
                             if(option_4==1){
                                 NonDeliveringSupplier supplier =new NonDeliveringSupplier(name,business_id,payment,id,con_person,null,null);
+                                supplier_manger.getSuppliers().add(supplier);
                             }
                             else if (option_4==2){
                                 System.out.println("day:");
                                 String day= scanner.next();
                                 WindowType day_window =WindowType.valueOf(day.toUpperCase());
                                 FixedDaySupplier supplier =new FixedDaySupplier(day_window,name,business_id,payment,id,con_person,null,null);
+                                supplier_manger.getSuppliers().add(supplier);
 
                             }
                             else if(option_4==3){
                                 System.out.println("days to deliver:");
                                 int day= scanner.nextInt();
                                 NonFixedDaySupplier supplier =new NonFixedDaySupplier(day,name,business_id,payment,id,con_person,null,null);
+                                supplier_manger.getSuppliers().add(supplier);
                             }
                             break;
 
@@ -145,7 +148,7 @@ public class Main {
 
 
                     }
-
+                    break;
 
 
 
@@ -157,13 +160,16 @@ public class Main {
                 case 2:
                     System.out.println("You selected Order manger");
                     System.out.println("1.add new Order");
-                    System.out.println("2.move Order");
+                    System.out.println("2.approve order");
+                    System.out.println("2.print all order number");
+
                     option_1 = scanner.nextInt();
                     switch (option_1){
                         case 1:
                             break;
 
                     }
+                    break;
 
 
                     // TODO: Add code to handle the Order manager option

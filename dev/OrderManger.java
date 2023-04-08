@@ -32,6 +32,9 @@ public class OrderManger {
     }
 
     public OrderManger() {
+        this.orders_history=new ArrayList<Order>();
+        this.approval=new ArrayList<Order>();
+        this.pending_for_apporval=new ArrayList<Order>();
 
     }
     public void move_from_pending_to_approvel(Order order){
@@ -163,6 +166,22 @@ public class OrderManger {
         }
 
 
+
+
+    }
+    public void print_all_orders_num(){
+        System.out.println("pending:");
+        for(Order order: pending_for_apporval){
+            System.out.println(order.getOrderNum());
+        }
+        System.out.println("approved:");
+        for(Order order: approval){
+            System.out.println(order.getOrderNum());
+        }
+        System.out.println("history:");
+        for(Order order: orders_history){
+            System.out.println(order.getOrderNum());
+        }
 
 
     }

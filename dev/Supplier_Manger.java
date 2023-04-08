@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 //This is the class that hold all the suppliers that work with the company
@@ -15,6 +16,8 @@ public class Supplier_Manger {
 
 
     public Supplier_Manger() {
+        this.suppliers=new ArrayList<Supplier>();
+
     }
     public void  remove_supplier(String name){
         for(Supplier suppleir :this.suppliers){

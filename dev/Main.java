@@ -12,7 +12,6 @@ public class Main {
         Interface in = new Interface();
         in.logIn();
          */
-
         // -------------------------------------------------------
         // Demo categories, general items, and specific items for demonstration
         // -------------------------------------------------------
@@ -72,6 +71,7 @@ public class Main {
         milksSubCat.addGeneralItem(milk1Percent);
         milksSubCat.addGeneralItem(milk3Percent);
         dairyCategory.addSubCategory(milksSubCat);
+        dairyCategory.addSubCategory(buttersSubCat);
 
         System.out.println(dairyCategory.toString());
 

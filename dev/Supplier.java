@@ -4,17 +4,18 @@ import java.util.Map;
 public abstract class Supplier {
     private String name;
     private String business_id;
-    private String Payment_method;
+//    private String Payment_method;
+    private PaymentMethod paymentMethod;
     private String Suplier_ID;
     private Contact_Person person;
     private Contract contract;
     private Map<Item,Pair<Integer,Float>>items;
 
 
-    public Supplier(String name, String business_id, String payment_method, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
+    public Supplier(String name, String business_id, PaymentMethod paymentMethod, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;
-        Payment_method = payment_method;
+        this.paymentMethod = paymentMethod;
         Suplier_ID = suplier_ID;
         this.person = person;
         if(contract==null){
@@ -49,13 +50,19 @@ public abstract class Supplier {
         this.business_id = business_id;
     }
 
-    public String getPayment_method() {
-        return Payment_method;
+//    public String getPayment_method() {
+//        return Payment_method;
+//    }
+    public PaymentMethod getPayment_method() {return paymentMethod;}
+
+
+//    public void setPayment_method(String payment_method) {
+//        Payment_method = payment_method;
+//    }
+    public void setPayment_method(int payment_method) {
+        paymentMethod = PaymentCreator.getpayment(payment_method);
     }
 
-    public void setPayment_method(String payment_method) {
-        Payment_method = payment_method;
-    }
 
     public String getSuplier_ID() {
         return Suplier_ID;

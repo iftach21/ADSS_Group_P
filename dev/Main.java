@@ -34,12 +34,8 @@ public class Main {
                     }
                     break;
                 }
-                catch(Exception e)
+                catch(Exception ignored)
                 {
-                    System.out.println("Please enter a valid option");
-                    System.out.println("1.Supplier manger");
-                    System.out.println("2.Order manger");
-                    System.out.println("3.Exit");
                 }
             }
             switch (choice) {
@@ -78,18 +74,8 @@ public class Main {
                             }
                             break;
                         }
-                        catch(Exception e)
+                        catch(Exception ignored)
                         {
-                            System.out.println("Please enter a valid option");
-                            System.out.println("1.add new supplier");
-                            System.out.println("2.remove supplier");
-                            System.out.println("3.Update contact to supplier");
-                            System.out.println("4.add Item to Supplier");
-                            System.out.println("5.remove item from Supplier");
-                            System.out.println("6.Update item on Contract");
-                            System.out.println("7.print all suppliers");
-                            System.out.println("8.get back to previous menu");
-
                         }
                     }
 
@@ -113,8 +99,47 @@ public class Main {
                             }
                             System.out.println("business id:");
                             String business_id = scanner.next();
+                            while(true)
+                            {
+                                int counter = 0;
+                                for (int i = 0; i < business_id.length(); i++) {
+                                    if (!Character.isDigit(business_id.charAt(i))) {
+                                        System.out.println("A business id has to be numbers only");
+                                        break;
+                                    }
+                                    else {counter ++;}
+                                }
+                                if(counter == business_id.length()){break;}
+                                else
+                                {
+                                    System.out.println("business id:");
+                                    business_id = scanner.next();
+                                }
+                            }
                             System.out.println("Payment method:");
+                            System.out.println("1.SHOTEF");
+                            System.out.println("2.SHOTEF+30");
+                            System.out.println("3.SHOTEF+60");
                             String payment = scanner.next();
+                            while(true)
+                            {
+                                int paymentNum;
+                                try
+                                {
+                                    paymentNum = Integer.parseInt(payment);
+                                    if(choice < 1 || choice > 3)
+                                    {
+                                        System.out.println("Please enter a valid option");
+                                        System.out.println("1.SHOTEF");
+                                        System.out.println("2.SHOTEF+30");
+                                        System.out.println("3.SHOTEF+60");
+                                        continue;
+                                    }
+                                    break;
+                                }
+                                catch(Exception ignored)
+                                {}
+                            }
                             System.out.println("Supplier ID");
                             String id = scanner.next();
                             System.out.println("Contact name");

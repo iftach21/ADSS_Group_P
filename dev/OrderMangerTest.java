@@ -226,6 +226,7 @@ class OrderMangerTest {
         assertEquals("Supplier1 Inc.",ordermanger.getPending_for_apporval().get(0).getSupplier().getName());
 
 }
+    //tetst 6
     @Test
     void move_order_to_approvel(){
         var ordermanger=new OrderManger();
@@ -252,7 +253,7 @@ class OrderMangerTest {
         supplier_1.add_total_discount(0.5);
         supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
         NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
-        supplier_2.add_Items(item1,100,100);
+        supplier_2.add_Items(item1,10,90);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
         supplier_2.add_Items(item4,100,100);
@@ -266,5 +267,101 @@ class OrderMangerTest {
 
 
 
+    }
+    // test 7
+    @Test
+    void three_supllier_split(){
+        var ordermanger=new OrderManger();
+        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+
+        Item item1 = new Item("Apple", "1001", new Date(123456789), 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", new Date(234567890), 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", new Date(345678901), 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", new Date(456789012), 0.3, "Seafood", -2.0);
+
+        maplist.put(item1,100);
+        maplist.put(item2,100);
+        maplist.put(item3,100);
+        maplist.put(item4,100);
+
+        Supplier_Manger masupplier=new Supplier_Manger();
+        Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        supplier_1.add_Items(item1,100,100);
+        supplier_1.add_item_to_contract(item1.getName(),100,0.1);
+        supplier_1.add_Items(item2,100,100);
+        supplier_1.add_Items(item3,100,100);
+        supplier_1.add_Items(item4,100,100);
+        supplier_1.add_total_discount(0.5);
+        supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        supplier_2.add_Items(item1,10,90);
+        supplier_2.add_Items(item2,100,100);
+        supplier_2.add_Items(item3,100,100);
+        supplier_2.add_Items(item4,100,100);
+        supplier_2.add_total_discount(0.5);
+
+        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        supplier_3.add_Items(item2,100,100);
+        supplier_3.add_Items(item3,100,100);
+        supplier_3.add_Items(item4,100,100);
+        supplier_3.add_total_discount(0.5);
+
+
+        masupplier.getSuppliers().add(supplier_1);
+        masupplier.getSuppliers().add(supplier_2);
+        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
+        int num =ordermanger.getPending_for_apporval().get(0).getOrderNum();
+        assertEquals("Supplier1 Inc.",ordermanger.getPending_for_apporval().get(0).getSupplier().getName());
+
+
+    }
+ //test 8
+    @Test
+    void order_delete(){
+        var ordermanger=new OrderManger();
+        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+
+        Item item1 = new Item("Apple", "1001", new Date(123456789), 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", new Date(234567890), 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", new Date(345678901), 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", new Date(456789012), 0.3, "Seafood", -2.0);
+
+        maplist.put(item1,100);
+        maplist.put(item2,100);
+        maplist.put(item3,100);
+        maplist.put(item4,100);
+
+        Supplier_Manger masupplier=new Supplier_Manger();
+        Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        supplier_1.add_Items(item1,100,100);
+        supplier_1.add_item_to_contract(item1.getName(),100,0.1);
+        supplier_1.add_Items(item2,100,100);
+        supplier_1.add_Items(item3,100,100);
+        supplier_1.add_Items(item4,100,100);
+        supplier_1.add_total_discount(0.5);
+        supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        supplier_2.add_Items(item1,10,90);
+        supplier_2.add_Items(item2,100,100);
+        supplier_2.add_Items(item3,100,100);
+        supplier_2.add_Items(item4,100,100);
+        supplier_2.add_total_discount(0.5);
+
+        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        supplier_3.add_Items(item2,100,100);
+        supplier_3.add_Items(item3,100,100);
+        supplier_3.add_Items(item4,100,100);
+        supplier_3.add_total_discount(0.5);
+
+
+        masupplier.getSuppliers().add(supplier_1);
+        masupplier.getSuppliers().add(supplier_2);
+        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
+        int num =ordermanger.getPending_for_apporval().get(0).getOrderNum();
+        ordermanger.move_from_pending_to_approvel(num);
+        ordermanger.moveFromApprovalToHistory(ordermanger.getApproval().get(0));
+        assertEquals(1,ordermanger.getOrders_history().size());
     }
 }

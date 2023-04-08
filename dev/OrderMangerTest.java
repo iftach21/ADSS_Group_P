@@ -24,7 +24,7 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier.add_Items(item1,100,100);
         supplier.add_Items(item2,100,100);
         supplier.add_Items(item3,100,100);
@@ -58,12 +58,12 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
         supplier_1.add_Items(item3,100,100);
         supplier_1.add_Items(item4,100,100);
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,100,100);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
@@ -96,12 +96,12 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
         supplier_1.add_Items(item3,100,100);
         supplier_1.add_Items(item4,100,100);
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,100,100);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
@@ -132,11 +132,11 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
 
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
 
         supplier_2.add_Items(item3,100,100);
         supplier_2.add_Items(item4,100,5);
@@ -168,13 +168,13 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
         supplier_1.add_Items(item3,100,100);
         supplier_1.add_Items(item4,100,100);
         supplier_1.add_total_discount(0.9);
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,100,100);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
@@ -206,7 +206,7 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
         supplier_1.add_Items(item2,100,100);
@@ -214,7 +214,7 @@ class OrderMangerTest {
         supplier_1.add_Items(item4,100,100);
         supplier_1.add_total_discount(0.5);
         supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,100,100);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
@@ -244,7 +244,7 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
         supplier_1.add_Items(item2,100,100);
@@ -252,7 +252,7 @@ class OrderMangerTest {
         supplier_1.add_Items(item4,100,100);
         supplier_1.add_total_discount(0.5);
         supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,10,90);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
@@ -286,7 +286,7 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
         supplier_1.add_Items(item2,100,100);
@@ -294,14 +294,14 @@ class OrderMangerTest {
         supplier_1.add_Items(item4,100,100);
         supplier_1.add_total_discount(0.5);
         supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,10,90);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
         supplier_2.add_Items(item4,100,100);
         supplier_2.add_total_discount(0.5);
 
-        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_3.add_Items(item2,100,100);
         supplier_3.add_Items(item3,100,100);
         supplier_3.add_Items(item4,100,100);
@@ -334,7 +334,7 @@ class OrderMangerTest {
 
         Supplier_Manger masupplier=new Supplier_Manger();
         Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
         supplier_1.add_Items(item2,100,100);
@@ -342,14 +342,14 @@ class OrderMangerTest {
         supplier_1.add_Items(item4,100,100);
         supplier_1.add_total_discount(0.5);
         supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_2.add_Items(item1,10,90);
         supplier_2.add_Items(item2,100,100);
         supplier_2.add_Items(item3,100,100);
         supplier_2.add_Items(item4,100,100);
         supplier_2.add_total_discount(0.5);
 
-        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", "Credit Card", "S001", contactPerson, null, null);
+        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_3.add_Items(item2,100,100);
         supplier_3.add_Items(item3,100,100);
         supplier_3.add_Items(item4,100,100);

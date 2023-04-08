@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Supplier {
@@ -16,8 +17,17 @@ public abstract class Supplier {
         Payment_method = payment_method;
         Suplier_ID = suplier_ID;
         this.person = person;
-        this.contract = contract;
-        this.items = items;
+        if(contract==null){
+            this.contract=new Contract(null,1);
+        }
+        else {
+            this.contract=contract;
+        }
+        if(items==null){
+            this.items=new HashMap<Item,Pair<Integer,Float>>();
+        }
+        else {
+        this.items = items;}
     }
 
 
@@ -101,6 +111,9 @@ public abstract class Supplier {
             this.contract.remove_by_item(item);
             this.items.remove(item);}
         }
+    }
+    public void print_supply(){
+        System.out.println(this.getItems().keySet());
     }
 
 

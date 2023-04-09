@@ -115,7 +115,7 @@ public class InventoryController {
         if (this.CategoryControl.getCategoriesList().size() == 0)
             return null;
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++) {
             Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
             for (int j = 0; j < currentCategory.getAmount(); j++) {
@@ -133,7 +133,7 @@ public class InventoryController {
         if (this.CategoryControl.getCategoriesList().size() == 0)
             return null;
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
         {
             Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
@@ -163,28 +163,30 @@ public class InventoryController {
         if (this.ItemsList.size() == 0)
             return null;
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item CurrentItem = this.ItemsList.get(i);
-            currentReport.setReportData(CurrentItem.toString());
+            if (CurrentItem.getCatalogNum().equals(CatlogNum))
+                currentReport.setReportData(CurrentItem.toString());
         }
         return currentReport;
     }
 
-    public Report FullDefectiveReport() {
+    public Report FullDefectiveReport()
+    {
         if (this.CategoryControl.getCategoriesList().size() == 0)
             return null;
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
-        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++) {
-            Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
-            for (int j = 0; j < currentCategory.getAmount(); j++) {
-                subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                for (int w = 0; w < currentSubCategory.getAmount(); w++) {
-                    Item currentItem = currentSubCategory.getItem(w);
-                    currentReport.setReportData(currentItem.toString());
-                }
+        Report currentReport = new Report(reportType.Defective, currentDate);
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            for (int j = 0; j < currentItem.getAmount(); j++)
+            {
+                specificItem currentSpecificItem = currentItem.getSpecificItemList(j);
+                if (currentSpecificItem.getisDefected())
+                    currentReport.setReportData(currentSpecificItem.toString());
             }
         }
         return currentReport;

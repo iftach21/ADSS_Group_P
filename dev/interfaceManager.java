@@ -73,7 +73,7 @@ public class interfaceManager {
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
-        specificItem toiletPaper1 = new specificItem(1, null, false, Location.Store);
+        specificItem toiletPaper1 = new specificItem(1, null, true, Location.Store);
         specificItem toiletPaper2 = new specificItem(2, null, false, Location.Store);
         specificItem toiletPaper3 = new specificItem(3, null, false, Location.Store);
         toiletPaper.addSpecificItem(toiletPaper1);

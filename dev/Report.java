@@ -39,7 +39,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "------ Report: " +
+        return "Report: " +
                 "Report Type: " + type +
                 ", Report number: " + reportNum +
                 ", Report Date: " + reportDate +

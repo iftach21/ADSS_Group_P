@@ -33,6 +33,7 @@ public class CategoryController {
         return null;
     }
 
+
     //Method 1: addCategory
     //This method recieves a string, and creates a new super category to be added to the store's inventory
     public void addCategory(String categoryName) {

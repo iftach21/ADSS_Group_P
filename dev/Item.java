@@ -74,6 +74,11 @@ public class Item {
         return amount;
     }
 
+    public specificItem getSpecificItemList(int index) {
+        specificItem currentSpecificItem;
+        return this.specificItemList.get(index);
+    }
+
     //Method 1: toString
     //This method prints the general items list
     @Override
@@ -93,9 +98,8 @@ public class Item {
                 " Bought for: " + this.priceHistoryList.get(lastPriceHistory).getBuyPrice() +
         " Last price update: " + this.priceHistoryList.get(lastPriceHistory).getCurrentDate();
         for (int i = 0; i < this.specificItemList.size(); i++){
-            generalItem += "\n" + this.specificItemList.get(i) + " --";
+            generalItem += "\n" + this.specificItemList.get(i);
         }
-        generalItem += "\n" + "----------------------------------------------------------------" + "\n";
         return generalItem;
     }
 

@@ -21,14 +21,19 @@ public class interfaceManager {
         Date dateMilk4 = new Date(2026, 6, 13);
 
         //Categories
-        Category dairyCategory = new Category("Dairy");
         Inventory.addCategory("Dairy");
+        Inventory.addCategory("Cleaning");
 
         //Sub-categories
         subCategory milksSubCat = new subCategory("Milk");
         subCategory buttersSubCat = new subCategory("Butter");
-        Inventory.addSubCategory(dairyCategory, milksSubCat);
-        Inventory.addSubCategory(dairyCategory, buttersSubCat);
+        Inventory.addSubCategory(Inventory.getCategory("Dairy"), milksSubCat);
+        Inventory.addSubCategory(Inventory.getCategory("Dairy"), buttersSubCat);
+
+        subCategory toiletSubCat = new subCategory("Toilet Paper");
+        subCategory washingMachineSubCat = new subCategory("Washing Machine Gels");
+        Inventory.addSubCategory(Inventory.getCategory("Cleaning"), toiletSubCat);
+        Inventory.addSubCategory(Inventory.getCategory("Cleaning"), washingMachineSubCat);
 
         //General Items
         Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2);
@@ -38,11 +43,16 @@ public class interfaceManager {
         Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12);
         regularButter.addNewPrice(50, 60);
 
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular, 20);
+        toiletPaper.addNewPrice(20, 40);
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular, 10);
+        sodGel.addNewPrice(20, 26);
+
         //Specific Items
         specificItem milk1 = new specificItem(1, dateMilk1, false, Location.Store);
-        specificItem milk2 = new specificItem(2, dateMilk2, false, Location.Store);
-        specificItem milk3 = new specificItem(3, dateMilk3, false, Location.Store);
-        specificItem milk4 = new specificItem(4, dateMilk4, false, Location.Store);
+        specificItem milk2 = new specificItem(2, dateMilk2, true, Location.Store);
+        specificItem milk3 = new specificItem(3, dateMilk3, true, Location.Store);
+        specificItem milk4 = new specificItem(4, dateMilk4, true, Location.Store);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
@@ -62,9 +72,24 @@ public class interfaceManager {
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
+        specificItem toiletPaper1 = new specificItem(1, null, false, Location.Store);
+        specificItem toiletPaper2 = new specificItem(2, null, false, Location.Store);
+        specificItem toiletPaper3 = new specificItem(3, null, false, Location.Store);
+        toiletPaper.addSpecificItem(toiletPaper1);
+        toiletPaper.addSpecificItem(toiletPaper2);
+        toiletPaper.addSpecificItem(toiletPaper3);
+
+        specificItem sodGel1 = new specificItem(1, null, false, Location.Store);
+        specificItem sodGel2 = new specificItem(2, null, true, Location.Storage);
+        sodGel.addSpecificItem(sodGel1);
+        sodGel.addSpecificItem(sodGel2);
+
+
         milksSubCat.addGeneralItem(milk3Percent);
         milksSubCat.addGeneralItem(soyMilk);
         buttersSubCat.addGeneralItem(regularButter);
+        toiletSubCat.addGeneralItem(toiletPaper);
+        washingMachineSubCat.addGeneralItem(sodGel);
     }
 
     public void interfaceManagerLogin() {
@@ -105,14 +130,11 @@ public class interfaceManager {
 
                         switch (Sub_Ans) {
                             case "1":
-                                Reports.addReport(Inventory.shortageReportCategory("FULL"));
+                                Reports.addReport(Inventory.shortageReportFull());
                                 break;
 
                             case "2":
-                                System.out.println("Please enter the category you would like to provide a shortage report for:");
-                                Scanner Category = new Scanner(System.in);
-                                String categoryName = Category.nextLine();
-                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
+
                                 break;
 
                             case "3":

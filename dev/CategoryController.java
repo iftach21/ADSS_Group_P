@@ -16,6 +16,19 @@ public class CategoryController {
         return amount;
     }
 
+    //getCategory
+    //This getter recieves a category's name from the user (String), and returns that same category
+    public Category getCategory(String categoryName) {
+        Category currentCategory;
+        for (int i = 0; i < this.amount; i++){
+            currentCategory = this.CategoriesList.get(i);
+            if (currentCategory.getCategoryName().equals(categoryName)){
+                return currentCategory;
+            }
+        }
+        return null;
+    }
+
     //Method 1: addCategory
     //This method recieves a string, and creates a new super category to be added to the store's inventory
     public void addCategory(String categoryName) {
@@ -45,37 +58,38 @@ public class CategoryController {
         }
     }
     
-    //Method 4: shortageFullCategory
-    //This method provides a report for all the product that need to be ordered
-    public Report shortageReportCategory(String categoryName){
+    //Method 4: shortageReportFull
+    //This method provides a report for all the products that need to be ordered
+    public Report shortageReportFull(){
+        //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
-        if (categoryName == "FULL"){
-            for (int i = 0; i < this.CategoriesList.size(); i++){
-                Category currentCategory = this.CategoriesList.get(i);
-                for (int j = 0; j < currentCategory.getAmount(); j++){
-                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                    for (int w = 0; w < currentSubCategory.getAmount(); w++){
-                        Item currentItem = currentSubCategory.getItem(w);
-                        if (currentItem.getAmount() < currentItem.getMinQuantity()){
-                            currentReport.setReportData(currentItem.toString());
+        String reportInformation = "";
+        int defectedCount = 0;
+        //Iterate every category
+        for (int i = 0; i < this.CategoriesList.size(); i++){
+            Category currentCategory = this.CategoriesList.get(i);
+            //Iterate every sub-category
+            for (int j = 0; j < currentCategory.getAmount(); j++){
+                subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                //Iterate every general-item
+                for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                    Item currentItem = currentSubCategory.getItem(w);
+                    //Check for each specific item if it is defected, and needs to be added to the order
+                    for (int z = 0; z < currentItem.getAmount(); z++){
+                        if (currentItem.getSpecificItemList(z).getisDefected()){
+                            defectedCount++;
                         }
                     }
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < this.CategoriesList.size(); i++){
-                Category currentCategory = this.CategoriesList.get(i);
-                if (currentCategory.getCategoryName().equals(categoryName)){
-                    for (int j = 0; j < currentCategory.getAmount(); j++){
-                        subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                        for (int w = 0; w < currentSubCategory.getAmount(); w++){
-                            Item currentItem = currentSubCategory.getItem(w);
-                            if (currentItem.getAmount() < currentItem.getMinQuantity()){
-                                currentReport.setReportData(currentItem.toString());
-                            }
-                        }
+                    if (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount){
+                        //Add the information collected to the report data
+                        reportInformation += currentItem.toString() + "\n" +
+                        " Defected amount: " + defectedCount + " Total to order: " +
+                                (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
+                        currentReport.setReportData(reportInformation);
+                        //Reset variables
+                        reportInformation = "";
+                        defectedCount = 0;
                     }
                 }
             }
@@ -84,6 +98,18 @@ public class CategoryController {
         if (currentReport.getReportInformation().equals("")){
             currentReport.setReportData("There are no shortages.");
         }
+        return currentReport;
+    }
+
+    //Method 5: shortageReportCategory
+    //This method provides a report for all the products that need to be ordered by a specific category
+    public Report shortageReportCategory(String categoryName){
+        //Set variables for method
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        String reportInformation = "";
+        int defectedCount = 0;
+
         return currentReport;
     }
 

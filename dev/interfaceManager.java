@@ -116,10 +116,9 @@ public class interfaceManager {
             System.out.println("4: Provide a defective products report");
             System.out.println("5: Update discount on products");
             System.out.println("6: Place an order from a supplier");
-            System.out.println("7: Update product details");
-            System.out.println("8: Provide a price history report for a product");
-            System.out.println("9: Insert a defective product into the defective inventory");
-            System.out.println("10: Print full inventory report");
+            System.out.println("7: Provide a price history report for a product");
+            System.out.println("8: Insert a defective product into the defective inventory");
+            System.out.println("9: Print full inventory report");
 
             System.out.println("0: Exit the system ");
 
@@ -495,21 +494,11 @@ public class interfaceManager {
                     break;
                 }
 
-                //-----------------------
-                //Update product details
-                //-----------------------
-                case "7": {
-                    System.out.println("please enter catalog number:");
-                    Scanner Second_obj = new Scanner(System.in);
-                    String Sub_Ans = Second_obj.nextLine();  // Read user input
-//                        this.Update_Details();
-                    break;
-                }
 
                 //-----------------------
                 //Provide a price history report for a product
                 //-----------------------
-                case "8": {
+                case "7": {
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which history report to provide:");
@@ -556,7 +545,7 @@ public class interfaceManager {
                 //-----------------------
                 //Insert a defective product into the defective inventory
                 //-----------------------
-                case "9": {
+                case "8": {
                     System.out.println("please enter catalog number:");
                     Scanner Second_obj = new Scanner(System.in);
                     String Sub_Ans = Second_obj.nextLine();  // Read user input
@@ -567,7 +556,7 @@ public class interfaceManager {
                 //-----------------------
                 //Print full inventory report
                 //-----------------------
-                case "10": {
+                case "9": {
                     System.out.println(this.Inventory.toString());
                     break;
                 }

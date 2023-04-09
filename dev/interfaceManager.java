@@ -38,7 +38,7 @@ public class interfaceManager {
         //General Items
         Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2);
         milk3Percent.addNewPrice(10, 20);
-        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 8);
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2);
         soyMilk.addNewPrice(30, 40);
         Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12);
         regularButter.addNewPrice(50, 60);
@@ -134,7 +134,10 @@ public class interfaceManager {
                                 break;
 
                             case "2":
-
+                                System.out.println("For which category?");
+                                Scanner categoryInput = new Scanner(System.in);
+                                String categoryName = categoryInput.nextLine();
+                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
                                 break;
 
                             case "3":

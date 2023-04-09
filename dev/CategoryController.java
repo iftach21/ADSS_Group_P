@@ -107,9 +107,37 @@ public class CategoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
+        Category currentCategory = this.getCategory(categoryName);
         String reportInformation = "";
         int defectedCount = 0;
 
+        for (int j = 0; j < currentCategory.getAmount(); j++){
+            subCategory currentSubCategory = currentCategory.getSubCategory(j);
+            //Iterate every general-item
+            for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                Item currentItem = currentSubCategory.getItem(w);
+                //Check for each specific item if it is defected, and needs to be added to the order
+                for (int z = 0; z < currentItem.getAmount(); z++){
+                    if (currentItem.getSpecificItemList(z).getisDefected()){
+                        defectedCount++;
+                    }
+                }
+                if (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount){
+                    //Add the information collected to the report data
+                    reportInformation += currentItem.toString() + "\n" +
+                            " Defected amount: " + defectedCount + " Total to order: " +
+                            (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
+                    currentReport.setReportData(reportInformation);
+                    //Reset variables
+                    reportInformation = "";
+                    defectedCount = 0;
+                }
+            }
+        }
+        //If there are no shortages
+        if (currentReport.getReportInformation().equals("")){
+            currentReport.setReportData("There are no shortages.");
+        }
         return currentReport;
     }
 

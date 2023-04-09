@@ -211,7 +211,7 @@ public class interfaceManager {
 
                         switch (Sub_Ans) {
                             case "1":
-//                                    this.Defective_Report("All");
+                                    Reports.addReport(Inventory.FullDefectiveReport());
                                 break;
 
                             case "2":

@@ -144,8 +144,8 @@ public class InventoryController {
                     }
                     if (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount){
                         //Add the information collected to the report data
-                        reportInformation += currentItem.toString() + "\n" +
-                                " Defected amount: " + defectedCount + " Total to order: " +
+                        reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                                "Defected amount: " + defectedCount + " Total to order: " +
                                 (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
                         currentReport.setReportData(reportInformation);
                         //Reset variables
@@ -185,8 +185,8 @@ public class InventoryController {
                 }
                 if (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount){
                     //Add the information collected to the report data
-                    reportInformation += currentItem.toString() + "\n" +
-                            " Defected amount: " + defectedCount + " Total to order: " +
+                    reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                            "Defected amount: " + defectedCount + " Total to order: " +
                             (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
                     currentReport.setReportData(reportInformation);
                     //Reset variables
@@ -220,8 +220,8 @@ public class InventoryController {
             if (currentItem.getCatalogNum().equals(catalogNumber) &&
                     (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount)){
                 //Add the information collected to the report data
-                reportInformation += currentItem.toString() + "\n" +
-                        " Defected amount: " + defectedCount + " Total to order: " +
+                reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                        "Defected amount: " + defectedCount + " Total to order: " +
                         (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
                 currentReport.setReportData(reportInformation);
                 //Reset variables

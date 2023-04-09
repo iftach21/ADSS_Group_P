@@ -4,7 +4,8 @@ import java.util.Date;
 public class Item {
     private String name;
     private String catalogNum;
-    private SimpleDateFormat expirationDate;
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yyyy");
+    private String expirationDate;
     private double weight;
     private String catalogName;
 
@@ -18,7 +19,7 @@ public class Item {
 
     private double temperature;
 
-    public Item(String name, String catalogNum, SimpleDateFormat expirationDate, double weight, String catalogName, double temperature)
+    public Item(String name, String catalogNum, String expirationDate, double weight, String catalogName, double temperature)
     {
         this.name = name;
         this.catalogNum = catalogNum;
@@ -36,12 +37,15 @@ public class Item {
         this.catalogNum = catalogNum;
     }
 
-    public SimpleDateFormat getExpirationDate() {
-        return expirationDate;
+    public String getDateStr() {
+        return this.expirationDate;
+    }
+    public Date getDate() throws Exception {
+        return dateFormat.parse(expirationDate);
     }
 
-    public void setExpirationDate(SimpleDateFormat expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setDate(Date date) {
+        this.expirationDate = dateFormat.format(date);
     }
 
     public double getWeight() {

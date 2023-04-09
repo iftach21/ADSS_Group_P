@@ -5,9 +5,14 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
+
+
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+
+        //this is all some data to start to work with until there will be a new data base or corresonde with other system's
         OrderManger orderManger =new OrderManger();
         Supplier_Manger supplier_manger=new Supplier_Manger();
 
@@ -16,15 +21,14 @@ public class Main {
         Contact_Person contactPerson2 = new Contact_Person("John not Smith", "555-1233");
 
         //init item to play with
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/3/1789"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/3/1789"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/3/1789"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/3/1789"), 0.3, "Seafood", -2.0);
-        System.out.println(item1.getExpirationDate());
-
+        Item item1 = new Item("Apple", "1001","12/3/1789", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002","12/3/1789", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/3/1789", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/3/1789", 0.3, "Seafood", -2.0);
+        System.out.println(item1.getDateStr());
         //two supplier to init
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson1, null, null);
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "122456789", 1, "S002", contactPerson2, null, null);
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson1, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Suppliermono Inc.", "122456789", 1, "S002", contactPerson2, null, null);
 
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
@@ -38,6 +42,17 @@ public class Main {
         //adding them to the system
         supplier_manger.getSuppliers().add(supplier_1);
         supplier_manger.getSuppliers().add(supplier_2);
+
+
+
+        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+        maplist.put(item1,100);
+        maplist.put(item2,100);
+        maplist.put(item3,100);
+        maplist.put(item4,100);
+
+        orderManger.assing_Orders_to_Suppliers(maplist,supplier_manger,20);
+
 
 
 
@@ -302,14 +317,20 @@ public class Main {
                             tempInput = checkNumberWithDot(tempInput);
                             double temp = Double.parseDouble(tempInput);
                             System.out.println("exprison date:");
-
-
                             String expirationDate_s = scanner.next();
-                            SimpleDateFormat expirationDate = new SimpleDateFormat(expirationDate_s);
-
 
                             //create the new item
-                            Item item = new Item(item_name, catalogName, expirationDate, weight, catalogNum, temp);
+                            Item item = new Item(item_name, catalogName, expirationDate_s, weight, catalogNum, temp);
+                            try {
+                                Date date = item.getDate();
+                                // Do something with the date
+                            } catch (ParseException e) {
+                                System.out.println("Invalid date format: " + item.getDateStr());
+                                e.printStackTrace();
+                                break;
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                             System.out.println("base price per unit");
                             String priceInput = scanner.next();
                             priceInput = checkNumberWithDot(priceInput);
@@ -431,10 +452,10 @@ public class Main {
                                     String expirationDate_s = scanner.next();
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                     String exp=scanner.next();
-                                    SimpleDateFormat expirationDate = new SimpleDateFormat(exp);
+
 
                                     //create the new item
-                                    Item item = new Item(item_name, catalogName, expirationDate, weight, catalogNum, temp);
+                                    Item item = new Item(item_name, catalogName, exp, weight, catalogNum, temp);
                                     System.out.println("amount:");
                                     String amount_21Input = scanner.next();
                                     amount_21Input = checkNumberWithDot(amount_21Input);
@@ -461,7 +482,7 @@ public class Main {
                             break;
                         case 4:
                             System.out.println("Type supplier name :");
-                            String supplier=scanner.next();
+                            String supplier=scanner.nextLine();
                             supplier = checkName(supplier);
                             System.out.println("order waiting for approvel :");
                             for(Order order:orderManger.getPending_for_apporval()){

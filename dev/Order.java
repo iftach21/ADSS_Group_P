@@ -23,7 +23,8 @@ public class Order {
 
 
     public Order( Map<Item,Pair<Integer,Float>>itemList,Supplier supplier,float cost,int store_number) {
-        this.orderNum = number+1;
+        this.orderNum = number;
+        number+=1;
         if(itemList==null){
             this.itemList= new HashMap<Item,Pair<Integer,Float>>();
         }

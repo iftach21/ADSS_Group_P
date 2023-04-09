@@ -13,10 +13,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -47,10 +47,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -85,10 +85,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -121,10 +121,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -157,10 +157,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -195,10 +195,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -233,10 +233,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004","12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -275,10 +275,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -323,10 +323,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);
@@ -371,10 +371,10 @@ class OrderMangerTest {
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
 
-        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/10/1992"), 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/10/1992"), 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/10/1992"), 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/10/1992"), 0.3, "Seafood", -2.0);
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
         maplist.put(item1,100);
         maplist.put(item2,100);

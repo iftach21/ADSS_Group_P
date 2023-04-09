@@ -260,7 +260,9 @@ public class Main {
                             System.out.println("name:");
                             String name_s = scanner.next();
                             name_s = checkName(name_s);
-                            supplier_manger.remove_supplier(name_s);
+                            if(!supplier_manger.remove_supplier(name_s)){
+                                System.out.println("No supplier like this exist");
+                            };
                             break;
 
 

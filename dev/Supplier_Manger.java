@@ -19,12 +19,14 @@ public class Supplier_Manger {
         this.suppliers=new ArrayList<Supplier>();
 
     }
-    public void  remove_supplier(String name){
+    public boolean  remove_supplier(String name){
         for(Supplier suppleir :this.suppliers){
             if(suppleir.getName().equals(name)){
                 this.suppliers.remove(suppleir);
+                return true;
             }
         }
+        return false;
     }
     public void update_contact_preson(String name_1,String name_2,String phone_number) {
         boolean flag = false;
@@ -57,12 +59,14 @@ public class Supplier_Manger {
                 suppleir.add_Items(item,amount,price);
             }
     }}
-    public void remove_item_to_supplier(String name_1 ,String item){
+    public boolean remove_item_to_supplier(String name_1 ,String item){
             for(Supplier suppleir :this.suppliers){
                 if(suppleir.getName().equals(name_1)){
                     suppleir.remove_item(item);
+                    return true;
                 }
             }
+            return false;
 
 }
     public void print_all_suppliers_names(){

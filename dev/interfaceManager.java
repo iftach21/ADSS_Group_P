@@ -148,9 +148,9 @@ public class interfaceManager {
                                 Reports.addReport(Inventory.shortageReportCategory(categoryName));
                                 break;
                             case "3":
-                                System.out.println("Please enter the product you would like to provide a shortage report for:");
+                                System.out.println("Please enter the catalog number for the product you would like to provide a shortage report for:");
                                 Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
+                                String productNumber = Product.nextLine();
 //                                    this.Shortge_Report(Pro_ans);
                                 break;
 

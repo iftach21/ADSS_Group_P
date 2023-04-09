@@ -102,6 +102,41 @@ public class InventoryController {
         return currentReport;
     }
 
+    //Method 6: shortageReportGeneralItem
+    //This method provides a shortage report for a general item
+    public Report shortageReportGeneralItem(String catalogNumber){
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Item currentItem;
+        String reportInformation = "";
+        int defectedCount = 0;
+        for (int i = 0; i < this.ItemsList.size(); i++){
+            currentItem = this.ItemsList.get(i);
+            for (int z = 0; z < currentItem.getAmount(); z++){
+                if (currentItem.getSpecificItemList(z).getisDefected()){
+                    defectedCount++;
+                }
+            }
+            if (currentItem.getCatalogNum().equals(catalogNumber) &&
+                    (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount)){
+                //Add the information collected to the report data
+                reportInformation += currentItem.toString() + "\n" +
+                        " Defected amount: " + defectedCount + " Total to order: " +
+                        (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
+                currentReport.setReportData(reportInformation);
+                //Reset variables
+                reportInformation = "";
+                defectedCount = 0;
+            }
+
+        }
+        //If there are no shortages
+        if (currentReport.getReportInformation().equals("")){
+            currentReport.setReportData("There are no shortages.");
+        }
+        return currentReport;
+    }
+
     @Override
     public String toString() {
         String categoryController = "Inventory - Amount of categories: " + CategoryControl.getAmount() + '\n';

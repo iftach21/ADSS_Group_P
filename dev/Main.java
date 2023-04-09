@@ -83,6 +83,7 @@ public class Main {
                             System.out.println("business id:");
                             String business_id = scanner.next();
                             business_id = checkNumber(business_id);
+                            //payment opiton
                             System.out.println("Payment method:");
                             System.out.println("1.SHOTEF");
                             System.out.println("2.SHOTEF+30");
@@ -121,6 +122,8 @@ public class Main {
                             String phone_number = scanner.next();
                             phone_number = checkNumber(phone_number);
                             Contact_Person con_person = new Contact_Person(contact_name, phone_number);
+
+                            //delivery option
                             System.out.println("type:");
                             System.out.println("1.Non delivery supplier");
                             System.out.println("2.delivery supplier on fixed days");
@@ -455,7 +458,7 @@ public class Main {
                     break;
 
 
-                // TODO: Add code to handle the Order manager option
+
                 default:
 //                    System.out.println("Invalid option selected");
                     System.out.println("Please enter a number between 1 and 2");

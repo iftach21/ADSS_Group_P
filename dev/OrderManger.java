@@ -92,24 +92,26 @@ public class OrderManger {
                 if(trigger==1){
                     continue;
                 }
+                if(min_sup == null){
+                    min_sup=supplier;}
 
                 //make a new order to be cheak if there is better
-                Order order=new Order(null,supplier,0,number_store);
+                Order order = new Order(null,supplier,0,number_store);
                 for(Item item :itemlist.keySet()){
                     if(supplier.getItems().containsKey(item)){
-                    double discount=1;
+                    double discount = 1;
 
                     int amount=itemlist.get(item);
                     float base_price = supplier.getItems().get(item).getSecond();
                     int new_amount=0;
-                    float cost=0;
+                    float cost = 0;
                     //if the supplier give a discount on the item serch for the biggest amount
                     if(supplier.getContract().items_Map_discount.containsKey(item)){
                         //cheak how much max amount have a discount from the curr amount
-                        for(int i=0; i<amount;i++){
+                        for(int i = 0; i < amount ;i++){
                             if(supplier.getContract().items_Map_discount.get(item).containsKey(amount-i)){
                                 discount = supplier.getContract().items_Map_discount.get(item).get(amount-i);
-                                new_amount=amount-i;
+                                new_amount = amount-i;
 
 
                                 break;
@@ -119,7 +121,7 @@ public class OrderManger {
                         }
                     }
                     //add the item to the total price o
-                    cost= (float) (new_amount*base_price*discount+((amount-new_amount)*base_price));
+                    cost = (float) (new_amount*base_price*discount + ((amount-new_amount)*base_price));
                     order.add_item(item,amount,cost);
 
 
@@ -129,11 +131,11 @@ public class OrderManger {
 
 
             }
-               if(number_of_item<numOfCommonElements){
-                   number_of_item=numOfCommonElements;
-                   min_sup=supplier;
-                   min_cost=order.getCost();
-                   min_order=order;
+               if(number_of_item < numOfCommonElements){
+                   number_of_item = numOfCommonElements;
+                   min_sup = supplier;
+                   min_cost = order.getCost();
+                   min_order = order;
                }
                else {
                    if(min_cost>order.getCost()){
@@ -150,11 +152,13 @@ public class OrderManger {
 
             }}
         //add it to the order's
+        if(min_order ==null || min_sup==null){
+            return;
+        }
         pending_for_apporval.add(min_order);
         Iterator<Item> iter = itemlist.keySet().iterator();
         while (iter.hasNext()) {
             Item item = iter.next();
-            assert min_sup != null;
             if (min_sup.getItems().containsKey(item)) {
                 iter.remove();
             }

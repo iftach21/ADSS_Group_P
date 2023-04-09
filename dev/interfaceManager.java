@@ -488,10 +488,17 @@ public class interfaceManager {
                                 break;
 
                             case "2":
-                                System.out.println("Please enter the category you would like to provide a discount:");
                                 Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.Update_discount(Cat_ans);
+                                System.out.println("For which category do you want to give discount:");
+                                String CategoryAnswer = Category.nextLine();
+                                System.out.println("Discount by: P) Percentage, S) Standard");
+                                String kindAnswer = Category.nextLine();
+                                System.out.println("How much:");
+                                double discountAmountCat = Category.nextDouble();
+                                if (kindAnswer.equals("S"))
+                                    Inventory.CategoryStandardDiscount(discountAmountCat,CategoryAnswer);
+                                if (kindAnswer.equals("P"))
+                                    Inventory.CategoryPercentageDiscount(discountAmountCat,CategoryAnswer);
                                 break;
 
                             case "3":

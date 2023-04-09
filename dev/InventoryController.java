@@ -432,6 +432,36 @@ public class InventoryController {
         }
     }
 
+    public void CategoryPercentageDiscount(double _amount, String _CategoryName)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            if (currentItem.getCategoryName().equals(_CategoryName))
+
+                //TODO - SET CategoryName in Item
+
+                currentItem.getDiscount().setPercentageDiscount(_amount);
+        }
+    }
+
+    public void CategoryStandardDiscount(double _amount, String _CategoryName)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            if (currentItem.getCategoryName().equals(_CategoryName))
+
+                //TODO - SET CategoryName in Item
+
+                currentItem.getDiscount().setStandardDiscount(_amount);
+        }
+    }
+
 
 
 }

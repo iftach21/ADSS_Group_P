@@ -45,8 +45,8 @@ public class CategoryController {
         }
     }
     
-    //Method 4: shortageFullReport
-    //This method provides a full report for all the product that need to be ordered
+    //Method 4: shortageFullCategory
+    //This method provides a report for all the product that need to be ordered
     public Report shortageReportCategory(String categoryName){
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);

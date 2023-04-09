@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
+
+//This is the supplier class the represent a supplier abstract that ecah type of supplier take his field and fuction
 public abstract class Supplier {
     private String name;
     private String business_id;
@@ -18,6 +21,7 @@ public abstract class Supplier {
         this.paymentMethod = paymentMethod;
         Suplier_ID = suplier_ID;
         this.person = person;
+        //in case there is no given contract or a list of item and the user can create them himsself
         if(contract==null){
             this.contract=new Contract(null,1);
         }
@@ -112,6 +116,7 @@ public abstract class Supplier {
     public void add_total_discount(double discount){
         this.contract.total_discount=discount;
     }
+
     public  void remove_item(String item_to_remove){
         Item item1 =null;
         for(Item item :items.keySet()){
@@ -121,6 +126,7 @@ public abstract class Supplier {
         }
         items.remove(item1);
     }
+
    public void print_items(){
         for(Item item :items.keySet()){
             System.out.println(item.getName());

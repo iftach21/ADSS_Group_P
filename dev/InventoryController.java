@@ -21,6 +21,33 @@ public class InventoryController {
         }
         return null;
     }
+    //Method: deleteSpecificItem
+    //This method deleted a specific item from the entire inventory
+    public boolean deleteSpecificItem(int itemID){
+        Item currentItem;
+        specificItem currentSpecificItem;
+        for (int i = 0; i < ItemsList.size(); i++){
+            currentItem = ItemsList.get(i);
+            for (int j = 0; j < currentItem.getAmount(); j++){
+                currentSpecificItem = currentItem.getSpecificItemList(j);
+                if (currentSpecificItem.getItemID() == itemID){
+                    currentItem.removeSpecificItem(currentSpecificItem);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //Method: deleteGeneralItem
+    //This method deletes a general item and all of it's specific items from the inventory
+    public boolean deleteGeneralItem(String catalogNumber){
+        Category currentCategory;
+        subCategory currentSubCat;
+        Item currentItem;
+        specificItem currentSpecificItem;
+        return false;
+    }
 
     public void addGeneralItem(Item generalItem) {
         ItemsList.add(generalItem);

@@ -42,6 +42,11 @@ public class CategoryController {
         amount ++;
     }
 
+    public void removeCateogry(String categoryName){
+        Category _Category = getCategory(categoryName);
+        CategoriesList.remove(_Category);
+    }
+
     //Method 2: removeCategory
     //This method recieves a category's name, and deletes it from the store's inventory
     public void removeCategory(String categoryName){

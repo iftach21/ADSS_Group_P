@@ -23,6 +23,8 @@ public class interfaceManager {
         //Categories
         Inventory.getCategoryControl().addCategory("Dairy");
         Inventory.getCategoryControl().addCategory("Cleaning");
+        //Default
+        Inventory.getCategoryControl().addCategory("Etc");
 
         //Sub-categories
         subCategory milksSubCat = new subCategory("Milk");
@@ -34,6 +36,10 @@ public class interfaceManager {
         subCategory washingMachineSubCat = new subCategory("Washing Machine Gels");
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), toiletSubCat);
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), washingMachineSubCat);
+
+        //Default
+        subCategory allSubCat = new subCategory("All");
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
         Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2);
@@ -110,10 +116,9 @@ public class interfaceManager {
             System.out.println("4: Provide a defective products report");
             System.out.println("5: Update discount on products");
             System.out.println("6: Place an order from a supplier");
-            System.out.println("7: Update product details");
-            System.out.println("8: Provide a price history report for a product");
-            System.out.println("9: Insert a defective product into the defective inventory");
-            System.out.println("10: Print full inventory report");
+            System.out.println("7: Provide a price history report for a product");
+            System.out.println("8: Insert a defective product into the defective inventory");
+            System.out.println("9: Print full inventory report");
 
             System.out.println("0: Exit the system ");
 
@@ -297,6 +302,36 @@ public class interfaceManager {
                                 System.out.println("New specific item has been added!");
                                 System.out.println(currentItem.toString());
                                 break;
+                            //Delete category
+                            case "5":
+                                break;
+                            //Delete sub-category
+                            case "6":
+                                break;
+                            //Delete general item
+                            case "7":
+                                System.out.println("What is the Catalog Number for the general item you wish to remove?");
+                                Scanner Input = new Scanner(System.in);
+                                itemCatalogNumber = Input.nextLine();
+                                if (Inventory.deleteGeneralItem(itemCatalogNumber)){
+                                    System.out.println("Item" + itemCatalogNumber + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
+                                break;
+                            //Delete specific item
+                            case "8":
+                                System.out.println("What is the ID for the specific item you wish to remove?");
+                                Input = new Scanner(System.in);
+                                int itemID = Integer.parseInt(Input.nextLine());
+                                if (Inventory.deleteSpecificItem(itemID)){
+                                    System.out.println("Item" + itemID + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
+                                break;
                             case "0":
                                 System.out.println("Going back to the Main Menu");
                                 flag = false;
@@ -459,21 +494,11 @@ public class interfaceManager {
                     break;
                 }
 
-                //-----------------------
-                //Update product details
-                //-----------------------
-                case "7": {
-                    System.out.println("please enter catalog number:");
-                    Scanner Second_obj = new Scanner(System.in);
-                    String Sub_Ans = Second_obj.nextLine();  // Read user input
-//                        this.Update_Details();
-                    break;
-                }
 
                 //-----------------------
                 //Provide a price history report for a product
                 //-----------------------
-                case "8": {
+                case "7": {
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which history report to provide:");
@@ -520,7 +545,7 @@ public class interfaceManager {
                 //-----------------------
                 //Insert a defective product into the defective inventory
                 //-----------------------
-                case "9": {
+                case "8": {
                     System.out.println("please enter catalog number:");
                     Scanner Second_obj = new Scanner(System.in);
                     String Sub_Ans = Second_obj.nextLine();  // Read user input
@@ -531,7 +556,7 @@ public class interfaceManager {
                 //-----------------------
                 //Print full inventory report
                 //-----------------------
-                case "10": {
+                case "9": {
                     System.out.println(this.Inventory.toString());
                     break;
                 }

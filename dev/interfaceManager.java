@@ -188,15 +188,25 @@ public class interfaceManager {
                         String Sub_Ans = Second_obj.nextLine();  // Read user input
 
                         switch (Sub_Ans) {
+                            //Create a new category
                             case "1":
-                                Reports.addReport(Inventory.shortageReportFull());
-                                break;
-
-                            case "2":
-                                System.out.println("For which category?");
+                                System.out.println("What would you like to name the new category?");
                                 Scanner categoryInput = new Scanner(System.in);
                                 String categoryName = categoryInput.nextLine();
-                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
+                                Inventory.getCategoryControl().addCategory(categoryName);
+                                System.out.println("New category " + categoryName + " has been created!");
+                                break;
+                            //Create a new sub-category
+                            case "2":
+                                System.out.println("What is the name of your new sub-category?");
+                                Scanner subCategoryInput = new Scanner(System.in);
+                                String subCategoryName = subCategoryInput.nextLine();
+                                System.out.println("Which category will store this sub category?");
+                                categoryInput = new Scanner(System.in);
+                                categoryName = categoryInput.nextLine();
+                                subCategory currentSubCategory = new subCategory(subCategoryName);
+                                Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory(categoryName), currentSubCategory);
+                                System.out.println("A new sub-category " + subCategoryName + " was added into category " + categoryName);
                                 break;
 
                             case "0":

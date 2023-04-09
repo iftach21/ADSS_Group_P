@@ -347,4 +347,29 @@ public class InventoryController {
         }
         return currentReport;
     }
+
+    public void FullStandardDiscount(double _amount)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            currentItem.getDiscount().setStandardDiscount(_amount);
+        }
+    }
+
+    public void FullPercentageDiscount(double _amount)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            currentItem.getDiscount().setPercentageDiscount(_amount);
+        }
+    }
+
+
+
 }

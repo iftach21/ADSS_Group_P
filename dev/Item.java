@@ -13,6 +13,7 @@ public class Item {
     private int amount = 0;
     private TempLevel temperature;
     private Location location = Location.Storage;
+    private Discount discount;
     private List<specificItem> specificItemList;
     private List<PriceHistory> priceHistoryList;
 
@@ -27,7 +28,12 @@ public class Item {
         this.minQuantity = minQuantity;
         this.specificItemList = new ArrayList<specificItem>();
         this.priceHistoryList = new ArrayList<PriceHistory>();
+        this.discount = new Discount();
         this.categoryName = null;
+    }
+
+    public Discount getDiscount() {
+        return discount;
     }
 
     public String getCategoryName() {

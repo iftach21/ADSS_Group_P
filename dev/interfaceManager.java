@@ -448,7 +448,8 @@ public class interfaceManager {
                         System.out.println("For which products to update:");
                         System.out.println("1: To all products");
                         System.out.println("2: By Category");
-                        System.out.println("3: For a specific product");
+                        System.out.println("3: By Subcategory");
+                        System.out.println("4: For a specific product");
                         System.out.println("0: Return to the Main Menu");
 
                         Scanner Second_obj = new Scanner(System.in);
@@ -456,18 +457,32 @@ public class interfaceManager {
 
                         switch (Sub_Ans) {
                             case "1":
-//                                    this.Update_discount("All");
+                                System.out.println("Discount by: P) Percentage, S) Standard");
+                                Scanner kind = new Scanner(System.in);
+                                String KindAnswer = kind.nextLine();
+                                System.out.println("How much:");
+                                double discountAmount = kind.nextDouble();
+                                if (KindAnswer.equals("S"))
+                                    Inventory.FullStandardDiscount(discountAmount);
+                                if (KindAnswer.equals("P"))
+                                    Inventory.FullPercentageDiscount(discountAmount);
                                 break;
 
                             case "2":
-                                System.out.println("Please enter the category you would like to provide a defective products report for:");
+                                System.out.println("Please enter the category you would like to provide a discount:");
                                 Scanner Category = new Scanner(System.in);
                                 String Cat_ans = Category.nextLine();
 //                                    this.Update_discount(Cat_ans);
                                 break;
 
                             case "3":
-                                System.out.println("Please enter the product you would like to provide a defective products report for:");
+                                System.out.println("Please enter the subcategory you would like to provide a discount:");
+                                Scanner Subcategory = new Scanner(System.in);
+                                String Sub_ans = Subcategory.nextLine();
+//                                    this.Update_discount(Pro_ans);
+                                break;
+                            case "4":
+                                System.out.println("Please enter the product you would like to provide a discount:");
                                 Scanner Product = new Scanner(System.in);
                                 String Pro_ans = Product.nextLine();
 //                                    this.Update_discount(Pro_ans);

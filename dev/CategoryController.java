@@ -96,4 +96,76 @@ public class CategoryController {
         }
         return categoryController;
     }
+    public Report FullCountingReport() {
+        if (this.CategoriesList.size() == 0)
+            return null;
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for (int i = 0; i < this.CategoriesList.size(); i++) {
+            Category currentCategory = this.CategoriesList.get(i);
+            for (int j = 0; j < currentCategory.getAmount(); j++) {
+                subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                for (int w = 0; w < currentSubCategory.getAmount(); w++) {
+                    Item currentItem = currentSubCategory.getItem(w);
+                    currentReport.setReportData(currentItem.toString());
+                }
+            }
+        }
+        return currentReport;
+    }
+
+    public Report CategoryCountingReport(String _CategoryName) {
+        if (this.CategoriesList.size() == 0)
+            return null;
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for (int i = 0; i < this.CategoriesList.size(); i++)
+        {
+            Category currentCategory = this.CategoriesList.get(i);
+            if (currentCategory.getCategoryName().equals(_CategoryName))
+            {
+                for (int j = 0; j < currentCategory.getAmount(); j++){
+                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                    for (int w = 0; w < currentSubCategory.getAmount(); w++)
+                    {
+                        Item currentItem = currentSubCategory.getItem(w);
+                        currentReport.setReportData(currentItem.toString());
+                    }
+                }
+            }
+            else
+            {
+                System. out. println("There is no such category");
+                return null;
+            }
+        }
+        return currentReport;
+    }
+
+
+    public Report ItemCountingReport(String _CategoryName, String _SubCategoryName, String ItemName)
+    {
+        if (this.CategoriesList.size() == 0)
+            return null;
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for (int i = 0; i < this.CategoriesList.size(); i++) {
+            Category currentCategory = this.CategoriesList.get(i);
+            if (currentCategory.getCategoryName().equals(_CategoryName)) {
+                for (int j = 0; j < currentCategory.getAmount(); j++) {
+                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                    for (int w = 0; w < currentSubCategory.getAmount(); w++)
+                    {
+                        if (currentSubCategory.getItem(w).getName().equals(ItemName))
+                        {
+                            Item currentItem = currentSubCategory.getItem(w);
+                            currentReport.setReportData(currentItem.toString());
+                        }
+                    }
+                }
+            }
+        }
+        return currentReport;
+    }
+
 }

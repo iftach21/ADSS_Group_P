@@ -1,5 +1,5 @@
 public class WindowTypeCreater {
-    public static WindowType getwidowtype(int day){
+    public static WindowType getwindowtype(int day){
             if(day==1){return WindowType.day1;}
             if(day==2){return WindowType.day2;}
             if(day==3){return WindowType.day3;}

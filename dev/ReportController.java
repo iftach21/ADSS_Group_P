@@ -8,6 +8,8 @@ public class ReportController {
         this.reportsList = new ArrayList<Report>();
     }
 
+    //Method 1: addReport
+    //This method recieves a new report to be added to the reports list and prints it to the user
     public void addReport(Report newReport){
         System.out.println(newReport.toString());
         reportsList.add(newReport);

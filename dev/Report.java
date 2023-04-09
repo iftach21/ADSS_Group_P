@@ -26,6 +26,8 @@ public class Report {
         return reportDate;
     }
 
+    //Method 1: setReportData
+    //This method adds the reports information into the report
     public void setReportData(String data){
         this.reportInformation += data;
     }

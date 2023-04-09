@@ -139,7 +139,6 @@ public class interfaceManager {
                                 String categoryName = categoryInput.nextLine();
                                 Reports.addReport(Inventory.shortageReportCategory(categoryName));
                                 break;
-
                             case "3":
                                 System.out.println("Please enter the product you would like to provide a shortage report for:");
                                 Scanner Product = new Scanner(System.in);

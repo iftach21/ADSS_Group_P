@@ -12,51 +12,9 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        //this is all some data to start to work with until there will be a new data base or corresonde with other system's
+
         OrderManger orderManger =new OrderManger();
         Supplier_Manger supplier_manger=new Supplier_Manger();
-
-
-        Contact_Person contactPerson1 = new Contact_Person("John Smith", "555-1234");
-        Contact_Person contactPerson2 = new Contact_Person("John not Smith", "555-1233");
-
-        //init item to play with
-        Item item1 = new Item("Apple", "1001","12/3/1789", 0.5, "Fruits", 10.0);
-        Item item2 = new Item("Milk", "2002","12/3/1789", 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", "12/3/1789", 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", "12/3/1789", 0.3, "Seafood", -2.0);
-        //two supplier to init
-        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson1, null, null);
-        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Suppliermono Inc.", "122456789", 1, "S002", contactPerson2, null, null);
-
-        supplier_1.add_Items(item1,100,100);
-        supplier_1.add_Items(item2,100,100);
-        supplier_2.add_Items(item3,100,100);
-        supplier_2.add_Items(item4,100,100);
-
-        //total discount given to each supplier
-        supplier_1.add_total_discount(0.5);
-        supplier_2.add_total_discount(0.6);
-
-        //adding them to the system
-        supplier_manger.getSuppliers().add(supplier_1);
-        supplier_manger.getSuppliers().add(supplier_2);
-
-
-
-        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
-        maplist.put(item1,100);
-        maplist.put(item2,100);
-        maplist.put(item3,100);
-        maplist.put(item4,100);
-
-        orderManger.assing_Orders_to_Suppliers(maplist,supplier_manger,20);
-
-
-
-
-
-
 
 
 
@@ -76,14 +34,15 @@ public class Main {
             System.out.println("Hello this is the manger suppliers board press on the right option");
             System.out.println("1.Supplier manger");
             System.out.println("2.Order manger");
-            System.out.println("3.Exit");
+            System.out.println("3.insert demo data to the system for test and playing ");
+            System.out.println("4.Exit");
             option = scanner.nextLine();
             while(true)
             {
                 try
                 {
                     choice = Integer.parseInt(option);
-                    if(choice < 1 || choice > 3)
+                    if(choice < 1 || choice > 4)
                     {
                         System.out.println("Please enter a valid option");
                         System.out.println("1.Supplier manger");
@@ -506,6 +465,45 @@ public class Main {
                     }
                     break;
                 case 3:
+
+                    Contact_Person contactPerson1 = new Contact_Person("John Smith", "555-1234");
+                    Contact_Person contactPerson2 = new Contact_Person("John not Smith", "555-1233");
+
+                    //init item to play with
+                    Item item1 = new Item("Apple", "1001","12/3/1789", 0.5, "Fruits", 10.0);
+                    Item item2 = new Item("Milk", "2002","12/3/1789", 1.0, "Dairy", 4.0);
+                    Item item3 = new Item("Bread", "3003", "12/3/1789", 0.8, "Bakery", 25.0);
+                    Item item4 = new Item("Salmon", "4004", "12/3/1789", 0.3, "Seafood", -2.0);
+                    //two supplier to init
+                    NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson1, null, null);
+                    NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Suppliermono Inc.", "122456789", 1, "S002", contactPerson2, null, null);
+
+                    supplier_1.add_Items(item1,100,100);
+                    supplier_1.add_Items(item2,100,100);
+                    supplier_2.add_Items(item3,100,100);
+                    supplier_2.add_Items(item4,100,100);
+
+                    //total discount given to each supplier
+                    supplier_1.add_total_discount(0.5);
+                    supplier_2.add_total_discount(0.6);
+
+                    //adding them to the system
+                    supplier_manger.getSuppliers().add(supplier_1);
+                    supplier_manger.getSuppliers().add(supplier_2);
+
+
+
+                    Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+                    maplist.put(item1,100);
+                    maplist.put(item2,100);
+                    maplist.put(item3,100);
+                    maplist.put(item4,100);
+
+                    orderManger.assing_Orders_to_Suppliers(maplist,supplier_manger,20);
+                    System.out.println("data inseted and ready");
+                    break;
+
+                case 4:
                     System.out.println("Thank you and goodbye");
                     System.exit(0);
                     break;

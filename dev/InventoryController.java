@@ -11,6 +11,21 @@ public class InventoryController {
         this.ItemsList = new ArrayList<Item>();
     }
 
+    public specificItem findSpecificItem(int itemId){
+        specificItem currentSpecificItem;
+        Item currentItem;
+        for (int i = 0; i < ItemsList.size(); i++){
+            currentItem = ItemsList.get(i);
+            for (int j = 0; j < currentItem.getAmount(); j++){
+                currentSpecificItem = currentItem.getSpecificItemList(j);
+                if(currentSpecificItem.getItemID() == itemId){
+                    return currentSpecificItem;
+                }
+            }
+        }
+        return null;
+    }
+
     public Item getItemByCatalogNumber(String itemCatalogNumber) {
         Item currentItem;
         for (int i = 0; i < ItemsList.size(); i++){

@@ -565,10 +565,15 @@ public class interfaceManager {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "8": {
-                    System.out.println("please enter catalog number:");
-                    Scanner Second_obj = new Scanner(System.in);
-                    String Sub_Ans = Second_obj.nextLine();  // Read user input
-//                        this.Insert_Defective();
+                    System.out.println("What is the item ID for the item to be set as defected?");
+                    Scanner defectedItemInput = new Scanner(System.in);
+                    int defectedItemID = Integer.parseInt(defectedItemInput.nextLine());
+                    specificItem currentSpecific = Inventory.findSpecificItem(defectedItemID);
+                    currentSpecific.setDefected(true);
+                    currentSpecific.setLocation(Location.Storage);
+                    System.out.println("Item numbered " + defectedItemID + " has been set has defected and" +
+                            "moved into the warehouse storage." );
+                    System.out.println(currentSpecific.toString());
                     break;
                 }
 

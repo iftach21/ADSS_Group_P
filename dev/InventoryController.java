@@ -65,6 +65,37 @@ public class InventoryController {
         return false;
     }
 
+    public boolean deleteSubCat(String subCategoryName){
+        Category currentCategory;
+        subCategory currentSubCat;
+
+        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
+            currentCategory = CategoryControl.getCategoriesList().get(i);
+            for (int j = 0; j < currentCategory.getAmount(); j++){
+                currentSubCat = currentCategory.getSubCategory(j);
+                if (currentSubCat.getSubCategoryName().equals(subCategoryName)){
+                    currentCategory.removeSubCategory(currentSubCat);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteCat(String categoryName){
+        Category currentCategory;
+
+        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
+            currentCategory = CategoryControl.getCategoriesList().get(i);
+            if (currentCategory.getCategoryName().equals(categoryName)){
+                CategoryControl.getCategoriesList().remove(currentCategory);
+                CategoryControl.setAmount(CategoryControl.getAmount() - 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addGeneralItem(Item generalItem) {
         ItemsList.add(generalItem);
     }

@@ -37,6 +37,17 @@ public class Category {
         return null;
     }
 
+    public void removeSubCategory(subCategory toDeleteSubCat){
+        subCategory currentSubCat;
+        for (int i = 0; i < subCategoriesList.size(); i++){
+            currentSubCat = subCategoriesList.get(i);
+            if (currentSubCat.getSubCategoryName().equals(toDeleteSubCat.getSubCategoryName())){
+                subCategoriesList.remove(toDeleteSubCat);
+                amount --;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String categoryString = "---------- Category name: " + categoryName + ", Amount of sub-categories: "

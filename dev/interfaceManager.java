@@ -305,14 +305,32 @@ public class interfaceManager {
                                 break;
                             //Delete category
                             case "5":
+                                System.out.println("What is theCategory you would like to delete??");
+                                Scanner Input = new Scanner(System.in);
+                                String CatName = Input.nextLine();
+                                if (Inventory.deleteCat(CatName)){
+                                    System.out.println("Category" + CatName + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
                                 break;
                             //Delete sub-category
                             case "6":
+                                System.out.println("What is the Sub Category you would like to delete??");
+                                Input = new Scanner(System.in);
+                                String subCatName = Input.nextLine();
+                                if (Inventory.deleteSubCat(subCatName)){
+                                    System.out.println("Sub Category" + subCatName + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
                                 break;
                             //Delete general item
                             case "7":
                                 System.out.println("What is the Catalog Number for the general item you wish to remove?");
-                                Scanner Input = new Scanner(System.in);
+                                Input = new Scanner(System.in);
                                 itemCatalogNumber = Input.nextLine();
                                 if (Inventory.deleteGeneralItem(itemCatalogNumber)){
                                     System.out.println("Item" + itemCatalogNumber + " has been deleted.");

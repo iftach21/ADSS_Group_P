@@ -1,5 +1,5 @@
 public enum reportType {
-    shortagesReport,
-    inventoryReport,
-    defectiveReport
+    Shortage,
+    Inventory,
+    Defective
 }

@@ -49,7 +49,7 @@ public class CategoryController {
     //This method provides a full report for all the product that need to be ordered
     public Report shortageReportCategory(String categoryName){
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.shortagesReport, currentDate);
+        Report currentReport = new Report(reportType.Shortage, currentDate);
         if (categoryName == "FULL"){
             for (int i = 0; i < this.CategoriesList.size(); i++){
                 Category currentCategory = this.CategoriesList.get(i);

@@ -12,6 +12,7 @@ public class Report {
         this.reportDate = reportDate;
         this.reportNum = nextReportNum;
         nextReportNum++;
+        this.reportInformation = "";
     }
 
     public reportType getType() {
@@ -38,6 +39,6 @@ public class Report {
                 "Report Type: " + type +
                 ", Report number: " + reportNum +
                 ", Report Date: " + reportDate +
-                ", Report Information: " + reportInformation + '\n';
+                ", Report Information: \n" + reportInformation;
     }
 }

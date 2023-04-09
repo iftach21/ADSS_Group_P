@@ -184,21 +184,25 @@ public class interfaceManager {
 
                         switch (Sub_Ans) {
                             case "1":
-//                                    this.Inventory_Report("All");
+                                Reports.addReport(Inventory.FullCountingReport());
                                 break;
 
                             case "2":
                                 System.out.println("Please enter the category you would like to provide a inventory counting report for:");
                                 Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.Inventory_Report(Cat_ans);
+                                String categoryName = Category.nextLine();
+                                Reports.addReport(Inventory.CategoryCountingReport(categoryName));
                                 break;
 
                             case "3":
-                                System.out.println("Please enter the product you would like to provide a inventory counting report for:");
+                                System.out.println("Please enter the category of the product you would like to provide a inventory counting report for:");
                                 Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.Inventory_Report(Pro_ans);
+                                String CategoryName = Product.nextLine();
+                                System.out.println("Please enter the subcategory of the product you would like to provide a inventory counting report for:");
+                                String SubCategoryName = Product.nextLine();
+                                System.out.println("Please enter the subcategory of the product you would like to provide a inventory counting report for:");
+                                String ItemName = Product.nextLine();
+                                Reports.addReport(Inventory.ItemCountingReport(CategoryName,SubCategoryName,ItemName));
                                 break;
 
                             case "0":

@@ -11,6 +11,21 @@ public class InventoryController {
         this.ItemsList = new ArrayList<Item>();
     }
 
+    public specificItem findSpecificItem(int itemId){
+        specificItem currentSpecificItem;
+        Item currentItem;
+        for (int i = 0; i < ItemsList.size(); i++){
+            currentItem = ItemsList.get(i);
+            for (int j = 0; j < currentItem.getAmount(); j++){
+                currentSpecificItem = currentItem.getSpecificItemList(j);
+                if(currentSpecificItem.getItemID() == itemId){
+                    return currentSpecificItem;
+                }
+            }
+        }
+        return null;
+    }
+
     public Item getItemByCatalogNumber(String itemCatalogNumber) {
         Item currentItem;
         for (int i = 0; i < ItemsList.size(); i++){
@@ -46,6 +61,53 @@ public class InventoryController {
         subCategory currentSubCat;
         Item currentItem;
         specificItem currentSpecificItem;
+
+        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
+            currentCategory = CategoryControl.getCategoriesList().get(i);
+            for (int j = 0; j < currentCategory.getAmount(); j++){
+                currentSubCat = currentCategory.getSubCategory(j);
+                for (int w = 0; w < currentSubCat.getGeneralItemsList().size(); w++){
+                    currentItem = currentSubCat.getGeneralItemsList().get(w);
+                    if (currentItem.getCatalogNum().equals(catalogNumber)){
+                        currentSubCat.getGeneralItemsList().remove(currentItem);
+                        ItemsList.remove(currentItem);
+                        currentSubCat.setAmount(currentSubCat.getAmount() - 1);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteSubCat(String subCategoryName){
+        Category currentCategory;
+        subCategory currentSubCat;
+
+        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
+            currentCategory = CategoryControl.getCategoriesList().get(i);
+            for (int j = 0; j < currentCategory.getAmount(); j++){
+                currentSubCat = currentCategory.getSubCategory(j);
+                if (currentSubCat.getSubCategoryName().equals(subCategoryName)){
+                    currentCategory.removeSubCategory(currentSubCat);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteCat(String categoryName){
+        Category currentCategory;
+
+        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
+            currentCategory = CategoryControl.getCategoriesList().get(i);
+            if (currentCategory.getCategoryName().equals(categoryName)){
+                CategoryControl.getCategoriesList().remove(currentCategory);
+                CategoryControl.setAmount(CategoryControl.getAmount() - 1);
+                return true;
+            }
+        }
         return false;
     }
 

@@ -263,6 +263,7 @@ public class interfaceManager {
                                 String itemSubCat = itemInput.nextLine();
                                 subCategory currentSubCat = currentCategory.getSubCategoryByName(itemSubCat);
                                 Inventory.addGeneralItem(currentItem);
+                                currentSubCat.addGeneralItem(currentItem);
 
                                 //Announce new product
                                 System.out.println("New general item has been created!\nCategory: " + currentCategory.getCategoryName() +
@@ -304,14 +305,32 @@ public class interfaceManager {
                                 break;
                             //Delete category
                             case "5":
+                                System.out.println("What is theCategory you would like to delete??");
+                                Scanner Input = new Scanner(System.in);
+                                String CatName = Input.nextLine();
+                                if (Inventory.deleteCat(CatName)){
+                                    System.out.println("Category" + CatName + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
                                 break;
                             //Delete sub-category
                             case "6":
+                                System.out.println("What is the Sub Category you would like to delete??");
+                                Input = new Scanner(System.in);
+                                String subCatName = Input.nextLine();
+                                if (Inventory.deleteSubCat(subCatName)){
+                                    System.out.println("Sub Category" + subCatName + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
                                 break;
                             //Delete general item
                             case "7":
                                 System.out.println("What is the Catalog Number for the general item you wish to remove?");
-                                Scanner Input = new Scanner(System.in);
+                                Input = new Scanner(System.in);
                                 itemCatalogNumber = Input.nextLine();
                                 if (Inventory.deleteGeneralItem(itemCatalogNumber)){
                                     System.out.println("Item" + itemCatalogNumber + " has been deleted.");
@@ -561,10 +580,15 @@ public class interfaceManager {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "8": {
-                    System.out.println("please enter catalog number:");
-                    Scanner Second_obj = new Scanner(System.in);
-                    String Sub_Ans = Second_obj.nextLine();  // Read user input
-//                        this.Insert_Defective();
+                    System.out.println("What is the item ID for the item to be set as defected?");
+                    Scanner defectedItemInput = new Scanner(System.in);
+                    int defectedItemID = Integer.parseInt(defectedItemInput.nextLine());
+                    specificItem currentSpecific = Inventory.findSpecificItem(defectedItemID);
+                    currentSpecific.setDefected(true);
+                    currentSpecific.setLocation(Location.Storage);
+                    System.out.println("Item numbered " + defectedItemID + " has been set has defected and" +
+                            "moved into the warehouse storage." );
+                    System.out.println(currentSpecific.toString());
                     break;
                 }
 

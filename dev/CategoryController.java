@@ -20,6 +20,10 @@ public class CategoryController {
         return amount;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     //getCategory
     //This getter recieves a category's name from the user (String), and returns that same category
     public Category getCategory(String categoryName) {

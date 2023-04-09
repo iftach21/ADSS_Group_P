@@ -15,6 +15,10 @@ public class subCategory {
         return subCategoryName;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public List<Item> getGeneralItemsList() {
         return generalItemsList;
     }

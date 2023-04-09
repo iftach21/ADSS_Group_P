@@ -28,7 +28,8 @@ public class Category {
 
     @Override
     public String toString() {
-        String categoryString = "Category name: " + categoryName + ", Amount of sub-categories: " + amount;
+        String categoryString = "---------- Category name: " + categoryName + ", Amount of sub-categories: "
+                + amount + " ----------";
         for (int i = 0; i < this.subCategoriesList.size(); i++){
             categoryString += '\n';
             categoryString += this.subCategoriesList.get(i).toString();

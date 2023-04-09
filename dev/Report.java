@@ -27,6 +27,10 @@ public class Report {
         return reportDate;
     }
 
+    public String getReportInformation() {
+        return reportInformation;
+    }
+
     //Method 1: setReportData
     //This method adds the reports information into the report
     public void setReportData(String data){
@@ -35,7 +39,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report: " +
+        return "------ Report: " +
                 "Report Type: " + type +
                 ", Report number: " + reportNum +
                 ", Report Date: " + reportDate +

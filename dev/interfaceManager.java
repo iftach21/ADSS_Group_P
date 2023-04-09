@@ -311,11 +311,20 @@ public class interfaceManager {
                                 break;
                             //Delete general item
                             case "7":
+                                System.out.println("What is the Catalog Number for the general item you wish to remove?");
+                                Scanner Input = new Scanner(System.in);
+                                itemCatalogNumber = Input.nextLine();
+                                if (Inventory.deleteGeneralItem(itemCatalogNumber)){
+                                    System.out.println("Item" + itemCatalogNumber + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
                                 break;
                             //Delete specific item
                             case "8":
                                 System.out.println("What is the ID for the specific item you wish to remove?");
-                                Scanner Input = new Scanner(System.in);
+                                Input = new Scanner(System.in);
                                 int itemID = Integer.parseInt(Input.nextLine());
                                 if (Inventory.deleteSpecificItem(itemID)){
                                     System.out.println("Item" + itemID + " has been deleted.");

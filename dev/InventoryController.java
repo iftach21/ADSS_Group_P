@@ -46,6 +46,7 @@ public class InventoryController {
         subCategory currentSubCat;
         Item currentItem;
         specificItem currentSpecificItem;
+        return false;
     }
 
     public void addGeneralItem(Item generalItem) {

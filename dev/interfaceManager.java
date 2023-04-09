@@ -263,6 +263,7 @@ public class interfaceManager {
                                 String itemSubCat = itemInput.nextLine();
                                 subCategory currentSubCat = currentCategory.getSubCategoryByName(itemSubCat);
                                 Inventory.addGeneralItem(currentItem);
+                                currentSubCat.addGeneralItem(currentItem);
 
                                 //Announce new product
                                 System.out.println("New general item has been created!\nCategory: " + currentCategory.getCategoryName() +

@@ -46,6 +46,22 @@ public class InventoryController {
         subCategory currentSubCat;
         Item currentItem;
         specificItem currentSpecificItem;
+
+        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
+            currentCategory = CategoryControl.getCategoriesList().get(i);
+            for (int j = 0; j < currentCategory.getAmount(); j++){
+                currentSubCat = currentCategory.getSubCategory(j);
+                for (int w = 0; w < currentSubCat.getGeneralItemsList().size(); w++){
+                    currentItem = currentSubCat.getGeneralItemsList().get(w);
+                    if (currentItem.getCatalogNum().equals(catalogNumber)){
+                        currentSubCat.getGeneralItemsList().remove(currentItem);
+                        ItemsList.remove(currentItem);
+                        currentSubCat.setAmount(currentSubCat.getAmount() - 1);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 

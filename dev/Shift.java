@@ -73,7 +73,7 @@ public class Shift {
      * removal Worker from Shift
      */
     public boolean removalWorker(Workers currentWorker) {
-        if (checkIfWorkerInShift(currentWorker.getId())) {
+        if (!checkIfWorkerInShift(currentWorker.getId())) {
             return false;
         }
         for (int i = 0; i < 7;i++){

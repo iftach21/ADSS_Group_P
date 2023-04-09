@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ADSS_Group_P:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added switching between interface" />
+    <list default="true" id="6f22e29e-b6ee-4b3b-a5e2-c0f068c62217" name="Changes" comment="added space for the printing">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ADSS_Group_P_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ShiftRequirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ShiftRequirement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/ShiftTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/ShiftTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShiftTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WeeklyShiftTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowTypeCreater.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowTypeCreater.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Workers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Workers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WorkersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WorkersTest.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,40 +51,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
-}</component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+}]]></component>
+  <component name="RunManager" selected="JUnit.WeeklyShiftTest">
+    <configuration name="ShiftTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ShiftTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShiftTest.TestPrintShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WeeklyShiftTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ShiftTest" />
-      <option name="METHOD_NAME" value="TestPrintShift" />
+      <option name="MAIN_CLASS_NAME" value="WeeklyShiftTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WeeklyShiftTest.changeWorker" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WeeklyShiftTest" />
+      <option name="METHOD_NAME" value="changeWorker" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WeeklyShiftTest.printWeeklyShift" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WeeklyShiftTest.howMuchShiftWorkerDid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="WeeklyShiftTest" />
-      <option name="METHOD_NAME" value="printWeeklyShift" />
+      <option name="METHOD_NAME" value="howMuchShiftWorkerDid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -79,23 +115,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WorkersTest.testRemovingProf" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WorkersTest" />
-      <option name="METHOD_NAME" value="testRemovingProf" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.WeeklyShiftTest" />
+        <item itemvalue="JUnit.WeeklyShiftTest.changeWorker" />
         <item itemvalue="JUnit.WorkersTest" />
-        <item itemvalue="JUnit.WeeklyShiftTest.printWeeklyShift" />
-        <item itemvalue="JUnit.ShiftTest.TestPrintShift" />
-        <item itemvalue="JUnit.WorkersTest.testRemovingProf" />
+        <item itemvalue="JUnit.WeeklyShiftTest.howMuchShiftWorkerDid" />
+        <item itemvalue="JUnit.ShiftTest" />
       </list>
     </recent_temporary>
   </component>
@@ -249,7 +275,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1680930857130</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL‎-00021" summary="added space for the printing">
+      <created>1681022248475</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL‎-00021" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1681022248475</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +314,8 @@
     <MESSAGE value="added ability to restart system in case of problem." />
     <MESSAGE value="added login password!" />
     <MESSAGE value="added switching between interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="added switching between interface" />
+    <MESSAGE value="added space for the printing" />
+    <option name="LAST_COMMIT_MESSAGE" value="added space for the printing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

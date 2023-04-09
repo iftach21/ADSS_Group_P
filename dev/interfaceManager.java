@@ -203,14 +203,10 @@ public class interfaceManager {
                                 break;
 
                             case "3":
-                                System.out.println("Please enter the category of the product you would like to provide a inventory counting report for:");
                                 Scanner Product = new Scanner(System.in);
-                                String CategoryName = Product.nextLine();
-                                System.out.println("Please enter the subcategory of the product you would like to provide a inventory counting report for:");
-                                String SubCategoryName = Product.nextLine();
-                                System.out.println("Please enter the subcategory of the product you would like to provide a inventory counting report for:");
-                                String ItemName = Product.nextLine();
-                                Reports.addReport(Inventory.ItemCountingReport(CategoryName,SubCategoryName,ItemName));
+                                System.out.println("Please enter the catalog number of the product you would like to provide a inventory counting report for:");
+                                String CatalogNum = Product.nextLine();
+                                Reports.addReport(Inventory.ItemCountingReport(CatalogNum));
                                 break;
 
                             case "0":

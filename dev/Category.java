@@ -26,6 +26,17 @@ public class Category {
         return this.subCategoriesList.get(index);
     }
 
+    public subCategory getSubCategoryByName(String subName){
+        subCategory currentSubCat;
+        for (int i = 0; i < subCategoriesList.size(); i++){
+            if (subCategoriesList.get(i).getSubCategoryName().equals(subName)){
+                currentSubCat = subCategoriesList.get(i);
+                return currentSubCat;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         String categoryString = "---------- Category name: " + categoryName + ", Amount of sub-categories: "

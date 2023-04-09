@@ -11,6 +11,17 @@ public class InventoryController {
         this.ItemsList = new ArrayList<Item>();
     }
 
+    public Item getItemByCatalogNumber(String itemCatalogNumber) {
+        Item currentItem;
+        for (int i = 0; i < ItemsList.size(); i++){
+            if (ItemsList.get(i).getCatalogNum().equals(itemCatalogNumber)){
+                currentItem = ItemsList.get(i);
+                return currentItem;
+            }
+        }
+        return null;
+    }
+
     public void addGeneralItem(Item generalItem) {
         ItemsList.add(generalItem);
     }
@@ -135,6 +146,21 @@ public class InventoryController {
             currentReport.setReportData("There are no shortages.");
         }
         return currentReport;
+    }
+
+    //Method 7: returnTempLevel
+    //This method returns a TempLevel given the user's chouse
+    public TempLevel returnTempLevel(String userInput){
+        if (!userInput.equals("A") && !userInput.equals("B") && !userInput.equals("C")){
+            return null;
+        } else if (userInput.equals("A")) {
+            return TempLevel.regular;
+        } else if (userInput.equals("B")) {
+            return TempLevel.cold;
+        }
+        else {
+            return TempLevel.frozen;
+        }
     }
 
     @Override

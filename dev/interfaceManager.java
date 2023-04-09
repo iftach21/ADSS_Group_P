@@ -208,7 +208,95 @@ public class interfaceManager {
                                 Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory(categoryName), currentSubCategory);
                                 System.out.println("A new sub-category " + subCategoryName + " was added into category " + categoryName);
                                 break;
+                            //Create new general item
+                            case "3":
+                                //User's inputs for the general item
+                                System.out.println("What is the name of the new general item?");
+                                Scanner itemInput = new Scanner(System.in);
+                                String itemName = itemInput.nextLine();
+                                System.out.println("What is the catalog number for the new general item?");
+                                itemInput = new Scanner(System.in);
+                                String catalogNumber = itemInput.nextLine();
+                                System.out.println("What is the weight for the new general item?");
+                                itemInput = new Scanner(System.in);
+                                double itemWeight = Double.parseDouble(itemInput.nextLine());
+                                System.out.println("Who is the manufacturer of the general item?");
+                                itemInput = new Scanner(System.in);
+                                String itemMan = itemInput.nextLine();
+                                System.out.println("Is the general item A) Regular, B) Cold, C) Frozen?");
+                                itemInput = new Scanner(System.in);
+                                String itemTemp = itemInput.nextLine();
+                                TempLevel currentTemp = Inventory.returnTempLevel(itemTemp);
+                                //Check user's input is valid
+                                if (currentTemp == null){
+                                    System.out.println("Invalid temp level choice.");
+                                    break;
+                                }
+                                System.out.println("What is the minimum quantity of the product?");
+                                itemInput = new Scanner(System.in);
+                                int itemSize = Integer.parseInt(itemInput.nextLine());
+                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, itemMan, currentTemp, itemSize);
 
+                                //Add price history for item
+                                System.out.println("What is the buying price of the item?");
+                                itemInput = new Scanner(System.in);
+                                double itemBuyPrice = Double.parseDouble(itemInput.nextLine());
+                                System.out.println("What is the selling price of the item?");
+                                itemInput = new Scanner(System.in);
+                                double itemSellPrice = Double.parseDouble(itemInput.nextLine());
+
+                                currentItem.addNewPrice(itemBuyPrice, itemSellPrice);
+
+                                //Add item to sub category and category
+                                System.out.println("To which category would you like to add the general item?");
+                                itemInput = new Scanner(System.in);
+                                String itemCat = itemInput.nextLine();
+                                Category currentCategory = Inventory.getCategoryControl().getCategory(itemCat);
+
+                                System.out.println("To which sub category would you like to add the general item?");
+                                itemInput = new Scanner(System.in);
+                                String itemSubCat = itemInput.nextLine();
+                                subCategory currentSubCat = currentCategory.getSubCategoryByName(itemSubCat);
+                                Inventory.addGeneralItem(currentItem);
+
+                                //Announce new product
+                                System.out.println("New general item has been created!\nCategory: " + currentCategory.getCategoryName() +
+                                        " Sub-Category: " + currentSubCat.getSubCategoryName());
+                                System.out.println(currentItem.toString());
+
+                                break;
+                            //Add new specific item
+                            case "4":
+                                //User's inputs
+                                Date currentDate = new Date();
+                                System.out.println("What is the catalog of the general item?");
+                                itemInput = new Scanner(System.in);
+                                String itemCatalogNumber = itemInput.nextLine();
+                                currentItem = Inventory.getItemByCatalogNumber(itemCatalogNumber);
+                                System.out.println("Does you item have an expiration date? Y) Yes N) No");
+                                itemInput = new Scanner(System.in);
+                                String expirationAns = itemInput.nextLine();
+                                if (!expirationAns.equals("Y") && !expirationAns.equals("N")){
+                                    System.out.println("Invalid input");
+                                    break;
+                                }
+                                if (expirationAns.equals("Y")){
+                                    System.out.println("What is the expiration year?");
+                                    itemInput = new Scanner(System.in);
+                                    int itemYear = Integer.parseInt(itemInput.nextLine());
+                                    System.out.println("What is the expiration month?");
+                                    itemInput = new Scanner(System.in);
+                                    int itemMonth = Integer.parseInt(itemInput.nextLine());
+                                    System.out.println("What is the expiration day?");
+                                    itemInput = new Scanner(System.in);
+                                    int itemDay = Integer.parseInt(itemInput.nextLine());
+                                    currentDate = new Date(itemYear, itemMonth, itemDay);
+                                }
+                                specificItem currentSpecificItem = new specificItem(currentDate, false, Location.Storage);
+                                currentItem.addSpecificItem(currentSpecificItem);
+                                System.out.println("New specific item has been added!");
+                                System.out.println(currentItem.toString());
+                                break;
                             case "0":
                                 System.out.println("Going back to the Main Menu");
                                 flag = false;

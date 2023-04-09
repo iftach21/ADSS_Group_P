@@ -27,6 +27,14 @@ public class subCategory {
         this.generalItemsList = generalItemsList;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public Item getItem(int index){
+        return this.generalItemsList.get(index);
+    }
+
     @Override
     public String toString() {
         String subCategoryString = "Sub-Category name: " + subCategoryName +

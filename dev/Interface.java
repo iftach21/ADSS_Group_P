@@ -76,6 +76,7 @@ public class Interface {
 
         //If the user is a manager
         if (userName.equals(Manager_Username)) {
+            interfaceManager.interfaceStartup();
             interfaceManager.interfaceManagerLogin();
         }
 

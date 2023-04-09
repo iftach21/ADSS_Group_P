@@ -16,12 +16,16 @@ public class CategoryController {
         return amount;
     }
 
+    //Method 1: addCategory
+    //This method recieves a string, and creates a new super category to be added to the store's inventory
     public void addCategory(String categoryName) {
         Category _Category = new Category(categoryName);
         CategoriesList.add(_Category);
         amount ++;
     }
 
+    //Method 2: removeCategory
+    //This method recieves a category's name, and deletes it from the store's inventory
     public void removeCategory(String categoryName){
         for (int i = 0; i < this.CategoriesList.size(); i++) {
             if (this.CategoriesList.get(i).getCategoryName() == categoryName)
@@ -30,6 +34,8 @@ public class CategoryController {
         amount --;
     }
 
+    //Method 3: addSubCategory
+    //This method adds a new sub category into a super category's list
     public void addSubCategory(Category _Category,subCategory subCategory)
     {
         for (int i = 0; i < this.CategoriesList.size(); i++){
@@ -37,7 +43,26 @@ public class CategoryController {
                 this.CategoriesList.get(i).addSubCategory(subCategory);
             }
         }
-        //_Category.addSubCategory(subCategory);
+    }
+    
+    //Method 4: shortageFullReport
+    //This method provides a full report for all the product that need to be ordered
+    public Report shortageFullReport(){
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.shortagesReport, currentDate);
+        for (int i = 0; i < this.CategoriesList.size(); i++){
+            Category currentCategory = this.CategoriesList.get(i);
+            for (int j = 0; j < currentCategory.getAmount(); j++){
+                subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                    Item currentItem = currentSubCategory.getItem(w);
+                    if (currentItem.getAmount() < currentItem.getMinQuantity()){
+                        currentReport.setReportData(currentItem.toString());
+                    }
+                }
+            }
+        }
+        return currentReport;
     }
 
     @Override

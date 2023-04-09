@@ -2,13 +2,16 @@ import java.util.Date;
 
 public class Report {
     private reportType type;
+    private static int nextReportNum = 1;
     private int reportNum;
     private Date reportDate;
+    private String reportInformation;
 
-    public Report(reportType type, int reportNum, Date reportDate) {
+    public Report(reportType type, Date reportDate) {
         this.type = type;
-        this.reportNum = reportNum;
         this.reportDate = reportDate;
+        this.reportNum = nextReportNum;
+        nextReportNum++;
     }
 
     public reportType getType() {
@@ -23,4 +26,16 @@ public class Report {
         return reportDate;
     }
 
+    public void setReportData(String data){
+        this.reportInformation += data;
+    }
+
+    @Override
+    public String toString() {
+        return "Report: " +
+                "Report Type: " + type +
+                ", Report number: " + reportNum +
+                ", Report Date: " + reportDate +
+                ", Report Information: " + reportInformation + '\n';
+    }
 }

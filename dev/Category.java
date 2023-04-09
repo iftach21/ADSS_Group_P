@@ -22,6 +22,10 @@ public class Category {
         return amount;
     }
 
+    public subCategory getSubCategory(int index){
+        return this.subCategoriesList.get(index);
+    }
+
     @Override
     public String toString() {
         String categoryString = "Category name: " + categoryName + ", Amount of sub-categories: " + amount;

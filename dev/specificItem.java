@@ -15,6 +15,9 @@ public class specificItem{
         this.location = location;
     }
 
+    public int getItemID() {
+        return itemID;
+    }
 
     public void setDefected(boolean defected) {
         isDefected = defected;
@@ -31,6 +34,10 @@ public class specificItem{
     public boolean isExpired()
     {
         return expirationDate.before(Date.from(Instant.now()));
+    }
+
+    public boolean getisDefected(){
+        return isDefected;
     }
 
     public boolean isDefected()

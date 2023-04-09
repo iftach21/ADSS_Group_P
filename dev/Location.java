@@ -1,4 +1,5 @@
 public enum Location {
     Storage,
-    Store
+    Store,
+    DefctiveArea
 }

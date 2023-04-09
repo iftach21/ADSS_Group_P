@@ -102,6 +102,41 @@ public class InventoryController {
         return currentReport;
     }
 
+    //Method 6: shortageReportGeneralItem
+    //This method provides a shortage report for a general item
+    public Report shortageReportGeneralItem(String catalogNumber){
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Item currentItem;
+        String reportInformation = "";
+        int defectedCount = 0;
+        for (int i = 0; i < this.ItemsList.size(); i++){
+            currentItem = this.ItemsList.get(i);
+            for (int z = 0; z < currentItem.getAmount(); z++){
+                if (currentItem.getSpecificItemList(z).getisDefected()){
+                    defectedCount++;
+                }
+            }
+            if (currentItem.getCatalogNum().equals(catalogNumber) &&
+                    (currentItem.getAmount() < currentItem.getMinQuantity() + defectedCount)){
+                //Add the information collected to the report data
+                reportInformation += currentItem.toString() + "\n" +
+                        " Defected amount: " + defectedCount + " Total to order: " +
+                        (currentItem.getMinQuantity() - currentItem.getAmount() + defectedCount) + "\n";
+                currentReport.setReportData(reportInformation);
+                //Reset variables
+                reportInformation = "";
+                defectedCount = 0;
+            }
+
+        }
+        //If there are no shortages
+        if (currentReport.getReportInformation().equals("")){
+            currentReport.setReportData("There are no shortages.");
+        }
+        return currentReport;
+    }
+
     @Override
     public String toString() {
         String categoryController = "Inventory - Amount of categories: " + CategoryControl.getAmount() + '\n';
@@ -186,11 +221,77 @@ public class InventoryController {
             {
                 specificItem currentSpecificItem = currentItem.getSpecificItemList(j);
                 if (currentSpecificItem.getisDefected())
+                {
+                    //TODO - check if need to do diffrent func for that
+//                    currentSpecificItem.setLocation(Location.DefctiveArea);
                     currentReport.setReportData(currentSpecificItem.toString());
+                }
             }
         }
         return currentReport;
     }
 
+    public Report CategoryDefectiveReport(String _CategoryName) {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return null;
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Defective, currentDate);
+        boolean flag = false;
+        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
+        {
+            Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
+            if (currentCategory.getCategoryName().equals(_CategoryName))
+            {
+                flag = true;
+                for (int j = 0; j < currentCategory.getAmount(); j++){
+                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                    for (int w = 0; w < currentSubCategory.getAmount(); w++)
+                    {
+                        Item currentItem = currentSubCategory.getItem(w);
+                        for (int k = 0; k < currentItem.getAmount(); k++)
+                        {
+                            specificItem currentSpecificItem = currentItem.getSpecificItemList(k);
+                            if (currentSpecificItem.getisDefected())
+                            {
+                                //TODO - check if need to do diffrent func for that
+//                                currentSpecificItem.setLocation(Location.DefctiveArea);
+                                currentReport.setReportData(currentSpecificItem.toString());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (!flag)
+        {
+            System.out.println("There no such category");
+            return null;
+        }
+        return currentReport;
+    }
 
+    public Report ItemDefectiveReport(String CatalogNum)
+    {
+        if (this.ItemsList.size() == 0)
+            return null;
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.Defective, currentDate);
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = ItemsList.get(i);
+            if (currentItem.getCatalogNum().equals(CatalogNum))
+            {
+                for (int j = 0; j < currentItem.getAmount(); j++) {
+
+                    specificItem currentSpecificItem = currentItem.getSpecificItemList(j);
+                    if (currentSpecificItem.getisDefected()) {
+                        //TODO - check if need to do diffrent func for that
+                        //                                currentSpecificItem.setLocation(Location.DefctiveArea);
+                        currentReport.setReportData(currentSpecificItem.toString());
+                    }
+                }
+            }
+        }
+        return currentReport;
+    }
 }

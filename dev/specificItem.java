@@ -7,9 +7,11 @@ public class specificItem{
     private final Date expirationDate;
     private boolean isDefected = false;
     private Location location;
+    private static int nextItemID = 1;
 
-    public specificItem(int itemID, Date expirationDate, boolean isDefected, Location location) {
-        this.itemID = itemID;
+    public specificItem(Date expirationDate, boolean isDefected, Location location) {
+        this.itemID = nextItemID;
+        nextItemID++;
         this.expirationDate = expirationDate;
         this.isDefected = isDefected;
         this.location = location;
@@ -51,10 +53,10 @@ public class specificItem{
 
     @Override
     public String toString() {
-        return "specificItem : " +
-                "item ID : " + itemID +
+        return  "item ID : " + itemID +
                 ", Expiration Date: " + expirationDate +
                 ", isDefected: " + isDefected +
                 ", location: " + location + "\n";
     }
+
 }

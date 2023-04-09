@@ -80,6 +80,10 @@ public class CategoryController {
                 }
             }
         }
+        //If there are no shortages
+        if (currentReport.getReportInformation().equals("")){
+            currentReport.setReportData("There are no shortages.");
+        }
         return currentReport;
     }
 

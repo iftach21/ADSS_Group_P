@@ -78,23 +78,24 @@ public class Item {
     //This method prints the general items list
     @Override
     public String toString() {
-        String generalItem = "General Item : " +
+        String generalItem = "---- General Item : " +
                 "name: " + name + '\'' +
                 ", catalogNum: '" + catalogNum + '\'' +
                 ", weight: " + weight +
                 ", manufacturer: '" + manufacturer + '\'' +
                 ", minQuantity: " + minQuantity +
                 ", amount: " + amount +
-                ", temperature: " + temperature;
+                ", temperature: " + temperature + " ----";
 
         int lastPriceHistory = this.priceHistoryList.size() - 1;
 
-        generalItem += "\n" + "Sold for: " + this.priceHistoryList.get(lastPriceHistory).getSellPrice() +
+        generalItem += "\n" + "-- Sold for: " + this.priceHistoryList.get(lastPriceHistory).getSellPrice() +
                 " Bought for: " + this.priceHistoryList.get(lastPriceHistory).getBuyPrice() +
         " Last price update: " + this.priceHistoryList.get(lastPriceHistory).getCurrentDate();
         for (int i = 0; i < this.specificItemList.size(); i++){
-            generalItem += "\n" + this.specificItemList.get(i);
+            generalItem += "\n" + this.specificItemList.get(i) + " --";
         }
+        generalItem += "\n" + "----------------------------------------------------------------" + "\n";
         return generalItem;
     }
 

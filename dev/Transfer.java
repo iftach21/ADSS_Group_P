@@ -270,4 +270,6 @@ public class Transfer {
     {
         return _truckLicenseNumber;
     }
+
+    public String getDriverName(){ return _driverName; }
 }

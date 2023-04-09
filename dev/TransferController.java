@@ -82,8 +82,8 @@ public class TransferController {
                     }
 
                     Transfer chosenTransfer = _transfers.get(transferId);
-                    System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
                     chosenTransfer.createDocument();
+                    System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
                 }
             }
             else if (optionSelection == 2)
@@ -191,7 +191,6 @@ public class TransferController {
             int truckWeight;
             Scanner scanner = new Scanner(System.in);
             Truck transferTruck = tc._trucks.get(newTransfer.getTruckLicenseNumber());
-
             transferTruck.setTruckUnavailable();
 
             System.out.println("The transfer starts now");
@@ -200,6 +199,10 @@ public class TransferController {
             System.out.println("Truck Model: " + transferTruck.getTruckModel());
             System.out.println("Truck Max Weight: " + transferTruck.getMaxWeight());
             System.out.println("Truck Cooling Capacity: " + transferTruck.getTempCapacity());
+            System.out.println("------------------------------------------------------------");
+
+            System.out.println("The driver chosen to the transfer is: ");
+            System.out.println("Driver Name: " + newTransfer.getDriverName());
             System.out.println("------------------------------------------------------------");
 
 

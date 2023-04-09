@@ -57,9 +57,9 @@ public class interfaceManager {
 
         //Specific Items
         specificItem milk1 = new specificItem(dateMilk1, false, Location.Store);
-        specificItem milk2 = new specificItem(dateMilk2, true, Location.Store);
-        specificItem milk3 = new specificItem(dateMilk3, true, Location.Store);
-        specificItem milk4 = new specificItem(dateMilk4, true, Location.Store);
+        specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage);
+        specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage);
+        specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);

@@ -56,7 +56,7 @@ public class specificItem{
         return  "item ID : " + itemID +
                 ", Expiration Date: " + expirationDate +
                 ", isDefected: " + isDefected +
-                ", location: " + location + "\n";
+                ", location: " + location;
     }
 
 }

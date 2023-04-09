@@ -462,7 +462,9 @@ public class Main {
 
                                 }
                                 if (option_11 == 2) {
-                                    orderManger.assing_Orders_to_Suppliers(itemlist, supplier_manger, store_number);
+                                    if(!orderManger.assing_Orders_to_Suppliers(itemlist, supplier_manger, store_number)){
+                                        System.out.println("failed to make an order");
+                                    }
                                     break;
                                 }
                             }

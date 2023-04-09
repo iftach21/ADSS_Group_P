@@ -23,6 +23,8 @@ public class interfaceManager {
         //Categories
         Inventory.getCategoryControl().addCategory("Dairy");
         Inventory.getCategoryControl().addCategory("Cleaning");
+        //Default
+        Inventory.getCategoryControl().addCategory("Etc");
 
         //Sub-categories
         subCategory milksSubCat = new subCategory("Milk");
@@ -34,6 +36,10 @@ public class interfaceManager {
         subCategory washingMachineSubCat = new subCategory("Washing Machine Gels");
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), toiletSubCat);
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), washingMachineSubCat);
+
+        //Default
+        subCategory allSubCat = new subCategory("All");
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
         Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2);
@@ -296,6 +302,27 @@ public class interfaceManager {
                                 currentItem.addSpecificItem(currentSpecificItem);
                                 System.out.println("New specific item has been added!");
                                 System.out.println(currentItem.toString());
+                                break;
+                            //Delete category
+                            case "5":
+                                break;
+                            //Delete sub-category
+                            case "6":
+                                break;
+                            //Delete general item
+                            case "7":
+                                break;
+                            //Delete specific item
+                            case "8":
+                                System.out.println("What is the ID for the specific item you wish to remove?");
+                                Scanner Input = new Scanner(System.in);
+                                int itemID = Integer.parseInt(Input.nextLine());
+                                if (Inventory.deleteSpecificItem(itemID)){
+                                    System.out.println("Item" + itemID + " has been deleted.");
+                                }
+                                else {
+                                    System.out.println("Could not find such an item.");
+                                }
                                 break;
                             case "0":
                                 System.out.println("Going back to the Main Menu");

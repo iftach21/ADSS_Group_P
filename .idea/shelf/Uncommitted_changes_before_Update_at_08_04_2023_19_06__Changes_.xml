@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]" date="1680970021111" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 08/04/2023 19:06 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Main.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Order.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Order.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/Order.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/WindowTypeCreater.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/WindowTypeCreater.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/WindowTypeCreater.class" />
+  </binary>
+</changelist>

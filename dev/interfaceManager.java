@@ -2,10 +2,10 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class interfaceManager {
-    private CategoryController Inventory;
+    private InventoryController Inventory;
     private ReportController Reports;
     public interfaceManager() {
-        this.Inventory = new CategoryController();
+        this.Inventory = new InventoryController();
         this.Reports = new ReportController();
     }
 
@@ -21,23 +21,24 @@ public class interfaceManager {
         Date dateMilk4 = new Date(2026, 6, 13);
 
         //Categories
-        Inventory.addCategory("Dairy");
-        Inventory.addCategory("Cleaning");
+        Inventory.getCategoryControl().addCategory("Dairy");
+        Inventory.getCategoryControl().addCategory("Cleaning");
 
         //Sub-categories
         subCategory milksSubCat = new subCategory("Milk");
         subCategory buttersSubCat = new subCategory("Butter");
-        Inventory.addSubCategory(Inventory.getCategory("Dairy"), milksSubCat);
-        Inventory.addSubCategory(Inventory.getCategory("Dairy"), buttersSubCat);
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Dairy"), milksSubCat);
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Dairy"), buttersSubCat);
 
         subCategory toiletSubCat = new subCategory("Toilet Paper");
         subCategory washingMachineSubCat = new subCategory("Washing Machine Gels");
-        Inventory.addSubCategory(Inventory.getCategory("Cleaning"), toiletSubCat);
-        Inventory.addSubCategory(Inventory.getCategory("Cleaning"), washingMachineSubCat);
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), toiletSubCat);
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), washingMachineSubCat);
 
         //General Items
         Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2);
         milk3Percent.addNewPrice(10, 20);
+
         Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2);
         soyMilk.addNewPrice(30, 40);
         Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12);
@@ -90,6 +91,13 @@ public class interfaceManager {
         buttersSubCat.addGeneralItem(regularButter);
         toiletSubCat.addGeneralItem(toiletPaper);
         washingMachineSubCat.addGeneralItem(sodGel);
+
+        Inventory.addGeneralItem(milk3Percent);
+        Inventory.addGeneralItem(soyMilk);
+        Inventory.addGeneralItem(regularButter);
+        Inventory.addGeneralItem(toiletPaper);
+        Inventory.addGeneralItem(sodGel);
+
     }
 
     public void interfaceManagerLogin() {

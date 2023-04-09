@@ -25,7 +25,6 @@ public class Main {
         Item item2 = new Item("Milk", "2002","12/3/1789", 1.0, "Dairy", 4.0);
         Item item3 = new Item("Bread", "3003", "12/3/1789", 0.8, "Bakery", 25.0);
         Item item4 = new Item("Salmon", "4004", "12/3/1789", 0.3, "Seafood", -2.0);
-        System.out.println(item1.getDateStr());
         //two supplier to init
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson1, null, null);
         NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Suppliermono Inc.", "122456789", 1, "S002", contactPerson2, null, null);
@@ -451,11 +450,10 @@ public class Main {
                                     System.out.println("exprison date:");
                                     String expirationDate_s = scanner.next();
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                    String exp=scanner.next();
 
 
                                     //create the new item
-                                    Item item = new Item(item_name, catalogName, exp, weight, catalogNum, temp);
+                                    Item item = new Item(item_name, catalogName, expirationDate_s, weight, catalogNum, temp);
                                     System.out.println("amount:");
                                     String amount_21Input = scanner.next();
                                     amount_21Input = checkNumberWithDot(amount_21Input);

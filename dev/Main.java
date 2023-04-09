@@ -123,8 +123,12 @@ public class Main {
         //put site2 with items in the map:
         order1_Items.put(site2, order1_Items_site2);
 
-        //Let's start the transfer!
-        transferController.createNewTransfer(order1_Items, site3.getSiteId());
+        //Add order to the transfer system
+        transferController.newOrderReceived(order1_Items, site3.getSiteId());
+
+        //start the transfer system!
+        transferController.startTransferSystem();
+
 
     }
 }

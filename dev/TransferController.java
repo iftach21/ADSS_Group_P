@@ -9,6 +9,9 @@ public class TransferController {
     private TruckController tc;
     private DriverController dc;
     private SiteController sc;
+    private Queue<Map<Site, Map<Item_mock, Integer>>> _ordersQueue;
+    private Queue<Integer> _orderDestinationSiteIdQueue;
+
 
     public TransferController(TruckController tc, DriverController dc, SiteController sc)
     {
@@ -17,7 +20,99 @@ public class TransferController {
         this.tc = tc;
         this.dc = dc;
         this.sc = sc;
+        this._ordersQueue = new LinkedList<>();
+        this._orderDestinationSiteIdQueue = new LinkedList<>();
     }
+
+    public void startTransferSystem()
+    {
+        boolean systemIsOn = true;
+        Scanner scanner = new Scanner(System.in);
+        while (systemIsOn)
+        {
+            System.out.println("------------------------------------------------------------");
+            System.out.println("Hello transfer manager, welcome to the transfer system!");
+            System.out.println("Please pick one of the following options:");
+            System.out.println("1. View previous transfers");
+            System.out.println("2. Create transfer for pending orders. you have " + _ordersQueue.size() + " orders waiting to transfer");
+            System.out.println("3. Exit the transfer system");
+
+            int optionSelection;
+            while(true) {
+                try {
+                    optionSelection = scanner.nextInt();
+                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3) {
+                        break;
+                    } else {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - 3");
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - 3");
+                    scanner.next();
+                }
+            }
+
+            if (optionSelection == 1)
+            {
+                if (_transfers.size() == 0)
+                {
+                    System.out.println("Unfortunatly, there are no previous transfers to watch. You'll be taken to the main menu.");
+                    System.out.println("------------------------------------------------------------");
+                }
+                else
+                {
+                    System.out.println("Please enter the transfer id of the transfer you would like to watch: ");
+                    int transferId;
+                    while(true) {
+                        try {
+                            transferId = scanner.nextInt();
+                            if (_transfers.containsKey(transferId)) {
+                                break;
+                            } else {
+                                System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                            scanner.next();
+                        }
+                    }
+
+                    Transfer chosenTransfer = _transfers.get(transferId);
+                    System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
+                    chosenTransfer.createDocument();
+                }
+            }
+            else if (optionSelection == 2)
+            {
+                if (_ordersQueue.size() == 0)
+                {
+                    System.out.println("Unfortunatly, there are no orders to handle. You'll be taken to the main menu.");
+                    System.out.println("------------------------------------------------------------");
+                }
+                else
+                {
+                    createNewTransfer(_ordersQueue.remove(), _orderDestinationSiteIdQueue.remove());
+                    System.out.println("You'll be taken to the main menu.");
+                }
+            }
+            else
+            {
+                System.out.println("Thanks for using the transfer system. See you next time!");
+                systemIsOn = false;
+            }
+        }
+    }
+
+    public void newOrderReceived(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId)
+    {
+        _ordersQueue.add(orderItems);
+        _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+    }
+
 
     public void createNewTransfer(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId)
     {
@@ -201,6 +296,7 @@ public class TransferController {
             {
                 System.out.println("The truck arrived to it's final destination: " + transferDest.get(transferDest.size() - 1).getSiteName());
                 System.out.println("It will unload all the items here.");
+                System.out.println("------------------------------------------------------------");
                 transferTruck.resetTruckWeight();
                 break;
             }

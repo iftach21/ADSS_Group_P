@@ -50,38 +50,38 @@ public class interfaceManager {
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
-        specificItem milk1 = new specificItem(1, dateMilk1, false, Location.Store);
-        specificItem milk2 = new specificItem(2, dateMilk2, true, Location.Store);
-        specificItem milk3 = new specificItem(3, dateMilk3, true, Location.Store);
-        specificItem milk4 = new specificItem(4, dateMilk4, true, Location.Store);
+        specificItem milk1 = new specificItem(dateMilk1, false, Location.Store);
+        specificItem milk2 = new specificItem(dateMilk2, true, Location.Store);
+        specificItem milk3 = new specificItem(dateMilk3, true, Location.Store);
+        specificItem milk4 = new specificItem(dateMilk4, true, Location.Store);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
         milk3Percent.addSpecificItem(milk4);
 
-        specificItem soyMilk1 = new specificItem(1, dateMilk1,false, Location.Store);
-        specificItem soyMilk2 = new specificItem(2, dateMilk2,false, Location.Store);
-        specificItem soyMilk3 = new specificItem(3, dateMilk3,false, Location.Store);
-        specificItem soyMilk4 = new specificItem(4, dateMilk4,false, Location.Store);
+        specificItem soyMilk1 = new specificItem(dateMilk1,false, Location.Store);
+        specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store);
+        specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store);
+        specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store);
         soyMilk.addSpecificItem(soyMilk1);
         soyMilk.addSpecificItem(soyMilk2);
         soyMilk.addSpecificItem(soyMilk3);
         soyMilk.addSpecificItem(soyMilk4);
 
-        specificItem butter1 = new specificItem(1, dateMilk1, false, Location.Store);
-        specificItem butter2 = new specificItem(2, dateMilk2, false, Location.Store);
+        specificItem butter1 = new specificItem(dateMilk1, false, Location.Store);
+        specificItem butter2 = new specificItem(dateMilk2, false, Location.Store);
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
-        specificItem toiletPaper1 = new specificItem(1, null, false, Location.Store);
-        specificItem toiletPaper2 = new specificItem(2, null, false, Location.Store);
-        specificItem toiletPaper3 = new specificItem(3, null, false, Location.Store);
+        specificItem toiletPaper1 = new specificItem(null, false, Location.Store);
+        specificItem toiletPaper2 = new specificItem(null, false, Location.Store);
+        specificItem toiletPaper3 = new specificItem(null, false, Location.Store);
         toiletPaper.addSpecificItem(toiletPaper1);
         toiletPaper.addSpecificItem(toiletPaper2);
         toiletPaper.addSpecificItem(toiletPaper3);
 
-        specificItem sodGel1 = new specificItem(1, null, false, Location.Store);
-        specificItem sodGel2 = new specificItem(2, null, true, Location.Storage);
+        specificItem sodGel1 = new specificItem(null, false, Location.Store);
+        specificItem sodGel2 = new specificItem(null, true, Location.Storage);
         sodGel.addSpecificItem(sodGel1);
         sodGel.addSpecificItem(sodGel2);
 
@@ -151,7 +151,7 @@ public class interfaceManager {
                                 System.out.println("Please enter the catalog number for the product you would like to provide a shortage report for:");
                                 Scanner Product = new Scanner(System.in);
                                 String productNumber = Product.nextLine();
-//                                    this.Shortge_Report(Pro_ans);
+                                Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
                                 break;
 
                             case "0":
@@ -171,7 +171,44 @@ public class interfaceManager {
                 //Update inventory
                 //-----------------------
                 case "2": {
-                    System.out.println("This function is not yet available in the current version of the system.");
+                    boolean flag = true;
+                    while (flag) {
+                        System.out.println("Which of the following would you choose:");
+                        System.out.println("1: Create new category");
+                        System.out.println("2: Create new subcategory");
+                        System.out.println("3: Create new general Item");
+                        System.out.println("4: Add a new specific item");
+                        System.out.println("5: Delete category");
+                        System.out.println("6: Delete subcategory");
+                        System.out.println("7: Delete general item");
+                        System.out.println("8: Delete specific item");
+                        System.out.println("0: Return to the Main Menu");
+
+                        Scanner Second_obj = new Scanner(System.in);
+                        String Sub_Ans = Second_obj.nextLine();  // Read user input
+
+                        switch (Sub_Ans) {
+                            case "1":
+                                Reports.addReport(Inventory.shortageReportFull());
+                                break;
+
+                            case "2":
+                                System.out.println("For which category?");
+                                Scanner categoryInput = new Scanner(System.in);
+                                String categoryName = categoryInput.nextLine();
+                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
+                                break;
+
+                            case "0":
+                                System.out.println("Going back to the Main Menu");
+                                flag = false;
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice");
+                                break;
+                        }
+                    }
                     break;
                 }
 

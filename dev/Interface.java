@@ -46,7 +46,7 @@ public class Interface {
             //Checks the login information to be matched with any of the users
             if (userName.equals(Manager_Username) && password.equals(Manager_Passward) || userName.equals(Worker_Username) && password.equals(Worker_Passward)) {
                 break;
-                //If the user name does not exists, ask the user to re-enter his credentials
+                //If the username does not exists, ask the user to re-enter his credentials
             }
             //If such a username does not exist
             else if (!userName.equals(Manager_Username) && !userName.equals(Worker_Username)){
@@ -67,19 +67,15 @@ public class Interface {
         // Main Menu
         // -------------------------------------------------------
 
+        // -------------------------------------------------------
+        // Choose correct user interface (Manager / Worker)
+        // -------------------------------------------------------
+
         //If the user is a manager
         if (userName.equals(Manager_Username)) {
             interfaceManager.interfaceStartup();
             interfaceManager.interfaceManagerLogin();
         }
-
-//        Scanner myObj = new Scanner(System.in);
-//        String ans = myObj.nextLine();  // Read user input
-
-        // -------------------------------------------------------
-        // Choose correct user interface (Manager / Worker)
-        // -------------------------------------------------------
-
 
         //Else if the user is a worker
         else if (userName.equals(Worker_Username)) {

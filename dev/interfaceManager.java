@@ -105,14 +105,14 @@ public class interfaceManager {
 
                         switch (Sub_Ans) {
                             case "1":
-                                Reports.addReport(Inventory.shortageFullReport());
+                                Reports.addReport(Inventory.shortageReportCategory("FULL"));
                                 break;
 
                             case "2":
                                 System.out.println("Please enter the category you would like to provide a shortage report for:");
                                 Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.Shortge_Report(Cat_ans);
+                                String categoryName = Category.nextLine();
+                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
                                 break;
 
                             case "3":

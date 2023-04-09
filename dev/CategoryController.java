@@ -47,17 +47,35 @@ public class CategoryController {
     
     //Method 4: shortageFullReport
     //This method provides a full report for all the product that need to be ordered
-    public Report shortageFullReport(){
+    public Report shortageReportCategory(String categoryName){
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.shortagesReport, currentDate);
-        for (int i = 0; i < this.CategoriesList.size(); i++){
-            Category currentCategory = this.CategoriesList.get(i);
-            for (int j = 0; j < currentCategory.getAmount(); j++){
-                subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                for (int w = 0; w < currentSubCategory.getAmount(); w++){
-                    Item currentItem = currentSubCategory.getItem(w);
-                    if (currentItem.getAmount() < currentItem.getMinQuantity()){
-                        currentReport.setReportData(currentItem.toString());
+        if (categoryName == "FULL"){
+            for (int i = 0; i < this.CategoriesList.size(); i++){
+                Category currentCategory = this.CategoriesList.get(i);
+                for (int j = 0; j < currentCategory.getAmount(); j++){
+                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                    for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                        Item currentItem = currentSubCategory.getItem(w);
+                        if (currentItem.getAmount() < currentItem.getMinQuantity()){
+                            currentReport.setReportData(currentItem.toString());
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < this.CategoriesList.size(); i++){
+                Category currentCategory = this.CategoriesList.get(i);
+                if (currentCategory.getCategoryName().equals(categoryName)){
+                    for (int j = 0; j < currentCategory.getAmount(); j++){
+                        subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                        for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                            Item currentItem = currentSubCategory.getItem(w);
+                            if (currentItem.getAmount() < currentItem.getMinQuantity()){
+                                currentReport.setReportData(currentItem.toString());
+                            }
+                        }
                     }
                 }
             }

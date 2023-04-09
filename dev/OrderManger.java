@@ -56,10 +56,10 @@ public class OrderManger {
     }
 
 
-    public void assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger,int number_store){
+    public Boolean assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger,int number_store){
         //if there is no supplier do nothing
         if(manger == null){
-            return;
+            return false;
         }
         //to find the min supplier(in case of one supplier have it all)
         Supplier min_sup=null;
@@ -68,6 +68,7 @@ public class OrderManger {
         //to cheak who have the max items in each call to the function
         int number_of_item=0;
         int trigger=0;
+        int no_match=0;
 
 
         for(Supplier supplier: manger.getSuppliers()){
@@ -93,6 +94,7 @@ public class OrderManger {
                     continue;
                 }
                 if(min_sup == null){
+                    no_match=1;
                     min_sup=supplier;}
 
                 //make a new order to be cheak if there is better
@@ -151,10 +153,11 @@ public class OrderManger {
 
 
             }}
-        //add it to the order's
-        if(min_order ==null || min_sup==null){
-            return;
+        if(no_match==0){
+            return false;
         }
+        //add it to the order's
+        //add it to the order's
         pending_for_apporval.add(min_order);
         Iterator<Item> iter = itemlist.keySet().iterator();
         while (iter.hasNext()) {
@@ -168,8 +171,9 @@ public class OrderManger {
             assing_Orders_to_Suppliers(itemlist,manger,number_store);
         }
         else{
-            return;
+            return true;
         }
+        return true;
 
 
 

@@ -6,9 +6,54 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         OrderManger orderManger =new OrderManger();
         Supplier_Manger supplier_manger=new Supplier_Manger();
+
+
+        Contact_Person contactPerson1 = new Contact_Person("John Smith", "555-1234");
+        Contact_Person contactPerson2 = new Contact_Person("John not Smith", "555-1233");
+
+        //init item to play with
+        Item item1 = new Item("Apple", "1001", new SimpleDateFormat("12/3/1789"), 0.5, "Fruits", 10.0);
+        Item item2 = new Item("Milk", "2002", new SimpleDateFormat("12/3/1789"), 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", new SimpleDateFormat("12/3/1789"), 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", new SimpleDateFormat("12/3/1789"), 0.3, "Seafood", -2.0);
+        System.out.println(item1.getExpirationDate());
+
+        //two supplier to init
+        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson1, null, null);
+        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "122456789", 1, "S002", contactPerson2, null, null);
+
+        supplier_1.add_Items(item1,100,100);
+        supplier_1.add_Items(item2,100,100);
+        supplier_2.add_Items(item3,100,100);
+        supplier_2.add_Items(item4,100,100);
+
+        //total discount given to each supplier
+        supplier_1.add_total_discount(0.5);
+        supplier_2.add_total_discount(0.6);
+
+        //adding them to the system
+        supplier_manger.getSuppliers().add(supplier_1);
+        supplier_manger.getSuppliers().add(supplier_2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         String option;
         int choice = 0;
 
@@ -255,21 +300,12 @@ public class Main {
                             tempInput = checkNumberWithDot(tempInput);
                             double temp = Double.parseDouble(tempInput);
                             System.out.println("exprison date:");
+
+
                             String expirationDate_s = scanner.next();
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                            Date expirationDate = null;
-                            while(true)
-                            {
-                            try {
-                                expirationDate = dateFormat.parse(expirationDate_s);
-                                break;
-                            }
-                            catch (ParseException e)
-                            {
-                                System.out.println("Invalid date format. Please enter a date in the format dd/MM/yyyy");
-                                expirationDate_s = scanner.next();
-                            }
-                            }
+                            SimpleDateFormat expirationDate = new SimpleDateFormat(expirationDate_s);
+
+
                             //create the new item
                             Item item = new Item(item_name, catalogName, expirationDate, weight, catalogNum, temp);
                             System.out.println("base price per unit");
@@ -392,15 +428,9 @@ public class Main {
                                     System.out.println("exprison date:");
                                     String expirationDate_s = scanner.next();
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                    Date expirationDate = null;
-                                    while(true){
-                                    try {
-                                        expirationDate = dateFormat.parse(expirationDate_s);
-                                        break;
-                                    } catch (ParseException e) {
-                                        System.out.println("Invalid date format. Please enter a date in the format dd/MM/yyyy");
-                                        expirationDate_s = scanner.next();
-                                    }}
+                                    String exp=scanner.next();
+                                    SimpleDateFormat expirationDate = new SimpleDateFormat(exp);
+
                                     //create the new item
                                     Item item = new Item(item_name, catalogName, expirationDate, weight, catalogNum, temp);
                                     System.out.println("amount:");

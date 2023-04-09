@@ -39,6 +39,6 @@ public class Report {
                 "Report Type: " + type +
                 ", Report number: " + reportNum +
                 ", Report Date: " + reportDate +
-                ", Report Information: \n" + reportInformation;
+                ", Report Information: \n" + reportInformation ;
     }
 }

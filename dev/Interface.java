@@ -35,7 +35,7 @@ public class Interface {
         //Scans the username and password
 
         System.out.println("Welcome to 'Super-Li's' storage management system! Please log-in.");
-
+        String UserLogin;
         String userName;
         while (true) {
             Scanner myObj = new Scanner(System.in);
@@ -67,18 +67,19 @@ public class Interface {
         // Main Menu
         // -------------------------------------------------------
 
-        Scanner myObj = new Scanner(System.in);
-        String ans = myObj.nextLine();  // Read user input
-
-        // -------------------------------------------------------
-        // Choose correct user interface (Manager / Worker)
-        // -------------------------------------------------------
-
         //If the user is a manager
         if (userName.equals(Manager_Username)) {
             interfaceManager.interfaceStartup();
             interfaceManager.interfaceManagerLogin();
         }
+
+//        Scanner myObj = new Scanner(System.in);
+//        String ans = myObj.nextLine();  // Read user input
+
+        // -------------------------------------------------------
+        // Choose correct user interface (Manager / Worker)
+        // -------------------------------------------------------
+
 
         //Else if the user is a worker
         else if (userName.equals(Worker_Username)) {

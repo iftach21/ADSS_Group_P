@@ -85,7 +85,7 @@ public class Item {
                 ", manufacturer: '" + manufacturer + '\'' +
                 ", minQuantity: " + minQuantity +
                 ", amount: " + amount +
-                ", temperature: " + temperature;
+                ", temperature: " + temperature + "\n";
 
         int lastPriceHistory = this.priceHistoryList.size() - 1;
 

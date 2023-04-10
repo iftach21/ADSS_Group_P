@@ -22,4 +22,12 @@ public class PriceHistory {
     public Date getCurrentDate() {
         return currentDate;
     }
+
+    @Override
+    public String toString() {
+        return "PriceH istory: " +
+                "Buy price: " + buyPrice +
+                ", sell price: " + sellPrice +
+                ", updated in: " + currentDate;
+    }
 }

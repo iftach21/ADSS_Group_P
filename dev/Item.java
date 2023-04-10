@@ -80,6 +80,14 @@ public class Item {
         return amount;
     }
 
+    public int getPriceHistorySize() {
+        return priceHistoryList.size();
+    }
+
+    public PriceHistory getPriceHistorySpecific(int index) {
+        return priceHistoryList.get(index);
+    }
+
     public specificItem getSpecificItemList(int index) {
         specificItem currentSpecificItem;
         return this.specificItemList.get(index);

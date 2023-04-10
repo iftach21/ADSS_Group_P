@@ -285,63 +285,70 @@ public class InventoryController {
         return categoryController;
     }
     public Report FullCountingReport() {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return null;
+        //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
-        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++) {
+        String reportInformation = "";
+        //Iterate every category
+        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++){
             Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
-            for (int j = 0; j < currentCategory.getAmount(); j++) {
+            //Iterate every sub-category
+            for (int j = 0; j < currentCategory.getAmount(); j++){
                 subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                for (int w = 0; w < currentSubCategory.getAmount(); w++) {
+                //Iterate every general-item
+                for (int w = 0; w < currentSubCategory.getAmount(); w++){
                     Item currentItem = currentSubCategory.getItem(w);
-                    currentReport.setReportData(currentItem.toString());
+                    //Add the information collected to the report data
+                    reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                            "Total amount: " + currentItem.getAmount() + "\n";
+                    currentReport.setReportData(reportInformation);
+                    //Reset variables
+                    reportInformation = "";
                 }
             }
         }
         return currentReport;
     }
 
-    public Report CategoryCountingReport(String _CategoryName) {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return null;
+    public Report CategoryCountingReport(String categoryName) {
+        //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
-        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
-        {
-            Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
-            if (currentCategory.getCategoryName().equals(_CategoryName))
-            {
-                for (int j = 0; j < currentCategory.getAmount(); j++){
-                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                    for (int w = 0; w < currentSubCategory.getAmount(); w++)
-                    {
-                        Item currentItem = currentSubCategory.getItem(w);
-                        currentReport.setReportData(currentItem.toString());
-                    }
-                }
-            }
-            else
-            {
-                System. out. println("There is no such category");
-                return null;
+        Category currentCategory = this.CategoryControl.getCategory(categoryName);
+        String reportInformation = "";
+        for (int j = 0; j < currentCategory.getAmount(); j++){
+            subCategory currentSubCategory = currentCategory.getSubCategory(j);
+            //Iterate every general-item
+            for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                Item currentItem = currentSubCategory.getItem(w);
+                //Add the information collected to the report data
+                reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                        "Total amount: " + currentItem.getAmount() + "\n";
+                currentReport.setReportData(reportInformation);
+                //Reset variables
+                reportInformation = "";
             }
         }
         return currentReport;
     }
 
 
-    public Report ItemCountingReport(String CatlogNum)
+    public Report ItemCountingReport(String catalogNumber)
     {
-        if (this.ItemsList.size() == 0)
-            return null;
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item CurrentItem = this.ItemsList.get(i);
-            if (CurrentItem.getCatalogNum().equals(CatlogNum))
-                currentReport.setReportData(CurrentItem.toString());
+        Item currentItem;
+        String reportInformation = "";
+        for (int i = 0; i < this.ItemsList.size(); i++){
+            currentItem = this.ItemsList.get(i);
+            if (currentItem.getCatalogNum().equals(catalogNumber)){
+                //Add the information collected to the report data
+                reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                        "Total amount: " + currentItem.getAmount() + "\n";
+                currentReport.setReportData(reportInformation);
+                //Reset variables
+                reportInformation = "";
+            }
         }
         return currentReport;
     }
@@ -352,6 +359,7 @@ public class InventoryController {
             return null;
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Defective, currentDate);
+        String reportInformation = "";
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = this.ItemsList.get(i);
@@ -362,7 +370,9 @@ public class InventoryController {
                 {
                     //TODO - check if need to do diffrent func for that
 //                    currentSpecificItem.setLocation(Location.DefctiveArea);
-                    currentReport.setReportData(currentSpecificItem.toString());
+                    reportInformation += currentSpecificItem.toString() + "\n";
+                    currentReport.setReportData(reportInformation);
+                    reportInformation = "";
                 }
             }
         }
@@ -374,6 +384,7 @@ public class InventoryController {
             return null;
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Defective, currentDate);
+        String reportInformation = "";
         boolean flag = false;
         for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
         {
@@ -393,7 +404,9 @@ public class InventoryController {
                             {
                                 //TODO - check if need to do diffrent func for that
 //                                currentSpecificItem.setLocation(Location.DefctiveArea);
-                                currentReport.setReportData(currentSpecificItem.toString());
+                                reportInformation += currentSpecificItem.toString() + "\n";
+                                currentReport.setReportData(reportInformation);
+                                reportInformation = "";
                             }
                         }
                     }
@@ -414,6 +427,7 @@ public class InventoryController {
             return null;
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Defective, currentDate);
+        String reportInformation = "";
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = ItemsList.get(i);
@@ -425,7 +439,9 @@ public class InventoryController {
                     if (currentSpecificItem.getisDefected()) {
                         //TODO - check if need to do diffrent func for that
                         //                                currentSpecificItem.setLocation(Location.DefctiveArea);
-                        currentReport.setReportData(currentSpecificItem.toString());
+                        reportInformation += currentSpecificItem.toString() + "\n";
+                        currentReport.setReportData(reportInformation);
+                        reportInformation = "";
                     }
                 }
             }
@@ -441,6 +457,7 @@ public class InventoryController {
         {
             Item currentItem = this.ItemsList.get(i);
             currentItem.getDiscount().setStandardDiscount(_amount);
+            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
         }
     }
 
@@ -452,6 +469,8 @@ public class InventoryController {
         {
             Item currentItem = this.ItemsList.get(i);
             currentItem.getDiscount().setPercentageDiscount(_amount);
+            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
+
         }
     }
 
@@ -462,11 +481,11 @@ public class InventoryController {
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCategoryName().equals(_CategoryName))
-
-                //TODO - SET CategoryName in Item
-
+            if (currentItem.getCategoryName().equals(_CategoryName)){
                 currentItem.getDiscount().setPercentageDiscount(_amount);
+                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
+
+            }
         }
     }
 
@@ -477,11 +496,10 @@ public class InventoryController {
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCategoryName().equals(_CategoryName))
-
-                //TODO - SET CategoryName in Item
-
+            if (currentItem.getCategoryName().equals(_CategoryName)){
                 currentItem.getDiscount().setStandardDiscount(_amount);
+                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
+            }
         }
     }
 
@@ -500,6 +518,7 @@ public class InventoryController {
                         for (int w = 0; w < currentSubCategory.getAmount(); w++) {
                             Item currentItem = currentSubCategory.getItem(w);
                             currentItem.getDiscount().setStandardDiscount(_amount);
+                            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
                         }
                     }
                 }
@@ -522,9 +541,39 @@ public class InventoryController {
                         for (int w = 0; w < currentSubCategory.getAmount(); w++) {
                             Item currentItem = currentSubCategory.getItem(w);
                             currentItem.getDiscount().setPercentageDiscount(_amount);
+                            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
+
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public void SpecificStandardDiscount(double _amount, String _CatalogNum)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            if (currentItem.getCatalogNum().equals(_CatalogNum)){
+                currentItem.getDiscount().setStandardDiscount(_amount);
+                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
+            }
+        }
+    }
+
+    public void SpecificPercentageDiscount(double _amount, String _CatalogNum)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.ItemsList.size(); i++)
+        {
+            Item currentItem = this.ItemsList.get(i);
+            if (currentItem.getCatalogNum().equals(_CatalogNum)){
+                currentItem.getDiscount().setPercentageDiscount(_amount);
+                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
             }
         }
     }

@@ -453,7 +453,7 @@ public class InventoryController {
         {
             Item currentItem = this.ItemsList.get(i);
             currentItem.getDiscount().setPercentageDiscount(_amount);
-            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - (currentItem.getSellPrice() * _amount));
+            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
 
         }
     }
@@ -467,7 +467,7 @@ public class InventoryController {
             Item currentItem = this.ItemsList.get(i);
             if (currentItem.getCategoryName().equals(_CategoryName)){
                 currentItem.getDiscount().setPercentageDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - (currentItem.getSellPrice() * _amount));
+                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
 
             }
         }
@@ -525,7 +525,7 @@ public class InventoryController {
                         for (int w = 0; w < currentSubCategory.getAmount(); w++) {
                             Item currentItem = currentSubCategory.getItem(w);
                             currentItem.getDiscount().setPercentageDiscount(_amount);
-                            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - (currentItem.getSellPrice() * _amount));
+                            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
 
                         }
                     }
@@ -557,7 +557,7 @@ public class InventoryController {
             Item currentItem = this.ItemsList.get(i);
             if (currentItem.getCatalogNum().equals(_CatalogNum)){
                 currentItem.getDiscount().setPercentageDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - (currentItem.getSellPrice() * _amount));
+                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
             }
         }
     }

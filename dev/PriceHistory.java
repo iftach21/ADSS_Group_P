@@ -28,6 +28,6 @@ public class PriceHistory {
         return "PriceH istory: " +
                 "Buy price: " + buyPrice +
                 ", sell price: " + sellPrice +
-                ", updated in: " + currentDate;
+                ", updated in: " + currentDate + "\n";
     }
 }

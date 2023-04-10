@@ -12,6 +12,8 @@ public class Item {
     private int minQuantity;
     private int amount = 0;
     private TempLevel temperature;
+
+    //todo - consider to erase that
     private Location location = Location.Storage;
     private Discount discount;
     private List<specificItem> specificItemList;

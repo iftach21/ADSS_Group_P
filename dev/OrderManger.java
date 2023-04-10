@@ -198,15 +198,15 @@ public class OrderManger {
     public void print_all_orders_details(){
         System.out.println("pending:");
         for(Order order: pending_for_apporval){
-            System.out.println(order.getOrderNum());
+            order.print_order_detail();
         }
         System.out.println("approved:");
         for(Order order: approval){
-            System.out.println(order.getOrderNum());
+            order.print_order_detail();
         }
         System.out.println("history:");
         for(Order order: orders_history){
-            System.out.println(order.getOrderNum());
+            order.print_order_detail();
         }
     }
 }

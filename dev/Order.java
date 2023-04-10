@@ -92,6 +92,16 @@ public class Order {
         System.out.println("cost of the order: " + this.getCost());
         System.out.println("date: " + this.currentDate);
         System.out.println("Supplier name: " + this.supplier.getName());
+        System.out.println("items:");
+
+        for(Item item: this.itemList.keySet()){
+            System.out.println("-------------------------------------------------------------");
+            item.print_item();
+            System.out.println("base price per unit no discount's:"+this.supplier.getItems().get(item).getSecond());
+            System.out.println("amount :" +this.itemList.get(item).getFirst());
+            System.out.println("price :" +this.itemList.get(item).getSecond());
+            System.out.println("-------------------------------------------------------------");
+        }
     }
 
 

@@ -51,7 +51,10 @@ public class Main {
                         System.out.println("Please enter a valid option");
                         System.out.println("1.Supplier manger");
                         System.out.println("2.Order manger");
-                        System.out.println("3.Exit");
+                        System.out.println("3.insert demo data to the system for test and playing ");
+
+
+                        System.out.println("4.Exit");
                         option = scanner.nextLine();
                         continue;
                     }
@@ -353,7 +356,8 @@ public class Main {
                     System.out.println("2.approve order");
                     System.out.println("3.print all order number");
                     System.out.println("4.print all order's from supplier");
-                    System.out.println("5.get back to previous menu");
+                    System.out.println("5.print all order's from all supplier with all the details");
+                    System.out.println("6.get back to previous menu");
                     String choice_1 =scanner.nextLine();
                     option_1 = 0;
 
@@ -362,7 +366,7 @@ public class Main {
                         try
                         {
                             option_1 = Integer.parseInt(choice_1);
-                            if(option_1 < 1 || option_1 > 5)
+                            if(option_1 < 1 || option_1 > 6)
                             {
                                 System.out.println("Please enter a valid option");
                                 choice_1 = scanner.nextLine();
@@ -466,6 +470,8 @@ public class Main {
                             }
                             break;
                         case 5:
+                            orderManger.print_all_orders_details();
+                        case 6:
                             System.out.println("Redirecting back to main menu");
                             break;
                     }
@@ -508,7 +514,6 @@ public class Main {
                     orderManger.assing_Orders_to_Suppliers(maplist,supplier_manger,20);
                     System.out.println("data inseted and ready");
                     break;
-
                 case 4:
                     System.out.println("Thank you and goodbye");
                     System.exit(0);

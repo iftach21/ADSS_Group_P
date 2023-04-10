@@ -1,7 +1,110 @@
+import java.util.Date;
 import java.util.Scanner;
 
 public class interfaceWorker {
+    private final InventoryController Inventory;
+    private final ReportController Reports;
     public interfaceWorker() {
+        this.Inventory = new InventoryController();
+        this.Reports = new ReportController();
+    }
+
+    public void interfaceStartup() {
+        // -------------------------------------------------------
+        // Demo categories, general items, and specific items for demonstration
+        // -------------------------------------------------------
+
+        //New dates
+        Date dateMilk1 = new Date(2023, 10, 7);
+        Date dateMilk2 = new Date(2024, 1, 9);
+        Date dateMilk3 = new Date(2025, 5, 11);
+        Date dateMilk4 = new Date(2026, 6, 13);
+
+        //Categories
+        Inventory.getCategoryControl().addCategory("Dairy");
+        Inventory.getCategoryControl().addCategory("Cleaning");
+        //Default
+        Inventory.getCategoryControl().addCategory("Etc");
+
+        //Sub-categories
+        subCategory milksSubCat = new subCategory("Milk");
+        subCategory buttersSubCat = new subCategory("Butter");
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Dairy"), milksSubCat);
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Dairy"), buttersSubCat);
+
+        subCategory toiletSubCat = new subCategory("Toilet Paper");
+        subCategory washingMachineSubCat = new subCategory("Washing Machine Gels");
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), toiletSubCat);
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Cleaning"), washingMachineSubCat);
+
+        //Default
+        subCategory allSubCat = new subCategory("All");
+        Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
+
+        //General Items
+        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2, "Dairy");
+        milk3Percent.addNewPrice(10, 20);
+        milk3Percent.addNewPrice(30,40);
+
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2, "Dairy");
+        soyMilk.addNewPrice(30, 40);
+        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12, "Dairy");
+        regularButter.addNewPrice(50, 60);
+
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular, 20,"Cleaning");
+        toiletPaper.addNewPrice(20, 40);
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular, 10,"Cleaning");
+        sodGel.addNewPrice(20, 26);
+
+        //Specific Items
+        specificItem milk1 = new specificItem(dateMilk1, false, Location.Store);
+        specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage);
+        specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage);
+        specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage);
+        milk3Percent.addSpecificItem(milk1);
+        milk3Percent.addSpecificItem(milk2);
+        milk3Percent.addSpecificItem(milk3);
+        milk3Percent.addSpecificItem(milk4);
+
+        specificItem soyMilk1 = new specificItem(dateMilk1,false, Location.Store);
+        specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store);
+        specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store);
+        specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store);
+        soyMilk.addSpecificItem(soyMilk1);
+        soyMilk.addSpecificItem(soyMilk2);
+        soyMilk.addSpecificItem(soyMilk3);
+        soyMilk.addSpecificItem(soyMilk4);
+
+        specificItem butter1 = new specificItem(dateMilk1, false, Location.Store);
+        specificItem butter2 = new specificItem(dateMilk2, false, Location.Store);
+        regularButter.addSpecificItem(butter1);
+        regularButter.addSpecificItem(butter2);
+
+        specificItem toiletPaper1 = new specificItem(null, false, Location.Store);
+        specificItem toiletPaper2 = new specificItem(null, false, Location.Store);
+        specificItem toiletPaper3 = new specificItem(null, false, Location.Store);
+        toiletPaper.addSpecificItem(toiletPaper1);
+        toiletPaper.addSpecificItem(toiletPaper2);
+        toiletPaper.addSpecificItem(toiletPaper3);
+
+        specificItem sodGel1 = new specificItem(null, false, Location.Store);
+        specificItem sodGel2 = new specificItem(null, true, Location.Storage);
+        sodGel.addSpecificItem(sodGel1);
+        sodGel.addSpecificItem(sodGel2);
+
+
+        milksSubCat.addGeneralItem(milk3Percent);
+        milksSubCat.addGeneralItem(soyMilk);
+        buttersSubCat.addGeneralItem(regularButter);
+        toiletSubCat.addGeneralItem(toiletPaper);
+        washingMachineSubCat.addGeneralItem(sodGel);
+
+        Inventory.addGeneralItem(milk3Percent);
+        Inventory.addGeneralItem(soyMilk);
+        Inventory.addGeneralItem(regularButter);
+        Inventory.addGeneralItem(toiletPaper);
+        Inventory.addGeneralItem(sodGel);
+
     }
 
     public void interfaceWorkerLogin() {
@@ -37,21 +140,20 @@ public class interfaceWorker {
 
                         switch (Sub_Ans) {
                             case "1":
-//                                    this.Shortge_Report("All");
+                                Reports.addReport(Inventory.shortageReportFull());
                                 break;
 
                             case "2":
-                                System.out.println("Please enter the category you would like to provide a shortage report for:");
-                                Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.Shortge_Report(Cat_ans);
+                                System.out.println("For which category?");
+                                Scanner categoryInput = new Scanner(System.in);
+                                String categoryName = categoryInput.nextLine();
+                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
                                 break;
-
                             case "3":
-                                System.out.println("Please enter the product you would like to provide a shortage report for:");
+                                System.out.println("Please enter the catalog number for the product you would like to provide a shortage report for:");
                                 Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.Shortge_Report(Pro_ans);
+                                String productNumber = Product.nextLine();
+                                Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
                                 break;
 
                             case "0":
@@ -84,21 +186,21 @@ public class interfaceWorker {
 
                         switch (Sub_Ans) {
                             case "1":
-//                                    this.Inventory_Report("All");
+                                Reports.addReport(Inventory.FullCountingReport());
                                 break;
 
                             case "2":
                                 System.out.println("Please enter the category you would like to provide a inventory counting report for:");
                                 Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.Inventory_Report(Cat_ans);
+                                String categoryName = Category.nextLine();
+                                Reports.addReport(Inventory.CategoryCountingReport(categoryName));
                                 break;
 
                             case "3":
-                                System.out.println("Please enter the product you would like to provide a inventory counting report for:");
                                 Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.Inventory_Report(Pro_ans);
+                                System.out.println("Please enter the catalog number of the product you would like to provide a inventory counting report for:");
+                                String CatalogNum = Product.nextLine();
+                                Reports.addReport(Inventory.ItemCountingReport(CatalogNum));
                                 break;
 
                             case "0":
@@ -131,21 +233,21 @@ public class interfaceWorker {
 
                         switch (Sub_Ans) {
                             case "1":
-//                                    this.Defective_Report("All");
+                                Reports.addReport(Inventory.FullDefectiveReport());
                                 break;
 
                             case "2":
                                 System.out.println("Please enter the category you would like to provide a defective products report for:");
                                 Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.Defective_Report(Cat_ans);
+                                String categoryName = Category.nextLine();
+                                Reports.addReport(Inventory.CategoryDefectiveReport(categoryName));
                                 break;
 
                             case "3":
                                 System.out.println("Please enter the product you would like to provide a defective products report for:");
                                 Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.Defective_Report(Pro_ans);
+                                String CatalogNum = Product.nextLine();
+                                Reports.addReport(Inventory.ItemDefectiveReport(CatalogNum));
                                 break;
 
                             case "0":
@@ -165,46 +267,11 @@ public class interfaceWorker {
                 //Provide a price history report for a product
                 //-----------------------
                 case "4": {
-                    boolean flag = true;
-                    while (flag) {
-                        System.out.println("which history report to provide:");
-                        System.out.println("1: To all products");
-                        System.out.println("2: By Category");
-                        System.out.println("3: For a specific product");
-                        System.out.println("0: Return to the Main Menu");
-
-                        Scanner Second_obj = new Scanner(System.in);
-                        String Sub_Ans = Second_obj.nextLine();  // Read user input
-
-                        switch (Sub_Ans) {
-                            case "1":
-//                                    this.History_Report("All");
-                                break;
-
-                            case "2":
-                                System.out.println("Please enter the category you would like to provide a history report for:");
-                                Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.History_Report(Cat_ans);
-                                break;
-
-                            case "3":
-                                System.out.println("Please enter the product you would like to provide a history report for:");
-                                Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.History_Report(Pro_ans);
-                                break;
-
-                            case "0":
-                                System.out.println("Going back to the Main Menu");
-                                flag = false;
-                                break;
-
-                            default:
-                                System.out.println("Invalid choice");
-                                break;
-                        }
-                    }
+                    System.out.println("What is the catalog number for the product?");
+                    Scanner Input = new Scanner(System.in);
+                    String catalogNumber = Input.nextLine();
+                    Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
+                    //Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
                     break;
                 }
 
@@ -212,10 +279,15 @@ public class interfaceWorker {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "5": {
-                    System.out.println("please enter catalog number:");
-                    Scanner Second_obj = new Scanner(System.in);
-                    String Sub_Ans = Second_obj.nextLine();  // Read user input
-//                        this.Insert_Defective();
+                    System.out.println("What is the item ID for the item to be set as defected?");
+                    Scanner defectedItemInput = new Scanner(System.in);
+                    int defectedItemID = Integer.parseInt(defectedItemInput.nextLine());
+                    specificItem currentSpecific = Inventory.findSpecificItem(defectedItemID);
+                    currentSpecific.setDefected(true);
+                    currentSpecific.setLocation(Location.Storage);
+                    System.out.println("Item numbered " + defectedItemID + " has been set has defected and" +
+                            "moved into the warehouse storage." );
+                    System.out.println(currentSpecific.toString());
                     break;
                 }
 

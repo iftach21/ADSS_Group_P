@@ -321,11 +321,6 @@ public class InventoryController {
                     }
                 }
             }
-            else
-            {
-                System. out. println("There is no such category");
-                return null;
-            }
         }
         return currentReport;
     }

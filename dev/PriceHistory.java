@@ -25,8 +25,7 @@ public class PriceHistory {
 
     @Override
     public String toString() {
-        return "PriceH istory: " +
-                "Buy price: " + buyPrice +
+        return "Buy price: " + buyPrice +
                 ", sell price: " + sellPrice +
                 ", updated in: " + currentDate + "\n";
     }

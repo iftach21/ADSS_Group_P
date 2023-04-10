@@ -247,7 +247,7 @@ public class InventoryController {
             if (currentItem.getCatalogNum().equals(catalogNumber)){
                 reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n";
                 for (int j = 0; j < currentItem.getPriceHistorySize(); j++){
-                    reportInformation += currentItem.getPriceHistorySpecific(j).toString();
+                    reportInformation += currentItem.getPriceHistorySpecific(j).toString() + "\n";
                 }
                 currentReport.setReportData(reportInformation);
                 return currentReport;

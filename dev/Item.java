@@ -80,6 +80,7 @@ public class Item {
         return amount;
     }
 
+
     public int getPriceHistorySize() {
         return priceHistoryList.size();
     }

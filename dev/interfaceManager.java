@@ -188,6 +188,7 @@ public class interfaceManager {
                         System.out.println("6: Delete subcategory");
                         System.out.println("7: Delete general item");
                         System.out.println("8: Delete specific item");
+                        System.out.println("9: Move a specific item");
                         System.out.println("0: Return to the Main Menu");
 
                         Scanner Second_obj = new Scanner(System.in);
@@ -279,6 +280,7 @@ public class interfaceManager {
                             case "4":
                                 //User's inputs
                                 Date currentDate = new Date();
+                                currentDate = null;
                                 System.out.println("What is the catalog of the general item?");
                                 itemInput = new Scanner(System.in);
                                 String itemCatalogNumber = itemInput.nextLine();
@@ -354,6 +356,16 @@ public class interfaceManager {
                                 else {
                                     System.out.println("Could not find such an item.");
                                 }
+                                break;
+                            //Move specific item
+                            case "9":
+                                System.out.println("What is the item ID for the specific item you wish to move?");
+                                Input = new Scanner(System.in);
+                                itemID = Integer.parseInt(Input.nextLine());
+                                currentSpecificItem = Inventory.findSpecificItem(itemID);
+                                currentSpecificItem.moveSpecificItem();
+                                System.out.println("Item has been moved!");
+                                System.out.println(currentSpecificItem.toString());
                                 break;
                             case "0":
                                 System.out.println("Going back to the Main Menu");

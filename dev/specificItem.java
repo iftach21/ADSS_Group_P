@@ -42,6 +42,10 @@ public class specificItem{
         return isDefected;
     }
 
+    public String getLocationString() {
+        return location.toString();
+    }
+
     public boolean isDefected()
     {
         if (isExpired() == true)
@@ -49,6 +53,15 @@ public class specificItem{
             isDefected = true;
         }
         return isDefected;
+    }
+
+    public void moveSpecificItem(){
+        if (this.getLocationString().equals("Store")){
+            this.location = Location.Storage;
+        }
+        else {
+            this.location = Location.Store;
+        }
     }
 
     @Override

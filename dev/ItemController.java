@@ -8,9 +8,9 @@ public class ItemController {
         this.ItemList = new ArrayList<Item>();
     }
 
-    public Item addItem(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity)
+    public Item addItem(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity, String CategoryName)
     {
-        Item _item = new Item(name, catalogNum, weight, manufacturer, temperature, minQuantity);
+        Item _item = new Item(name, catalogNum, weight, manufacturer, temperature, minQuantity, CategoryName);
         ItemList.add(_item);
         return _item;
     }

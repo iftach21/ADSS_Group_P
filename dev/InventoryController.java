@@ -285,69 +285,78 @@ public class InventoryController {
         return categoryController;
     }
     public Report FullCountingReport() {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return null;
+        //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
-        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++) {
+        String reportInformation = "";
+        //Iterate every category
+        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++){
             Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
-            for (int j = 0; j < currentCategory.getAmount(); j++) {
+            //Iterate every sub-category
+            for (int j = 0; j < currentCategory.getAmount(); j++){
                 subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                for (int w = 0; w < currentSubCategory.getAmount(); w++) {
+                //Iterate every general-item
+                for (int w = 0; w < currentSubCategory.getAmount(); w++){
                     Item currentItem = currentSubCategory.getItem(w);
-                    currentReport.setReportData(currentItem.toString());
+                    //Add the information collected to the report data
+                    reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                            "Total amount: " + currentItem.getAmount() + "\n";
+                    currentReport.setReportData(reportInformation);
+                    //Reset variables
+                    reportInformation = "";
                 }
             }
         }
         return currentReport;
     }
 
-    public Report CategoryCountingReport(String _CategoryName) {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return null;
+    public Report CategoryCountingReport(String categoryName) {
+        //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
-        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
-        {
-            Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
-            if (currentCategory.getCategoryName().equals(_CategoryName))
-            {
-                for (int j = 0; j < currentCategory.getAmount(); j++){
-                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
-                    for (int w = 0; w < currentSubCategory.getAmount(); w++)
-                    {
-                        Item currentItem = currentSubCategory.getItem(w);
-                        currentReport.setReportData(currentItem.toString());
-                    }
-                }
-            }
-            else
-            {
-                System. out. println("There is no such category");
-                return null;
+        Category currentCategory = this.CategoryControl.getCategory(categoryName);
+        String reportInformation = "";
+
+        for (int j = 0; j < currentCategory.getAmount(); j++){
+            subCategory currentSubCategory = currentCategory.getSubCategory(j);
+            //Iterate every general-item
+            for (int w = 0; w < currentSubCategory.getAmount(); w++){
+                Item currentItem = currentSubCategory.getItem(w);
+                //Add the information collected to the report data
+                reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                        "Total amount: " + currentItem.getAmount() + "\n";
+                currentReport.setReportData(reportInformation);
+                //Reset variables
+                reportInformation = "";
             }
         }
         return currentReport;
     }
 
 
-    public Report ItemCountingReport(String CatlogNum)
+    public Report ItemCountingReport(String catalogNumber)
     {
-        if (this.ItemsList.size() == 0)
-            return null;
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item CurrentItem = this.ItemsList.get(i);
-            if (CurrentItem.getCatalogNum().equals(CatlogNum))
-                currentReport.setReportData(CurrentItem.toString());
+        Item currentItem;
+        String reportInformation = "";
+        for (int i = 0; i < this.ItemsList.size(); i++){
+            currentItem = this.ItemsList.get(i);
+            if (currentItem.getCatalogNum().equals(catalogNumber)){
+                //Add the information collected to the report data
+                reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n" +
+                        "Total amount: " + currentItem.getAmount() + "\n";
+                currentReport.setReportData(reportInformation);
+                //Reset variables
+                reportInformation = "";
+            }
         }
         return currentReport;
     }
 
     public Report FullDefectiveReport()
     {
+        String reportInformation = "";
         if (this.CategoryControl.getCategoriesList().size() == 0)
             return null;
         Date currentDate = new Date();
@@ -362,7 +371,9 @@ public class InventoryController {
                 {
                     //TODO - check if need to do diffrent func for that
 //                    currentSpecificItem.setLocation(Location.DefctiveArea);
-                    currentReport.setReportData(currentSpecificItem.toString());
+                    reportInformation += currentSpecificItem.toString() + "\n";
+                    currentReport.setReportData(reportInformation);
+                    reportInformation = "";
                 }
             }
         }
@@ -370,6 +381,7 @@ public class InventoryController {
     }
 
     public Report CategoryDefectiveReport(String _CategoryName) {
+        String reportInformation = "";
         if (this.CategoryControl.getCategoriesList().size() == 0)
             return null;
         Date currentDate = new Date();
@@ -393,7 +405,9 @@ public class InventoryController {
                             {
                                 //TODO - check if need to do diffrent func for that
 //                                currentSpecificItem.setLocation(Location.DefctiveArea);
-                                currentReport.setReportData(currentSpecificItem.toString());
+                                reportInformation += currentSpecificItem.toString() + "\n";
+                                currentReport.setReportData(reportInformation);
+                                reportInformation = "";
                             }
                         }
                     }
@@ -410,6 +424,7 @@ public class InventoryController {
 
     public Report ItemDefectiveReport(String CatalogNum)
     {
+        String reportInformation = "";
         if (this.ItemsList.size() == 0)
             return null;
         Date currentDate = new Date();
@@ -425,7 +440,9 @@ public class InventoryController {
                     if (currentSpecificItem.getisDefected()) {
                         //TODO - check if need to do diffrent func for that
                         //                                currentSpecificItem.setLocation(Location.DefctiveArea);
-                        currentReport.setReportData(currentSpecificItem.toString());
+                        reportInformation += currentSpecificItem.toString() + "\n";
+                        currentReport.setReportData(reportInformation);
+                        reportInformation = "";
                     }
                 }
             }

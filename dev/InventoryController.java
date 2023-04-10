@@ -321,6 +321,11 @@ public class InventoryController {
                     }
                 }
             }
+            else
+            {
+                System. out. println("There is no such category");
+                return null;
+            }
         }
         return currentReport;
     }
@@ -436,7 +441,6 @@ public class InventoryController {
         {
             Item currentItem = this.ItemsList.get(i);
             currentItem.getDiscount().setStandardDiscount(_amount);
-            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
         }
     }
 
@@ -448,8 +452,6 @@ public class InventoryController {
         {
             Item currentItem = this.ItemsList.get(i);
             currentItem.getDiscount().setPercentageDiscount(_amount);
-            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
-
         }
     }
 
@@ -460,11 +462,11 @@ public class InventoryController {
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCategoryName().equals(_CategoryName)){
-                currentItem.getDiscount().setPercentageDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
+            if (currentItem.getCategoryName().equals(_CategoryName))
 
-            }
+                //TODO - SET CategoryName in Item
+
+                currentItem.getDiscount().setPercentageDiscount(_amount);
         }
     }
 
@@ -475,10 +477,11 @@ public class InventoryController {
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCategoryName().equals(_CategoryName)){
+            if (currentItem.getCategoryName().equals(_CategoryName))
+
+                //TODO - SET CategoryName in Item
+
                 currentItem.getDiscount().setStandardDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
-            }
         }
     }
 
@@ -497,7 +500,6 @@ public class InventoryController {
                         for (int w = 0; w < currentSubCategory.getAmount(); w++) {
                             Item currentItem = currentSubCategory.getItem(w);
                             currentItem.getDiscount().setStandardDiscount(_amount);
-                            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
                         }
                     }
                 }
@@ -520,39 +522,9 @@ public class InventoryController {
                         for (int w = 0; w < currentSubCategory.getAmount(); w++) {
                             Item currentItem = currentSubCategory.getItem(w);
                             currentItem.getDiscount().setPercentageDiscount(_amount);
-                            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
-
                         }
                     }
                 }
-            }
-        }
-    }
-
-    public void SpecificStandardDiscount(double _amount, String _CatalogNum)
-    {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCatalogNum().equals(_CatalogNum)){
-                currentItem.getDiscount().setStandardDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
-            }
-        }
-    }
-
-    public void SpecificPercentageDiscount(double _amount, String _CatalogNum)
-    {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCatalogNum().equals(_CatalogNum)){
-                currentItem.getDiscount().setPercentageDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
             }
         }
     }

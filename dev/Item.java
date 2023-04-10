@@ -71,4 +71,12 @@ public class Item {
     public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
+    public void print_item(){
+        System.out.println("name:"+this.name);
+        System.out.println("catalog number : " +this.catalogNum);
+        System.out.println("expirationDate :" +this.expirationDate);
+        System.out.println("weight: "+this.weight );
+        System.out.println("catalog Name :" +this.catalogName );
+        System.out.println("temperature :"+ this.temperature);
+    }
 }

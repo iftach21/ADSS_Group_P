@@ -29,6 +29,9 @@ public class Main {
         String option;
         int choice = 0;
 
+
+
+        //this is the the user interactive display
         while (true) {
             //main menu
             System.out.println("Hello this is the manger suppliers board press on the right option");
@@ -44,6 +47,7 @@ public class Main {
                     choice = Integer.parseInt(option);
                     if(choice < 1 || choice > 4)
                     {
+                        //the main menu there he can choose what to do
                         System.out.println("Please enter a valid option");
                         System.out.println("1.Supplier manger");
                         System.out.println("2.Order manger");
@@ -250,6 +254,7 @@ public class Main {
                             System.out.println("his phone number :");
                             String phone_1 = scanner.next();
                             phone_1 = checkNumber(phone_1);
+                            //give an output if the supplier not exist
                             supplier_manger.update_contact_preson(name_s1, name_s2, phone_1);
                             break;
 
@@ -307,7 +312,8 @@ public class Main {
                             System.out.println("name of the item");
                             String item_c5 = scanner.next();
                             item_c5 = checkName(item_c5);
-                            supplier_manger.remove_item_to_supplier(name_s4, item_c5);
+                            if(!supplier_manger.remove_item_to_supplier(name_s4, item_c5)){
+                                System.out.println("Supplier or item does not exist");                            }
                             break;
 
                         case 6:
@@ -422,7 +428,7 @@ public class Main {
                                 }
                                 if (option_11 == 2) {
                                     if(!orderManger.assing_Orders_to_Suppliers(itemlist, supplier_manger, store_number)){
-                                        System.out.println("failed to make an order");
+                                        System.out.println("failed to make an order make sure that the items can be provied");
                                     }
                                     break;
                                 }
@@ -519,6 +525,9 @@ public class Main {
     }
 }
 
+
+
+///this fuction use to cheak if the input of the user is correct
 public static String checkName(String input)
 {
     Scanner scanner = new Scanner(System.in);

@@ -60,6 +60,7 @@ public class Order {
         this.itemList = itemList;
     }
 
+    //fixed cost
     public float getCost() {
 
         return (float) (cost*supplier.getContract().total_discount);
@@ -84,6 +85,13 @@ public class Order {
         for(Item item :this.itemList.keySet()){
             System.out.println(item.getName());
         }
+    }
+    public void print_order_detail(){
+        System.out.println("Order number: " +this.orderNum);
+        System.out.println("Store number: " + this.Store_number);
+        System.out.println("cost of the order: " + this.getCost());
+        System.out.println("date: " + this.currentDate);
+        System.out.println("Supplier name: " + this.supplier.getName());
     }
 
 

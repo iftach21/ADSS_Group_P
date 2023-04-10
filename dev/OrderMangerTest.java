@@ -396,4 +396,16 @@ class OrderMangerTest {
         supplier_1.remove_item(item1.getName());
         assertFalse(supplier_1.getItems().containsKey(item1));
 
-}}
+}
+//test 10
+    @Test
+    void test_only_supplier_exist(){
+        Supplier_Manger masupplier=new Supplier_Manger();
+        Contact_Person contactPerson = new Contact_Person("John Smith", "555-1234");
+        NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
+        masupplier.getSuppliers().add(supplier_1);
+        assertEquals(1,masupplier.getSuppliers().size());
+
+
+    }
+}

@@ -140,4 +140,17 @@ public class Item {
         PriceHistory currentPrice = new PriceHistory(buyPrice, sellPrice, currentDate);
         this.priceHistoryList.add(currentPrice);
     }
+
+    public double getSellPrice(){
+        int lastPriceHistory = this.priceHistoryList.size() - 1;
+        return this.priceHistoryList.get(lastPriceHistory).getSellPrice();
+    }
+
+    public double getBuyPrice()
+    {
+        int lastPriceHistory = this.priceHistoryList.size() - 1;
+        return this.priceHistoryList.get(lastPriceHistory).getBuyPrice();
+    }
+
+
 }

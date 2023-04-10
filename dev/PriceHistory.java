@@ -27,6 +27,6 @@ public class PriceHistory {
     public String toString() {
         return "Buy price: " + buyPrice +
                 ", sell price: " + sellPrice +
-                ", updated in: " + currentDate;
+                ", updated in: " + currentDate + "\n";
     }
 }

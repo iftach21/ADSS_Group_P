@@ -533,10 +533,17 @@ public class interfaceManager {
                                     Inventory.SubCategoryPercentageDiscount(discountAmountSub, CategoryAnswerForSub, SubCategoryAnswer);
                                 break;
                             case "4":
-                                System.out.println("Please enter the product you would like to provide a discount:");
+                                System.out.println("Please enter the catalog number of the item you would like to provide a discount:");
                                 Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.Update_discount(Pro_ans);
+                                String CatalogNumber = Product.nextLine();
+                                System.out.println("Discount by: P) Percentage, S) Standard");
+                                String SpecificKindAnswer = Product.nextLine();
+                                System.out.println("How much:");
+                                double discountAmountSpecific = Product.nextDouble();
+                                if (SpecificKindAnswer.equals("S"))
+                                    Inventory.SpecificStandardDiscount(discountAmountSpecific, CatalogNumber);
+                                if (SpecificKindAnswer.equals("P"))
+                                    Inventory.SpecificPercentageDiscount(discountAmountSpecific, CatalogNumber);
                                 break;
 
                             case "0":

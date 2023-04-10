@@ -462,6 +462,50 @@ public class InventoryController {
         }
     }
 
+    public void SubCategoryStandardDiscount(double _amount, String _CategoryName, String _Subcategory)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
+        {
+            Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
+            if (currentCategory.getCategoryName().equals(_CategoryName))
+            {
+                for (int j = 0; j < currentCategory.getAmount(); j++) {
+                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                    if (currentSubCategory.getSubCategoryName().equals(_Subcategory)) {
+                        for (int w = 0; w < currentSubCategory.getAmount(); w++) {
+                            Item currentItem = currentSubCategory.getItem(w);
+                            currentItem.getDiscount().setStandardDiscount(_amount);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void SubCategoryPercentageDiscount(double _amount, String _CategoryName, String _Subcategory)
+    {
+        if (this.CategoryControl.getCategoriesList().size() == 0)
+            return;
+        for (int i = 0; i < this.CategoryControl.getCategoriesList().size(); i++)
+        {
+            Category currentCategory = this.CategoryControl.getCategoriesList().get(i);
+            if (currentCategory.getCategoryName().equals(_CategoryName))
+            {
+                for (int j = 0; j < currentCategory.getAmount(); j++) {
+                    subCategory currentSubCategory = currentCategory.getSubCategory(j);
+                    if (currentSubCategory.getSubCategoryName().equals(_Subcategory)) {
+                        for (int w = 0; w < currentSubCategory.getAmount(); w++) {
+                            Item currentItem = currentSubCategory.getItem(w);
+                            currentItem.getDiscount().setPercentageDiscount(_amount);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 
 }

@@ -18,7 +18,7 @@ public class Item {
     private List<PriceHistory> priceHistoryList;
 
 
-    public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity)
+    public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity, String categoryName)
     {
         this.name = name;
         this.catalogNum = catalogNum;
@@ -29,7 +29,7 @@ public class Item {
         this.specificItemList = new ArrayList<specificItem>();
         this.priceHistoryList = new ArrayList<PriceHistory>();
         this.discount = new Discount();
-        this.categoryName = null;
+        this.categoryName = categoryName;
     }
 
     public Discount getDiscount() {

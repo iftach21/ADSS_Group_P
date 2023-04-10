@@ -2,8 +2,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class interfaceManager {
-    private InventoryController Inventory;
-    private ReportController Reports;
+    private final InventoryController Inventory;
+    private final ReportController Reports;
     public interfaceManager() {
         this.Inventory = new InventoryController();
         this.Reports = new ReportController();
@@ -42,17 +42,17 @@ public class interfaceManager {
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
-        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2);
+        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2, "Dairy");
         milk3Percent.addNewPrice(10, 20);
 
-        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2);
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2, "Dairy");
         soyMilk.addNewPrice(30, 40);
-        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12);
+        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12, "Dairy");
         regularButter.addNewPrice(50, 60);
 
-        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular, 20);
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular, 20,"Cleaning");
         toiletPaper.addNewPrice(20, 40);
-        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular, 10);
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular, 10,"Cleaning");
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
@@ -222,6 +222,9 @@ public class interfaceManager {
                                 System.out.println("What is the catalog number for the new general item?");
                                 itemInput = new Scanner(System.in);
                                 String catalogNumber = itemInput.nextLine();
+                                System.out.println("What is the category name for the new general item?");
+                                itemInput = new Scanner(System.in);
+                                String CategoryName = itemInput.nextLine();
                                 System.out.println("What is the weight for the new general item?");
                                 itemInput = new Scanner(System.in);
                                 double itemWeight = Double.parseDouble(itemInput.nextLine());
@@ -240,7 +243,7 @@ public class interfaceManager {
                                 System.out.println("What is the minimum quantity of the product?");
                                 itemInput = new Scanner(System.in);
                                 int itemSize = Integer.parseInt(itemInput.nextLine());
-                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, itemMan, currentTemp, itemSize);
+                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, itemMan, currentTemp, itemSize,CategoryName);
 
                                 //Add price history for item
                                 System.out.println("What is the buying price of the item?");
@@ -502,10 +505,19 @@ public class interfaceManager {
                                 break;
 
                             case "3":
-                                System.out.println("Please enter the subcategory you would like to provide a discount:");
                                 Scanner Subcategory = new Scanner(System.in);
-                                String Sub_ans = Subcategory.nextLine();
-//                                    this.Update_discount(Pro_ans);
+                                System.out.println("For which category do you want to give discount:");
+                                String CategoryAnswerForSub = Subcategory.nextLine();
+                                System.out.println("For which subcategory do you want to give discount:");
+                                String SubCategoryAnswer = Subcategory.nextLine();
+                                System.out.println("Discount by: P) Percentage, S) Standard");
+                                String SubkindAnswer = Subcategory.nextLine();
+                                System.out.println("How much:");
+                                double discountAmountSub = Subcategory.nextDouble();
+                                if (SubkindAnswer.equals("S"))
+                                    Inventory.SubCategoryStandardDiscount(discountAmountSub, CategoryAnswerForSub, SubCategoryAnswer);
+                                if (SubkindAnswer.equals("P"))
+                                    Inventory.SubCategoryPercentageDiscount(discountAmountSub, CategoryAnswerForSub, SubCategoryAnswer);
                                 break;
                             case "4":
                                 System.out.println("Please enter the product you would like to provide a discount:");

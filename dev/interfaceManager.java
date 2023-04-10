@@ -279,6 +279,7 @@ public class interfaceManager {
                             case "4":
                                 //User's inputs
                                 Date currentDate = new Date();
+                                currentDate = null;
                                 System.out.println("What is the catalog of the general item?");
                                 itemInput = new Scanner(System.in);
                                 String itemCatalogNumber = itemInput.nextLine();

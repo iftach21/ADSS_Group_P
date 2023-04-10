@@ -237,6 +237,29 @@ public class InventoryController {
         return currentReport;
     }
 
+    public Report priceHistoryReport(String catalogNumber){
+        Date currentDate = new Date();
+        Report currentReport = new Report(reportType.PriceHistory, currentDate);
+        Item currentItem;
+        String reportInformation = "";
+        for (int i = 0; i < ItemsList.size(); i++){
+            currentItem = ItemsList.get(i);
+            if (currentItem.getCatalogNum().equals(catalogNumber)){
+                reportInformation += currentItem.getName() + ", Catalog Number: " + currentItem.getCatalogNum() + "\n";
+                for (int j = 0; j < currentItem.getPriceHistorySize(); j++){
+                    reportInformation += currentItem.getPriceHistorySpecific(j).toString();
+                }
+                currentReport.setReportData(reportInformation);
+                return currentReport;
+            }
+        }
+        //If there are no shortages
+        if (currentReport.getReportInformation().equals("")){
+            currentReport.setReportData("There is no price history for the product.");
+        }
+        return currentReport;
+    }
+
     //Method 7: returnTempLevel
     //This method returns a TempLevel given the user's chouse
     public TempLevel returnTempLevel(String userInput){

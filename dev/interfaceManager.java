@@ -44,6 +44,7 @@ public class interfaceManager {
         //General Items
         Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2, "Dairy");
         milk3Percent.addNewPrice(10, 20);
+        milk3Percent.addNewPrice(30,40);
 
         Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2, "Dairy");
         soyMilk.addNewPrice(30, 40);
@@ -559,46 +560,11 @@ public class interfaceManager {
                 //Provide a price history report for a product
                 //-----------------------
                 case "7": {
-                    boolean flag = true;
-                    while (flag) {
-                        System.out.println("which history report to provide:");
-                        System.out.println("1: To all products");
-                        System.out.println("2: By Category");
-                        System.out.println("3: For a specific product");
-                        System.out.println("0: Return to the Main Menu");
-
-                        Scanner Second_obj = new Scanner(System.in);
-                        String Sub_Ans = Second_obj.nextLine();  // Read user input
-
-                        switch (Sub_Ans) {
-                            case "1":
-//                                    this.History_Report("All");
-                                break;
-
-                            case "2":
-                                System.out.println("Please enter the category you would like to provide a history report for:");
-                                Scanner Category = new Scanner(System.in);
-                                String Cat_ans = Category.nextLine();
-//                                    this.History_Report(Cat_ans);
-                                break;
-
-                            case "3":
-                                System.out.println("Please enter the product you would like to provide a history report for:");
-                                Scanner Product = new Scanner(System.in);
-                                String Pro_ans = Product.nextLine();
-//                                    this.History_Report(Pro_ans);
-                                break;
-
-                            case "0":
-                                System.out.println("Going back to the Main Menu");
-                                flag = false;
-                                break;
-
-                            default:
-                                System.out.println("Invalid choice");
-                                break;
-                        }
-                    }
+                    System.out.println("What is the catalog number for the product?");
+                    Scanner Input = new Scanner(System.in);
+                    String catalogNumber = Input.nextLine();
+                    Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
+                    //Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
                     break;
                 }
 

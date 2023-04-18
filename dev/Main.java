@@ -1,123 +1,134 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        //Making mock transfer system.
 
-        boolean connectionActive = true;
+        //Creating Sites for destinations:
+        //SitesList for siteController
+        List<Site> mock_Sites = new ArrayList<>();
 
-        while(connectionActive){
-        try {
-            System.out.println("are you employee or Manager?");
-            System.out.println("1 = employee");
-            System.out.println("2 = Manager ");
+        //Creating 6 Sites:
+        Site site1 = new Site(0, "Coca-Cola", "HaZionut 12 Bnei-Brak", "03-4789653", "Shmuel");
+        Site site2 = new Site(1, "Tnuva", "zion 100 Beer-Sheva", "09-1001002", "Ramiel");
+        Site site3 = new Site(2, "Super-Li Ashkelon", "Lola 97 Ashkelon", "08-6543210", "Taco");
+        Site site4 = new Site(3,"Super-Li Haifa", "Bahaian-Gardens 1700", "08-1231700", "Alicia");
+        Site site5 = new Site(4,"Super-Li Eilat", "AnotherUglyStreet 46 Eilat", "02-0000000", "Johnson");
+        Site site6 = new Site(5,"Osem", "HaNachshon 89 Tel-Aviv", "09-7689809", "Ron");
 
-            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-            int ans = myObj.nextInt();
-            BossInterface in = new BossInterface();
-            WorkerInterface win = new WorkerInterface();
-            initiation();
-            myObj.nextLine();
-            //worker log in
-            if (ans == 1) {
+        //Add these sites to the list:
+        mock_Sites.add(site1);
+        mock_Sites.add(site2);
+        mock_Sites.add(site3);
+        mock_Sites.add(site4);
+        mock_Sites.add(site5);
+        mock_Sites.add(site6);
 
-                win.logInWorker();
-            }
+        //Create SitesController:
+        SiteController sc = new SiteController(mock_Sites);
 
-            //manager login
-            if(ans==2){in.logIn();}
+        //Creating drivers for DriverController:
+        //Drivers List for DriverController:
+        List<Driver> mock_Drivers = new ArrayList<>();
 
-            else{connectionActive=false;}
-        }
-        catch(ExitExeption idnt){
-            continue;
-        }
-        catch (Exception exception){
-            System.out.println("Oh no! something went wrong! error 404.\n please try again and contact the IT-team");
-        }
+        //Creating 3 DriversLicense for the drivers:
+        DriverLicense driverLicense1 = new DriverLicense(weightType.lightWeight, TempLevel.cold);
+        DriverLicense driverLicense2 = new DriverLicense(weightType.heavyWeight, TempLevel.regular);
+        DriverLicense driverLicense3 = new DriverLicense(weightType.mediumWeight, TempLevel.frozen);
 
+        //Creating 3 Drivers for DriverController:
+        Driver driver1 = new Driver(driverLicense1, "Avi", true);
+        Driver driver2 = new Driver(driverLicense2, "Moshe", true);
+        Driver driver3 = new Driver(driverLicense3, "Arnon", true);
 
-        }
-    }
+        //Add these sites to the list:
+        mock_Drivers.add(driver1);
+        mock_Drivers.add(driver2);
+        mock_Drivers.add(driver3);
 
-    public static void initiation(){
-        WeeklyShiftAndWorkersManager controller = WeeklyShiftAndWorkersManager.getInstance();
-        //creation of 6 workers:
-        Workers work1=new Workers(1,"work1","q","e",1,586012012,"o",11);
-        Workers work2=new Workers(2,"work2","q","e",1,586012012,"o",11);
-        Workers work3=new Workers(3,"work3","q","e",1,586012012,"o",11);
-        Workers work4=new Workers(4,"work4","q","e",1,586012012,"o",11);
-        Workers work5=new Workers(5,"work5","q","e",1,586012012,"o",11);
-        Workers work6=new Workers(6,"work6","q","e",1,586012012,"o",11);
+        //Create DriversController:
+        DriverController dc = new DriverController(mock_Drivers);
 
-        //creating 2 weeklyshift in the system
-        controller.createnewweeklyshift(1,1,1);
-        controller.createnewweeklyshift(2,1,1);
+        //Creating Trucks for truckController:
+        //SitesList for truckController
+        Map<Integer, Truck> mock_Trucks = new HashMap<>();
 
-        //adding the workers into the system
-        controller.addemployee(work1);
-        controller.addemployee(work2);
-        controller.addemployee(work3);
-        controller.addemployee(work4);
-        controller.addemployee(work5);
-        controller.addemployee(work6);
+        //Creating 3 Trucks:
+        Truck truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen,false);
+        Truck truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,false);
+        Truck truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen,false);
 
-        //adding prof for the workers in the system
-        //adding to worker 1
-        controller.addnewproforemployee(1,0);
-        controller.addnewproforemployee(1,1);
-        controller.addnewproforemployee(1,2);
-        controller.addnewproforemployee(1,3);
-        controller.addnewproforemployee(1,4);
-        controller.addnewproforemployee(1,5);
-        controller.addnewproforemployee(1,6);
-        //adding to worker 2
-        controller.addnewproforemployee(2,0);
-        controller.addnewproforemployee(2,1);
-        controller.addnewproforemployee(2,2);
-        //adding to worker 3
-        controller.addnewproforemployee(3,3);
-        //adding to worker 4
-        controller.addnewproforemployee(4,4);
-        //adding to worker 5
-        controller.addnewproforemployee(5,5);
-        //adding to worker 6
-        controller.addnewproforemployee(6,6);
+        //Add these trucks to the list:
+        mock_Trucks.put(truck1.getLicenseNumber(), truck1);
+        mock_Trucks.put(truck2.getLicenseNumber(), truck2);
+        mock_Trucks.put(truck3.getLicenseNumber(), truck3);
 
-        //adding avialble for empl:
+        //Create TrucksController:
+        TruckController tc = new TruckController(mock_Trucks);
 
-        //addin for work1
-        controller.addavilableforemployee(1,WindowType.night1);
-        controller.addavilableforemployee(1,WindowType.day5);
+        //Create TransferController:
+        TransferController transferController = new TransferController(tc, dc, sc);
 
-        //woerker2
-        controller.addavilableforemployee(2,WindowType.night1);
-        controller.addavilableforemployee(2,WindowType.day5);
+        //Create some mock orders:
+        //Order1 to site3 mock items map:
+        Map<Site, Map<Item_mock, Integer>> order1_Items = new HashMap<>();
 
-        //worker3
-        controller.addavilableforemployee(3,WindowType.night1);
+        //Order1 mockItems map with quantity:
+        Map<Item_mock, Integer> order1_Items_site1 = new HashMap<>();
 
+        //Create 3 mock items for first destination:
+        Item_mock Fanta1 = new Item_mock(TempLevel.cold, "Fanta");
+        Item_mock Cola1 = new Item_mock(TempLevel.cold, "Coca-Cola");
 
-        //worker5
-        controller.addavilableforemployee(5,WindowType.night1);
+        //put the mock items with quantity to order for site1:
+        order1_Items_site1.put(Fanta1, 200);
+        order1_Items_site1.put(Cola1, 500);
 
-        //creatingnew weeklyshift:
-        controller.createnewweeklyshift(1,1,1);
+        //Order2 mockItems map with quantity:
+        Map<Item_mock, Integer> order1_Items_site6 = new HashMap<>();
 
-        //adding emp to it:
-        //for night1:
-        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work1,0);
-        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work2,1);
-        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work5,5);
-        controller.addtoexistingweeklyshift(1,1,1,WindowType.night1,work3,3);
+        //Create 3 mock items for second destination:
+        Item_mock Doritos1 = new Item_mock(TempLevel.regular, "Doritos");
+        Item_mock bamba1 = new Item_mock(TempLevel.regular, "Bamba");
 
-        //for day5:
-        controller.addtoexistingweeklyshift(1,1,1,WindowType.day5,work1,0);
-        controller.addtoexistingweeklyshift(1,1,1,WindowType.day5,work2,2);
+        //put the mock items with quantity to order for site6:
+        order1_Items_site6.put(Doritos1, 800);
+        order1_Items_site6.put(bamba1, 400);
 
+        //Order3 mockItems map with quantity:
+        Map<Item_mock, Integer> order1_Items_site2 = new HashMap<>();
+
+        //Create 3 mock items for third destination:
+        Item_mock TomatoSauce1 = new Item_mock(TempLevel.regular, "Tomato Sauce");
+        Item_mock CreamCheese1 = new Item_mock(TempLevel.cold, "Cream Cheese");
+        Item_mock Yolo1 = new Item_mock(TempLevel.cold, "Yolo");
+        Item_mock FrozenPizza1 = new Item_mock(TempLevel.frozen, "Frozen Pizza");
+
+        //put the mock items with quantity to order for site3:
+        order1_Items_site2.put(TomatoSauce1, 500);
+        order1_Items_site2.put(CreamCheese1, 300);
+        order1_Items_site2.put(Yolo1, 900);
+        order1_Items_site2.put(FrozenPizza1, 200);
+
+        //put the sites and items with quantity in the order map:
+        //put site1 with items in the map:
+        order1_Items.put(site1, order1_Items_site1);
+
+        //put site6 with items in the map:
+        order1_Items.put(site6, order1_Items_site6);
+
+        //put site2 with items in the map:
+        order1_Items.put(site2, order1_Items_site2);
+
+        //Add order to the transfer system
+        transferController.newOrderReceived(order1_Items, site3.getSiteId());
+
+        //start the transfer system!
+        transferController.startTransferSystem();
 
 
     }
 }
-
-
-

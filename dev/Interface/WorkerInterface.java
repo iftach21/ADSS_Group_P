@@ -1,5 +1,8 @@
 package Interface;
 
+import Domain.WeeklyShiftAndWorkersManager;
+import Domain.WindowTypeCreater;
+
 import java.util.Scanner;
 
 public class WorkerInterface {

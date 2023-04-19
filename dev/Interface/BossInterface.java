@@ -5,7 +5,7 @@ import Domain.WindowTypeCreater;
 import Domain.Workers;
 
 import java.util.Scanner;  // Import the Scanner class
-public class BossInterface {
+public class BossInterface extends AInterface {
     /**
      * This class allows the users interact with the internal classes.
      * allows creating weeklyShift and workers to update when they can work.

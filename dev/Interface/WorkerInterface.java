@@ -5,13 +5,13 @@ import Domain.WindowTypeCreater;
 
 import java.util.Scanner;
 
-public class WorkerInterface {
+public class WorkerInterface extends AInterface {
     private final WeeklyShiftAndWorkersManager controller;
 
     public WorkerInterface() {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
-    public void logInWorker() throws ExitExeption {
+    public void logIn() throws ExitExeption {
         int ans = 1;
         Scanner myObj = new Scanner(System.in);
         while (ans == 1) {

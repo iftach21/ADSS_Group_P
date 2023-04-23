@@ -39,7 +39,8 @@ public class WeeklyShiftAndWorkersManager {
     }
 
     //function for the "5"
-    public void addemployee(Workers w){
+    public void addemployee(int id,String name,String contract,String start_date,int wage,int phoneNUM, String personalinfo,int bankNum){
+        Workers w = new Workers(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum);
         workersDAO.add(w);
     }
     //function for the "6"

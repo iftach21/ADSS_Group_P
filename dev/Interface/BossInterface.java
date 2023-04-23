@@ -287,9 +287,7 @@ public class BossInterface extends AInterface {
                     System.out.println("please enter bankNum for the employee");
                     int bankNum = myObj.nextInt();  // Read user input
 
-                    Workers w = new Workers(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum);
-
-                    controller.addemployee(w);
+                    controller.addemployee(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum);
                     break;
 
                 }

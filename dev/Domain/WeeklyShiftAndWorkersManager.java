@@ -156,6 +156,12 @@ public class WeeklyShiftAndWorkersManager {
         return false;
     }
 
+    public boolean doIHaveDriverAvailableDor(){
+        //todo: complete
+        return false;
+    }
+
+
 
 
 

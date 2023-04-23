@@ -138,7 +138,7 @@ public class BossInterface extends AInterface {
                 //add to existing weekly shift
                 //-----------------------
                 case "2":{
-                    System.out.println("please enter year");
+                    System.out.println("pleease enter yar");
                     int year = myObj.nextInt();  // Read user input
 
                     System.out.println("please enter week number");
@@ -149,44 +149,57 @@ public class BossInterface extends AInterface {
                     int supernum = myObj.nextInt();  // Read user input
 
 
-                    System.out.println("please enter day number in the week");
-                    int daynum = myObj.nextInt();  // Read user input
-                    myObj.nextLine();
+                    while(true) {
 
-                    System.out.println("please enter night or day");
-                    String don = myObj.nextLine();  // Read user input
+                        System.out.println("please enter day number in the week");
+                        int daynum = myObj.nextInt();  // Read user input
+                        myObj.nextLine();
 
-                    WindowTypeCreater wc = new WindowTypeCreater();
-
-
-                    System.out.println("please enter int for the persons prof");
-                    System.out.println("0=manager");
-                    System.out.println("1=cashier");
-                    System.out.println("2=stoke");
-                    System.out.println("3=security");
-                    System.out.println("4=cleaning");
-                    System.out.println("5=shelf-stoking");
-                    System.out.println("6= general-worker");
-                    int prof = myObj.nextInt();  // Read user input
+                        System.out.println("please enter night or day");
+                        String don = myObj.nextLine();  // Read user input
+                        int changer = 1;
+                        while (changer == 1) {
+                            //stayes on same shift:
+                            WindowTypeCreater wc = new WindowTypeCreater();
 
 
+                            System.out.println("please enter int for the persons prof");
+                            System.out.println("0=manager");
+                            System.out.println("1=cashier");
+                            System.out.println("2=stoke");
+                            System.out.println("3=security");
+                            System.out.println("4=cleaning");
+                            System.out.println("5=shelf-stoking");
+                            System.out.println("6= general-worker");
+                            int prof = myObj.nextInt();  // Read user input
 
 
 
+                            while(true) {
+                                //shows the user all the people whom can work
+                                controller.printAllWorkersWhoCanWork(prof, daynum, don);
+                                System.out.println("please enter id");
+                                int id = myObj.nextInt();  // Read user input
+
+                                //checking if allready has shift at other super:
+                                if (controller.IsWorkingAllready(id, weeknum, year, daynum, don)) {
+                                    System.out.println("the employee cant work at this time, pick some one else plz");
+                                    continue;
+                                } else {
+
+                                    controller.addtoexistingweeklyshift(weeknum, year, supernum, wc.getwidowtype(daynum, don), controller.getworkerbyid(id), prof);
+                                    break;
+                                }
+                            }
 
 
-                    //shows the user all the people whom can work
-                    controller.printAllWorkersWhoCanWork(prof,daynum,don);
-
-                    System.out.println("please enter id");
-                    int id = myObj.nextInt();  // Read user input
-
-                    //checking if allready has shift at other super:
-                    if(controller.IsWorkingAllready(id,weeknum,year,daynum,don)){
-                    System.out.println("the employee cant work at this time, pick some one else plz");}
-                    else{
-
-                    controller.addtoexistingweeklyshift(weeknum,year,supernum,wc.getwidowtype(daynum,don),controller.getworkerbyid(id),prof);}
+                            System.out.println("would you like to change day and shift type? y=0 no = 1");
+                            changer = myObj.nextInt();  // Read user input
+                        }
+                        System.out.println("would you like to keep going? y=0 no = 1");
+                        int ender = myObj.nextInt();  // Read user input
+                        if(ender==1){break;}
+                    }
                     break;
                 }
 

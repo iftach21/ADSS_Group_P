@@ -31,6 +31,7 @@ public class WorkersDAO {
     }
 
     public void add(Workers w){
+        //verify that the w allready exist.
         //todo: complete;
     }
     public void delete(int id){

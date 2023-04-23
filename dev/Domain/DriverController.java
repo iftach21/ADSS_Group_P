@@ -3,6 +3,7 @@ package Domain;
 import java.util.*;
 
 public class DriverController {
+    private static final WeeklyShiftAndWorkersManager weeklyShiftAndWorkersManager = WeeklyShiftAndWorkersManager.getInstance();
 
     private List<Driver> _drivers;
 

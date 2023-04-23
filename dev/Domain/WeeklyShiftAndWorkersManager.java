@@ -1,15 +1,19 @@
 package Domain;
 
-import java.util.ArrayList;
+import Data.WeeklyShiftDAO;
+import Data.WorkersDAO;
 import java.util.List;
 
 public class WeeklyShiftAndWorkersManager {
     private static WeeklyShiftAndWorkersManager Instance = null;
-    private List<WeeklyShift> weeklyShiftList; //holds all the weeklyshifts
-    private List<Workers> allworkerslist; //holds all the workers available
+    private final WorkersDAO workersDAO;
+    private final WeeklyShiftDAO weeklyShiftDAO;
+
+
+
     private WeeklyShiftAndWorkersManager(){
-        this.weeklyShiftList = new ArrayList<WeeklyShift>();
-        this.allworkerslist = new ArrayList<Workers>();
+        workersDAO = WorkersDAO.getInstance();
+        weeklyShiftDAO = WeeklyShiftDAO.getInstance();
     }
     public static WeeklyShiftAndWorkersManager getInstance(){
         if(Instance==null){Instance = new WeeklyShiftAndWorkersManager();}
@@ -17,29 +21,26 @@ public class WeeklyShiftAndWorkersManager {
     }
     //function for the "1" option in menu
     public void createnewweeklyshift(int weeknum,int year,int supernum){
-        weeklyShiftList.add(new WeeklyShift(weeknum,year,supernum));
-
+        weeklyShiftDAO.add(new WeeklyShift(weeknum,year,supernum));
     }
+
     //function for the "2"
     public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,Workers w,int profindx){
         this.getweeklyshift(weeknum,year,supernum).addworkertoshift(w,wt,profindx);
     }
+
     //function for the "3"
     public void switchemployeeinashift(int weeknum,int yearnum,int supernum, WindowType wt,int prof, int id1, int id2){
         this.getweeklyshift(weeknum,yearnum,supernum).changeWorker(this.getworkerbyid(id1),this.getworkerbyid(id2),prof,wt);
     }
     //function for the "4"
     public void fireemployee(int id){
-        for(int i=0; i<allworkerslist.size();i++){
-            if(allworkerslist.get(i).getId()==id){
-                allworkerslist.remove(i);
-                break;
-            }
-        }
+        this.workersDAO.delete(id);
     }
+
     //function for the "5"
     public void addemployee(Workers w){
-        allworkerslist.add(w);
+        workersDAO.add(w);
     }
     //function for the "6"
     public void addwagetoemployee(int id,int addedwage){
@@ -47,7 +48,8 @@ public class WeeklyShiftAndWorkersManager {
     }
     //function for the "7"
     public int getwageforemployee(int id, int week,int year){
-
+        List <Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+        List <WeeklyShift> weeklyShiftList = this.weeklyShiftDAO.getWeeklyShiftList();
         for(int i=0; i<weeklyShiftList.size();i++) {
             if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year){
                 int hm =  weeklyShiftList.get(i).howMuchShiftWorkerDid(id);
@@ -99,42 +101,33 @@ public class WeeklyShiftAndWorkersManager {
         System.out.println(this.getweeklyshift(weeknum,year,supernum).printSpesific());
     }
     public Workers getworkerbyid(int id) {
-        for (int i = 0; i < allworkerslist.size(); i++) {
-            if (allworkerslist.get(i).getId() == id) {
-                return allworkerslist.get(i);
-            }
-        }
-        return null;
+            return this.workersDAO.get(id);
     }
     public WeeklyShift getweeklyshift(int week,int year,int supernum){
-        for(int i=0; i<weeklyShiftList.size();i++) {
-            if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year &&supernum == weeklyShiftList.get(i).getSupernum()) {
-                return weeklyShiftList.get(i);}
-
-        }
-        return null;
+        return this.weeklyShiftDAO.get(week,year,supernum);
     }
     public void printall(){
-        for(int i =0;i<this.allworkerslist.size();i++){
-            this.allworkerslist.get(i).print();
+        List<Workers> list = this.workersDAO.getAllworkerslist();
+        for(int i=0;i<list.size();i++){
+            list.get(i).print();
         }
     }
 
     public void printAllWorkersWhoCanWork(int prof,int daynum, String don){
         WindowTypeCreater wc = new WindowTypeCreater();
-
-        for(int i=0;i<this.allworkerslist.size();i++){
-            if(this.allworkerslist.get(i).caniworkatprofindx(prof) && this.allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum,don))){
-                this.allworkerslist.get(i).print();
+        List <Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+        for(int i=0;i<allworkerslist.size();i++){
+            if(allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum,don))){
+                allworkerslist.get(i).print();
             }
         }
     }
     //checking if allready has shift at other super:
     public boolean IsWorkingAllready(int id,int weeknum, int year,int daynum, String don){
         WindowTypeCreater wc = new WindowTypeCreater();
-
-        for(int i =0;i<this.weeklyShiftList.size();i++){
-            WeeklyShift w = this.weeklyShiftList.get(i);
+        List <WeeklyShift> weeklyShiftList = this.weeklyShiftDAO.getWeeklyShiftList();
+        for(int i =0;i<weeklyShiftList.size();i++){
+            WeeklyShift w = weeklyShiftList.get(i);
             if(w.getYear()==year && w.getWeekNUm()==weeknum){
                 if(w.checkifworkallready(id,wc.getwidowtype(daynum,don) )){
                     return true;
@@ -158,6 +151,14 @@ public class WeeklyShiftAndWorkersManager {
 
     }
 
+    public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,int daynum,String don){
+        //todo: stub
+        return false;
+    }
+
+
+
 
 
 }
+

@@ -33,7 +33,6 @@ public class Main {
                 continue;
             }
 
-
             try{
                 intefaceList.get(option -1).logIn();
           }

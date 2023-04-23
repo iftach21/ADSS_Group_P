@@ -19,7 +19,7 @@ public class Workers {
     //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker6.
     private boolean[] pro;
 
-    private String drivingLicense;
+
     public Workers(int id, String name, String contract, String start_date, int wage, int phoneNUM, String personalinfo, int bankNum) {
         this.id = id;
         this.name = name;
@@ -33,18 +33,10 @@ public class Workers {
         pro[6] = true;
         this.bankNum = bankNum;
         this.available = new ArrayList<WindowType>();
-        this.drivingLicense = null;
 
     }
 
 
-    public String getDrivingLicense() {
-        return drivingLicense;
-    }
-
-    public void setDrivingLicense(String drivingLicense) {
-        this.drivingLicense = drivingLicense;
-    }
 
     public int getId() {
         return id;
@@ -93,9 +85,6 @@ public class Workers {
      * Create an employee
      */
 
-    public void drivingLicenseChange(String driverLicenseStatus){
-        this.drivingLicense=driverLicenseStatus;
-    }
     public void setId(int id) {
         this.id = id;
     }
@@ -174,9 +163,6 @@ public class Workers {
     }
     //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker 6.
 
-    public  String candrivetruck(){
-        return this.drivingLicense;
-    }
     /**
      * Add time an employee can work
      */

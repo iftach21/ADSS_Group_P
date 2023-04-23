@@ -25,8 +25,8 @@ public class WeeklyShiftAndWorkersManager {
     }
 
     //function for the "2"
-    public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,Workers w,int profindx){
-        this.getweeklyshift(weeknum,year,supernum).addworkertoshift(w,wt,profindx);
+    public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,int id ,int profindx){
+        this.getweeklyshift(weeknum,year,supernum).addworkertoshift(this.getworkerbyid(id),wt,profindx);
     }
 
     //function for the "3"

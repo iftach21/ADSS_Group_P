@@ -187,7 +187,7 @@ public class BossInterface extends AInterface {
                                     continue;
                                 } else {
 
-                                    controller.addtoexistingweeklyshift(weeknum, year, supernum, wc.getwidowtype(daynum, don), controller.getworkerbyid(id), prof);
+                                    controller.addtoexistingweeklyshift(weeknum, year, supernum, wc.getwidowtype(daynum, don), id, prof);
                                     break;
                                 }
                             }

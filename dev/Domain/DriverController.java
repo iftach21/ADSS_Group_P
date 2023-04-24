@@ -5,30 +5,23 @@ import java.util.*;
 public class DriverController {
     private static final WeeklyShiftAndWorkersManager weeklyShiftAndWorkersManager = WeeklyShiftAndWorkersManager.getInstance();
 
-    private List<Driver> _drivers;
 
-    public DriverController(List<Driver> drivers){
-        this._drivers = drivers;
-    }
+    public DriverController(){}
 
-    public List<Driver> getAvailableDrivers()
+    public List<Driver> getAvailableDrivers(int weekNum,int yearNum, WindowType wt)
     {
-        List<Driver> availableDrivers = new ArrayList<>();
+        weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);
 
-        for (int i=0; i<_drivers.size(); i++)
-        {
-            if(_drivers.get(i).getIsAvailable())
-            {
-                availableDrivers.add(_drivers.get(i));
-            }
-        }
-        return availableDrivers;
+        //todo: call fuction for workers
+        //limit to 5
+        return null;
     }
 
-    public Driver findDriver(TempLevel currMinTemp){
+    public List<Driver> findDriver(TempLevel currMinTemp,int weekNum,int yearNum, WindowType wt){
         Driver chosenDriver;
 
-        List<Driver> availableDrivers = getAvailableDrivers();
+        //this will give the available drivers for the shift
+        List<Driver> availableDrivers = getAvailableDrivers(weekNum,yearNum,wt);
 
         Collections.sort(availableDrivers, new Comparator<Driver>() {
             @Override

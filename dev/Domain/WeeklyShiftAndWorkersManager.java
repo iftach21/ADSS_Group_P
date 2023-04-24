@@ -152,14 +152,15 @@ public class WeeklyShiftAndWorkersManager {
 
     }
 
-    public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,int daynum,String don){
+    public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt){
         //todo: stub
         return false;
     }
 
-    public boolean doIHaveDriverAvailableDor(){
+    public List<Driver> giveMeViableDrivers(int weekNum,int yearNum, WindowType wt){
         //todo: complete
-        return false;
+        //will ask the workersDAO and will give back the list
+        return null;
     }
 
 

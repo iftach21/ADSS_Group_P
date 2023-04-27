@@ -1,0 +1,99 @@
+<changelist name="Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]" date="1681722337821" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17/04/2023 12:05 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/Main.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/DeliveringSupplier.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/DeliveringSupplier.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/DeliveringSupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/WindowTypeCreater.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/WindowTypeCreater.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/WindowTypeCreater.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/NonFixedDaySupplier.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/NonFixedDaySupplier.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/NonFixedDaySupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/FixedDaySupplier.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/FixedDaySupplier.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/FixedDaySupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/OrderMangerTest.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/OrderMangerTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/OrderMangerTest.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Pair.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Pair.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Pair.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/WindowTypeCreater.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/PaymentMethod.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/PaymentMethod.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/PaymentMethod.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/NonDeliveringSupplier.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/NonDeliveringSupplier.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/NonDeliveringSupplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/Order.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/PaymentCreator.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/PaymentCreator.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/PaymentCreator.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Order.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Order.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Order.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/WindowType.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/WindowType.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/WindowType.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Supplier_Manger.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Supplier_Manger.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Supplier_Manger.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Contract.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Contract.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Contract.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Contact_Person.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Contact_Person.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Contact_Person.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/Supplier.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/Supplier.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Supplier.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ADSS_Group_P/OrderManger.class" />
+    <option name="AFTER_PATH" value="out/production/ADSS_Group_P/OrderManger.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/OrderManger.class" />
+  </binary>
+</changelist>

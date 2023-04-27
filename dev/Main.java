@@ -178,7 +178,7 @@ public class Main {
 
                             if (option_4 == 1) {
                                 NonDeliveringSupplier supplier = new NonDeliveringSupplier(name, business_id, paymentNum, id, con_person, null, null);
-                                supplier_manger.getSuppliers().add(supplier);
+                                supplier_manger.add_supplier(supplier);
                             } else if (option_4 == 2) {
                                 System.out.println("day:");
                                 String day = scanner.next();
@@ -205,7 +205,7 @@ public class Main {
                                 WindowType day_window;
                                 day_window = WindowTypeCreater.getwindowtype(dayNum);
                                 FixedDaySupplier supplier = new FixedDaySupplier(day_window, name, business_id, paymentNum, id, con_person, null, null);
-                                supplier_manger.getSuppliers().add(supplier);
+                                supplier_manger.add_supplier(supplier);
 
                             } else {
                                 System.out.println("days to deliver:");
@@ -231,7 +231,7 @@ public class Main {
                                     }
                                 }
                                 NonFixedDaySupplier supplier = new NonFixedDaySupplier(numOfDeliveryDays, name, business_id, paymentNum, id, con_person, null, null);
-                                supplier_manger.getSuppliers().add(supplier);
+                                supplier_manger.add_supplier(supplier);
                             }
                             break;
 
@@ -398,38 +398,36 @@ public class Main {
 
                                 //add item to the order list
                                 if (option_11 == 1) {
-                                    System.out.println("Item name:");
-                                    String item_name = scanner.next();
-                                    item_name = checkName(item_name);
-                                    System.out.println("Item catalog number:");
-                                    String catalogNum = scanner.next();
-                                    catalogNum = checkNumber(catalogNum);
-                                    System.out.println("Item weight:");
-                                    String inputWeight = scanner.next();
-                                    inputWeight = checkNumberWithDot(inputWeight);
-                                    double weight = Double.parseDouble(inputWeight);
-                                    System.out.println("catalog Name");
-                                    String catalogName = scanner.next();
-                                    catalogName = checkName(catalogName);
-                                    System.out.println("temperature");
-                                    String tempInput = scanner.next();
-                                    tempInput = checkNumberWithDot(tempInput);
-                                    double temp = Double.parseDouble(tempInput);
-
-                                    System.out.println("exprison date:");
-                                    String expirationDate_s = scanner.next();
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-
-                                    //create the new item
-                                    Item item = new Item(item_name, catalogName, expirationDate_s, weight, catalogNum, temp);
-                                    System.out.println("amount:");
-                                    String amount_21Input = scanner.next();
-                                    amount_21Input = checkNumberWithDot(amount_21Input);
-                                    int amount_21 = Integer.parseInt(amount_21Input);
-                                    itemlist.put(item, amount_21);
-
+                                    List<Item> itemList_sub = new ArrayList<>();
+                                    int op = 1;
+                                    for (Item item : supplier_manger.getItemslist().keySet()) {
+                                        if (supplier_manger.getItemslist().get(item) > 0) {
+                                            System.out.print(op + ".");
+                                            item.print_item();
+                                            itemList_sub.add(item);
+                                            op++;
+                                        }
+                                    }
+                                    System.out.println("Enter the number of the item you want to add:");
+                                    String item_numberInput = scanner.next();
+                                    item_numberInput = checkNumber(item_numberInput);
+                                    int item_number = Integer.parseInt(item_numberInput);
+                                    int count = 1;
+                                    for (Item item : itemList_sub) {
+                                        if (supplier_manger.getItemslist().get(item) > 0) {
+                                            if (count == item_number) {
+                                                System.out.println("Enter the quantity:");
+                                                String quantityInput = scanner.next();
+                                                quantityInput = checkNumberWithDot(quantityInput);
+                                                int quantity = Integer.parseInt(quantityInput);
+                                                itemlist.put(item,quantity);
+                                                break;
+                                            }
+                                            count++;
+                                        }
+                                    }
                                 }
+
                                 if (option_11 == 2) {
                                     if(!orderManger.assing_Orders_to_Suppliers(itemlist, supplier_manger, store_number)){
                                         System.out.println("failed to make an order make sure that the items can be provied");
@@ -500,8 +498,8 @@ public class Main {
                     supplier_2.add_total_discount(0.6);
 
                     //adding them to the system
-                    supplier_manger.getSuppliers().add(supplier_1);
-                    supplier_manger.getSuppliers().add(supplier_2);
+                    supplier_manger.add_supplier(supplier_1);
+                    supplier_manger.add_supplier(supplier_2);
 
 
 

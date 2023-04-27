@@ -1,12 +1,26 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //This is the class that hold all the suppliers that work with the company
 public class Supplier_Manger {
     private List<Supplier> suppliers;
+    private Map<Item,Integer> itemslist;
+
+    public Map<Item,Integer> getItemslist() {
+        return itemslist;
+    }
+
+    public void setItemslist(Map<Item,Integer>itemslist) {
+        this.itemslist = itemslist ;
+    }
+
     public List<Supplier> getSuppliers() {
         return suppliers;
     }
+
+
 
     public void setSuppliers(List<Supplier> suppliers) {
         this.suppliers = suppliers;
@@ -17,14 +31,37 @@ public class Supplier_Manger {
 
     public Supplier_Manger() {
         this.suppliers=new ArrayList<Supplier>();
+        this.itemslist=new HashMap<Item,Integer>();
 
     }
+    public boolean add_supplier(Supplier supplier) {
+        if (!this.suppliers.contains(supplier)) {
+            this.suppliers.add(supplier);
+            for (Item item : supplier.getItems().keySet()) {
+                if (itemslist.containsKey(item)) {
+                    itemslist.replace(item, itemslist.get(item), itemslist.get(item) + 1);
+                } else {
+                    itemslist.put(item, 1);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean  remove_supplier(String name){
         for(Supplier suppleir :this.suppliers){
             if(suppleir.getName().equals(name)){
+                for(Item item :suppleir.getItems().keySet()){
+                    if(itemslist.containsKey(item)){
+                        itemslist.replace(item,itemslist.get(item)-1);
+                    }
+                }
                 this.suppliers.remove(suppleir);
                 return true;
             }
+
         }
         return false;
     }
@@ -53,22 +90,38 @@ public class Supplier_Manger {
             }
         }
     }
-    public void add_item_to_supplier(String name_1 ,Item item,int amount,float price){
-        for(Supplier suppleir :this.suppliers){
-            if(suppleir.getName().equals(name_1)){
-                suppleir.add_Items(item,amount,price);
-            }
-    }}
-    public boolean remove_item_to_supplier(String name_1 ,String item){
-            for(Supplier suppleir :this.suppliers){
-                if(suppleir.getName().equals(name_1)){
-                    suppleir.remove_item(item);
-                    return true;
+    public void add_item_to_supplier(String name_1 ,Item item,int amount,float price) {
+        for (Supplier suppleir : this.suppliers) {
+            if (suppleir.getName().equals(name_1)) {
+                if (itemslist.containsKey(item)) {
+                    itemslist.replace(item, itemslist.get(item),itemslist.get(item)+1);
+                } else {
+                    itemslist.put(item, 1);
                 }
-            }
-            return false;
 
-}
+                suppleir.add_Items(item, amount, price);
+            }
+        }
+    }
+    public boolean remove_item_to_supplier(String name_1 ,String item_S) {
+        for (Supplier suppleir : this.suppliers) {
+            if (suppleir.getName().equals(name_1)) {
+                suppleir.remove_item(item_S);
+                for (Item item : suppleir.getItems().keySet()) {
+                    if (item.getName().equals(item_S)) {
+                        if (itemslist.containsKey(item)) {
+                            itemslist.replace(item, itemslist.get(item) - 1);
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public void print_all_suppliers_names(){
         for(Supplier supplier: suppliers){
             System.out.println("" + supplier.getName());

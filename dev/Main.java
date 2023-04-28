@@ -15,17 +15,6 @@ public class Main {
 
         OrderManger orderManger =new OrderManger();
         Supplier_Manger supplier_manger=new Supplier_Manger();
-
-
-
-
-
-
-
-
-
-
-
         String option;
         int choice = 0;
 

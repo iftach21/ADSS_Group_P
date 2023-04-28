@@ -5,9 +5,10 @@ public class Item {
     private String name;
     private String catalogNum;
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yyyy");
-    private String expirationDate;
+    private String expirationDate;//
     private double weight;
     private String catalogName;
+    private double temperature;
 
     public String getName() {
         return name;
@@ -16,8 +17,6 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
-
-    private double temperature;
 
     public Item(String name, String catalogNum, String expirationDate, double weight, String catalogName, double temperature)
     {

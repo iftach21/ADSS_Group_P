@@ -1,6 +1,7 @@
 package Domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -36,13 +37,14 @@ public class TransferController {
             System.out.println("Please pick one of the following options:");
             System.out.println("1. View previous transfers");
             System.out.println("2. Create transfer for pending orders. you have " + _ordersQueue.size() + " orders waiting to transfer");
-            System.out.println("3. Exit the transfer system");
+            System.out.println("3. View and update current transfers ");
+            System.out.println("4. Exit the transfer system");
 
             int optionSelection;
             while(true) {
                 try {
                     optionSelection = scanner.nextInt();
-                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3) {
+                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3 || optionSelection == 4) {
                         break;
                     } else {
                         System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - 3");
@@ -98,6 +100,35 @@ public class TransferController {
                 {
                     createNewTransfer(_ordersQueue.remove(), _orderDestinationSiteIdQueue.remove());
                     System.out.println("You'll be taken to the main menu.");
+                }
+            }
+            else if (optionSelection == 3)
+            {
+                System.out.println("Those are the transfers that are currently takes place.");
+                System.out.println("Please enter the transferId of your chosen transfer");
+                Map<Integer, Transfer> currentTransfers = getCurrentTransfers();
+                for(Integer transferId: currentTransfers.keySet())
+                {
+                    Transfer transfer = currentTransfers.get(transferId);
+                    System.out.println("transfer Id: " + transferId + ", Source site: " + transfer.getSource().getSiteName() + ", Destination site: " + transfer.getDestinations().get(transfer.getDestinations().size()-1));
+                }
+
+                int transferId;
+
+                while(true) {
+                    try {
+                        transferId = scanner.nextInt();
+                        if (_transfers.containsKey(transferId)) {
+                            break;
+                        } else {
+                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                        scanner.next();
+                    }
                 }
             }
             else
@@ -604,5 +635,21 @@ public class TransferController {
             }
         }
         return currMinTemp;
+    }
+
+    public Map<Integer, Transfer> getCurrentTransfers(){
+        Map<Integer, Transfer> currentTransfers = new HashMap<>();
+
+        for(Integer trandferId: _transfers.keySet()){
+            Transfer transfer = _transfers.get(trandferId);
+            LocalDateTime transferLocalDateTimeLeaving = LocalDateTime.of(transfer.getDateOfTransfer(), transfer.getLeavingTime());
+            LocalDateTime transferLocalDateTimeArriving = LocalDateTime.of(transfer.getArrivingDate(), transfer.get_arrivingTime());
+            if(transferLocalDateTimeLeaving.isBefore(LocalDateTime.now()) && transferLocalDateTimeArriving.isAfter(LocalDateTime.now()))
+            {
+                currentTransfers.put(trandferId, transfer);
+            }
+        }
+
+        return currentTransfers;
     }
 }

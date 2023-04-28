@@ -10,37 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_18_38_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_18_38__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/WindowTypeCreater.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_06__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_08_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_04_2023_19_08__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_8_2023_4_41_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_8_2023_4_41_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Contact_Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Contract.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/DeliveringSupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/FixedDaySupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/NonDeliveringSupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/NonFixedDaySupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/OrderManger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/OrderMangerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Pair.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/PaymentCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/PaymentMethod.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Supplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/Supplier_Manger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/WindowType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/WindowTypeCreater.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_04_2023_12_05__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contact_Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contact_Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/DeliveringSupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/DeliveringSupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/FixedDaySupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/FixedDaySupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonDeliveringSupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonDeliveringSupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonFixedDaySupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonFixedDaySupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderManger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderManger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderMangerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier_Manger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowTypeCreater.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowTypeCreater.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +97,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.OrderMangerTest.test_only_supplier_exist">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_P" />
@@ -133,16 +124,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderMangerTest.order_delete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="order_delete" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderMangerTest.test_add_item_list_one_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -153,13 +134,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OrderMangerTest.test_only_supplier_exist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
+      <option name="METHOD_NAME" value="test_only_supplier_exist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest" />
         <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_one_supplier" />
         <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
-        <item itemvalue="JUnit.OrderMangerTest.order_delete" />
       </list>
     </recent_temporary>
   </component>
@@ -487,7 +478,28 @@
       <option name="project" value="LOCAL" />
       <updated>1681148152759</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
+      <created>1681904402501</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1681904402501</updated>
+    </task>
+    <task id="LOCAL-00047" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
+      <created>1681904444748</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1681904444748</updated>
+    </task>
+    <task id="LOCAL-00048" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
+      <created>1681904602326</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1681904602326</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -512,7 +524,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>184</line>
+          <line>195</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>

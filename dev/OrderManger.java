@@ -6,6 +6,13 @@ public class OrderManger {
     private List<Order> approval;
     private List<Order> orders_history;
 
+    public List<Order>Period_orders;
+
+
+
+
+
+
     public List<Order> getApproval() {
         return approval;
     }
@@ -35,6 +42,7 @@ public class OrderManger {
         this.orders_history=new ArrayList<Order>();
         this.approval=new ArrayList<Order>();
         this.pending_for_apporval=new ArrayList<Order>();
+        this.Period_orders=new ArrayList<Order>();
 
     }
     public void move_from_pending_to_approvel(int order_num) {
@@ -179,6 +187,9 @@ public class OrderManger {
 
 
     }
+
+
+
     public void print_all_orders_num(){
         System.out.println("pending:");
         for(Order order: pending_for_apporval){
@@ -209,6 +220,46 @@ public class OrderManger {
             order.print_order_detail();
         }
     }
+    public boolean period_order(Supplier supplier,Map<Item,Integer> list_items, int store_num) {
+        Map<Item, Pair<Integer, Float>> maplist;
+        Order order = new Order(null, supplier, 0, store_num);
+        for (Item item : list_items.keySet()) {
+            if (supplier.getItems().containsKey(item)) {
+                double discount = 1;
+
+                int amount = list_items.get(item);
+                float base_price = supplier.getItems().get(item).getSecond();
+                int new_amount = 0;
+                float cost = 0;
+                //if the supplier give a discount on the item serch for the biggest amount
+                if (supplier.getContract().items_Map_discount.containsKey(item)) {
+                    //cheak how much max amount have a discount from the curr amount
+                    for (int i = 0; i < amount; i++) {
+                        if (supplier.getContract().items_Map_discount.get(item).containsKey(amount - i)) {
+                            discount = supplier.getContract().items_Map_discount.get(item).get(amount - i);
+                            new_amount = amount - i;
+
+
+                            break;
+                        }
+
+
+                    }
+                }
+                //add the item to the total price o
+                cost = (float) (new_amount * base_price * discount + ((amount - new_amount) * base_price));
+                order.add_item(item, amount, cost);
+
+
+            }
+        }
+        this.Period_orders.add(order);
+        return true;
+    }
+
+
+
+
 }
 
 

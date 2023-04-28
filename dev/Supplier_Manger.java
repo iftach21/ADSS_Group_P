@@ -133,4 +133,6 @@ public class Supplier_Manger {
             if(suppleir.getName().equals(name_1)){
                 suppleir.add_item_to_contract(item,amount,discount);
     }
-}}}
+}}
+
+}

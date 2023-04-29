@@ -2,22 +2,21 @@ import java.sql.*;
 import java.util.*;
 public class ItemMapper {
     private final Connection conn;
-    private final Map<Integer,Item> cache;
-
+    private final Map<String,Item> cache;
     public ItemMapper(Connection conn)
     {
         this.conn = conn;
         this.cache = new HashMap<>();
     }
 
-    public Item findByCatalogNum(int catalogNum) throws SQLException
+    public Item findByCatalogNum(String catalogNum) throws SQLException
     {
         if(cache.containsKey(catalogNum))
         {
             return cache.get(catalogNum);
         }
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE catalogNum = ?");
-        stmt.setInt(1,catalogNum);
+        stmt.setString(1,catalogNum);
         ResultSet rs = stmt.executeQuery();
         if(rs.next())
         {
@@ -40,6 +39,43 @@ public class ItemMapper {
     {
         List<Item> items = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items");
-        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next())
+        {
+            Item item = new Item();
+            item.setName(rs.getString("name"));
+            item.setCatalogNum(rs.getString("catalog_number"));
+            item.setWeight(rs.getDouble("weight"));
+            item.setCatalogName(rs.getString("catalog_name"));
+            String tempLevel = rs.getString("temperature");
+            TempLevel tempValue = TempLevel.valueOf(tempLevel);
+            item.setTemperature(tempValue);
+            item.setManufacturer((rs.getString("manufacturer")));
+            cache.put(item.getCatalogNum(),item);
+            items.add(item);
+        }
+        return items;
     }
+
+    public void insert(Item item) throws SQLException // TODO check what happens if i try to add an item that already exists in the database
+    {
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)");
+        stmt.setString(1,item.getCatalogNum());
+        stmt.setString(2,item.getName());
+        stmt.setString(3,Double.toString(item.getWeight()));
+        stmt.setString(4,item.getCatalogName());
+        stmt.setString(5,item.getTemperature().name());
+        stmt.setString(6,"0");
+        stmt.setString(7,null);
+        stmt.setString(8,item.getManufacturer());
+        stmt.executeUpdate();
+        ResultSet rs = stmt.getGeneratedKeys();
+        if(rs.next())
+        {
+            item.setCatalogNum(rs.getString(1));
+            cache.put(item.getCatalogNum(),item);
+        }
+    }
+
+    public void update()
 }

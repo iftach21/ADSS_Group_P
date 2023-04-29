@@ -16,6 +16,10 @@ public class Item {
     private List<PriceHistory> priceHistory;
     private String manufacturer;
 
+    public Item() {
+        this.priceHistory = new ArrayList<>();
+    }
+
     public Item(String name, String catalogNum, double weight, String catalogName, TempLevel temperature, String manufacturer) {
         this.name = name;
         this.catalogNum = catalogNum;

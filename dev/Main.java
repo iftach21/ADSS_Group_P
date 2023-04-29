@@ -473,11 +473,11 @@ public class Main {
                     Contact_Person contactPerson2 = new Contact_Person("John not Smith", "555-1233");
 
                     //init item to play with
-                    Item item1 = new Item("Apple", "1001","12/3/1789", 0.5, "Fruits", 10.0);
-                    Item item2 = new Item("Milk", "2002","12/3/1789", 1.0, "Dairy", 4.0);
-                    Item item3 = new Item("Bread", "3003", "12/3/1789", 0.8, "Bakery", 25.0);
-                    Item item4 = new Item("Salmon", "4004", "12/3/1789", 0.3, "Seafood", -2.0);
-                    //two supplier to init
+                    Item item1 = new Item("Apple","1001",0.5,"Fruits Apple",TempLevel.regular,"Tree");
+                    Item item2 = new Item("Milk","2002",1.0,"Milky milk",TempLevel.regular,"Tara");
+                    Item item3 = new Item("Bread", "3003",0.8,"Baked bread",TempLevel.regular,"Bakery");
+                    Item item4 = new Item("Salmon", "4004",0.3,"Salmon sal",TempLevel.cold,"Sea");
+                            //two supplier to init
                     NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson1, null, null);
                     NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Suppliermono Inc.", "122456789", 1, "S002", contactPerson2, null, null);
 

@@ -9,8 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="Added database">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="כן">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +152,7 @@
       <option name="presentableId" value="Default" />
       <updated>1680017976928</updated>
       <workItem from="1682607405112" duration="31000" />
-      <workItem from="1682681197620" duration="11530000" />
+      <workItem from="1682681197620" duration="14341000" />
     </task>
     <task id="LOCAL-00001" summary="day">
       <created>1680020111731</created>
@@ -481,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682695626625</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="כן">
+      <created>1682695820564</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1682695820564</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +512,8 @@
     <MESSAGE value="df" />
     <MESSAGE value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
     <MESSAGE value="Added database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added database" />
+    <MESSAGE value="כן" />
+    <option name="LAST_COMMIT_MESSAGE" value="כן" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -267,25 +267,29 @@ public class Main {
                             System.out.println("catalog Name");
                             String catalogName = scanner.next();
                             catalogName = checkName(catalogName);
-                            System.out.println("temperature");
+                            System.out.println("temperature (regular,frozen,cold)");// TODO there are only 3 options : regular, frozen, cold
                             String tempInput = scanner.next();
-                            tempInput = checkNumberWithDot(tempInput);
+                            TempLevel tempLevel = TempLevel.valueOf(tempInput);
+//                            tempInput = checkNumberWithDot(tempInput);
                             double temp = Double.parseDouble(tempInput);
-                            System.out.println("exprison date:");
-                            String expirationDate_s = scanner.next();
+                            System.out.println("manufacturer:");
+                            String manufacturer = scanner.next();
+                            manufacturer = checkName(manufacturer);
 
                             //create the new item
-                            Item item = new Item(item_name, catalogName, expirationDate_s, weight, catalogNum, temp);
-                            try {
-                                Date date = item.getDate();
-                                // Do something with the date
-                            } catch (ParseException e) {
-                                System.out.println("Invalid date format: " + item.getDateStr());
-                                e.printStackTrace();
-                                break;
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
+//                            Item item = new Item(item_name, catalogName, expirationDate_s, weight, catalogNum, temp);
+                            Item item = new Item(item_name, catalogName,weight,catalogName,tempLevel,manufacturer);
+
+//                            try {
+//                                Date date = item.getDate();
+//                                // Do something with the date
+//                            } catch (ParseException e) {
+//                                System.out.println("Invalid date format: " + item.getDateStr());
+//                                e.printStackTrace();
+//                                break;
+//                            } catch (Exception e) {
+//                                throw new RuntimeException(e);
+//                            }
                             System.out.println("base price per unit");
                             String priceInput = scanner.next();
                             priceInput = checkNumberWithDot(priceInput);

@@ -9,24 +9,26 @@ public abstract class Supplier {
     private String business_id;
 //    private String Payment_method;
     private PaymentMethod paymentMethod;
-    private String Suplier_ID;
-    private Contact_Person person;
+    private String Supplier_ID;
+    private contactPerson person;
     private Contract contract;
     private Map<Item,Pair<Integer,Float>>items;
 
 
-    public Supplier(String name, String business_id, PaymentMethod paymentMethod, String suplier_ID, Contact_Person person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
+    public Supplier(String name, String business_id, PaymentMethod paymentMethod, String supplier_ID, contactPerson person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;
         this.paymentMethod = paymentMethod;
-        Suplier_ID = suplier_ID;
+        Supplier_ID = supplier_ID;
         this.person = person;
         //in case there is no given contract or a list of item and the user can create them himsself
         if(contract==null){
-            this.contract=new Contract(null,1);
+            this.contract = new Contract(null,1);
+            this.contract.setSupplierId(this.Supplier_ID);
         }
         else {
             this.contract=contract;
+            this.contract.setSupplierId(this.Supplier_ID);
         }
         if(items==null){
             this.items=new HashMap<Item,Pair<Integer,Float>>();
@@ -68,19 +70,19 @@ public abstract class Supplier {
     }
 
 
-    public String getSuplier_ID() {
-        return Suplier_ID;
+    public String getSupplier_ID() {
+        return Supplier_ID;
     }
 
-    public void setSuplier_ID(String suplier_ID) {
-        Suplier_ID = suplier_ID;
+    public void setSupplier_ID(String supplier_ID) {
+        Supplier_ID = supplier_ID;
     }
 
-    public Contact_Person getPerson() {
+    public contactPerson getPerson() {
         return person;
     }
 
-    public void setPerson(Contact_Person person) {
+    public void setPerson(contactPerson person) {
         this.person = person;
     }
 
@@ -110,7 +112,7 @@ public abstract class Supplier {
             this.contract.add_to_contract(item,num,discount);}
     }}
     public void update_contact_person(String name ,String number){
-        Contact_Person contact_person=new Contact_Person(name,number);
+        contactPerson contact_person=new contactPerson(name,number);
         this.person=contact_person;
     }
     public void add_total_discount(double discount){

@@ -16,6 +16,8 @@ public class Item {
     private List<PriceHistory> priceHistory;
     private String manufacturer;
 
+    private int minimum_quantity;
+
     public Item() {
         this.priceHistory = new ArrayList<>();
     }
@@ -28,6 +30,7 @@ public class Item {
         this.temperature = temperature;
         this.priceHistory = new ArrayList<>();
         this.manufacturer = manufacturer;
+        this.minimum_quantity = 0;
     }
 
     public String getName() {
@@ -118,5 +121,31 @@ public class Item {
 
     public List<PriceHistory> getPriceHistory() {
         return priceHistory;
+    }
+
+    public void setPriceHistory(List<PriceHistory> priceHistory) {
+        this.priceHistory = priceHistory;
+    }
+
+    public int getMinimum_quantity() {
+        return minimum_quantity;
+    }
+
+    public void setMinimum_quantity(int minimum_quantity) {
+        this.minimum_quantity = minimum_quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", catalogNum='" + catalogNum + '\'' +
+                ", weight=" + weight +
+                ", catalogName='" + catalogName + '\'' +
+                ", temperature=" + temperature +
+                ", priceHistory=" + priceHistory +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", minimum_quantity=" + minimum_quantity +
+                '}';
     }
 }

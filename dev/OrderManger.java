@@ -116,11 +116,11 @@ public class OrderManger {
                     int new_amount=0;
                     float cost = 0;
                     //if the supplier give a discount on the item serch for the biggest amount
-                    if(supplier.getContract().items_Map_discount.containsKey(item)){
+                    if(supplier.getContract().itemsMapDiscount.containsKey(item)){
                         //cheak how much max amount have a discount from the curr amount
                         for(int i = 0; i < amount ;i++){
-                            if(supplier.getContract().items_Map_discount.get(item).containsKey(amount-i)){
-                                discount = supplier.getContract().items_Map_discount.get(item).get(amount-i);
+                            if(supplier.getContract().itemsMapDiscount.get(item).containsKey(amount-i)){
+                                discount = supplier.getContract().itemsMapDiscount.get(item).get(amount-i);
                                 new_amount = amount-i;
 
 
@@ -232,11 +232,11 @@ public class OrderManger {
                 int new_amount = 0;
                 float cost = 0;
                 //if the supplier give a discount on the item serch for the biggest amount
-                if (supplier.getContract().items_Map_discount.containsKey(item)) {
+                if (supplier.getContract().itemsMapDiscount.containsKey(item)) {
                     //cheak how much max amount have a discount from the curr amount
                     for (int i = 0; i < amount; i++) {
-                        if (supplier.getContract().items_Map_discount.get(item).containsKey(amount - i)) {
-                            discount = supplier.getContract().items_Map_discount.get(item).get(amount - i);
+                        if (supplier.getContract().itemsMapDiscount.get(item).containsKey(amount - i)) {
+                            discount = supplier.getContract().itemsMapDiscount.get(item).get(amount - i);
                             new_amount = amount - i;
 
 

@@ -65,8 +65,8 @@ public class ItemMapper {
         stmt.setString(3,Double.toString(item.getWeight()));
         stmt.setString(4,item.getCatalogName());
         stmt.setString(5,item.getTemperature().name());
-        stmt.setString(6,"0");
-        stmt.setString(7,null);
+        stmt.setString(6,Integer.toString(item.getMinimum_quantity()));
+        stmt.setString(7,item.getPriceHistory().toString());
         stmt.setString(8,item.getManufacturer());
         stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
@@ -77,5 +77,26 @@ public class ItemMapper {
         }
     }
 
-    public void update()
+    public void update(Item item) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE items SET name = ?, weight = ?,  catalog_name = ?, temperature = ?, minimum_quantity = ?, price_history = ?, manufacturer = ? WHERE catalog_number = ?");
+        stmt.setString(1,item.getCatalogNum());
+        stmt.setString(2,item.getName());
+        stmt.setString(3,Double.toString(item.getWeight()));
+        stmt.setString(4,item.getCatalogName());
+        stmt.setString(5,item.getTemperature().name());
+        stmt.setString(6,Integer.toString(item.getMinimum_quantity()));
+        stmt.setString(7,item.getPriceHistory().toString());
+        stmt.setString(8,item.getManufacturer());
+        stmt.executeUpdate();
+        cache.put(item.getCatalogNum(),item);
+    }
+
+    public void delete(Item item) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM items WHERE catalog_number = ?");
+        stmt.setString(1,item.getCatalogNum());
+        stmt.executeUpdate();
+        cache.remove(item.getCatalogNum());
+    }
 }

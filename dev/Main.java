@@ -1,7 +1,4 @@
 import java.util.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -135,7 +132,7 @@ public class Main {
                             System.out.println("number");
                             String phone_number = scanner.next();
                             phone_number = checkNumber(phone_number);
-                            Contact_Person con_person = new Contact_Person(contact_name, phone_number);
+                            contactPerson con_person = new contactPerson(contact_name, phone_number);
 
                             //delivery option
                             System.out.println("type:");
@@ -469,8 +466,8 @@ public class Main {
                     break;
                 case 3:
 
-                    Contact_Person contactPerson1 = new Contact_Person("John Smith", "555-1234");
-                    Contact_Person contactPerson2 = new Contact_Person("John not Smith", "555-1233");
+                    contactPerson contactPerson1 = new contactPerson("John Smith", "555-1234");
+                    contactPerson contactPerson2 = new contactPerson("John not Smith", "555-1233");
 
                     //init item to play with
                     Item item1 = new Item("Apple","1001",0.5,"Fruits Apple",TempLevel.regular,"Tree");

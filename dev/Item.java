@@ -106,6 +106,17 @@ public class Item {
         System.out.println("weight: "+this.weight );
         System.out.println("catalog Name :" +this.catalogName );
         System.out.println("temperature :"+ this.temperature);
+    }
 
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public List<PriceHistory> getPriceHistory() {
+        return priceHistory;
     }
 }

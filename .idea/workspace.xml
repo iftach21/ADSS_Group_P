@@ -10,42 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="database">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Contact_Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/contactPerson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ADSS_Group_P.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_P.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DeliveringSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DeliveringSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contact_Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contact_Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/DeliveringSupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/DeliveringSupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/FixedDaySupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/FixedDaySupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonDeliveringSupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonDeliveringSupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonFixedDaySupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonFixedDaySupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderManger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderManger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderMangerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier_Manger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowTypeCreater.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/classpath.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +27,7 @@
         <option value="JUnit5 Test Class" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -100,14 +70,15 @@
     "create.test.in.the.same.root": "true",
     "extract.method.default.visibility": "public",
     "git-widget-placeholder": "209512722__320827637",
-    "last_opened_file_path": "C:/Users/marik/Documents/GitHub/ADSS_Group_P/dev/res",
+    "last_opened_file_path": "C:/Users/marik/Downloads/gson-2.10.1.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
+    "project.structure.side.proportion": "0.11967778",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
     "vue.rearranger.settings.migration": "true"
   },
@@ -189,14 +160,8 @@
       <workItem from="1682607405112" duration="31000" />
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1027000" />
-      <workItem from="1682765750552" duration="9328000" />
-    </task>
-    <task id="LOCAL-00003" summary="day">
-      <created>1680021275648</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1680021275648</updated>
+      <workItem from="1682765750552" duration="9367000" />
+      <workItem from="1682777490770" duration="5194000" />
     </task>
     <task id="LOCAL-00004" summary="day">
       <created>1680021342190</created>
@@ -534,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682767432378</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="database">
+      <created>1682777456463</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1682777456463</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

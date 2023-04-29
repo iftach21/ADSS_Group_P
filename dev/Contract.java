@@ -9,7 +9,7 @@ public class Contract {
 
     public int contractId;
 
-    private String supplierId;
+    public String supplierId;
 
 
     public Contract(Map<Item, Map<Integer, Double>> itemsMapDiscount, double total_discount) {

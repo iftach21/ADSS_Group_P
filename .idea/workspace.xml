@@ -10,11 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="database">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ADSS_Group_P.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_P.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Order.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,21 +158,7 @@
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1027000" />
       <workItem from="1682765750552" duration="9367000" />
-      <workItem from="1682777490770" duration="5194000" />
-    </task>
-    <task id="LOCAL-00004" summary="day">
-      <created>1680021342190</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1680021342190</updated>
-    </task>
-    <task id="LOCAL-00005" summary="day">
-      <created>1680021534941</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1680021534941</updated>
+      <workItem from="1682777490770" duration="7203000" />
     </task>
     <task id="LOCAL-00006" summary="df">
       <created>1680022366512</created>
@@ -506,7 +489,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682777456463</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="database">
+      <created>1682782794789</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1682782794789</updated>
+    </task>
+    <task id="LOCAL-00054" summary="database">
+      <created>1682783396886</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1682783396887</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

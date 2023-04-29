@@ -11,16 +11,7 @@ public class Order {
     private Map<Item,Pair<Integer,Float>> itemList;
     private Float cost;
     private int  Store_number;
-    static int number =0;
-    public int getStore_number() {
-        return Store_number;
-    }
-
-    public void setStore_number(int store_number) {
-        Store_number = store_number;
-    }
-
-
+    static int number = 0;
 
     public Order( Map<Item,Pair<Integer,Float>>itemList,Supplier supplier,float cost,int store_number) {
         this.orderNum = number;
@@ -36,6 +27,14 @@ public class Order {
         this.Store_number=store_number;
         this.currentDate= LocalDate.now();
 
+    }
+
+    public int getStore_number() {
+        return Store_number;
+    }
+
+    public void setStore_number(int store_number) {
+        Store_number = store_number;
     }
 
     public Integer getOrderNum() {

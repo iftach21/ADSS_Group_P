@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="database">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,9 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -65,18 +61,15 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;public&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;209512722__320827637&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marik/Downloads/gson-2.10.1.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/marik/Documents/GitHub/ADSS_Group_P/dev/res&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.11967778&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -93,18 +86,13 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Database Script.Suppliers.sql">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_P" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="Suppliers.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="df6b1986-9990-446a-96ba-1d8e678a5cc5/schema/main/table/Suppliers.sql" />
-      <script-mode>FILE</script-mode>
-      <method v="2" />
     </configuration>
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/df6b1986-9990-446a-96ba-1d8e678a5cc5/console.sql" />
@@ -121,6 +109,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OrderMangerTest.manipule_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
+      <option name="METHOD_NAME" value="manipule_supplier" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OrderMangerTest.test_add_item_list_one_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -133,11 +131,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.Suppliers.sql" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Database Script.console.sql" />
         <item itemvalue="JUnit.OrderMangerTest" />
         <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_one_supplier" />
+        <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
       </list>
     </recent_temporary>
   </component>
@@ -150,11 +147,56 @@
       <option name="presentableId" value="Default" />
       <updated>1680017976928</updated>
       <workItem from="1682607405112" duration="31000" />
-      <workItem from="1682681197620" duration="18796000" />
-      <workItem from="1682764325480" duration="1027000" />
-      <workItem from="1682765750552" duration="9367000" />
-      <workItem from="1682777490770" duration="8742000" />
-      <workItem from="1682846427176" duration="832000" />
+      <workItem from="1682681197620" duration="11530000" />
+    </task>
+    <task id="LOCAL-00001" summary="day">
+      <created>1680020111731</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680020111731</updated>
+    </task>
+    <task id="LOCAL-00002" summary="day">
+      <created>1680020586548</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680020586548</updated>
+    </task>
+    <task id="LOCAL-00003" summary="day">
+      <created>1680021275648</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680021275648</updated>
+    </task>
+    <task id="LOCAL-00004" summary="day">
+      <created>1680021342190</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680021342190</updated>
+    </task>
+    <task id="LOCAL-00005" summary="day">
+      <created>1680021534941</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680021534941</updated>
+    </task>
+    <task id="LOCAL-00006" summary="df">
+      <created>1680022366512</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680022366512</updated>
+    </task>
+    <task id="LOCAL-00007" summary="df">
+      <created>1680022808398</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680022808398</updated>
     </task>
     <task id="LOCAL-00008" summary="df">
       <created>1680022930139</created>
@@ -436,70 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682695626625</updated>
     </task>
-    <task id="LOCAL-00048" summary="כן">
-      <created>1682695820564</created>
+    <task id="LOCAL-00048" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
+      <created>1682845542276</created>
       <option name="number" value="00048" />
       <option name="presentableId" value="LOCAL-00048" />
       <option name="project" value="LOCAL" />
-      <updated>1682695820564</updated>
+      <updated>1682845542276</updated>
     </task>
-    <task id="LOCAL-00049" summary="sadf">
-      <created>1682759347485</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1682759347485</updated>
-    </task>
-    <task id="LOCAL-00050" summary="database">
-      <created>1682764289927</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1682764289927</updated>
-    </task>
-    <task id="LOCAL-00051" summary="database">
-      <created>1682767432378</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1682767432378</updated>
-    </task>
-    <task id="LOCAL-00052" summary="database">
-      <created>1682777456463</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1682777456463</updated>
-    </task>
-    <task id="LOCAL-00053" summary="database">
-      <created>1682782794789</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1682782794789</updated>
-    </task>
-    <task id="LOCAL-00054" summary="database">
-      <created>1682783396886</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1682783396887</updated>
-    </task>
-    <task id="LOCAL-00055" summary="database">
-      <created>1682787022823</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1682787022823</updated>
-    </task>
-    <task id="LOCAL-00056" summary="database">
-      <created>1682787357770</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1682787357770</updated>
-    </task>
-    <option name="localTasksCounter" value="57" />
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,28 +505,25 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="day" />
     <MESSAGE value="df" />
-    <MESSAGE value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
     <MESSAGE value="Added database" />
-    <MESSAGE value="כן" />
-    <MESSAGE value="sadf" />
-    <MESSAGE value="database" />
-    <option name="LAST_COMMIT_MESSAGE" value="database" />
+    <MESSAGE value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
+    <option name="LAST_COMMIT_MESSAGE" value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>195</line>
+          <line>196</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -15,6 +15,16 @@ public abstract class Supplier {
     private Map<Item,Pair<Integer,Float>>items;
 
 
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+
+
     public Supplier(String name, String business_id, PaymentMethod paymentMethod, String supplier_ID, contactPerson person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;
@@ -134,6 +144,9 @@ public abstract class Supplier {
             System.out.println(item.getName());
         }
 
+   }
+   public int get_days(){
+        return 0;
    }
 
 }

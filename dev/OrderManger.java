@@ -69,6 +69,7 @@ public class OrderManger {
         if(manger == null){
             return false;
         }
+        manger.sort_supplier_by_deliver_days();
         //to find the min supplier(in case of one supplier have it all)
         Supplier min_sup=null;
         Order min_order = null;

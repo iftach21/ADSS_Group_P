@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //This is the class that hold all the suppliers that work with the company
 public class Supplier_Manger {
@@ -135,4 +132,24 @@ public class Supplier_Manger {
     }
 }}
 
-}
+
+    //Thiis fuction sort the supplier array by the days that each on can deliver
+    public void sort_supplier_by_deliver_days(){
+                int n = suppliers.size();
+                for (int i = 0; i < n - 1; i++) {
+                    for (int j = 0; j < n - i - 1; j++) {
+                        int days1 = suppliers.get(j).get_days();
+                        int days2 = suppliers.get(j + 1).get_days();
+                        if (days1 > days2) {
+                            // Swap suppliers[j] and suppliers[j+1]
+                            Supplier temp = suppliers.get(j);
+                            suppliers.set(j, suppliers.get(j + 1));
+                            suppliers.set(j + 1, temp);
+                        }
+                    }
+                }
+            }
+
+        }
+
+

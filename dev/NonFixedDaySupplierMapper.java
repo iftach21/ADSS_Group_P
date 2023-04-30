@@ -96,7 +96,24 @@ public class NonFixedDaySupplierMapper {
     public void update(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
     {
         PreparedStatement stmt = conn.prepareStatement("UPDATE NonFixedDaySuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, numOfDayToDeliver = ?, contract_id = ? WHERE supplier_ID = ?");
+        String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
+        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+        stmt.setString(2, nonFixedDaySupplier.getName());
+        stmt.setString(3, (nonFixedDaySupplier.getPaymentMethod()).toString());
+        stmt.setString(4, nonFixedDaySupplier.getSupplierID());
+        stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
+        stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
+        stmt.setString(7, itemsJson);
+        stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+        stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+        cache.put(nonFixedDaySupplier.getSupplierID(),nonFixedDaySupplier);
+    }
+    public void delete(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
+
 
     }
+
 
 }

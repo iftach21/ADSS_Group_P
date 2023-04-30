@@ -74,6 +74,7 @@ public class OrderManger {
         Supplier min_sup=null;
         Order min_order = null;
         float min_cost = 0;
+        int min_days=0;
         //to cheak who have the max items in each call to the function
         int number_of_item=0;
         int trigger=0;

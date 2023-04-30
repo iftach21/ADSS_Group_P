@@ -108,11 +108,12 @@ public class NonFixedDaySupplierMapper {
         stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
         cache.put(nonFixedDaySupplier.getSupplierID(),nonFixedDaySupplier);
     }
-    public void delete(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    public void delete(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
     {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
-
-
+        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+        stmt.executeUpdate();
+        cache.remove(nonFixedDaySupplier.getSupplierID());
     }
 
 

@@ -123,7 +123,4 @@ public class FixedDaySupplierMapper {
         stmt.executeUpdate();
         cache.remove(fixedDaySupplier.getSupplierID());
     }
-
-
-
 }

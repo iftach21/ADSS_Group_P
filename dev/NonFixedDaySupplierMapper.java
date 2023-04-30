@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.json.JSONObject;
+//import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.sql.*;
@@ -78,6 +78,7 @@ public class NonFixedDaySupplierMapper {
             cache.put(rs.getString("supplier_ID"),nonFixedDaySupplier);
 
         }
+        return null;
     }
 
 }

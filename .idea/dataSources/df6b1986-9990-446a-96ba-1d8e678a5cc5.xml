@@ -1425,217 +1425,290 @@
     </argument>
     <table id="504" parent="173" name="Contracts"/>
     <table id="505" parent="173" name="NonDeliveringSuppliers"/>
-    <table id="506" parent="173" name="items"/>
-    <table id="507" parent="173" name="specific_items"/>
-    <table id="508" parent="173" name="sqlite_master">
+    <table id="506" parent="173" name="NonFixedDaySuppliers"/>
+    <table id="507" parent="173" name="items"/>
+    <table id="508" parent="173" name="specific_items"/>
+    <table id="509" parent="173" name="sqlite_master">
       <System>1</System>
     </table>
-    <column id="509" parent="504" name="contract_id">
+    <column id="510" parent="504" name="contract_id">
       <DasType>INTEGER|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="510" parent="504" name="supplier_id">
+    <column id="511" parent="504" name="supplier_id">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="511" parent="504" name="items_Map_discount">
+    <column id="512" parent="504" name="items_Map_discount">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="512" parent="504" name="total_discount">
+    <column id="513" parent="504" name="total_discount">
       <DasType>DOUBLE|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="513" parent="504">
+    <foreign-key id="514" parent="504">
       <ColNames>supplier_id</ColNames>
       <RefColNames>business_id</RefColNames>
       <RefTableName>NonDeliveringSuppliers</RefTableName>
     </foreign-key>
-    <key id="514" parent="504">
+    <key id="515" parent="504">
       <ColNames>contract_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <check id="515" parent="505">
+    <check id="516" parent="505">
       <Predicate>payment_method IN (&apos;SHOTEF&apos;, &apos;SHOTEFPLUS30&apos;, &apos;SHOTEFPLUS60&apos;)</Predicate>
     </check>
-    <column id="516" parent="505" name="business_id">
+    <column id="517" parent="505" name="business_id">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="517" parent="505" name="name">
+    <column id="518" parent="505" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="518" parent="505" name="payment_method">
+    <column id="519" parent="505" name="payment_method">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="519" parent="505" name="supplier_ID">
+    <column id="520" parent="505" name="supplier_ID">
       <DasType>TEXT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="520" parent="505" name="contract_person_name">
+    <column id="521" parent="505" name="contract_person_name">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="521" parent="505" name="contract_phone_number">
+    <column id="522" parent="505" name="contract_phone_number">
       <DasType>TEXT|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="522" parent="505" name="items">
+    <column id="523" parent="505" name="items">
       <DasType>TEXT|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="523" parent="505" name="contract_id">
+    <column id="524" parent="505" name="contract_id">
       <DasType>INTEGER|0s</DasType>
       <Position>8</Position>
     </column>
-    <foreign-key id="524" parent="505">
+    <foreign-key id="525" parent="505">
       <ColNames>contract_id</ColNames>
       <RefColNames>contract_id</RefColNames>
       <RefTableName>Contracts</RefTableName>
     </foreign-key>
-    <index id="525" parent="505" name="sqlite_autoindex_NonDeliveringSuppliers_1">
+    <index id="526" parent="505" name="sqlite_autoindex_NonDeliveringSuppliers_1">
       <ColNames>business_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="526" parent="505" name="sqlite_autoindex_NonDeliveringSuppliers_2">
+    <index id="527" parent="505" name="sqlite_autoindex_NonDeliveringSuppliers_2">
       <ColNames>name</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="527" parent="505" name="sqlite_autoindex_NonDeliveringSuppliers_3">
+    <index id="528" parent="505" name="sqlite_autoindex_NonDeliveringSuppliers_3">
       <ColNames>supplier_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="528" parent="505">
+    <key id="529" parent="505">
       <ColNames>supplier_ID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_NonDeliveringSuppliers_3</UnderlyingIndexName>
     </key>
-    <key id="529" parent="505">
+    <key id="530" parent="505">
       <ColNames>business_id</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_NonDeliveringSuppliers_1</UnderlyingIndexName>
     </key>
-    <key id="530" parent="505">
+    <key id="531" parent="505">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_NonDeliveringSuppliers_2</UnderlyingIndexName>
     </key>
-    <check id="531" parent="506">
-      <Predicate>temperature IN (&apos;regular&apos;, &apos;frozen&apos;, &apos;cold&apos;)</Predicate>
+    <check id="532" parent="506">
+      <Predicate>payment_method IN (&apos;SHOTEF&apos;, &apos;SHOTEFPLUS30&apos;, &apos;SHOTEFPLUS60&apos;)</Predicate>
     </check>
-    <column id="532" parent="506" name="catalog_number">
+    <column id="533" parent="506" name="business_id">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="533" parent="506" name="name">
+    <column id="534" parent="506" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="534" parent="506" name="weight">
-      <DasType>REAL|0s</DasType>
+    <column id="535" parent="506" name="payment_method">
+      <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="535" parent="506" name="catalog_name">
+    <column id="536" parent="506" name="supplier_ID">
       <DasType>TEXT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="536" parent="506" name="temperature">
+    <column id="537" parent="506" name="contract_person_name">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="537" parent="506" name="minimum_quantity">
-      <DasType>INTEGER|0s</DasType>
+    <column id="538" parent="506" name="contract_phone_number">
+      <DasType>TEXT|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="538" parent="506" name="price_history">
+    <column id="539" parent="506" name="items">
       <DasType>TEXT|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="539" parent="506" name="manufacturer">
+    <column id="540" parent="506" name="numOfDayToDeliver">
+      <DasType>INTEGER|0s</DasType>
+      <Position>8</Position>
+    </column>
+    <column id="541" parent="506" name="contract_id">
+      <DasType>INTEGER|0s</DasType>
+      <Position>9</Position>
+    </column>
+    <foreign-key id="542" parent="506">
+      <ColNames>contract_id</ColNames>
+      <RefColNames>contract_id</RefColNames>
+      <RefTableName>Contracts</RefTableName>
+    </foreign-key>
+    <index id="543" parent="506" name="sqlite_autoindex_NonFixedDaySuppliers_1">
+      <ColNames>business_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="544" parent="506" name="sqlite_autoindex_NonFixedDaySuppliers_2">
+      <ColNames>name</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="545" parent="506" name="sqlite_autoindex_NonFixedDaySuppliers_3">
+      <ColNames>supplier_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="546" parent="506">
+      <ColNames>supplier_ID</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_NonFixedDaySuppliers_3</UnderlyingIndexName>
+    </key>
+    <key id="547" parent="506">
+      <ColNames>business_id</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_NonFixedDaySuppliers_1</UnderlyingIndexName>
+    </key>
+    <key id="548" parent="506">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_NonFixedDaySuppliers_2</UnderlyingIndexName>
+    </key>
+    <check id="549" parent="507">
+      <Predicate>temperature IN (&apos;regular&apos;, &apos;frozen&apos;, &apos;cold&apos;)</Predicate>
+    </check>
+    <column id="550" parent="507" name="catalog_number">
+      <DasType>TEXT|0s</DasType>
+      <Position>1</Position>
+    </column>
+    <column id="551" parent="507" name="name">
+      <DasType>TEXT|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="552" parent="507" name="weight">
+      <DasType>REAL|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="553" parent="507" name="catalog_name">
+      <DasType>TEXT|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="554" parent="507" name="temperature">
+      <DasType>TEXT|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="555" parent="507" name="minimum_quantity">
+      <DasType>INTEGER|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="556" parent="507" name="price_history">
+      <DasType>TEXT|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <column id="557" parent="507" name="manufacturer">
       <DasType>TEXT|0s</DasType>
       <Position>8</Position>
     </column>
-    <index id="540" parent="506" name="sqlite_autoindex_items_1">
+    <index id="558" parent="507" name="sqlite_autoindex_items_1">
       <ColNames>catalog_number</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="541" parent="506" name="sqlite_autoindex_items_2">
+    <index id="559" parent="507" name="sqlite_autoindex_items_2">
       <ColNames>name</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="542" parent="506">
+    <key id="560" parent="507">
       <ColNames>catalog_number</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_items_1</UnderlyingIndexName>
     </key>
-    <key id="543" parent="506">
+    <key id="561" parent="507">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_items_2</UnderlyingIndexName>
     </key>
-    <check id="544" parent="507">
+    <check id="562" parent="508">
       <Predicate>location IN (&apos;storage&apos;, &apos;store&apos;)</Predicate>
     </check>
-    <column id="545" parent="507" name="name">
+    <column id="563" parent="508" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="546" parent="507" name="catalog_number">
+    <column id="564" parent="508" name="catalog_number">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="547" parent="507" name="location">
+    <column id="565" parent="508" name="location">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="548" parent="507" name="expiration_date">
+    <column id="566" parent="508" name="expiration_date">
       <DasType>DATE|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="549" parent="507" name="defected">
+    <column id="567" parent="508" name="defected">
       <DasType>BOOLEAN|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="550" parent="507" name="serial_number">
+    <column id="568" parent="508" name="serial_number">
       <DasType>INTEGER|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="551" parent="507">
+    <foreign-key id="569" parent="508">
       <ColNames>catalog_number</ColNames>
       <RefColNames>catalog_number</RefColNames>
       <RefTableName>items</RefTableName>
     </foreign-key>
-    <index id="552" parent="507" name="sqlite_autoindex_specific_items_1">
+    <index id="570" parent="508" name="sqlite_autoindex_specific_items_1">
       <ColNames>name</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="553" parent="507">
+    <key id="571" parent="508">
       <ColNames>name</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_specific_items_1</UnderlyingIndexName>
     </key>
-    <column id="554" parent="508" name="type">
+    <column id="572" parent="509" name="type">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="555" parent="508" name="name">
+    <column id="573" parent="509" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="556" parent="508" name="tbl_name">
+    <column id="574" parent="509" name="tbl_name">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="557" parent="508" name="rootpage">
+    <column id="575" parent="509" name="rootpage">
       <DasType>INT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="558" parent="508" name="sql">
+    <column id="576" parent="509" name="sql">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>

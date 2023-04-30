@@ -21,3 +21,5 @@ public class NonFixedDaySupplier extends DeliveringSupplier{
         this.numOfDayToDeliver = numOfDayToDeliver;
     }
 }
+
+

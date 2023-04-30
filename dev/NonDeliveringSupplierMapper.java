@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.sql.*;
@@ -86,6 +87,43 @@ public class NonDeliveringSupplierMapper {
 
     public void insert(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
     {
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,contract_id) VALUES (?, ?, ?, ?,?,?,?,?)");
+        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
+        stmt.setString(2, nonDeliveringSupplier.getName());
+        stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
+        stmt.setString(4, nonDeliveringSupplier.getSupplierID());
+        stmt.setString(5, nonDeliveringSupplier.getPerson().getName());
+        stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
+        stmt.setString(7, itemsJson);
+        stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
+        ResultSet rs = stmt.getGeneratedKeys();
+        if(rs.next())
+        {
+            cache.put(nonDeliveringSupplier.getSupplierID(),nonDeliveringSupplier);
+        }
+    }
 
+    public void update(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE NonDeliveringSuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, contract_id = ? WHERE supplier_ID = ?");
+        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
+        stmt.setString(2, nonDeliveringSupplier.getName());
+        stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
+        stmt.setString(4, nonDeliveringSupplier.getSupplierID());
+        stmt.setString(5, nonDeliveringSupplier.getPerson().getName());
+        stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
+        stmt.setString(7, itemsJson);
+        stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
+        cache.put(nonDeliveringSupplier.getSupplierID(),nonDeliveringSupplier);
+    }
+
+    public void delete(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonDeliveringSuppliers WHERE supplier_ID = ?");
+        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
+        stmt.executeUpdate();
+        cache.remove(nonDeliveringSupplier.getSupplierID());
     }
 }

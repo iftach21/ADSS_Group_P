@@ -9,23 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_04_2023_18_31__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_04_2023_18_31__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_04_2023_20_28__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_04_2023_20_28__Changes_.xml" afterDir="false" />
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="continue work on databases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DeliveringSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DeliveringSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/PaymentMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PaymentMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/SupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/contactPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContactPerson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -503,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682845542276</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="continue work on databases">
+      <created>1682853899004</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1682853899004</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +520,8 @@
     <MESSAGE value="df" />
     <MESSAGE value="Added database" />
     <MESSAGE value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
-    <option name="LAST_COMMIT_MESSAGE" value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
+    <MESSAGE value="continue work on databases" />
+    <option name="LAST_COMMIT_MESSAGE" value="continue work on databases" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

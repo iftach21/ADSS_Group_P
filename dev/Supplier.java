@@ -14,17 +14,6 @@ public abstract class Supplier {
     private Contract contract;
     private Map<Item,Pair<Integer,Float>>items;
 
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-
-
     public Supplier(String name, String business_id, PaymentMethod paymentMethod, String supplier_ID, ContactPerson person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;
@@ -48,7 +37,13 @@ public abstract class Supplier {
     }
 
 
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
 
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 
     public String getName() {
         return name;
@@ -58,7 +53,7 @@ public abstract class Supplier {
         this.name = name;
     }
 
-    public String getBusiness_id() {
+    public String getBusinessId() {
         return business_id;
     }
 
@@ -69,18 +64,18 @@ public abstract class Supplier {
 //    public String getPayment_method() {
 //        return Payment_method;
 //    }
-    public PaymentMethod getPayment_method() {return paymentMethod;}
+//    public PaymentMethod getPayment_method() {return paymentMethod;}
 
 
 //    public void setPayment_method(String payment_method) {
 //        Payment_method = payment_method;
 //    }
-    public void setPayment_method(int payment_method) {
-        paymentMethod = PaymentCreator.getpayment(payment_method);
-    }
+//    public void setPayment_method(int payment_method) {
+//        paymentMethod = PaymentCreator.getpayment(payment_method);
+//    }
 
 
-    public String getSupplier_ID() {
+    public String getSupplierID() {
         return Supplier_ID;
     }
 

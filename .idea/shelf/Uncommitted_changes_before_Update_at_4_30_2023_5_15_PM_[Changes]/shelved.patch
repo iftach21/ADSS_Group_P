@@ -1,0 +1,314 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>groupId</groupId>\r\n    <artifactId>ADSS_Group_P</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n\r\n    <properties>\r\n        <maven.compiler.source>15</maven.compiler.source>\r\n        <maven.compiler.target>15</maven.compiler.target>\r\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n    </properties>\r\n    \r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 98c7eb24fd9099885f1cf73fdb8c4edda82b3088)
++++ b/pom.xml	(date 1682864126345)
+@@ -13,5 +13,21 @@
+         <maven.compiler.target>15</maven.compiler.target>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     </properties>
++
++    <repositories>
++        <repository>
++            <id>central</id>
++            <url>https://repo.maven.apache.org/maven2</url>
++        </repository>
++    </repositories>
++
++    <dependencies>
++        <dependency>
++            <groupId>org.json</groupId>
++            <artifactId>json</artifactId>
++            <version>20160810</version>
++        </dependency>
++
++    </dependencies>
+     
+ </project>
+\ No newline at end of file
+Index: out/production/ADSS_Group_P/META-INF/MANIFEST.MF
+===================================================================
+diff --git a/out/production/ADSS_Group_P/META-INF/MANIFEST.MF b/out/production/ADSS_Group_P/META-INF/MANIFEST.MF
+deleted file mode 100644
+--- a/out/production/ADSS_Group_P/META-INF/MANIFEST.MF	(revision 98c7eb24fd9099885f1cf73fdb8c4edda82b3088)
++++ /dev/null	(revision 98c7eb24fd9099885f1cf73fdb8c4edda82b3088)
+@@ -1,3 +0,0 @@
+-Manifest-Version: 1.0
+-Main-Class: Main
+-
+Index: ADSS_Group_P.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/dev\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit4\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.8.1\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit4\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.8.1\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\" exported=\"\">\r\n      <library>\r\n        <CLASSES>\r\n          <root url=\"jar://$USER_HOME$/Downloads/json-20230227.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\" exported=\"\">\r\n      <library>\r\n        <CLASSES>\r\n          <root url=\"jar://$USER_HOME$/Downloads/gson-2.10.1.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ADSS_Group_P.iml b/ADSS_Group_P.iml
+--- a/ADSS_Group_P.iml	(revision 98c7eb24fd9099885f1cf73fdb8c4edda82b3088)
++++ b/ADSS_Group_P.iml	(date 1682863127649)
+@@ -1,81 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$">
++  <component name="AdditionalModuleElements">
++    <content url="file://$MODULE_DIR$" dumb="true">
+       <sourceFolder url="file://$MODULE_DIR$/dev" isTestSource="false" />
+     </content>
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="module-library">
+-      <library name="JUnit4">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library">
+-      <library name="JUnit5.8.1">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library">
+-      <library name="JUnit4">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library">
+-      <library name="JUnit5.8.1">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library" exported="">
+-      <library>
+-        <CLASSES>
+-          <root url="jar://$USER_HOME$/Downloads/json-20230227.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library" exported="">
+-      <library>
+-        <CLASSES>
+-          <root url="jar://$USER_HOME$/Downloads/gson-2.10.1.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ArtifactsWorkspaceSettings\">\r\n    <artifacts-to-build>\r\n      <artifact name=\"ADSS_Group_P:jar\" />\r\n    </artifacts-to-build>\r\n  </component>\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6\" name=\"Changes\" comment=\"continue work on databases\">\r\n      <change afterPath=\"$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/dev/NonFixedDaySupplier.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dev/NonFixedDaySupplier.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/dev/res/SuperLeeDataBase\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dev/res/SuperLeeDataBase\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"JUnit5 Test Class\" />\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"482e421e-609a-47a0-b79c-469797ae8ba1\" />\r\n        <option name=\"url\" value=\"https://github.com/iftach21/ADSS_Group_P.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NeI9zUNLgjzxbSv1ARiyXCyGjb\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Downloaded.Files.Path.Enabled\": \"false\",\r\n    \"Repository.Attach.Annotations\": \"false\",\r\n    \"Repository.Attach.JavaDocs\": \"false\",\r\n    \"Repository.Attach.Sources\": \"false\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary\": \"JUnit5\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5\": \"\",\r\n    \"create.test.in.the.same.root\": \"true\",\r\n    \"git-widget-placeholder\": \"209512722__320827637\",\r\n    \"last_opened_file_path\": \"C:/Users/marik/Documents/GitHub/ADSS_Group_P/dev/res\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"settings.editor.selected.configurable\": \"preferences.sourceCode\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  },\r\n  \"keyToStringList\": {\r\n    \"RunConfigurationTargetLRU\": [\r\n      \"df6b1986-9990-446a-96ba-1d8e678a5cc5\"\r\n    ]\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"ADSS_Group_P\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"console.sql\" type=\"DatabaseScript\" editBeforeRun=\"true\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <script-file value=\"$APPLICATION_CONFIG_DIR$/consoles/db/df6b1986-9990-446a-96ba-1d8e678a5cc5/console.sql\" />\r\n      <script-mode>FILE</script-mode>\r\n      <data-source id=\"df6b1986-9990-446a-96ba-1d8e678a5cc5\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"OrderMangerTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ADSS_Group_P\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"OrderMangerTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"OrderMangerTest.manipule_supplier\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ADSS_Group_P\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"OrderMangerTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"manipule_supplier\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"OrderMangerTest.test_add_item_list_one_supplier\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ADSS_Group_P\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"OrderMangerTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test_add_item_list_one_supplier\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"JUnit.OrderMangerTest\" />\r\n        <item itemvalue=\"JUnit.OrderMangerTest.test_add_item_list_one_supplier\" />\r\n        <item itemvalue=\"JUnit.OrderMangerTest.manipule_supplier\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6\" name=\"Changes\" comment=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\" />\r\n      <created>1680017976928</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680017976928</updated>\r\n      <workItem from=\"1682607405112\" duration=\"31000\" />\r\n      <workItem from=\"1682681197620\" duration=\"11530000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"day\">\r\n      <created>1680021275648</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021275648</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"day\">\r\n      <created>1680021342190</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021342190</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"day\">\r\n      <created>1680021534941</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680021534941</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"df\">\r\n      <created>1680022366512</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680022366512</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"df\">\r\n      <created>1680022808398</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680022808398</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"df\">\r\n      <created>1680022930139</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680022930139</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"df\">\r\n      <created>1680023897815</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680023897815</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"df\">\r\n      <created>1680024147235</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680024147235</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"df\">\r\n      <created>1680025465222</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680025465222</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"df\">\r\n      <created>1680026157221</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680026157221</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"df\">\r\n      <created>1680086519200</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680086519200</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"df\">\r\n      <created>1680089286258</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680089286258</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680090072414</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680090072414</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680090443301</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680090443301</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680100822480</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680100822480</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680347590514</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680347590514</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680352759577</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680352759577</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680365386470</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680365386470</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680367678314</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680367678314</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680447813725</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680447813725</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680942157840</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680942157840</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680942536281</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680942536281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00025\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680950207486</created>\r\n      <option name=\"number\" value=\"00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680950207486</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00026\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680952955800</created>\r\n      <option name=\"number\" value=\"00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680952955800</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00027\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680954200988</created>\r\n      <option name=\"number\" value=\"00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680954200988</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00028\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680958692219</created>\r\n      <option name=\"number\" value=\"00028\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680958692219</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00029\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680961031673</created>\r\n      <option name=\"number\" value=\"00029\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00029\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680961031673</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00030\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680961233507</created>\r\n      <option name=\"number\" value=\"00030\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00030\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680961233507</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00031\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680965924607</created>\r\n      <option name=\"number\" value=\"00031\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00031\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680965924607</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00032\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680970025572</created>\r\n      <option name=\"number\" value=\"00032\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00032\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680970025572</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00033\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680970114348</created>\r\n      <option name=\"number\" value=\"00033\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00033\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680970114348</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00034\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680970188957</created>\r\n      <option name=\"number\" value=\"00034\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00034\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680970188957</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00035\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1680972229166</created>\r\n      <option name=\"number\" value=\"00035\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00035\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680972229167</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00036\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681045399457</created>\r\n      <option name=\"number\" value=\"00036\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00036\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681045399457</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00037\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681047579444</created>\r\n      <option name=\"number\" value=\"00037\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00037\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681047579444</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00038\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681048204588</created>\r\n      <option name=\"number\" value=\"00038\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00038\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681048204588</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00039\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681048499127</created>\r\n      <option name=\"number\" value=\"00039\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00039\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681048499127</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00040\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681051877689</created>\r\n      <option name=\"number\" value=\"00040\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00040\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681051877689</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00041\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681052190812</created>\r\n      <option name=\"number\" value=\"00041\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00041\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681052190812</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00042\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681052352386</created>\r\n      <option name=\"number\" value=\"00042\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00042\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681052352386</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00043\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681056792277</created>\r\n      <option name=\"number\" value=\"00043\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00043\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681056792277</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00044\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681128508682</created>\r\n      <option name=\"number\" value=\"00044\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00044\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681128508682</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00045\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1681148152759</created>\r\n      <option name=\"number\" value=\"00045\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00045\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681148152759</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00046\" summary=\"Added database\">\r\n      <created>1682695565978</created>\r\n      <option name=\"number\" value=\"00046\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00046\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682695565978</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00047\" summary=\"Added database\">\r\n      <created>1682695626625</created>\r\n      <option name=\"number\" value=\"00047\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00047\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682695626625</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00048\" summary=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\">\r\n      <created>1682845542276</created>\r\n      <option name=\"number\" value=\"00048\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00048\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682845542276</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00049\" summary=\"continue work on databases\">\r\n      <created>1682853899004</created>\r\n      <option name=\"number\" value=\"00049\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00049\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682853899004</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00050\" summary=\"continue work on databases\">\r\n      <created>1682854939431</created>\r\n      <option name=\"number\" value=\"00050\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00050\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682854939431</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00051\" summary=\"continue work on databases\">\r\n      <created>1682857932322</created>\r\n      <option name=\"number\" value=\"00051\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00051\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682857932322</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"52\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"day\" />\r\n    <MESSAGE value=\"df\" />\r\n    <MESSAGE value=\"Added database\" />\r\n    <MESSAGE value=\"CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS\" />\r\n    <MESSAGE value=\"continue work on databases\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"continue work on databases\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>\r\n          <line>196</line>\r\n          <option name=\"timeStamp\" value=\"12\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic\" NAME=\"OrderMangerTest.three_supllier_split Coverage Results\" MODIFIED=\"1680966694724\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic\" NAME=\"OrderMangerTest.order_delete Coverage Results\" MODIFIED=\"1680967494058\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic\" NAME=\"OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results\" MODIFIED=\"1680965200494\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n    <SUITE FILE_PATH=\"coverage/ADSS_Group_P$OrderMangerTest.ic\" NAME=\"OrderMangerTest Coverage Results\" MODIFIED=\"1681124374583\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 98c7eb24fd9099885f1cf73fdb8c4edda82b3088)
++++ b/.idea/workspace.xml	(date 1682864126738)
+@@ -10,11 +10,34 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="continue work on databases">
+-      <change afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/df6b1986-9990-446a-96ba-1d8e678a5cc5.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplier.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ADSS_Group_P.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_P.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contact_Person.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Contract.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/DeliveringSupplier.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/FixedDaySupplier.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Item.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/ItemMapper.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Location.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/META-INF/MANIFEST.MF" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Main.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonDeliveringSupplier.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/NonFixedDaySupplier.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Order.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/OrderManger.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Pair.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/PaymentMethod.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/PriceHistory.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/Supplier_Manger.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/TempLevel.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/WindowType.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/ADSS_Group_P/res/SuperLeeDataBase" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -155,13 +178,6 @@
+       <updated>1680017976928</updated>
+       <workItem from="1682607405112" duration="31000" />
+       <workItem from="1682681197620" duration="11530000" />
+-    </task>
+-    <task id="LOCAL-00003" summary="day">
+-      <created>1680021275648</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680021275648</updated>
+     </task>
+     <task id="LOCAL-00004" summary="day">
+       <created>1680021342190</created>
+@@ -499,7 +515,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1682857932322</updated>
+     </task>
+-    <option name="localTasksCounter" value="52" />
++    <task id="LOCAL-00052" summary="continue work on databases">
++      <created>1682863091067</created>
++      <option name="number" value="00052" />
++      <option name="presentableId" value="LOCAL-00052" />
++      <option name="project" value="LOCAL" />
++      <updated>1682863091067</updated>
++    </task>
++    <option name="localTasksCounter" value="53" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1682863127733)
++++ b/.idea/jarRepositories.xml	(date 1682863127733)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Central Repository" />
++      <option name="url" value="https://repo.maven.apache.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1682863127701)
++++ b/.idea/compiler.xml	(date 1682863127701)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <annotationProcessing>
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="ADSS_Group_P" />
++      </profile>
++    </annotationProcessing>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_15\" default=\"true\" project-jdk-name=\"corretto-15\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 98c7eb24fd9099885f1cf73fdb8c4edda82b3088)
++++ b/.idea/misc.xml	(date 1682863127687)
+@@ -1,5 +1,13 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_15" default="true" project-jdk-name="corretto-15" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1682863127718)
++++ b/.idea/encodings.xml	(date 1682863127718)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file

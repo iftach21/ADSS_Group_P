@@ -74,6 +74,7 @@ public class OrderManger {
         Supplier min_sup=null;
         Order min_order = null;
         float min_cost = 0;
+        int min_days=10000000;
         //to cheak who have the max items in each call to the function
         int number_of_item=0;
         int trigger=0;
@@ -141,21 +142,23 @@ public class OrderManger {
 
 
 
-            }
-               if(number_of_item < numOfCommonElements){
-                   number_of_item = numOfCommonElements;
-                   min_sup = supplier;
-                   min_cost = order.getCost();
-                   min_order = order;
-               }
-               else {
-                   if(min_cost>order.getCost()){
-                       min_sup=supplier;
-                       min_cost=order.getCost();
-                       min_order=order;
+            }if(supplier.get_days()<=min_days) {
+                    if (number_of_item < numOfCommonElements) {
+                        number_of_item = numOfCommonElements;
+                        min_sup = supplier;
+                        min_cost = order.getCost();
+                        min_order = order;
+                        min_days = supplier.get_days();
+                    } else {
+                        if (min_cost > order.getCost()) {
+                            min_sup = supplier;
+                            min_cost = order.getCost();
+                            min_order = order;
 
-                   }
-               }
+                        }
+                    }
+                }
+
 
 
 

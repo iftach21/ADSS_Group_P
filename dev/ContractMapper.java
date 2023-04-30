@@ -36,9 +36,35 @@ public class ContractMapper {
             Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
             contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
             cache.put(contractId,contract);
+            return contract;
         }
         return null;
     }
+
+    public Contract findBySupplierId(String supplierID) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE supplier_id = ?");
+//        stmt.setString(2,supplierID);
+        ResultSet rs = stmt.executeQuery();
+        if(rs.next())
+        {
+            if(cache.containsKey(rs.getInt("contract_id")))
+            {
+                return cache.get(rs.getInt("contract_id"));
+            }
+            Contract contract = new Contract();
+            contract.setContractId(rs.getInt("contract_id"));
+            contract.setSupplierId(rs.getString("supplier_id"));
+            contract.setTotalDiscount(rs.getDouble("total_discount"));
+            String itemsMapJson = rs.getString("items_Map_discount");
+            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
+            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
+            cache.put(rs.getInt("contract_id"),contract);
+            return contract;
+        }
+        return null;
+    }
+
 
     public List<Contract> findAll() throws SQLException
     {
@@ -74,7 +100,6 @@ public class ContractMapper {
             contract.contractId = rs.getInt(1);
             cache.put(contract.contractId,contract);
         }
-
     }
 
     public void update(Contract contract) throws SQLException

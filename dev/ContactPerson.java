@@ -1,8 +1,8 @@
-public class contactPerson {
+public class ContactPerson {
     private String name;
     private String phoneNumber;
 
-    public contactPerson(String name, String phoneNumber) {
+    public ContactPerson(String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;    }
 

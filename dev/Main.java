@@ -132,7 +132,7 @@ public class Main {
                             System.out.println("number");
                             String phone_number = scanner.next();
                             phone_number = checkNumber(phone_number);
-                            contactPerson con_person = new contactPerson(contact_name, phone_number);
+                            ContactPerson con_person = new ContactPerson(contact_name, phone_number);
 
                             //delivery option
                             System.out.println("type:");
@@ -466,8 +466,8 @@ public class Main {
                     break;
                 case 3:
 
-                    contactPerson contactPerson1 = new contactPerson("John Smith", "555-1234");
-                    contactPerson contactPerson2 = new contactPerson("John not Smith", "555-1233");
+                    ContactPerson contactPerson1 = new ContactPerson("John Smith", "555-1234");
+                    ContactPerson contactPerson2 = new ContactPerson("John not Smith", "555-1233");
 
                     //init item to play with
                     Item item1 = new Item("Apple","1001",0.5,"Fruits Apple",TempLevel.regular,"Tree");

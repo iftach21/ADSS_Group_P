@@ -10,7 +10,7 @@ public abstract class Supplier {
 //    private String Payment_method;
     private PaymentMethod paymentMethod;
     private String Supplier_ID;
-    private contactPerson person;
+    private ContactPerson person;
     private Contract contract;
     private Map<Item,Pair<Integer,Float>>items;
 
@@ -25,7 +25,7 @@ public abstract class Supplier {
 
 
 
-    public Supplier(String name, String business_id, PaymentMethod paymentMethod, String supplier_ID, contactPerson person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
+    public Supplier(String name, String business_id, PaymentMethod paymentMethod, String supplier_ID, ContactPerson person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;
         this.paymentMethod = paymentMethod;
@@ -88,11 +88,11 @@ public abstract class Supplier {
         Supplier_ID = supplier_ID;
     }
 
-    public contactPerson getPerson() {
+    public ContactPerson getPerson() {
         return person;
     }
 
-    public void setPerson(contactPerson person) {
+    public void setPerson(ContactPerson person) {
         this.person = person;
     }
 
@@ -122,7 +122,7 @@ public abstract class Supplier {
             this.contract.add_to_contract(item,num,discount);}
     }}
     public void update_contact_person(String name ,String number){
-        contactPerson contact_person=new contactPerson(name,number);
+        ContactPerson contact_person=new ContactPerson(name,number);
         this.person=contact_person;
     }
     public void add_total_discount(double discount){

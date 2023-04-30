@@ -22,7 +22,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier.add_Items(item1,100,100);
         supplier.add_Items(item2,100,100);
@@ -56,7 +56,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
@@ -94,7 +94,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
@@ -130,7 +130,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
@@ -166,7 +166,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_Items(item2,100,100);
@@ -204,7 +204,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
@@ -242,7 +242,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
@@ -284,7 +284,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
@@ -332,7 +332,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
@@ -380,7 +380,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
 
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier_1.add_Items(item1,100,100);
         supplier_1.add_item_to_contract(item1.getName(),100,0.1);
@@ -399,7 +399,7 @@ class OrderMangerTest {
     @Test
     void test_only_supplier_exist(){
         Supplier_Manger masupplier=new Supplier_Manger();
-        contactPerson contactPerson = new contactPerson("John Smith", "555-1234");
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
         masupplier.getSuppliers().add(supplier_1);
         assertEquals(1,masupplier.getSuppliers().size());

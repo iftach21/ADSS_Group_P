@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.*;
-public class FixedDaySupplierMapper {
+public class FixedDaySupplierMapper{
     private final Connection conn;
     private final Map<String, Supplier> cache;
 

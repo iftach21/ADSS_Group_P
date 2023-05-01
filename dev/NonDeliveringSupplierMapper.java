@@ -6,14 +6,13 @@ import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.*;
 
-public class NonDeliveringSupplierMapper extends AbstractSupplierMapper{
-//    private final Connection conn;
-//    private final Map<String,Supplier> cache;
+public class NonDeliveringSupplierMapper {
+    private final Connection conn;
+    private final Map<String,Supplier> cache;
 
     public NonDeliveringSupplierMapper(Connection conn) {
-        super(conn);
-//        this.conn = conn;
-//        this.cache = new HashMap<>();
+        this.conn = conn;
+        this.cache = new HashMap<>();
     }
 
     public Supplier findBySupplierId(String supplierID) throws SQLException
@@ -64,9 +63,9 @@ public class NonDeliveringSupplierMapper extends AbstractSupplierMapper{
         return null;
     }
 
-    public List<Supplier> findAll() throws SQLException
+    public List<NonDeliveringSupplier> findAll() throws SQLException
     {
-        List<Supplier> suppliers = new ArrayList<>();
+        List<NonDeliveringSupplier> suppliers = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM NonDeliveringSuppliers");
         ResultSet rs = stmt.executeQuery();
         while(rs.next())
@@ -86,88 +85,48 @@ public class NonDeliveringSupplierMapper extends AbstractSupplierMapper{
         return suppliers;
     }
 
-    @Override
-    public void insert(Supplier supplier) throws SQLException {
+
+
+    public void insert(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,contract_id) VALUES (?, ?, ?, ?,?,?,?,?)");
-        String itemsJson = new JSONObject(supplier.getItems()).toString();
-        stmt.setString(1, supplier.getBusinessId());
-        stmt.setString(2, supplier.getName());
-        stmt.setString(3, (supplier.getPaymentMethod()).toString());
-        stmt.setString(4, supplier.getSupplierID());
-        stmt.setString(5, supplier.getPerson().getName());
-        stmt.setString(6, supplier.getPerson().getPhoneNumber());
+        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
+        stmt.setString(2, nonDeliveringSupplier.getName());
+        stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
+        stmt.setString(4, nonDeliveringSupplier.getSupplierID());
+        stmt.setString(5, nonDeliveringSupplier.getPerson().getName());
+        stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
         stmt.setString(7, itemsJson);
-        stmt.setString(8, String.valueOf(supplier.getContract().contractId));
+        stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
         ResultSet rs = stmt.getGeneratedKeys();
         if(rs.next())
         {
-            cache.put(supplier.getSupplierID(),supplier);
+            cache.put(nonDeliveringSupplier.getSupplierID(),nonDeliveringSupplier);
         }
     }
 
-    @Override
-    public void update(Supplier supplier) throws SQLException {
+    public void update(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    {
         PreparedStatement stmt = conn.prepareStatement("UPDATE NonDeliveringSuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, contract_id = ? WHERE supplier_ID = ?");
-        String itemsJson = new JSONObject(supplier.getItems()).toString();
-        stmt.setString(1, supplier.getBusinessId());
-        stmt.setString(2, supplier.getName());
-        stmt.setString(3, (supplier.getPaymentMethod()).toString());
-        stmt.setString(4, supplier.getSupplierID());
-        stmt.setString(5, supplier.getPerson().getName());
-        stmt.setString(6, supplier.getPerson().getPhoneNumber());
+        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
+        stmt.setString(2, nonDeliveringSupplier.getName());
+        stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
+        stmt.setString(4, nonDeliveringSupplier.getSupplierID());
+        stmt.setString(5, nonDeliveringSupplier.getPerson().getName());
+        stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
         stmt.setString(7, itemsJson);
-        stmt.setString(8, String.valueOf(supplier.getContract().contractId));
-        cache.put(supplier.getSupplierID(),supplier);
+        stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
+        cache.put(nonDeliveringSupplier.getSupplierID(),nonDeliveringSupplier);
     }
 
-    @Override
-    public void delete(Supplier supplier) throws SQLException {
+    public void delete(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
+    {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonDeliveringSuppliers WHERE supplier_ID = ?");
-        stmt.setString(1, supplier.getBusinessId());
+        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
         stmt.executeUpdate();
-        cache.remove(supplier.getSupplierID());
+        cache.remove(nonDeliveringSupplier.getSupplierID());
     }
-
-//    public void insert(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
-//    {
-//        PreparedStatement stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,contract_id) VALUES (?, ?, ?, ?,?,?,?,?)");
-//        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
-//        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
-//        stmt.setString(2, nonDeliveringSupplier.getName());
-//        stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
-//        stmt.setString(4, nonDeliveringSupplier.getSupplierID());
-//        stmt.setString(5, nonDeliveringSupplier.getPerson().getName());
-//        stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
-//        stmt.setString(7, itemsJson);
-//        stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
-//        ResultSet rs = stmt.getGeneratedKeys();
-//        if(rs.next())
-//        {
-//            cache.put(nonDeliveringSupplier.getSupplierID(),nonDeliveringSupplier);
-//        }
-//    }
-
-//    public void update(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
-//    {
-//        PreparedStatement stmt = conn.prepareStatement("UPDATE NonDeliveringSuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, contract_id = ? WHERE supplier_ID = ?");
-//        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
-//        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
-//        stmt.setString(2, nonDeliveringSupplier.getName());
-//        stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
-//        stmt.setString(4, nonDeliveringSupplier.getSupplierID());
-//        stmt.setString(5, nonDeliveringSupplier.getPerson().getName());
-//        stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
-//        stmt.setString(7, itemsJson);
-//        stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
-//        cache.put(nonDeliveringSupplier.getSupplierID(),nonDeliveringSupplier);
-//    }
-
-//    public void delete(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
-//    {
-//        PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonDeliveringSuppliers WHERE supplier_ID = ?");
-//        stmt.setString(1, nonDeliveringSupplier.getBusinessId());
-//        stmt.executeUpdate();
-//        cache.remove(nonDeliveringSupplier.getSupplierID());
-//    }
 }
 

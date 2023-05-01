@@ -6,14 +6,17 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.*;
-public class NonFixedDaySupplierMapper {
-    private final Connection conn;
-    private final Map<String, Supplier> cache;
-
+public class NonFixedDaySupplierMapper extends AbstractSupplierMapper {
     public NonFixedDaySupplierMapper(Connection conn) {
-        this.conn = conn;
-        this.cache = new HashMap<>();
+        super(conn);
     }
+//    private final Connection conn;
+//    private final Map<String, Supplier> cache;
+//
+//    public NonFixedDaySupplierMapper(Connection conn) {
+//        this.conn = conn;
+//        this.cache = new HashMap<>();
+//    }
 
     public Supplier findBySupplierId(String supplierID) throws SQLException {
         if (cache.containsKey(supplierID)) {
@@ -52,7 +55,7 @@ public class NonFixedDaySupplierMapper {
         return null;
     }
 
-    public List<NonDeliveringSupplier> findAll() throws SQLException {
+    public List<Supplier> findAll() throws SQLException {
         List<NonFixedDaySupplier> suppliers = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers");
         ResultSet rs = stmt.executeQuery();
@@ -73,47 +76,91 @@ public class NonFixedDaySupplierMapper {
         return null;
     }
 
-    public void insert(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
-    {
+    @Override
+    public void insert(Supplier supplier) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO NonFixedDaySuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,numOfDayToDeliver,contract_id) VALUES (?, ?, ?, ?,?,?,?,?,?)");
-        String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
-        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
-        stmt.setString(2, nonFixedDaySupplier.getName());
-        stmt.setString(3, (nonFixedDaySupplier.getPaymentMethod()).toString());
-        stmt.setString(4, nonFixedDaySupplier.getSupplierID());
-        stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
-        stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
+        String itemsJson = new JSONObject(supplier.getItems()).toString();
+        stmt.setString(1, supplier.getBusinessId());
+        stmt.setString(2, supplier.getName());
+        stmt.setString(3, (supplier.getPaymentMethod()).toString());
+        stmt.setString(4, supplier.getSupplierID());
+        stmt.setString(5, supplier.getPerson().getName());
+        stmt.setString(6, supplier.getPerson().getPhoneNumber());
         stmt.setString(7, itemsJson);
-        stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
-        stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+        stmt.setString(8, String.valueOf(supplier.getContract().contractId));
+        stmt.setString(9, String.valueOf(supplier.getContract().contractId));
         ResultSet rs = stmt.getGeneratedKeys();
         if(rs.next())
         {
-            cache.put(nonFixedDaySupplier.getSupplierID(),nonFixedDaySupplier);
+            cache.put(supplier.getSupplierID(),supplier);
         }
     }
-    public void update(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
-    {
+
+    @Override
+    public void update(Supplier supplier) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("UPDATE NonFixedDaySuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, numOfDayToDeliver = ?, contract_id = ? WHERE supplier_ID = ?");
-        String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
-        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
-        stmt.setString(2, nonFixedDaySupplier.getName());
-        stmt.setString(3, (nonFixedDaySupplier.getPaymentMethod()).toString());
-        stmt.setString(4, nonFixedDaySupplier.getSupplierID());
-        stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
-        stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
+        String itemsJson = new JSONObject(supplier.getItems()).toString();
+        stmt.setString(1, supplier.getBusinessId());
+        stmt.setString(2, supplier.getName());
+        stmt.setString(3, (supplier.getPaymentMethod()).toString());
+        stmt.setString(4, supplier.getSupplierID());
+        stmt.setString(5, supplier.getPerson().getName());
+        stmt.setString(6, supplier.getPerson().getPhoneNumber());
         stmt.setString(7, itemsJson);
-        stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
-        stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
-        cache.put(nonFixedDaySupplier.getSupplierID(),nonFixedDaySupplier);
+        stmt.setString(8, String.valueOf(supplier.getContract().contractId));
+        stmt.setString(9, String.valueOf(supplier.getContract().contractId));
+        cache.put(supplier.getSupplierID(),supplier);
     }
-    public void delete(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
-    {
+
+    @Override
+    public void delete(Supplier supplier) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
-        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+        stmt.setString(1, supplier.getBusinessId());
         stmt.executeUpdate();
-        cache.remove(nonFixedDaySupplier.getSupplierID());
+        cache.remove(supplier.getSupplierID());
     }
+
+//    public void insert(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
+//    {
+//        PreparedStatement stmt = conn.prepareStatement("INSERT INTO NonFixedDaySuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,numOfDayToDeliver,contract_id) VALUES (?, ?, ?, ?,?,?,?,?,?)");
+//        String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
+//        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+//        stmt.setString(2, nonFixedDaySupplier.getName());
+//        stmt.setString(3, (nonFixedDaySupplier.getPaymentMethod()).toString());
+//        stmt.setString(4, nonFixedDaySupplier.getSupplierID());
+//        stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
+//        stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
+//        stmt.setString(7, itemsJson);
+//        stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+//        stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+//        ResultSet rs = stmt.getGeneratedKeys();
+//        if(rs.next())
+//        {
+//            cache.put(nonFixedDaySupplier.getSupplierID(),nonFixedDaySupplier);
+//        }
+//    }
+//    public void update(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
+//    {
+//        PreparedStatement stmt = conn.prepareStatement("UPDATE NonFixedDaySuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, numOfDayToDeliver = ?, contract_id = ? WHERE supplier_ID = ?");
+//        String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
+//        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+//        stmt.setString(2, nonFixedDaySupplier.getName());
+//        stmt.setString(3, (nonFixedDaySupplier.getPaymentMethod()).toString());
+//        stmt.setString(4, nonFixedDaySupplier.getSupplierID());
+//        stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
+//        stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
+//        stmt.setString(7, itemsJson);
+//        stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+//        stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+//        cache.put(nonFixedDaySupplier.getSupplierID(),nonFixedDaySupplier);
+//    }
+//    public void delete(NonFixedDaySupplier nonFixedDaySupplier) throws SQLException
+//    {
+//        PreparedStatement stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
+//        stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+//        stmt.executeUpdate();
+//        cache.remove(nonFixedDaySupplier.getSupplierID());
+//    }
 
 
 }

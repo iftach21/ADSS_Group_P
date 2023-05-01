@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -7,18 +10,43 @@ import java.util.Map;
 
 public class FixedDaySupplier extends DeliveringSupplier {
     private WindowType currentDeliveryDay;
+    public static FixedDaySupplierMapper fixedDaySupplierMapper;
+    public FixedDaySupplier(WindowType currentDeliveryDay, String name, String business_id, int payment_method, String suplier_ID, ContactPerson person, Contract contract, Map<Item,Pair<Integer, Float>> items)
+    {
+        super(name, business_id, payment_method, suplier_ID, person, contract, items);
+        this.currentDeliveryDay = currentDeliveryDay;
+        Connection conn = null;
+        try
+        {
+            String url = "jdbc:sqlite:res/SuperLeeDataBase";
+            conn = DriverManager.getConnection(url);
+        }
+        catch (SQLException ignored) {}
+        finally
+        {
+            try {
+                if (conn != null)
+                {
+                    conn.close();
+                }
+            }
+            catch (SQLException ignored) {}
+        }
+
+        if(fixedDaySupplierMapper == null)
+        {
+            fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+        }
+    }
 
     public WindowType getCurrentDeliveryDay() {
         return currentDeliveryDay;
     }
 
+
     public void setCurrentDeliveryDay(WindowType currentDeliveryDay) {
         this.currentDeliveryDay = currentDeliveryDay;
     }
-
-    public FixedDaySupplier(WindowType currentDeliveryDay, String name, String business_id, int payment_method, String suplier_ID, ContactPerson person, Contract contract, Map<Item,Pair<Integer, Float>> items) {
-        super(name, business_id, payment_method, suplier_ID, person, contract, items);
-        this.currentDeliveryDay = currentDeliveryDay;}
 
     @Override
     public int get_days(){
@@ -44,7 +72,6 @@ public class FixedDaySupplier extends DeliveringSupplier {
 
         return (int) (secondsUntilDelivery / (24 * 60 * 60)); // Convert seconds to days
     }
-
-    }
+}
 
 

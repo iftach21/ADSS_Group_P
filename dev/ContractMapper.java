@@ -17,12 +17,13 @@ public class ContractMapper {
         this.cache = new HashMap<>();
     }
 
-    public Contract findByContractId(int contractId) throws SQLException
+    public Contract findByContractId(int contractId)
     {
         if(cache.containsKey(contractId))
         {
             return cache.get(contractId);
         }
+        try{
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE contract_id = ?");
         stmt.setInt(1,contractId);
         ResultSet rs = stmt.executeQuery();
@@ -37,7 +38,8 @@ public class ContractMapper {
             contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
             cache.put(contractId,contract);
             return contract;
-        }
+        }}
+        catch (Exception ignored){}
         return null;
     }
 

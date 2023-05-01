@@ -29,7 +29,7 @@ public class NonFixedDaySupplierMapper extends AbstractSupplierMapper {
         if (rs.next()) {
             Connection conn = null;
             try {
-                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db";
+                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
                 conn = DriverManager.getConnection(url);
             } catch (SQLException ignored) {
             } finally {

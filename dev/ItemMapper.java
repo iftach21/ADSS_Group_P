@@ -63,7 +63,7 @@ public class ItemMapper {
 
     public void insert(Item item) throws SQLException // TODO check what happens if i try to add an item that already exists in the database
     {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)VALUES (?, ?, ?, ?,?,?,?,?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         stmt.setString(1,item.getCatalogNum());
         stmt.setString(2,item.getName());
         stmt.setString(3,Double.toString(item.getWeight()));
@@ -74,6 +74,7 @@ public class ItemMapper {
         stmt.setString(8,item.getManufacturer());
         stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
+
         if(rs.next())
         {
             item.setCatalogNum(rs.getString(1));

@@ -38,32 +38,30 @@ public class Item {
         this.manufacturer = manufacturer;
         this.minimum_quantity = 0;
         Connection conn = null;
-        try
-        {
-            Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:dev/res/db/SuperLeeDataBase.db";
-            conn = DriverManager.getConnection(url);
-        }
-
-        catch(SQLException ignored){} catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally
-        {
-            try
-            {
-                if(conn != null)
-                {
-                    conn.close();
-                }
-            }
-            catch(SQLException ignored){}
-        }
-
-        if (itemMapper == null){
-            itemMapper = new ItemMapper(conn);}
-
-
-
+//        try
+//        {
+//            Class.forName("org.sqlite.JDBC");
+//            String url = "jdbc:sqlite:dev/res/db/SuperLeeDataBase.db.db";
+//            conn = DriverManager.getConnection(url);
+//        }
+//
+//        catch(SQLException ignored){} catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } finally
+//        {
+//            try
+//            {
+//                if(conn != null)
+//                {
+//                    conn.close();
+//                }
+//            }
+//            catch(SQLException ignored){}
+//        }
+//
+//        if (itemMapper == null){
+//            itemMapper = new ItemMapper(conn);}
+//
     }
 
     public String getName() {
@@ -72,10 +70,6 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
     }
 
 
@@ -85,10 +79,6 @@ public class Item {
 
     public void setCatalogNum(String catalogNum) {
         this.catalogNum = catalogNum;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
     }
 
 
@@ -98,10 +88,7 @@ public class Item {
 
     public void setWeight(double weight) {
         this.weight = weight;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
+
     }
 
     public String getCatalogName() {
@@ -110,10 +97,7 @@ public class Item {
 
     public void setCatalogName(String catalogName) {
         this.catalogName = catalogName;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
+
     }
 
 
@@ -125,10 +109,7 @@ public class Item {
 
     public void setTemperature(TempLevel temperature) {
     this.temperature = temperature;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
+
 }
 
     public void print_item(){
@@ -142,10 +123,7 @@ public class Item {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
+
     }
 
     public String getManufacturer() {
@@ -158,10 +136,7 @@ public class Item {
 
     public void setPriceHistory(List<PriceHistory> priceHistory) {
         this.priceHistory = priceHistory;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
+
     }
 
     public int getMinimum_quantity() {
@@ -170,10 +145,7 @@ public class Item {
 
     public void setMinimum_quantity(int minimum_quantity) {
         this.minimum_quantity = minimum_quantity;
-        try {
-            itemMapper.update(this);
-        }
-        catch(SQLException ignored){}
+
     }
 
     @Override

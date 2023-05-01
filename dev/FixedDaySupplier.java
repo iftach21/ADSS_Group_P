@@ -18,7 +18,7 @@ public class FixedDaySupplier extends DeliveringSupplier {
         Connection conn = null;
         try
         {
-            String url = "jdbc:sqlite:res/SuperLeeDataBase";
+            String url = "jdbc:sqlite:res/SuperLeeDataBase.db";
             conn = DriverManager.getConnection(url);
         }
         catch (SQLException ignored) {}

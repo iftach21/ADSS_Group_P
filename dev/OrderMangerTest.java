@@ -2,18 +2,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
 class OrderMangerTest {
     @Test
-    void test_add_item_list_one_supplier(){ //1
+    void test_add_item_list_one_supplier() throws SQLException { //1
 //        Connection conn = null;
 //        try {
-//            String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db";
+//            String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
 //            conn = DriverManager.getConnection(url);
 //            System.out.println("Database connection successful");
 //        } catch (SQLException e) {
@@ -27,21 +25,103 @@ class OrderMangerTest {
 //                System.out.println("Error closing database connection: " + e.getMessage());
 //            }
 //        }
+//        Connection conn = null;
+//        try
+//        {
+//            Class.forName("org.sqlite.JDBC");
+//            String url = "jdbc:sqlite:dev/res/db/SuperLeeDataBase.db.db";
+//            conn = DriverManager.getConnection(url);
+//        }
+//
+//        catch(SQLException ignored){} catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        if (conn.isClosed()) {
+            System.out.println("Connection is closed.");
+        } else {
+            System.out.println("Connection is open.");
+        }
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+            System.out.println("Connection to SuperLeeDataBase.db has been established.");
+
+            // Check if the connection is working by executing a test query
+            Statement stmt = conn.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM main.items");
+
+//            if (rs.next()) {
+//                System.out.println("Connection can access the items table.");
+//            } else {
+//                System.out.println("Connection cannot access the items table.");
+//            }
+
+            // TODO: Perform database operations here
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+/*        finally
+        {
+            try
+            {
+                if(conn != null)
+                {
+                    conn.close();
+                }
+            }
+            catch(SQLException ignored){}
+        }*/
+        ItemMapper mapper = new ItemMapper(conn);
         var ordermanger = new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
-        Item item1 = new Item("Apple", "A100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
-        item1.setMinimum_quantity(10);
-        Item item2 = new Item("Milk", "M200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
-        item2.setMinimum_quantity(5);
-        Item item3 = new Item("Bread", "B300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
-        item3.setMinimum_quantity(3);
-        Item item4 = new Item("Chicken", "C400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
-        item4.setMinimum_quantity(2);
+        Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+//        item1.setMinimum_quantity(10);
+        Item item2 = new Item("Milk", "200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
+//        item2.setMinimum_quantity(5);
+        Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
+//        item3.setMinimum_quantity(3);
+        Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
+//        item4.setMinimum_quantity(2);
         maplist.put(item1,100);
         maplist.put(item2,100);
         maplist.put(item3,100);
         maplist.put(item4,100);
-
+        try
+        {
+        mapper.insert(item1);
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Exception caught: " + e.getMessage());
+        }
+        try
+        {
+            mapper.insert(item2);
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Exception caught: " + e.getMessage());
+        }
+        try
+        {
+            mapper.insert(item3);
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Exception caught: " + e.getMessage());
+        }
+        try
+        {
+            mapper.insert(item4);
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Exception caught: " + e.getMessage());
+        }
         Supplier_Manger masupplier=new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);

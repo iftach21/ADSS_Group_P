@@ -27,7 +27,7 @@ public class FixedDaySupplierMapper {
             Connection conn = null;
             try
             {
-                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db";
+                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
                 conn = DriverManager.getConnection(url);
             }
             catch (SQLException ignored) {}

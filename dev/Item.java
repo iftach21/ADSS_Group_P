@@ -21,7 +21,6 @@ public class Item {
     private List<PriceHistory> priceHistoryList;
     //static ItemMapper itemMapper; // MFMF
 
-
     public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity, String catalogName)
     {
         this.name = name;

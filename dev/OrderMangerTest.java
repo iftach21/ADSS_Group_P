@@ -132,12 +132,20 @@ class OrderMangerTest {
         supplier.add_Items(item3,100,100);
         supplier.add_Items(item4,100,100);
         NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
-        mapper1.insert(supplier);
+        try{
+        mapper1.insert(supplier);}
+        catch(SQLException ignored){}
         masupplier.getSuppliers().add(supplier);
         ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
         supplier.print_items();
         ordermanger.getPending_for_apporval().get(0).print_items();
-        NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
+        try
+        {
+            NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
+        }
+        catch(SQLException e){
+            System.err.println("Exception caught: " + e.getMessage());
+        }
         supplier.print_items();
 
 

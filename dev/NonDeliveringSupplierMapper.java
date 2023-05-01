@@ -26,35 +26,37 @@ public class NonDeliveringSupplierMapper {
         ResultSet rs = stmt.executeQuery();
         if(rs.next())
         {
-            Connection conn = null;
-            try
-            {
-                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-                conn = DriverManager.getConnection(url);
-            }
+//            Connection conn = null;
+//            try
+//            {
+//                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
+//                conn = DriverManager.getConnection(url);
+//            }
+//
+//            catch(SQLException ignored){}
 
-            catch(SQLException ignored){}
-
-            finally
-            {
-                try
-                {
-                    if(conn != null)
-                    {
-                        conn.close();
-                    }
-                }
-                catch(SQLException ignored){}
-            }
+//            finally
+//            {
+//                try
+//                {
+//                    if(conn != null)
+//                    {
+//                        conn.close();
+//                    }
+//                }
+//                catch(SQLException ignored){}
+//            }
 
             ContractMapper contractMapper = new ContractMapper(conn);
             Contract contract;
             contract = contractMapper.findBySupplierId(supplierID);
             ContactPerson person = new ContactPerson(rs.getString("contract_person_name"),rs.getString("contract_phone_number"));
             String itemsMapJson = rs.getString("items");
-            Type type = new TypeToken<Map<Item,Pair<Integer, Float>>>(){}.getType();
+//            Type type = new TypeToken<Map<Item,Pair<Integer, Float>>>(){}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item,Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
+            Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>(){}.getType();
+            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
+//            Map<Item,Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
             NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
 
             cache.put(supplierID,nonDeliveringSupplier);
@@ -90,7 +92,9 @@ public class NonDeliveringSupplierMapper {
     public void insert(NonDeliveringSupplier nonDeliveringSupplier) throws SQLException
     {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,contract_id) VALUES (?, ?, ?, ?,?,?,?,?)");
-        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+//        String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+        String itemsJson = new Gson().toJson(nonDeliveringSupplier.getItems());
+
         stmt.setString(1, nonDeliveringSupplier.getBusinessId());
         stmt.setString(2, nonDeliveringSupplier.getName());
         stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());

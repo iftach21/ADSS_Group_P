@@ -113,8 +113,8 @@ public class stockTest {
         Date date1 = new Date(2023, 10, 7);
         Date date2 = new Date(2024, 1, 9);
 
-        specificItem milk1 = new specificItem(date1, false, Location.Store);
-        specificItem milk2 = new specificItem(date2, true, Location.Storage);
+        specificItem milk1 = new specificItem(date1, false, Location.Store, milk3Percent);
+        specificItem milk2 = new specificItem(date2, true, Location.Storage, milk3Percent);
 
         dairyCat.addSubCategory(milkSubCat);
         dairyCat.addSubCategory(butterSubCat);
@@ -146,8 +146,8 @@ public class stockTest {
         Date date1 = new Date(2023, 10, 7);
         Date date2 = new Date(2024, 1, 9);
 
-        specificItem milk1 = new specificItem(date1, false, Location.Store);
-        specificItem milk2 = new specificItem(date2, true, Location.Storage);
+        specificItem milk1 = new specificItem(date1, false, Location.Store, milk3Percent);
+        specificItem milk2 = new specificItem(date2, true, Location.Storage, milk3Percent);
 
         dairyCat.addSubCategory(milkSubCat);
         dairyCat.addSubCategory(butterSubCat);
@@ -178,8 +178,8 @@ public class stockTest {
         Date date1 = new Date(2023, 10, 7);
         Date date2 = new Date(2024, 1, 9);
 
-        specificItem milk1 = new specificItem(date1, false, Location.Store);
-        specificItem milk2 = new specificItem(date2, true, Location.Storage);
+        specificItem milk1 = new specificItem(date1, false, Location.Store, milk3Percent);
+        specificItem milk2 = new specificItem(date2, true, Location.Storage, milk3Percent);
 
         dairyCat.addSubCategory(milkSubCat);
         dairyCat.addSubCategory(butterSubCat);
@@ -244,38 +244,38 @@ public class stockTest {
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
-        specificItem milk1 = new specificItem(dateMilk1, false, Location.Store);
-        specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage);
-        specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage);
-        specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage);
+        specificItem milk1 = new specificItem(dateMilk1, false, Location.Store, milk3Percent);
+        specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage, milk3Percent);
+        specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage, milk3Percent);
+        specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage, milk3Percent);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
         milk3Percent.addSpecificItem(milk4);
 
-        specificItem soyMilk1 = new specificItem(dateMilk1,false, Location.Store);
-        specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store);
-        specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store);
-        specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store);
+        specificItem soyMilk1 = new specificItem(dateMilk1,false, Location.Store, soyMilk);
+        specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store, soyMilk);
+        specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store, soyMilk);
+        specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store, soyMilk);
         soyMilk.addSpecificItem(soyMilk1);
         soyMilk.addSpecificItem(soyMilk2);
         soyMilk.addSpecificItem(soyMilk3);
         soyMilk.addSpecificItem(soyMilk4);
 
-        specificItem butter1 = new specificItem(dateMilk1, false, Location.Store);
-        specificItem butter2 = new specificItem(dateMilk2, false, Location.Store);
+        specificItem butter1 = new specificItem(dateMilk1, false, Location.Store, regularButter);
+        specificItem butter2 = new specificItem(dateMilk2, false, Location.Store, regularButter);
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
-        specificItem toiletPaper1 = new specificItem(null, false, Location.Store);
-        specificItem toiletPaper2 = new specificItem(null, false, Location.Store);
-        specificItem toiletPaper3 = new specificItem(null, false, Location.Store);
+        specificItem toiletPaper1 = new specificItem(null, false, Location.Store, toiletPaper);
+        specificItem toiletPaper2 = new specificItem(null, false, Location.Store, toiletPaper);
+        specificItem toiletPaper3 = new specificItem(null, false, Location.Store, toiletPaper);
         toiletPaper.addSpecificItem(toiletPaper1);
         toiletPaper.addSpecificItem(toiletPaper2);
         toiletPaper.addSpecificItem(toiletPaper3);
 
-        specificItem sodGel1 = new specificItem(null, false, Location.Store);
-        specificItem sodGel2 = new specificItem(null, true, Location.Storage);
+        specificItem sodGel1 = new specificItem(null, false, Location.Store, sodGel);
+        specificItem sodGel2 = new specificItem(null, true, Location.Storage, sodGel);
         sodGel.addSpecificItem(sodGel1);
         sodGel.addSpecificItem(sodGel2);
 
@@ -345,38 +345,38 @@ public class stockTest {
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
-        specificItem milk1 = new specificItem(dateMilk1, false, Location.Store);
-        specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage);
-        specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage);
-        specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage);
+        specificItem milk1 = new specificItem(dateMilk1, false, Location.Store, milk3Percent);
+        specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage, milk3Percent);
+        specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage, milk3Percent);
+        specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage, milk3Percent);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
         milk3Percent.addSpecificItem(milk4);
 
-        specificItem soyMilk1 = new specificItem(dateMilk1,false, Location.Store);
-        specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store);
-        specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store);
-        specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store);
+        specificItem soyMilk1 = new specificItem(dateMilk1,false, Location.Store, soyMilk);
+        specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store, soyMilk);
+        specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store, soyMilk);
+        specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store, soyMilk);
         soyMilk.addSpecificItem(soyMilk1);
         soyMilk.addSpecificItem(soyMilk2);
         soyMilk.addSpecificItem(soyMilk3);
         soyMilk.addSpecificItem(soyMilk4);
 
-        specificItem butter1 = new specificItem(dateMilk1, false, Location.Store);
-        specificItem butter2 = new specificItem(dateMilk2, false, Location.Store);
+        specificItem butter1 = new specificItem(dateMilk1, false, Location.Store, regularButter);
+        specificItem butter2 = new specificItem(dateMilk2, false, Location.Store, regularButter);
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
-        specificItem toiletPaper1 = new specificItem(null, false, Location.Store);
-        specificItem toiletPaper2 = new specificItem(null, false, Location.Store);
-        specificItem toiletPaper3 = new specificItem(null, false, Location.Store);
+        specificItem toiletPaper1 = new specificItem(null, false, Location.Store, toiletPaper);
+        specificItem toiletPaper2 = new specificItem(null, false, Location.Store, toiletPaper);
+        specificItem toiletPaper3 = new specificItem(null, false, Location.Store, toiletPaper);
         toiletPaper.addSpecificItem(toiletPaper1);
         toiletPaper.addSpecificItem(toiletPaper2);
         toiletPaper.addSpecificItem(toiletPaper3);
 
-        specificItem sodGel1 = new specificItem(null, false, Location.Store);
-        specificItem sodGel2 = new specificItem(null, true, Location.Storage);
+        specificItem sodGel1 = new specificItem(null, false, Location.Store, sodGel);
+        specificItem sodGel2 = new specificItem(null, true, Location.Storage, sodGel);
         sodGel.addSpecificItem(sodGel1);
         sodGel.addSpecificItem(sodGel2);
 

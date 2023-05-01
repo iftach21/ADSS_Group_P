@@ -1,6 +1,9 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.time.Instant;
 import java.util.List;
 
 public class Item {
@@ -9,22 +12,22 @@ public class Item {
     private String categoryName;
     private double weight;
     private String manufacturer;
+    private String catalogName; // MFMF Supplier
     private int minQuantity;
     private int amount = 0;
     private TempLevel temperature;
-
-    //todo - consider to erase that
-    private Location location = Location.Storage;
     private Discount discount;
     private List<specificItem> specificItemList;
     private List<PriceHistory> priceHistoryList;
+    //static ItemMapper itemMapper; // MFMF
 
 
-    public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity, String categoryName)
+    public Item(String name, String catalogNum, double weight, String manufacturer, TempLevel temperature, int minQuantity, String catalogName)
     {
         this.name = name;
         this.catalogNum = catalogNum;
         this.weight = weight;
+        // this.catalogName = catalogName; // MFMF
         this.manufacturer = manufacturer;
         this.temperature = temperature;
         this.minQuantity = minQuantity;
@@ -32,6 +35,21 @@ public class Item {
         this.priceHistoryList = new ArrayList<PriceHistory>();
         this.discount = new Discount();
         this.categoryName = categoryName;
+    }
+
+    public Item(Item fatherItem) {
+        this.name = fatherItem.name;
+        this.catalogName = fatherItem.catalogName;
+        this.manufacturer = fatherItem.manufacturer;
+        this.temperature = fatherItem.temperature;
+        this.minQuantity = fatherItem.minQuantity;
+        this.specificItemList = fatherItem.specificItemList;
+        this.priceHistoryList = fatherItem.priceHistoryList;
+        this.categoryName = fatherItem.categoryName;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public Discount getDiscount() {
@@ -48,6 +66,10 @@ public class Item {
 
     public void setCatalogNum(String catalogNum) {
         this.catalogNum = catalogNum;
+    }
+
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
     }
 
     public void setMinQuantity(int minQuantity) {
@@ -74,6 +96,10 @@ public class Item {
         this.name = name;
     }
 
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
     public int getMinQuantity() {
         return minQuantity;
     }
@@ -94,6 +120,16 @@ public class Item {
     public specificItem getSpecificItemList(int index) {
         specificItem currentSpecificItem;
         return this.specificItemList.get(index);
+    }
+
+    // MFMF
+    public void print_item(){
+        System.out.println("name:"+this.name);
+        System.out.println("manufacturer :"+ this.manufacturer);
+        System.out.println("catalog number : " +this.catalogNum);
+        System.out.println("weight: "+this.weight );
+        System.out.println("catalog Name :" +this.catalogName );
+        System.out.println("temperature :"+ this.temperature);
     }
 
     //Method 1: toString
@@ -153,6 +189,4 @@ public class Item {
         int lastPriceHistory = this.priceHistoryList.size() - 1;
         return this.priceHistoryList.get(lastPriceHistory).getBuyPrice();
     }
-
-
 }

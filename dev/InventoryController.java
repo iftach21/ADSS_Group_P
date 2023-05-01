@@ -1,24 +1,24 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
+    private HashMap<Item, List<specificItem>> specificItemsMap;
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
+        this.specificItemsMap = new HashMap<Item, List<specificItem>>();
     }
 
-    public specificItem findSpecificItem(int itemId){
+    public specificItem findSpecificItem(int serialNumber){
         specificItem currentSpecificItem;
         Item currentItem;
         for (int i = 0; i < ItemsList.size(); i++){
             currentItem = ItemsList.get(i);
             for (int j = 0; j < currentItem.getAmount(); j++){
                 currentSpecificItem = currentItem.getSpecificItemList(j);
-                if(currentSpecificItem.getItemID() == itemId){
+                if(currentSpecificItem.getserialNumber() == serialNumber){
                     return currentSpecificItem;
                 }
             }
@@ -38,14 +38,14 @@ public class InventoryController {
     }
     //Method: deleteSpecificItem
     //This method deleted a specific item from the entire inventory
-    public boolean deleteSpecificItem(int itemID){
+    public boolean deleteSpecificItem(int serialNumber){
         Item currentItem;
         specificItem currentSpecificItem;
         for (int i = 0; i < ItemsList.size(); i++){
             currentItem = ItemsList.get(i);
             for (int j = 0; j < currentItem.getAmount(); j++){
                 currentSpecificItem = currentItem.getSpecificItemList(j);
-                if (currentSpecificItem.getItemID() == itemID){
+                if (currentSpecificItem.getserialNumber() == serialNumber){
                     currentItem.removeSpecificItem(currentSpecificItem);
                     return true;
                 }

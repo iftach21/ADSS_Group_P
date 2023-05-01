@@ -1,24 +1,25 @@
 import java.time.Instant;
 import java.util.Date;
 
-public class specificItem{
+public class specificItem extends Item{
 
-    private int itemID;
+    private final int serialNumber;
     private final Date expirationDate;
     private boolean isDefected = false;
     private Location location;
-    private static int nextItemID = 1;
+    private static int nextserialNumber = 1;
 
-    public specificItem(Date expirationDate, boolean isDefected, Location location) {
-        this.itemID = nextItemID;
-        nextItemID++;
+    public specificItem(Date expirationDate, boolean isDefected, Location location, Item fatherItem) {
+        super(fatherItem);
+        this.serialNumber = nextserialNumber;
+        nextserialNumber++;
         this.expirationDate = expirationDate;
         this.isDefected = isDefected;
         this.location = location;
     }
 
-    public int getItemID() {
-        return itemID;
+    public int getserialNumber() {
+        return serialNumber;
     }
 
     public void setDefected(boolean defected) {
@@ -66,7 +67,7 @@ public class specificItem{
 
     @Override
     public String toString() {
-        return  "item ID : " + itemID +
+        return  "item ID : " + serialNumber +
                 ", Expiration Date: " + expirationDate +
                 ", isDefected: " + isDefected +
                 ", location: " + location;

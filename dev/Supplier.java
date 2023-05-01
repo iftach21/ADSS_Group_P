@@ -14,6 +14,7 @@ public abstract class Supplier {
     private Contract contract;
     private Map<Item,Pair<Integer,Float>>items;
 
+
     public Supplier(String name, String business_id, PaymentMethod paymentMethod, String supplier_ID, ContactPerson person, Contract contract, Map<Item, Pair<Integer,Float>> items) {
         this.name = name;
         this.business_id = business_id;

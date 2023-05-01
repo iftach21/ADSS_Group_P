@@ -10,29 +10,27 @@ class OrderMangerTest {
     void test_add_item_list_one_supplier(){ //1
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
+        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
+        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
 
-//        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
-//        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
-//        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
-//        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
-//
-//        maplist.put(item1,100);
-//        maplist.put(item2,100);
-//        maplist.put(item3,100);
-//        maplist.put(item4,100);
-//
-//        Supplier_Manger masupplier=new Supplier_Manger();
-//        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
-//        NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
-//        supplier.add_Items(item1,100,100);
-//        supplier.add_Items(item2,100,100);
-//        supplier.add_Items(item3,100,100);
-//        supplier.add_Items(item4,100,100);
+        maplist.put(item1,100);
+        maplist.put(item2,100);
+        maplist.put(item3,100);
+        maplist.put(item4,100);
 
-//        masupplier.getSuppliers().add(supplier);
-//        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
-//        supplier.print_items();
-//        ordermanger.getPending_for_apporval().get(0).print_items();
+        Supplier_Manger masupplier=new Supplier_Manger();
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
+        NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
+        supplier.add_Items(item1,100,100);
+        supplier.add_Items(item2,100,100);
+        supplier.add_Items(item3,100,100);
+        supplier.add_Items(item4,100,100);
+
+        masupplier.getSuppliers().add(supplier);
+        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
+        supplier.print_items();
+        ordermanger.getPending_for_apporval().get(0).print_items();
 
 
 

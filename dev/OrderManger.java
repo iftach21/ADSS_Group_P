@@ -78,6 +78,7 @@ public class OrderManger {
         int number_of_item=0;
         int trigger=0;
         int no_match=0;
+        int min_number_days;
 
 
         for(Supplier supplier: manger.getSuppliers()){

@@ -40,13 +40,14 @@ public class Item {
         Connection conn = null;
         try
         {
-            String url = "jdbc:sqlite:res/SuperLeeDataBase";
+            Class.forName("org.sqlite.JDBC");
+            String url = "jdbc:sqlite:dev/res/db/SuperLeeDataBase.db";
             conn = DriverManager.getConnection(url);
         }
 
-        catch(SQLException ignored){}
-
-        finally
+        catch(SQLException ignored){} catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally
         {
             try
             {

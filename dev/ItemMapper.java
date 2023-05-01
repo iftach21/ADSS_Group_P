@@ -1,10 +1,14 @@
 import java.sql.*;
 import java.util.*;
+import java.sql.Connection;
 public class ItemMapper {
     private final Connection conn;
     private final Map<String,Item> cache;
     public ItemMapper(Connection conn)
     {
+        if (conn == null) {
+            throw new IllegalArgumentException("Connection cannot be null.");
+        }
         this.conn = conn;
         this.cache = new HashMap<>();
     }

@@ -42,8 +42,7 @@ public class NonFixedDaySupplierMapper {
             contract = contractMapper.findBySupplierId(supplierID);
             ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
             String itemsMapJson = rs.getString("items");
-            Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {
-            }.getType();
+            Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
             Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
             NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, items);

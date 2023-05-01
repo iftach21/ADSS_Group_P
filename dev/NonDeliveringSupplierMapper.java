@@ -26,38 +26,19 @@ public class NonDeliveringSupplierMapper {
         ResultSet rs = stmt.executeQuery();
         if(rs.next())
         {
-//            Connection conn = null;
-//            try
-//            {
-//                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-//                conn = DriverManager.getConnection(url);
-//            }
-//
-//            catch(SQLException ignored){}
 
-//            finally
-//            {
-//                try
-//                {
-//                    if(conn != null)
-//                    {
-//                        conn.close();
-//                    }
-//                }
-//                catch(SQLException ignored){}
-//            }
 
             ContractMapper contractMapper = new ContractMapper(conn);
             Contract contract;
             contract = contractMapper.findBySupplierId(supplierID);
             ContactPerson person = new ContactPerson(rs.getString("contract_person_name"),rs.getString("contract_phone_number"));
             String itemsMapJson = rs.getString("items");
-//            Type type = new TypeToken<Map<Item,Pair<Integer, Float>>>(){}.getType();
+            Map<Item,Pair<Integer,Float>> map=ItemParser.parse(itemsMapJson);
+
+
+//
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>(){}.getType();
-            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-//            Map<Item,Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-            NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
+            NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
 
             cache.put(supplierID,nonDeliveringSupplier);
             return nonDeliveringSupplier;

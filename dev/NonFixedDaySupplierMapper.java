@@ -45,8 +45,8 @@ public class NonFixedDaySupplierMapper{
             String itemsMapJson = rs.getString("items");
             Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-            NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, items);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
+            NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
             cache.put(supplierID, nonFixedDaySupplier);
             return nonFixedDaySupplier;
         }
@@ -66,8 +66,8 @@ public class NonFixedDaySupplierMapper{
             Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {
             }.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-            NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, items);
+            Map<Item,Pair<Integer,Float>> map= Parser.parse(itemsMapJson);
+            NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
             cache.put(rs.getString("supplier_ID"), nonFixedDaySupplier);
             suppliers.add(nonFixedDaySupplier);
         }

@@ -33,7 +33,7 @@ public class NonDeliveringSupplierMapper {
             contract = contractMapper.findBySupplierId(supplierID);
             ContactPerson person = new ContactPerson(rs.getString("contract_person_name"),rs.getString("contract_phone_number"));
             String itemsMapJson = rs.getString("items");
-            Map<Item,Pair<Integer,Float>> map=ItemParser.parse(itemsMapJson);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
 
 
 //
@@ -60,8 +60,8 @@ public class NonDeliveringSupplierMapper {
             String itemsMapJson = rs.getString("items");
             Type type = new TypeToken<Map<Item,Pair<Integer, Float>>>(){}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item,Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-            NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
+            NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
             cache.put(rs.getString("supplier_ID"),nonDeliveringSupplier);
             suppliers.add(nonDeliveringSupplier);
         }

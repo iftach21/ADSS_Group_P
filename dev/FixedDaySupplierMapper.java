@@ -47,10 +47,10 @@ public class FixedDaySupplierMapper{
             String itemsMapJson = rs.getString("items");
             Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
             String currentDay = rs.getString("currentDeliveryDay");
             WindowType currentDeliveryDay = WindowType.valueOf(currentDay);
-            FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay,rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
+            FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay,rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
             cache.put(supplierID,fixedDaySupplier);
             return fixedDaySupplier;
         }
@@ -70,10 +70,10 @@ public class FixedDaySupplierMapper{
             String itemsMapJson = rs.getString("items");
             Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
             String currentDay = rs.getString("currentDeliveryDay");
             WindowType currentDeliveryDay = WindowType.valueOf(currentDay);
-            FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay,rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
+            FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay,rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
             cache.put(rs.getString("supplier_ID"),fixedDaySupplier);
             suppliers.add(fixedDaySupplier);
         }

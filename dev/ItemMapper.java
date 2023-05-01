@@ -15,7 +15,7 @@ public class ItemMapper {
         {
             return cache.get(catalogNum);
         }
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE catalogNum = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE catalog_number = ?");
         stmt.setString(1,catalogNum);
         ResultSet rs = stmt.executeQuery();
         if(rs.next())
@@ -59,7 +59,7 @@ public class ItemMapper {
 
     public void insert(Item item) throws SQLException // TODO check what happens if i try to add an item that already exists in the database
     {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)VALUES (?, ?, ?, ?,?,?,?,?)");
         stmt.setString(1,item.getCatalogNum());
         stmt.setString(2,item.getName());
         stmt.setString(3,Double.toString(item.getWeight()));

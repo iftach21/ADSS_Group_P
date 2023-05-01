@@ -10,10 +10,14 @@ class OrderMangerTest {
     void test_add_item_list_one_supplier(){ //1
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
-        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
-        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
-        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
-
+        Item item1 = new Item("Apple", "A100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+        item1.setMinimum_quantity(10);
+        Item item2 = new Item("Milk", "M200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
+        item2.setMinimum_quantity(5);
+        Item item3 = new Item("Bread", "B300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
+        item3.setMinimum_quantity(3);
+        Item item4 = new Item("Chicken", "C400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
+        item4.setMinimum_quantity(2);
         maplist.put(item1,100);
         maplist.put(item2,100);
         maplist.put(item3,100);

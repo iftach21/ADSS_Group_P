@@ -1,6 +1,8 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
+
 
 import java.lang.reflect.Type;
 import java.sql.*;
@@ -52,11 +54,28 @@ public class NonDeliveringSupplierMapper {
             contract = contractMapper.findBySupplierId(supplierID);
             ContactPerson person = new ContactPerson(rs.getString("contract_person_name"),rs.getString("contract_phone_number"));
             String itemsMapJson = rs.getString("items");
-//            Type type = new TypeToken<Map<Item,Pair<Integer, Float>>>(){}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>(){}.getType();
-            Map<Item, Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-//            Map<Item,Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
+
+
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
+//            Map<Item, Pair<Integer, Float>> items = gson.fromJson(itemsMapJson, type);
+
+            Map<Item, Pair<Integer, Float>> map = new HashMap<>();
+            for (Map.Entry<String, Object> entry : new ObjectMapper().readValue(itemsMapJson, Map.class).entrySet()) {
+                Item item = new Item();
+                item.name = entry.getKey().replace("Item{", "").replace("}", "");
+                Map<String, Object> innerMap = (Map<String, Object>) entry.getValue();
+                item.catalogNum = (String) innerMap.get("catalogNum");
+                item.weight = (Double) innerMap.get("weight");
+                item.catalogName = (String) innerMap.get("catalogName");
+                item.temperature = (TempLevel) innerMap.get("temperature");
+                item.priceHistory = (List<PriceHistory>) innerMap.get("priceHistory");
+                item.manufacturer = (String) innerMap.get("manufacturer");
+                item.minimum_quantity = (Integer) innerMap.get("minimum_quantity");
+                map.put(item, new Pair((Integer) innerMap.get("first"), (Float) innerMap.get("second")));
+            }
+
             NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
 
             cache.put(supplierID,nonDeliveringSupplier);

@@ -85,14 +85,16 @@ public class ItemMapper {
     public void update(Item item) throws SQLException
     {
         PreparedStatement stmt = conn.prepareStatement("UPDATE items SET name = ?, weight = ?,  catalog_name = ?, temperature = ?, minimum_quantity = ?, price_history = ?, manufacturer = ? WHERE catalog_number = ?");
-        stmt.setString(1,item.getCatalogNum());
-        stmt.setString(2,item.getName());
-        stmt.setString(3,Double.toString(item.getWeight()));
-        stmt.setString(4,item.getCatalogName());
-        stmt.setString(5,item.getTemperature().name());
-        stmt.setString(6,Integer.toString(item.getMinimum_quantity()));
-        stmt.setString(7,item.getPriceHistory().toString());
-        stmt.setString(8,item.getManufacturer());
+        stmt.setString(1,item.getName());
+        stmt.setString(2,Double.toString(item.getWeight()));
+        stmt.setString(3,item.getCatalogName());
+        stmt.setString(4,item.getTemperature().name());
+        stmt.setString(5,Integer.toString(item.getMinimum_quantity()));
+        stmt.setString(6,item.getPriceHistory().toString());
+        stmt.setString(7,item.getManufacturer());
+        stmt.setString(8,item.getCatalogNum());
+
+
         stmt.executeUpdate();
         cache.put(item.getCatalogNum(),item);
     }

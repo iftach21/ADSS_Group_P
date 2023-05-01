@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Item {
     private String name;
@@ -160,5 +161,16 @@ public class Item {
                 ", manufacturer='" + manufacturer + '\'' +
                 ", minimum_quantity=" + minimum_quantity +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return Objects.equals(catalogNum, item.catalogNum);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(catalogNum);
     }
 }

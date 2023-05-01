@@ -2,40 +2,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.sql.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class OrderMangerTest {
     @Test
     void test_add_item_list_one_supplier() throws SQLException { //1
-//        Connection conn = null;
-//        try {
-//            String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-//            conn = DriverManager.getConnection(url);
-//            System.out.println("Database connection successful");
-//        } catch (SQLException e) {
-//            System.out.println("Error connecting to database: " + e.getMessage());
-//        } finally {
-//            try {
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//            } catch (SQLException e) {
-//                System.out.println("Error closing database connection: " + e.getMessage());
-//            }
-//        }
-//        Connection conn = null;
-//        try
-//        {
-//            Class.forName("org.sqlite.JDBC");
-//            String url = "jdbc:sqlite:dev/res/db/SuperLeeDataBase.db.db";
-//            conn = DriverManager.getConnection(url);
-//        }
-//
-//        catch(SQLException ignored){} catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
+
 
         Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         if (conn.isClosed()) {
@@ -63,18 +39,6 @@ class OrderMangerTest {
             System.out.println(e.getMessage());
         }
 
-
-/*        finally
-        {
-            try
-            {
-                if(conn != null)
-                {
-                    conn.close();
-                }
-            }
-            catch(SQLException ignored){}
-        }*/
 
         ItemMapper mapper = new ItemMapper(conn);
         var ordermanger = new OrderManger();
@@ -124,7 +88,7 @@ class OrderMangerTest {
             System.err.println("Exception caught: " + e.getMessage());
         }
         Connection conn1 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-        Supplier_Manger masupplier=new Supplier_Manger();
+        Supplier_Manger masupplier = new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
         supplier.add_Items(item1,100,100);
@@ -139,6 +103,7 @@ class OrderMangerTest {
         ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
         supplier.print_items();
         ordermanger.getPending_for_apporval().get(0).print_items();
+        Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
         try
         {
             NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
@@ -146,7 +111,13 @@ class OrderMangerTest {
         catch(SQLException e){
             System.err.println("Exception caught: " + e.getMessage());
         }
+
+        List<Item> items = mapper.findAll();
+        item1.setManufacturer("tegrity farms");
+        mapper.update(item1);
         supplier.print_items();
+        mapper.delete(item1);
+
 
 
 

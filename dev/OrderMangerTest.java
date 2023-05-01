@@ -1,4 +1,5 @@
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 class OrderMangerTest {
     @Test
     void test_add_item_list_one_supplier() throws SQLException { //1
-
+//        Map<Item, Pair<Integer, Float>> newMap = JsonToMap.convert();
 
         Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         if (conn.isClosed()) {
@@ -110,6 +111,8 @@ class OrderMangerTest {
         }
         catch(SQLException e){
             System.err.println("Exception caught: " + e.getMessage());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
 
         List<Item> items = mapper.findAll();

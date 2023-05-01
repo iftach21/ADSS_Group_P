@@ -1,3 +1,5 @@
+import org.json.JSONArray;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -63,6 +65,17 @@ public class Item {
 //        if (itemMapper == null){
 //            itemMapper = new ItemMapper(conn);}
 //
+    }
+
+    public Item(String name, String catalogNum, double weight, String catalogName, TempLevel temperature, String manufacturer, int minimumQuantity) {
+        this.name = name;
+        this.catalogNum = catalogNum;
+        this.weight = weight;
+        this.catalogName = catalogName;
+        this.temperature = temperature;
+        this.priceHistory = new ArrayList<>();
+        this.manufacturer = manufacturer;
+        this.minimum_quantity = minimumQuantity;
     }
 
     public String getName() {

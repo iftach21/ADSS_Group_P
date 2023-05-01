@@ -106,4 +106,26 @@ public class ItemMapper {
         stmt.executeUpdate();
         cache.remove(item.getCatalogNum());
     }
+
+    public List<Item> findAllByCatalogNum(String catalogNum) throws SQLException {
+
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE catalog_number = ?");
+        stmt.setString(1, catalogNum);
+        ResultSet rs = stmt.executeQuery();
+        List<Item> items = new ArrayList<>();
+        while(rs.next())
+        {
+            Item item = new Item();
+            item.setName(rs.getString("name"));
+            item.setCatalogNum(rs.getString("catalog_number"));
+            item.setWeight(rs.getDouble("weight"));
+            item.setCatalogName(rs.getString("catalog_name"));
+            String tempLevel = rs.getString("temperature");
+            TempLevel tempValue = TempLevel.valueOf(tempLevel);
+            item.setTemperature(tempValue);
+            item.setManufacturer((rs.getString("manufacturer")));
+            items.add(item);
+        }
+        return items;
+    }
 }

@@ -93,6 +93,7 @@ public class FixedDaySupplierMapper{
         stmt.setString(7, fixedDaySupplier.getPerson().getPhoneNumber());
         stmt.setString(8, itemsJson);
         stmt.setString(9, String.valueOf(fixedDaySupplier.getContract().contractId));
+        stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
         if(rs.next())
         {

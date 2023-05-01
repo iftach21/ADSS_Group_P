@@ -8,14 +8,14 @@ import java.util.*;
 
 public class NonDeliveringSupplierMapper {
     private final Connection conn;
-    private final Map<String,Supplier> cache;
+    private final Map<String,NonDeliveringSupplier> cache;
 
     public NonDeliveringSupplierMapper(Connection conn) {
         this.conn = conn;
         this.cache = new HashMap<>();
     }
 
-    public Supplier findBySupplierId(String supplierID) throws SQLException
+    public NonDeliveringSupplier findBySupplierId(String supplierID) throws SQLException
     {
         if(cache.containsKey(supplierID))
         {
@@ -99,6 +99,7 @@ public class NonDeliveringSupplierMapper {
         stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
         stmt.setString(7, itemsJson);
         stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
+        stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
         if(rs.next())
         {

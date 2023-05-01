@@ -2,13 +2,32 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 class OrderMangerTest {
     @Test
     void test_add_item_list_one_supplier(){ //1
-        var ordermanger=new OrderManger();
+//        Connection conn = null;
+//        try {
+//            String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db";
+//            conn = DriverManager.getConnection(url);
+//            System.out.println("Database connection successful");
+//        } catch (SQLException e) {
+//            System.out.println("Error connecting to database: " + e.getMessage());
+//        } finally {
+//            try {
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//            } catch (SQLException e) {
+//                System.out.println("Error closing database connection: " + e.getMessage());
+//            }
+//        }
+        var ordermanger = new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
         Item item1 = new Item("Apple", "A100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
         item1.setMinimum_quantity(10);

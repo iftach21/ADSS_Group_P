@@ -30,7 +30,7 @@ public class NonDeliveringSupplierMapper extends AbstractSupplierMapper{
             Connection conn = null;
             try
             {
-                String url = "jdbc:sqlite:res/SuperLeeDataBase";
+                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db";
                 conn = DriverManager.getConnection(url);
             }
 

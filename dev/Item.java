@@ -40,7 +40,7 @@ public class Item {
         Connection conn = null;
         try
         {
-            String url = "jdbc:sqlite:res/SuperLeeDataBase";
+            String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db";
             conn = DriverManager.getConnection(url);
         }
 
@@ -60,8 +60,6 @@ public class Item {
 
         if (itemMapper == null){
             itemMapper = new ItemMapper(conn);}
-
-
 
     }
 

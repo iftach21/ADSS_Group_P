@@ -84,6 +84,7 @@ class OrderMangerTest {
         supplier.add_Items(item3,100,100);
         supplier.add_Items(item4,100,100);
         NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
+        ContractMapper con =new ContractMapper(conn);
         try{
         mapper1.insert(supplier);}
         catch(SQLException ignored){}
@@ -92,8 +93,10 @@ class OrderMangerTest {
         supplier.print_items();
         ordermanger.getPending_for_apporval().get(0).print_items();
         Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
-
         NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
+        supplier.add_item_to_contract(item1.getName(),10,0.5);
+        con.insert(supplier.getContract());
+
 
 
 

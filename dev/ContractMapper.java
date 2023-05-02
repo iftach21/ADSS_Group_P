@@ -99,6 +99,7 @@ public class ContractMapper {
         stmt.setDouble(4, contract.getTotal_discount());
         stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
+
         if(rs.next())
         {
             contract.contractId = rs.getInt(1);

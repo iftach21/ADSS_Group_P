@@ -38,7 +38,8 @@ public class ContractMapper {
             contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
             cache.put(contractId,contract);
             return contract;
-        }}
+        }
+        }
         catch (Exception ignored){}
         return null;
     }
@@ -96,6 +97,7 @@ public class ContractMapper {
         stmt.setString(2, contract.supplierId);
         stmt.setString(3, itemsJson);
         stmt.setDouble(4, contract.getTotal_discount());
+        stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
         if(rs.next())
         {

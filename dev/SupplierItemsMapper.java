@@ -14,18 +14,18 @@ public class SupplierItemsMapper {
         this.conn = conn;
     }
     public Map<Item, Pair<Integer, Float>> findAllSupplierId(String SupplierId) throws SQLException {
-        ItemMapper itemMapper = new ItemMapper(conn);
-
-        List<Item> items = itemMapper.findAllByCatalogNum(catalogNum);
-        List<Integer> amount = new ArrayList<>();
-        List<Float> prices = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT amount, price FROM SupplierItems WHERE item_catalog_number = ?");
-        ResultSet rs = stmt.executeQuery();
-        int counter = 0;
-        while (rs.next())
-        {
-
-        }
+//        ItemMapper itemMapper = new ItemMapper(conn);
+//
+//        List<Item> items = itemMapper.findAllByCatalogNum(catalogNum);
+//        List<Integer> amount = new ArrayList<>();
+//        List<Float> prices = new ArrayList<>();
+//        PreparedStatement stmt = conn.prepareStatement("SELECT amount, price FROM SupplierItems WHERE item_catalog_number = ?");
+//        ResultSet rs = stmt.executeQuery();
+//        int counter = 0;
+//        while (rs.next())
+//        {
+//
+//        }
         return null;
     }
 }

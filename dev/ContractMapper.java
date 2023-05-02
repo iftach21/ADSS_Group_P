@@ -92,7 +92,7 @@ public class ContractMapper {
     public void insert(Contract contract) throws SQLException
     {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO contracts (contract_id, supplier_id, items_Map_discount,total_discount) VALUES (?, ?, ?, ?)");
-        String itemsJson = new JSONObject(contract.itemsMapDiscount).toString();
+        String itemsJson = new Gson().toJson(contract.getItemsMapDiscount()).toString();
         stmt.setString(1, Integer.toString(contract.contractId));
         stmt.setString(2, contract.supplierId);
         stmt.setString(3, itemsJson);

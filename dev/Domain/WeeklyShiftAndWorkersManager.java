@@ -162,7 +162,7 @@ public class WeeklyShiftAndWorkersManager {
         //will ask the workersDAO and will give back the list
         return null;
     }
-
+    //setting the personal info
     public void setPersonalinfo(int id,String setPersonalinfo ){
         getworkerbyid(id).setPersonalinfo(setPersonalinfo);
     }

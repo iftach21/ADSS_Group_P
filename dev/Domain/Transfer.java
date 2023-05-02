@@ -14,6 +14,8 @@ import java.util.Set;
 public class Transfer {
     private LocalDate _dateOfTransfer;
     private LocalTime _leavingTime;
+    private LocalDate _arrivingDate;
+    private LocalTime _arrivingTime;
     private int _truckLicenseNumber;
     private String _driverName;
     private Site _source;
@@ -255,6 +257,10 @@ public class Transfer {
     public LocalTime getLeavingTime(){
         return this._leavingTime;
     }
+
+    public LocalTime get_arrivingTime(){return this._arrivingTime;}
+
+    public LocalDate getArrivingDate(){return this._arrivingDate;}
 
     public List<Site> getDestinations(){
         return this._destinations;

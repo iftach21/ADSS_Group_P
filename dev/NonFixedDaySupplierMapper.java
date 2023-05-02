@@ -9,14 +9,14 @@ import java.util.*;
 public class NonFixedDaySupplierMapper{
 
     private final Connection conn;
-    private final Map<String, Supplier> cache;
+    private final Map<String, NonFixedDaySupplier> cache;
 
     public NonFixedDaySupplierMapper(Connection conn) {
         this.conn = conn;
         this.cache = new HashMap<>();
     }
 
-    public Supplier findBySupplierId(String supplierID) throws SQLException {
+    public NonFixedDaySupplier findBySupplierId(String supplierID) throws SQLException {
         if (cache.containsKey(supplierID)) {
             return cache.get(supplierID);
         }

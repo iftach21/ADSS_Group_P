@@ -13,7 +13,12 @@ public class Order {
     private int  Store_number;
     static int number = 0;
 
-    public Order( Map<Item,Pair<Integer,Float>>itemList,Supplier supplier,float cost,int store_number) {
+    public Order() {
+        this.itemList= new HashMap<Item,Pair<Integer,Float>>();
+        this.currentDate= LocalDate.now();
+    }
+
+    public Order(Map<Item,Pair<Integer,Float>>itemList, Supplier supplier, float cost, int store_number) {
         this.orderNum = number;
         number+=1;
         if(itemList==null){
@@ -41,7 +46,9 @@ public class Order {
         return orderNum;
     }
 
-
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
+    }
 
     public Supplier getSupplier() {
         return supplier;

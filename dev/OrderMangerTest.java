@@ -84,7 +84,10 @@ class OrderMangerTest {
         supplier.add_Items(item3,100,100);
         supplier.add_Items(item4,100,100);
         NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
-        ContractMapper con =new ContractMapper(conn);
+        Connection conn2 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+
+
+        ContractMapper con =new ContractMapper(conn2);
         try{
         mapper1.insert(supplier);}
         catch(SQLException ignored){}
@@ -95,6 +98,8 @@ class OrderMangerTest {
         Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
         NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
         supplier.add_item_to_contract(item1.getName(),10,0.5);
+        conn1.close();
+        conn.close();
         con.insert(supplier.getContract());
 
 

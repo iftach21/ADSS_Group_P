@@ -8,14 +8,14 @@ import java.sql.*;
 import java.util.*;
 public class FixedDaySupplierMapper{
     private final Connection conn;
-    private final Map<String, Supplier> cache;
+    private final Map<String, FixedDaySupplier> cache;
 
     public FixedDaySupplierMapper(Connection conn) {
         this.conn = conn;
         this.cache = new HashMap<>();
     }
 
-    public Supplier findBySupplierId(String supplierID) throws SQLException {
+    public FixedDaySupplier findBySupplierId(String supplierID) throws SQLException {
         if (cache.containsKey(supplierID)) {
             return cache.get(supplierID);
         }

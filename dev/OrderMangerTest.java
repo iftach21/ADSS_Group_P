@@ -43,38 +43,19 @@ class OrderMangerTest {
         maplist.put(item2,100);
         maplist.put(item3,100);
         maplist.put(item4,100);
-        try
-        {
-        mapper.insert(item1);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
-        try
-        {
-            mapper.insert(item2);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
-        try
-        {
-            mapper.insert(item3);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
-        try
-        {
-            mapper.insert(item4);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
+
+        try {mapper.insert(item1);}
+        catch (SQLException e) {System.err.println("Exception caught: " + e.getMessage());}
+
+        try {mapper.insert(item2);}
+        catch (SQLException e) {System.err.println("Exception caught: " + e.getMessage());}
+
+        try {mapper.insert(item3);}
+        catch (SQLException e) {System.err.println("Exception caught: " + e.getMessage());}
+
+        try {mapper.insert(item4);}
+        catch (SQLException e) {System.err.println("Exception caught: " + e.getMessage());}
+
         Connection conn1 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         Supplier_Manger masupplier = new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
@@ -84,8 +65,8 @@ class OrderMangerTest {
         supplier.add_Items(item3,100,100);
         supplier.add_Items(item4,100,100);
         NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
-        try{
-        mapper1.insert(supplier);}
+
+        try {mapper1.insert(supplier);}
         catch(SQLException ignored){}
         masupplier.getSuppliers().add(supplier);
         ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
@@ -94,13 +75,6 @@ class OrderMangerTest {
         Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
 
         NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
-
-
-
-
-
-
-
     }
 
 

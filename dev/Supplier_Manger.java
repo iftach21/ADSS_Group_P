@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 
 //This is the class that hold all the suppliers that work with the company
@@ -16,6 +19,11 @@ public class Supplier_Manger {
     public List<Supplier> getSuppliers() {
         return suppliers;
     }
+    private ItemMapper mapper ;
+    private NonDeliveringSupplierMapper nonDeliveringSupplierMapper;
+    private NonFixedDaySupplierMapper nonFixedDaySupplierMapper;
+    private FixedDaySupplierMapper fixedDaySupplierMapper;
+
 
 
 
@@ -29,6 +37,17 @@ public class Supplier_Manger {
     public Supplier_Manger() {
         this.suppliers=new ArrayList<Supplier>();
         this.itemslist=new HashMap<Item,Integer>();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+            System.out.println("Connection to SuperLeeDataBase.db has been established.");
+            this.mapper=new ItemMapper(conn);
+            this.fixedDaySupplierMapper=new FixedDaySupplierMapper(conn);
+            this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper(conn);
+            this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper(conn);
+            ///
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
     public boolean add_supplier(Supplier supplier) {

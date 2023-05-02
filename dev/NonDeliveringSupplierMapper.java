@@ -1,10 +1,6 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
-
 
 import java.lang.reflect.Type;
 import java.sql.*;
@@ -19,7 +15,8 @@ public class NonDeliveringSupplierMapper {
         this.cache = new HashMap<>();
     }
 
-    public NonDeliveringSupplier findBySupplierId(String supplierID) throws SQLException, JsonProcessingException {
+    public NonDeliveringSupplier findBySupplierId(String supplierID) throws SQLException
+    {
         if(cache.containsKey(supplierID))
         {
             return cache.get(supplierID);
@@ -29,38 +26,18 @@ public class NonDeliveringSupplierMapper {
         ResultSet rs = stmt.executeQuery();
         if(rs.next())
         {
-//            Connection conn = null;
-//            try
-//            {
-//                String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-//                conn = DriverManager.getConnection(url);
-//            }
-//
-//            catch(SQLException ignored){}
 
-//            finally
-//            {
-//                try
-//                {
-//                    if(conn != null)
-//                    {
-//                        conn.close();
-//                    }
-//                }
-//                catch(SQLException ignored){}
-//            }
 
             ContractMapper contractMapper = new ContractMapper(conn);
             Contract contract;
             contract = contractMapper.findBySupplierId(supplierID);
             ContactPerson person = new ContactPerson(rs.getString("contract_person_name"),rs.getString("contract_phone_number"));
             String itemsMapJson = rs.getString("items");
-            JsonToMap.convert(itemsMapJson);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
+
+
+//
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-
-            Map<Item, Pair<Integer, Float>> map = new HashMap<>();
-
-
             NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
 
             cache.put(supplierID,nonDeliveringSupplier);
@@ -83,8 +60,8 @@ public class NonDeliveringSupplierMapper {
             String itemsMapJson = rs.getString("items");
             Type type = new TypeToken<Map<Item,Pair<Integer, Float>>>(){}.getType();
             int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-            Map<Item,Pair<Integer, Float>> items = new Gson().fromJson(itemsMapJson, type);
-            NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,items);
+            Map<Item,Pair<Integer,Float>> map=Parser.parse(itemsMapJson);
+            NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
             cache.put(rs.getString("supplier_ID"),nonDeliveringSupplier);
             suppliers.add(nonDeliveringSupplier);
         }

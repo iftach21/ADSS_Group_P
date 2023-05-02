@@ -40,7 +40,7 @@ public class Item {
         this.priceHistory = new ArrayList<>();
         this.manufacturer = manufacturer;
         this.minimum_quantity = 0;
-        Connection conn = null;
+
 //        try
 //        {
 //            Class.forName("org.sqlite.JDBC");

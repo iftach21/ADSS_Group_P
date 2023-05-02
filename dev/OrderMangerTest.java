@@ -1,5 +1,5 @@
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,19 +23,6 @@ class OrderMangerTest {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             System.out.println("Connection to SuperLeeDataBase.db has been established.");
-
-            // Check if the connection is working by executing a test query
-            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM main.items");
-
-//            if (rs.next()) {
-//                System.out.println("Connection can access the items table.");
-//            } else {
-//                System.out.println("Connection cannot access the items table.");
-//            }
-
-            // TODO: Perform database operations here
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -105,21 +92,11 @@ class OrderMangerTest {
         supplier.print_items();
         ordermanger.getPending_for_apporval().get(0).print_items();
         Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
-        try
-        {
-            NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
-        }
-        catch(SQLException e){
-            System.err.println("Exception caught: " + e.getMessage());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
 
-        List<Item> items = mapper.findAll();
-        item1.setManufacturer("tegrity farms");
-        mapper.update(item1);
-        supplier.print_items();
-        mapper.delete(item1);
+        NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
+
+
+
 
 
 

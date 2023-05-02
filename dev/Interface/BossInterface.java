@@ -458,7 +458,7 @@ public class BossInterface extends AInterface {
                     System.out.println("please enter the new personal info");
                     String persoinfo = myObj.nextLine();  // Read user input
 
-                    controller.getworkerbyid(id).setPersonalinfo(persoinfo);
+                    controller.setPersonalinfo(id,persoinfo);
                     break;
                 }
                 case "16":{

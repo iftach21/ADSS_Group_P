@@ -10,11 +10,7 @@ public class DriverController {
 
     public List<Driver> getAvailableDrivers(int weekNum,int yearNum, WindowType wt)
     {
-        weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);
-
-        //todo: call fuction for workers
-        //limit to 5
-        return null;
+        return weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);
     }
 
     public List<Driver> findDriver(TempLevel currMinTemp,int weekNum,int yearNum, WindowType wt){
@@ -42,7 +38,7 @@ public class DriverController {
         }
 
         if (chosenDriver != null)
-            return chosenDriver;
+            return null;
         else
             throw new NoSuchElementException("There is no available driver for this transfer");
     }

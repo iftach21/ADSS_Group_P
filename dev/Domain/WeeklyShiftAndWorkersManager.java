@@ -163,6 +163,10 @@ public class WeeklyShiftAndWorkersManager {
         return null;
     }
 
+    public void setPersonalinfo(int id,String setPersonalinfo ){
+        getworkerbyid(id).setPersonalinfo(setPersonalinfo);
+    }
+
 
 
 

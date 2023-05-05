@@ -96,7 +96,8 @@ public class ItemMapper {
 
 
         stmt.executeUpdate();
-        cache.put(item.getCatalogNum(),item);
+        cache.remove(item.getCatalogNum());
+        cache.put(item.getCatalogNum(),item); // TODO check if there is no duplication after update in the cache
     }
 
     public void delete(Item item) throws SQLException

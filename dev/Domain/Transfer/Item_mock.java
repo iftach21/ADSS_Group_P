@@ -1,4 +1,6 @@
-package Domain;
+package Domain.Transfer;
+
+import Domain.Enums.TempLevel;
 
 public class Item_mock {
 

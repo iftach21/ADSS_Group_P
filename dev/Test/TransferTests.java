@@ -1,8 +1,9 @@
 package Test;
 
-import Domain.*;
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
+import Domain.Transfer.Transfer;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

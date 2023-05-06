@@ -1,8 +1,11 @@
-package Domain;
+package Domain.Employee;
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class Shift {
     private String date;
+    private List<Driver> drivers;
 
     private ArrayList<Workers>[] workerInShift;
     private ShiftRequirement shiftRequirement;
@@ -15,6 +18,7 @@ public class Shift {
     // Creating a shift
     //
     public Shift(String date) {
+        this.drivers = new ArrayList<>();
         this.date = date;
         this.shiftManager = shiftManager;
         this.log = " ";
@@ -51,7 +55,6 @@ public class Shift {
         if (checkIfWorkerInShift(newWorker.getId())){
             System.out.println("he is allready exist");
             return false;
-
         }
         this.workerInShift[profindx].add(newWorker);
         if(profindx==0){this.shiftManager=newWorker;}
@@ -61,7 +64,7 @@ public class Shift {
         return true;
     }
     /**
-     * check If Worker In Domain.Shift
+     * check If Worker In Domain.Employee.Shift
      */
     public boolean checkIfWorkerInShift(int id){
         for (int i = 0; i < 7;i++){
@@ -72,7 +75,7 @@ public class Shift {
         return false;
     }
     /**
-     * removal Worker from Domain.Shift
+     * removal Worker from Domain.Employee.Shift
      */
     public boolean removalWorker(Workers currentWorker) {
         if (!checkIfWorkerInShift(currentWorker.getId())) {
@@ -100,4 +103,10 @@ public class Shift {
         System.out.println("Start time for the shift: " + this.startTime);
         shiftRequirement.printreq();
     }
+    public boolean doIHaveStoke(){
+        return ! workerInShift[2].isEmpty();
+    }
+    public List<Driver> giveDrivers(){return this.drivers;}
+
+    public void addDriver(Driver driver){this.drivers.add(driver);}
 }

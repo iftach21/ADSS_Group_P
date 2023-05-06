@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Transfer;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -105,12 +105,12 @@ public class Transfer {
         try {
             FileWriter fileWriter = new FileWriter(fileName);
             fileWriter.write(documentAddUnderline("TRANSFER DETAILS:") + "\n\n");
-            fileWriter.write(String.format(" %20s %20s %20s %20s %20s \r\n\n", "Document ID: " +  _transferId, ", Date: "+ _dateOfTransfer.toString(), ", Track's number: "+ _truckLicenseNumber,  ", Leaving time: " +_leavingTime.toString(), ", Domain.Driver name: "+_driverName));
+            fileWriter.write(String.format(" %20s %20s %20s %20s %20s \r\n\n", "Document ID: " +  _transferId, ", Date: "+ _dateOfTransfer.toString(), ", Track's number: "+ _truckLicenseNumber,  ", Leaving time: " +_leavingTime.toString(), ", Domain.Transfer.Transfer.Driver name: "+_driverName));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             //fileWriter.write(String.format("%20s %20s %20s %20s %20s \r\n", _transferId, _dateOfTransfer.toString(), _truckLicenseNumber, _leavingTime.toString(), _driverName));
             fileWriter.write(documentAddUnderline(" SOURCE DETAILS: ") + "\n\n");
             fileWriter.write(String.format(" %20s \r\n", "Source name: "+ _source.getSiteName()));
-            fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: "+_source.getSiteAddress(), ", Contact name: "+ _source.get_contactName(), ", Phone: " + _source.get_phoneNumber(), ", Domain.Truck weight: " + "None"));
+            fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: "+_source.getSiteAddress(), ", Contact name: "+ _source.get_contactName(), ", Phone: " + _source.get_phoneNumber(), ", Domain.Transfer.Transfer.Truck weight: " + "None"));
             //fileWriter.write(String.format("%20s %20s %20s %20s\r\n", _source.getSiteAddress(), _source.get_contactName(), _source.get_phoneNumber(), ""));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("DESTINATION DETAILS:") + "\n\n");
@@ -118,7 +118,7 @@ public class Transfer {
             {
                 fileWriter.write(String.format(" %20s \r\n","Destination name: "+ _destinations.get(i).getSiteName()));
                 if(i<_destinations.size()-1) {
-                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + _destinations.get(i).getSiteAddress(), ", Contact name: "+_destinations.get(i).get_contactName(), ", Phone: "+_destinations.get(i).get_phoneNumber(), ", Domain.Truck Weight: "+ "None"));
+                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + _destinations.get(i).getSiteAddress(), ", Contact name: "+_destinations.get(i).get_contactName(), ", Phone: "+_destinations.get(i).get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ "None"));
                     //fileWriter.write(String.format("%20s %20s %20s %20s \r\n", _destinations.get(i).getSiteAddress(), _destinations.get(i).get_contactName(), _destinations.get(i).get_phoneNumber(), ""));
                 }
                 else {
@@ -160,9 +160,9 @@ public class Transfer {
                 String line = lines.get(i);
                 if (line.contains(site.getSiteAddress())) {
                     if(weight!=null)
-                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Domain.Truck Weight: "+ weight));
+                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ weight));
                     else
-                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Domain.Truck Weight: "+ "None"));
+                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ "None"));
                     //lines.set(i, String.format("%20s %20s %20s %20s \r\n", site.getSiteAddress(), site.get_contactName(), site.get_phoneNumber(), weight));
                     break;
                 }
@@ -208,7 +208,7 @@ public class Transfer {
             for (int i = 0; i < lines.size(); i++) {
                 String line = lines.get(i);
                 if (line.contains("Track's number:")) {
-                    lines.set(i, String.format(" %20s %20s %20s %20s %20s ", "Document ID: " +  _transferId, ", Date: "+ _dateOfTransfer.toString(), ", Track's number: "+ _truckLicenseNumber,  ", Leaving time: " +_leavingTime.toString(), ", Domain.Driver name: "+_driverName));
+                    lines.set(i, String.format(" %20s %20s %20s %20s %20s ", "Document ID: " +  _transferId, ", Date: "+ _dateOfTransfer.toString(), ", Track's number: "+ _truckLicenseNumber,  ", Leaving time: " +_leavingTime.toString(), ", Domain.Transfer.Transfer.Driver name: "+_driverName));
                 }
             }
             Files.write(Paths.get(fileName), lines, StandardCharsets.UTF_8);

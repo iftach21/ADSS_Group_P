@@ -1,4 +1,8 @@
-package Domain;
+package Domain.Transfer;
+
+import Domain.Employee.Driver;
+import Domain.Employee.DriverController;
+import Domain.Enums.TempLevel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -228,13 +232,13 @@ public class TransferController {
             System.out.println("The transfer starts now");
             System.out.println("The truck chosen to the transfer is: ");
             System.out.println("License Number: " + transferTruck.getLicenseNumber());
-            System.out.println("Domain.Truck Model: " + transferTruck.getTruckModel());
-            System.out.println("Domain.Truck Max Weight: " + transferTruck.getMaxWeight());
-            System.out.println("Domain.Truck Cooling Capacity: " + transferTruck.getTempCapacity());
+            System.out.println("Domain.Transfer.Transfer.Truck Model: " + transferTruck.getTruckModel());
+            System.out.println("Domain.Transfer.Transfer.Truck Max Weight: " + transferTruck.getMaxWeight());
+            System.out.println("Domain.Transfer.Transfer.Truck Cooling Capacity: " + transferTruck.getTempCapacity());
             System.out.println("------------------------------------------------------------");
 
             System.out.println("The driver chosen to the transfer is: ");
-            System.out.println("Domain.Driver Name: " + newTransfer.getDriverName());
+            System.out.println("Domain.Transfer.Transfer.Driver Name: " + newTransfer.getDriverName());
             System.out.println("------------------------------------------------------------");
 
 
@@ -405,7 +409,7 @@ public class TransferController {
             System.out.println("These are the available trucks. Please choose one of the trucks, by type its license number: ");
             for (Integer LicenseNum : tc.getAllAvailableTrucks().keySet())
             {
-                System.out.println("License number: " + LicenseNum + ", Domain.Truck Model: " + tc._trucks.get(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc._trucks.get(LicenseNum).getTruckWeightType());
+                System.out.println("License number: " + LicenseNum + ", Domain.Transfer.Transfer.Truck Model: " + tc._trucks.get(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc._trucks.get(LicenseNum).getTruckWeightType());
             }
 
             int chosenTruck;

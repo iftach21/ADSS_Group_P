@@ -1,8 +1,8 @@
 package Test;
 
-import Domain.WeeklyShift;
-import Domain.WindowType;
-import Domain.Workers;
+import Domain.Employee.WeeklyShift;
+import Domain.Enums.WindowType;
+import Domain.Employee.Workers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

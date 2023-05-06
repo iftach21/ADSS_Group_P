@@ -1,4 +1,6 @@
-package Domain;
+package Domain.Transfer;
+
+import Domain.Enums.siteType;
 
 public class Site {
     private int _siteId;

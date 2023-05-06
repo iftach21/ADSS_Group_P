@@ -1,4 +1,7 @@
-package Domain;
+package Domain.Employee;
+
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
 
 import java.util.Comparator;
 

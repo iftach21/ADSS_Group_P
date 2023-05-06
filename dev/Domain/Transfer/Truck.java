@@ -1,4 +1,7 @@
-package Domain;
+package Domain.Transfer;
+
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
 
 public class Truck {
     private int _truck_licenseNumber;

@@ -1,4 +1,8 @@
-package Domain;
+package Domain.Transfer;
+
+import Domain.Employee.Driver;
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
 
 import java.util.HashMap;
 import java.util.Map;

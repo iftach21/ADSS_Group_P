@@ -1,7 +1,7 @@
 package Interface;
 
-import Domain.WeeklyShiftAndWorkersManager;
-import Domain.WindowTypeCreater;
+import Domain.Employee.WeeklyShiftAndWorkersManager;
+import Domain.Enums.WindowTypeCreater;
 
 import java.util.Scanner;
 

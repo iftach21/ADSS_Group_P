@@ -1,6 +1,6 @@
 package Data;
 
-import Domain.Workers;
+import Domain.Employee.Workers;
 
 import java.util.ArrayList;
 import java.util.List;

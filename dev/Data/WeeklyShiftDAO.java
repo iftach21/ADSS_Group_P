@@ -1,6 +1,6 @@
 package Data;
 
-import Domain.WeeklyShift;
+import Domain.Employee.WeeklyShift;
 
 import java.util.ArrayList;
 import java.util.List;

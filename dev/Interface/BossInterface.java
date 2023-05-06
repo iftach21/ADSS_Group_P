@@ -1,8 +1,9 @@
 package Interface;
 
-import Domain.WeeklyShiftAndWorkersManager;
-import Domain.WindowTypeCreater;
-import Domain.Workers;
+import Domain.Employee.WeeklyShiftAndWorkersManager;
+import Domain.Enums.TempTypeFactory;
+import Domain.Enums.WeightTypeFactory;
+import Domain.Enums.WindowTypeCreater;
 
 import java.util.Scanner;  // Import the Scanner class
 public class BossInterface extends AInterface {
@@ -13,7 +14,7 @@ public class BossInterface extends AInterface {
 
     private static final String passward = "12345"; // the password for the system
     private static final String username = "theboss"; // the username for the system
-    private WeeklyShiftAndWorkersManager controller;
+    private final WeeklyShiftAndWorkersManager controller;
 
 
 
@@ -39,7 +40,7 @@ public class BossInterface extends AInterface {
                System.out.println("invalid input, please try again");  // Output user input
            }
            }
-        //=================================================
+        //==================================================
         //
         //                      main menu
         //
@@ -134,9 +135,9 @@ public class BossInterface extends AInterface {
                 }
 
 
-                //-----------------------
+                //---------------------------
                 //add to existing weekly shift
-                //-----------------------
+                //----------------------------
                 case "2":{
                     System.out.println("pleease enter yar");
                     int year = myObj.nextInt();  // Read user input
@@ -204,9 +205,9 @@ public class BossInterface extends AInterface {
                 }
 
 
-                //-----------------------
+                //--------------------------
                 //switch employees in a shift
-                //-----------------------
+                //---------------------------
                 case "3":{
                     System.out.println("please enter year");
                     int year = myObj.nextInt();  // Read user input
@@ -258,7 +259,7 @@ public class BossInterface extends AInterface {
                 //add new employee
                 //-----------------------
                 case "5":{
-                    //Domain.Workers(int id, String name, String contract,
+                    //Domain.Employee.Workers(int id, String name, String contract,
                     // String start_date, int wage, int phoneNUM, String personalinfo, int bankNum)
 
                     System.out.println("please enter id for the employee");
@@ -287,7 +288,23 @@ public class BossInterface extends AInterface {
                     System.out.println("please enter bankNum for the employee");
                     int bankNum = myObj.nextInt();  // Read user input
 
-                    controller.addemployee(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum);
+                    System.out.println("is he a driver?\n 1 = yes, 2 = no");
+                    int isdriver = myObj.nextInt();  // Read user input
+
+                    if(isdriver == 1){
+                        System.out.println("what is his weightType?\n 1=lightWeight,\n" +
+                                "    2= mediumWeight,\n" +
+                                "    3= heavyWeight;");
+                        int wt = myObj.nextInt();  // Read user input
+                        System.out.println("what is his TempType?\n1= regular, 2= cold,3= frozen");
+                        int tt = myObj.nextInt();  // Read user input
+                        controller.addNewDriver(id,name,contract,start_date,wage,phoneNUM,personalinfo,bankNum,
+                                TempTypeFactory.TempLevel(tt), WeightTypeFactory.weightType(wt));
+
+                    }
+                    else {
+                        controller.addemployee(id, name, contract, start_date, wage, phoneNUM, personalinfo, bankNum);
+                    }
                     break;
 
                 }

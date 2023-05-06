@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Transfer;
 
 import java.util.List;
 

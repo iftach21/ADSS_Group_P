@@ -1,7 +1,7 @@
 package Test;
 
-import Domain.Shift;
-import Domain.Workers;
+import Domain.Employee.Shift;
+import Domain.Employee.Workers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

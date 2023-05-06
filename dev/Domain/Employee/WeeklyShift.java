@@ -1,4 +1,8 @@
-package Domain;
+package Domain.Employee;
+
+import Domain.Enums.WindowType;
+
+import java.util.List;
 
 public class WeeklyShift {
     private  int weekNUm;
@@ -134,6 +138,31 @@ public class WeeklyShift {
             dayShift[i].printreq();
             System.out.println("night: "+ i);
             nightShift[i].printreq();
+        }
+    }
+    public boolean doIhaveAStoke(WindowType st){
+        if(st.ordinal()<7){
+            return this.dayShift[st.ordinal()].doIHaveStoke();
+        }
+        else {
+           return this.nightShift[st.ordinal()-7].doIHaveStoke();
+        }
+    }
+
+    public List<Driver> giveAllDrivers(WindowType st){
+        if(st.ordinal()<7){
+            return this.dayShift[st.ordinal()].giveDrivers();
+        }
+        else {
+            return this.nightShift[st.ordinal()-7].giveDrivers();
+        }
+    }
+    public void addDriverToShift(Driver newWorker, WindowType shiftTime) {
+        if(shiftTime.ordinal()<7){
+            this.dayShift[shiftTime.ordinal()].addDriver(newWorker);
+        }
+        else {
+            this.nightShift[shiftTime.ordinal()-7].addDriver(newWorker);
         }
     }
 

@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Enums;
 
 public enum siteType {
     Supplier,

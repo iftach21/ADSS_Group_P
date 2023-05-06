@@ -1,17 +1,13 @@
 package Test;
 
-import Domain.*;
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TruckControllerTests {
     Driver driver1;
@@ -83,7 +79,7 @@ class TruckControllerTests {
     @Test
     void findTruckByDriverTest()
     {
-        //Set CurrMinTemp with Domain.TempLevel.regular and driver with lightWeight and frozen qualify and find corresponding truck
+        //Set CurrMinTemp with Domain.Enums.TempLevel.regular and driver with lightWeight and frozen qualify and find corresponding truck
         Truck chosenTruck = truckControllerTest.findTruckByDriver(driver1, TempLevel.regular);
 
         //test if equals

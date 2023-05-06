@@ -1,11 +1,9 @@
 package Test;
 
-import Domain.WindowType;
-import Domain.Workers;
+import Domain.Enums.WindowType;
+import Domain.Employee.Workers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class WorkersTest {
 

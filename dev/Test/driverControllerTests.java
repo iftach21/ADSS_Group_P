@@ -1,8 +1,9 @@
 package Test;
 
-import Domain.*;
+import Domain.Employee.DriverController;
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,12 +32,12 @@ class driverControllerTests {
         this.driverLicense2 = new DriverLicense(weightType.mediumWeight, TempLevel.regular);
         this.driverLicense3 = new DriverLicense(weightType.heavyWeight, TempLevel.frozen);
         this.driverLicense4 = new DriverLicense(weightType.lightWeight, TempLevel.regular);
-
+        //todo: fix!
         //create 4 drivers
-        this.driver1 = new Driver(driverLicense1,"Nitzan", true);
-        this.driver2 = new Driver(driverLicense2,"Tomer", true);
-        this.driver3 = new Driver(driverLicense3,"Ron", true);
-        this.driver4 = new Driver(driverLicense4, "Liraz", false);
+        //this.driver1 = new Driver(driverLicense1,"Nitzan", true);
+        //this.driver2 = new Driver(driverLicense2,"Tomer", true);
+        //this.driver3 = new Driver(driverLicense3,"Ron", true);
+        //this.driver4 = new Driver(driverLicense4, "Liraz", false);
 
         //add drivers to list
         this.drivers = new ArrayList<>();
@@ -46,7 +47,7 @@ class driverControllerTests {
         this.drivers.add(driver4);
 
         //create driverController
-        this.driverControllerTest = new DriverController(drivers);
+        //this.driverControllerTest = new DriverController(drivers);
     }
 
     @Test
@@ -65,7 +66,7 @@ class driverControllerTests {
     @Test
     void findDriverTest1()
     {
-        //Set minimum item temp with Domain.TempLevel.regular and find driver with corresponding license
+        //Set minimum item temp with Domain.Enums.TempLevel.regular and find driver with corresponding license
         Driver ChosenDriver = driverControllerTest.findDriver(TempLevel.regular);
 
         //test if equals
@@ -75,7 +76,7 @@ class driverControllerTests {
     @Test
     void findDriverTest2()
     {
-        //Set CurrMinTemp with Domain.TempLevel.frozen and find driver with corresponding license
+        //Set CurrMinTemp with Domain.Enums.TempLevel.frozen and find driver with corresponding license
         Driver ChosenDriver = driverControllerTest.findDriver(TempLevel.frozen);
 
         //test if equals

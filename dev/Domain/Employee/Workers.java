@@ -1,4 +1,6 @@
-package Domain;
+package Domain.Employee;
+
+import Domain.Enums.WindowType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,18 +8,18 @@ import java.util.ArrayList;
 
 public class Workers {
 
-    private int id;
-    private String name;
-    private String contract;
-    private String start_date;
-    private ArrayList<WindowType> available;
-    private int wage;
-    private int phoneNUM;
+    protected int id;
+    protected String name;
+    protected String contract;
+    protected String start_date;
+    protected ArrayList<WindowType> available;
+    protected int wage;
+    protected int phoneNUM;
 
-    private String personalinfo;
-    private int bankNum;
+    protected String personalinfo;
+    protected int bankNum;
     //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker6.
-    private boolean[] pro;
+    protected boolean[] pro;
 
 
     public Workers(int id, String name, String contract, String start_date, int wage, int phoneNUM, String personalinfo, int bankNum) {
@@ -138,30 +140,6 @@ public class Workers {
         return this.pro[indx];
     }
 
-    public  boolean canIShiftMange() {
-
-        return this.pro[0];
-    }
-    public  boolean canICashier(){
-        return this.pro[1];
-    }
-
-    public  boolean canIstoke(){
-        return this.pro[2];
-    }
-    public  boolean canIsecurity(){
-        return this.pro[3];
-    }
-    public  boolean canIcleaning(){
-        return this.pro[4];
-    }
-    public  boolean canIshelfstoking(){
-        return this.pro[5];
-    }
-    public  boolean canIgeneralworker(){
-        return this.pro[6];
-    }
-    //manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker 6.
 
     /**
      * Add time an employee can work
@@ -205,6 +183,6 @@ public class Workers {
         ans +=this.name + " id: " + String.valueOf(this.id);
         System.out.println(ans);
     }
-
+    public boolean amIDriver(){return false;}
 
 }

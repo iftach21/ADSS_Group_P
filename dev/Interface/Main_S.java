@@ -1,6 +1,12 @@
 package Interface;
 
-import Domain.*;
+import Domain.Employee.Driver;
+import Domain.Employee.DriverController;
+import Domain.Employee.DriverLicense;
+import Domain.Transfer.SiteController;
+import Domain.Enums.TempLevel;
+import Domain.Enums.weightType;
+import Domain.Transfer.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,8 +40,8 @@ public class Main_S {
         //Create SitesController:
         SiteController sc = new SiteController(mock_Sites);
 
-        //Creating drivers for Domain.DriverController:
-        //Drivers List for Domain.DriverController:
+        //Creating drivers for Domain.Employee.DriverController:
+        //Drivers List for Domain.Employee.DriverController:
         List<Driver> mock_Drivers = new ArrayList<>();
 
         //Creating 3 DriversLicense for the drivers:
@@ -43,7 +49,7 @@ public class Main_S {
         DriverLicense driverLicense2 = new DriverLicense(weightType.heavyWeight, TempLevel.regular);
         DriverLicense driverLicense3 = new DriverLicense(weightType.mediumWeight, TempLevel.frozen);
 
-        //Creating 3 Drivers for Domain.DriverController:
+        //Creating 3 Drivers for Domain.Employee.DriverController:
         Driver driver1 = new Driver(driverLicense1, "Avi", true);
         Driver driver2 = new Driver(driverLicense2, "Moshe", true);
         Driver driver3 = new Driver(driverLicense3, "Arnon", true);
@@ -54,7 +60,7 @@ public class Main_S {
         mock_Drivers.add(driver3);
 
         //Create DriversController:
-        DriverController dc = new DriverController(mock_Drivers);
+        DriverController dc = new DriverController();
 
         //Creating Trucks for truckController:
         //SitesList for truckController
@@ -73,7 +79,7 @@ public class Main_S {
         //Create TrucksController:
         TruckController tc = new TruckController(mock_Trucks);
 
-        //Create Domain.TransferController:
+        //Create Domain.Transfer.Transfer.TransferController:
         TransferController transferController = new TransferController(tc, dc, sc);
 
         //Create some mock orders:

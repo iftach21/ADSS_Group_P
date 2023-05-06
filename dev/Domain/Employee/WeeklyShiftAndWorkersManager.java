@@ -1,7 +1,12 @@
-package Domain;
+package Domain.Employee;
 
 import Data.WeeklyShiftDAO;
 import Data.WorkersDAO;
+import Domain.Enums.TempLevel;
+import Domain.Enums.WindowType;
+import Domain.Enums.WindowTypeCreater;
+import Domain.Enums.weightType;
+
 import java.util.List;
 
 public class WeeklyShiftAndWorkersManager {
@@ -25,7 +30,7 @@ public class WeeklyShiftAndWorkersManager {
     }
 
     //function for the "2"
-    public void addtoexistingweeklyshift(int weeknum,int year,int supernum, WindowType wt,int id ,int profindx){
+    public void addtoexistingweeklyshift(int weeknum, int year, int supernum, WindowType wt, int id , int profindx){
         this.getweeklyshift(weeknum,year,supernum).addworkertoshift(this.getworkerbyid(id),wt,profindx);
     }
 
@@ -78,6 +83,7 @@ public class WeeklyShiftAndWorkersManager {
     }
     //function for the "11"
     public void addnewproforemployee(int id, int indx) {
+        if(getworkerbyid(id).amIDriver()){return;}
 
         //0=manager
         //1=cashier
@@ -91,6 +97,7 @@ public class WeeklyShiftAndWorkersManager {
     }
     //function for the "12"
     public void removeprofforemployee(int id,int pros){
+        if(getworkerbyid(id).amIDriver()){return;}
         this.getworkerbyid(id).removePro(pros);
     }
     //function for the "13"
@@ -152,21 +159,24 @@ public class WeeklyShiftAndWorkersManager {
 
     }
 
+    //while giving the right info giving back if there is a stock viable.
     public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt){
-        //todo: stub
-        return false;
+        return this.weeklyShiftDAO.get(weeknum,year,supernum).doIhaveAStoke(wt);
     }
 
-    public List<Driver> giveMeViableDrivers(int weekNum,int yearNum, WindowType wt){
-        //todo: complete
-        //will ask the workersDAO and will give back the list
-        return null;
+    public List<Driver> giveMeViableDrivers(int weekNum, int yearNum, WindowType wt){
+        return this.weeklyShiftDAO.get(weekNum,yearNum,0).giveAllDrivers(wt);
     }
+    //adding a new driver:
+    public void addNewDriver(int id, String name, String contract, String start_date, int wage, int phoneNUM, String personalinfo, int bankNum, TempLevel tl, weightType wt){
+        Driver new_w = new Driver(id, name, contract, start_date, wage, phoneNUM, personalinfo, bankNum, tl, wt);
+        this.workersDAO.add(new_w);
+    }
+
     //setting the personal info
     public void setPersonalinfo(int id,String setPersonalinfo ){
         getworkerbyid(id).setPersonalinfo(setPersonalinfo);
     }
-
 
 
 

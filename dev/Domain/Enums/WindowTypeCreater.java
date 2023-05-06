@@ -1,11 +1,11 @@
-package Domain;
+package Domain.Enums;
 
 public class WindowTypeCreater {
     public WindowTypeCreater() {
         //empty
     }
     // you give the funtion day and when (day\night) and it return the enum.
-    public WindowType getwidowtype(int day,String time){
+    public WindowType getwidowtype(int day, String time){
         if(time.equals("day")){
             if(day==1){return WindowType.day1;}
             if(day==2){return WindowType.day2;}

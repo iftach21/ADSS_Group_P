@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Employee;
 
 import java.util.Arrays;
 

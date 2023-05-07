@@ -28,7 +28,6 @@ public class Shift {
         }
         startTime = "8:00";
         shiftRequirement = new ShiftRequirement();
-
     }
 
     /**

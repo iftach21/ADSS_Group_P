@@ -287,6 +287,17 @@ public class Transfer {
 
     public String getDriverName(){ return _driverName; }
 
+
+    public void setArrivingDate(LocalDate arrivingDate)
+    {
+        _arrivingDate = arrivingDate;
+    }
+
+    public void setArrivingTime(LocalTime arrivingTime)
+    {
+        _arrivingTime = arrivingTime;
+    }
+
     //from here i updated
     public String getTransferStatus()
     {
@@ -312,3 +323,4 @@ public class Transfer {
         return _transferId;
     }
 }
+

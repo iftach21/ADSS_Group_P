@@ -189,10 +189,6 @@ public class TransferController {
             }
         }
 
-        //calculate arriving date and time
-        LocalDate arrivingDate = null;
-        LocalTime arrivingTime = null;
-
         //get lowest temp item
         TempLevel currMinTemp = lowestTempItem(orderItems);
 
@@ -237,6 +233,11 @@ public class TransferController {
         destinationSites.remove(sourceSite);
 
         destinationSites.add(sc.getSiteById(orderDestinationSiteId));
+
+        //calculate arriving date and time
+        LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
+        LocalDate arrivingDate = arrivingDateTime.toLocalDate();
+        LocalTime arrivingTime = arrivingDateTime.toLocalTime();
 
         Map<Site, Integer> weights = new HashMap<>();
         for(int i=0; i < sites.length; i++)
@@ -828,5 +829,72 @@ public class TransferController {
     public void updateCurrentTransfersDetails(Transfer transferToUpdate)
     {
 
+    }
+
+    //should be called also when rearrange transfer
+    public LocalDateTime calculateArrivingTime(Site sourceSite, List<Site> destinationSites, LocalTime leavingTime, LocalDate leavingDate){
+        /*
+        Calculates the expected arriving times, based on the distance between the sites in the transfer and the driver's speed.
+         */
+        int speed = 80;
+
+        //get the distance between source site to the first destination site
+        double distanceToNextSite = sourceSite.calculateDistance(destinationSites.get(0));
+
+        //Calculate the time to drive this distance
+        double timeOfTransfer =  distanceToNextSite/speed;
+
+        for(int i=0; i<destinationSites.size()-1; i++)
+        {
+            Site currentSite = destinationSites.get(i);
+
+            //get the distance between current site to the next site
+            distanceToNextSite = currentSite.calculateDistance(destinationSites.get(i+1));
+
+            //Calculate the time to drive this distance and add it to current time
+            timeOfTransfer = timeOfTransfer + distanceToNextSite/speed;
+        }
+
+
+        // Calculate the number of hours and remaining minutes of the transfer
+        long minutes = (long) (timeOfTransfer * 60);
+        int hoursOfTransfer = (int) minutes / 60;
+        int minutesOdTransfer = (int) minutes % 60;
+
+
+        LocalDateTime transferLocalDateTimeLeaving = LocalDateTime.of(leavingDate, leavingTime);
+        LocalDateTime arrivingTime = transferLocalDateTimeLeaving.plusHours(hoursOfTransfer).plusMinutes(minutesOdTransfer);
+
+        return arrivingTime;
+    }
+
+    //the storeKeeper should also be  able to watch the planned transfers
+    public void watchPlannedTransfers()
+    {
+        System.out.println("Here are the next planned transfers: ");
+
+        int numOfPlannedTransfer = 0;
+        for(int i=0; i<_transfers.size(); i++)
+        {
+            Transfer currentTransfer = _transfers.get(i);
+            if(currentTransfer.getTransferStatus().equals("NOT START") || currentTransfer.getTransferStatus().equals("IN PROGRESS")){
+                numOfPlannedTransfer++;
+                System.out.println("---------------------------------------------------------------");
+                System.out.println("TRANSFER ID: " + currentTransfer.getTransferId());
+                System.out.println("Source site: " + currentTransfer.getTransferId());
+                System.out.println("Last destination: " + currentTransfer.getDestinations().get(currentTransfer.getDestinations().size()-1));
+                System.out.println("Leaving date: " + currentTransfer.getLeavingDate());
+                System.out.println("Leaving time: " + currentTransfer.getLeavingTime());
+                System.out.println("Arriving date: " + currentTransfer.getArrivingDate());
+                System.out.println("Arriving time: " + currentTransfer.get_arrivingTime());
+            }
+        }
+        if (numOfPlannedTransfer == 0)
+            System.out.println("There are no planned transfers!");
+        else
+        {
+            System.out.println("Those are all the next planned transfers! \n" +
+                    "If you would like to get some more details for some transfer, you can easily download the transfer's document :)");
+        }
     }
 }

@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shift {
+    private int ShiftID;
     private String date;
+
+
+
     private List<Driver> drivers;
 
     private ArrayList<Workers>[] workerInShift;
     private ShiftRequirement shiftRequirement;
-
     private Workers shiftManager;
     private String log;
     private String startTime;
@@ -18,6 +21,7 @@ public class Shift {
     // Creating a shift
     //
     public Shift(String date) {
+        this.ShiftID=0;
         this.drivers = new ArrayList<>();
         this.date = date;
         this.shiftManager = shiftManager;
@@ -30,6 +34,19 @@ public class Shift {
         shiftRequirement = new ShiftRequirement();
     }
 
+    public Shift() {
+        this.ShiftID=0;
+        this.drivers = new ArrayList<>();
+        this.date = "";
+        this.shiftManager = shiftManager;
+        this.log = " ";
+        this.workerInShift = new ArrayList[7];
+        for (int i = 0; i < 7; i++) {
+            workerInShift[i] = new ArrayList<Workers>();
+        }
+        startTime = "8:00";
+        shiftRequirement = new ShiftRequirement();
+    }
     /**
      *Prints the shift
      */
@@ -45,6 +62,35 @@ public class Shift {
         }
         return pShift;
     }
+
+    public void setShiftID(int shiftID) {
+        ShiftID = shiftID;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
+    }
+
+    public void setWorkerInShift(ArrayList<Workers>[] workerInShift) {
+        this.workerInShift = workerInShift;
+    }
+
+    public void setShiftRequirement(ShiftRequirement shiftRequirement) {
+        this.shiftRequirement = shiftRequirement;
+    }
+
+    public void setShiftManager(Workers shiftManager) {
+        this.shiftManager = shiftManager;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
+    }
+
     /**
      * insert an employee on shift
      */
@@ -108,4 +154,38 @@ public class Shift {
     public List<Driver> giveDrivers(){return this.drivers;}
 
     public void addDriver(Driver driver){this.drivers.add(driver);}
+
+    public String getDate() {
+        return date;
+    }
+
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
+
+    public ArrayList<Workers>[] getWorkerInShift() {
+        return workerInShift;
+    }
+
+    public ShiftRequirement getShiftRequirement() {
+        return shiftRequirement;
+    }
+
+    public Workers getShiftManager() {
+        return shiftManager;
+    }
+    public int getShiftManagerID() {
+        return shiftManager.getId();
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+    public String getShiftID() {
+        return ShiftID;
+    }
 }

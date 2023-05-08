@@ -12,6 +12,7 @@ public class Workers {
     protected String name;
     protected String contract;
     protected String start_date;
+
     protected ArrayList<WindowType> available;
     protected int wage;
     protected int phoneNUM;
@@ -40,7 +41,7 @@ public class Workers {
 
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

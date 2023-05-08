@@ -1,13 +1,17 @@
 package Data;
 
+import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShift;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public class WeeklyShiftDAO {
     private static WeeklyShiftDAO instance = null;
     private List<WeeklyShift> weeklyShiftList; //holds all the weeklyshifts
+
     private WeeklyShiftDAO(){
         weeklyShiftList = new ArrayList<>();
     }
@@ -28,8 +32,8 @@ public class WeeklyShiftDAO {
         return weeklyShiftList;
     }
 
-    public void add(WeeklyShift ws){
-        //todo: complete
+    public void add(Shift s){
+
     }
 
     public void delete(int weekNum, int yearNum, int superNum){

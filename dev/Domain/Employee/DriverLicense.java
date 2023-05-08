@@ -25,6 +25,14 @@ public class DriverLicense implements Comparable<DriverLicense> {
         return _licenseTempCapacity;
     }
 
+    public void set_licenseWeightCapacity(weightType _licenseWeightCapacity) {
+        this._licenseWeightCapacity = _licenseWeightCapacity;
+    }
+
+    public void set_licenseTempCapacity(TempLevel _licenseTempCapacity) {
+        this._licenseTempCapacity = _licenseTempCapacity;
+    }
+
     @Override
     public int compareTo(DriverLicense d) {
         return Comparator.comparing(DriverLicense::getLicenseWeightCapacity).compare(this, d);

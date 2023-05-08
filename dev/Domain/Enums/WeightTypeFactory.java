@@ -11,4 +11,15 @@ public class WeightTypeFactory {
         if(indx==3){return weightType.heavyWeight;}
         else{return null;}
     }
+
+    static public weightType weightTypeFromString(String weight){
+        if(weight.compareTo("lightWeight")==0){
+            return weightType.lightWeight;
+        }
+        if(weight.compareTo("mediumWeight")==0){
+            return weightType.mediumWeight;
+        }
+        if(weight.compareTo("heavyWeight")==0){return weightType.heavyWeight;}
+        else{return null;}
+    }
 }

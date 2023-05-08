@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
@@ -286,4 +287,15 @@ public class Transfer {
     }
 
     public String getDriverName(){ return _driverName; }
+
+
+    public void setArrivingDate(LocalDate arrivingDate)
+    {
+        _arrivingDate = arrivingDate;
+    }
+
+    public void setArrivingTime(LocalTime arrivingTime)
+    {
+        _arrivingTime = arrivingTime;
+    }
 }

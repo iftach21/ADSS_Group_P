@@ -29,23 +29,21 @@ public class DriverController {
         Driver chosenDriver;
 
         //this will give the available drivers for the shift
-        List<Driver> availableDrivers = getAvailableDrivers(weekNum,yearNum,wt);
+        List<Driver> allAvailableDrivers = getAvailableDrivers(weekNum,yearNum,wt);
+
+        //list of max 5 drivers, which will be shown to the transfer manager to choose from
+        List<Driver> max5Drivers = new ArrayList<>();
 
         chosenDriver = null;
 
-        for (int i = 0; i < availableDrivers.size(); i++)
+        for (int i = 0; i < allAvailableDrivers.size() && max5Drivers.size() < 5; i++)
         {
-            if (availableDrivers.get(i).checkLicenseWithItemTemp(currMinTemp))
+            if (allAvailableDrivers.get(i).checkLicenseWithItemTemp(currMinTemp))
             {
-                chosenDriver = availableDrivers.get(i);
-                break;
+                max5Drivers.add(allAvailableDrivers.get(i));
             }
         }
 
-        if (chosenDriver != null)
-            return null;
-        else
-            throw new NoSuchElementException("There is no available driver for this transfer");
+        return max5Drivers;
     }
-
 }

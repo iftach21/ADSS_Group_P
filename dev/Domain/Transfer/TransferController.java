@@ -84,7 +84,7 @@ public class TransferController {
                             if (!_transfers.containsKey(transferId)) {
                                 System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
                             }
-                            else if (_transfers.containsKey(transferId) && _transfers.get(transferId).isInProgress()){
+                            else if (_transfers.containsKey(transferId) && _transfers.get(transferId).getTransferStatus().equals("IN PROGRESS")){
                                 System.out.println("Sorry transfer manager, but your selected transfer is in progress. Please choose another transfer");
                             }
                             else

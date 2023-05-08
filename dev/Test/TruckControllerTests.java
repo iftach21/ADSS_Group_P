@@ -1,7 +1,11 @@
 package Test;
 
+import Domain.Employee.Driver;
+import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
+import Domain.Transfer.Truck;
+import Domain.Transfer.TruckController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

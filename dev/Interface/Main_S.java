@@ -50,9 +50,9 @@ public class Main_S {
         DriverLicense driverLicense3 = new DriverLicense(weightType.mediumWeight, TempLevel.frozen);
 
         //Creating 3 Drivers for Domain.Employee.DriverController:
-        Driver driver1 = new Driver(driverLicense1, "Avi", true);
-        Driver driver2 = new Driver(driverLicense2, "Moshe", true);
-        Driver driver3 = new Driver(driverLicense3, "Arnon", true);
+        Driver driver1 = new Driver(0, "Avi", "1 week", "01/02/1998", 10, 549876543, "blabla", 12, TempLevel.cold, weightType.lightWeight);
+        Driver driver2 = new Driver(1,"moshe", "1 week", "01/02/1998", 10, 549876543, "blabla", 12, TempLevel.regular, weightType.heavyWeight);
+        Driver driver3 = new Driver(2,"arnon", "1 week", "01/02/1998", 10, 549876543, "blabla", 12, TempLevel.frozen, weightType.mediumWeight);
 
         //Add these sites to the list:
         mock_Drivers.add(driver1);
@@ -67,9 +67,9 @@ public class Main_S {
         Map<Integer, Truck> mock_Trucks = new HashMap<>();
 
         //Creating 3 Trucks:
-        Truck truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen,false);
-        Truck truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,false);
-        Truck truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen,false);
+        Truck truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen,null, null);
+        Truck truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,null, null);
+        Truck truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen,null, null);
 
         //Add these trucks to the list:
         mock_Trucks.put(truck1.getLicenseNumber(), truck1);

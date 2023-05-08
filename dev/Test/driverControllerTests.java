@@ -1,6 +1,8 @@
 package Test;
 
+import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
+import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
 import org.junit.jupiter.api.Assertions;

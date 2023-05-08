@@ -39,7 +39,7 @@ public class Period_Order {
 
 
     }
-    //to cheak if the period order can be update
+    //to check if the period order can be updated
     public boolean can_update(){
         if(this.day_left>1){
             return true;

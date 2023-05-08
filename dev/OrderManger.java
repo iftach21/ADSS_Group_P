@@ -8,12 +8,6 @@ public class OrderManger {
 
     public List<Order>Period_orders;
 
-
-
-
-
-
-
     public List<Order> getApproval() {
         return approval;
     }

@@ -6,7 +6,7 @@ public class OrderManger {
     private List<Order> approval;
     private List<Order> orders_history;
 
-    public List<Order>Period_orders;
+    public List<Period_Order> periodOrders;
 
     public List<Order> getApproval() {
         return approval;
@@ -37,7 +37,7 @@ public class OrderManger {
         this.orders_history=new ArrayList<Order>();
         this.approval=new ArrayList<Order>();
         this.pending_for_apporval=new ArrayList<Order>();
-        this.Period_orders=new ArrayList<Order>();
+        this.periodOrders =new ArrayList<Period_Order>();
 
     }
     public void move_from_pending_to_approvel(int order_num) {
@@ -217,7 +217,7 @@ public class OrderManger {
             order.print_order_detail();
         }
     }
-    public boolean period_order(Supplier supplier,Map<Item,Integer> list_items, int store_num) {
+    public boolean period_order(Supplier supplier,Map<Item,Integer> list_items, int store_num ,int numberofdayscycle) {
         Map<Item, Pair<Integer, Float>> maplist;
         Order order = new Order(null, supplier, 0, store_num);
         for (Item item : list_items.keySet()) {
@@ -250,7 +250,8 @@ public class OrderManger {
 
             }
         }
-        this.Period_orders.add(order);
+        Period_Order periodOrders =new Period_Order(order,numberofdayscycle);
+        this.periodOrders.add(periodOrders);
         return true;
     }
 

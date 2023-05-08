@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,6 @@ public class Transfer {
     private List<Site> _destinations;
     private Map<Site, Map<Item_mock, Integer>> _orderItems;
     private int _transferId;
-
 
     public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId)
     {
@@ -286,4 +286,29 @@ public class Transfer {
     }
 
     public String getDriverName(){ return _driverName; }
+
+    //from here i updated
+    public String getTransferStatus()
+    {
+        /*
+        returns whether the transfer has not started yet, in progress or done
+         */
+        String status = "NOT START";
+        LocalDateTime transferLocalDateTimeLeaving = LocalDateTime.of(_dateOfTransfer, _leavingTime);
+        LocalDateTime transferLocalDateTimeArriving = LocalDateTime.of(_arrivingDate, _arrivingTime);
+        if(transferLocalDateTimeLeaving.isBefore(LocalDateTime.now()) && transferLocalDateTimeArriving.isAfter(LocalDateTime.now()))
+        {
+            status = "IN PROGRESS";
+        }
+        else if(transferLocalDateTimeArriving.isBefore(LocalDateTime.now()))
+        {
+            status = "DONE";
+        }
+        return status;
+    }
+
+    public int getTransferId()
+    {
+        return _transferId;
+    }
 }

@@ -22,12 +22,12 @@ public class Main_S {
         List<Site> mock_Sites = new ArrayList<>();
 
         //Creating 6 Sites:
-        Site site1 = new Site(0, "Coca-Cola", "HaZionut 12 Bnei-Brak", "03-4789653", "Shmuel");
-        Site site2 = new Site(1, "Tnuva", "zion 100 Beer-Sheva", "09-1001002", "Ramiel");
-        Site site3 = new Site(2, "Super-Li Ashkelon", "Lola 97 Ashkelon", "08-6543210", "Taco");
-        Site site4 = new Site(3,"Super-Li Haifa", "Bahaian-Gardens 1700", "08-1231700", "Alicia");
-        Site site5 = new Site(4,"Super-Li Eilat", "AnotherUglyStreet 46 Eilat", "02-0000000", "Johnson");
-        Site site6 = new Site(5,"Osem", "HaNachshon 89 Tel-Aviv", "09-7689809", "Ron");
+        Site site1 = new Site(0, "Coca-Cola", "HaZionut 12 Bnei-Brak", "03-4789653", "Shmuel", 32.0814063287243, 34.84070574112242);
+        Site site2 = new Site(1, "Tnuva", "zion 100 Beer-Sheva", "09-1001002", "Ramiel", 31.26251784717323, 34.79923739845509);
+        Site site3 = new Site(2, "Super-Li Ashkelon", "Lola 97 Ashkelon", "08-6543210", "Taco", 31.664440098898297, 34.56658075366881);
+        Site site4 = new Site(3,"Super-Li Haifa", "Bahaian-Gardens 1700", "08-1231700", "Alicia", 32.81197581090884, 34.98531891877501);
+        Site site5 = new Site(4,"Super-Li Eilat", "AnotherUglyStreet 46 Eilat", "02-0000000", "Johnson", 29.577058822027755, 34.96319269539631);
+        Site site6 = new Site(5,"Osem", "HaNachshon 89 Tel-Aviv", "09-7689809", "Ron", 32.06875185597646, 34.78349301226401);
 
         //Add these sites to the list:
         mock_Sites.add(site1);

@@ -3,6 +3,8 @@ package Domain.Transfer;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
 
+import java.time.LocalDate;
+
 public class Truck {
     private int _truck_licenseNumber;
     private String _truckModel;
@@ -10,9 +12,10 @@ public class Truck {
     private int _truckWeight;
     private int _truck_maxWeight;
     private TempLevel _coolingCapacity;
-    private boolean _isCurrentlyUsed;
+    private LocalDate _unavailableStartDate;
+    private LocalDate _unavailableEndDate;
 
-    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity, boolean isCurrentlyUsed)
+    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity, LocalDate unavailableStartDate, LocalDate unavailableEndDate)
     {
         this._truck_licenseNumber = truck_licenseNumber;
         this._truckModel = truckModel;
@@ -20,7 +23,8 @@ public class Truck {
         this._truckWeight = truckWeight;
         this._truck_maxWeight = truck_maxWeight;
         this._coolingCapacity = coolingCapacity;
-        this._isCurrentlyUsed = isCurrentlyUsed;
+        this._unavailableStartDate = unavailableStartDate;
+        this._unavailableEndDate = unavailableEndDate;
     }
 
     public int getCurrentTruckWeight()
@@ -40,7 +44,7 @@ public class Truck {
 
     public int getMaxWeight(){ return _truck_maxWeight;}
 
-    public boolean getIsCurrentlyUsed(){ return _isCurrentlyUsed;}
+    public boolean getIsUsedInDate(LocalDate dateToCheck){ return !(dateToCheck.isAfter(_unavailableStartDate) && dateToCheck.isBefore(_unavailableEndDate));}
 
     public int getLicenseNumber(){return _truck_licenseNumber;}
 
@@ -78,8 +82,9 @@ public class Truck {
             return weightType.heavyWeight;
     }
 
-    public void setTruckUnavailable()
+    public void setTruckUnavailable(LocalDate startDate, LocalDate endDate)
     {
-        _isCurrentlyUsed = true;
+        _unavailableStartDate = startDate;
+        _unavailableEndDate = endDate;
     }
 }

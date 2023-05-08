@@ -4,6 +4,7 @@ import Domain.Employee.Driver;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -16,69 +17,69 @@ public class TruckController {
         this._trucks = trucks;
     }
 
-    public Map<Integer, Truck> getAvailableTrucksOfLightWeight()
+    public Map<Integer, Truck> getAvailableTrucksOfLightWeight(LocalDate leavingDate)
     {
         Map<Integer, Truck> availableTrucks = new HashMap<>();
         for(int licenseNumber : _trucks.keySet()){
-            if(!_trucks.get(licenseNumber).getIsCurrentlyUsed() && _trucks.get(licenseNumber).isLightWeight()){
+            if(!_trucks.get(licenseNumber).getIsUsedInDate(leavingDate) && _trucks.get(licenseNumber).isLightWeight()){
                 availableTrucks.put(_trucks.get(licenseNumber).getLicenseNumber(), _trucks.get(licenseNumber));
             }
         }
         return availableTrucks;
     }
 
-    public Map<Integer, Truck> getAvailableTrucksOfMiddleWeight()
+    public Map<Integer, Truck> getAvailableTrucksOfMiddleWeight(LocalDate leavingDate)
     {
         Map<Integer, Truck> availableTrucks = new HashMap<>();
         for(int licenseNumber : _trucks.keySet()){
-            if(!_trucks.get(licenseNumber).getIsCurrentlyUsed() && _trucks.get(licenseNumber).isMiddleWeight()){
+            if(!_trucks.get(licenseNumber).getIsUsedInDate(leavingDate) && _trucks.get(licenseNumber).isMiddleWeight()){
                 availableTrucks.put(_trucks.get(licenseNumber).getLicenseNumber(), _trucks.get(licenseNumber));
             }
         }
         return availableTrucks;
     }
 
-    public Map<Integer, Truck> getAvailableTrucksOfHeavyWeight()
+    public Map<Integer, Truck> getAvailableTrucksOfHeavyWeight(LocalDate leavingDate)
     {
         Map<Integer, Truck> availableTrucks = new HashMap<>();
         for(int licenseNumber : _trucks.keySet()){
-            if(!_trucks.get(licenseNumber).getIsCurrentlyUsed() && _trucks.get(licenseNumber).isHeavyWeight()){
+            if(!_trucks.get(licenseNumber).getIsUsedInDate(leavingDate) && _trucks.get(licenseNumber).isHeavyWeight()){
                 availableTrucks.put(_trucks.get(licenseNumber).getLicenseNumber(), _trucks.get(licenseNumber));
             }
         }
         return availableTrucks;
     }
 
-    public Map<Integer, Truck> getAllAvailableTrucks()
+    public Map<Integer, Truck> getAllAvailableTrucks(LocalDate leavingDate)
     {
         Map<Integer, Truck> availableTrucks;
-        availableTrucks = getAvailableTrucksOfHeavyWeight();
-        Map<Integer, Truck> availableTrucksMiddleWeight = getAvailableTrucksOfMiddleWeight();
-        Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight();
+        availableTrucks = getAvailableTrucksOfHeavyWeight(leavingDate);
+        Map<Integer, Truck> availableTrucksMiddleWeight = getAvailableTrucksOfMiddleWeight(leavingDate);
+        Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight(leavingDate);
         availableTrucksMiddleWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
         availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
 
         return availableTrucks;
     }
 
-    public Truck findTruckByDriver(Driver chosenDriver, TempLevel currMinTemp) {
+    public Truck findTruckByDriver(Driver chosenDriver, TempLevel currMinTemp, LocalDate leavingDate) {
         Map<Integer, Truck> availableTrucks;
 
         if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.lightWeight)
         {
-            availableTrucks = getAvailableTrucksOfLightWeight();
+            availableTrucks = getAvailableTrucksOfLightWeight(leavingDate);
         }
         else if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.mediumWeight)
         {
-            availableTrucks = getAvailableTrucksOfMiddleWeight();
-            Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight();
+            availableTrucks = getAvailableTrucksOfMiddleWeight(leavingDate);
+            Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight(leavingDate);
             availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
         }
         else
         {
-            availableTrucks = getAvailableTrucksOfHeavyWeight();
-            Map<Integer, Truck> availableTrucksMiddleWeight = getAvailableTrucksOfMiddleWeight();
-            Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight();
+            availableTrucks = getAvailableTrucksOfHeavyWeight(leavingDate);
+            Map<Integer, Truck> availableTrucksMiddleWeight = getAvailableTrucksOfMiddleWeight(leavingDate);
+            Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight(leavingDate);
             availableTrucksMiddleWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
             availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
         }

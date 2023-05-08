@@ -24,10 +24,12 @@ public class Transfer {
     private int _transferId;
 
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId)
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId)
     {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
+        this._arrivingDate = arrivingDate;
+        this._arrivingTime = arrivingTime;
         this._truckLicenseNumber = truck_LicenseNumber;
         this._driverName = driverName;
         this._source = source;
@@ -256,6 +258,10 @@ public class Transfer {
 
     public LocalTime getLeavingTime(){
         return this._leavingTime;
+    }
+
+    public LocalDate getLeavingDate(){
+        return this._dateOfTransfer;
     }
 
     public LocalTime get_arrivingTime(){return this._arrivingTime;}

@@ -41,7 +41,7 @@ public class Workers {
 
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

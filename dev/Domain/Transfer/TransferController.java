@@ -11,7 +11,6 @@ import java.util.*;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Enums.TempLevel;
-import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;
 
 
@@ -47,14 +46,15 @@ public class TransferController {
             System.out.println("Please pick one of the following options:");
             System.out.println("1. View previous transfers");
             System.out.println("2. Create transfer for pending orders. you have " + _ordersQueue.size() + " orders waiting to transfer");
-            System.out.println("3. View and update weight of current transfers ");
-            System.out.println("4. Exit the transfer system");
+            System.out.println("3. View and update current transfers ");
+            System.out.println("4. Add a new truck to the system ");
+            System.out.println("5. Exit the transfer system");
 
             int optionSelection;
             while(true) {
                 try {
                     optionSelection = scanner.nextInt();
-                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3 || optionSelection == 4) {
+                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3 || optionSelection == 4 || optionSelection == 5) {
                         break;
                     } else {
                         System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - 3");
@@ -81,10 +81,15 @@ public class TransferController {
                     while(true) {
                         try {
                             transferId = scanner.nextInt();
-                            if (_transfers.containsKey(transferId)) {
-                                break;
-                            } else {
+                            if (!_transfers.containsKey(transferId)) {
                                 System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                            }
+                            else if (_transfers.containsKey(transferId) && _transfers.get(transferId).isInProgress()){
+                                System.out.println("Sorry transfer manager, but your selected transfer is in progress. Please choose another transfer");
+                            }
+                            else
+                            {
+                                break;
                             }
                         }
                         catch (Exception e)
@@ -123,14 +128,13 @@ public class TransferController {
                 }
                 else
                 {
-                    System.out.println("Those are the transfers that are currently takes place.");
-                    System.out.println("Please enter the transferId of your chosen transfer");
+                    System.out.println("Those are the transfers that are currently takes place:");
                     for(Integer transferId: currentTransfers.keySet())
                     {
                         Transfer transfer = currentTransfers.get(transferId);
                         System.out.println("transfer Id: " + transferId + ", Source site: " + transfer.getSource().getSiteName() + ", Destination site: " + transfer.getDestinations().get(transfer.getDestinations().size()-1));
                     }
-
+                    System.out.println("Please enter the transferId of your chosen transfer");
                     int transferId;
                     while(true) {
                         try {
@@ -147,9 +151,14 @@ public class TransferController {
                             scanner.next();
                         }
                     }
-                    updateCurrentTransfersDetails(_transfers.get(transferId));
+                    updateCurrentTransferDetails(_transfers.get(transferId));
                     System.out.println("You'll be taken to the main menu.");
                 }
+            }
+            else if(optionSelection == 4)
+            {
+                addTruckToSystem();
+                System.out.println("Truck added successfully. You'll be taken to the main menu.");
             }
             else
             {
@@ -198,10 +207,23 @@ public class TransferController {
 
         //choose driver for transfer
         Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp, orderItems);
-
+        if (chosenDriver == null)
+        {
+            System.out.println("Unfortunately, there is no available driver to this transfer.");
+            _ordersQueue.add(orderItems);
+            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            return;
+        }
 
         //choose truck by the chosen driver
         Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate);
+        if (chosenTruck == null)
+        {
+            System.out.println("Unfortunately, there is no available truck to this transfer.");
+            _ordersQueue.add(orderItems);
+            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            return;
+        }
 
         System.out.println("Please choose source site from the next options (enter number): ");
         Site[] sites = orderItems.keySet().toArray(new Site[0]);
@@ -275,17 +297,16 @@ public class TransferController {
             System.out.println("Driver Name: " + newTransfer.getDriverName());
             System.out.println("------------------------------------------------------------");
 
-
-
+            transferRearranged = updateWeightsForTransfer(newTransfer, false);
 
             if (transferRearranged) {
                 continue;
             }
             else
             {
+                List<Site> transferDest = newTransfer.getDestinations();
                 System.out.println("It will unload all the items at his final destination - " + transferDest.get(transferDest.size() - 1).getSiteName());
                 System.out.println("------------------------------------------------------------");
-                transferTruck.resetTruckWeight();
                 break;
             }
         }
@@ -369,7 +390,7 @@ public class TransferController {
         return currentTransfers;
     }
 
-    public void updateWeightsForTransfer(Transfer newTransfer)
+    public boolean updateWeightsForTransfer(Transfer newTransfer, boolean happensRightNow)
     {
         int truckWeight;
 
@@ -379,8 +400,16 @@ public class TransferController {
 
         boolean transferRearranged = false;
 
-        System.out.print("The truck's driver will start his drive from "+ newTransfer.getSource().getSiteName() + ", ");
-        System.out.println("And he will pick up the following items: ");
+        if (!happensRightNow)
+        {
+            System.out.print("The truck's driver will start his drive from "+ newTransfer.getSource().getSiteName() + ", ");
+            System.out.println("And he will pick up the following items: ");
+        }
+        else
+        {
+            System.out.print("The truck's driver started his drive from "+ newTransfer.getSource().getSiteName() + ", ");
+            System.out.println("And he picked up the following items: ");
+        }
 
         Map<Site, Map<Item_mock, Integer>> transferOrderItems = newTransfer.getOrderItems();
         Map<Item_mock, Integer> sourceItems = transferOrderItems.get(newTransfer.getSource());
@@ -388,7 +417,11 @@ public class TransferController {
             System.out.println("Item name: " + item.getItemName() + ", Quantity: " + sourceItems.get(item));
         }
 
-        System.out.println("Please enter the expected weight of the truck: ");
+        if (!happensRightNow)
+            System.out.println("Please enter the expected weight of the truck: ");
+        else
+            System.out.println("Please enter the weight of the truck: ");
+
         while(true)
         {
             try {
@@ -420,13 +453,21 @@ public class TransferController {
         }
 
         if (transferRearranged) {
-            continue;
+            return true;
         }
         List<Site> transferDest = newTransfer.getDestinations();
         for (int i=0; i<transferDest.size() - 1 && !transferRearranged; i++)
         {
-            System.out.print("Next, the truck's driver arrive to: "+ transferDest.get(i).getSiteName() + ", ");
-            System.out.println("And he will pick up the following items: ");
+            if (!happensRightNow)
+            {
+                System.out.print("Next, the truck's driver will arrive to: "+ transferDest.get(i).getSiteName() + ", ");
+                System.out.println("And he will pick up the following items: ");
+            }
+            else
+            {
+                System.out.print("Next, the truck's driver arrived to: "+ transferDest.get(i).getSiteName() + ", ");
+                System.out.println("And he picked up the following items: ");
+            }
 
             Map<Item_mock, Integer> destItems = transferOrderItems.get(transferDest.get(i));
             for (Item_mock item : destItems.keySet()) {
@@ -455,8 +496,6 @@ public class TransferController {
                 }
             }
             newTransfer.documentUpdateTruckWeight(truckWeight, transferDest.get(i));
-
-
             while (!transferTruck.checkWeightCapacity() && !transferRearranged)
             {
                 transferRearranged = true;
@@ -464,6 +503,7 @@ public class TransferController {
                 System.out.println("After the transfer rearranged, we will start all over again, so you can enter the updated weights.");
             }
         }
+        return transferRearranged;
     }
 
     public void removeOneDestOfTransfer(Transfer transfer)
@@ -795,6 +835,9 @@ public class TransferController {
         //
         List<Driver> Drivers = dc.findDriver(currMinTemp, weekNumber, leavingDate.getYear(), wt.getwidowtype(dayOfWeekNum, shift));
 
+        if (Drivers.size() ==0)
+            return null;
+
         System.out.println("Now, please choose 1 driver from the following list:");
         for (int i = 0; i < Drivers.size(); i++)
         {
@@ -825,8 +868,178 @@ public class TransferController {
         return chosenDriver;
     }
 
-    public void updateCurrentTransfersDetails(Transfer transferToUpdate)
+    public void updateCurrentTransferDetails(Transfer transferToUpdate)
     {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Please choose one of the following options:");
+        System.out.println("1. Change weights reported in each site");
+        System.out.println("2. Update transfer arriving time");
+        int optionChosen;
+        while(true)
+        {
+            try {
+                optionChosen = scanner.nextInt();
+                if(optionChosen == 1 || optionChosen == 2)
+                {
+                    break;
+                }
+                else
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                scanner.next();
+            }
+        }
+
+        if (optionChosen == 1)
+        {
+            updateWeightsForTransfer(transferToUpdate, true);
+        }
+        else
+        {
+            System.out.println("Please enter the updated arriving date of the transfer, in this format - dd/mm/yyy: ");
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate arrivingDate;
+            while(true)
+            {
+                try {
+                    String date = scanner.next();
+                    arrivingDate = LocalDate.parse(date, formatter1);
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                    scanner.next();
+                }
+            }
+            transferToUpdate.setArrivingDate(arrivingDate);
+
+            //update arriving time
+            System.out.println("Please enter the updated arriving time of the transfer, in this format - HH:mm : ");
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime arrivingTime;
+            while(true)
+            {
+                try {
+                    String time = scanner.next();
+                    arrivingTime = LocalTime.parse(time, formatter2);
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                    scanner.next();
+                }
+            }
+            transferToUpdate.setArrivingTime(arrivingTime);
+        }
+    }
+
+    public void addTruckToSystem()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("To add a new truck to the transfer system, you'll need to enter the following details:");
+
+        System.out.println("Please enter the truck License Number:");
+        int licenseNumber;
+        while(true)
+        {
+            try {
+                licenseNumber = scanner.nextInt();
+                if (licenseNumber >= 0)
+                    break;
+                else
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                scanner.next();
+            }
+        }
+
+        System.out.println("Please enter the truck Model:");
+        String model = scanner.next();
+
+        System.out.println("Please enter the truck net Weight:");
+        int netWeight;
+        while(true)
+        {
+            try {
+                netWeight = scanner.nextInt();
+                if (netWeight >= 0 && netWeight <= 60)
+                    break;
+                else
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                scanner.next();
+            }
+        }
+
+        System.out.println("Please enter the truck max Weight:");
+        int maxWeight;
+        while(true)
+        {
+            try {
+                maxWeight = scanner.nextInt();
+                if (netWeight >= 0 && netWeight <= 60)
+                    break;
+                else
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                scanner.next();
+            }
+        }
+
+        System.out.println("Please choose from the following options the truck cooling capacity:");
+        System.out.println("1. Regular");
+        System.out.println("2. Cold");
+        System.out.println("3. Frozen");
+        int indexChosen;
+        while(true)
+        {
+            try {
+                indexChosen = scanner.nextInt();
+                if (netWeight >= 1 && netWeight <= 3)
+                    break;
+                else
+                    System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Sorry transfer manager, but your input is illegal. please try again");
+                scanner.next();
+            }
+        }
+        TempLevel coolingCapacity;
+
+        if (indexChosen == 1)
+        {
+            coolingCapacity = TempLevel.regular;
+        }
+        else if (indexChosen == 2)
+        {
+            coolingCapacity = TempLevel.cold;
+        }
+        else
+        {
+            coolingCapacity = TempLevel.frozen;
+        }
+
+        //create the truck
+        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null);
+        tc._trucks.put(licenseNumber, newTruck);
     }
 }

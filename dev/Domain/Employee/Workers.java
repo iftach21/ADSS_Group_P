@@ -12,6 +12,7 @@ public class Workers {
     protected String name;
     protected String contract;
     protected String start_date;
+
     protected ArrayList<WindowType> available;
     protected int wage;
     protected int phoneNUM;
@@ -115,8 +116,8 @@ public class Workers {
         this.personalinfo = personalinfo;
     }
 
-    public void setPro(boolean[] pro) {
-        this.pro = pro;
+    public void setPro(int indx, boolean val) {
+        this.pro[indx] = val;
     }
 
     /**
@@ -185,4 +186,11 @@ public class Workers {
     }
     public boolean amIDriver(){return false;}
 
+    public String getWeightType(){
+        return null;
+    }
+
+    public String getTempType(){
+        return null;
+    }
 }

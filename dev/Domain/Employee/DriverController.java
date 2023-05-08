@@ -3,10 +3,19 @@ package Domain.Employee;
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowType;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class DriverController {
-    private static final WeeklyShiftAndWorkersManager weeklyShiftAndWorkersManager = WeeklyShiftAndWorkersManager.getInstance();
+    private static final WeeklyShiftAndWorkersManager weeklyShiftAndWorkersManager;
+
+    static {
+        try {
+            weeklyShiftAndWorkersManager = WeeklyShiftAndWorkersManager.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public DriverController(){}

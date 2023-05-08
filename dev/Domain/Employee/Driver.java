@@ -1,6 +1,8 @@
 package Domain.Employee;
 
 import Domain.Enums.TempLevel;
+import Domain.Enums.TempTypeFactory;
+import Domain.Enums.WeightTypeFactory;
 import Domain.Enums.weightType;
 
 public class Driver extends Workers {
@@ -29,4 +31,22 @@ public class Driver extends Workers {
     }
     public boolean amIDriver(){return true;}
 
+    public String getWeightType(){
+        return this._driversLicense.getLicenseWeightCapacity().toString();
+    }
+
+    public String getTempType(){
+        return this._driversLicense.getLicenseTempCapacity().toString();
+    }
+
+    public void setTempType(String tempType){
+        TempLevel tl = TempTypeFactory.TempLevelFromString(tempType);
+        this._driversLicense.set_licenseTempCapacity(tl);
+    }
+
+    public void setWeightType(String WeightType){
+        weightType wt = WeightTypeFactory.weightTypeFromString(WeightType);
+        this._driversLicense.set_licenseWeightCapacity(wt);
+    }
 }
+

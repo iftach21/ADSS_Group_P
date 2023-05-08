@@ -7,6 +7,7 @@ import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;
 import Domain.Enums.weightType;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class WeeklyShiftAndWorkersManager {
@@ -16,11 +17,11 @@ public class WeeklyShiftAndWorkersManager {
 
 
 
-    private WeeklyShiftAndWorkersManager(){
+    private WeeklyShiftAndWorkersManager() throws SQLException {
         workersDAO = WorkersDAO.getInstance();
         weeklyShiftDAO = WeeklyShiftDAO.getInstance();
     }
-    public static WeeklyShiftAndWorkersManager getInstance(){
+    public static WeeklyShiftAndWorkersManager getInstance() throws SQLException {
         if(Instance==null){Instance = new WeeklyShiftAndWorkersManager();}
         return Instance;
     }

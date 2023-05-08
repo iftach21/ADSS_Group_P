@@ -1,17 +1,18 @@
 package Data;
-
+import java.sql.*;
 import Domain.Employee.Workers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkersDAO {
+    private Connection conn = Database.Connection.getConnectionToDatabase();
     private static WorkersDAO instance = null;
     private final List<Workers> allworkerslist; //holds all the workers available
-    private WorkersDAO(){
+    private WorkersDAO() throws SQLException {
         allworkerslist = new ArrayList<>();
     }
-    public static WorkersDAO getInstance(){
+    public static WorkersDAO getInstance() throws SQLException {
         if(instance==null){
             instance =  new WorkersDAO();
         }

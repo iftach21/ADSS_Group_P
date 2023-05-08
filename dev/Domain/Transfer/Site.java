@@ -9,14 +9,18 @@ public class Site {
     private String _address;
     private String _phoneNumber;
     private String _contactName;
+    private double x_coordinate;
+    private double y_coordinate;
 
-    public Site(int siteId, String siteName, String address, String phoneNumber, String contactName)
+    public Site(int siteId, String siteName, String address, String phoneNumber, String contactName, double x_coordinate, double y_coordinate)
     {
         this._siteId = siteId;
         this._siteName = siteName;
         this._address = address;
         this._phoneNumber = phoneNumber;
         this._contactName = contactName;
+        this.x_coordinate = x_coordinate;
+        this.y_coordinate = y_coordinate;
     }
 
     public String getSiteName(){
@@ -43,4 +47,11 @@ public class Site {
     public String get_phoneNumber(){
         return _phoneNumber;
     }
+
+    public double calculateDistance(Site site)
+    {
+        return Math.sqrt(Math.pow(this.x_coordinate-site.x_coordinate, 2) + Math.pow(this.y_coordinate=site.y_coordinate, 2));
+    }
+
+
 }

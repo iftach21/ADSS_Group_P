@@ -101,8 +101,7 @@ class OrderMangerTest {
         conn1.close();
         conn.close();
         con.insert(supplier.getContract());
-
-
+        mapper1.update(supplier);
 
     }
 

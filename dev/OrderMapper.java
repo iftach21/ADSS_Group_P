@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import org.json.JSONObject;
 
 import java.sql.*;
 import java.util.*;
@@ -78,9 +79,24 @@ public class OrderMapper
 
     public void update(Order order) throws SQLException
     {
-
+        PreparedStatement stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ? WHERE order_num = ?");
+        stmt.setString(1,order.getSupplier().getSupplierID());
+        String itemsJson = new JSONObject(order.getItemList()).toString();
+        stmt.setString(2,itemsJson);
+        stmt.setFloat(3,order.getCost());
+        stmt.setInt(4,order.getStore_number());
+        stmt.setInt(5,order.getOrderNum());
+        cache.remove(order.getOrderNum());
+        cache.put(order.getOrderNum(),order);// TODO check if there is no duplication after update in the cache
     }
 
+    public void delete(Order order) throws SQLException
+    {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Orders WHERE order_num = ?");
+        stmt.setInt(1,order.getOrderNum());
+        stmt.executeUpdate();
+        cache.remove(order.getOrderNum());
+    }
     public Supplier findSupplier(String supplierId) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         int flag = 0;

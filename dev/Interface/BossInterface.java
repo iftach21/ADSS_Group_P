@@ -5,6 +5,7 @@ import Domain.Enums.TempTypeFactory;
 import Domain.Enums.WeightTypeFactory;
 import Domain.Enums.WindowTypeCreater;
 
+import java.sql.SQLException;
 import java.util.Scanner;  // Import the Scanner class
 public class BossInterface extends AInterface {
     /**
@@ -18,7 +19,7 @@ public class BossInterface extends AInterface {
 
 
 
-    public BossInterface() {
+    public BossInterface() throws SQLException {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
     public void logIn() throws Exception {

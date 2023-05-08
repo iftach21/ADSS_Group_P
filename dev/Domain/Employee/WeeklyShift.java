@@ -20,6 +20,22 @@ public class WeeklyShift {
         return year;
     }
 
+    public Shift[] getDayShift() {
+        return dayShift;
+    }
+
+    public Shift[] getNightShift() {
+        return nightShift;
+    }
+
+    public void setDayShift(Shift[] dayShift) {
+        this.dayShift = dayShift;
+    }
+
+    public void setNightShift(Shift[] nightShift) {
+        this.nightShift = nightShift;
+    }
+
     /**
      * Creating a weekly shift
      */

@@ -3,12 +3,13 @@ package Interface;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.WindowTypeCreater;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class WorkerInterface extends AInterface {
     private final WeeklyShiftAndWorkersManager controller;
 
-    public WorkerInterface() {
+    public WorkerInterface() throws SQLException {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
     public void logIn() throws ExitExeption {

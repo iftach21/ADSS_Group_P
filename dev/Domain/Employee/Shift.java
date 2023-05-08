@@ -185,7 +185,7 @@ public class Shift {
     public String getStartTime() {
         return startTime;
     }
-    public String getShiftID() {
+    public int getShiftID() {
         return ShiftID;
     }
 }

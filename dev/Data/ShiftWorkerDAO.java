@@ -31,8 +31,8 @@ public class ShiftWorkerDAO {
             String sql = "INSERT INTO shift_worker_in_shift (shift_id, worker_id, workers_pro) VALUES (?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, s.getShiftID());
-            stmt.setString(2, w.getId());
+            stmt.setInt(1, s.getShiftID());
+            stmt.setInt(2, w.getId());
             stmt.setString(3, String.valueOf(workersPro));
 
 

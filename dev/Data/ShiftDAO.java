@@ -22,13 +22,15 @@ public class ShiftDAO {
         return instance;
     }
 
-    public void add(Shift s){
+    public int add(Shift s){
+        int primaryKey = -1;
+
         try {
             // create SQL query string with placeholders for parameter values
             String sql = "INSERT INTO Shift (date, shift_manager_id, log, start_time) VALUES (?, ?, ?, ?)";
 
             // create PreparedStatement object and set parameter values
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setDate(1, Date.valueOf(s.getDate()));
             stmt.setInt(2, s.getShiftManagerID());
             stmt.setString(3, s.getLog());
@@ -37,15 +39,24 @@ public class ShiftDAO {
             // execute query to insert new record
             stmt.executeUpdate();
 
+            // retrieve generated keys and get primary key value
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                primaryKey = rs.getInt(1);
+            }
+
             // close resources
+            rs.close();
             stmt.close();
             conn.close();
 
-            System.out.println("New record inserted into Shift table.");
+            System.out.println("New record inserted into Shift table with primary key " + primaryKey);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return primaryKey;
     }
     public Shift get(int shiftId) throws SQLException {
         for(Shift shift: ShiftList){

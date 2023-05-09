@@ -60,4 +60,11 @@ public class ShiftWorkerDAO {
         }
         return workersList;
     }
+    public void update(){
+        //todo: complete
+    }
+
+    public void delete(){
+        //todo: complete: =)
+    }
 }

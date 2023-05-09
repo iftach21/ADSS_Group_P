@@ -11,7 +11,7 @@ public class Connection {
         if(conn == null){
 
             String currentPath  = System.getProperty("user.dir");
-            String dbName = "Transfer_Employee";
+            String dbName = "Transfer_Employee.db";
             String dbPath = currentPath + "\\" + dbName;
 
             conn = DriverManager.getConnection(dbPath);

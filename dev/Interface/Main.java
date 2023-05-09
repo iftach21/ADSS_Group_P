@@ -1,5 +1,6 @@
 package Interface;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +12,25 @@ public class Main {
         add(transferInterface);
     }};
     static BossInterface bossInterface;
+
+    static {
+        try {
+            bossInterface = new BossInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            bossInterface = new BossInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            bossInterface = new BossInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;
     public static void main(String[] args) {

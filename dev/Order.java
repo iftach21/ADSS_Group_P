@@ -16,6 +16,10 @@ public class Order {
     private int  Store_number;
     static int number = 0;
 
+    private StatusOrder statusOrder;
+
+
+
     public Order() {
         this.itemList= new HashMap<Item,Pair<Integer,Float>>();
         this.currentDate= LocalDate.now();
@@ -35,7 +39,16 @@ public class Order {
         this.supplier=supplier;
         this.Store_number=store_number;
         this.currentDate= LocalDate.now();
+        this.statusOrder=StatusOrder.Waiting;
 
+    }
+
+    public StatusOrder getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(StatusOrder statusOrder) {
+        this.statusOrder = statusOrder;
     }
 
     public int getStore_number() {

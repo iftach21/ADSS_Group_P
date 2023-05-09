@@ -2,6 +2,7 @@
   <library name="adss2023_v01">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/release/adss2023_v01.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/SqliteJdbcDriver/sqlite-jdbc-3.40.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

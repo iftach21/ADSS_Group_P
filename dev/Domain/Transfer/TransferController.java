@@ -350,6 +350,9 @@ public class TransferController {
         if (selectedOption == 1)
         {
             removeOneDestOfTransfer(transfer);
+            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+            transfer.setArrivingTime(arrivingTime.toLocalTime());
+            transfer.setArrivingDate(arrivingTime.toLocalDate());
         }
         else if (selectedOption == 2)
         {
@@ -358,6 +361,9 @@ public class TransferController {
         else if (selectedOption == 3)
         {
             removeItemsOfTransfer(transfer);
+            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+            transfer.setArrivingTime(arrivingTime.toLocalTime());
+            transfer.setArrivingDate(arrivingTime.toLocalDate());
         }
 
         transfer.documentUpdateTruckWeight(null, transfer.getSource());

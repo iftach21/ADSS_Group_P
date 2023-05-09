@@ -145,4 +145,8 @@ public abstract class Supplier {
         return 0;
    }
 
+   public int getType(){
+        return 0;
+   }
+
 }

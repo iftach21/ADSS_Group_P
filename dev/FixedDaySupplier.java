@@ -72,6 +72,9 @@ public class FixedDaySupplier extends DeliveringSupplier {
 
         return (int) (secondsUntilDelivery / (24 * 60 * 60)); // Convert seconds to days
     }
+    public int getType(){
+        return 0;
+    }
 }
 
 

@@ -68,6 +68,36 @@ public class OrderMapper
         return orders;
     }
 
+    public List <Order> findAllOrderWithStatus(String status)
+    {
+        List<Order> orders = new ArrayList<>();
+        PreparedStatement stmt;
+        ResultSet rs;
+//        String waiting = "Waiting";
+        try
+        {
+            stmt = conn.prepareStatement("SELECT * FROM Orders WHERE statusOrder = ?");
+            stmt.setString(1, status);
+            rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                Order order = new Order();
+                order.setOrderNum(rs.getInt("order_num"));
+                order.setItemList(Parser.parse(rs.getString("item_list")));
+                order.setCost(rs.getFloat("cost"));
+                order.setStore_number(rs.getInt("store_number"));
+                String supplierId = rs.getString("supplier_id");
+                order.setSupplier(findSupplier(supplierId));
+                order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
+                orders.add(order);
+            }
+
+        }
+        catch (SQLException e){}
+        return orders;
+    }
+
+
     public void insert(Order order)
     {
         PreparedStatement stmt;

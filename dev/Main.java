@@ -437,7 +437,7 @@ public class Main {
                             String order_2Input = scanner.next();
                             order_2Input = checkNumber(order_2Input);
                             int order_2 = Integer.parseInt(order_2Input);
-                            orderManger.move_from_pending_to_approvel(order_2);
+                            orderManger.move_from_pending_to_approved(order_2);
                             break;
                         case 3:
                             orderManger.print_all_orders_num();
@@ -447,17 +447,17 @@ public class Main {
                             String supplier=scanner.nextLine();
                             supplier = checkName(supplier);
                             System.out.println("order waiting for approvel :");
-                            for(Order order:orderManger.getPending_for_apporval()){
+                            for(Order order:orderManger.getPendingForApproval()){
                                 if(order.getSupplier().getName().equals(supplier)){
                                  System.out.println(order.getOrderNum());}
                             }
                             System.out.println("order approved and waiting for shipment :");
-                            for(Order order:orderManger.getApproval()){
+                            for(Order order:orderManger.getApprovedOrders()){
                                 if(order.getSupplier().getName().equals(supplier)){
                                     System.out.println(order.getOrderNum());}
                             }
                             System.out.println("order history");
-                            for(Order order:orderManger.getApproval()){
+                            for(Order order:orderManger.getApprovedOrders()){
                                 if(order.getSupplier().getName().equals(supplier)){
                                     System.out.println(order.getOrderNum());}
                             }

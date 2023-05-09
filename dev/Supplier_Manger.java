@@ -36,9 +36,10 @@ public class Supplier_Manger {
 
 
     public Supplier_Manger() {
-        this.suppliers=new ArrayList<Supplier>();
-        this.itemslist=new HashMap<Item,Integer>();
-        try {
+        this.suppliers = new ArrayList<Supplier>();
+        this.itemslist = new HashMap<Item,Integer>();
+        try
+        {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             System.out.println("Connection to SuperLeeDataBase.db has been established.");
             this.itemMapper =new ItemMapper(conn);
@@ -46,8 +47,9 @@ public class Supplier_Manger {
             this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper(conn);
             this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper(conn);
             this.contractMapper = new ContractMapper(conn);
-            ///
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             System.out.println(e.getMessage());
         }
 
@@ -204,7 +206,7 @@ public class Supplier_Manger {
 }}
 
 
-    //Thiis fuction sort the supplier array by the days that each on can deliver
+    //This fuction sort the supplier array by the days that each on can deliver
     public void sort_supplier_by_deliver_days(){
             this.update_suppliers();
                 int n = suppliers.size();

@@ -1,10 +1,14 @@
 package Domain.Transfer;
 
+import Data.TransferDestinationsDAO;
+import Data.TransferItemsDAO;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Transfer {
+    private int _transferId;
     private LocalDate _dateOfTransfer;
     private LocalTime _leavingTime;
     private LocalDate _arrivingDate;
@@ -20,12 +25,12 @@ public class Transfer {
     private int _truckLicenseNumber;
     private String _driverName;
     private Site _source;
-    private List<Site> _destinations;
-    private Map<Site, Map<Item_mock, Integer>> _orderItems;
-    private int _transferId;
+    private final TransferDestinationsDAO _transferDestinationsDAO;
+    private final TransferItemsDAO _transferItemsDAO;
+    //private List<Site> _destinations;
+    //private Map<Site, Map<Item_mock, Integer>> _orderItems;
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId)
-    {
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, int transferId) throws SQLException {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
         this._arrivingDate = arrivingDate;
@@ -33,9 +38,9 @@ public class Transfer {
         this._truckLicenseNumber = truck_LicenseNumber;
         this._driverName = driverName;
         this._source = source;
-        this._destinations = destinations;
-        this._orderItems = orderItems;
         this._transferId = transferId;
+        this._transferDestinationsDAO = TransferDestinationsDAO.getInstance();
+        this._transferItemsDAO = TransferItemsDAO.getInstance();
     }
 
     public void removeTransferItems(Map<Site, Map<Item_mock, Integer>> itemsToDelete)
@@ -43,51 +48,24 @@ public class Transfer {
         for (Site site : itemsToDelete.keySet()) {
             for (Item_mock product : itemsToDelete.get(site).keySet())
             {
-                _orderItems.get(site).put(product, _orderItems.get(site).get(product) - itemsToDelete.get(site).get(product));
-                if (_orderItems.get(site).get(product) == 0) {
-                    _orderItems.get(site).remove(product);
-                    if (_orderItems.get(site).size() == 0)
+                Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
+                //calculate how much to reduce from each item
+                int quantityToUpdate = orderItems.get(site).get(product) - itemsToDelete.get(site).get(product);
+                //update the database
+                _transferItemsDAO.update(_transferId, site.getSiteId(), product.getCatalogNum(), quantityToUpdate);
+                if (quantityToUpdate == 0) {
+                    //update and remove product from the database
+                    _transferItemsDAO.delete(_transferId, product.getCatalogNum(), site.getSiteId(), quantityToUpdate);
+                    //if there are no more products to this destinations
+                    if (orderItems.get(site).size() == 0)
                     {
-                        _orderItems.remove(site);
-                        _destinations.remove(site);
+                        //remove from the database
+                        _transferDestinationsDAO.delete(_transferId, site.getSiteId());
                         System.out.println("Please notice that you removed every item from this destination, so the destination has been removed from the transfer!");
                     }
                 }
             }
         }
-    }
-
-    public void addTransferItems(Map<Site, Map<Item_mock, Integer>> itemsToAdd){
-        for (Site site : itemsToAdd.keySet()) {
-            if(_orderItems.containsKey(site)) {
-                for (Item_mock product : itemsToAdd.get(site).keySet()) {
-                    if (_orderItems.get(site).containsKey(product)) {
-                        Integer x = _orderItems.get(site).get(product);
-                        _orderItems.get(site).put(product, x + itemsToAdd.get(site).get(product));
-                    } else {
-                        _orderItems.get(site).put(product, itemsToAdd.get(site).get(product));
-                    }
-                }
-            }
-            else {
-                _orderItems.put(site, itemsToAdd.get(site));
-            }
-        }
-    }
-
-    public void addTransferDestinations(Set<Site> sites)
-    {
-        for(Site site: sites)
-        {
-            if (!_destinations.contains(site))
-                this._destinations.add(site);
-        }
-    }
-
-    public void addTransferDestinations(Site site)
-    {
-        if (!_destinations.contains(site))
-            this._destinations.add(site);
     }
 
     public void updateTransferTruck(int truck_LicenseNumber)
@@ -97,11 +75,13 @@ public class Transfer {
 
     public void removeTransferDestination(Site destinationToDelete)
     {
-        _destinations.remove(destinationToDelete);
+        _transferDestinationsDAO.delete(_transferId, destinationToDelete.getSiteId());
     }
 
     public void createDocument()
     {
+        List<Site> destinations = _transferDestinationsDAO.get(_transferId);
+        Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
         System.out.println("Creating transfer document (a text file will be created in current directory)...");
         String fileName = "transfer" + _transferId +"_Document.txt";
         try {
@@ -116,24 +96,24 @@ public class Transfer {
             //fileWriter.write(String.format("%20s %20s %20s %20s\r\n", _source.getSiteAddress(), _source.get_contactName(), _source.get_phoneNumber(), ""));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("DESTINATION DETAILS:") + "\n\n");
-            for(int i=0; i<_destinations.size(); i++)
+            for(int i=0; i<destinations.size(); i++)
             {
-                fileWriter.write(String.format(" %20s \r\n","Destination name: "+ _destinations.get(i).getSiteName()));
-                if(i<_destinations.size()-1) {
-                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + _destinations.get(i).getSiteAddress(), ", Contact name: "+_destinations.get(i).get_contactName(), ", Phone: "+_destinations.get(i).get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ "None"));
+                fileWriter.write(String.format(" %20s \r\n","Destination name: "+ destinations.get(i).getSiteName()));
+                if(i<destinations.size()-1) {
+                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + destinations.get(i).getSiteAddress(), ", Contact name: "+destinations.get(i).get_contactName(), ", Phone: "+destinations.get(i).get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ "None"));
                     //fileWriter.write(String.format("%20s %20s %20s %20s \r\n", _destinations.get(i).getSiteAddress(), _destinations.get(i).get_contactName(), _destinations.get(i).get_phoneNumber(), ""));
                 }
                 else {
-                    fileWriter.write(String.format(" %20s %20s %20s \r\n\n", "Address: "+_destinations.get(i).getSiteAddress() , ", Contact name: "+_destinations.get(i).get_contactName(), ", Phone: "+_destinations.get(i).get_phoneNumber()));
+                    fileWriter.write(String.format(" %20s %20s %20s \r\n\n", "Address: "+destinations.get(i).getSiteAddress() , ", Contact name: "+destinations.get(i).get_contactName(), ", Phone: "+destinations.get(i).get_phoneNumber()));
                     //fileWriter.write(String.format("%20s %20s %20s \r\n", _destinations.get(i).getSiteAddress(), _destinations.get(i).get_contactName(), _destinations.get(i).get_phoneNumber()));
                 }
             }
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("TRANSFER ITEMS CONTENT:") + "\n\n");
-            for (Site site : _orderItems.keySet()) {
-                for (Item_mock product : _orderItems.get(site).keySet())
+            for (Site site : orderItems.keySet()) {
+                for (Item_mock product : orderItems.get(site).keySet())
                 {
-                    fileWriter.write(String.format(" %20s %20s \r\n", "Item name: "+product.getItemName(), ", Quantity: "+_orderItems.get(site).get(product)));
+                    fileWriter.write(String.format(" %20s %20s \r\n", "Item name: "+product.getItemName(), ", Quantity: "+orderItems.get(site).get(product)));
                     //fileWriter.write(String.format("%20s %20s \r\n", product.getItemName(), _orderItems.get(site).get(product)));
                 }
             }
@@ -221,6 +201,7 @@ public class Transfer {
     }
 
     public void documentUpdateOrderItems(){
+        Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
         String fileName = "transfer" + _transferId +"_Document.txt";
         int lineToRemoveFrom = -1;
         try {
@@ -234,10 +215,10 @@ public class Transfer {
             }
             if(lineToRemoveFrom != -1) {
                 lines.subList(lineToRemoveFrom, lines.size()).clear();
-                for (Site site : _orderItems.keySet()) {
-                    for (Item_mock product : _orderItems.get(site).keySet())
+                for (Site site : orderItems.keySet()) {
+                    for (Item_mock product : orderItems.get(site).keySet())
                     {
-                        lines.add(String.format(" %20s %20s ", "Item name: "+product.getItemName(), ", Quantity: "+_orderItems.get(site).get(product)));
+                        lines.add(String.format(" %20s %20s ", "Item name: "+product.getItemName(), ", Quantity: "+orderItems.get(site).get(product)));
                     }
                 }
                 Files.write(Paths.get(fileName), lines, StandardCharsets.UTF_8);
@@ -269,11 +250,11 @@ public class Transfer {
     public LocalDate getArrivingDate(){return this._arrivingDate;}
 
     public List<Site> getDestinations(){
-        return this._destinations;
+        return _transferDestinationsDAO.get(_transferId);
     }
 
     public Map<Site, Map<Item_mock, Integer>> getOrderItems(){
-        return _orderItems;
+        return _transferItemsDAO.get(_transferId);
     }
 
     public Site getSource(){
@@ -322,5 +303,7 @@ public class Transfer {
     {
         return _transferId;
     }
+
+
 }
 

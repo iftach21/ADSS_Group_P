@@ -47,6 +47,9 @@ public class Supplier_Manger {
             this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper(conn);
             this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper(conn);
             this.contractMapper = new ContractMapper(conn);
+            this.update_suppliers();
+            Contract contract=new Contract();
+            contract.setContractIdCounter(this.contractMapper.findAll().get(this.contractMapper.findAll().size()-1).contractId);
         }
         catch (SQLException e)
         {
@@ -242,6 +245,8 @@ public class Supplier_Manger {
         }
         return items;
     }
+
+
 
 
 

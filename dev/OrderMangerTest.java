@@ -459,7 +459,7 @@ class OrderMangerTest {
 //        item3.setMinimum_quantity(3);
         Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
         masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
-        masupplier.add_item_discount_to_supplier("Supplier1 Inc.","Milk",10,0.8);
+        masupplier.add_item_discount_to_supplier("Supplier1 Inc.","Apple",10,0.8);
         masupplier.update_suppliers();
 
 

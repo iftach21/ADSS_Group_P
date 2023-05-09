@@ -7,75 +7,76 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TransferItemsDAO {
     private Connection conn = Database.Connection.getConnectionToDatabase();
-    private List<Site> SiteList;
-    private static SiteDAO instance = null;
+    private Map<Integer, Map<Site, Map<Item_mock, Integer>>> orderItemsList;  //the key in the first map is transferId
+    private static TransferItemsDAO instance = null;
 
-    private SiteDAO() throws SQLException
+    private TransferItemsDAO() throws SQLException
     {
-        SiteList = new ArrayList<>();
+        orderItemsList = new HashMap<>();
     }
 
-    public static SiteDAO getInstance() throws SQLException {
+    public static TransferItemsDAO getInstance() throws SQLException {
         if(instance==null){
-            instance =  new SiteDAO();
+            instance =  new TransferItemsDAO();
         }
         return instance;
     }
 
-    public Site get(int id){
-        Site siteToReturn = this.getFromCache(id);
-        if(siteToReturn != null){return siteToReturn;}
+
+    public Map<Site, Map<Item_mock, Integer>> get(int transferId){
+        Map<Site, Map<Item_mock, Integer>> orderItemsToReturn = this.getFromCache(transferId);
+        if(orderItemsToReturn != null){return orderItemsToReturn;}
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM Site WHERE siteId = ?";
+            String sql = "SELECT * FROM TransferItems WHERE transferId = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setInt(1, transferId);
             rs = stmt.executeQuery();
-            if (rs.next()) {
-                siteToReturn = this.gettingNewSite(rs,id);
-                this.SiteList.add(siteToReturn);
-            } else {
-                System.out.println("No site found with ID " + id);
+            while (rs.next()) {
+                int siteId = rs.getInt("siteId");
+                Site site = SiteDAO.getInstance().get(siteId);
+                orderItemsToReturn.put(site, getItemsBySiteId(transferId, siteId));
+                this.orderItemsList.put(transferId, orderItemsToReturn);
+            }
+            if (orderItemsToReturn.size() == 0){
+                System.out.println("No transfer found with ID " + transferId);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
 
-        return siteToReturn;
-
-
-
+        return orderItemsToReturn;
     }
-    public void update(Site site) {
+
+
+    public void update(int transferId, int siteId, String catalogNum, int quantity) {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Site SET siteId=?, siteName=?, address=?, phoneNumber=?, contactName=?, x_Coordinate=?, y_Coordinate=? WHERE siteId=?";
+            String sql = "UPDATE TransferItems SET transferId=?, catalogNum=?, siteId=?, quantity=? WHERE transferId=? AND catalogNum=? AND siteId=?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, site.getSiteId());
-            stmt.setString(2, site.getSiteName());
-            stmt.setString(3, site.getSiteAddress());
-            stmt.setString(4, site.get_phoneNumber());
-            stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getY_coordinate());
-            stmt.setInt(8, site.getSiteId());
-
+            stmt.setInt(1, transferId);
+            stmt.setString(2, catalogNum);
+            stmt.setInt(3, siteId);
+            stmt.setInt(4, quantity);
+            stmt.setInt(5, transferId);
+            stmt.setString(6, catalogNum);
+            stmt.setInt(7, siteId);
 
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No worker found with ID " + site.getSiteId() + " to update.");
+                System.out.println("No transfer found with ID " + transferId + " to update.");
             } else {
-                System.out.println("Worker with ID " + site.getSiteId() + " updated successfully.");
+                System.out.println("transfer with ID " + transferId + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -83,19 +84,17 @@ public class TransferItemsDAO {
     }
 
 
-    public void add(Site site){
+    public void add(int transferId, int siteId, String catalogNum, int quantity){
         try {
-            String sql = "INSERT INTO Site (siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO TransferItems (transferId, catalogNum, siteId, quantity) " +
+                    "VALUES (?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, site.getSiteId());
-            stmt.setString(2, site.getSiteName());
-            stmt.setString(3, site.getSiteAddress());
-            stmt.setString(4, site.get_phoneNumber());
-            stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getX_coordinate());
+            stmt.setInt(1, transferId);
+            stmt.setString(2, catalogNum);
+            stmt.setInt(3, siteId);
+            stmt.setInt(4, quantity);
+
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -103,59 +102,72 @@ public class TransferItemsDAO {
         }
     }
 
-    public void delete(int id) {
+    public void delete(int transferId, String catalogNum, int siteId, int quantity) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteId = ?");
-            stmt.setInt(1, id);
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE transferId=? AND catalogNum=? AND siteId=? AND quantity=?");
+            stmt.setInt(1, transferId);
+            stmt.setString(1, catalogNum);
+            stmt.setInt(1, siteId);
+            stmt.setInt(1, quantity);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No site found with ID " + id);
+                System.out.println("No transfer items found with ID " + transferId);
             } else {
-                System.out.println("Site with ID " + id + " deleted successfully");
-                deleteFromCache(id);
+                System.out.println("transfer items with ID " + transferId + " deleted successfully");
+                deleteFromCache(transferId, catalogNum, siteId, quantity);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    private Site getFromCache(int id){
-        for (Site site : this.SiteList) {
-            if (id == site.getSiteId()) {
-                return site;
+    private Map<Site, Map<Item_mock, Integer>> getFromCache(int transferId){
+        for (Integer Id : this.orderItemsList.keySet()) {
+            if (Id == transferId) {
+                return orderItemsList.get(Id);
             }
         }
         return null;
     }
 
-    private Site gettingNewSite(ResultSet rs, int id) throws SQLException {
-        int siteId = rs.getInt("siteId");
-        String siteName = rs.getString("siteName");
-        String address = rs.getString("address");
-        String phoneNumber = rs.getString("phoneNumber");
-        String contactName = rs.getString("contactName");
-        double x_Coordinate = rs.getDouble("x_Coordinate");
-        double y_Coordinate = rs.getDouble("x_Coordinate");
-
-        Site siteToReturn = new Site(siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate);
-        return siteToReturn;
-    }
-
-    public void deleteFromCache(int id){
-        for (Site site : this.SiteList) {
-            if (site.getSiteId() == id) {
-                this.SiteList.remove(site.getSiteId());
+    public void deleteFromCache(int transferId, String catalogNum, int siteId, int quantity) throws SQLException {
+        for (Integer Id : this.orderItemsList.keySet()) {
+            if (Id == transferId) {
+                for (Site site: this.orderItemsList.get(Id).keySet()) {
+                    if (site.getSiteId() == siteId) {
+                        for (Item_mock item: this.orderItemsList.get(Id).get(site).keySet()) {
+                            if (catalogNum.equals(item.getCatalogNum()))
+                                this.orderItemsList.remove(transferId);
+                        }
+                    }
+                }
             }
         }
     }
 
-    public List<Site> getTransferDestinations(int transferId)
+    public Map<Item_mock, Integer> getItemsBySiteId(int transferId, int siteId)
     {
-        return null;
-    }
+        Map<Item_mock, Integer> itemsOfSite = new HashMap<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM TransferItems WHERE transferId = ? AND siteId = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, transferId);
+            stmt.setInt(2, siteId);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Item_mock item_mock = Item_mockDAO.getInstance().get(rs.getString("catalogNum"));
+                int quantity = rs.getInt("quantity");
+                itemsOfSite.put(item_mock, quantity);
+            }
+            if (itemsOfSite.size() == 0){
+                System.out.println("No items found for transfer with ID " + transferId + " and site with ID " + siteId);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
 
-    public Map<Site, Map<Item_mock, Integer>> getTransferItemsWithDestinations(int transferId)
-    {
-        return null;
+        return itemsOfSite;
     }
 }

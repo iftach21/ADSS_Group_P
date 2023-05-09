@@ -71,9 +71,9 @@ public class SiteDAO {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No worker found with ID " + site.getSiteId() + " to update.");
+                System.out.println("No site found with ID " + site.getSiteId() + " to update.");
             } else {
-                System.out.println("Worker with ID " + site.getSiteId() + " updated successfully.");
+                System.out.println("Site with ID " + site.getSiteId() + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

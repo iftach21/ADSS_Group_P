@@ -41,83 +41,45 @@ public class TransferDestinationsDAO {
             stmt.setInt(1, transferId);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                
-                siteToReturn = this.gettingNewSite(rs,id);
-                this.SiteList.add(siteToReturn);
+                Site siteToReturn = SiteDAO.getInstance().get(rs.getInt("siteId"));
+                destsToReturn.add(siteToReturn);
             }
+            destinationsList.put(transferId, destsToReturn);
             if (destsToReturn == null){
-                System.out.println("No site found with ID " + id);
+                System.out.println("No transfer found with ID " + transferId);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-
-        return siteToReturn;
-
-
-
+        return destsToReturn;
     }
 
-
-    public void update(int transferId, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems) {
-        PreparedStatement stmt = null;
-
+    public void add(int transferId, List<Site> destinations){
         try {
-            String sql = "UPDATE TransferItems SET transferId=?, catalogNum=?, siteId=?, quantity=? WHERE transferId=? AND ";
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, site.getSiteId());
-            stmt.setString(2, site.getSiteName());
-            stmt.setString(3, site.getSiteAddress());
-            stmt.setString(4, site.get_phoneNumber());
-            stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getY_coordinate());
-            stmt.setInt(8, site.getSiteId());
-
-
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected == 0) {
-                System.out.println("No worker found with ID " + site.getSiteId() + " to update.");
-            } else {
-                System.out.println("Worker with ID " + site.getSiteId() + " updated successfully.");
+            String sql = "INSERT INTO TransferDestinations (transferId, siteId) " +
+                    "VALUES (?, ?)";
+            for (Site dest: destinations) {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, transferId);
+                stmt.setInt(2, dest.getSiteId());
+                stmt.executeUpdate();
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
 
-
-    public void add(Site site){
+    public void delete(int transferId, int siteId) {
         try {
-            String sql = "INSERT INTO Site (siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, site.getSiteId());
-            stmt.setString(2, site.getSiteName());
-            stmt.setString(3, site.getSiteAddress());
-            stmt.setString(4, site.get_phoneNumber());
-            stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getX_coordinate());
-            stmt.executeUpdate();
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-    }
-
-    public void delete(int id) {
-        try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteId = ?");
-            stmt.setInt(1, id);
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferDestinations WHERE transferId = ? AND siteId = ?");
+            stmt.setInt(1, transferId);
+            stmt.setInt(1, siteId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No site found with ID " + id);
+                System.out.println("No transfer destination found with transfer Id " + transferId + "and site Id" + siteId);
             } else {
-                System.out.println("Site with ID " + id + " deleted successfully");
-                deleteFromCache(id);
+                System.out.println("transfer destination with transfer Id " + transferId + "and site Id" + siteId +" deleted successfully");
+                deleteFromCache(transferId, siteId);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -133,34 +95,16 @@ public class TransferDestinationsDAO {
         return null;
     }
 
-    private Site gettingNewSite(ResultSet rs, int id) throws SQLException {
-        int siteId = rs.getInt("siteId");
-        String siteName = rs.getString("siteName");
-        String address = rs.getString("address");
-        String phoneNumber = rs.getString("phoneNumber");
-        String contactName = rs.getString("contactName");
-        double x_Coordinate = rs.getDouble("x_Coordinate");
-        double y_Coordinate = rs.getDouble("x_Coordinate");
-
-        Site siteToReturn = new Site(siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate);
-        return siteToReturn;
-    }
-
-    public void deleteFromCache(int id){
-        for (Site site : this.SiteList) {
-            if (site.getSiteId() == id) {
-                this.SiteList.remove(site.getSiteId());
+    public void deleteFromCache(int transferId, int siteId){
+        for (Site site : this.destinationsList.get(transferId)) {
+            if (site.getSiteId() == siteId) {
+                this.destinationsList.get(transferId).remove(site.getSiteId());
             }
         }
     }
 
     public List<Site> getTransferDestinations(int transferId)
     {
-        return destinationsList;
-    }
-
-    public Map<Site, Map<Item_mock, Integer>> getTransferItemsWithDestinations(int transferId)
-    {
-        return orderItemsList;
+        return this.destinationsList.get(transferId);
     }
 }

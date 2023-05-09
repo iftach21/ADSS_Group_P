@@ -60,4 +60,19 @@ public class ShiftWorkerDAO {
         }
         return workersList;
     }
+    private void update(){
+
+    }
+    private void delete(int id){
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM shift_worker_in_shift WHERE id = ?");
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+
 }

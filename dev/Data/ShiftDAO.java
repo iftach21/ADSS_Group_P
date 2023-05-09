@@ -12,6 +12,9 @@ import java.sql.*;
 public class ShiftDAO {
     private Connection conn = Database.Connection.getConnectionToDatabase();
     private static ShiftDAO instance = null;
+
+    private ShiftWorkerDAO shiftWorkerDAO=ShiftWorkerDAO.getInstance();
+
     private ArrayList<Shift> ShiftList; //holds all the weeklyshifts
 
     private ShiftDAO() throws SQLException {ShiftList = new ArrayList<>();
@@ -25,8 +28,8 @@ public class ShiftDAO {
 
 
     public int add(Shift s){
-        //todo: add to support in req
         int primaryKey = -1;
+        int count=0;
 
         try {
             // create SQL query string with placeholders for parameter values
@@ -45,6 +48,17 @@ public class ShiftDAO {
             stmt.setInt(9, s.getShiftRequirement().getreqbyprof(4));
             stmt.setInt(10, s.getShiftRequirement().getreqbyprof(5));
             stmt.setInt(11, s.getShiftRequirement().getreqbyprof(6));
+            for (ArrayList<Workers> workers: s.getWorkerInShift()){
+                for(Workers worker: workers){
+                    shiftWorkerDAO.add(worker,s,count);
+                }
+                count++;
+            }
+            for (Workers worker: s.getDrivers()) {
+                shiftWorkerDAO.add(worker, s, 7);
+            }
+
+
 
             // execute query to insert new record
             stmt.executeUpdate();
@@ -71,7 +85,6 @@ public class ShiftDAO {
     }
 
     public Shift get(int shiftId) throws SQLException {
-        //todo: add to support in req
 
         for(Shift shift: ShiftList){
             if (shift.getShiftID()==shiftId){
@@ -149,6 +162,8 @@ public class ShiftDAO {
 
         try {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Shift WHERE shift_id = ?");
+            stmt.setInt(1, id);
+            stmt = conn.prepareStatement("DELETE FROM shift_worker_in_shift WHERE shift_id = ?");
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {

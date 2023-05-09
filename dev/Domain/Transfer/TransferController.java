@@ -14,6 +14,7 @@ import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.TempLevel;
+import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;
 
 
@@ -187,47 +188,6 @@ public class TransferController {
     public void createNewTransfer(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the next details for the new transfer: ");
-        LocalDate leavingDate;
-        LocalTime leavingTime;
-        while(true)
-        {
-            //choose date
-            leavingDate = chooseDateForTransfer();
-
-            //choose time
-            leavingTime = chooseTimeForTransfer();
-            if (!checkIfDateIsLegal(leavingDate, leavingTime))
-            {
-                System.out.println("Sorry transfer manager' but the date you entered is in the past. please enter a date in the future.");
-            }
-            else if (!checkIfStoreKeeperIsThere(leavingDate, leavingTime))
-            {
-
-            }
-        }
-
-        //get lowest temp item
-        TempLevel currMinTemp = lowestTempItem(orderItems);
-
-        //choose driver for transfer
-        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp, orderItems);
-        if (chosenDriver == null)
-        {
-            System.out.println("Unfortunately, there is no available driver to this transfer.");
-            _ordersQueue.add(orderItems);
-            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
-            return;
-        }
-
-        //choose truck by the chosen driver
-        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate);
-        if (chosenTruck == null)
-        {
-            System.out.println("Unfortunately, there is no available truck to this transfer.");
-            _ordersQueue.add(orderItems);
-            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
-            return;
-        }
 
         System.out.println("Please choose source site from the next options (enter number): ");
         Site[] sites = orderItems.keySet().toArray(new Site[0]);
@@ -264,10 +224,61 @@ public class TransferController {
 
         destinationSites.add(sc.getSiteById(orderDestinationSiteId));
 
-        //calculate arriving date and time
-        LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
-        LocalDate arrivingDate = arrivingDateTime.toLocalDate();
-        LocalTime arrivingTime = arrivingDateTime.toLocalTime();
+        LocalDate arrivingDate;
+        LocalTime arrivingTime;
+
+        LocalDate leavingDate;
+        LocalTime leavingTime;
+
+        while(true)
+        {
+            //choose date
+            leavingDate = chooseDateForTransfer();
+
+            //choose time
+            leavingTime = chooseTimeForTransfer();
+
+            //calculate arriving date and time
+            LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
+            arrivingDate = arrivingDateTime.toLocalDate();
+            arrivingTime = arrivingDateTime.toLocalTime();
+
+            if (!checkIfDateIsLegal(leavingDate, leavingTime))
+            {
+                System.out.println("Sorry transfer manager, but the date you entered is in the past. Please enter a date in the future.");
+            }
+            else if (!checkIfStoreKeeperIsThere(arrivingDate, arrivingTime, orderDestinationSiteId))
+            {
+                System.out.println("Sorry transfer manager, there is no stoke in the last destination. Please enter another date.");
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        //get lowest temp item
+        TempLevel currMinTemp = lowestTempItem(orderItems);
+
+        //choose driver for transfer
+        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp, orderItems);
+        if (chosenDriver == null)
+        {
+            System.out.println("Unfortunately, there is no available driver to this transfer.");
+            _ordersQueue.add(orderItems);
+            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            return;
+        }
+
+        //choose truck by the chosen driver
+        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate);
+        if (chosenTruck == null)
+        {
+            System.out.println("Unfortunately, there is no available truck to this transfer.");
+            _ordersQueue.add(orderItems);
+            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            return;
+        }
 
         Map<Site, Integer> weights = new HashMap<>();
         for(int i=0; i < sites.length; i++)
@@ -1134,24 +1145,27 @@ public class TransferController {
         }
     }
 
-    public boolean checkIfStoreKeeperIsThere(LocalDate leavingDate, LocalTime leavingTime)
-    {
+    public boolean checkIfStoreKeeperIsThere(LocalDate arrivingDate, LocalTime arrivingTime, int orderDestinationSiteId) throws SQLException {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int weekNumber = leavingDate.get(weekFields.weekOfWeekBasedYear());
+        int weekNumber = arrivingDate.get(weekFields.weekOfWeekBasedYear());
 
         //get the day number in the week
-        DayOfWeek dayOfWeek = leavingDate.getDayOfWeek();
+        DayOfWeek dayOfWeek = arrivingDate.getDayOfWeek();
         int dayOfWeekNum = dayOfWeek.getValue();
 
-        WindowTypeCreater wt = new WindowTypeCreater();
+        WindowTypeCreater wtc = new WindowTypeCreater();
 
         //check whether the transfer leaves in dayshift or nightshift
         String shift;
-        if (leavingTime.isAfter(LocalTime.NOON))
+        if (arrivingTime.isAfter(LocalTime.NOON))
             shift = "day";
         else
             shift = "night";
 
+        WindowType wt = wtc.getwidowtype(dayOfWeekNum, shift);
 
+        List<WindowType> stokeWindowTypes = weeklyShiftManager.doIHaveStokeForTheShipment(weekNumber, arrivingDate.getYear(), orderDestinationSiteId, wt);
+
+        return stokeWindowTypes.contains(wt);
     }
 }

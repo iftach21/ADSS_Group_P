@@ -119,7 +119,7 @@ public class OrderMapper
         catch (SQLException e){}
 
     }
-    public Supplier findSupplier(String supplierId)
+    private Supplier findSupplier(String supplierId)
     {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");

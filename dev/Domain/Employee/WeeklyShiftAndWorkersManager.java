@@ -142,7 +142,6 @@ public class WeeklyShiftAndWorkersManager {
         }
     }
 
-    //todo: mabe add here a function to the database:###################################################
     public void printAllWorkersWhoCanWork(int prof,int daynum, String don){
         WindowTypeCreater wc = new WindowTypeCreater();
         List <Workers> allworkerslist = this.workersDAO.getAllworkerslist();

@@ -196,7 +196,6 @@ public class Shift {
     public void setId(int id) {
         this.id = id;
     }
-
     public List<Workers> getDiffWorkers(Shift shiftToCompare){
         List<Workers> ans = new ArrayList<>();
 

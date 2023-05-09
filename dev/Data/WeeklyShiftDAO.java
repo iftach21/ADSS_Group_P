@@ -43,6 +43,10 @@ public class WeeklyShiftDAO {
         return weeklyShift;
     }
 
+    /**
+     * this will update the weeklyshift in the database.
+     */
+
     public void update(WeeklyShift weeklyShift) {
         try {
             // Update the day and night shifts in the WeeklyShift object

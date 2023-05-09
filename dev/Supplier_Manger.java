@@ -219,7 +219,9 @@ public class Supplier_Manger {
                 return suppleir;
 
             }
-        }}
+        }
+        return null;
+    }
     public void update_suppliers() {
         this.suppliers=new ArrayList<Supplier>();
         this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());

@@ -3,7 +3,6 @@ package Data;
 import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 import Domain.Transfer.Transfer;
-import Domain.Transfer.Truck;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -245,8 +244,8 @@ public class TransferDAO {
         LocalTime leavingTime = LocalTime.parse(leavingTimeString, formatterTime);
         LocalTime arrivingTime = LocalTime.parse(arrivingTimeString, formatterTime);
 
-        List<Site> transferDestination = TransferItemsDAO.getInstance().getTransferDestinations(transferId);
-        Map<Site, Map<Item_mock, Integer>> transferOrderItems = TransferItemsDAO.getInstance().getTransferItemsWithDestinations(transferId);
+        List<Site> transferDestination = TransferDestinationsDAO.getInstance().get(transferId);
+        Map<Site, Map<Item_mock, Integer>> transferOrderItems = TransferItemsDAO.getInstance().get(transferId);
 
         Transfer transfer = new Transfer(dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, site, transferDestination, transferOrderItems, transferId);
 

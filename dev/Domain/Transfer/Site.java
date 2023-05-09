@@ -53,5 +53,11 @@ public class Site {
         return Math.sqrt(Math.pow(this.x_coordinate-site.x_coordinate, 2) + Math.pow(this.y_coordinate=site.y_coordinate, 2));
     }
 
+    public double getX_coordinate() {
+        return x_coordinate;
+    }
 
+    public double getY_coordinate() {
+        return y_coordinate;
+    }
 }

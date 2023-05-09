@@ -1,5 +1,6 @@
 package Data;
 
+import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 
 import java.sql.Connection;
@@ -8,8 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class SiteDAO {
+public class TransferItemsDAO {
     private Connection conn = Database.Connection.getConnectionToDatabase();
     private List<Site> SiteList;
     private static SiteDAO instance = null;
@@ -127,6 +129,7 @@ public class SiteDAO {
     }
 
     private Site gettingNewSite(ResultSet rs, int id) throws SQLException {
+        int siteId = rs.getInt("siteId");
         String siteName = rs.getString("siteName");
         String address = rs.getString("address");
         String phoneNumber = rs.getString("phoneNumber");
@@ -134,7 +137,7 @@ public class SiteDAO {
         double x_Coordinate = rs.getDouble("x_Coordinate");
         double y_Coordinate = rs.getDouble("x_Coordinate");
 
-        Site siteToReturn = new Site(id, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate);
+        Site siteToReturn = new Site(siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate);
         return siteToReturn;
     }
 
@@ -144,5 +147,15 @@ public class SiteDAO {
                 this.SiteList.remove(site.getSiteId());
             }
         }
+    }
+
+    public List<Site> getTransferDestinations(int transferId)
+    {
+        return null;
+    }
+
+    public Map<Site, Map<Item_mock, Integer>> getTransferItemsWithDestinations(int transferId)
+    {
+        return null;
     }
 }

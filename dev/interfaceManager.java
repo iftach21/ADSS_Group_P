@@ -561,7 +561,6 @@ public class interfaceManager {
                                     Inventory.SpecificPercentageDiscount(discountAmountSpecific, CatalogNumber);
                                 break;
 
-
                             case "0":
                                 System.out.println("Going back to the Main Menu");
                                 flag = false;

@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,8 +129,8 @@ public class TrucksDAO {
             stmt.setInt(3, truck.getCurrentTruckWeight());
             stmt.setInt(4, truck.getMaxWeight());
             stmt.setString(5, truck.getTempCapacity().name());
-            stmt.setString(6, truck.getUnavailableStartDate().toString());
-            stmt.setString(7, truck.getUnavailableStartDate().toString());
+            stmt.setString(6, truck.getUnavailableStartTime().toString());
+            stmt.setString(7, truck.getUnavailableEndTime().toString());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -167,8 +168,8 @@ public class TrucksDAO {
             stmt.setInt(4, truck.getCurrentTruckWeight());
             stmt.setInt(5, truck.getMaxWeight());
             stmt.setString(6, truck.getTempCapacity().name());
-            stmt.setString(7, truck.getUnavailableStartDate().toString());
-            stmt.setString(8, truck.getUnavailableStartDate().toString());
+            stmt.setString(7, truck.getUnavailableStartTime().toString());
+            stmt.setString(8, truck.getUnavailableEndTime().toString());
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -232,13 +233,19 @@ public class TrucksDAO {
         int maxWeight = rs.getInt("maxWeight");
         TempLevel coolingCapacity = TempTypeFactory.TempLevelFromString(rs.getString("coolingCapacity"));
         String unavailableStartDateString = rs.getString("unavailableStartDate");
+        String unavailableStartTimeString = rs.getString("unavailableStartTime");
         String unavailableEndDateString = rs.getString("unavailableEndDate");
+        String unavailableEndTimeString = rs.getString("unavailableEndTime");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate unavailableStartDate = LocalDate.parse(unavailableStartDateString, formatter);
-        LocalDate unavailableEndDate = LocalDate.parse(unavailableEndDateString, formatter);
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate unavailableStartDate = LocalDate.parse(unavailableStartDateString, formatterDate);
+        LocalDate unavailableEndDate = LocalDate.parse(unavailableEndDateString, formatterDate);
 
-        Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableEndDate);
+        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime unavailableStartTime = LocalTime.parse(unavailableStartTimeString, formatterTime);
+        LocalTime unavailableEndTime = LocalTime.parse(unavailableEndTimeString, formatterTime);
+
+        Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime);
 
         return truck;
     }

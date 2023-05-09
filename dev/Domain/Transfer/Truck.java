@@ -87,4 +87,19 @@ public class Truck {
         _unavailableStartDate = startDate;
         _unavailableEndDate = endDate;
     }
+
+    public int getTruckNetWeight()
+    {
+        return _truckNetoWeight;
+    }
+
+    public LocalDate getUnavailableStartDate()
+    {
+        return _unavailableStartDate;
+    }
+
+    public LocalDate get_unavailableEndDate()
+    {
+        return _unavailableEndDate;
+    }
 }

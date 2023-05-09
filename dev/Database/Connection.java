@@ -9,8 +9,12 @@ public class Connection {
 
     public static java.sql.Connection getConnectionToDatabase() throws SQLException {
         if(conn == null){
-            //todo:mabe i need to get it somehow else???
-            conn = DriverManager.getConnection("C:\\Users\\97254\\Documents\\GitHub\\ADSS_Group_P\\ADSS_Group_P\\dev\\Database\\Transfer_Employee");
+
+            String currentPath  = System.getProperty("user.dir");
+            String dbName = "Transfer_Employee";
+            String dbPath = currentPath + "\\" + dbName;
+
+            conn = DriverManager.getConnection(dbPath);
         }
         return conn;
     }

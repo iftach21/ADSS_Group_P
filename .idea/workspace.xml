@@ -9,11 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="working ContractMapper">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="started working on OrderManger">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/SupplierInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/SupplierInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Supplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +101,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderMangerTest.test_add_item_list_one_supplier">
+  <component name="RunManager" selected="JUnit.OrderMangerTest.test_only_supplier_exist">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_P" />
@@ -121,16 +124,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderMangerTest.manipule_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="manipule_supplier" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderMangerTest.test_add_item_list_one_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -141,13 +134,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OrderMangerTest.test_only_supplier_exist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
+      <option name="METHOD_NAME" value="test_only_supplier_exist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
         <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_one_supplier" />
         <item itemvalue="Database Script.console.sql" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest" />
-        <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
       </list>
     </recent_temporary>
   </component>
@@ -163,13 +166,6 @@
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
       <workItem from="1683628162392" duration="9614000" />
-    </task>
-    <task id="LOCAL-00010" summary="df">
-      <created>1680024147235</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1680024147235</updated>
     </task>
     <task id="LOCAL-00011" summary="df">
       <created>1680025465222</created>
@@ -507,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683647419289</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="started working on OrderManger">
+      <created>1683649911946</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1683649911946</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +537,8 @@
     <MESSAGE value="database" />
     <MESSAGE value="dfg" />
     <MESSAGE value="working ContractMapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="working ContractMapper" />
+    <MESSAGE value="started working on OrderManger" />
+    <option name="LAST_COMMIT_MESSAGE" value="started working on OrderManger" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -558,9 +562,9 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

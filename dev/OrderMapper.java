@@ -13,7 +13,7 @@ public class OrderMapper
         this.conn = conn;
         this.cache = new HashMap<>();
     }
-    public Order findByContractId(String orderNum)
+    public Order findByOrderNum(String orderNum)
     {
         if(cache.containsKey(orderNum))
         {

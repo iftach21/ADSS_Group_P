@@ -7,5 +7,8 @@ public class NonDeliveringSupplier extends Supplier{
                                  Map<Item,Pair<Integer, Float>> items) {
         super(name, business_id, PaymentCreator.getpayment(payment_method), suplier_ID, person, contract,items);
     }
+    public int getType(){
+        return 2;
+    }
 
 }

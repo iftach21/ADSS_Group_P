@@ -44,10 +44,13 @@ public class subCategory {
     public String toString() {
         String subCategoryString = "------ Sub-Category name: " + subCategoryName +
                 ", Amount of general items: " + amount + " ------";
+        /*
         for (int i = 0; i < this.generalItemsList.size(); i++){
             subCategoryString += '\n';
             subCategoryString += this.generalItemsList.get(i).toString();
         }
+
+         */
         return subCategoryString;
     }
 

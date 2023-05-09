@@ -20,6 +20,10 @@ public class NonFixedDaySupplier extends DeliveringSupplier{
     public void setNumOfDayToDeliver(int numOfDayToDeliver) {
         this.numOfDayToDeliver = numOfDayToDeliver;
     }
+    @Override
+    public int getType(){
+        return 1;
+    }
 }
 
 

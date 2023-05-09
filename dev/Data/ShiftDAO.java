@@ -141,6 +141,17 @@ public class ShiftDAO {
             stmt.setInt(10, shift.getShiftRequirement().getreqbyprof(5));
             stmt.setInt(11, shift.getShiftRequirement().getreqbyprof(6));
             stmt.setInt(12,shift.getId());
+//            return the list of new worker
+            List<Workers> l1= shift.getDiffWorkers(returnFromCache(shift.getId()));
+//            return the list of new worker
+            List<Workers> l2= returnFromCache(shift.getId()).getDiffWorkers(shift);
+            for(Workers worker:l1){
+                shiftWorkerDAO.add(worker,shift,
+            }
+            for(Workers worker:l1){
+                shiftWorkerDAO.delete(worker.getId(),shift.getShiftID());
+            }
+
             // execute query to insert new record
             stmt.executeUpdate();
 
@@ -183,4 +194,15 @@ public class ShiftDAO {
             }
         }
     }
+    public Shift returnFromCache(int id){
+        for (Shift shift : this.ShiftList) {
+            if (shift.getId() == id) {
+                    return shift;
+            }
+        }
+        return null;
+    }
+
+
+
 }

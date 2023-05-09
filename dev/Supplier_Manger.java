@@ -223,6 +223,16 @@ public class Supplier_Manger {
                     }
                 }
     }
+
+    public Supplier get_supplier_by_id(String id){
+        for(Supplier suppleir :this.suppliers) {
+            if (suppleir.getSupplierID().equals(id)) {
+                return suppleir;
+
+            }
+        }
+        return null;
+    }
     public void update_suppliers() {
         this.suppliers=new ArrayList<Supplier>();
         this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());

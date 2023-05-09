@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class SupplierInterface extends AInterface  {
     private Supplier_Manger supplier_manger;
+    private OrderManger orderManger;
 
-    public SupplierInterface(Supplier_Manger supplier_manger){
-         this.supplier_manger=supplier_manger;
+    public SupplierInterface(){
+         this.supplier_manger= new Supplier_Manger();
     }
 
     public void interfaceStartup() {
@@ -23,7 +24,8 @@ public class SupplierInterface extends AInterface  {
                 System.out.println("5.remove item from Supplier");
                 System.out.println("6.Update item on Contract");
                 System.out.println("7.print all suppliers");
-                System.out.println("8.get back to previous menu");
+                System.out.println("8.print supplier  by id's");
+                System.out.println("9.get back to previous menu");
                 option = scanner.nextLine();
                 choice = Integer.parseInt(option);
 
@@ -31,7 +33,7 @@ public class SupplierInterface extends AInterface  {
                     try {
                         option = scanner.nextLine();
                         option_1 = Integer.parseInt(option);
-                        if (option_1 < 1 || option_1 > 8) {
+                        if (option_1 < 1 || option_1 > 9) {
                             System.out.println("Please enter a valid option");
                             continue;
                         }
@@ -269,6 +271,12 @@ public class SupplierInterface extends AInterface  {
                         supplier_manger.print_all_suppliers_names();
                         break;
                     case 8:
+                        System.out.println("supplier id:");
+                        String id_sup1 = scanner.next();
+                        int amount_7 = Integer.parseInt(id_sup1);
+                        supplier_manger.get_supplier_by_id(id_sup1).print();
+
+                    case 9:
                         System.out.println("Redirecting back to main menu");
                         break;
 

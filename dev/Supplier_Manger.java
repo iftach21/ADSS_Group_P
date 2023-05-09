@@ -222,6 +222,20 @@ public class Supplier_Manger {
         }
         return null;
     }
+
+
+    public Set<Item> get_itemlist_ofallsuppliers(){
+        Set<Item> items= new
+        for (Supplier sup :suppliers){
+            for(Item item: sup.getItems().keySet()){
+
+
+            }
+        }
+    }
+
+
+
     public void update_suppliers() {
         this.suppliers=new ArrayList<Supplier>();
         this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());

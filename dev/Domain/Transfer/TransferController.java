@@ -12,6 +12,7 @@ import java.util.*;
 import Data.TransferDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
+import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowTypeCreater;
 
@@ -25,6 +26,7 @@ public class TransferController {
     private Queue<Map<Site, Map<Item_mock, Integer>>> _ordersQueue; //should be taken from suppliers DB (in the future)
     private Queue<Integer> _orderDestinationSiteIdQueue; //should be taken from suppliers DB (in the future)
     private final TransferDAO transfersDAO;
+    private WeeklyShiftAndWorkersManager weeklyShiftManager = WeeklyShiftAndWorkersManager.getInstance();
 
     public TransferController(TruckController tc, DriverController dc, SiteController sc) throws SQLException {
         //_transfers = new HashMap<>();
@@ -194,13 +196,13 @@ public class TransferController {
 
             //choose time
             leavingTime = chooseTimeForTransfer();
-            if (checkIfDateIsLegal(leavingDate, leavingTime))
-            {
-                break;
-            }
-            else
+            if (!checkIfDateIsLegal(leavingDate, leavingTime))
             {
                 System.out.println("Sorry transfer manager' but the date you entered is in the past. please enter a date in the future.");
+            }
+            else if (!checkIfStoreKeeperIsThere(leavingDate, leavingTime))
+            {
+
             }
         }
 
@@ -1130,5 +1132,26 @@ public class TransferController {
             System.out.println("That's it! Those are all the next planned transfers! \n" +
                     "If you would like to get some more details for any transfer, you can easily download the transfer's document :)");
         }
+    }
+
+    public boolean checkIfStoreKeeperIsThere(LocalDate leavingDate, LocalTime leavingTime)
+    {
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        int weekNumber = leavingDate.get(weekFields.weekOfWeekBasedYear());
+
+        //get the day number in the week
+        DayOfWeek dayOfWeek = leavingDate.getDayOfWeek();
+        int dayOfWeekNum = dayOfWeek.getValue();
+
+        WindowTypeCreater wt = new WindowTypeCreater();
+
+        //check whether the transfer leaves in dayshift or nightshift
+        String shift;
+        if (leavingTime.isAfter(LocalTime.NOON))
+            shift = "day";
+        else
+            shift = "night";
+
+
     }
 }

@@ -74,7 +74,7 @@ public class OrderMapper
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
             stmt.setString(2, supplier.getSupplierID());
-            String itemsJson = new Gson().toJson(order.getItemList()).toString();
+            String itemsJson = new JSONObject(order.getItemList()).toString();
             stmt.setString(3, itemsJson);
             stmt.setFloat(4, order.getCost());
             stmt.setInt(5, order.getStore_number());
@@ -101,6 +101,7 @@ public class OrderMapper
             stmt.setFloat(3, order.getCost());
             stmt.setInt(4, order.getStore_number());
             stmt.setInt(5, order.getOrderNum());
+            stmt.executeUpdate();
             cache.remove(order.getOrderNum());
             cache.put(order.getOrderNum(), order);// TODO check if there is no duplication after update in the cache
         }

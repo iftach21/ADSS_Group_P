@@ -9,9 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="working ContractMapper">
-      <change afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="added periodic order mapper">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ContractMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ContractMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Period_Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Period_Order.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/classpath.index" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,21 +168,7 @@
       <workItem from="1682607405112" duration="31000" />
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
-      <workItem from="1683628162392" duration="10719000" />
-    </task>
-    <task id="LOCAL-00008" summary="df">
-      <created>1680022930139</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1680022930139</updated>
-    </task>
-    <task id="LOCAL-00009" summary="df">
-      <created>1680023897815</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1680023897815</updated>
+      <workItem from="1683628162392" duration="13418000" />
     </task>
     <task id="LOCAL-00010" summary="df">
       <created>1680024147235</created>
@@ -503,7 +499,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683641182404</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="added periodic order mapper">
+      <created>1683642211063</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1683642211063</updated>
+    </task>
+    <task id="LOCAL-00058" summary="added periodic order mapper">
+      <created>1683642777049</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1683642777049</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,16 +540,12 @@
     <MESSAGE value="database" />
     <MESSAGE value="dfg" />
     <MESSAGE value="working ContractMapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="working ContractMapper" />
+    <MESSAGE value="added periodic order mapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="added periodic order mapper" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/ParserForContractItemIntegerDouble.java</url>
           <line>68</line>
@@ -549,6 +555,11 @@
           <url>file://$PROJECT_DIR$/dev/Parser.java</url>
           <line>19</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

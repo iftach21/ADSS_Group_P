@@ -153,10 +153,6 @@ public class OrderManger {
                    }
                }
 
-
-
-
-
             }}
         if(no_match==0){
             return false;
@@ -250,8 +246,8 @@ public class OrderManger {
 
             }
         }
-        Period_Order periodOrders =new Period_Order(order,numberofdayscycle);
-        this.periodOrders.add(periodOrders);
+//        Period_Order periodOrders =new Period_Order(order,numberofdayscycle);
+//        this.periodOrders.add(periodOrders);
         return true;
     }
 

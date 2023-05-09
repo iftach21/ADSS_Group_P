@@ -41,38 +41,13 @@ class OrderMangerTest {
         maplist.put(item2,100);
         maplist.put(item3,100);
         maplist.put(item4,100);
-        try
-        {
-            mapper.insert(item1);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
-        try
-        {
-            mapper.insert(item2);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
-        try
-        {
-            mapper.insert(item3);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
-        try
-        {
-            mapper.insert(item4);
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Exception caught: " + e.getMessage());
-        }
+
+        mapper.insert(item1);
+        mapper.insert(item2);
+        mapper.insert(item3);
+
+        mapper.insert(item4);
+
         Connection conn1 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         Supplier_Manger masupplier = new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
@@ -105,11 +80,24 @@ class OrderMangerTest {
         Contract supplierIdContractTest1 = contractMapperTest.findByContractId(2);
         List<Contract> allContractsTest = contractMapperTest.findAll();
         System.out.println("---------------------");
+        OrderMapper orderMapperTest = new OrderMapper(conn2);
+        Order orderTest = new Order();
+        orderTest.setSupplier(supplier1);
+
+        orderTest.add_item(item1,420,69);
+        orderTest.add_item(item2,300,20);
+        orderTest.add_item(item3,45,6);
+        orderMapperTest.insert(orderTest);
+        orderTest.add_item(item4,4,850);
+        orderMapperTest.update(orderTest);
+
+
 //        try{
 //        mapper1.insert(supplier);}
 //        catch(SQLException ignored){}
 //        masupplier.getSuppliers().add(supplier);
 //        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
+//
 //        supplier.print_items();
 //        ordermanger.getPending_for_apporval().get(0).print_items();
 //        Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());

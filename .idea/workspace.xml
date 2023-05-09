@@ -10,14 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="working ContractMapper">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/AInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/AInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/SupplierInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/SupplierInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,20 +161,6 @@
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
       <workItem from="1683628162392" duration="9614000" />
-    </task>
-    <task id="LOCAL-00013" summary="df">
-      <created>1680086519200</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1680086519200</updated>
-    </task>
-    <task id="LOCAL-00014" summary="df">
-      <created>1680089286258</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1680089286258</updated>
     </task>
     <task id="LOCAL-00015" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680090072414</created>
@@ -512,7 +491,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683649980754</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="working ContractMapper">
+      <created>1683653026896</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1683653026897</updated>
+    </task>
+    <task id="LOCAL-00063" summary="working ContractMapper">
+      <created>1683653044115</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1683653044115</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

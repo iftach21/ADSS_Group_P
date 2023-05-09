@@ -322,6 +322,15 @@ public class OrderManger {
            return false;
 
     }
+    public boolean update_remove_from_order(String id,Item item) {
+        Period_Order periodOrder = periodicOrderMapper.findByContractId(id);
+        if (periodOrder.can_update()) {
+            periodOrder.remove_item(item);
+            periodicOrderMapper.update(periodOrder);
+            return true;
+        }
+        return false;
+    }
 }
 
 

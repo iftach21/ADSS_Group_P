@@ -181,7 +181,7 @@ public class Item {
                 ", weight=" + weight +
                 ", catalogName='" + catalogName + '\'' +
                 ", temperature=" + temperature +
-                ", priceHistory=" + priceHistory +
+                //", priceHistory=" + priceHistory +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", minimum_quantity=" + minimum_quantity +
                 '}';
@@ -250,5 +250,9 @@ public class Item {
 
     public Object getCategoryName() {
         return catalogName;
+    }
+
+    public void setMinQuantity(int minimum_quantity){
+        this.minimum_quantity = minimum_quantity;
     }
 }

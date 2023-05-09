@@ -52,6 +52,7 @@ public class Category {
     public String toString() {
         String categoryString = "\n---------- Category name: " + categoryName + ", Amount of sub-categories: "
                 + amount + " ----------";
+
         for (int i = 0; i < this.subCategoriesList.size(); i++){
             categoryString += '\n';
             categoryString += this.subCategoriesList.get(i).toString();

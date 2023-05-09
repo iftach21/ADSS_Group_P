@@ -42,18 +42,25 @@ public class interfaceManager {
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
-        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, "Dairy");
+        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Dairy", TempLevel.cold, "man2");
+        milk3Percent.setMinQuantity(6);
         milk3Percent.addNewPrice(10, 20);
         milk3Percent.addNewPrice(30,40);
 
-        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, "Dairy");
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Dairy", TempLevel.cold, "man3");
+        soyMilk.setMinQuantity(1);
         soyMilk.addNewPrice(30, 40);
-        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, "Dairy");
+
+        Item regularButter = new Item("Best Butter", "000666", 4, "Dairy", TempLevel.cold, "man4");
+        regularButter.setMinQuantity(3);
         regularButter.addNewPrice(50, 60);
 
-        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular,"Cleaning");
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Cleaning", TempLevel.regular,"man4");
+        toiletPaper.setMinQuantity(2);
         toiletPaper.addNewPrice(20, 40);
-        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular,"Cleaning");
+
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Cleaning", TempLevel.regular,"man5");
+        sodGel.setMinQuantity(4);
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
@@ -61,7 +68,10 @@ public class interfaceManager {
         specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage, milk3Percent);
         specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage, milk3Percent);
         specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage, milk3Percent);
-
+        Inventory.addSpecificItem(milk3Percent, milk1);
+        Inventory.addSpecificItem(milk3Percent, milk2);
+        Inventory.addSpecificItem(milk3Percent, milk3);
+        Inventory.addSpecificItem(milk3Percent, milk4);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
@@ -71,6 +81,10 @@ public class interfaceManager {
         specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store, soyMilk);
         specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store, soyMilk);
         specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store, soyMilk);
+        Inventory.addSpecificItem(soyMilk, soyMilk1);
+        Inventory.addSpecificItem(soyMilk, soyMilk3);
+        Inventory.addSpecificItem(soyMilk, soyMilk3);
+        Inventory.addSpecificItem(soyMilk, soyMilk4);
         soyMilk.addSpecificItem(soyMilk1);
         soyMilk.addSpecificItem(soyMilk2);
         soyMilk.addSpecificItem(soyMilk3);
@@ -78,18 +92,25 @@ public class interfaceManager {
 
         specificItem butter1 = new specificItem(dateMilk1, false, Location.Store, regularButter);
         specificItem butter2 = new specificItem(dateMilk2, false, Location.Store, regularButter);
+        Inventory.addSpecificItem(regularButter, butter1);
+        Inventory.addSpecificItem(regularButter, butter2);
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
         specificItem toiletPaper1 = new specificItem(null, false, Location.Store, toiletPaper);
         specificItem toiletPaper2 = new specificItem(null, false, Location.Store, toiletPaper);
         specificItem toiletPaper3 = new specificItem(null, false, Location.Store, toiletPaper);
+        Inventory.addSpecificItem(toiletPaper, toiletPaper1);
+        Inventory.addSpecificItem(toiletPaper, toiletPaper2);
+        Inventory.addSpecificItem(toiletPaper, toiletPaper3);
         toiletPaper.addSpecificItem(toiletPaper1);
         toiletPaper.addSpecificItem(toiletPaper2);
         toiletPaper.addSpecificItem(toiletPaper3);
 
         specificItem sodGel1 = new specificItem(null, false, Location.Store, sodGel);
         specificItem sodGel2 = new specificItem(null, true, Location.Storage, sodGel);
+        Inventory.addSpecificItem(sodGel, sodGel1);
+        Inventory.addSpecificItem(sodGel, sodGel2);
         sodGel.addSpecificItem(sodGel1);
         sodGel.addSpecificItem(sodGel2);
 
@@ -132,7 +153,6 @@ public class interfaceManager {
                 //Provide a product shortage report
                 //-----------------------
                 case "1": {
-                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -172,7 +192,6 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                     */
                     break;
                 }
 
@@ -389,7 +408,7 @@ public class interfaceManager {
                 //Provide an inventory counting report
                 //-----------------------
                 case "3": {
-                    /*
+
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -430,7 +449,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                    */
+
                     break;
                 }
 
@@ -438,7 +457,6 @@ public class interfaceManager {
                 //Provide a defective products report
                 //-----------------------
                 case "4": {
-                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -479,7 +497,6 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                    */
                     break;
                 }
 
@@ -583,13 +600,13 @@ public class interfaceManager {
                 //Provide a price history report for a product
                 //-----------------------
                 case "7": {
-                    /*
+
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
                     String catalogNumber = Input.nextLine();
-                    Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
-                    //Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
-                    */
+                    Reports.addReportHistory(Inventory.priceHistoryReport(catalogNumber));
+
+
                     break;
                 }
 
@@ -597,7 +614,7 @@ public class interfaceManager {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "8": {
-                    /*
+
                     System.out.println("What is the item ID for the item to be set as defected?");
                     Scanner defectedItemInput = new Scanner(System.in);
                     int defectedserialNumber = Integer.parseInt(defectedItemInput.nextLine());
@@ -607,7 +624,7 @@ public class interfaceManager {
                     System.out.println("Item numbered " + defectedserialNumber + " has been set has defected and" +
                             "moved into the warehouse storage." );
                     System.out.println(currentSpecific.toString());
-                    */
+
                     break;
                 }
 

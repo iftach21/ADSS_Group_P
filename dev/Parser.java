@@ -4,6 +4,10 @@ import java.util.Map;
 public class Parser {
     public static Map<Item, Pair<Integer, Float>> parse(String input) {
         Map<Item, Pair<Integer, Float>> map = new HashMap<>();
+        if(input == "{}")
+        {
+            return map;
+        }
         String[] pairs = input.split("},");
 
         for (String pair : pairs) {

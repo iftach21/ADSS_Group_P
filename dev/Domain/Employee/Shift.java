@@ -196,14 +196,4 @@ public class Shift {
     public void setId(int id) {
         this.id = id;
     }
-    public List<Workers> getDiffWorkers(Shift shiftToCompare){
-        return null;
-        }
-    public int workerPro(Workers worker){
-        for (Workers w: workerInShift){
-            if(worker.getId()==w.getId()){
-
-            }
-        }
-    }
 }

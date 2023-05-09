@@ -1,5 +1,6 @@
 package Domain.Transfer;
 
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
+import Data.TransferDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Enums.TempLevel;
@@ -15,18 +17,18 @@ import Domain.Enums.WindowTypeCreater;
 
 
 public class TransferController {
-    private Map<Integer, Transfer> _transfers;
+
     private int _documentsCounter;
     private TruckController tc;
     private DriverController dc;
     private SiteController sc;
-    private Queue<Map<Site, Map<Item_mock, Integer>>> _ordersQueue;
-    private Queue<Integer> _orderDestinationSiteIdQueue;
+    private Queue<Map<Site, Map<Item_mock, Integer>>> _ordersQueue; //should be taken from suppliers DB (in the future)
+    private Queue<Integer> _orderDestinationSiteIdQueue; //should be taken from suppliers DB (in the future)
+    private final TransferDAO transfersDAO;
 
-
-    public TransferController(TruckController tc, DriverController dc, SiteController sc)
-    {
-        _transfers = new HashMap<>();
+    public TransferController(TruckController tc, DriverController dc, SiteController sc) throws SQLException {
+        //_transfers = new HashMap<>();
+        this.transfersDAO = TransferDAO.getInstance();
         _documentsCounter = 0;
         this.tc = tc;
         this.dc = dc;
@@ -35,8 +37,7 @@ public class TransferController {
         this._orderDestinationSiteIdQueue = new LinkedList<>();
     }
 
-    public void startTransferSystem()
-    {
+    public void startTransferSystem() throws SQLException {
         boolean systemIsOn = true;
         Scanner scanner = new Scanner(System.in);
         while (systemIsOn)
@@ -46,15 +47,16 @@ public class TransferController {
             System.out.println("Please pick one of the following options:");
             System.out.println("1. View previous transfers");
             System.out.println("2. Create transfer for pending orders. you have " + _ordersQueue.size() + " orders waiting to transfer");
-            System.out.println("3. View and update current transfers ");
+            System.out.println("3. Update current transfers ");
             System.out.println("4. Add a new truck to the system ");
-            System.out.println("5. Exit the transfer system");
+            System.out.println("5. View Planned Transfers");
+            System.out.println("6. Exit the transfer system");
 
             int optionSelection;
             while(true) {
                 try {
                     optionSelection = scanner.nextInt();
-                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3 || optionSelection == 4 || optionSelection == 5) {
+                    if (optionSelection == 1 || optionSelection == 2 || optionSelection == 3 || optionSelection == 4 || optionSelection == 5 || optionSelection == 6) {
                         break;
                     } else {
                         System.out.println("Sorry transfer manager, but your input is illegal. please enter number in th range 1 - 3");
@@ -69,7 +71,7 @@ public class TransferController {
 
             if (optionSelection == 1)
             {
-                if (_transfers.size() == 0)
+                if (transfersDAO.getAllTransfers().size() == 0)
                 {
                     System.out.println("Unfortunatly, there are no previous transfers to watch. You'll be taken to the main menu.");
                     System.out.println("------------------------------------------------------------");
@@ -79,13 +81,14 @@ public class TransferController {
                     System.out.println("Please enter the transfer id of the transfer you would like to watch: ");
                     int transferId;
                     while(true) {
-                        try {
+                        try
+                        {
                             transferId = scanner.nextInt();
-                            if (!_transfers.containsKey(transferId)) {
+                            if (transfersDAO.get(transferId) == null ) {
                                 System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
                             }
-                            else if (_transfers.containsKey(transferId) && _transfers.get(transferId).getTransferStatus().equals("IN PROGRESS")){
-                                System.out.println("Sorry transfer manager, but your selected transfer is in progress. Please choose another transfer");
+                            else if (transfersDAO.get(transferId)!=null && (transfersDAO.get(transferId).getTransferStatus().equals("IN PROGRESS") || transfersDAO.get(transferId).getTransferStatus().equals("NOT START"))){
+                                System.out.println("Sorry transfer manager, but your selected transfer is in progress or has not start yet. Please choose another transfer");
                             }
                             else
                             {
@@ -99,7 +102,7 @@ public class TransferController {
                         }
                     }
 
-                    Transfer chosenTransfer = _transfers.get(transferId);
+                    Transfer chosenTransfer = transfersDAO.get(transferId);
                     chosenTransfer.createDocument();
                     System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
                 }
@@ -139,7 +142,7 @@ public class TransferController {
                     while(true) {
                         try {
                             transferId = scanner.nextInt();
-                            if (_transfers.containsKey(transferId)) {
+                            if (transfersDAO.get(transferId)!=null) {
                                 break;
                             } else {
                                 System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
@@ -151,7 +154,7 @@ public class TransferController {
                             scanner.next();
                         }
                     }
-                    updateCurrentTransferDetails(_transfers.get(transferId));
+                    updateCurrentTransferDetails(transfersDAO.get(transferId));
                     System.out.println("You'll be taken to the main menu.");
                 }
             }
@@ -159,6 +162,10 @@ public class TransferController {
             {
                 addTruckToSystem();
                 System.out.println("Truck added successfully. You'll be taken to the main menu.");
+            }
+            else if(optionSelection == 5)
+            {
+                watchPlannedTransfers();
             }
             else
             {
@@ -175,8 +182,7 @@ public class TransferController {
     }
 
 
-    public void createNewTransfer(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId)
-    {
+    public void createNewTransfer(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the next details for the new transfer: ");
         LocalDate leavingDate;
@@ -268,8 +274,9 @@ public class TransferController {
         }
 
         Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationSites, orderItems, _documentsCounter);
+
         newTransfer.createDocument();
-        _transfers.put(_documentsCounter, newTransfer);
+        transfersDAO.add(newTransfer);
         _documentsCounter++;
 
         System.out.println("Thanks manager! The transfer will be ready in short time. You'll now need to predict the weight in each destination, and rearrange the transfer if needed.");
@@ -282,9 +289,7 @@ public class TransferController {
         {
             boolean transferRearranged = false;
 
-            int truckWeight;
-            Scanner scanner = new Scanner(System.in);
-            Truck transferTruck = tc._trucks.get(newTransfer.getTruckLicenseNumber());
+            Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
             transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getArrivingDate());
 
             System.out.println("The truck chosen to the transfer is: ");
@@ -346,6 +351,9 @@ public class TransferController {
         if (selectedOption == 1)
         {
             removeOneDestOfTransfer(transfer);
+            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+            transfer.setArrivingTime(arrivingTime.toLocalTime());
+            transfer.setArrivingDate(arrivingTime.toLocalDate());
         }
         else if (selectedOption == 2)
         {
@@ -354,6 +362,9 @@ public class TransferController {
         else if (selectedOption == 3)
         {
             removeItemsOfTransfer(transfer);
+            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+            transfer.setArrivingTime(arrivingTime.toLocalTime());
+            transfer.setArrivingDate(arrivingTime.toLocalDate());
         }
 
         transfer.documentUpdateTruckWeight(null, transfer.getSource());
@@ -377,9 +388,10 @@ public class TransferController {
 
     public Map<Integer, Transfer> getCurrentTransfers(){
         Map<Integer, Transfer> currentTransfers = new HashMap<>();
+        Map<Integer, Transfer> allTransfer = transfersDAO.getAllTransfers();
 
-        for(Integer trandferId: _transfers.keySet()){
-            Transfer transfer = _transfers.get(trandferId);
+        for(Integer trandferId: allTransfer.keySet()){
+            Transfer transfer = allTransfer.get(trandferId);
             LocalDateTime transferLocalDateTimeLeaving = LocalDateTime.of(transfer.getDateOfTransfer(), transfer.getLeavingTime());
             LocalDateTime transferLocalDateTimeArriving = LocalDateTime.of(transfer.getArrivingDate(), transfer.get_arrivingTime());
             if(transferLocalDateTimeLeaving.isBefore(LocalDateTime.now()) && transferLocalDateTimeArriving.isAfter(LocalDateTime.now()))
@@ -396,7 +408,7 @@ public class TransferController {
         int truckWeight;
 
         Scanner scanner = new Scanner(System.in);
-        Truck transferTruck = tc._trucks.get(newTransfer.getTruckLicenseNumber());
+        Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
         transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getArrivingDate());
 
         boolean transferRearranged = false;
@@ -547,7 +559,7 @@ public class TransferController {
         System.out.println("These are the available trucks. Please choose one of the trucks, by type its license number: ");
         for (Integer LicenseNum : tc.getAllAvailableTrucks(transfer.getLeavingDate()).keySet())
         {
-            System.out.println("License number: " + LicenseNum + ", Domain.Truck Model: " + tc._trucks.get(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc._trucks.get(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc._trucks.get(LicenseNum).getTruckWeightType());
+            System.out.println("License number: " + LicenseNum + ", Domain.Truck Model: " + tc.getTruck(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc.getTruck(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc.getTruck(LicenseNum).getTruckWeightType());
         }
 
         int chosenTruck;
@@ -571,7 +583,7 @@ public class TransferController {
                 scanner.next();
             }
         }
-
+        tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null);
         transfer.updateTransferTruck(chosenTruck);
         transfer.documentUpdateTruckNumber();
     }
@@ -813,8 +825,7 @@ public class TransferController {
 
     }
 
-    public Driver chooseDriverForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp, Map<Site, Map<Item_mock, Integer>> orderItems)
-    {
+    public Driver chooseDriverForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp, Map<Site, Map<Item_mock, Integer>> orderItems) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         //get week num
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
@@ -1041,7 +1052,7 @@ public class TransferController {
 
         //create the truck
         Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null);
-        tc._trucks.put(licenseNumber, newTruck);
+        tc.addTruck(newTruck);
     }
 
     //should be called also when rearrange transfer
@@ -1087,9 +1098,9 @@ public class TransferController {
         System.out.println("Here are the next planned transfers: ");
 
         int numOfPlannedTransfer = 0;
-        for(int i=0; i<_transfers.size(); i++)
-        {
-            Transfer currentTransfer = _transfers.get(i);
+        Map<Integer,Transfer> allTransfers = transfersDAO.getAllTransfers();
+        for(Integer trandferId: allTransfers.keySet()){
+            Transfer currentTransfer = allTransfers.get(trandferId);
             if(currentTransfer.getTransferStatus().equals("NOT START") || currentTransfer.getTransferStatus().equals("IN PROGRESS")){
                 numOfPlannedTransfer++;
                 System.out.println("---------------------------------------------------------------");
@@ -1106,8 +1117,8 @@ public class TransferController {
             System.out.println("There are no planned transfers!");
         else
         {
-            System.out.println("Those are all the next planned transfers! \n" +
-                    "If you would like to get some more details for some transfer, you can easily download the transfer's document :)");
+            System.out.println("That's it! Those are all the next planned transfers! \n" +
+                    "If you would like to get some more details for any transfer, you can easily download the transfer's document :)");
         }
     }
 }

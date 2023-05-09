@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,12 +40,12 @@ public class TransferDAO {
         return null;
     }
 
-    public List<Transfer> getAllTransfers() {
+    public Map<Integer, Transfer> getAllTransfers() {
         /*
             get all transfers from Transfer table
         */
 
-        List<Transfer> transfers = new ArrayList<>();
+        Map<Integer, Transfer> transfers = new HashMap<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -55,7 +56,7 @@ public class TransferDAO {
                 int transferId = rs.getInt("transferId");
                 Transfer transfer = this.createNewTransfer(rs);
                 this.TransferList.add(transfer);
-                transfers.add(transfer);
+                transfers.put(transferId, transfer);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

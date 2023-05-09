@@ -178,20 +178,17 @@ public class BossInterface extends AInterface {
 
 
                             while(true) {
+                                try{
                                 //shows the user all the people whom can work
                                 controller.printAllWorkersWhoCanWork(prof, daynum, don);
                                 System.out.println("please enter id");
                                 int id = myObj.nextInt();  // Read user input
 
                                 //checking if allready has shift at other super:
-                                if (controller.IsWorkingAllready(id, weeknum, year, daynum, don)) {
-                                    System.out.println("the employee cant work at this time, pick some one else plz");
-                                    continue;
-                                } else {
-
                                     controller.addtoexistingweeklyshift(weeknum, year, supernum, wc.getwidowtype(daynum, don), id, prof);
-                                    break;
-                                }
+                                    break;}
+                                catch (Exception e){}
+
                             }
 
 

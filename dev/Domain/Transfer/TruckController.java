@@ -107,4 +107,15 @@ public class TruckController {
         else
             throw new NoSuchElementException("There is no available truck for this transfer");
     }
+
+    public void addTruck(Truck newTrack)
+    {
+        trucksDAO.add(newTrack);
+    }
+
+    public Truck getTruck(int licenseNumnber)
+    {
+        Truck truck = trucksDAO.get(licenseNumnber);
+        return truck;
+    }
 }

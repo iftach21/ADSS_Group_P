@@ -10,11 +10,11 @@ public class Connection {
     public static java.sql.Connection getConnectionToDatabase() throws SQLException {
         if(conn == null){
 
-            String currentPath  = System.getProperty("user.dir");
-            String dbName = "Transfer_Employee";
-            String dbPath = currentPath + "\\" + dbName;
+            //String currentPath  = System.getProperty("user.dir");
+            //String dbName = "Transfer_Employee";
+            //String dbPath = currentPath + "\\" + dbName;
 
-            conn = DriverManager.getConnection(dbPath);
+            //conn = DriverManager.getConnection(dbPath);
         }
         return conn;
     }

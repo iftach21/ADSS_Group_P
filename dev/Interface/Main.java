@@ -6,11 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static final List<AInterface> intefaceList = new ArrayList<>(){{
-        add(bossInterface);
-        add(workerInterface);
-        add(transferInterface);
-    }};
+
     static BossInterface bossInterface;
 
     static {
@@ -34,6 +30,11 @@ public class Main {
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;
     public static void main(String[] args) {
+        List<AInterface> intefaceList = new ArrayList<>();
+        intefaceList.add(bossInterface);
+        intefaceList.add(workerInterface);
+        intefaceList.add(transferInterface);
+
         int option = 1;
         while(option != 0){
             System.out.println("What system would you like to log into?");
@@ -47,7 +48,7 @@ public class Main {
             option = myObj.nextInt();  // Read user input
 
             //checking if the option works
-            if(option>3 || option < 0){
+            if(option > 3 || option < 0){
                 System.out.println("Invalid Input");
                 continue;
             }

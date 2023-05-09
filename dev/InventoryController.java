@@ -30,10 +30,10 @@ public class InventoryController {
 
     public Item getItemByCatalogNumber(String itemCatalogNumber) {
         Item currentItem;
-        for (int i = 0; i < ItemsList.size(); i++){
-            if (ItemsList.get(i).getCatalogNum().equals(itemCatalogNumber)){
-                currentItem = ItemsList.get(i);
-                return currentItem;
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            if (key.getCatalogNum().equals(itemCatalogNumber)){
+                return key;
             }
         }
         return null;
@@ -42,14 +42,12 @@ public class InventoryController {
     //This method deleted a specific item from the entire inventory
     public boolean deleteSpecificItem(int serialNumber){
 
-        Item currentItem;
-        specificItem currentSpecificItem;
-        for (int i = 0; i < ItemsList.size(); i++){
-            currentItem = ItemsList.get(i);
-            for (int j = 0; j < currentItem.getAmount(); j++){
-                currentSpecificItem = currentItem.getSpecificItemList(j);
-                if (currentSpecificItem.getserialNumber() == serialNumber){
-                    currentItem.removeSpecificItem(currentSpecificItem);
+        for (List<specificItem> specificItemList : specificItemsMap.values()) {
+            Iterator<specificItem> iter = specificItemList.iterator();
+            while (iter.hasNext()) {
+                specificItem item = iter.next();
+                if (item.getserialNumber() == serialNumber) {
+                    iter.remove();
                     return true;
                 }
             }
@@ -60,24 +58,14 @@ public class InventoryController {
     //Method: deleteGeneralItem
     //This method deletes a general item and all of it's specific items from the inventory
     public boolean deleteGeneralItem(String catalogNumber){
-        Category currentCategory;
-        subCategory currentSubCat;
-        Item currentItem;
-        specificItem currentSpecificItem;
 
-        for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
-            currentCategory = CategoryControl.getCategoriesList().get(i);
-            for (int j = 0; j < currentCategory.getAmount(); j++){
-                currentSubCat = currentCategory.getSubCategory(j);
-                for (int w = 0; w < currentSubCat.getGeneralItemsList().size(); w++){
-                    currentItem = currentSubCat.getGeneralItemsList().get(w);
-                    if (currentItem.getCatalogNum().equals(catalogNumber)){
-                        currentSubCat.getGeneralItemsList().remove(currentItem);
-                        ItemsList.remove(currentItem);
-                        currentSubCat.setAmount(currentSubCat.getAmount() - 1);
-                        return true;
-                    }
-                }
+        Iterator<Map.Entry<Item, List<specificItem>>> iter = specificItemsMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<Item, List<specificItem>> entry = iter.next();
+            Item key = entry.getKey();
+            if (key.getCatalogNum().equals(catalogNumber)) {
+                iter.remove();
+                return true;
             }
         }
         return false;
@@ -103,6 +91,15 @@ public class InventoryController {
     public boolean deleteCat(String categoryName){
         Category currentCategory;
 
+        Iterator<Map.Entry<Item, List<specificItem>>> iter = specificItemsMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<Item, List<specificItem>> entry = iter.next();
+            Item key = entry.getKey();
+            if (key.getCatalogName().equals(categoryName)) {
+                iter.remove();
+            }
+        }
+
         for (int i = 0; i < CategoryControl.getCategoriesList().size(); i++){
             currentCategory = CategoryControl.getCategoriesList().get(i);
             if (currentCategory.getCategoryName().equals(categoryName)){
@@ -114,8 +111,8 @@ public class InventoryController {
         return false;
     }
 
-    public void addGeneralItem(Item generalItem) {
-        ItemsList.add(generalItem);
+    public void addGeneralItem(Item key) {
+        specificItemsMap.put(key, new ArrayList<>());
     }
 
     public CategoryController getCategoryControl() {
@@ -237,6 +234,7 @@ public class InventoryController {
                 previousCategory = currentCategory;
             }
             categoryController += key + ": " + '\n';
+            categoryController += "Buy price: " + key.getBuyPrice() + " Sell price: " + key.getSellPrice() + '\n';
             for (specificItem value : values) {
                 categoryController += "\t" + value + "\n";
             }
@@ -371,20 +369,21 @@ public class InventoryController {
 
     public void FullStandardDiscount(double _amount)
     {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            currentItem.getDiscount().setStandardDiscount(_amount);
-            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            double newPrice = key.getSellPrice() - _amount;
+            key.addNewPrice(key.getBuyPrice(), newPrice);
         }
     }
 
     public void FullPercentageDiscount(double _amount)
     {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
+            key.addNewPrice(key.getBuyPrice(), newPrice);
+        }
+        /*
         for (int i = 0; i < this.ItemsList.size(); i++)
         {
             Item currentItem = this.ItemsList.get(i);
@@ -392,35 +391,32 @@ public class InventoryController {
             currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
 
         }
+         */
     }
 
     public void CategoryPercentageDiscount(double _amount, String _CategoryName)
     {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCategoryName().equals(_CategoryName)){
-                currentItem.getDiscount().setPercentageDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
-
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            if (!key.getCatalogName().equals(_CategoryName)){
+                continue;
             }
+            double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
+            key.addNewPrice(key.getBuyPrice(), newPrice);
         }
     }
 
     public void CategoryStandardDiscount(double _amount, String _CategoryName)
     {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCategoryName().equals(_CategoryName)){
-                currentItem.getDiscount().setStandardDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            if (!key.getCatalogName().equals(_CategoryName)){
+                continue;
             }
+            double newPrice = key.getSellPrice() - _amount;
+            key.addNewPrice(key.getBuyPrice(), newPrice);
         }
+
     }
 
     public void SubCategoryStandardDiscount(double _amount, String _CategoryName, String _Subcategory)
@@ -472,29 +468,25 @@ public class InventoryController {
 
     public void SpecificStandardDiscount(double _amount, String _CatalogNum)
     {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCatalogNum().equals(_CatalogNum)){
-                currentItem.getDiscount().setStandardDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - _amount);
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            if (!key.getCatalogNum().equals(_CatalogNum)){
+                continue;
             }
+            double newPrice = key.getSellPrice() - _amount;
+            key.addNewPrice(key.getBuyPrice(), newPrice);
         }
     }
 
     public void SpecificPercentageDiscount(double _amount, String _CatalogNum)
     {
-        if (this.CategoryControl.getCategoriesList().size() == 0)
-            return;
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            if (currentItem.getCatalogNum().equals(_CatalogNum)){
-                currentItem.getDiscount().setPercentageDiscount(_amount);
-                currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
+        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
+            Item key = entry.getKey();
+            if (!key.getCatalogNum().equals(_CatalogNum)){
+                continue;
             }
+            double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
+            key.addNewPrice(key.getBuyPrice(), newPrice);
         }
     }
 

@@ -14,7 +14,7 @@ import static Domain.Enums.WindowType.*;
 
 public class WorkersDAO {
     private List <Workers> cache = new ArrayList<>();
-    private final Connection conn = Database.Connection.getConnectionToDatabase();
+    private final java.sql.Connection conn = Connection.getConnectionToDatabase();
     private static WorkersDAO instance = null;
     private WorkersDAO() throws SQLException {
     }

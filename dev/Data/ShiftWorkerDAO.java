@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ShiftWorkerDAO {
 
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private static ShiftWorkerDAO instance = null;
 
     private ShiftWorkerDAO() throws SQLException {

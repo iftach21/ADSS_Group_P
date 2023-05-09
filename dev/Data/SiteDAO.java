@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SiteDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private List<Site> SiteList;
     private static SiteDAO instance = null;
 

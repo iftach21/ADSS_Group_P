@@ -1,6 +1,5 @@
 package Data;
 
-import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 
 import java.sql.Connection;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferDestinationsDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private Map<Integer, List<Site>> destinationsList;  //the key in the first map is transferId
     private static TransferDestinationsDAO instance = null;
 

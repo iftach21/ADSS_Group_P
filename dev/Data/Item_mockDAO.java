@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item_mockDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private List<Item_mock> ItemList;
     private static Item_mockDAO instance = null;
 

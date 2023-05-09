@@ -13,11 +13,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TrucksDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private ArrayList<Truck> TruckList;
     private static TrucksDAO instance = null;
 

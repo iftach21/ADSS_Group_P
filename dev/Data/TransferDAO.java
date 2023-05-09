@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private ArrayList<Transfer> TransferList;
     private static TransferDAO instance = null;
 

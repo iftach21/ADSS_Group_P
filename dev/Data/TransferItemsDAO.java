@@ -8,11 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TransferItemsDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private Connection conn = Data.Connection.getConnectionToDatabase();
     private Map<Integer, Map<Site, Map<Item_mock, Integer>>> orderItemsList;  //the key in the first map is transferId
     private static TransferItemsDAO instance = null;
 

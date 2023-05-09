@@ -9,6 +9,7 @@ public class ParserForContractItemIntegerDouble {
         {
             return map;
         }
+
         String[] pairs = input.split("},");
 
         for (String pair : pairs) {

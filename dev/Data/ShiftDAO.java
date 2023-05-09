@@ -91,5 +91,6 @@ public class ShiftDAO {
 
     public void delete(Shift shiftToDelete){
         //todo: make sure to delete the workers_shift table accord..
+        //allso make sure to delete from cache
     }
 }

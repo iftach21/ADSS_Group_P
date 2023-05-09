@@ -1,4 +1,4 @@
-package Test;
+package Test.DAOTest;
 
 import Data.WorkersDAO;
 import Domain.Employee.Driver;

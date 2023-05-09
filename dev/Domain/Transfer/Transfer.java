@@ -30,7 +30,7 @@ public class Transfer {
     //private List<Site> _destinations;
     //private Map<Site, Map<Item_mock, Integer>> _orderItems;
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, int transferId) throws SQLException {
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId) throws SQLException {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
         this._arrivingDate = arrivingDate;
@@ -41,6 +41,17 @@ public class Transfer {
         this._transferId = transferId;
         this._transferDestinationsDAO = TransferDestinationsDAO.getInstance();
         this._transferItemsDAO = TransferItemsDAO.getInstance();
+        addToDAO(orderItems, destinations);
+    }
+
+    private void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, List<Site> destinations) throws SQLException {
+        _transferDestinationsDAO.add(_transferId, destinations);
+        for (Site site : orderItems.keySet()) {
+            for (Item_mock item : orderItems.get(site).keySet())
+            {
+                _transferItemsDAO.add(_transferId, site.getSiteId(), item.getCatalogNum(), orderItems.get(site).get(item));
+            }
+        }
     }
 
     public void removeTransferItems(Map<Site, Map<Item_mock, Integer>> itemsToDelete)
@@ -303,6 +314,7 @@ public class Transfer {
     {
         return _transferId;
     }
+
 
 
 }

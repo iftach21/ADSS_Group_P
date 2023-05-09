@@ -274,6 +274,7 @@ public class TransferController {
         }
 
         Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationSites, orderItems, _documentsCounter);
+
         newTransfer.createDocument();
         transfersDAO.add(newTransfer);
         _documentsCounter++;

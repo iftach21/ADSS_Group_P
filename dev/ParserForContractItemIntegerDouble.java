@@ -1,9 +1,14 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ParserForContractItemIntegerDouble {
     public static Map<Item, Map<Integer, Double>> parse(String input) {
         Map<Item, Map<Integer, Double>> map = new HashMap<>();
+        if(Objects.equals(input, "{}"))
+        {
+            return map;
+        }
         String[] pairs = input.split("},");
 
         for (String pair : pairs) {

@@ -116,6 +116,8 @@ public class NonDeliveringSupplierMapper {
             stmt.setString(6, nonDeliveringSupplier.getPerson().getPhoneNumber());
             stmt.setString(7, itemsJson);
             stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
+            stmt.executeUpdate();
+
             cache.put(nonDeliveringSupplier.getSupplierID(), nonDeliveringSupplier);
         }
         catch(SQLException e){}

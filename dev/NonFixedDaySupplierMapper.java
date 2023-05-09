@@ -55,7 +55,10 @@ public class NonFixedDaySupplierMapper{
                 return nonFixedDaySupplier;
             }
         }
-        catch (SQLException e){}
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
@@ -82,7 +85,10 @@ public class NonFixedDaySupplierMapper{
                 suppliers.add(nonFixedDaySupplier);
             }
         }
-        catch (SQLException e){}
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
@@ -103,12 +109,14 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(7, itemsJson);
             stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+            stmt.executeUpdate();
+
             rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);
             }
         }
-        catch (SQLException e){}
+        catch (SQLException e){System.out.println(e.getMessage());}
 
     }
     public void update(NonFixedDaySupplier nonFixedDaySupplier)
@@ -126,9 +134,11 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(7, itemsJson);
             stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+            stmt.executeUpdate();
+
             cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);
         }
-        catch (SQLException e){}
+        catch (SQLException e){System.out.println(e.getMessage());}
 
     }
     public void delete(NonFixedDaySupplier nonFixedDaySupplier)
@@ -140,7 +150,10 @@ public class NonFixedDaySupplierMapper{
             stmt.executeUpdate();
             cache.remove(nonFixedDaySupplier.getSupplierID());
         }
-        catch (SQLException e){}
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
 

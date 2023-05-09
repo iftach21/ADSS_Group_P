@@ -245,14 +245,21 @@ public class Supplier_Manger {
 
 
 
-    public void update_suppliers() {
+    public void update_suppliers()
+    {
         this.suppliers=new ArrayList<Supplier>();
-        if(this.fixedDaySupplierMapper.findAll()!=null){
-        this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());}
-        if(this.nonDeliveringSupplierMapper.findAll()!=null){
-        this.suppliers.addAll(this.nonDeliveringSupplierMapper.findAll());}
-        if(this.nonFixedDaySupplierMapper.findAll()!=null){
-        this.suppliers.addAll(this.nonFixedDaySupplierMapper.findAll());}
+        if(this.fixedDaySupplierMapper.findAll()!=null)
+        {
+            this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());
+        }
+        if(this.nonDeliveringSupplierMapper.findAll()!=null)
+        {
+            this.suppliers.addAll(this.nonDeliveringSupplierMapper.findAll());
+        }
+        if(this.nonFixedDaySupplierMapper.findAll()!=null)
+        {
+            this.suppliers.addAll(this.nonFixedDaySupplierMapper.findAll());
+        }
     }
 
 

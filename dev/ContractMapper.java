@@ -24,21 +24,21 @@ public class ContractMapper {
             return cache.get(contractId);
         }
         try{
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE contract_id = ?");
-        stmt.setInt(1,contractId);
-        ResultSet rs = stmt.executeQuery();
-        if(rs.next())
-        {
-            Contract contract = new Contract();
-            contract.setContractId(rs.getInt("contract_id"));
-            contract.setSupplierId(rs.getString("supplier_id"));
-            contract.setTotalDiscount(rs.getDouble("total_discount"));
-            String itemsMapJson = rs.getString("items_Map_discount");
-            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
-            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
-            cache.put(contractId,contract);
-            return contract;
-        }
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE contract_id = ?");
+            stmt.setInt(1,contractId);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next())
+            {
+                Contract contract = new Contract();
+                contract.setContractId(rs.getInt("contract_id"));
+                contract.setSupplierId(rs.getString("supplier_id"));
+                contract.setTotalDiscount(rs.getDouble("total_discount"));
+                String itemsMapJson = rs.getString("items_Map_discount");
+//                Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
+                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
+                cache.put(contractId,contract);
+                return contract;
+            }
         }
         catch (Exception ignored){}
         return null;
@@ -60,8 +60,8 @@ public class ContractMapper {
             contract.setSupplierId(rs.getString("supplier_id"));
             contract.setTotalDiscount(rs.getDouble("total_discount"));
             String itemsMapJson = rs.getString("items_Map_discount");
-            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
-            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
+//            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
+            contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
             cache.put(rs.getInt("contract_id"),contract);
             return contract;
         }
@@ -81,41 +81,61 @@ public class ContractMapper {
             contract.setSupplierId(rs.getString("supplier_id"));
             contract.setTotalDiscount(rs.getDouble("total_discount"));
             String itemsMapJson = rs.getString("items_Map_discount");
-            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
-            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
+            contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
+//            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
+//
+//            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
+
             cache.put(contract.contractId,contract);
             contracts.add(contract);
         }
         return contracts;
     }
 
-    public void insert(Contract contract) throws SQLException
+    public void insert(Contract contract)
     {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO contracts (contract_id, supplier_id, items_Map_discount,total_discount) VALUES (?, ?, ?, ?)");
-        String itemsJson = new Gson().toJson(contract.getItemsMapDiscount()).toString();
-        stmt.setString(1, Integer.toString(contract.contractId));
-        stmt.setString(2, contract.supplierId);
-        stmt.setString(3, itemsJson);
-        stmt.setDouble(4, contract.getTotal_discount());
-        stmt.executeUpdate();
-        ResultSet rs = stmt.getGeneratedKeys();
+        PreparedStatement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.prepareStatement("INSERT INTO contracts (contract_id, supplier_id, items_Map_discount,total_discount) VALUES (?, ?, ?, ?)");
+            String itemsJson = new Gson().toJson(contract.getItemsMapDiscount()).toString();
+            stmt.setString(1, Integer.toString(contract.contractId));
+            stmt.setString(2, contract.supplierId);
+            stmt.setString(3, itemsJson);
+            stmt.setDouble(4, contract.getTotal_discount());
 
-        if(rs.next())
+            stmt.executeUpdate();
+            rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                contract.contractId = rs.getInt(1);
+                cache.put(contract.contractId, contract);
+            }
+        }
+        catch (SQLException e)
         {
-            contract.contractId = rs.getInt(1);
-            cache.put(contract.contractId,contract);
+            System.err.println("Exception caught: " + e.getMessage());
         }
     }
 
-    public void update(Contract contract) throws SQLException
+    public void update(Contract contract)
     {
-        PreparedStatement stmt = conn.prepareStatement("UPDATE Contracts SET supplier_id = ?,  items_Map_discount = ?, total_discount = ? WHERE contract_id = ?");
-        stmt.setInt(1,contract.contractId);
-        stmt.setString(2,contract.supplierId);
-        String itemsJson = new JSONObject(contract.itemsMapDiscount).toString();
-        stmt.setString(3, itemsJson);
-        stmt.setDouble(4, contract.getTotal_discount());
-        cache.put(contract.contractId,contract);
+        PreparedStatement stmt;
+        try{
+
+            stmt = conn.prepareStatement("UPDATE Contracts SET supplier_id = ?,  items_Map_discount = ?, total_discount = ? WHERE contract_id = ?");
+            stmt.setInt(4,contract.contractId);
+            stmt.setString(1,contract.supplierId);
+            String itemsJson = new JSONObject(contract.getItemsMapDiscount()).toString();
+            stmt.setString(2, itemsJson);
+            stmt.setDouble(3, contract.getTotal_discount());
+            stmt.executeUpdate();
+            cache.put(contract.contractId,contract);
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Exception caught: " + e.getMessage());
+        }
     }
     public void delete(Contract contract) throws SQLException
     {

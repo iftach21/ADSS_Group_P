@@ -1,5 +1,3 @@
-
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,7 +43,7 @@ class OrderMangerTest {
         maplist.put(item4,100);
         try
         {
-        mapper.insert(item1);
+            mapper.insert(item1);
         }
         catch (SQLException e)
         {
@@ -79,6 +77,7 @@ class OrderMangerTest {
         Supplier_Manger masupplier = new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
+        DeliveringSupplier supplier1 = new FixedDaySupplier(WindowType.day2, "Supplier Inc.","2", 1,"S002",contactPerson,null,null);
         supplier.add_Items(item1,100,100);
         supplier.add_Items(item2,100,100);
         supplier.add_Items(item3,100,100);
@@ -87,21 +86,33 @@ class OrderMangerTest {
         Connection conn2 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
 
 
-        ContractMapper con =new ContractMapper(conn2);
-        try{
-        mapper1.insert(supplier);}
-        catch(SQLException ignored){}
-        masupplier.getSuppliers().add(supplier);
-        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
-        supplier.print_items();
-        ordermanger.getPending_for_apporval().get(0).print_items();
-        Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
-        NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
-        supplier.add_item_to_contract(item1.getName(),10,0.5);
-        conn1.close();
-        conn.close();
-        con.insert(supplier.getContract());
-        mapper1.update(supplier);
+        ContractMapper contractMapperTest =new ContractMapper(conn2);
+        Contract contractTest = new Contract();
+        contractMapperTest.insert(contractTest);
+        contractTest.add_to_contract(item1,100,50);
+        contractTest.add_to_contract(item2,80,70);
+        contractTest.setSupplierId("S002");
+        contractTest.add_to_contract(item3,95,35);
+        contractTest.setTotalDiscount(25);
+        contractMapperTest.update(contractTest);
+        Contract supplierIdContractTest = contractMapperTest.findBySupplierId("S002");
+        Contract supplierIdContractTest1 = contractMapperTest.findByContractId(2);
+        List<Contract> allContractsTest = contractMapperTest.findAll();
+        System.out.println("---------------------");
+//        try{
+//        mapper1.insert(supplier);}
+//        catch(SQLException ignored){}
+//        masupplier.getSuppliers().add(supplier);
+//        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
+//        supplier.print_items();
+//        ordermanger.getPending_for_apporval().get(0).print_items();
+//        Item catalogItem = mapper.findByCatalogNum(item1.getCatalogNum());
+//        NonDeliveringSupplier test = mapper1.findBySupplierId(supplier.getSupplierID());
+//        supplier.add_item_to_contract(item1.getName(),10,0.5);
+//        conn1.close();
+//        conn.close();
+//        con.insert(supplier.getContract());
+//        mapper1.update(supplier);
 
     }
 
@@ -291,7 +302,7 @@ class OrderMangerTest {
 //        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
 //        assertEquals("Supplier1 Inc.",ordermanger.getPending_for_apporval().get(0).getSupplier().getName());
 
-}
+    }
     //tetst 6
     @Test
     void move_order_to_approvel(){
@@ -382,7 +393,7 @@ class OrderMangerTest {
 
 
     }
- //test 8
+    //test 8
     @Test
     void order_move_to_history(){
         var ordermanger=new OrderManger();
@@ -431,7 +442,7 @@ class OrderMangerTest {
 //        assertEquals(1,ordermanger.getOrders_history().size());
     }
     @Test
-    //test 9
+        //test 9
     void manipule_supplier(){
         var ordermanger=new OrderManger();
         Map<Item,Integer> maplist =new HashMap<Item,Integer>();
@@ -461,8 +472,8 @@ class OrderMangerTest {
 //        supplier_1.remove_item(item1.getName());
 //        assertFalse(supplier_1.getItems().containsKey(item1));
 
-}
-//test 10
+    }
+    //test 10
     @Test
     void test_only_supplier_exist(){
         Supplier_Manger masupplier=new Supplier_Manger();

@@ -15,4 +15,8 @@ public class ReportController {
         reportsList.add(newReport);
     }
 
+    public void addReportHistory(Report priceHistoryReport) {
+        System.out.println(priceHistoryReport.printPriceHistory());
+        reportsList.add(priceHistoryReport);
+    }
 }

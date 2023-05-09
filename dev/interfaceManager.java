@@ -42,18 +42,25 @@ public class interfaceManager {
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
-        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, "Dairy");
+        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Dairy", TempLevel.cold, "man2");
+        milk3Percent.setMinQuantity(6);
         milk3Percent.addNewPrice(10, 20);
         milk3Percent.addNewPrice(30,40);
 
-        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, "Dairy");
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Dairy", TempLevel.cold, "man3");
+        soyMilk.setMinQuantity(1);
         soyMilk.addNewPrice(30, 40);
-        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, "Dairy");
+
+        Item regularButter = new Item("Best Butter", "000666", 4, "Dairy", TempLevel.cold, "man4");
+        regularButter.setMinQuantity(3);
         regularButter.addNewPrice(50, 60);
 
-        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular,"Cleaning");
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Cleaning", TempLevel.regular,"man4");
+        toiletPaper.setMinQuantity(2);
         toiletPaper.addNewPrice(20, 40);
-        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular,"Cleaning");
+
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Cleaning", TempLevel.regular,"man5");
+        sodGel.setMinQuantity(4);
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
@@ -61,7 +68,10 @@ public class interfaceManager {
         specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage, milk3Percent);
         specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage, milk3Percent);
         specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage, milk3Percent);
-
+        Inventory.addSpecificItem(milk3Percent, milk1);
+        Inventory.addSpecificItem(milk3Percent, milk2);
+        Inventory.addSpecificItem(milk3Percent, milk3);
+        Inventory.addSpecificItem(milk3Percent, milk4);
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
@@ -71,6 +81,10 @@ public class interfaceManager {
         specificItem soyMilk2 = new specificItem(dateMilk2,false, Location.Store, soyMilk);
         specificItem soyMilk3 = new specificItem(dateMilk3,false, Location.Store, soyMilk);
         specificItem soyMilk4 = new specificItem(dateMilk4,false, Location.Store, soyMilk);
+        Inventory.addSpecificItem(soyMilk, soyMilk1);
+        Inventory.addSpecificItem(soyMilk, soyMilk3);
+        Inventory.addSpecificItem(soyMilk, soyMilk3);
+        Inventory.addSpecificItem(soyMilk, soyMilk4);
         soyMilk.addSpecificItem(soyMilk1);
         soyMilk.addSpecificItem(soyMilk2);
         soyMilk.addSpecificItem(soyMilk3);
@@ -78,18 +92,25 @@ public class interfaceManager {
 
         specificItem butter1 = new specificItem(dateMilk1, false, Location.Store, regularButter);
         specificItem butter2 = new specificItem(dateMilk2, false, Location.Store, regularButter);
+        Inventory.addSpecificItem(regularButter, butter1);
+        Inventory.addSpecificItem(regularButter, butter2);
         regularButter.addSpecificItem(butter1);
         regularButter.addSpecificItem(butter2);
 
         specificItem toiletPaper1 = new specificItem(null, false, Location.Store, toiletPaper);
         specificItem toiletPaper2 = new specificItem(null, false, Location.Store, toiletPaper);
         specificItem toiletPaper3 = new specificItem(null, false, Location.Store, toiletPaper);
+        Inventory.addSpecificItem(toiletPaper, toiletPaper1);
+        Inventory.addSpecificItem(toiletPaper, toiletPaper2);
+        Inventory.addSpecificItem(toiletPaper, toiletPaper3);
         toiletPaper.addSpecificItem(toiletPaper1);
         toiletPaper.addSpecificItem(toiletPaper2);
         toiletPaper.addSpecificItem(toiletPaper3);
 
         specificItem sodGel1 = new specificItem(null, false, Location.Store, sodGel);
         specificItem sodGel2 = new specificItem(null, true, Location.Storage, sodGel);
+        Inventory.addSpecificItem(sodGel, sodGel1);
+        Inventory.addSpecificItem(sodGel, sodGel2);
         sodGel.addSpecificItem(sodGel1);
         sodGel.addSpecificItem(sodGel2);
 
@@ -100,11 +121,14 @@ public class interfaceManager {
         toiletSubCat.addGeneralItem(toiletPaper);
         washingMachineSubCat.addGeneralItem(sodGel);
 
+        /*
         Inventory.addGeneralItem(milk3Percent);
         Inventory.addGeneralItem(soyMilk);
         Inventory.addGeneralItem(regularButter);
         Inventory.addGeneralItem(toiletPaper);
         Inventory.addGeneralItem(sodGel);
+
+         */
 
     }
 
@@ -132,7 +156,6 @@ public class interfaceManager {
                 //Provide a product shortage report
                 //-----------------------
                 case "1": {
-                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -172,7 +195,6 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                     */
                     break;
                 }
 
@@ -180,7 +202,6 @@ public class interfaceManager {
                 //Update inventory
                 //-----------------------
                 case "2": {
-                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("Which of the following would you choose:");
@@ -189,10 +210,9 @@ public class interfaceManager {
                         System.out.println("3: Create new general Item");
                         System.out.println("4: Add a new specific item");
                         System.out.println("5: Delete category");
-                        System.out.println("6: Delete subcategory");
-                        System.out.println("7: Delete general item");
-                        System.out.println("8: Delete specific item");
-                        System.out.println("9: Move a specific item");
+                        System.out.println("6: Delete general item");
+                        System.out.println("7: Delete specific item");
+                        System.out.println("8: Move a specific item");
                         System.out.println("0: Return to the Main Menu");
 
                         Scanner Second_obj = new Scanner(System.in);
@@ -249,7 +269,8 @@ public class interfaceManager {
                                 System.out.println("What is the minimum quantity of the product?");
                                 itemInput = new Scanner(System.in);
                                 int itemSize = Integer.parseInt(itemInput.nextLine());
-                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, itemMan, currentTemp, CategoryName);
+                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, CategoryName, currentTemp, itemMan);
+                                currentItem.setMinQuantity(itemSize);
 
                                 //Add price history for item
                                 System.out.println("What is the buying price of the item?");
@@ -282,6 +303,7 @@ public class interfaceManager {
                                 break;
                             //Add new specific item
                             case "4":
+
                                 //User's inputs
                                 Date currentDate = new Date();
                                 currentDate = null;
@@ -309,13 +331,17 @@ public class interfaceManager {
                                     currentDate = new Date(itemYear, itemMonth, itemDay);
                                 }
                                 specificItem currentSpecificItem = new specificItem(currentDate, false, Location.Storage, currentItem);
-                                currentItem.addSpecificItem(currentSpecificItem);
+                                Inventory.addSpecificItem(currentItem, currentSpecificItem);
+                                //currentItem.addSpecificItem(currentSpecificItem);
                                 System.out.println("New specific item has been added!");
                                 System.out.println(currentItem.toString());
+
+
                                 break;
                             //Delete category
                             case "5":
-                                System.out.println("What is theCategory you would like to delete??");
+
+                                System.out.println("What is theCategory you would like to delete?");
                                 Scanner Input = new Scanner(System.in);
                                 String CatName = Input.nextLine();
                                 if (Inventory.deleteCat(CatName)){
@@ -324,21 +350,11 @@ public class interfaceManager {
                                 else {
                                     System.out.println("Could not find such an item.");
                                 }
-                                break;
-                            //Delete sub-category
-                            case "6":
-                                System.out.println("What is the Sub Category you would like to delete??");
-                                Input = new Scanner(System.in);
-                                String subCatName = Input.nextLine();
-                                if (Inventory.deleteSubCat(subCatName)){
-                                    System.out.println("Sub Category" + subCatName + " has been deleted.");
-                                }
-                                else {
-                                    System.out.println("Could not find such an item.");
-                                }
+
                                 break;
                             //Delete general item
-                            case "7":
+                            case "6":
+
                                 System.out.println("What is the Catalog Number for the general item you wish to remove?");
                                 Input = new Scanner(System.in);
                                 itemCatalogNumber = Input.nextLine();
@@ -348,9 +364,11 @@ public class interfaceManager {
                                 else {
                                     System.out.println("Could not find such an item.");
                                 }
+
                                 break;
                             //Delete specific item
-                            case "8":
+                            case "7":
+
                                 System.out.println("What is the ID for the specific item you wish to remove?");
                                 Input = new Scanner(System.in);
                                 int serialNumber = Integer.parseInt(Input.nextLine());
@@ -360,9 +378,12 @@ public class interfaceManager {
                                 else {
                                     System.out.println("Could not find such an item.");
                                 }
+
+
                                 break;
                             //Move specific item
-                            case "9":
+                            case "8":
+
                                 System.out.println("What is the item ID for the specific item you wish to move?");
                                 Input = new Scanner(System.in);
                                 serialNumber = Integer.parseInt(Input.nextLine());
@@ -370,18 +391,20 @@ public class interfaceManager {
                                 currentSpecificItem.moveSpecificItem();
                                 System.out.println("Item has been moved!");
                                 System.out.println(currentSpecificItem.toString());
+
                                 break;
                             case "0":
                                 System.out.println("Going back to the Main Menu");
                                 flag = false;
                                 break;
 
+
+
                             default:
                                 System.out.println("Invalid choice");
                                 break;
                         }
                     }
-                    */
                     break;
                 }
 
@@ -389,7 +412,7 @@ public class interfaceManager {
                 //Provide an inventory counting report
                 //-----------------------
                 case "3": {
-                    /*
+
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -430,7 +453,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                    */
+
                     break;
                 }
 
@@ -438,7 +461,6 @@ public class interfaceManager {
                 //Provide a defective products report
                 //-----------------------
                 case "4": {
-                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -479,7 +501,6 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                    */
                     break;
                 }
 
@@ -487,14 +508,13 @@ public class interfaceManager {
                 //Update discount on products
                 //-----------------------
                 case "5": {
-                    /*
+
                     boolean flag = true;
                     while (flag) {
                         System.out.println("For which products to update:");
                         System.out.println("1: To all products");
                         System.out.println("2: By Category");
-                        System.out.println("3: By Subcategory");
-                        System.out.println("4: For a specific product");
+                        System.out.println("3: For a specific product");
                         System.out.println("0: Return to the Main Menu");
 
                         Scanner Second_obj = new Scanner(System.in);
@@ -528,21 +548,6 @@ public class interfaceManager {
                                 break;
 
                             case "3":
-                                Scanner Subcategory = new Scanner(System.in);
-                                System.out.println("For which category do you want to give discount:");
-                                String CategoryAnswerForSub = Subcategory.nextLine();
-                                System.out.println("For which subcategory do you want to give discount:");
-                                String SubCategoryAnswer = Subcategory.nextLine();
-                                System.out.println("Discount by: P) Percentage, S) Standard");
-                                String SubkindAnswer = Subcategory.nextLine();
-                                System.out.println("How much:");
-                                double discountAmountSub = Subcategory.nextDouble();
-                                if (SubkindAnswer.equals("S"))
-                                    Inventory.SubCategoryStandardDiscount(discountAmountSub, CategoryAnswerForSub, SubCategoryAnswer);
-                                if (SubkindAnswer.equals("P"))
-                                    Inventory.SubCategoryPercentageDiscount(discountAmountSub, CategoryAnswerForSub, SubCategoryAnswer);
-                                break;
-                            case "4":
                                 System.out.println("Please enter the catalog number of the item you would like to provide a discount:");
                                 Scanner Product = new Scanner(System.in);
                                 String CatalogNumber = Product.nextLine();
@@ -566,7 +571,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
-                    */
+
                     break;
                 }
 
@@ -583,13 +588,13 @@ public class interfaceManager {
                 //Provide a price history report for a product
                 //-----------------------
                 case "7": {
-                    /*
+
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
                     String catalogNumber = Input.nextLine();
-                    Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
-                    //Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
-                    */
+                    Reports.addReportHistory(Inventory.priceHistoryReport(catalogNumber));
+
+
                     break;
                 }
 
@@ -597,7 +602,7 @@ public class interfaceManager {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "8": {
-                    /*
+
                     System.out.println("What is the item ID for the item to be set as defected?");
                     Scanner defectedItemInput = new Scanner(System.in);
                     int defectedserialNumber = Integer.parseInt(defectedItemInput.nextLine());
@@ -607,7 +612,7 @@ public class interfaceManager {
                     System.out.println("Item numbered " + defectedserialNumber + " has been set has defected and" +
                             "moved into the warehouse storage." );
                     System.out.println(currentSpecific.toString());
-                    */
+
                     break;
                 }
 

@@ -233,6 +233,18 @@ public class Supplier_Manger {
         }
         return null;
     }
+
+
+    public Set<Item> get_itemlist_ofallsuppliers() {
+        Set<Item> items = new HashSet<>();
+        for (Supplier supplier : suppliers) {
+            items.addAll(supplier.getItems().keySet());
+        }
+        return items;
+    }
+
+
+
     public void update_suppliers() {
         this.suppliers=new ArrayList<Supplier>();
         this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());

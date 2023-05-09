@@ -2,18 +2,21 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.sql.*;
-import java.util.*;
-import java.sql.Connection;
-public class OrderMapper
-{
-    private final Connection conn;
-    private final Map<Integer,Order> cache;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    public OrderMapper(Connection conn) {
+public class PeriodicOrderMapper {
+    private final Connection conn;
+    private final Map<Integer,Period_Order> cache;
+
+    public PeriodicOrderMapper(Connection conn) {
         this.conn = conn;
         this.cache = new HashMap<>();
     }
-    public Order findByContractId(String orderNum)
+
+    public Period_Order findByContractId(String orderNum)
     {
         if(cache.containsKey(orderNum))
         {
@@ -21,18 +24,21 @@ public class OrderMapper
         }
         PreparedStatement stmt;
         ResultSet rs;
-        try {
-            stmt = conn.prepareStatement("SELECT * FROM Orders WHERE order_num = ?");
+        try
+        {
+            stmt = conn.prepareStatement("SELECT * FROM PeriodicOrders WHERE order_num = ?");
             stmt.setString(1, orderNum);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                Order order = new Order();
+                Period_Order order = new Period_Order();
                 order.setOrderNum(rs.getInt("order_num"));
                 order.setItemList(Parser.parse(rs.getString("item_list")));
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
                 order.setSupplier(findSupplier(supplierId));
+                order.setDays_to_cycle(rs.getInt("days_to_cycle"));
+                order.setDay_left(rs.getInt("day_left"));
                 cache.put(rs.getInt("order_num"), order);
                 return order;
             }
@@ -41,23 +47,26 @@ public class OrderMapper
         return null;
     }
 
-    public List<Order> findAll()
+    public List<Period_Order> findAll()
     {
-        List<Order> orders = new ArrayList<>();
+        List<Period_Order> orders = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
-        try {
-            stmt = conn.prepareStatement("SELECT * FROM Orders");
+        try
+        {
+            stmt = conn.prepareStatement("SELECT * FROM PeriodicOrders");
             rs = stmt.executeQuery();
             while (rs.next())
             {
-                Order order = new Order();
+                Period_Order order = new Period_Order();
                 order.setOrderNum(rs.getInt("order_num"));
                 order.setItemList(Parser.parse(rs.getString("item_list")));
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
                 order.setSupplier(findSupplier(supplierId));
+                order.setDays_to_cycle(rs.getInt("days_to_cycle"));
+                order.setDay_left(rs.getInt("day_left"));
                 cache.put(rs.getInt("order_num"), order);
                 orders.add(order);
             }
@@ -66,11 +75,12 @@ public class OrderMapper
         return orders;
     }
 
-    public void insert(Order order)
+    public void insert(Period_Order order)
     {
         PreparedStatement stmt;
-        try {
-            stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number)VALUES (?, ?, ?, ?, ?)");
+        try
+        {
+            stmt = conn.prepareStatement("INSERT INTO PeriodicOrders(order_num,supplier_id,item_list,cost,store_number,days_to_cycle,day_left)VALUES (?, ?, ?, ?, ?,?,?)");
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
             stmt.setString(2, supplier.getSupplierID());
@@ -78,6 +88,8 @@ public class OrderMapper
             stmt.setString(3, itemsJson);
             stmt.setFloat(4, order.getCost());
             stmt.setInt(5, order.getStore_number());
+            stmt.setInt(6, order.getDays_to_cycle());
+            stmt.setInt(7, order.getDay_left());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
 
@@ -90,29 +102,33 @@ public class OrderMapper
 
     }
 
-    public void update(Order order)
+    public void update(Period_Order order)
     {
         PreparedStatement stmt;
-        try {
-            stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ? WHERE order_num = ?");
+        try
+        {
+            stmt = conn.prepareStatement("UPDATE PeriodicOrders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ?, days_to_cycle = ?, day_left = ? WHERE order_num = ?");
             stmt.setString(1, order.getSupplier().getSupplierID());
             String itemsJson = new JSONObject(order.getItemList()).toString();
             stmt.setString(2, itemsJson);
             stmt.setFloat(3, order.getCost());
             stmt.setInt(4, order.getStore_number());
-            stmt.setInt(5, order.getOrderNum());
+            stmt.setInt(5, order.getDays_to_cycle());
+            stmt.setInt(6, order.getDay_left());
+            stmt.setInt(7, order.getOrderNum());
             cache.remove(order.getOrderNum());
-            cache.put(order.getOrderNum(), order);// TODO check if there is no duplication after update in the cache
+            cache.put(order.getOrderNum(), order);
         }
         catch (SQLException e){}
 
     }
 
-    public void delete(Order order)
+    public void delete(Period_Order order)
     {
         PreparedStatement stmt;
-        try {
-            stmt = conn.prepareStatement("DELETE FROM Orders WHERE order_num = ?");
+        try
+        {
+            stmt = conn.prepareStatement("DELETE FROM PeriodicOrders WHERE order_num = ?");
             stmt.setInt(1, order.getOrderNum());
             stmt.executeUpdate();
             cache.remove(order.getOrderNum());
@@ -120,6 +136,7 @@ public class OrderMapper
         catch (SQLException e){}
 
     }
+
     private Supplier findSupplier(String supplierId)
     {
         try {
@@ -130,7 +147,6 @@ public class OrderMapper
             if (nonDeliveringSupplier != null) {
                 flag++;
                 return nonDeliveringSupplier;
-//            order.setSupplier(nonDeliveringSupplier);
             }
             conn.close();
             conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
@@ -143,10 +159,8 @@ public class OrderMapper
                     FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
                     FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
                     return fixedDaySupplier;
-//                order.setSupplier(fixedDaySupplier);
                 } else {
                     return nonFixedDaySupplier;
-//                order.setSupplier(nonFixedDaySupplier);
 
                 }
             }

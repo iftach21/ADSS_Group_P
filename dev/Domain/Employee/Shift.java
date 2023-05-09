@@ -196,4 +196,29 @@ public class Shift {
     public void setId(int id) {
         this.id = id;
     }
+    public List<Workers> getDiffWorkers(Shift shiftToCompare){
+        List<Workers> ans = new ArrayList<>();
+
+        List<Workers> inThisWorkers = this.getAllWorkers();
+        List<Workers> otherWorkers = shiftToCompare.getAllWorkers();
+
+        for(Workers w1: inThisWorkers){
+            for(Workers w2: otherWorkers){
+                if(w1.getId() == w2.getId()){ans.add(w1);}
+            }
+        }
+        return ans;
+    }
+
+    private ArrayList<Workers> getAllWorkers(){
+        // Create a new ArrayList to store all the workers
+        ArrayList<Workers> allWorkers = new ArrayList<>();
+
+        // Iterate over each ArrayList in the array
+        for (ArrayList<Workers> workers : this.workerInShift) {
+            // Add all the workers in the current ArrayList to the allWorkers list
+            allWorkers.addAll(workers);
+        }
+        return allWorkers;
+    }
 }

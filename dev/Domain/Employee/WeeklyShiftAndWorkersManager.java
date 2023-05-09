@@ -8,6 +8,7 @@ import Domain.Enums.WindowTypeCreater;
 import Domain.Enums.weightType;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyShiftAndWorkersManager {
@@ -141,7 +142,6 @@ public class WeeklyShiftAndWorkersManager {
         }
     }
 
-    //todo: mabe add here a function to the database:###################################################
     public void printAllWorkersWhoCanWork(int prof,int daynum, String don){
         WindowTypeCreater wc = new WindowTypeCreater();
         List <Workers> allworkerslist = this.workersDAO.getAllworkerslist();
@@ -171,8 +171,16 @@ public class WeeklyShiftAndWorkersManager {
     }
 
     //while giving the right info giving back if there is a stock viable.
-    public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt) throws SQLException {
-        return this.weeklyShiftDAO.get(weeknum,year,supernum).doIhaveAStoke(wt);
+    public List<WindowType> doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt) throws SQLException {
+        List<WindowType> ans = new ArrayList<>();
+        WeeklyShift weeklyShift = this.weeklyShiftDAO.get(weeknum,year,supernum);
+        for(WindowType windowType: WindowTypeCreater.getAllWindowTypes()) {
+            if (weeklyShift.doIhaveAStoke(windowType)) {
+                ans.add(windowType);
+            }
+        }
+
+        return ans;
     }
 
     public List<Driver> giveMeViableDrivers(int weekNum, int yearNum, WindowType wt) throws SQLException {

@@ -1,5 +1,9 @@
 package Domain.Enums;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class WindowTypeCreater {
     public WindowTypeCreater() {
         //empty
@@ -25,6 +29,25 @@ public class WindowTypeCreater {
             if(day==7){return WindowType.night7;}
         }
         return null;
+    }
+
+    static public List<WindowType> getAllWindowTypes(){
+        List<WindowType> windowTypes = new ArrayList<>();
+        windowTypes.add(WindowType.day1);
+        windowTypes.add(WindowType.day2);
+        windowTypes.add(WindowType.day3);
+        windowTypes.add(WindowType.day4);
+        windowTypes.add(WindowType.day5);
+        windowTypes.add(WindowType.day6);
+        windowTypes.add(WindowType.day7);
+        windowTypes.add(WindowType.night1);
+        windowTypes.add(WindowType.night2);
+        windowTypes.add(WindowType.night3);
+        windowTypes.add(WindowType.night4);
+        windowTypes.add(WindowType.night5);
+        windowTypes.add(WindowType.night6);
+        windowTypes.add(WindowType.night7);
+        return windowTypes;
     }
 
 }

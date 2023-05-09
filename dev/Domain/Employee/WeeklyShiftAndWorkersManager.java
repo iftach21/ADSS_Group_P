@@ -26,17 +26,17 @@ public class WeeklyShiftAndWorkersManager {
         return Instance;
     }
     //function for the "1" option in menu
-    public void createnewweeklyshift(int weeknum,int year,int supernum){
+    public void createnewweeklyshift(int weeknum,int year,int supernum) throws SQLException {
         weeklyShiftDAO.add(new WeeklyShift(weeknum,year,supernum));
     }
 
     //function for the "2"
-    public void addtoexistingweeklyshift(int weeknum, int year, int supernum, WindowType wt, int id , int profindx){
+    public void addtoexistingweeklyshift(int weeknum, int year, int supernum, WindowType wt, int id , int profindx) throws SQLException {
         this.getweeklyshift(weeknum,year,supernum).addworkertoshift(this.getworkerbyid(id),wt,profindx);
     }
 
     //function for the "3"
-    public void switchemployeeinashift(int weeknum,int yearnum,int supernum, WindowType wt,int prof, int id1, int id2){
+    public void switchemployeeinashift(int weeknum,int yearnum,int supernum, WindowType wt,int prof, int id1, int id2) throws SQLException {
         this.getweeklyshift(weeknum,yearnum,supernum).changeWorker(this.getworkerbyid(id1),this.getworkerbyid(id2),prof,wt);
     }
     //function for the "4"
@@ -54,9 +54,10 @@ public class WeeklyShiftAndWorkersManager {
         this.getworkerbyid(id).setWage(addedwage + this.getworkerbyid(id).getWage());
     }
     //function for the "7"
+    //todo: fix this!
     public int getwageforemployee(int id, int week,int year){
         List <Workers> allworkerslist = this.workersDAO.getAllworkerslist();
-        List <WeeklyShift> weeklyShiftList = this.weeklyShiftDAO.getWeeklyShiftList();
+        List <WeeklyShift> weeklyShiftList = this.weeklyShiftDAO.getWeeklyShiftList(week,year);
         for(int i=0; i<weeklyShiftList.size();i++) {
             if(weeklyShiftList.get(i).getWeekNUm()==week && weeklyShiftList.get(i).getYear()==year){
                 int hm =  weeklyShiftList.get(i).howMuchShiftWorkerDid(id);
@@ -106,13 +107,13 @@ public class WeeklyShiftAndWorkersManager {
         this.getworkerbyid(id).removewindow(wt);
     }
     //for function "14"
-    public void printweeklyshift(int weeknum,int year,int supernum){
+    public void printweeklyshift(int weeknum,int year,int supernum) throws SQLException {
         System.out.println(this.getweeklyshift(weeknum,year,supernum).printSpesific());
     }
     public Workers getworkerbyid(int id) {
             return this.workersDAO.get(id);
     }
-    public WeeklyShift getweeklyshift(int week,int year,int supernum){
+    public WeeklyShift getweeklyshift(int week,int year,int supernum) throws SQLException {
         return this.weeklyShiftDAO.get(week,year,supernum);
     }
     public void printall(){
@@ -131,41 +132,27 @@ public class WeeklyShiftAndWorkersManager {
             }
         }
     }
-    //checking if allready has shift at other super:
-    public boolean IsWorkingAllready(int id,int weeknum, int year,int daynum, String don){
-        WindowTypeCreater wc = new WindowTypeCreater();
-        List <WeeklyShift> weeklyShiftList = this.weeklyShiftDAO.getWeeklyShiftList();
-        for(int i =0;i<weeklyShiftList.size();i++){
-            WeeklyShift w = weeklyShiftList.get(i);
-            if(w.getYear()==year && w.getWeekNUm()==weeknum){
-                if(w.checkifworkallready(id,wc.getwidowtype(daynum,don) )){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
-    public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm){
+    public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm) throws SQLException {
         WindowTypeCreater wc = new WindowTypeCreater();
         getweeklyshift(weeknum,year,supernum).addreqtoshift(wc.getwidowtype(daynum,don),prof,hm);
     }
 
-    public void settimeforweeklyshift(int weeknum, int year,int supernum, int daynum,String don, String startime){
+    public void settimeforweeklyshift(int weeknum, int year,int supernum, int daynum,String don, String startime) throws SQLException {
         WindowTypeCreater wc = new WindowTypeCreater();
         getweeklyshift(weeknum,year,supernum).setTimeForShift(startime,wc.getwidowtype(daynum,don));
     }
-    public void printweeklyreq(int weeknum, int year,int supernum){
+    public void printweeklyreq(int weeknum, int year,int supernum) throws SQLException {
         getweeklyshift(weeknum,year,supernum).printweeklyreq();
 
     }
 
     //while giving the right info giving back if there is a stock viable.
-    public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt){
+    public boolean doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt) throws SQLException {
         return this.weeklyShiftDAO.get(weeknum,year,supernum).doIhaveAStoke(wt);
     }
 
-    public List<Driver> giveMeViableDrivers(int weekNum, int yearNum, WindowType wt){
+    public List<Driver> giveMeViableDrivers(int weekNum, int yearNum, WindowType wt) throws SQLException {
         return this.weeklyShiftDAO.get(weekNum,yearNum,0).giveAllDrivers(wt);
     }
     //adding a new driver:

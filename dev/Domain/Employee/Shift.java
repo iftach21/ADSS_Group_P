@@ -6,6 +6,7 @@ import java.util.List;
 public class Shift {
     private int ShiftID;
     private String date;
+    private int id = -1;
 
 
 
@@ -187,5 +188,12 @@ public class Shift {
     }
     public int getShiftID() {
         return ShiftID;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }

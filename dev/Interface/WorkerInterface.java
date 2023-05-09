@@ -12,7 +12,7 @@ public class WorkerInterface extends AInterface {
     public WorkerInterface() throws SQLException {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
-    public void logIn() throws ExitExeption {
+    public void logIn() throws ExitExeption, SQLException {
         int ans = 1;
         Scanner myObj = new Scanner(System.in);
         while (ans == 1) {

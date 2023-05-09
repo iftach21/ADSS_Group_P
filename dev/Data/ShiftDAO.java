@@ -43,6 +43,7 @@ public class ShiftDAO {
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 primaryKey = rs.getInt(1);
+                s.setId(primaryKey);
             }
 
             // close resources
@@ -82,5 +83,14 @@ public class ShiftDAO {
         }
         return null;
 
+    }
+
+    public void update(Shift shiftToUpdate){
+        //todo: complete: update workers_shift table
+    }
+
+    public void delete(Shift shiftToDelete){
+        //todo: make sure to delete the workers_shift table accord..
+        //allso make sure to delete from cache
     }
 }

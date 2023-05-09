@@ -20,12 +20,11 @@ public class DriverController {
 
     public DriverController(){}
 
-    public List<Driver> getAvailableDrivers(int weekNum, int yearNum, WindowType wt)
-    {
+    public List<Driver> getAvailableDrivers(int weekNum, int yearNum, WindowType wt) throws SQLException {
         return weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);
     }
 
-    public List<Driver> findDriver(TempLevel currMinTemp, int weekNum, int yearNum, WindowType wt){
+    public List<Driver> findDriver(TempLevel currMinTemp, int weekNum, int yearNum, WindowType wt) throws SQLException {
         Driver chosenDriver;
 
         //this will give the available drivers for the shift

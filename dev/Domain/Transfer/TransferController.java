@@ -352,7 +352,9 @@ public class TransferController {
             removeOneDestOfTransfer(transfer);
             LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
             transfer.setArrivingTime(arrivingTime.toLocalTime());
+            transfersDAO.update(transfer);
             transfer.setArrivingDate(arrivingTime.toLocalDate());
+            transfersDAO.update(transfer);
         }
         else if (selectedOption == 2)
         {
@@ -363,7 +365,9 @@ public class TransferController {
             removeItemsOfTransfer(transfer);
             LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
             transfer.setArrivingTime(arrivingTime.toLocalTime());
+            transfersDAO.update(transfer);
             transfer.setArrivingDate(arrivingTime.toLocalDate());
+            transfersDAO.update(transfer);
         }
 
         transfer.documentUpdateTruckWeight(null, transfer.getSource());
@@ -441,6 +445,7 @@ public class TransferController {
                 if (truckWeight >=0)
                 {
                     transferTruck.updateWeight(truckWeight);
+                    tc.updateTruck(transferTruck);
                     break;
                 }
                 else
@@ -494,6 +499,7 @@ public class TransferController {
                     if (truckWeight >=0)
                     {
                         transferTruck.updateWeight(truckWeight);
+                        tc.updateTruck(transferTruck);
                         break;
                     }
                     else
@@ -584,6 +590,7 @@ public class TransferController {
         }
         tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null);
         transfer.updateTransferTruck(chosenTruck);
+        transfersDAO.update(transfer);
         transfer.documentUpdateTruckNumber();
     }
 
@@ -929,7 +936,9 @@ public class TransferController {
                     scanner.next();
                 }
             }
+
             transferToUpdate.setArrivingDate(arrivingDate);
+            transfersDAO.update(transferToUpdate);
 
             //update arriving time
             System.out.println("Please enter the updated arriving time of the transfer, in this format - HH:mm : ");
@@ -949,6 +958,7 @@ public class TransferController {
                 }
             }
             transferToUpdate.setArrivingTime(arrivingTime);
+            transfersDAO.update(transferToUpdate);
         }
     }
 
@@ -1054,7 +1064,7 @@ public class TransferController {
         tc.addTruck(newTruck);
     }
 
-    //should be called also when rearrange transfer
+
     public LocalDateTime calculateArrivingTime(Site sourceSite, List<Site> destinationSites, LocalTime leavingTime, LocalDate leavingDate){
         /*
         Calculates the expected arriving times, based on the distance between the sites in the transfer and the driver's speed.

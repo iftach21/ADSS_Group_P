@@ -101,7 +101,7 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
             stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
             stmt.setString(7, itemsJson);
-            stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+            stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
             rs = stmt.getGeneratedKeys();
             if (rs.next()) {
@@ -124,7 +124,7 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(5, nonFixedDaySupplier.getPerson().getName());
             stmt.setString(6, nonFixedDaySupplier.getPerson().getPhoneNumber());
             stmt.setString(7, itemsJson);
-            stmt.setString(8, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+            stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
             cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);
         }

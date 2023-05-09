@@ -17,11 +17,17 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class TruckController {
+    private static TruckController Instance = null;
     //public Map<Integer, Truck> _trucks;
     private final TrucksDAO trucksDAO;
 
     public TruckController() throws SQLException {
         this.trucksDAO = TrucksDAO.getInstance();
+    }
+
+    public static TruckController getInstance() throws SQLException {
+        if(Instance==null){Instance = new TruckController();}
+        return Instance;
     }
 
     public Map<Integer, Truck> getAvailableTrucksOfLightWeight(LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime)

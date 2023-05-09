@@ -10,8 +10,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TruckControllerTests {
     Driver driver1;
@@ -24,13 +29,12 @@ class TruckControllerTests {
     TruckController truckControllerTest;
 
     @BeforeEach
-    void createMockTransfer()
-    {
+    void createMockTransfer() throws SQLException {
         //create 4 trucks
-        this.truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen,false);
-        this.truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,false);
-        this.truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen,false);
-        this.truck4 = new Truck(1045277, "Kia", 14, 14,40,  TempLevel.cold,true);
+        this.truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen,null, null, null,null);
+        this.truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,null, null, null,null);
+        this.truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen,null, null, null,null);
+        this.truck4 = new Truck(1045277, "Kia", 14, 14,40,  TempLevel.cold,null, null, null,null);
 
         //add trucks to map
         this.trucks = new HashMap<>();
@@ -41,10 +45,11 @@ class TruckControllerTests {
 
         //create driver
         this.driverLicense1 = new DriverLicense(weightType.lightWeight, TempLevel.frozen);
-        this.driver1 = new Driver(driverLicense1,"Nitzan", true);
+        this.driver1 = new Driver(1,"iftach","lotsofmoney",
+            "23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.lightWeight);
 
         //create truckController
-        this.truckControllerTest = new TruckController(trucks);
+        this.truckControllerTest = TruckController.getInstance();
     }
 
     @Test
@@ -55,7 +60,7 @@ class TruckControllerTests {
         availableLightTrucks.put(truck2.getLicenseNumber(), truck2);
 
         //test if equals
-        assertEquals(availableLightTrucks, truckControllerTest.getAvailableTrucksOfLightWeight());
+        assertEquals(availableLightTrucks, truckControllerTest.getAvailableTrucksOfLightWeight(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20)));
     }
 
     @Test
@@ -66,7 +71,7 @@ class TruckControllerTests {
         availableMiddleTrucks.put(truck1.getLicenseNumber(), truck1);
 
         //test if equals
-        assertEquals(availableMiddleTrucks, truckControllerTest.getAvailableTrucksOfMiddleWeight());
+        assertEquals(availableMiddleTrucks, truckControllerTest.getAvailableTrucksOfMiddleWeight(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20)));
     }
 
     @Test
@@ -77,16 +82,16 @@ class TruckControllerTests {
         availableHeavyTrucks.put(truck3.getLicenseNumber(), truck3);
 
         //test if equals
-        assertEquals(availableHeavyTrucks, truckControllerTest.getAvailableTrucksOfHeavyWeight());
+        assertEquals(availableHeavyTrucks, truckControllerTest.getAvailableTrucksOfHeavyWeight(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20)));
     }
 
     @Test
     void findTruckByDriverTest()
     {
         //Set CurrMinTemp with Domain.Enums.TempLevel.regular and driver with lightWeight and frozen qualify and find corresponding truck
-        Truck chosenTruck = truckControllerTest.findTruckByDriver(driver1, TempLevel.regular);
+        Truck chosenTruck = truckControllerTest.findTruckByDriver(driver1, TempLevel.regular, LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
 
         //test if equals
-        Assertions.assertEquals(truck2, chosenTruck);
+        assertEquals(truck2, chosenTruck);
     }
 }

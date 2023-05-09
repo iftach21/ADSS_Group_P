@@ -2,12 +2,15 @@ package Domain.Employee;
 
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowType;
+import Domain.Transfer.TruckController;
 
 import java.sql.SQLException;
 import java.util.*;
 
 public class DriverController {
     private static final WeeklyShiftAndWorkersManager weeklyShiftAndWorkersManager;
+    private static DriverController Instance = null;
+
 
     static {
         try {
@@ -17,8 +20,12 @@ public class DriverController {
         }
     }
 
-
     public DriverController(){}
+
+    public static DriverController getInstance() throws SQLException {
+        if(Instance==null){Instance = new DriverController();}
+        return Instance;
+    }
 
     public List<Driver> getAvailableDrivers(int weekNum, int yearNum, WindowType wt) throws SQLException {
         return weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);

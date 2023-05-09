@@ -19,25 +19,27 @@ import Domain.Enums.WindowTypeCreater;
 
 
 public class TransferController {
-
+    private static TransferController Instance = null;
     private int _documentsCounter;
-    private TruckController tc;
-    private DriverController dc;
-    private SiteController sc;
+    private TruckController tc = TruckController.getInstance();
+    private DriverController dc = DriverController.getInstance();
+    private SiteController sc = SiteController.getInstance();
     private Queue<Map<Site, Map<Item_mock, Integer>>> _ordersQueue; //should be taken from suppliers DB (in the future)
     private Queue<Integer> _orderDestinationSiteIdQueue; //should be taken from suppliers DB (in the future)
     private final TransferDAO transfersDAO;
     private WeeklyShiftAndWorkersManager weeklyShiftManager = WeeklyShiftAndWorkersManager.getInstance();
 
-    public TransferController(TruckController tc, DriverController dc, SiteController sc) throws SQLException {
+    public TransferController() throws SQLException {
         //_transfers = new HashMap<>();
         this.transfersDAO = TransferDAO.getInstance();
         _documentsCounter = 0;
-        this.tc = tc;
-        this.dc = dc;
-        this.sc = sc;
         this._ordersQueue = new LinkedList<>();
         this._orderDestinationSiteIdQueue = new LinkedList<>();
+    }
+
+    public static TransferController getInstance() throws SQLException {
+        if(Instance==null){Instance = new TransferController();}
+        return Instance;
     }
 
     public void startTransferSystem() throws SQLException {

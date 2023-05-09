@@ -8,12 +8,11 @@ public class Main {
     static final List<AInterface> intefaceList = new ArrayList<>(){{
         add(bossInterface);
         add(workerInterface);
-        //add(transferInterface) //todo: complete later;
+        add(transferInterface);
     }};
     static BossInterface bossInterface;
     static WorkerInterface workerInterface;
-    //TODO: adding here the shipment interface:
-    //static TransferInterface transferInterface;
+    static TransferManagerInterface transferInterface;
     public static void main(String[] args) {
         int option = 1;
         while(option != 0){

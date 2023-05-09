@@ -9,14 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="dfg">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="working ContractMapper">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Period_Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Period_Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/classpath.index" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,14 +157,7 @@
       <workItem from="1682607405112" duration="31000" />
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
-      <workItem from="1683628162392" duration="4410000" />
-    </task>
-    <task id="LOCAL-00005" summary="day">
-      <created>1680021534941</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1680021534941</updated>
+      <workItem from="1683628162392" duration="7495000" />
     </task>
     <task id="LOCAL-00006" summary="df">
       <created>1680022366512</created>
@@ -507,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683630244316</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="working ContractMapper">
+      <created>1683635045067</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1683635045067</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,7 +528,8 @@
     <MESSAGE value="sadf" />
     <MESSAGE value="database" />
     <MESSAGE value="dfg" />
-    <option name="LAST_COMMIT_MESSAGE" value="dfg" />
+    <MESSAGE value="working ContractMapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="working ContractMapper" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

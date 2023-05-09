@@ -23,6 +23,7 @@ public class ContractMapper {
         {
             return cache.get(contractId);
         }
+
         try{
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE contract_id = ?");
             stmt.setInt(1,contractId);

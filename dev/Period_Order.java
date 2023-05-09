@@ -1,27 +1,64 @@
 
 /*This class is representing the period order and is going to be used in the other class to insert when the cycle
  is ending a new order*/
-public class Period_Order {
-    private Order order;
+public class Period_Order extends Order {
+
+//    static int ordernumber = 0;
+
+//    private Order order;
     //day's to each cycle until the new order
     private int days_to_cycle;
 
     //how much time left until the order is issue again
     private int day_left;
 
-    public Period_Order(Order order, int days_to_cycle) {
-        this.order = order;
+//    private int periodicOrderId;
+
+    public Period_Order() {
+    }
+
+//    public Period_Order(Order order, int days_to_cycle)
+    public Period_Order(int days_to_cycle)
+
+    {
+//        this.order = order;
         this.days_to_cycle = days_to_cycle;
         this.day_left=days_to_cycle;
+//        this.periodicOrderId = ordernumber;
+//        ordernumber ++;
     }
 
-    public Order getOrder() {
-        return order;
+//    public static int getOrdernumber() {
+//        return ordernumber;
+//    }
+//
+//    public static void setOrdernumber(int ordernumber) {
+//        Period_Order.ordernumber = ordernumber;
+//    }
+
+    public int getDay_left() {
+        return day_left;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setDay_left(int day_left) {
+        this.day_left = day_left;
     }
+
+//    public int getPeriodicOrderId() {
+//        return periodicOrderId;
+//    }
+//
+//    public void setPeriodicOrderId(int periodicOrderId) {
+//        this.periodicOrderId = periodicOrderId;
+//    }
+
+//    public Order getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
 
     public int getDays_to_cycle() {
         return days_to_cycle;

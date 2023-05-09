@@ -4,6 +4,8 @@ import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Truck {
     private int _truck_licenseNumber;
@@ -12,10 +14,10 @@ public class Truck {
     private int _truckWeight;
     private int _truck_maxWeight;
     private TempLevel _coolingCapacity;
-    private LocalDate _unavailableStartDate;
-    private LocalDate _unavailableEndDate;
+    private LocalDateTime _unavailableStartTime;
+    private LocalDateTime _unavailableEndTime;
 
-    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity, LocalDate unavailableStartDate, LocalDate unavailableEndDate)
+    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity, LocalDate unavailableStartDate, LocalTime unavailableStartTime, LocalDate unavailableEndDate, LocalTime unavailableEndTime)
     {
         this._truck_licenseNumber = truck_licenseNumber;
         this._truckModel = truckModel;
@@ -23,8 +25,8 @@ public class Truck {
         this._truckWeight = truckWeight;
         this._truck_maxWeight = truck_maxWeight;
         this._coolingCapacity = coolingCapacity;
-        this._unavailableStartDate = unavailableStartDate;
-        this._unavailableEndDate = unavailableEndDate;
+        this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
+        this._unavailableEndTime = LocalDateTime.of(unavailableEndDate, unavailableEndTime);
     }
 
     public int getCurrentTruckWeight()
@@ -44,7 +46,7 @@ public class Truck {
 
     public int getMaxWeight(){ return _truck_maxWeight;}
 
-    public boolean getIsUsedInDate(LocalDate dateToCheck){ return !(dateToCheck.isAfter(_unavailableStartDate) && dateToCheck.isBefore(_unavailableEndDate));}
+    public boolean getIsUsedInDate(LocalDateTime leavingDate, LocalDateTime arrivingDate){ return !(leavingDate.isAfter(_unavailableEndTime) || arrivingDate.isBefore(_unavailableStartTime));}
 
     public int getLicenseNumber(){return _truck_licenseNumber;}
 
@@ -82,10 +84,10 @@ public class Truck {
             return weightType.heavyWeight;
     }
 
-    public void setTruckUnavailable(LocalDate startDate, LocalDate endDate)
+    public void setTruckUnavailable(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime)
     {
-        _unavailableStartDate = startDate;
-        _unavailableEndDate = endDate;
+        _unavailableStartTime = LocalDateTime.of(startDate, startTime);
+        _unavailableEndTime = LocalDateTime.of(endDate, endTime);;
     }
 
     public int getTruckNetWeight()
@@ -93,13 +95,10 @@ public class Truck {
         return _truckNetoWeight;
     }
 
-    public LocalDate getUnavailableStartDate()
+    public LocalDateTime getUnavailableStartTime()
     {
-        return _unavailableStartDate;
+        return _unavailableStartTime;
     }
 
-    public LocalDate get_unavailableEndDate()
-    {
-        return _unavailableEndDate;
-    }
+    public LocalDateTime getUnavailableEndTime() {return  _unavailableEndTime;}
 }

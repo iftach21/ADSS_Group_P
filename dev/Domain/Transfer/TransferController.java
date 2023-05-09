@@ -271,7 +271,7 @@ public class TransferController {
         }
 
         //choose truck by the chosen driver
-        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate);
+        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
         if (chosenTruck == null)
         {
             System.out.println("Unfortunately, there is no available truck to this transfer.");
@@ -303,7 +303,7 @@ public class TransferController {
             boolean transferRearranged = false;
 
             Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-            transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getArrivingDate());
+            transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
 
             System.out.println("The truck chosen to the transfer is: ");
             System.out.println("License Number: " + transferTruck.getLicenseNumber());
@@ -426,7 +426,7 @@ public class TransferController {
 
         Scanner scanner = new Scanner(System.in);
         Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-        transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getArrivingDate());
+        transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
 
         boolean transferRearranged = false;
 
@@ -576,7 +576,7 @@ public class TransferController {
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("These are the available trucks. Please choose one of the trucks, by type its license number: ");
-        for (Integer LicenseNum : tc.getAllAvailableTrucks(transfer.getLeavingDate()).keySet())
+        for (Integer LicenseNum : tc.getAllAvailableTrucks(transfer.getLeavingDate(), transfer.getLeavingTime(), transfer.getArrivingDate(), transfer.get_arrivingTime()).keySet())
         {
             System.out.println("License number: " + LicenseNum + ", Domain.Truck Model: " + tc.getTruck(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc.getTruck(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc.getTruck(LicenseNum).getTruckWeightType());
         }
@@ -587,7 +587,7 @@ public class TransferController {
         {
             try {
                 chosenTruck = scanner.nextInt();
-                if (tc.getAllAvailableTrucks(transfer.getLeavingDate()).containsKey(chosenTruck))
+                if (tc.getAllAvailableTrucks(transfer.getLeavingDate(), transfer.getLeavingTime(), transfer.getArrivingDate(), transfer.get_arrivingTime()).containsKey(chosenTruck))
                 {
                     break;
                 }
@@ -602,7 +602,7 @@ public class TransferController {
                 scanner.next();
             }
         }
-        tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null);
+        tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null, null, null);
         transfer.updateTransferTruck(chosenTruck);
         transfersDAO.update(transfer);
         transfer.documentUpdateTruckNumber();
@@ -1074,7 +1074,7 @@ public class TransferController {
         }
 
         //create the truck
-        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null);
+        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null, null, null);
         tc.addTruck(newTruck);
     }
 

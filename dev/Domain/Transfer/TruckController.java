@@ -1,28 +1,34 @@
 package Domain.Transfer;
 
+import Data.TrucksDAO;
+import Data.WeeklyShiftDAO;
+import Data.WorkersDAO;
 import Domain.Employee.Driver;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class TruckController {
-    public Map<Integer, Truck> _trucks;
+    //public Map<Integer, Truck> _trucks;
+    private final TrucksDAO trucksDAO;
 
-    public TruckController(Map<Integer, Truck> trucks)
-    {
-        this._trucks = trucks;
+    public TruckController() throws SQLException {
+        this.trucksDAO = TrucksDAO.getInstance();
     }
 
     public Map<Integer, Truck> getAvailableTrucksOfLightWeight(LocalDate leavingDate)
     {
+        Map<Integer,Truck> allTrucks = trucksDAO.getAllTrucks();
         Map<Integer, Truck> availableTrucks = new HashMap<>();
-        for(int licenseNumber : _trucks.keySet()){
-            if(!_trucks.get(licenseNumber).getIsUsedInDate(leavingDate) && _trucks.get(licenseNumber).isLightWeight()){
-                availableTrucks.put(_trucks.get(licenseNumber).getLicenseNumber(), _trucks.get(licenseNumber));
+        for(int licenseNumber : allTrucks.keySet()){
+            if(!allTrucks.get(licenseNumber).getIsUsedInDate(leavingDate) && allTrucks.get(licenseNumber).isLightWeight()){
+                availableTrucks.put(allTrucks.get(licenseNumber).getLicenseNumber(), allTrucks.get(licenseNumber));
             }
         }
         return availableTrucks;
@@ -30,10 +36,11 @@ public class TruckController {
 
     public Map<Integer, Truck> getAvailableTrucksOfMiddleWeight(LocalDate leavingDate)
     {
+        Map<Integer,Truck> allTrucks = trucksDAO.getAllTrucks();
         Map<Integer, Truck> availableTrucks = new HashMap<>();
-        for(int licenseNumber : _trucks.keySet()){
-            if(!_trucks.get(licenseNumber).getIsUsedInDate(leavingDate) && _trucks.get(licenseNumber).isMiddleWeight()){
-                availableTrucks.put(_trucks.get(licenseNumber).getLicenseNumber(), _trucks.get(licenseNumber));
+        for(int licenseNumber : allTrucks.keySet()){
+            if(!allTrucks.get(licenseNumber).getIsUsedInDate(leavingDate) && allTrucks.get(licenseNumber).isMiddleWeight()){
+                availableTrucks.put(allTrucks.get(licenseNumber).getLicenseNumber(), allTrucks.get(licenseNumber));
             }
         }
         return availableTrucks;
@@ -41,10 +48,11 @@ public class TruckController {
 
     public Map<Integer, Truck> getAvailableTrucksOfHeavyWeight(LocalDate leavingDate)
     {
+        Map<Integer,Truck> allTrucks = trucksDAO.getAllTrucks();
         Map<Integer, Truck> availableTrucks = new HashMap<>();
-        for(int licenseNumber : _trucks.keySet()){
-            if(!_trucks.get(licenseNumber).getIsUsedInDate(leavingDate) && _trucks.get(licenseNumber).isHeavyWeight()){
-                availableTrucks.put(_trucks.get(licenseNumber).getLicenseNumber(), _trucks.get(licenseNumber));
+        for(int licenseNumber : allTrucks.keySet()){
+            if(!allTrucks.get(licenseNumber).getIsUsedInDate(leavingDate) && allTrucks.get(licenseNumber).isHeavyWeight()){
+                availableTrucks.put(allTrucks.get(licenseNumber).getLicenseNumber(), allTrucks.get(licenseNumber));
             }
         }
         return availableTrucks;

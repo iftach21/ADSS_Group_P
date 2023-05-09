@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrucksDAO {
     private Connection conn = Database.Connection.getConnectionToDatabase();
@@ -37,13 +39,13 @@ public class TrucksDAO {
         return null;
     }
 
-    public List<Truck> getAllTrucks() {
+    public Map<Integer, Truck> getAllTrucks() {
         /*
             get all trucks from Truck table
         */
 
         //licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableEndDate
-        List<Truck> trucks = new ArrayList<>();
+        Map<Integer, Truck> trucks = new HashMap<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -54,7 +56,7 @@ public class TrucksDAO {
                 int licenseNumber = rs.getInt("licenseNumber");
                 Truck truck = this.createNewTruck(rs,licenseNumber);
                 this.TruckList.add(truck);
-                trucks.add(truck);
+                trucks.put(licenseNumber, truck);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

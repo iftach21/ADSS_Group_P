@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="started working on OrderManger">
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" afterDir="false" />
-    </list>
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="started working on OrderManger" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,13 +159,6 @@
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
       <workItem from="1683628162392" duration="9614000" />
-    </task>
-    <task id="LOCAL-00016" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680090443301</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1680090443301</updated>
     </task>
     <task id="LOCAL-00017" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680100822480</created>
@@ -507,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683655739191</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="started working on OrderManger">
+      <created>1683655895490</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1683655895490</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

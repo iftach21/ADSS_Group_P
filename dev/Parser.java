@@ -1,10 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Parser {
     public static Map<Item, Pair<Integer, Float>> parse(String input) {
         Map<Item, Pair<Integer, Float>> map = new HashMap<>();
-        if(input == "{}")
+        if(Objects.equals(input, "{}"))
         {
             return map;
         }

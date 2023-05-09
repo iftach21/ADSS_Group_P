@@ -130,7 +130,7 @@ public class ItemMapper {
 
     }
 
-    public List<Item> findAllByCatalogNum(String catalogNum) throws SQLException
+    public List<Item> findAllByCatalogNum(String catalogNum)
     {
         PreparedStatement stmt;
         ResultSet rs;

@@ -49,7 +49,8 @@ public class OrderMapper
         try {
             stmt = conn.prepareStatement("SELECT * FROM Orders");
             rs = stmt.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 Order order = new Order();
                 order.setOrderNum(rs.getInt("order_num"));
                 order.setItemList(Parser.parse(rs.getString("item_list")));

@@ -118,7 +118,10 @@ public class OrderMapper
             stmt.executeUpdate();
             cache.remove(order.getOrderNum());
         }
-        catch (SQLException e){}
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
 
     }
     private Supplier findSupplier(String supplierId)

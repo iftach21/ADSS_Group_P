@@ -76,21 +76,24 @@ class OrderMangerTest {
         supplier.add_item_to_contract(item3.getName(),96,96);
         supplier.add_item_to_contract(item4.getName(),54,45);
         contractMapperTest.update(supplier.getContract());
-        Contract supplierIdContractTest = contractMapperTest.findBySupplierId("S002");
+        Contract supplierIdContractTest = contractMapperTest.findBySupplierId("S001");
         Contract supplierIdContractTest1 = contractMapperTest.findByContractId(2);
         List<Contract> allContractsTest = contractMapperTest.findAll();
         System.out.println("---------------------");
         OrderMapper orderMapperTest = new OrderMapper(conn2);
         Order orderTest = new Order();
-        orderTest.setSupplier(supplier1);
+        orderTest.setSupplier(supplier);
 
         orderTest.add_item(item1,420,69);
         orderTest.add_item(item2,300,20);
         orderTest.add_item(item3,45,6);
-        orderMapperTest.insert(orderTest);
+//        orderMapperTest.insert(orderTest);
         orderTest.add_item(item4,4,850);
-        orderMapperTest.update(orderTest);
-
+//        orderMapperTest.update(orderTest);
+//        Order orderTest1 = orderMapperTest.findByOrderNum("0");
+//        List<Order> allOrdersTest = orderMapperTest.findAll();
+        System.out.println("---------------------");
+        orderMapperTest.delete(orderTest);
 
 //        try{
 //        mapper1.insert(supplier);}

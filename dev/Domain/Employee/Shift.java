@@ -221,4 +221,17 @@ public class Shift {
         }
         return allWorkers;
     }
+    public int workerPro(Workers worker){
+        int count=0;
+        for (ArrayList<Workers> workerLisr: workerInShift){
+            for(Workers w: workerLisr) {
+                if(worker.getId()==w.getId()){
+                    return count;
+                }
+            }
+            count++;
+            }
+            return -1;
+        }
+
 }

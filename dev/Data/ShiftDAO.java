@@ -146,7 +146,7 @@ public class ShiftDAO {
 //            return the list of new worker
             List<Workers> l2= returnFromCache(shift.getId()).getDiffWorkers(shift);
             for(Workers worker:l1){
-                shiftWorkerDAO.add(worker,shift,
+                shiftWorkerDAO.add(worker,shift,shift.workerPro(worker));
             }
             for(Workers worker:l1){
                 shiftWorkerDAO.delete(worker.getId(),shift.getShiftID());

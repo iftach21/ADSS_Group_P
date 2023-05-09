@@ -75,7 +75,7 @@ public class ShiftWorkerDAO {
         }
     }
 
-    private void delete(int idWorker, int idShift){
+    void delete(int idWorker, int idShift){
 
         try {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM shift_worker_in_shift WHERE worker_id = ? AND shift_id=?");

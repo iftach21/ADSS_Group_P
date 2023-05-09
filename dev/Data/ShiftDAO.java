@@ -25,6 +25,7 @@ public class ShiftDAO {
 
 
     public int add(Shift s){
+        //todo: add to support in req
         int primaryKey = -1;
 
         try {
@@ -70,6 +71,8 @@ public class ShiftDAO {
     }
 
     public Shift get(int shiftId) throws SQLException {
+        //todo: add to support in req
+
         for(Shift shift: ShiftList){
             if (shift.getShiftID()==shiftId){
                 return shift;

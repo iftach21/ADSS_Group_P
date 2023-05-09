@@ -23,7 +23,7 @@ public class Interface {
         // Create inner interfaces
         // -------------------------------------------------------
 
-        interfaceWorker interfaceWorker = new interfaceWorker();
+        //interfaceWorker interfaceWorker = new interfaceWorker();
         interfaceManager interfaceManager = new interfaceManager();
 
         // -------------------------------------------------------
@@ -78,9 +78,9 @@ public class Interface {
         }
 
         //Else if the user is a worker
-        else if (userName.equals(Worker_Username)) {
-            interfaceWorker.interfaceWorkerLogin();
-        }
+        //else if (userName.equals(Worker_Username)) {
+            //interfaceWorker.interfaceWorkerLogin();
+        //}
 
     }
 

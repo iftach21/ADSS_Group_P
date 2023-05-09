@@ -78,6 +78,17 @@ public class Item {
         this.minimum_quantity = minimumQuantity;
     }
 
+    public Item(Item fatherItem) {
+        this.name = fatherItem.name;
+        this.catalogNum = fatherItem.catalogNum;
+        this.weight = fatherItem.weight;
+        this.catalogName = fatherItem.catalogName;
+        this.temperature = fatherItem.temperature;
+        this.priceHistory = fatherItem.priceHistory;
+        this.manufacturer = fatherItem.manufacturer;
+        this.minimum_quantity = fatherItem.minimum_quantity;
+    }
+
     public String getName() {
         return name;
     }
@@ -185,5 +196,59 @@ public class Item {
     @Override
     public int hashCode() {
         return Objects.hash(catalogNum);
+    }
+
+    //This method updates the price, and adds it into the history
+    public void addNewPrice(double buyPrice, double sellPrice){
+        Date currentDate = new Date();
+        PriceHistory currentPrice = new PriceHistory(buyPrice, sellPrice, currentDate);
+        this.priceHistory.add(currentPrice);
+    }
+
+    public void addSpecificItem(specificItem s_Item) {
+    }
+
+    //TO DELETE
+    public int getAmount() {
+        return 0;
+    }
+
+    //TO DELETE
+    public specificItem getSpecificItemList(int j) {
+        return null;
+    }
+
+    //TO DELETE
+    public void removeSpecificItem(specificItem currentSpecificItem) {
+    }
+
+    public int getMinQuantity() {
+        return this.minimum_quantity;
+    }
+
+    public int getPriceHistorySize() {
+        return this.priceHistory.size();
+    }
+
+    public Object getPriceHistorySpecific(int j) {
+        return priceHistory.get(j);
+    }
+
+    public Discount getDiscount() {
+        return null;
+    }
+
+    public double getBuyPrice() {
+        int lastPriceHistory = this.priceHistory.size() - 1;
+        return this.priceHistory.get(lastPriceHistory).getBuyPrice();
+    }
+
+    public double getSellPrice() {
+        int lastPriceHistory = this.priceHistory.size() - 1;
+        return this.priceHistory.get(lastPriceHistory).getSellPrice();
+    }
+
+    public Object getCategoryName() {
+        return catalogName;
     }
 }

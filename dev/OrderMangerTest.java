@@ -95,6 +95,12 @@ class OrderMangerTest {
         contractTest.add_to_contract(item3,95,35);
         contractTest.setTotalDiscount(25);
         contractMapperTest.update(contractTest);
+
+        supplier.add_item_to_contract(item1.getName(),100,50);
+        supplier.add_item_to_contract(item2.getName(),420,69);
+        supplier.add_item_to_contract(item3.getName(),96,96);
+        supplier.add_item_to_contract(item4.getName(),54,45);
+        contractMapperTest.update(supplier.getContract());
         Contract supplierIdContractTest = contractMapperTest.findBySupplierId("S002");
         Contract supplierIdContractTest1 = contractMapperTest.findByContractId(2);
         List<Contract> allContractsTest = contractMapperTest.findAll();
@@ -111,7 +117,7 @@ class OrderMangerTest {
 //        supplier.add_item_to_contract(item1.getName(),10,0.5);
 //        conn1.close();
 //        conn.close();
-//        con.insert(supplier.getContract());
+////        con.insert(supplier.getContract());
 //        mapper1.update(supplier);
 
     }

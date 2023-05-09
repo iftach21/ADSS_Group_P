@@ -47,7 +47,7 @@ public class ContractMapper {
     public Contract findBySupplierId(String supplierID) throws SQLException
     {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE supplier_id = ?");
-//        stmt.setString(2,supplierID);
+        stmt.setString(1,supplierID);
         ResultSet rs = stmt.executeQuery();
         if(rs.next())
         {

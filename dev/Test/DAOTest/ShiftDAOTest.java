@@ -51,7 +51,7 @@ public class ShiftDAOTest {
     @Test
     void TestDeletingShift() throws SQLException {
         DAO.add(shift);
-        DAO.delete(shift);
+        DAO.delete(shift.getId());
         Assertions.assertNull(DAO.get(shift.getId()));
     }
 

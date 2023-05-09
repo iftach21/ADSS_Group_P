@@ -2,7 +2,6 @@ package Data;
 
 import Domain.Employee.Shift;
 import Domain.Employee.ShiftRequirement;
-import Domain.Employee.WeeklyShift;
 import Domain.Employee.Workers;
 
 
@@ -25,7 +24,6 @@ public class ShiftDAO {
         }
         return instance;
     }
-
 
     public int add(Shift s){
         int primaryKey = -1;
@@ -121,8 +119,6 @@ public class ShiftDAO {
     }
 
     public void update(Shift shift){
-        //todo: complete: update workers_shift table
-
         try {
             // create SQL query string with placeholders for parameter values
             String sql = "UPDATE Shift SET date = ?, shift_manager_id = ?, log = ?, start_time = ?, req_1 = ?, req_2 = ?, req_3 = ?, req_4 = ?, req_5 = ?, req_6 = ?, req_7 = ? WHERE shift_id = ?";
@@ -167,7 +163,6 @@ public class ShiftDAO {
 
 
     public void delete(int id){
-        //todo: make sure to delete the workers_shift table accord..
         //allso make sure to delete from cache
 
 
@@ -202,7 +197,5 @@ public class ShiftDAO {
         }
         return null;
     }
-
-
 
 }

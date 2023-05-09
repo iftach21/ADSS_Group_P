@@ -1,21 +1,20 @@
 package Domain.Transfer;
 
-import java.util.List;
+import Data.SiteDAO;
+
+import java.sql.SQLException;
 
 public class SiteController {
-    private List<Site> _sites;
 
-    public SiteController(List<Site> sites)
-    {
-        this._sites = sites;
+    //public Map<Integer, Truck> _trucks;
+    private final SiteDAO siteDAO;
+
+    public SiteController() throws SQLException {
+        this.siteDAO = SiteDAO.getInstance();
     }
 
     public Site getSiteById(int id)
     {
-        for (Site site: _sites) {
-            if (site.getSiteId() == id)
-                return site;
-        }
-        return null;
+        return siteDAO.get(id);
     }
 }

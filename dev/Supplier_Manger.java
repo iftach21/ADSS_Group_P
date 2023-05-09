@@ -57,10 +57,10 @@ public class Supplier_Manger {
     public boolean add_supplier(Supplier supplier) {
         if(supplier.getType()==0){
             this.fixedDaySupplierMapper.insert((FixedDaySupplier) supplier);
-        } else if (supplier.getType()==1) {
+        } else if (supplier.getType()==2) {
             this.nonDeliveringSupplierMapper.insert((NonDeliveringSupplier) supplier);
 
-        } else if (supplier.getType()==2) {
+        } else if (supplier.getType()==1) {
             this.nonFixedDaySupplierMapper.insert((NonFixedDaySupplier) supplier);
 
         }
@@ -247,9 +247,12 @@ public class Supplier_Manger {
 
     public void update_suppliers() {
         this.suppliers=new ArrayList<Supplier>();
-        this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());
-        this.suppliers.addAll(this.nonDeliveringSupplierMapper.findAll());
-        this.suppliers.addAll(this.nonFixedDaySupplierMapper.findAll());
+        if(this.fixedDaySupplierMapper.findAll()!=null){
+        this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());}
+        if(this.nonDeliveringSupplierMapper.findAll()!=null){
+        this.suppliers.addAll(this.nonDeliveringSupplierMapper.findAll());}
+        if(this.nonFixedDaySupplierMapper.findAll()!=null){
+        this.suppliers.addAll(this.nonFixedDaySupplierMapper.findAll());}
     }
 
 

@@ -5,6 +5,7 @@ public class Period_Order {
     private Order order;
     //day's to each cycle until the new order
     private int days_to_cycle;
+
     //how much time left until the order is issue again
     private int day_left;
 
@@ -29,6 +30,9 @@ public class Period_Order {
     public void setDays_to_cycle(int days_to_cycle) {
         this.days_to_cycle = days_to_cycle;
     }
+
+
+    //lower the days to the period orders when the day pass
     public int lower_days(){
         if(this.day_left!=0){
         this.day_left=this.day_left-1;
@@ -39,7 +43,7 @@ public class Period_Order {
 
 
     }
-    //to cheak if the period order can be update
+    //to check if the period order can be updated
     public boolean can_update(){
         if(this.day_left>1){
             return true;

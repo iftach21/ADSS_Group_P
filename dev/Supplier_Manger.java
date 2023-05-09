@@ -235,14 +235,12 @@ public class Supplier_Manger {
     }
 
 
-    public Set<Item> get_itemlist_ofallsuppliers(){
-        Set<Item> items= new
-        for (Supplier sup :suppliers){
-            for(Item item: sup.getItems().keySet()){
-
-
-            }
+    public Set<Item> get_itemlist_ofallsuppliers() {
+        Set<Item> items = new HashSet<>();
+        for (Supplier supplier : suppliers) {
+            items.addAll(supplier.getItems().keySet());
         }
+        return items;
     }
 
 

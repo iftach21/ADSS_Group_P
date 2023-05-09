@@ -10,6 +10,7 @@ public class OrderManger {
 //    private List<Order> orders_history;
 //    private List<Period_Order> periodOrders;
     private OrderMapper orderMapper;
+    private PeriodicOrderMapper periodicOrderMapper;
 
     public OrderManger() {
 //        this.orders_history = new ArrayList<Order>();
@@ -20,6 +21,7 @@ public class OrderManger {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             orderMapper = new OrderMapper(conn);
+            periodicOrderMapper=new PeriodicOrderMapper(conn);
         }
 
         catch (SQLException e)
@@ -300,10 +302,25 @@ public class OrderManger {
             }
         }
 
-        Period_Order periodOrders = new Period_Order(order,numberofdayscycle);
+        Period_Order periodOrders = new Period_Order(numberofdayscycle);
+        periodOrders.setSupplier(order.getSupplier());
+        periodOrders.setStore_number(order.getStore_number());
+        periodOrders.setCost(order.getCost());
+        periodOrders.setItemList(order.getItemList());
 
-        this.periodOrders.add(periodOrders);
+
+        this.periodicOrderMapper.insert(periodOrders);
         return true;
+    }
+    public boolean update_add_to_period_order(String id,Item item,int amount ,float cost){
+       Period_Order periodOrder= periodicOrderMapper.findByContractId(id);
+       if(periodOrder.can_update()){
+            periodOrder.add_item(item,amount,cost);
+            periodicOrderMapper.update(periodOrder);
+            return true;}
+       else
+           return false;
+
     }
 }
 

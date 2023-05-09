@@ -11,43 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="working ContractMapper">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/AInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/AInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/SupplierInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/SupplierInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AbstractSupplierMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CategoryController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Contract.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DeliveringSupplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ItemController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ItemMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/JsonToMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Parser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ParserForContractItemIntegerDouble.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Report.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ReportController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Supplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaceManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaceWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/specificItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/stockTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/subCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,13 +168,6 @@
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
       <workItem from="1683628162392" duration="9614000" />
-    </task>
-    <task id="LOCAL-00012" summary="df">
-      <created>1680026157221</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1680026157221</updated>
     </task>
     <task id="LOCAL-00013" summary="df">
       <created>1680086519200</created>
@@ -542,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683649351291</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="working ContractMapper">
+      <created>1683649980754</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1683649980754</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

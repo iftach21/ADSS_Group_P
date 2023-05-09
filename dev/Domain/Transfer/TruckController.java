@@ -118,4 +118,9 @@ public class TruckController {
         Truck truck = trucksDAO.get(licenseNumnber);
         return truck;
     }
+
+    public void updateTruck(Truck truck)
+    {
+        trucksDAO.update(truck);
+    }
 }

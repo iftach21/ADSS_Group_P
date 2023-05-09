@@ -45,51 +45,60 @@ public class ContractMapper {
         return null;
     }
 
-    public Contract findBySupplierId(String supplierID) throws SQLException
+    public Contract findBySupplierId(String supplierID)
     {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE supplier_id = ?");
-        stmt.setString(1,supplierID);
-        ResultSet rs = stmt.executeQuery();
-        if(rs.next())
-        {
-            if(cache.containsKey(rs.getInt("contract_id")))
-            {
-                return cache.get(rs.getInt("contract_id"));
-            }
-            Contract contract = new Contract();
-            contract.setContractId(rs.getInt("contract_id"));
-            contract.setSupplierId(rs.getString("supplier_id"));
-            contract.setTotalDiscount(rs.getDouble("total_discount"));
-            String itemsMapJson = rs.getString("items_Map_discount");
+        PreparedStatement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE supplier_id = ?");
+            stmt.setString(1, supplierID);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (cache.containsKey(rs.getInt("contract_id"))) {
+                    return cache.get(rs.getInt("contract_id"));
+                }
+                Contract contract = new Contract();
+                contract.setContractId(rs.getInt("contract_id"));
+                contract.setSupplierId(rs.getString("supplier_id"));
+                contract.setTotalDiscount(rs.getDouble("total_discount"));
+                String itemsMapJson = rs.getString("items_Map_discount");
 //            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
-            contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
-            cache.put(rs.getInt("contract_id"),contract);
-            return contract;
+                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
+                cache.put(rs.getInt("contract_id"), contract);
+                return contract;
+            }
         }
+        catch(SQLException ignored)
+        {}
         return null;
     }
 
 
-    public List<Contract> findAll() throws SQLException
+    public List<Contract> findAll()
     {
         List<Contract> contracts = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts");
-        ResultSet rs = stmt.executeQuery();
-        while(rs.next())
-        {
-            Contract contract = new Contract();
-            contract.setContractId(rs.getInt("contract_id"));
-            contract.setSupplierId(rs.getString("supplier_id"));
-            contract.setTotalDiscount(rs.getDouble("total_discount"));
-            String itemsMapJson = rs.getString("items_Map_discount");
-            contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
+        PreparedStatement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM Contracts");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Contract contract = new Contract();
+                contract.setContractId(rs.getInt("contract_id"));
+                contract.setSupplierId(rs.getString("supplier_id"));
+                contract.setTotalDiscount(rs.getDouble("total_discount"));
+                String itemsMapJson = rs.getString("items_Map_discount");
+                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
 //            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
 //
 //            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
 
-            cache.put(contract.contractId,contract);
-            contracts.add(contract);
+                cache.put(contract.contractId, contract);
+                contracts.add(contract);
+            }
         }
+        catch(SQLException ignored)
+        {}
         return contracts;
     }
 
@@ -115,7 +124,6 @@ public class ContractMapper {
         }
         catch (SQLException e)
         {
-            System.err.println("Exception caught: " + e.getMessage());
         }
     }
 
@@ -135,15 +143,20 @@ public class ContractMapper {
         }
         catch (SQLException e)
         {
-            System.err.println("Exception caught: " + e.getMessage());
         }
     }
-    public void delete(Contract contract) throws SQLException
+    public void delete(Contract contract)
     {
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Contracts WHERE contract_id = ?");
-        stmt.setString(1,Integer.toString(contract.contractId));
-        stmt.executeUpdate();
-        cache.remove(contract.contractId);
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM Contracts WHERE contract_id = ?");
+            stmt.setString(1, Integer.toString(contract.contractId));
+            stmt.executeUpdate();
+            cache.remove(contract.contractId);
+        }
+        catch (SQLException e)
+        {
+        }
 
     }
 

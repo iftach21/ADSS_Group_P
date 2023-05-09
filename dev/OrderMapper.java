@@ -13,123 +13,144 @@ public class OrderMapper
         this.conn = conn;
         this.cache = new HashMap<>();
     }
-    public Order findByContractId(String orderNum) throws SQLException
+    public Order findByContractId(String orderNum)
     {
         if(cache.containsKey(orderNum))
         {
             return cache.get(orderNum);
         }
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Orders WHERE order_num = ?");
-        stmt.setString(1,orderNum);
-        ResultSet rs = stmt.executeQuery();
-        if(rs.next())
-        {
-            Order order = new Order();
-            order.setOrderNum(rs.getInt("order_num"));
-            order.setItemList(Parser.parse(rs.getString("item_list")));
-            order.setCost(rs.getFloat("cost"));
-            order.setStore_number(rs.getInt("store_number"));
-            String supplierId = rs.getString("supplier_id");
-            order.setSupplier(findSupplier(supplierId));
-            cache.put(rs.getInt("order_num"),order);
-            return order;
+        PreparedStatement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM Orders WHERE order_num = ?");
+            stmt.setString(1, orderNum);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                Order order = new Order();
+                order.setOrderNum(rs.getInt("order_num"));
+                order.setItemList(Parser.parse(rs.getString("item_list")));
+                order.setCost(rs.getFloat("cost"));
+                order.setStore_number(rs.getInt("store_number"));
+                String supplierId = rs.getString("supplier_id");
+                order.setSupplier(findSupplier(supplierId));
+                cache.put(rs.getInt("order_num"), order);
+                return order;
+            }
         }
+        catch (SQLException e){}
         return null;
     }
 
-    public List<Order> findAll() throws SQLException
+    public List<Order> findAll()
     {
         List<Order> orders = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Orders");
-        ResultSet rs = stmt.executeQuery();
-        while(rs.next())
-        {
-            Order order = new Order();
-            order.setOrderNum(rs.getInt("order_num"));
-            order.setItemList(Parser.parse(rs.getString("item_list")));
-            order.setCost(rs.getFloat("cost"));
-            order.setStore_number(rs.getInt("store_number"));
-            String supplierId = rs.getString("supplier_id");
-            order.setSupplier(findSupplier(supplierId));
-            cache.put(rs.getInt("order_num"),order);
-            orders.add(order);
+        PreparedStatement stmt;
+        ResultSet rs;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM Orders");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderNum(rs.getInt("order_num"));
+                order.setItemList(Parser.parse(rs.getString("item_list")));
+                order.setCost(rs.getFloat("cost"));
+                order.setStore_number(rs.getInt("store_number"));
+                String supplierId = rs.getString("supplier_id");
+                order.setSupplier(findSupplier(supplierId));
+                cache.put(rs.getInt("order_num"), order);
+                orders.add(order);
+            }
         }
+        catch (SQLException e){}
         return orders;
     }
 
-    public void insert(Order order) throws SQLException
+    public void insert(Order order)
     {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number)VALUES (?, ?, ?, ?, ?)");
-        stmt.setInt(1,order.getOrderNum());
-        Supplier supplier = order.getSupplier();
-        stmt.setString(2,supplier.getSupplierID());
-        String itemsJson = new Gson().toJson(order.getItemList()).toString();
-        stmt.setString(3,itemsJson);
-        stmt.setFloat(4,order.getCost());
-        stmt.setInt(5,order.getStore_number());
-        stmt.executeUpdate();
-        ResultSet rs = stmt.getGeneratedKeys();
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number)VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, order.getOrderNum());
+            Supplier supplier = order.getSupplier();
+            stmt.setString(2, supplier.getSupplierID());
+            String itemsJson = new Gson().toJson(order.getItemList()).toString();
+            stmt.setString(3, itemsJson);
+            stmt.setFloat(4, order.getCost());
+            stmt.setInt(5, order.getStore_number());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
 
-        if(rs.next())
-        {
-            order.setOrderNum(rs.getInt(1));
-            cache.put(order.getOrderNum(),order);
-        }
-    }
-
-    public void update(Order order) throws SQLException
-    {
-        PreparedStatement stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ? WHERE order_num = ?");
-        stmt.setString(1,order.getSupplier().getSupplierID());
-        String itemsJson = new JSONObject(order.getItemList()).toString();
-        stmt.setString(2,itemsJson);
-        stmt.setFloat(3,order.getCost());
-        stmt.setInt(4,order.getStore_number());
-        stmt.setInt(5,order.getOrderNum());
-        cache.remove(order.getOrderNum());
-        cache.put(order.getOrderNum(),order);// TODO check if there is no duplication after update in the cache
-    }
-
-    public void delete(Order order) throws SQLException
-    {
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Orders WHERE order_num = ?");
-        stmt.setInt(1,order.getOrderNum());
-        stmt.executeUpdate();
-        cache.remove(order.getOrderNum());
-    }
-    public Supplier findSupplier(String supplierId) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-        int flag = 0;
-        NonDeliveringSupplierMapper nonMapper = new NonDeliveringSupplierMapper(conn);
-        NonDeliveringSupplier nonDeliveringSupplier = nonMapper.findBySupplierId(supplierId);
-        if(nonDeliveringSupplier != null)
-        {
-            flag ++;
-            return nonDeliveringSupplier;
-//            order.setSupplier(nonDeliveringSupplier);
-        }
-        conn.close();
-        conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-        NonFixedDaySupplierMapper nonFixedDaySupplierMapper = new NonFixedDaySupplierMapper(conn);
-        if(flag == 0)
-        {
-            NonFixedDaySupplier nonFixedDaySupplier = nonFixedDaySupplierMapper.findBySupplierId(supplierId);
-            if(nonFixedDaySupplier == null)
-            {
-                conn.close();
-                conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-                FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
-                FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
-                return fixedDaySupplier;
-//                order.setSupplier(fixedDaySupplier);
+            if (rs.next()) {
+                order.setOrderNum(rs.getInt(1));
+                cache.put(order.getOrderNum(), order);
             }
-            else
-            {
-                return nonFixedDaySupplier;
+        }
+        catch (SQLException e){}
+
+    }
+
+    public void update(Order order)
+    {
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ? WHERE order_num = ?");
+            stmt.setString(1, order.getSupplier().getSupplierID());
+            String itemsJson = new JSONObject(order.getItemList()).toString();
+            stmt.setString(2, itemsJson);
+            stmt.setFloat(3, order.getCost());
+            stmt.setInt(4, order.getStore_number());
+            stmt.setInt(5, order.getOrderNum());
+            cache.remove(order.getOrderNum());
+            cache.put(order.getOrderNum(), order);// TODO check if there is no duplication after update in the cache
+        }
+        catch (SQLException e){}
+
+    }
+
+    public void delete(Order order)
+    {
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM Orders WHERE order_num = ?");
+            stmt.setInt(1, order.getOrderNum());
+            stmt.executeUpdate();
+            cache.remove(order.getOrderNum());
+        }
+        catch (SQLException e){}
+
+    }
+    public Supplier findSupplier(String supplierId)
+    {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+            int flag = 0;
+            NonDeliveringSupplierMapper nonMapper = new NonDeliveringSupplierMapper(conn);
+            NonDeliveringSupplier nonDeliveringSupplier = nonMapper.findBySupplierId(supplierId);
+            if (nonDeliveringSupplier != null) {
+                flag++;
+                return nonDeliveringSupplier;
+//            order.setSupplier(nonDeliveringSupplier);
+            }
+            conn.close();
+            conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+            NonFixedDaySupplierMapper nonFixedDaySupplierMapper = new NonFixedDaySupplierMapper(conn);
+            if (flag == 0) {
+                NonFixedDaySupplier nonFixedDaySupplier = nonFixedDaySupplierMapper.findBySupplierId(supplierId);
+                if (nonFixedDaySupplier == null) {
+                    conn.close();
+                    conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+                    FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
+                    return fixedDaySupplier;
+//                order.setSupplier(fixedDaySupplier);
+                } else {
+                    return nonFixedDaySupplier;
 //                order.setSupplier(nonFixedDaySupplier);
 
+                }
             }
         }
+        catch (SQLException e){}
         return null;
     }
 }

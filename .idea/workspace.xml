@@ -12,6 +12,10 @@
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="working ContractMapper">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,14 +161,7 @@
       <workItem from="1682607405112" duration="31000" />
       <workItem from="1682681197620" duration="18796000" />
       <workItem from="1682764325480" duration="1337000" />
-      <workItem from="1683628162392" duration="7495000" />
-    </task>
-    <task id="LOCAL-00006" summary="df">
-      <created>1680022366512</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1680022366512</updated>
+      <workItem from="1683628162392" duration="9614000" />
     </task>
     <task id="LOCAL-00007" summary="df">
       <created>1680022808398</created>
@@ -502,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683635045067</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="working ContractMapper">
+      <created>1683639462595</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1683639462595</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

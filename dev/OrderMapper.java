@@ -33,6 +33,7 @@ public class OrderMapper
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
                 order.setSupplier(findSupplier(supplierId));
+                order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
                 cache.put(rs.getInt("order_num"), order);
                 return order;
             }
@@ -58,6 +59,7 @@ public class OrderMapper
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
                 order.setSupplier(findSupplier(supplierId));
+                order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
                 cache.put(rs.getInt("order_num"), order);
                 orders.add(order);
             }
@@ -70,7 +72,7 @@ public class OrderMapper
     {
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number)VALUES (?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number,statusOrder)VALUES (?,?, ?, ?, ?, ?)");
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
             stmt.setString(2, supplier.getSupplierID());
@@ -78,6 +80,8 @@ public class OrderMapper
             stmt.setString(3, itemsJson);
             stmt.setFloat(4, order.getCost());
             stmt.setInt(5, order.getStore_number());
+            stmt.setString(6, order.getStatusOrder().toString());
+
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
 
@@ -94,13 +98,15 @@ public class OrderMapper
     {
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ? WHERE order_num = ?");
+            stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ?, statusOrder = ? WHERE order_num = ?");
             stmt.setString(1, order.getSupplier().getSupplierID());
             String itemsJson = new JSONObject(order.getItemList()).toString();
             stmt.setString(2, itemsJson);
             stmt.setFloat(3, order.getCost());
             stmt.setInt(4, order.getStore_number());
-            stmt.setInt(5, order.getOrderNum());
+            stmt.setString(5, order.getStatusOrder().toString());
+            stmt.setInt(6, order.getOrderNum());
+
             stmt.executeUpdate();
             cache.remove(order.getOrderNum());
             cache.put(order.getOrderNum(), order);// TODO check if there is no duplication after update in the cache

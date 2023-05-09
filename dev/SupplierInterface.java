@@ -1,8 +1,15 @@
 import java.util.Scanner;
 
-public interface SupplierInterface  {
+public class SupplierInterface extends AInterface  {
+    private Supplier_Manger supplier_manger;
 
-    public  static void main(String[] args) {
+    public SupplierInterface(Supplier_Manger supplier_manger){
+         this.supplier_manger=supplier_manger;
+    }
+
+    public void interfaceStartup() {
+        Scanner scanner = new Scanner(System.in);
+        int option_1 =0;
         {
             while (true) {
                 String option;
@@ -17,12 +24,9 @@ public interface SupplierInterface  {
                 System.out.println("6.Update item on Contract");
                 System.out.println("7.print all suppliers");
                 System.out.println("8.get back to previous menu");
-                Scanner scanner = null;
                 option = scanner.nextLine();
                 choice = Integer.parseInt(option);
 
-
-                int option_1;
                 while (true) {
                     try {
                         option = scanner.nextLine();
@@ -276,72 +280,6 @@ public interface SupplierInterface  {
     }
 
 
-
-        ///this fuction use to cheak if the input of the user is correct
-        public static String checkName (String input)
-        {
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                int counter = 0;
-                for (int i = 0; i < input.length(); i++) {
-                    if (Character.isDigit(input.charAt(i))) {
-                        System.out.println("A name has to be letters only");
-                        break;
-                    } else {
-                        counter++;
-                    }
-                }
-                if (counter == input.length()) {
-                    return input;
-                } else {
-                    System.out.println("name:");
-                    input = scanner.next();
-                }
-            }
-        }
-        public static String checkNumber (String input)
-        {
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                int counter = 0;
-                for (int i = 0; i < input.length(); i++) {
-                    if (!Character.isDigit(input.charAt(i))) {
-                        System.out.println("has to be numbers only");
-                        break;
-                    } else {
-                        counter++;
-                    }
-                }
-                if (counter == input.length()) {
-                    return input;
-                } else {
-                    System.out.println("number:");
-                    input = scanner.next();
-                }
-            }
-        }
-
-        public static String checkNumberWithDot (String input)
-        {
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                int counter = 0;
-                for (int i = 0; i < input.length(); i++) {
-                    if (!Character.isDigit(input.charAt(i)) && !(input.charAt(i) == '.')) {
-                        System.out.println("has to be numbers only");
-                        break;
-                    } else {
-                        counter++;
-                    }
-                }
-                if (counter == input.length()) {
-                    return input;
-                } else {
-                    System.out.println("number:");
-                    input = scanner.next();
-                }
-            }
-        }
     }
 
 

@@ -1,17 +1,22 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public interface OrderInterface {
+public class OrderInterface extends AInterface {
+    private OrderManger orderManger;
+    private Supplier_Manger supplier_manger;
+    public OrderInterface(OrderManger orderManger ,Supplier_Manger supplier_manger){
+        this.orderManger= orderManger;
+        this.supplier_manger=supplier_manger;
+    }
 
-     public static void main(String[] args) {
+    public void interfaceStartup() {
+            Scanner scanner = new Scanner(System.in);
+            int option_1;
          while (true) {
              //orders menu to add new and to approve them
              System.out.println("You selected Order manger");
              System.out.println("1.add new Order");
              System.out.println("2.approve order");
-             System.out.println("3.print all order number");
+             System.out.println("3.print all order number's");
              System.out.println("4.print all order's from supplier");
              System.out.println("5.print all order's from all supplier with all the details");
              System.out.println("6.get back to previous menu");

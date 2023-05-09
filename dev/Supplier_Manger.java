@@ -6,15 +6,7 @@ import java.util.*;
 //This is the class that hold all the suppliers that work with the company
 public class Supplier_Manger {
     private List<Supplier> suppliers;
-    private Map<Item,Integer> itemslist;
 
-    public Map<Item,Integer> getItemslist() {
-        return itemslist;
-    }
-
-    public void setItemslist(Map<Item,Integer>itemslist) {
-        this.itemslist = itemslist ;
-    }
 
     public List<Supplier> getSuppliers() {
         return suppliers;
@@ -37,7 +29,7 @@ public class Supplier_Manger {
 
     public Supplier_Manger() {
         this.suppliers=new ArrayList<Supplier>();
-        this.itemslist=new HashMap<Item,Integer>();
+
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             System.out.println("Connection to SuperLeeDataBase.db has been established.");
@@ -221,6 +213,13 @@ public class Supplier_Manger {
                     }
                 }
     }
+    public Supplier get_supplier_by_id(String id){
+        for(Supplier suppleir :this.suppliers) {
+            if (suppleir.getSupplierID().equals(id)) {
+                return suppleir;
+
+            }
+        }}
     public void update_suppliers() {
         this.suppliers=new ArrayList<Supplier>();
         this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());

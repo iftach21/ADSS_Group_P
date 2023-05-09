@@ -141,6 +141,31 @@ public abstract class Supplier {
         }
 
    }
+    public void print() {
+        System.out.println("Supplier Details:");
+        System.out.println("Name: " + name);
+        System.out.println("Business ID: " + business_id);
+        System.out.println("Payment Method: " + paymentMethod);
+        System.out.println("Supplier ID: " + Supplier_ID);
+
+        System.out.println("\nContact Person Details:");
+        System.out.println("Name: " + person.getName());
+        System.out.println("Phone Number: " + person.getPhoneNumber());
+
+        System.out.println("\nContract Details:");
+        System.out.println("Contract ID: " + contract.contractId);
+        System.out.println("Supplier ID: " + contract.supplierId);
+        System.out.println("Total Discount: " + contract.getTotal_discount());
+
+        System.out.println("\nItems:");
+        for (Item item : items.keySet()) {
+            Pair<Integer, Float> itemDetails = items.get(item);
+            System.out.println("Item Name: " + item.getName());
+            System.out.println("Quantity: " + itemDetails.getFirst());
+            System.out.println("Cost: " + itemDetails.getSecond());
+            System.out.println("-------------------");
+        }
+    }
    public int get_days(){
         return 0;
    }

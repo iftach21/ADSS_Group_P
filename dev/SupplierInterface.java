@@ -272,6 +272,10 @@ public class SupplierInterface extends AInterface  {
                         break;
                     case 8:
                         System.out.println("supplier id:");
+                        String id_sup1 = scanner.next();
+                        int amount_7 = Integer.parseInt(id_sup1);
+                        supplier_manger.get_supplier_by_id(id_sup1).print();
+
                     case 9:
                         System.out.println("Redirecting back to main menu");
                         break;

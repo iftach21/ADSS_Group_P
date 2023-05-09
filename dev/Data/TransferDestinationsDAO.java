@@ -102,9 +102,4 @@ public class TransferDestinationsDAO {
             }
         }
     }
-
-    public List<Site> getTransferDestinations(int transferId)
-    {
-        return this.destinationsList.get(transferId);
-    }
 }

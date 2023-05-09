@@ -14,29 +14,32 @@ import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.TempLevel;
+import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;
 
 
 public class TransferController {
-
+    private static TransferController Instance = null;
     private int _documentsCounter;
-    private TruckController tc;
-    private DriverController dc;
-    private SiteController sc;
+    private TruckController tc = TruckController.getInstance();
+    private DriverController dc = DriverController.getInstance();
+    private SiteController sc = SiteController.getInstance();
     private Queue<Map<Site, Map<Item_mock, Integer>>> _ordersQueue; //should be taken from suppliers DB (in the future)
     private Queue<Integer> _orderDestinationSiteIdQueue; //should be taken from suppliers DB (in the future)
     private final TransferDAO transfersDAO;
     private WeeklyShiftAndWorkersManager weeklyShiftManager = WeeklyShiftAndWorkersManager.getInstance();
 
-    public TransferController(TruckController tc, DriverController dc, SiteController sc) throws SQLException {
+    public TransferController() throws SQLException {
         //_transfers = new HashMap<>();
         this.transfersDAO = TransferDAO.getInstance();
         _documentsCounter = 0;
-        this.tc = tc;
-        this.dc = dc;
-        this.sc = sc;
         this._ordersQueue = new LinkedList<>();
         this._orderDestinationSiteIdQueue = new LinkedList<>();
+    }
+
+    public static TransferController getInstance() throws SQLException {
+        if(Instance==null){Instance = new TransferController();}
+        return Instance;
     }
 
     public void startTransferSystem() throws SQLException {
@@ -187,47 +190,6 @@ public class TransferController {
     public void createNewTransfer(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the next details for the new transfer: ");
-        LocalDate leavingDate;
-        LocalTime leavingTime;
-        while(true)
-        {
-            //choose date
-            leavingDate = chooseDateForTransfer();
-
-            //choose time
-            leavingTime = chooseTimeForTransfer();
-            if (!checkIfDateIsLegal(leavingDate, leavingTime))
-            {
-                System.out.println("Sorry transfer manager' but the date you entered is in the past. please enter a date in the future.");
-            }
-            else if (!checkIfStoreKeeperIsThere(leavingDate, leavingTime))
-            {
-
-            }
-        }
-
-        //get lowest temp item
-        TempLevel currMinTemp = lowestTempItem(orderItems);
-
-        //choose driver for transfer
-        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp, orderItems);
-        if (chosenDriver == null)
-        {
-            System.out.println("Unfortunately, there is no available driver to this transfer.");
-            _ordersQueue.add(orderItems);
-            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
-            return;
-        }
-
-        //choose truck by the chosen driver
-        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate);
-        if (chosenTruck == null)
-        {
-            System.out.println("Unfortunately, there is no available truck to this transfer.");
-            _ordersQueue.add(orderItems);
-            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
-            return;
-        }
 
         System.out.println("Please choose source site from the next options (enter number): ");
         Site[] sites = orderItems.keySet().toArray(new Site[0]);
@@ -264,10 +226,61 @@ public class TransferController {
 
         destinationSites.add(sc.getSiteById(orderDestinationSiteId));
 
-        //calculate arriving date and time
-        LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
-        LocalDate arrivingDate = arrivingDateTime.toLocalDate();
-        LocalTime arrivingTime = arrivingDateTime.toLocalTime();
+        LocalDate arrivingDate;
+        LocalTime arrivingTime;
+
+        LocalDate leavingDate;
+        LocalTime leavingTime;
+
+        while(true)
+        {
+            //choose date
+            leavingDate = chooseDateForTransfer();
+
+            //choose time
+            leavingTime = chooseTimeForTransfer();
+
+            //calculate arriving date and time
+            LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
+            arrivingDate = arrivingDateTime.toLocalDate();
+            arrivingTime = arrivingDateTime.toLocalTime();
+
+            if (!checkIfDateIsLegal(leavingDate, leavingTime))
+            {
+                System.out.println("Sorry transfer manager, but the date you entered is in the past. Please enter a date in the future.");
+            }
+            else if (!checkIfStoreKeeperIsThere(arrivingDate, arrivingTime, orderDestinationSiteId))
+            {
+                System.out.println("Sorry transfer manager, there is no stoke in the last destination. Please enter another date.");
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        //get lowest temp item
+        TempLevel currMinTemp = lowestTempItem(orderItems);
+
+        //choose driver for transfer
+        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp, orderItems);
+        if (chosenDriver == null)
+        {
+            System.out.println("Unfortunately, there is no available driver to this transfer.");
+            _ordersQueue.add(orderItems);
+            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            return;
+        }
+
+        //choose truck by the chosen driver
+        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
+        if (chosenTruck == null)
+        {
+            System.out.println("Unfortunately, there is no available truck to this transfer.");
+            _ordersQueue.add(orderItems);
+            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            return;
+        }
 
         Map<Site, Integer> weights = new HashMap<>();
         for(int i=0; i < sites.length; i++)
@@ -292,7 +305,7 @@ public class TransferController {
             boolean transferRearranged = false;
 
             Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-            transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getArrivingDate());
+            transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
 
             System.out.println("The truck chosen to the transfer is: ");
             System.out.println("License Number: " + transferTruck.getLicenseNumber());
@@ -415,7 +428,7 @@ public class TransferController {
 
         Scanner scanner = new Scanner(System.in);
         Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-        transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getArrivingDate());
+        transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
 
         boolean transferRearranged = false;
 
@@ -565,7 +578,7 @@ public class TransferController {
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("These are the available trucks. Please choose one of the trucks, by type its license number: ");
-        for (Integer LicenseNum : tc.getAllAvailableTrucks(transfer.getLeavingDate()).keySet())
+        for (Integer LicenseNum : tc.getAllAvailableTrucks(transfer.getLeavingDate(), transfer.getLeavingTime(), transfer.getArrivingDate(), transfer.get_arrivingTime()).keySet())
         {
             System.out.println("License number: " + LicenseNum + ", Domain.Truck Model: " + tc.getTruck(LicenseNum).getTruckModel() + ", Temperature Capacity: " + tc.getTruck(LicenseNum).getTempCapacity() + ", Weight Capacity: " + tc.getTruck(LicenseNum).getTruckWeightType());
         }
@@ -576,7 +589,7 @@ public class TransferController {
         {
             try {
                 chosenTruck = scanner.nextInt();
-                if (tc.getAllAvailableTrucks(transfer.getLeavingDate()).containsKey(chosenTruck))
+                if (tc.getAllAvailableTrucks(transfer.getLeavingDate(), transfer.getLeavingTime(), transfer.getArrivingDate(), transfer.get_arrivingTime()).containsKey(chosenTruck))
                 {
                     break;
                 }
@@ -591,7 +604,7 @@ public class TransferController {
                 scanner.next();
             }
         }
-        tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null);
+        tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null, null, null);
         transfer.updateTransferTruck(chosenTruck);
         transfersDAO.update(transfer);
         transfer.documentUpdateTruckNumber();
@@ -1063,7 +1076,7 @@ public class TransferController {
         }
 
         //create the truck
-        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null);
+        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null, null, null);
         tc.addTruck(newTruck);
     }
 
@@ -1134,24 +1147,27 @@ public class TransferController {
         }
     }
 
-    public boolean checkIfStoreKeeperIsThere(LocalDate leavingDate, LocalTime leavingTime)
-    {
+    public boolean checkIfStoreKeeperIsThere(LocalDate arrivingDate, LocalTime arrivingTime, int orderDestinationSiteId) throws SQLException {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int weekNumber = leavingDate.get(weekFields.weekOfWeekBasedYear());
+        int weekNumber = arrivingDate.get(weekFields.weekOfWeekBasedYear());
 
         //get the day number in the week
-        DayOfWeek dayOfWeek = leavingDate.getDayOfWeek();
+        DayOfWeek dayOfWeek = arrivingDate.getDayOfWeek();
         int dayOfWeekNum = dayOfWeek.getValue();
 
-        WindowTypeCreater wt = new WindowTypeCreater();
+        WindowTypeCreater wtc = new WindowTypeCreater();
 
         //check whether the transfer leaves in dayshift or nightshift
         String shift;
-        if (leavingTime.isAfter(LocalTime.NOON))
+        if (arrivingTime.isAfter(LocalTime.NOON))
             shift = "day";
         else
             shift = "night";
 
+        WindowType wt = wtc.getwidowtype(dayOfWeekNum, shift);
 
+        List<WindowType> stokeWindowTypes = weeklyShiftManager.doIHaveStokeForTheShipment(weekNumber, arrivingDate.getYear(), orderDestinationSiteId, wt);
+
+        return stokeWindowTypes.contains(wt);
     }
 }

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -40,21 +41,20 @@ class TransferTests {
     Transfer testTransfer;
 
     @BeforeEach
-    void createMockTransfer()
-    {
+    void createMockTransfer() throws SQLException {
         //create 3 sites for destinations
-        this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe");
-        this.site2 = new Site(1,"Tara", "Masada 12 Beer-Sheva", "09-7887645", "Ron");
-        this.site3 = new Site(2,"Supe-Li Krayot", "HaZayit 5 Kiryat Haim", "09-7863231", "Avram");
+        this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe", 32.06845601633649, 34.783378215486955);
+        this.site2 = new Site(1,"Tara", "Masada 12 Beer-Sheva", "09-7887645", "Ron", 31.262913845991317, 34.79982446327962);
+        this.site3 = new Site(2,"Supe-Li Krayot", "HaZayit 5 Kiryat Haim", "09-7863231", "Avram", 32.835899363273555, 35.066426063499215);
 
         //create 2 items for each site
         //items for site 1
-        this.item11 = new Item_mock(TempLevel.regular, "Toilet Cleaner");
-        this.item12 = new Item_mock(TempLevel.regular, "Sink Cleaner");
+        this.item11 = new Item_mock("1", TempLevel.regular, "Toilet Cleaner");
+        this.item12 = new Item_mock("2", TempLevel.regular, "Sink Cleaner");
 
         //items for site 2
-        this.item21 = new Item_mock(TempLevel.cold, "Almond Milk");
-        this.item22 = new Item_mock(TempLevel.cold, "Cheddar Cheese");
+        this.item21 = new Item_mock("3", TempLevel.cold, "Almond Milk");
+        this.item22 = new Item_mock("4", TempLevel.cold, "Cheddar Cheese");
 
         //create order items map and destinations list
         this.orderItems1 = new HashMap<>();
@@ -78,12 +78,13 @@ class TransferTests {
         destinations.add(site3);
 
         //create truck and driver
-        this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen, false);
+        this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen, null, null, null, null);
         this.dl1 = new DriverLicense(weightType.heavyWeight, TempLevel.frozen);
-        this.driver1 = new Driver(dl1, "Tomer", true);
+        this.driver1 = new Driver(1,"iftach","lotsofmoney",
+                "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);
 
         //create the transfer
-        this.testTransfer = new Transfer(LocalDate.now(), LocalTime.now(), 123456, "Tomer", site1, destinations, orderItems1, 0);
+        this.testTransfer = new Transfer(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20), 123456, "Arnon", site1,destinations, orderItems1, 0);
     }
 
     @Test

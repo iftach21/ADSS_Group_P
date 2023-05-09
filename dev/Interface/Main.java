@@ -1,5 +1,6 @@
 package Interface;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,12 +9,30 @@ public class Main {
     static final List<AInterface> intefaceList = new ArrayList<>(){{
         add(bossInterface);
         add(workerInterface);
-        //add(transferInterface) //todo: complete later;
+        add(transferInterface);
     }};
     static BossInterface bossInterface;
+
+    static {
+        try {
+            bossInterface = new BossInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            bossInterface = new BossInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            bossInterface = new BossInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     static WorkerInterface workerInterface;
-    //TODO: adding here the shipment interface:
-    //static TransferInterface transferInterface;
+    static TransferManagerInterface transferInterface;
     public static void main(String[] args) {
         int option = 1;
         while(option != 0){

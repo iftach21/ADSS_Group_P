@@ -62,27 +62,30 @@ public class OrderManger {
     public void move_from_pending_to_approved(int order_num)
     {
         Order updateOrder = orderMapper.findByOrderNum(Integer.toString(order_num));
+        updateOrder.setStatusOrder(StatusOrder.Approved);
+        orderMapper.update(updateOrder);
 
-        Iterator<Order> iter = getPendingForApproval();
-        while (iter.hasNext()) {
-            Order order = iter.next();
-            if (order.getOrderNum().equals(order_num)) {
-                iter.remove();
-                approval.add(order);
-                orderMapper.update(order);
-            }
-        }
+//        Iterator<Order> iter = getPendingForApproval();
+//        while (iter.hasNext()) {
+//            Order order = iter.next();
+//            if (order.getOrderNum().equals(order_num)) {
+//                iter.remove();
+//                approval.add(order);
+//            }
+//        }
     }
 
     public void moveFromApprovalToHistory(Order order)
     {
-        if (order != null && approval.contains(order))
-        {
-            approval.remove(order);
-            orders_history.add(order);
-
-            orderMapper.update(order);
-        }
+        Order updateOrder = orderMapper.findByOrderNum(Integer.toString(order.getOrderNum()));
+        updateOrder.setStatusOrder(StatusOrder.History);
+        orderMapper.update(order);
+//        if (order != null && approval.contains(order))
+//        {
+//            approval.remove(order);
+//            orders_history.add(order);
+//
+//        }
     }
 
 
@@ -196,7 +199,8 @@ public class OrderManger {
         }
         //add it to the order's
         //add it to the order's
-        pending_for_apporval.add(min_order);
+//        pending_for_apporval.add(min_order);
+        orderMapper.insert(min_order);
         Iterator<Item> iter = itemlist.keySet().iterator();
         while (iter.hasNext())
         {
@@ -224,17 +228,17 @@ public class OrderManger {
     public void print_all_orders_num()
     {
         System.out.println("pending:");
-        for(Order order: pending_for_apporval)
+        for(Order order: orderMapper.findAllOrderWithStatus("Waiting"))
         {
             System.out.println(order.getOrderNum());
         }
         System.out.println("approved:");
-        for(Order order: approval)
+        for(Order order: orderMapper.findAllOrderWithStatus("Approved"))
         {
             System.out.println(order.getOrderNum());
         }
         System.out.println("history:");
-        for(Order order: orders_history)
+        for(Order order: orderMapper.findAllOrderWithStatus("History"))
         {
             System.out.println(order.getOrderNum());
         }
@@ -245,20 +249,20 @@ public class OrderManger {
     {
         System.out.println("pending:");
 
-        for(Order order: pending_for_apporval)
+        for(Order order: orderMapper.findAllOrderWithStatus("Waiting"))
 
         {
             order.print_order_detail();
         }
         System.out.println("approved:");
-        for(Order order: approval)
+        for(Order order: orderMapper.findAllOrderWithStatus("Approved"))
 
         {
             order.print_order_detail();
         }
         System.out.println("history:");
 
-        for(Order order: orders_history)
+        for(Order order: orderMapper.findAllOrderWithStatus("History"))
         {
             order.print_order_detail();
         }
@@ -295,7 +299,9 @@ public class OrderManger {
                 order.add_item(item, amount, cost);
             }
         }
-        Period_Order periodOrders =new Period_Order(order,numberofdayscycle);
+
+        Period_Order periodOrders = new Period_Order(order,numberofdayscycle);
+
         this.periodOrders.add(periodOrders);
         return true;
     }

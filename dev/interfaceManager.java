@@ -42,18 +42,18 @@ public class interfaceManager {
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
-        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2, "Dairy");
+        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, "Dairy");
         milk3Percent.addNewPrice(10, 20);
         milk3Percent.addNewPrice(30,40);
 
-        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2, "Dairy");
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, "Dairy");
         soyMilk.addNewPrice(30, 40);
-        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12, "Dairy");
+        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, "Dairy");
         regularButter.addNewPrice(50, 60);
 
-        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular, 20,"Cleaning");
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular,"Cleaning");
         toiletPaper.addNewPrice(20, 40);
-        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular, 10,"Cleaning");
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular,"Cleaning");
         sodGel.addNewPrice(20, 26);
 
         //Specific Items
@@ -61,6 +61,7 @@ public class interfaceManager {
         specificItem milk2 = new specificItem(dateMilk2, true, Location.Storage, milk3Percent);
         specificItem milk3 = new specificItem(dateMilk3, true, Location.Storage, milk3Percent);
         specificItem milk4 = new specificItem(dateMilk4, true, Location.Storage, milk3Percent);
+
         milk3Percent.addSpecificItem(milk1);
         milk3Percent.addSpecificItem(milk2);
         milk3Percent.addSpecificItem(milk3);
@@ -131,6 +132,7 @@ public class interfaceManager {
                 //Provide a product shortage report
                 //-----------------------
                 case "1": {
+                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -170,6 +172,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
+                     */
                     break;
                 }
 
@@ -177,6 +180,7 @@ public class interfaceManager {
                 //Update inventory
                 //-----------------------
                 case "2": {
+                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("Which of the following would you choose:");
@@ -245,7 +249,7 @@ public class interfaceManager {
                                 System.out.println("What is the minimum quantity of the product?");
                                 itemInput = new Scanner(System.in);
                                 int itemSize = Integer.parseInt(itemInput.nextLine());
-                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, itemMan, currentTemp, itemSize,CategoryName);
+                                Item currentItem = new Item(itemName, catalogNumber, itemWeight, itemMan, currentTemp, CategoryName);
 
                                 //Add price history for item
                                 System.out.println("What is the buying price of the item?");
@@ -377,6 +381,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
+                    */
                     break;
                 }
 
@@ -384,6 +389,7 @@ public class interfaceManager {
                 //Provide an inventory counting report
                 //-----------------------
                 case "3": {
+                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -424,6 +430,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
+                    */
                     break;
                 }
 
@@ -431,6 +438,7 @@ public class interfaceManager {
                 //Provide a defective products report
                 //-----------------------
                 case "4": {
+                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -471,6 +479,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
+                    */
                     break;
                 }
 
@@ -478,6 +487,7 @@ public class interfaceManager {
                 //Update discount on products
                 //-----------------------
                 case "5": {
+                    /*
                     boolean flag = true;
                     while (flag) {
                         System.out.println("For which products to update:");
@@ -556,6 +566,7 @@ public class interfaceManager {
                                 break;
                         }
                     }
+                    */
                     break;
                 }
 
@@ -572,11 +583,13 @@ public class interfaceManager {
                 //Provide a price history report for a product
                 //-----------------------
                 case "7": {
+                    /*
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
                     String catalogNumber = Input.nextLine();
                     Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
                     //Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
+                    */
                     break;
                 }
 
@@ -584,6 +597,7 @@ public class interfaceManager {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "8": {
+                    /*
                     System.out.println("What is the item ID for the item to be set as defected?");
                     Scanner defectedItemInput = new Scanner(System.in);
                     int defectedserialNumber = Integer.parseInt(defectedItemInput.nextLine());
@@ -593,6 +607,7 @@ public class interfaceManager {
                     System.out.println("Item numbered " + defectedserialNumber + " has been set has defected and" +
                             "moved into the warehouse storage." );
                     System.out.println(currentSpecific.toString());
+                    */
                     break;
                 }
 

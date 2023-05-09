@@ -23,6 +23,7 @@ public class InventoryController {
                 }
             }
         }
+
         return null;
     }
 
@@ -39,6 +40,7 @@ public class InventoryController {
     //Method: deleteSpecificItem
     //This method deleted a specific item from the entire inventory
     public boolean deleteSpecificItem(int serialNumber){
+
         Item currentItem;
         specificItem currentSpecificItem;
         for (int i = 0; i < ItemsList.size(); i++){
@@ -577,7 +579,12 @@ public class InventoryController {
             }
         }
     }
+    /*
+    public void addSpecificItem(specificItem currentItem){
+        this.specificItemsMap.
+    }
 
+     */
 
 
 }

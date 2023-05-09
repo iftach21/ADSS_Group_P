@@ -42,18 +42,18 @@ public class interfaceWorker {
         Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory("Etc"), allSubCat);
 
         //General Items
-        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, 2, "Dairy");
+        Item milk3Percent = new Item("Milk 3%", "000123", 2, "Tnuva", TempLevel.cold, "Dairy");
         milk3Percent.addNewPrice(10, 20);
         milk3Percent.addNewPrice(30,40);
 
-        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, 2, "Dairy");
+        Item soyMilk = new Item("Soy Milk", "000789", 2, "Tara", TempLevel.cold, "Dairy");
         soyMilk.addNewPrice(30, 40);
-        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, 12, "Dairy");
+        Item regularButter = new Item("Best Butter", "000666", 4, "Mama Mia", TempLevel.cold, "Dairy");
         regularButter.addNewPrice(50, 60);
 
-        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular, 20,"Cleaning");
+        Item toiletPaper = new Item("Lalin Toilet Paper", "111123", 10, "Lalin", TempLevel.regular,"Cleaning");
         toiletPaper.addNewPrice(20, 40);
-        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular, 10,"Cleaning");
+        Item sodGel = new Item("Sod Gel", "111567", 6, "Sod", TempLevel.regular,"Cleaning");
         sodGel.addNewPrice(20, 26);
 
         //Specific Items

@@ -126,6 +126,9 @@ public class Order {
             System.out.println("-------------------------------------------------------------");
         }
     }
+    public void set_number(int sum){
+        number=sum+1;
+    }
 
 
 

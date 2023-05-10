@@ -47,6 +47,11 @@ public class Main {
             Scanner myObj = new Scanner(System.in);  // Create a Scanner object
             option = myObj.nextInt();  // Read user input
 
+            if(option==0){
+                System.out.println("Goodbye see you soon!");
+                break;
+            }
+
             //checking if the option works
             if(option > 3 || option < 0){
                 System.out.println("Invalid Input");

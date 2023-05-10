@@ -89,7 +89,7 @@ public class NonFixedDaySupplierMapper{
         {
             System.out.println(e.getMessage());
         }
-        return null;
+        return suppliers;
     }
 
 

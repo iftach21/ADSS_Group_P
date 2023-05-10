@@ -29,7 +29,6 @@ public class WorkersDAOTest {
 
         this.w2 = new Driver(2,"iftach","lotsofmoney",
                 "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);
-
     }
 
     @Test

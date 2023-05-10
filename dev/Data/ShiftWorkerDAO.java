@@ -31,10 +31,10 @@ public class ShiftWorkerDAO {
             String sql = "INSERT INTO shift_worker_in_shift (shift_id, worker_id, workers_pro) VALUES (?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, s.getShiftID());
+            stmt.setInt(1, s.getId());
             stmt.setInt(2, w.getId());
-            stmt.setString(3, String.valueOf(workersPro));
-
+            stmt.setInt(3, workersPro);
+            stmt.executeUpdate();
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -54,7 +54,7 @@ public class ShiftWorkerDAO {
         // Iterate through the result set and print each worker ID
         while (rs.next()) {
             int workerId = rs.getInt("worker_id");
-            int workersPro = rs.getInt("workersPro");
+            int workersPro = rs.getInt("workers_pro");
             Pair<Workers, Integer> pair = new Pair<Workers, Integer>(WorkersDAO.getInstance().get(workerId), workersPro);
             workersList.add(pair);
         }

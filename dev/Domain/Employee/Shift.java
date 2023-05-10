@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shift {
-    private int ShiftID;
     private String date;
     private int id = -1;
 
@@ -22,7 +21,6 @@ public class Shift {
     // Creating a shift
     //
     public Shift(String date) {
-        this.ShiftID=0;
         this.drivers = new ArrayList<>();
         this.date = date;
         this.shiftManager = shiftManager;
@@ -36,7 +34,6 @@ public class Shift {
     }
 
     public Shift() {
-        this.ShiftID=0;
         this.drivers = new ArrayList<>();
         this.date = "";
         this.shiftManager = shiftManager;
@@ -64,9 +61,6 @@ public class Shift {
         return pShift;
     }
 
-    public void setShiftID(int shiftID) {
-        ShiftID = shiftID;
-    }
 
     public void setDate(String date) {
         this.date = date;
@@ -186,13 +180,11 @@ public class Shift {
     public String getStartTime() {
         return startTime;
     }
-    public int getShiftID() {
-        return ShiftID;
-    }
 
     public int getId() {
         return this.id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -204,8 +196,9 @@ public class Shift {
 
         for(Workers w1: inThisWorkers){
             for(Workers w2: otherWorkers){
-                if(w1.getId() == w2.getId()){ans.add(w1);}
+                if(w1.getId() == w2.getId()){continue;}
             }
+            ans.add(w1);
         }
         return ans;
     }

@@ -124,6 +124,7 @@ public class ContractMapper {
         }
         catch (SQLException e)
         {
+            System.out.println(e.getMessage() + " error");
         }
     }
 
@@ -143,6 +144,7 @@ public class ContractMapper {
         }
         catch (SQLException e)
         {
+            System.out.println(e.getMessage() + " error");
         }
     }
     public void delete(Contract contract)

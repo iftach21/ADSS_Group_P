@@ -86,8 +86,9 @@ public class Contract {
     {
         this.supplierId = supplierID;
     }
-    public void setContractIdCounter(int num){
-        contractIdCounter=num+1;
+    public void setContractIdCounter(int num)
+    {
+        contractIdCounter = num + 1;
     }
 
 }

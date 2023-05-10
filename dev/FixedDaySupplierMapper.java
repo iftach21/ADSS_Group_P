@@ -186,7 +186,9 @@ public class FixedDaySupplierMapper{
             stmt.executeUpdate();
             cache.remove(fixedDaySupplier.getSupplierID());
         }
-        catch (SQLException e){}
+        catch (SQLException e){
+
+        }
         try
         {
             conn.close();

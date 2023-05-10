@@ -23,6 +23,9 @@ public class OrderManger {
 //            orderMapper = new OrderMapper(conn);
             orderMapper = new OrderMapper();
             periodicOrderMapper=new PeriodicOrderMapper(conn);
+            Order order=new Order();
+            if(orderMapper.findAll().size()!=0){
+            order.set_number(orderMapper.findAll().get(orderMapper.findAll().size()-1).getOrderNum());}
         }
 
         catch (SQLException e)

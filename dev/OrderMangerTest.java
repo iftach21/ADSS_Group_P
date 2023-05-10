@@ -472,10 +472,14 @@ class OrderMangerTest {
         masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
         NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
         masupplier.add_supplier(supplier_3);
+
+
         OrderManger orderManger = new OrderManger();
+
         Map<Item,Integer> maplist = new HashMap<Item,Integer>();
         maplist.put(item1,100);
         maplist.put(item2,100);
+
         orderManger.assing_Orders_to_Suppliers(maplist,masupplier,50);
 
     }

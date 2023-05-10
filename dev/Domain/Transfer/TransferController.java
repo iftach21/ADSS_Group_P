@@ -1168,9 +1168,9 @@ public class TransferController {
         //check whether the transfer leaves in dayshift or nightshift
         String shift;
         if (arrivingTime.isAfter(LocalTime.NOON))
-            shift = "day";
-        else
             shift = "night";
+        else
+            shift = "day";
 
         WindowType wt = wtc.getwidowtype(dayOfWeekNum, shift);
 

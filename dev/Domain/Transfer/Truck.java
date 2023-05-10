@@ -25,8 +25,14 @@ public class Truck {
         this._truckWeight = truckWeight;
         this._truck_maxWeight = truck_maxWeight;
         this._coolingCapacity = coolingCapacity;
-        this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
-        this._unavailableEndTime = LocalDateTime.of(unavailableEndDate, unavailableEndTime);
+        if (unavailableStartDate == null || unavailableStartTime == null)
+            this._unavailableStartTime = null;
+        else
+            this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
+        if (unavailableEndDate == null || unavailableEndTime == null)
+            this._unavailableEndTime = null;
+        else
+            this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
     }
 
     public int getCurrentTruckWeight()
@@ -102,3 +108,4 @@ public class Truck {
 
     public LocalDateTime getUnavailableEndTime() {return  _unavailableEndTime;}
 }
+

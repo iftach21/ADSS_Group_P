@@ -101,11 +101,19 @@ public class Truck {
         return _truckNetoWeight;
     }
 
-    public LocalDateTime getUnavailableStartTime()
+    public LocalDate getUnavailableStartDate()
     {
-        return _unavailableStartTime;
+        return _unavailableStartTime.toLocalDate();
     }
 
-    public LocalDateTime getUnavailableEndTime() {return  _unavailableEndTime;}
+    public LocalTime getUnavailableStartTime()
+    {
+        return _unavailableStartTime.toLocalTime();
+    }
+
+    public LocalDate getUnavailableEndDate() {return  _unavailableEndTime.toLocalDate();}
+
+    public LocalTime getUnavailableEndTime() {return  _unavailableEndTime.toLocalTime();}
+
 }
 

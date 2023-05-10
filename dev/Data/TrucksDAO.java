@@ -121,15 +121,34 @@ public class TrucksDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Truck SET model=?, netWeight=?, currentWeight=?, maxWeight=?, coolingCapacity=?, unavailableStartDate=?, unavailableEndDate=? WHERE licenseNumber=?";
+            String sql = "UPDATE Truck SET model=?, netWeight=?, currentWeight=?, maxWeight=?, coolingCapacity=?, unavailableStartDate=?, unavailableStartTime=?, unavailableEndDate=?, unavailableEndTime=? WHERE licenseNumber=?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, truck.getTruckModel());
             stmt.setInt(2, truck.getTruckNetWeight());
             stmt.setInt(3, truck.getCurrentTruckWeight());
             stmt.setInt(4, truck.getMaxWeight());
             stmt.setString(5, truck.getTempCapacity().name());
-            stmt.setString(6, truck.getUnavailableStartTime().toString());
-            stmt.setString(7, truck.getUnavailableEndTime().toString());
+
+            if(truck.getUnavailableStartDate() == null)
+                stmt.setString(6, "");
+            else
+                stmt.setString(6, truck.getUnavailableStartDate().toString());
+
+            if(truck.getUnavailableStartTime() == null)
+                stmt.setString(7, "");
+            else
+                stmt.setString(7, truck.getUnavailableStartTime().toString());
+
+            if(truck.getUnavailableEndDate() == null)
+                stmt.setString(8, "");
+            else
+                stmt.setString(8, truck.getUnavailableEndDate().toString());
+
+            if(truck.getUnavailableEndTime() == null)
+                stmt.setString(9, "");
+            else
+                stmt.setString(9, truck.getUnavailableEndTime().toString());
+
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -156,8 +175,8 @@ public class TrucksDAO {
     public void add(Truck truck){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableEndDate) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
 
@@ -167,8 +186,27 @@ public class TrucksDAO {
             stmt.setInt(4, truck.getCurrentTruckWeight());
             stmt.setInt(5, truck.getMaxWeight());
             stmt.setString(6, truck.getTempCapacity().name());
-            stmt.setString(7, truck.getUnavailableStartTime().toString());
-            stmt.setString(8, truck.getUnavailableEndTime().toString());
+
+            if(truck.getUnavailableStartDate() == null)
+                stmt.setString(7, "");
+            else
+                stmt.setString(7, truck.getUnavailableStartDate().toString());
+
+            if(truck.getUnavailableStartTime() == null)
+                stmt.setString(8, "");
+            else
+                stmt.setString(8, truck.getUnavailableStartTime().toString());
+
+            if(truck.getUnavailableEndDate() == null)
+                stmt.setString(9, "");
+            else
+                stmt.setString(9, truck.getUnavailableEndDate().toString());
+
+            if(truck.getUnavailableEndTime() == null)
+                stmt.setString(10, "");
+            else
+                stmt.setString(10, truck.getUnavailableEndTime().toString());
+
             stmt.executeUpdate();
 
         } catch (Exception e) {

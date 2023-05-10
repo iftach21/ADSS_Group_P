@@ -25,7 +25,8 @@ public class OrderManger {
 //            periodicOrderMapper=new PeriodicOrderMapper(conn);
             periodicOrderMapper = new PeriodicOrderMapper();
             Order order = new Order();
-            if(orderMapper.findAll().size()!= 0){
+            if(orderMapper.findAll().size()!= 0)
+            {
             order.set_number(orderMapper.findAll().get(orderMapper.findAll().size()-1).getOrderNum());}
         }
 

@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="Updated payment method">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" afterDir="false" />
-    </list>
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated all mappers" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,14 +161,7 @@
       <workItem from="1683628162392" duration="9614000" />
       <workItem from="1683656328685" duration="736000" />
       <workItem from="1683702205614" duration="2609000" />
-      <workItem from="1683705392696" duration="3486000" />
-    </task>
-    <task id="LOCAL-00024" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680942536281</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1680942536281</updated>
+      <workItem from="1683705392696" duration="3926000" />
     </task>
     <task id="LOCAL-00025" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680950207486</created>
@@ -512,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683707936978</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="updated all mappers">
+      <created>1683709270922</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1683709270922</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +535,8 @@
     <MESSAGE value="working ContractMapper" />
     <MESSAGE value="started working on OrderManger" />
     <MESSAGE value="Updated payment method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated payment method" />
+    <MESSAGE value="updated all mappers" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated all mappers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

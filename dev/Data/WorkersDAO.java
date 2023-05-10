@@ -130,6 +130,10 @@ public class WorkersDAO {
 
             int rowsAffected = stmt.executeUpdate();
 
+            //cache handling
+            this.deleteFromCache(worker.getId());
+            this.cache.add(worker);
+
             if (rowsAffected == 0) {
                 System.out.println("No worker found with ID " + worker.getId() + " to update.");
             } else {
@@ -179,6 +183,8 @@ public class WorkersDAO {
             stmt.setBoolean(30, w.canIworkat(night7));
             stmt.executeUpdate();
 
+            cache.add(w);
+
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -191,9 +197,11 @@ public class WorkersDAO {
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("No worker found with ID " + id);
-            } else {
-                System.out.println("Worker with ID " + id + " deleted successfully");
                 deleteFromCache(id);
+            } else {
+                deleteFromCache(id);
+                System.out.println("Worker with ID " + id + " deleted successfully");
+
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -287,11 +295,8 @@ public class WorkersDAO {
     }
 
     public void deleteFromCache(int id){
-        for (Workers workers : this.cache) {
-            if (workers.getId() == id) {
-                this.cache.remove(workers.getId());
-            }
-        }
+        if(cache.size()==0){return;}
+        this.cache.removeIf(worker -> worker.getId() == id);
     }
 
 }

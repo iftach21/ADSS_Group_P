@@ -163,6 +163,7 @@ public class OrderMapper
 
     }
 
+    //update the field in the data base
     public void update(Order order)
     {
         PreparedStatement stmt;
@@ -252,6 +253,9 @@ public class OrderMapper
         return null;
     }
 
+
+
+    //This fuction is used to coonnect to the data base
     private void getConnection()
     {
         try

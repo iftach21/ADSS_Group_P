@@ -2,21 +2,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
-
+//this class is responsible for managing orders and periodic orders in a system.
 public class OrderManger {
 
-//    private List<Order> pending_for_apporval;
-//    private List<Order> approval;
-//    private List<Order> orders_history;
-//    private List<Period_Order> periodOrders;
+
     private OrderMapper orderMapper;
     private PeriodicOrderMapper periodicOrderMapper;
 
+
+
+    ///the constructor initializes the OrderMapper and PeriodicOrderMapper ,
+    // which handle the database operations for regular orders and periodic orders, respectively.
+    // it also creates a new order and periodic order objects and sets their numbers based on existing orders in the database.
     public OrderManger() {
-//        this.orders_history = new ArrayList<Order>();
-//        this.approval = new ArrayList<Order>();
-//        this.pending_for_apporval = new ArrayList<Order>();
-//        this.periodOrders = new ArrayList<Period_Order>();
+
         try
         {
 //            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
@@ -45,20 +44,14 @@ public class OrderManger {
         return orderMapper.findAllOrderWithStatus("Approved");
     }
 
-//    public void setApproval(List<Order> approval)
-//    {
-//        this.approval = approval;
-//    }
+
 
     public List<Order> getPendingForApproval()
     {
         return orderMapper.findAllOrderWithStatus("Waiting");
     }
 
-//    public void setPending_for_apporval(List<Order> pending_for_apporval)
-//    {
-//        this.pending_for_apporval = pending_for_apporval;
-//    }
+
 
 
     public List<Order> getOrdersHistory()
@@ -66,41 +59,37 @@ public class OrderManger {
         return orderMapper.findAllOrderWithStatus("History");
     }
 
-//    public void setOrders_history(List<Order> orders_history)
-//    {
-//        this.orders_history = orders_history;
-//    }
 
+    ///Updates the status of an order from approved to history by
+    // the order with the specified order number from the OrderMapper and updating its status.
     public void move_from_pending_to_approved(int order_num)
     {
         Order updateOrder = orderMapper.findByOrderNum(Integer.toString(order_num));
         updateOrder.setStatusOrder(StatusOrder.Approved);
         orderMapper.update(updateOrder);
 
-//        Iterator<Order> iter = getPendingForApproval();
-//        while (iter.hasNext()) {
-//            Order order = iter.next();
-//            if (order.getOrderNum().equals(order_num)) {
-//                iter.remove();
-//                approval.add(order);
-//            }
-//        }
+
     }
 
+
+    //Updates the status of an order from approved to history
+    // by retrieving the order with the specified order number from the OrderMapper and updating its status.
     public void moveFromApprovalToHistory(Order order)
     {
         Order updateOrder = orderMapper.findByOrderNum(Integer.toString(order.getOrderNum()));
         updateOrder.setStatusOrder(StatusOrder.History);
         orderMapper.update(order);
-//        if (order != null && approval.contains(order))
-//        {
-//            approval.remove(order);
-//            orders_history.add(order);
-//
-//        }
+
     }
 
 
+
+    //assigns orders to suppliers based on the provided item list, supplier manager,
+    // and store number. It iterates through the suppliers, checks if they have the required items,
+    // and selects the supplier with the lowest cost. It then creates an order and inserts it into the database
+    // using the OrderMapper. If there are remaining items to be assigned, the function calls itself recursively
+    // to assign them to other suppliers
+    // . returns true if the assignment is successful, false if there are no suppliers available.
     public Boolean assing_Orders_to_Suppliers(Map<Item,Integer> itemlist, Supplier_Manger manger,int number_store)
     {
         //if there is no supplier do nothing
@@ -209,7 +198,7 @@ public class OrderManger {
         {
             return false;
         }
-        //add it to the order's
+
         //add it to the order's
 //        pending_for_apporval.add(min_order);
         orderMapper.insert(min_order);
@@ -237,6 +226,11 @@ public class OrderManger {
 
 
 
+
+
+
+
+    //Prints the order numbers for all pending, approved, and historical orders.
     public void print_all_orders_num()
     {
         System.out.println("pending:");
@@ -257,6 +251,10 @@ public class OrderManger {
 
 
     }
+
+
+
+    //Prints the details of all pending, approved, and historical orders.
     public void print_all_orders_details()
     {
         System.out.println("pending:");
@@ -279,6 +277,10 @@ public class OrderManger {
             order.print_order_detail();
         }
     }
+
+
+    //Creates a periodic order by specifying the supplier, item list, store number, and the number of days in the order cycle. It calculates the cost of the order and inserts it into the database using the PeriodicOrderMapper.
+    // Returns true if the periodic order creation is successful.
     public boolean period_order(Supplier supplier,Map<Item,Integer> list_items, int store_num ,int numberofdayscycle) {
         Map<Item, Pair<Integer, Float>> maplist;
         Order order = new Order(null, supplier, 0, store_num);
@@ -325,6 +327,10 @@ public class OrderManger {
         this.periodicOrderMapper.insert(periodOrders);
         return true;
     }
+
+
+    //Adds an item with the specified amount and cost to a periodic order identified by its ID. It retrieves the periodic order from the PeriodicOrderMapper, checks if it can be updated, and adds the item.
+    // Returns true if the addition is successful, false if the order cannot be updated.
     public boolean update_add_to_period_order(String id,Item item,int amount ,float cost){
        Period_Order periodOrder= periodicOrderMapper.findByContractId(id);
        if(periodOrder.can_update()){
@@ -335,6 +341,10 @@ public class OrderManger {
            return false;
 
     }
+
+    //Removes an item from a periodic order identified by its ID.
+    // It retrieves the periodic order from the PeriodicOrderMapper, checks if it can be updated, and removes the item.
+    // Returns true if the removal is successful, false if the order cannot be updated.
     public boolean update_remove_from_order(String id,Item item) {
         Period_Order periodOrder = periodicOrderMapper.findByContractId(id);
         if (periodOrder.can_update()) {
@@ -343,6 +353,16 @@ public class OrderManger {
             return true;
         }
         return false;
+    }
+    // Deletes a periodic order with the specified ID from the database using the PeriodicOrderMapper.
+    public void delete_a_period_order(String id){
+        periodicOrderMapper.delete(periodicOrderMapper.findByContractId(id));
+
+    }
+
+    //Deletes an order with the specified order number from the database using the OrderMapper.
+    public  void delte_a_order(String id){
+        orderMapper.delete(orderMapper.findByOrderNum(id));
     }
 }
 

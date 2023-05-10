@@ -383,15 +383,7 @@ public class InventoryController {
             double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
             key.addNewPrice(key.getBuyPrice(), newPrice);
         }
-        /*
-        for (int i = 0; i < this.ItemsList.size(); i++)
-        {
-            Item currentItem = this.ItemsList.get(i);
-            currentItem.getDiscount().setPercentageDiscount(_amount);
-            currentItem.addNewPrice(currentItem.getBuyPrice(),currentItem.getSellPrice() - ((currentItem.getSellPrice() * (_amount /100 ))));
 
-        }
-         */
     }
 
     public void CategoryPercentageDiscount(double _amount, String _CategoryName)

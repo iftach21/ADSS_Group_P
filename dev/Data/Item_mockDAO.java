@@ -42,7 +42,7 @@ public class Item_mockDAO {
                 item_mockToReturn = this.gettingNewItem_mock(rs,catalogNum);
                 this.ItemList.add(item_mockToReturn);
             } else {
-                System.out.println("No site found with ID " + catalogNum);
+                System.out.println("No item found with catalog num " + catalogNum);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.time.LocalDate;
-
+//This is the order class that represent an order in the system
 public class Order {
 
     LocalDate currentDate;
@@ -19,13 +19,14 @@ public class Order {
     private StatusOrder statusOrder;
 
 
-
+    // This is the default constructor for the Order class. It initializes the
     public Order() {
         this.itemList= new HashMap<Item,Pair<Integer,Float>>();
         this.currentDate= LocalDate.now();
         this.cost = 0.0F;
     }
-
+    //This is a parameterized constructor for the Order class. It sets the orderNum as a static variable number, increments number by 1,
+    // initializes itemList with the provided map
     public Order(Map<Item,Pair<Integer,Float>>itemList, Supplier supplier, float cost, int store_number) {
         this.orderNum = number;
         number+=1;
@@ -42,19 +43,23 @@ public class Order {
         this.statusOrder=StatusOrder.Waiting;
 
     }
-
+    //This method returns the statusOrder of the order.
     public StatusOrder getStatusOrder() {
         return statusOrder;
     }
 
+
+    //This method sets the statusOrder of the order.
     public void setStatusOrder(StatusOrder statusOrder) {
         this.statusOrder = statusOrder;
     }
 
+
+    //This method returns the order number of the order.
     public int getStore_number() {
         return Store_number;
     }
-
+    //
     public void setStore_number(int store_number) {
         Store_number = store_number;
     }
@@ -99,16 +104,23 @@ public class Order {
         this.itemList.remove(item);
 
     }
+    //This method adds an item to the order. It updates the total cost of the order by adding the cost of the
+    // item and adds the item to the item list with the provided amount and cost.
     public void add_item(Item item ,int amount,float cost){
         Pair<Integer,Float> pair = new Pair(amount,cost);
         this.cost+=cost;
         this.itemList.put(item,pair);
     }
+
+    //This method prints the names of all items in the order.
     public void print_items(){
         for(Item item :this.itemList.keySet()){
             System.out.println(item.getName());
         }
     }
+
+    //his method prints the detailed information of the order, including order number, store number, cost, date, supplier name, and item details
+    // (name, base price per unit without discount, amount, and price).
     public void print_order_detail(){
         System.out.println("Order number: " +this.orderNum);
         System.out.println("Store number: " + this.Store_number);
@@ -126,6 +138,8 @@ public class Order {
             System.out.println("-------------------------------------------------------------");
         }
     }
+
+    //This method sets the static variable number to the provided sum plus 1.
     public void set_number(int sum){
         number=sum+1;
     }

@@ -3,7 +3,7 @@
  is ending a new order*/
 public class Period_Order extends Order {
 
-//    static int ordernumber = 0;
+   static int ordernumber ;
 
 //    private Order order;
     //day's to each cycle until the new order
@@ -24,8 +24,8 @@ public class Period_Order extends Order {
 //        this.order = order;
         this.days_to_cycle = days_to_cycle;
         this.day_left=days_to_cycle;
-//        this.periodicOrderId = ordernumber;
-//        ordernumber ++;
+        this.setOrderNum(ordernumber);
+        ordernumber ++;
     }
 
 //    public static int getOrdernumber() {
@@ -89,5 +89,9 @@ public class Period_Order extends Order {
             return false;
         }
     }
+    public void setOrdernumber(int sum){
+        ordernumber=sum+1;
+    }
+
 
 }

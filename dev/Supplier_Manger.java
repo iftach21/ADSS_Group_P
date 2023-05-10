@@ -3,7 +3,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 
-//This is the class that hold all the suppliers that work with the company
+//The Supplier_Manger class represents a manager for a company's suppliers.
+// It contains various methods for managing suppliers, contracts, and items.
 public class Supplier_Manger {
     private List<Supplier> suppliers;
     private Map<Item,Integer> itemslist;
@@ -72,6 +73,9 @@ public class Supplier_Manger {
         }
 
     }
+
+
+    //add supplier to the data-base and also to a list of all supplier so i can play with it when i want and i always love to play
     public boolean add_supplier(Supplier supplier) {
         if(supplier.getType()==0){
             this.fixedDaySupplierMapper.insert((FixedDaySupplier) supplier);
@@ -98,6 +102,7 @@ public class Supplier_Manger {
         }
     }
 
+            //remove a supploer form the data base base on his string
     public boolean  remove_supplier(String name){
         for(Supplier suppleir :this.suppliers){
             if(suppleir.getName().equals(name)){
@@ -117,6 +122,9 @@ public class Supplier_Manger {
         }
         return false;
     }
+
+
+    //Update the contrace person of a supplier and update the data base to.
     public void update_contact_preson(String name_1,String name_2,String phone_number) {
         boolean flag = false;
         for(Supplier suppleir :this.suppliers){
@@ -137,6 +145,8 @@ public class Supplier_Manger {
     {
         System.out.println("There is no supplier with that name");
     }}
+
+    //add item to  from supplier from the manager and updates the corresponding mapper and database.
     public void add_item_to_contract(Item item,int amount,float price ,String name_1) {
         for (Supplier suppleir : this.suppliers) {
             if (suppleir.getName().equals(name_1)) {
@@ -154,6 +164,9 @@ public class Supplier_Manger {
             }
         }
     }
+
+
+    //add total discount to a supplier and update the data base
     public void add_total_dsicount(double discount,String name_1){
         for(Supplier suppleir :this.suppliers){
             if(suppleir.getName().equals(name_1)){
@@ -162,6 +175,9 @@ public class Supplier_Manger {
             }
         }
     }
+
+
+    //add item from supplier from the manager and updates the corresponding mapper and database.
     public void add_item_to_supplier(String name_1 ,Item item,int amount,float price) {
         for (Supplier suppleir : this.suppliers) {
             if (suppleir.getName().equals(name_1)) {
@@ -177,8 +193,10 @@ public class Supplier_Manger {
                 }
             }
         }
+        this.update_suppliers();
     }
 
+    //Removes item from supplier from the manager and updates the corresponding mapper and database.
     public boolean remove_item_to_supplier(String name_1 ,String item_S) {
         for (Supplier suppleir : this.suppliers) {
             if (suppleir.getName().equals(name_1)) {
@@ -207,6 +225,7 @@ public class Supplier_Manger {
     }
 
 
+    // Prints the names of all suppliers in the manager.
     public void print_all_suppliers_names(){
         this.update_suppliers();
         for(Supplier supplier: suppliers){
@@ -214,6 +233,8 @@ public class Supplier_Manger {
         }
     }
 
+
+    //Adds a discount to a specific item for a specific supplier and updates the corresponding contract and database.
     public void add_item_discount_to_supplier(String name_1, String item, int amount ,double discount){
         this.update_suppliers();
         for(Supplier suppleir :this.suppliers){
@@ -243,6 +264,8 @@ public class Supplier_Manger {
                 }
     }
 
+
+    //Retrieves a supplier based on their ID.
     public Supplier get_supplier_by_id(String id){
         for(Supplier suppleir :this.suppliers) {
             if (suppleir.getSupplierID().equals(id)) {
@@ -253,7 +276,7 @@ public class Supplier_Manger {
         return null;
     }
 
-
+    //Returns a set of all items associated with the suppliers.
     public Set<Item> get_itemlist_ofallsuppliers() {
         Set<Item> items = new HashSet<>();
         for (Supplier supplier : suppliers) {

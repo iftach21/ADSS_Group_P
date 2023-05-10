@@ -32,22 +32,28 @@ public class NonFixedDaySupplierMapper{
                 try {
                     String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
                     conn = DriverManager.getConnection(url);
-                } catch (SQLException ignored) {
-                } finally {
-                    try {
-                        if (conn != null) {
+                }
+                catch (SQLException ignored)
+                {
+                }
+                finally
+                {
+                    try
+                    {
+                        if (conn != null)
+                        {
                             conn.close();
                         }
-                    } catch (SQLException ignored) {
                     }
+                    catch (SQLException ignored)
+                    {}
                 }
                 ContractMapper contractMapper = new ContractMapper(conn);
                 Contract contract;
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
-                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {
-                }.getType();
+//                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
                 Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
@@ -98,7 +104,7 @@ public class NonFixedDaySupplierMapper{
         PreparedStatement stmt;
         ResultSet rs;
         try {
-            stmt = conn.prepareStatement("INSERT INTO NonFixedDaySuppliers (business_id, name, payment_method,supplier_ID,contract_person_name,contract_phone_number,items,numOfDayToDeliver,contract_id) VALUES (?, ?, ?, ?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO NonFixedDaySuppliers (business_id, name, payment_method ,supplier_ID, contract_person_name, contract_phone_number, items, numOfDayToDeliver, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
             stmt.setString(1, nonFixedDaySupplier.getBusinessId());
             stmt.setString(2, nonFixedDaySupplier.getName());
@@ -109,6 +115,7 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(7, itemsJson);
             stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+
             stmt.executeUpdate();
 
             rs = stmt.getGeneratedKeys();
@@ -135,6 +142,7 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
             stmt.setString(10, String.valueOf(nonFixedDaySupplier.getSupplierID()));
+
             stmt.executeUpdate();
 
             cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);

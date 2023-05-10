@@ -129,6 +129,7 @@ public class FixedDaySupplierMapper{
             stmt.setString(7, fixedDaySupplier.getPerson().getPhoneNumber());
             stmt.setString(8, itemsJson);
             stmt.setString(9, String.valueOf(fixedDaySupplier.getContract().contractId));
+            stmt.setString(10, String.valueOf(fixedDaySupplier.getSupplierID()));
             stmt.executeUpdate();
 
             cache.put(fixedDaySupplier.getSupplierID(), fixedDaySupplier);

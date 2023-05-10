@@ -9,18 +9,18 @@ public class Site {
     private String _address;
     private String _phoneNumber;
     private String _contactName;
-    private double x_coordinate;
-    private double y_coordinate;
+    private double _latitude;
+    private double _longitude;
 
-    public Site(int siteId, String siteName, String address, String phoneNumber, String contactName, double x_coordinate, double y_coordinate)
+    public Site(int siteId, String siteName, String address, String phoneNumber, String contactName, double _latitude, double _longitude)
     {
         this._siteId = siteId;
         this._siteName = siteName;
         this._address = address;
         this._phoneNumber = phoneNumber;
         this._contactName = contactName;
-        this.x_coordinate = x_coordinate;
-        this.y_coordinate = y_coordinate;
+        this._latitude = _latitude;
+        this._longitude = _longitude;
     }
 
     public String getSiteName(){
@@ -48,16 +48,34 @@ public class Site {
         return _phoneNumber;
     }
 
+    //return distance in km between this site to a given site
     public double calculateDistance(Site site)
     {
-        return Math.sqrt(Math.pow(this.x_coordinate-site.x_coordinate, 2) + Math.pow(this.y_coordinate=site.y_coordinate, 2));
+        double lon1 = _longitude;
+        double lat1 = _latitude;
+        double lon2 = site.getLongitude();
+        double lat2 = site.getLatitude();
+
+        final int R = 6371; // Radius of the earth
+
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c * 1000; // convert to meters
+
+        distance = Math.pow(distance, 2);
+
+        return Math.sqrt(distance) / 1000;
     }
 
-    public double getX_coordinate() {
-        return x_coordinate;
+    public double getLatitude() {
+        return _latitude;
     }
 
-    public double getY_coordinate() {
-        return y_coordinate;
+    public double getLongitude() {
+        return _longitude;
     }
 }

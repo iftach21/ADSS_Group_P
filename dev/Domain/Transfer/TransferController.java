@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
+import Data.Item_mockDAO;
+import Data.SiteDAO;
 import Data.TransferDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
@@ -45,6 +47,11 @@ public class TransferController {
     public void startTransferSystem() throws SQLException {
         boolean systemIsOn = true;
         Scanner scanner = new Scanner(System.in);
+        //here we supposed to check the database for new orders
+        //in this stage we don't have any orders' database, so we will create some mock orders from the mock data in item and sites
+        //create mock orders
+        createMockOrder();
+
         while (systemIsOn)
         {
             System.out.println("------------------------------------------------------------");
@@ -1170,5 +1177,69 @@ public class TransferController {
         List<WindowType> stokeWindowTypes = weeklyShiftManager.doIHaveStokeForTheShipment(weekNumber, arrivingDate.getYear(), orderDestinationSiteId, wt);
 
         return stokeWindowTypes.contains(wt);
+    }
+
+    public void createMockOrder() throws SQLException {
+        //get all sites
+        Site Yarkan = SiteDAO.getInstance().get(1);
+        Site Tnuva = SiteDAO.getInstance().get(2);
+        Site Osem = SiteDAO.getInstance().get(3);
+        Site SuperLiAshkelon = SiteDAO.getInstance().get(4);
+        Site SuperLiMetula = SiteDAO.getInstance().get(5);
+
+        //get all items
+        Item_mock Bamba = Item_mockDAO.getInstance().get("45325");
+        Item_mock Yolo = Item_mockDAO.getInstance().get("hr4565");
+        Item_mock Potato = Item_mockDAO.getInstance().get("5524f2");
+        Item_mock Tomato = Item_mockDAO.getInstance().get("543523f");
+        Item_mock FrozenPizza = Item_mockDAO.getInstance().get("5838sk");
+        Item_mock Doritos = Item_mockDAO.getInstance().get("jl829kl");
+        Item_mock ChocolateIceCream = Item_mockDAO.getInstance().get("84390j");
+        Item_mock CreamCheese = Item_mockDAO.getInstance().get("23719g");
+
+        //create order items with quantity
+        Map<Item_mock, Integer> OsemOrder1Items = new HashMap<>();
+        OsemOrder1Items.put(Bamba, 300);
+        OsemOrder1Items.put(Doritos, 500);
+        OsemOrder1Items.put(ChocolateIceCream, 200);
+
+        Map<Item_mock, Integer> TnuvaOrder1Items = new HashMap<>();
+        TnuvaOrder1Items.put(Yolo, 500);
+        TnuvaOrder1Items.put(FrozenPizza, 100);
+        TnuvaOrder1Items.put(CreamCheese, 400);
+
+        Map<Item_mock, Integer> YarkanOrder1Items = new HashMap<>();
+        YarkanOrder1Items.put(Potato, 450);
+        YarkanOrder1Items.put(Tomato, 600);
+
+        //create order
+        Map<Site, Map<Item_mock, Integer>> order1 = new HashMap<>();
+        order1.put(Yarkan, YarkanOrder1Items);
+        order1.put(Tnuva, TnuvaOrder1Items);
+        order1.put(Osem, OsemOrder1Items);
+
+        //create order items with quantity
+        Map<Item_mock, Integer> OsemOrder2Items = new HashMap<>();
+        OsemOrder2Items.put(Bamba, 700);
+        OsemOrder2Items.put(ChocolateIceCream, 200);
+
+        Map<Item_mock, Integer> TnuvaOrder2Items = new HashMap<>();
+        TnuvaOrder2Items.put(Yolo, 500);
+        TnuvaOrder2Items.put(FrozenPizza, 270);
+
+        Map<Item_mock, Integer> YarkanOrder2Items = new HashMap<>();
+        YarkanOrder2Items.put(Potato, 450);
+        YarkanOrder2Items.put(Tomato, 900);
+
+        //create order
+        Map<Site, Map<Item_mock, Integer>> order2 = new HashMap<>();
+        order2.put(Yarkan, YarkanOrder1Items);
+        order2.put(Tnuva, TnuvaOrder1Items);
+        order2.put(Osem, OsemOrder1Items);
+
+        //add orders to the orders queue
+        newOrderReceived(order1, SuperLiAshkelon.getSiteId());
+        newOrderReceived(order2, SuperLiMetula.getSiteId());
+
     }
 }

@@ -63,8 +63,8 @@ public class SiteDAO {
             stmt.setString(3, site.getSiteAddress());
             stmt.setString(4, site.get_phoneNumber());
             stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getY_coordinate());
+            stmt.setDouble(6, site.getLatitude());
+            stmt.setDouble(7, site.getLongitude());
             stmt.setInt(8, site.getSiteId());
 
 
@@ -92,8 +92,8 @@ public class SiteDAO {
             stmt.setString(3, site.getSiteAddress());
             stmt.setString(4, site.get_phoneNumber());
             stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getX_coordinate());
+            stmt.setDouble(6, site.getLatitude());
+            stmt.setDouble(7, site.getLongitude());
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -132,7 +132,7 @@ public class SiteDAO {
         String phoneNumber = rs.getString("phoneNumber");
         String contactName = rs.getString("contactName");
         double x_Coordinate = rs.getDouble("x_Coordinate");
-        double y_Coordinate = rs.getDouble("x_Coordinate");
+        double y_Coordinate = rs.getDouble("y_Coordinate");
 
         Site siteToReturn = new Site(id, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate);
         return siteToReturn;

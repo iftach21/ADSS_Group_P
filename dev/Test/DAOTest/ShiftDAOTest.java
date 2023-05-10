@@ -1,4 +1,3 @@
-package Test.DAOTest;
 
 import Data.ShiftDAO;
 import Data.WorkersDAO;

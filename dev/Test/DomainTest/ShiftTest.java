@@ -1,4 +1,3 @@
-package Test.DomainTest;
 
 import Domain.Employee.Shift;
 import Domain.Employee.Workers;

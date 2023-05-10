@@ -7,6 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/out/production/ADSS_Group_P/Test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/out/production/ADSS_Group_P/Test/DAOTest" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/out/production/ADSS_Group_P/Test/DomainTest" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/dev/Test" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/dev/Test/DAOTest" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/dev/Test/DomainTest" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -14,16 +17,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.41.2.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/SqliteJdbcDriver/sqlite-jdbc-3.40.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/sqlite-jdbc-3.41.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

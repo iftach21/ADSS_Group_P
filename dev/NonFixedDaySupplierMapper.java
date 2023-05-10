@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.*;
 public class NonFixedDaySupplierMapper{
 
-    private final Connection conn;
+    private Connection conn;
     private final Map<String, NonFixedDaySupplier> cache;
 
     public NonFixedDaySupplierMapper(Connection conn) {
@@ -18,11 +18,13 @@ public class NonFixedDaySupplierMapper{
 
     public NonFixedDaySupplier findBySupplierId(String supplierID)
     {
+        getConnection();
         if (cache.containsKey(supplierID)) {
             return cache.get(supplierID);
         }
         PreparedStatement stmt;
         ResultSet rs;
+
         try {
             stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
             stmt.setString(1, supplierID);
@@ -60,6 +62,11 @@ public class NonFixedDaySupplierMapper{
                 Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
                 cache.put(supplierID, nonFixedDaySupplier);
+                try
+                {
+                    conn.close();
+                }
+                catch (SQLException e){}
                 return nonFixedDaySupplier;
             }
         }
@@ -67,11 +74,17 @@ public class NonFixedDaySupplierMapper{
         {
             System.out.println(e.getMessage());
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return null;
     }
 
     public List<NonFixedDaySupplier> findAll()
     {
+        getConnection();
         List<NonFixedDaySupplier> suppliers = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
@@ -99,12 +112,18 @@ public class NonFixedDaySupplierMapper{
         {
             System.out.println(e.getMessage());
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return suppliers;
     }
 
 
     public void insert(NonFixedDaySupplier nonFixedDaySupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         ResultSet rs;
         try {
@@ -128,10 +147,16 @@ public class NonFixedDaySupplierMapper{
             }
         }
         catch (SQLException e){System.out.println(e.getMessage());}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
     public void update(NonFixedDaySupplier nonFixedDaySupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("UPDATE NonFixedDaySuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, numOfDayToDeliver = ?, contract_id = ? WHERE supplier_ID = ?");
@@ -152,10 +177,16 @@ public class NonFixedDaySupplierMapper{
             cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);
         }
         catch (SQLException e){System.out.println(e.getMessage());}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
     public void delete(NonFixedDaySupplier nonFixedDaySupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
@@ -167,6 +198,19 @@ public class NonFixedDaySupplierMapper{
         {
             System.out.println(e.getMessage());
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+    }
+    private void getConnection()
+    {
+        try
+        {
+            this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        }
+        catch (SQLException e){}
     }
 
 

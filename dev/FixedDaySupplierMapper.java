@@ -62,11 +62,21 @@ public class FixedDaySupplierMapper{
                 WindowType currentDeliveryDay = WindowType.valueOf(currentDay);
                 FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay, rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
                 cache.put(supplierID, fixedDaySupplier);
+                try
+                {
+                    conn.close();
+                }
+                catch (SQLException e){}
                 return fixedDaySupplier;
             }
         }
         catch (SQLException e)
         {}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return null;
     }
     public List<FixedDaySupplier> findAll()
@@ -74,6 +84,7 @@ public class FixedDaySupplierMapper{
         List<FixedDaySupplier> suppliers = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
         try {
             stmt = conn.prepareStatement("SELECT * FROM FixedDaySuppliers");
             rs = stmt.executeQuery();
@@ -97,11 +108,17 @@ public class FixedDaySupplierMapper{
         }
         catch (SQLException e)
         {}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return suppliers;
     }
 
     public void insert(FixedDaySupplier fixedDaySupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("INSERT INTO FixedDaySuppliers (business_id, name, currentDeliveryDay, payment_method, supplier_ID, contract_person_name, contract_phone_number, items, contract_id) VALUES (?,?, ?, ?, ?,?,?,?,?)");
@@ -122,10 +139,16 @@ public class FixedDaySupplierMapper{
             }
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
     }
 
     public void update(FixedDaySupplier fixedDaySupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("UPDATE FixedDaySuppliers SET business_id = ?,  name = ?, currentDeliveryDay = ? ,payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, contract_id = ? WHERE supplier_ID = ?");
@@ -145,17 +168,28 @@ public class FixedDaySupplierMapper{
             cache.put(fixedDaySupplier.getSupplierID(), fixedDaySupplier);
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
 
     public void delete(FixedDaySupplier fixedDaySupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("DELETE FROM FixedDaySuppliers WHERE supplier_ID = ?");
             stmt.setString(1, fixedDaySupplier.getBusinessId());
             stmt.executeUpdate();
             cache.remove(fixedDaySupplier.getSupplierID());
+        }
+        catch (SQLException e){}
+        try
+        {
+            conn.close();
         }
         catch (SQLException e){}
     }

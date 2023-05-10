@@ -182,12 +182,12 @@ public class FixedDaySupplierMapper{
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("DELETE FROM FixedDaySuppliers WHERE supplier_ID = ?");
-            stmt.setString(1, fixedDaySupplier.getBusinessId());
+            stmt.setString(1, fixedDaySupplier.getSupplierID());
             stmt.executeUpdate();
             cache.remove(fixedDaySupplier.getSupplierID());
         }
         catch (SQLException e){
-
+            System.out.println(e.getMessage());
         }
         try
         {

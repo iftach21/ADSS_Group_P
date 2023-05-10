@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public class PeriodicOrderMapper {
-    private final Connection conn;
-    private final Map<Integer,Period_Order> cache;
+    private Connection conn;
+    private Map<Integer,Period_Order> cache;
 
-    public PeriodicOrderMapper(Connection conn) {
-        this.conn = conn;
+//    public PeriodicOrderMapper(Connection conn)
+    public PeriodicOrderMapper()
+    {
         this.cache = new HashMap<>();
     }
 
@@ -22,8 +23,11 @@ public class PeriodicOrderMapper {
         {
             return cache.get(orderNum);
         }
+
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
+
         try
         {
             stmt = conn.prepareStatement("SELECT * FROM PeriodicOrders WHERE order_num = ?");
@@ -44,6 +48,11 @@ public class PeriodicOrderMapper {
             }
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return null;
     }
 
@@ -52,6 +61,7 @@ public class PeriodicOrderMapper {
         List<Period_Order> orders = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
         try
         {
             stmt = conn.prepareStatement("SELECT * FROM PeriodicOrders");
@@ -72,15 +82,21 @@ public class PeriodicOrderMapper {
             }
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return orders;
     }
 
     public void insert(Period_Order order)
     {
         PreparedStatement stmt;
+        getConnection();
         try
         {
-            stmt = conn.prepareStatement("INSERT INTO PeriodicOrders(order_num,supplier_id,item_list,cost,store_number,days_to_cycle,day_left)VALUES (?, ?, ?, ?, ?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO PeriodicOrders(order_num, supplier_id, item_list, cost, store_number, days_to_cycle, day_left)VALUES (?, ?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
             stmt.setString(2, supplier.getSupplierID());
@@ -99,12 +115,18 @@ public class PeriodicOrderMapper {
             }
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
 
     public void update(Period_Order order)
     {
         PreparedStatement stmt;
+        getConnection();
         try
         {
             stmt = conn.prepareStatement("UPDATE PeriodicOrders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ?, days_to_cycle = ?, day_left = ? WHERE order_num = ?");
@@ -120,18 +142,29 @@ public class PeriodicOrderMapper {
             cache.put(order.getOrderNum(), order);
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
 
     public void delete(Period_Order order)
     {
         PreparedStatement stmt;
+        getConnection();
         try
         {
             stmt = conn.prepareStatement("DELETE FROM PeriodicOrders WHERE order_num = ?");
             stmt.setInt(1, order.getOrderNum());
             stmt.executeUpdate();
             cache.remove(order.getOrderNum());
+        }
+        catch (SQLException e){}
+        try
+        {
+            conn.close();
         }
         catch (SQLException e){}
 
@@ -172,5 +205,14 @@ public class PeriodicOrderMapper {
         }
         catch (Exception e){}
         return null;
+    }
+
+    private void getConnection()
+    {
+        try
+        {
+            this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        }
+        catch (SQLException e){}
     }
 }

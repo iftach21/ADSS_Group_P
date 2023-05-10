@@ -219,7 +219,7 @@ public class NonFixedDaySupplierMapper{
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
-            stmt.setString(1, nonFixedDaySupplier.getBusinessId());
+            stmt.setString(1, nonFixedDaySupplier.getSupplierID());
             stmt.executeUpdate();
             cache.remove(nonFixedDaySupplier.getSupplierID());
         }

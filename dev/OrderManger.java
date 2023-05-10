@@ -19,16 +19,17 @@ public class OrderManger {
 //        this.periodOrders = new ArrayList<Period_Order>();
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
 //            orderMapper = new OrderMapper(conn);
             orderMapper = new OrderMapper();
-            periodicOrderMapper=new PeriodicOrderMapper(conn);
-            Order order=new Order();
-            if(orderMapper.findAll().size()!=0){
+//            periodicOrderMapper=new PeriodicOrderMapper(conn);
+            periodicOrderMapper = new PeriodicOrderMapper();
+            Order order = new Order();
+            if(orderMapper.findAll().size()!= 0){
             order.set_number(orderMapper.findAll().get(orderMapper.findAll().size()-1).getOrderNum());}
         }
 
-        catch (SQLException e)
+        catch (Exception e)
         {
             System.out.println(e.getMessage());
         }

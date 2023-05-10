@@ -19,13 +19,14 @@ public class NonDeliveringSupplierMapper {
 
     public NonDeliveringSupplier findBySupplierId(String supplierID)
     {
-        getConnection();
         if(cache.containsKey(supplierID))
         {
             return cache.get(supplierID);
         }
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
+
         try {
             stmt = conn.prepareStatement("SELECT * FROM NonDeliveringSuppliers WHERE supplier_ID = ?");
             stmt.setString(1, supplierID);
@@ -164,7 +165,7 @@ public class NonDeliveringSupplierMapper {
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("DELETE FROM NonDeliveringSuppliers WHERE supplier_ID = ?");
-            stmt.setString(1, nonDeliveringSupplier.getBusinessId());
+            stmt.setString(1, nonDeliveringSupplier.getSupplierID());
             stmt.executeUpdate();
             cache.remove(nonDeliveringSupplier.getSupplierID());
         }

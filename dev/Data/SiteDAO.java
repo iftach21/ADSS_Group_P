@@ -56,7 +56,7 @@ public class SiteDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Site SET siteId=?, siteName=?, address=?, phoneNumber=?, contactName=?, x_Coordinate=?, y_Coordinate=? WHERE siteId=?";
+            String sql = "UPDATE Site SET siteID=?, siteName=?, address=?, phoneNumber=?, contactName=?, x_Coordinate=?, y_Coordinate=? WHERE siteID=?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, site.getSiteId());
             stmt.setString(2, site.getSiteName());
@@ -83,7 +83,7 @@ public class SiteDAO {
 
     public void add(Site site){
         try {
-            String sql = "INSERT INTO Site (siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
+            String sql = "INSERT INTO Site (siteID, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class SiteDAO {
 
     public void delete(int id) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteId = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteID = ?");
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {

@@ -28,6 +28,10 @@ public class OrderManger {
             if(orderMapper.findAll().size()!= 0)
             {
             order.set_number(orderMapper.findAll().get(orderMapper.findAll().size()-1).getOrderNum());}
+            Period_Order periodOrders = new Period_Order(5);
+            if(periodicOrderMapper.findAll().size()!= 0)
+            {
+                periodOrders.setOrdernumber(periodicOrderMapper.findAll().get(periodicOrderMapper.findAll().size()-1).getOrderNum());}
         }
 
         catch (Exception e)
@@ -309,6 +313,8 @@ public class OrderManger {
         }
 
         Period_Order periodOrders = new Period_Order(numberofdayscycle);
+
+
         periodOrders.setSupplier(order.getSupplier());
         periodOrders.setStore_number(order.getStore_number());
         periodOrders.setCost(order.getCost());

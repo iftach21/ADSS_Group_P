@@ -41,7 +41,7 @@ public class ShiftWorkerDAO {
         }
     }
 
-    //!!!
+    ///
     public List<Pair<Workers, Integer>> get(int shiftId) throws SQLException {
         List<Pair<Workers, Integer>> workersList = new ArrayList<>();
         PreparedStatement stmt = null;
@@ -60,9 +60,6 @@ public class ShiftWorkerDAO {
         }
         return workersList;
     }
-    public void update(){
-        //todo: complete
-    }
 
     private void delete(int idWorkerShift){
 
@@ -74,6 +71,7 @@ public class ShiftWorkerDAO {
             System.err.println(e.getMessage());
         }
     }
+
 
     void delete(int idWorker, int idShift){
 

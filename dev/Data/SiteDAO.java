@@ -145,4 +145,20 @@ public class SiteDAO {
             }
         }
     }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("TRUNCATE Site");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                SiteList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }

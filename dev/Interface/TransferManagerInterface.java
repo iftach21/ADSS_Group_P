@@ -54,5 +54,7 @@ public class TransferManagerInterface extends AInterface{
         Item_mockDAO.getInstance().add(CreamCheese);
 
         controller.startTransferSystem();
+        Item_mockDAO.getInstance().deleteAll();
+        SiteDAO.getInstance().deleteAll();
     }
 }

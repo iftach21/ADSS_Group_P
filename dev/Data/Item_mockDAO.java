@@ -136,4 +136,20 @@ public class Item_mockDAO {
             }
         }
     }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("TRUNCATE Item_Mock");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                ItemList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }

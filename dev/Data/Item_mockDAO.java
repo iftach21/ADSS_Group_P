@@ -122,7 +122,7 @@ public class Item_mockDAO {
 
     private Item_mock gettingNewItem_mock(ResultSet rs, String catalogNum) throws SQLException {
         String name = rs.getString("name");
-        String tempLevel = rs.getString("phoneNumber");
+        String tempLevel = rs.getString("tempLevel");
 
 
         Item_mock Item_mockToReturn = new Item_mock(catalogNum, TempTypeFactory.TempLevelFromString(tempLevel), name);

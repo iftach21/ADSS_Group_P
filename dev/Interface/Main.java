@@ -25,7 +25,7 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }//
 
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;

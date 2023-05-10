@@ -67,7 +67,7 @@ public class Supplier_Manger {
             this.nonFixedDaySupplierMapper.insert((NonFixedDaySupplier) supplier);
 
         }
-        this.update_suppliers();
+
         if (!this.suppliers.contains(supplier)) {
             this.suppliers.add(supplier);
             for (Item item : supplier.getItems().keySet()) {
@@ -76,6 +76,7 @@ public class Supplier_Manger {
                 }
             }
             contractMapper.insert(supplier.getContract());
+            this.update_suppliers();
             return true;
         } else {
             return false;
@@ -87,10 +88,10 @@ public class Supplier_Manger {
             if(suppleir.getName().equals(name)){
                 if(suppleir .getType()==0){
                     this.fixedDaySupplierMapper.delete((FixedDaySupplier) suppleir );
-                } else if (suppleir .getType()==1) {
+                } else if (suppleir .getType()==2) {
                     this.nonDeliveringSupplierMapper.delete((NonDeliveringSupplier) suppleir );
 
-                } else if (suppleir .getType()==2) {
+                } else if (suppleir .getType()==1) {
                     this.nonFixedDaySupplierMapper.delete((NonFixedDaySupplier) suppleir );
 
                 }
@@ -108,10 +109,10 @@ public class Supplier_Manger {
                 suppleir.update_contact_person(name_2,phone_number);
                 if(suppleir .getType()==0){
                     this.fixedDaySupplierMapper.update((FixedDaySupplier) suppleir );
-                } else if (suppleir .getType()==1) {
+                } else if (suppleir .getType()==2) {
                     this.nonDeliveringSupplierMapper.update((NonDeliveringSupplier) suppleir );
 
-                } else if (suppleir .getType()==2) {
+                } else if (suppleir .getType()==1) {
                     this.nonFixedDaySupplierMapper.update((NonFixedDaySupplier) suppleir );
 
                 }
@@ -127,10 +128,10 @@ public class Supplier_Manger {
                 suppleir.add_Items(item, amount, price);
                 if (suppleir.getType() == 0) {
                     this.fixedDaySupplierMapper.update((FixedDaySupplier) suppleir);
-                } else if (suppleir.getType() == 1) {
+                } else if (suppleir.getType() == 2) {
                     this.nonDeliveringSupplierMapper.update((NonDeliveringSupplier) suppleir);
 
-                } else if (suppleir.getType() == 2) {
+                } else if (suppleir.getType() == 1) {
                     this.nonFixedDaySupplierMapper.update((NonFixedDaySupplier) suppleir);
 
                 }
@@ -152,10 +153,10 @@ public class Supplier_Manger {
                 suppleir.add_Items(item, amount, price);
                 if (suppleir.getType() == 0) {
                     this.fixedDaySupplierMapper.update((FixedDaySupplier) suppleir);
-                } else if (suppleir.getType() == 1) {
+                } else if (suppleir.getType() == 2) {
                     this.nonDeliveringSupplierMapper.update((NonDeliveringSupplier) suppleir);
 
-                } else if (suppleir.getType() == 2) {
+                } else if (suppleir.getType() == 1) {
                     this.nonFixedDaySupplierMapper.update((NonFixedDaySupplier) suppleir);
 
                 }
@@ -177,10 +178,10 @@ public class Supplier_Manger {
                 }
                 if (suppleir.getType() == 0) {
                     this.fixedDaySupplierMapper.update((FixedDaySupplier) suppleir);
-                } else if (suppleir.getType() == 1) {
+                } else if (suppleir.getType() == 2) {
                     this.nonDeliveringSupplierMapper.update((NonDeliveringSupplier) suppleir);
 
-                } else if (suppleir.getType() == 2) {
+                } else if (suppleir.getType() == 1) {
                     this.nonFixedDaySupplierMapper.update((NonFixedDaySupplier) suppleir);
 
                 }
@@ -252,16 +253,16 @@ public class Supplier_Manger {
 
     public void update_suppliers()
     {
-        this.suppliers=new ArrayList<Supplier>();
-        if(this.fixedDaySupplierMapper.findAll()!=null)
+        this.suppliers = new ArrayList<Supplier>();
+        if(this.fixedDaySupplierMapper.findAll().size()!=0)
         {
             this.suppliers.addAll( this.fixedDaySupplierMapper.findAll());
         }
-        if(this.nonDeliveringSupplierMapper.findAll()!=null)
+        if(this.nonDeliveringSupplierMapper.findAll().size()!=0)
         {
             this.suppliers.addAll(this.nonDeliveringSupplierMapper.findAll());
         }
-        if(this.nonFixedDaySupplierMapper.findAll()!=null)
+        if(this.nonFixedDaySupplierMapper.findAll().size()!=0)
         {
             this.suppliers.addAll(this.nonFixedDaySupplierMapper.findAll());
         }

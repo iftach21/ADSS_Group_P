@@ -449,7 +449,9 @@ class OrderMangerTest {
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);
         masupplier.add_supplier(supplier_1);
+        System.out.println(masupplier.getSuppliers().size());
         masupplier.update_suppliers();
+        System.out.println(masupplier.getSuppliers().size());
         assertEquals(1,masupplier.getSuppliers().size());
         Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
 //        item1.setMinimum_quantity(10);

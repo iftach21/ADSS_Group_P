@@ -370,50 +370,37 @@ class OrderMangerTest {
     //test 8
     @Test
     void order_move_to_history(){
-        var ordermanger=new OrderManger();
-        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+        Supplier_Manger masupplier=new Supplier_Manger();
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
+        NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);
+        masupplier.add_supplier(supplier_1);
+        System.out.println(masupplier.getSuppliers().size());
+        masupplier.update_suppliers();
+        System.out.println(masupplier.getSuppliers().size());
+//        assertEquals(1,masupplier.getSuppliers().size());
+        Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+//        item1.setMinimum_quantity(10);
+        Item item2 = new Item("Milk", "200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
+//        item2.setMinimum_quantity(5);
+        Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
+//        item3.setMinimum_quantity(3);
+        Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
+        masupplier.add_item_discount_to_supplier("Supplier1 Inc.","Apple",10,0.8);
+        masupplier.update_suppliers();
+        WindowType currentDeliveryDay =WindowType.day2;
+        FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
+        masupplier.add_supplier(supplier_2);
+        masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
+        NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
+        masupplier.add_supplier(supplier_3);
+        OrderManger orderManger=new OrderManger();
 
-//        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
-//        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
-//        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
-//        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
-//
-//        maplist.put(item1,100);
-//        maplist.put(item2,100);
-//        maplist.put(item3,100);
-//        maplist.put(item4,100);
-//
-//        Supplier_Manger masupplier=new Supplier_Manger();
-//        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
-//        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
-//        supplier_1.add_Items(item1,100,100);
-//        supplier_1.add_item_to_contract(item1.getName(),100,0.1);
-//        supplier_1.add_Items(item2,100,100);
-//        supplier_1.add_Items(item3,100,100);
-//        supplier_1.add_Items(item4,100,100);
-//        supplier_1.add_total_discount(0.5);
-//        supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
-//        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
-//        supplier_2.add_Items(item1,10,90);
-//        supplier_2.add_Items(item2,100,100);
-//        supplier_2.add_Items(item3,100,100);
-//        supplier_2.add_Items(item4,100,100);
-//        supplier_2.add_total_discount(0.5);
-//
-//        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
-//        supplier_3.add_Items(item2,100,100);
-//        supplier_3.add_Items(item3,100,100);
-//        supplier_3.add_Items(item4,100,100);
-//        supplier_3.add_total_discount(0.5);
-//
-//
-//        masupplier.getSuppliers().add(supplier_1);
-//        masupplier.getSuppliers().add(supplier_2);
-//        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
-//        int num =ordermanger.getPending_for_apporval().get(0).getOrderNum();
-//        ordermanger.move_from_pending_to_approvel(num);
-//        ordermanger.moveFromApprovalToHistory(ordermanger.getApproval().get(0));
-//        assertEquals(1,ordermanger.getOrders_history().size());
+
+        Map<Item,Integer> maplist = new HashMap<Item,Integer>();
+        maplist.put(item1,100);
+        //This is to add a peiod order
+        orderManger.period_order(supplier_1,maplist,20,40);
     }
     @Test
         //test 9

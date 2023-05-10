@@ -175,7 +175,7 @@ public class TrucksDAO {
     public void add(Truck truck){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime) " +
+            String sql = "INSERT or REPLACE INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
@@ -287,15 +287,37 @@ public class TrucksDAO {
         DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("HH:mm");
 
         LocalTime inputTime3 = LocalTime.parse(unavailableStartTimeString);
+        /*
         String outputString3 = inputTime3.format(outputFormatter2);
         LocalTime unavailableStartTime = LocalTime.parse(outputString3, outputFormatter2);
 
+         */
+
         LocalTime inputTime4 = LocalTime.parse(unavailableEndTimeString);
-        String outputString4 = inputTime3.format(outputFormatter2);
+        /*
+        String outputString4 = inputTime4.format(outputFormatter2);
         LocalTime unavailableEndTime = LocalTime.parse(outputString4, outputFormatter2);
 
-        Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime);
+         */
+
+        Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, inputTime3, unavailableEndDate, inputTime4);
 
         return truck;
+    }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Truck");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                TruckList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

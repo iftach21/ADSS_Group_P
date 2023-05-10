@@ -83,7 +83,7 @@ public class SiteDAO {
 
     public void add(Site site){
         try {
-            String sql = "INSERT INTO Site (siteID, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
+            String sql = "INSERT or REPLACE INTO Site (siteID, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -149,7 +149,7 @@ public class SiteDAO {
     public void deleteAll()
     {
         try {
-            PreparedStatement stmt = conn.prepareStatement("TRUNCATE Site");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("Table is empty");

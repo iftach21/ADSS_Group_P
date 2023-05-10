@@ -32,7 +32,7 @@ public class Truck {
         if (unavailableEndDate == null || unavailableEndTime == null)
             this._unavailableEndTime = null;
         else
-            this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
+            this._unavailableEndTime = LocalDateTime.of(unavailableEndDate, unavailableEndTime);
     }
 
     public int getCurrentTruckWeight()

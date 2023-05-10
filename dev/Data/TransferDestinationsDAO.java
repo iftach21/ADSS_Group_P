@@ -55,7 +55,7 @@ public class TransferDestinationsDAO {
 
     public void add(int transferId, List<Site> destinations){
         try {
-            String sql = "INSERT INTO TransferDestinations (transferId, siteId) " +
+            String sql = "INSERT or REPLACE INTO TransferDestinations (transferId, siteId) " +
                     "VALUES (?, ?)";
             for (Site dest: destinations) {
                 PreparedStatement stmt = conn.prepareStatement(sql);
@@ -99,6 +99,22 @@ public class TransferDestinationsDAO {
             if (site.getSiteId() == siteId) {
                 this.destinationsList.get(transferId).remove(site.getSiteId());
             }
+        }
+    }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferDestinations");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                destinationsList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

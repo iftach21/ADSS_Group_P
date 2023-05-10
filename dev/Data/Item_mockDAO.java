@@ -81,7 +81,7 @@ public class Item_mockDAO {
 
     public void add(Item_mock item_mock){
         try {
-            String sql = "INSERT INTO Item_mock (catalogNum, name, tempLevel) " +
+            String sql = "INSERT or REPLACE INTO Item_mock (catalogNum, name, tempLevel) " +
                     "VALUES (?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -140,7 +140,7 @@ public class Item_mockDAO {
     public void deleteAll()
     {
         try {
-            PreparedStatement stmt = conn.prepareStatement("TRUNCATE Item_Mock");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Item_Mock");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("Table is empty");

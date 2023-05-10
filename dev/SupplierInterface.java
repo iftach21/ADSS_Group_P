@@ -1,13 +1,15 @@
 import java.util.Scanner;
 
-public class SupplierInterface extends AInterface  {
+public class SupplierInterface extends AInterface
+{
     private Supplier_Manger supplier_manger;
     private OrderManger orderManger;
 
-    public SupplierInterface(){
-         this.supplier_manger= new Supplier_Manger();
+    public SupplierInterface()
+    {
+        this.supplier_manger = new Supplier_Manger();
     }
-
+    @Override
     public void interfaceStartup() {
         Scanner scanner = new Scanner(System.in);
         int option_1 =0;
@@ -352,6 +354,6 @@ public class SupplierInterface extends AInterface  {
     }
 
 
-    }
+}
 
 

@@ -3,15 +3,18 @@ import java.util.*;
 public class OrderInterface extends AInterface {
     private OrderManger orderManger;
     private Supplier_Manger supplier_manger;
-    public OrderInterface(OrderManger orderManger ,Supplier_Manger supplier_manger){
-        this.orderManger= orderManger;
-        this.supplier_manger=supplier_manger;
+    public OrderInterface(Supplier_Manger supplier_manger){
+        this.orderManger = new OrderManger();
+        this.supplier_manger = supplier_manger;
     }
 
+    @Override
     public void interfaceStartup() {
-            Scanner scanner = new Scanner(System.in);
-            int option_1;
-         while (true) {
+        Scanner scanner = new Scanner(System.in);
+        int option_1;
+
+
+        while (true) {
              //orders menu to add new and to approve them
              System.out.println("You selected Order manger");
              System.out.println("1.add new Order");
@@ -22,7 +25,6 @@ public class OrderInterface extends AInterface {
              System.out.println("6.get back to previous menu");
              String choice_1 = scanner.nextLine();
              option_1 = 0;
-
              while (true) {
                  try {
                      option_1 = Integer.parseInt(choice_1);

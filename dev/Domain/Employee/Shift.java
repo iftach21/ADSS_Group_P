@@ -33,6 +33,19 @@ public class Shift {
         shiftRequirement = new ShiftRequirement();
     }
 
+    public Shift(Workers shiftManager){
+        this.drivers = new ArrayList<>();
+        this.date = "";
+        this.shiftManager = shiftManager;
+        this.log = " ";
+        this.workerInShift = new ArrayList[7];
+        for (int i = 0; i < 7; i++) {
+            workerInShift[i] = new ArrayList<Workers>();
+        }
+        startTime = "8:00";
+        shiftRequirement = new ShiftRequirement();
+    }
+
     public Shift() {
         this.drivers = new ArrayList<>();
         this.date = "";
@@ -192,7 +205,7 @@ public class Shift {
         List<Workers> ans = new ArrayList<>();
 
         List<Workers> inThisWorkers = this.getAllWorkers();
-        List<Workers> otherWorkers = shiftToCompare.getAllWorkers();
+        List<Workers> otherWorkers =shiftToCompare != null ? shiftToCompare.getAllWorkers()  : new ArrayList<>() ;
 
         for(Workers w1: inThisWorkers){
             for(Workers w2: otherWorkers){

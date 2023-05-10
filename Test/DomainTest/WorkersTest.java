@@ -1,3 +1,4 @@
+package DomainTest;
 
 import Domain.Enums.WindowType;
 import Domain.Employee.Workers;

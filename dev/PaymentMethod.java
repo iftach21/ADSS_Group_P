@@ -1,7 +1,7 @@
 public enum PaymentMethod {
-    SHOTEF(1),
-    SHOTEFPLUS30(2),
-    SHOTEFPLUS60(3);
+    SHOTEF(0),
+    SHOTEFPLUS30(1),
+    SHOTEFPLUS60(2);
 
     private int numericValue;
 

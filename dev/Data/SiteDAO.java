@@ -33,7 +33,7 @@ public class SiteDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM Site WHERE siteId = ?";
+            String sql = "SELECT * FROM Site WHERE siteID = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();

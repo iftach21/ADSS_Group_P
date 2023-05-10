@@ -11,56 +11,85 @@ public class NonFixedDaySupplierMapper{
     private Connection conn;
     private final Map<String, NonFixedDaySupplier> cache;
 
-    public NonFixedDaySupplierMapper(Connection conn) {
-        this.conn = conn;
+//    public NonFixedDaySupplierMapper(Connection conn)
+    public NonFixedDaySupplierMapper()
+    {
+//        this.conn = conn;
         this.cache = new HashMap<>();
     }
 
     public NonFixedDaySupplier findBySupplierId(String supplierID)
     {
-        getConnection();
         if (cache.containsKey(supplierID)) {
             return cache.get(supplierID);
         }
+
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
 
-        try {
+//        try
+//        {
+//            stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
+//            stmt.setString(1, supplierID);
+//            rs = stmt.executeQuery();
+//            if (rs.next()) {
+//                Connection conn = null;
+//                try {
+//                    String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
+//                    conn = DriverManager.getConnection(url);
+//                }
+//                catch (SQLException ignored)
+//                {
+//                }
+//                finally
+//                {
+//                    try
+//                    {
+//                        if (conn != null)
+//                        {
+//                            conn.close();
+//                        }
+//                    }
+//                    catch (SQLException ignored)
+//                    {}
+//                }
+////                ContractMapper contractMapper = new ContractMapper(conn);
+//                ContractMapper contractMapper = new ContractMapper();
+//
+//                Contract contract;
+//                contract = contractMapper.findBySupplierId(supplierID);
+//                ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
+//                String itemsMapJson = rs.getString("items");
+////                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
+//                int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
+//                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
+//                NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
+//                cache.put(supplierID, nonFixedDaySupplier);
+//                try
+//                {
+//                    conn.close();
+//                }
+//                catch (SQLException e){}
+//                return nonFixedDaySupplier;
+//            }
+//        }
+        try
+        {
             stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
             stmt.setString(1, supplierID);
             rs = stmt.executeQuery();
-            if (rs.next()) {
-                Connection conn = null;
-                try {
-                    String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-                    conn = DriverManager.getConnection(url);
-                }
-                catch (SQLException ignored)
-                {
-                }
-                finally
-                {
-                    try
-                    {
-                        if (conn != null)
-                        {
-                            conn.close();
-                        }
-                    }
-                    catch (SQLException ignored)
-                    {}
-                }
-//                ContractMapper contractMapper = new ContractMapper(conn);
+            if(rs.next())
+            {
                 ContractMapper contractMapper = new ContractMapper();
-
                 Contract contract;
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
-//                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
-                int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
                 Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
-                NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
+
+                int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
+                NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"),rs.getString("business_id"),paymentMethod,rs.getString("supplier_ID"),person,contract,map);
                 cache.put(supplierID, nonFixedDaySupplier);
                 try
                 {
@@ -69,6 +98,7 @@ public class NonFixedDaySupplierMapper{
                 catch (SQLException e){}
                 return nonFixedDaySupplier;
             }
+
         }
         catch (SQLException e)
         {
@@ -99,8 +129,7 @@ public class NonFixedDaySupplierMapper{
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
-                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {
-                }.getType();
+//                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
                 Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);

@@ -30,7 +30,9 @@ public abstract class DeliveringSupplier extends Supplier {
 
         if(deliveringSupplierMapper == null)
         {
-            deliveringSupplierMapper = new NonDeliveringSupplierMapper(conn);
+//            deliveringSupplierMapper = new NonDeliveringSupplierMapper(conn);
+            deliveringSupplierMapper = new NonDeliveringSupplierMapper();
+
         }
     }
 

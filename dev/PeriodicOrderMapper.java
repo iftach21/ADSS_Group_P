@@ -140,21 +140,24 @@ public class PeriodicOrderMapper {
     private Supplier findSupplier(String supplierId)
     {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             int flag = 0;
-            NonDeliveringSupplierMapper nonMapper = new NonDeliveringSupplierMapper(conn);
+//            NonDeliveringSupplierMapper nonMapper = new NonDeliveringSupplierMapper(conn);
+            NonDeliveringSupplierMapper nonMapper = new NonDeliveringSupplierMapper();
             NonDeliveringSupplier nonDeliveringSupplier = nonMapper.findBySupplierId(supplierId);
             if (nonDeliveringSupplier != null) {
                 flag++;
                 return nonDeliveringSupplier;
             }
-            conn.close();
-            conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-            NonFixedDaySupplierMapper nonFixedDaySupplierMapper = new NonFixedDaySupplierMapper(conn);
+//            conn.close();
+//            conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//            NonFixedDaySupplierMapper nonFixedDaySupplierMapper = new NonFixedDaySupplierMapper(conn);
+            NonFixedDaySupplierMapper nonFixedDaySupplierMapper = new NonFixedDaySupplierMapper();
+
             if (flag == 0) {
                 NonFixedDaySupplier nonFixedDaySupplier = nonFixedDaySupplierMapper.findBySupplierId(supplierId);
                 if (nonFixedDaySupplier == null) {
-                    conn.close();
+//                    conn.close();
 //                    conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
 //                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
                     FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper();
@@ -167,7 +170,7 @@ public class PeriodicOrderMapper {
                 }
             }
         }
-        catch (SQLException e){}
+        catch (Exception e){}
         return null;
     }
 }

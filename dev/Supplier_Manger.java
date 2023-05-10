@@ -40,7 +40,7 @@ public class Supplier_Manger {
         this.itemslist = new HashMap<Item,Integer>();
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             System.out.println("Connection to SuperLeeDataBase.db has been established.");
 //            this.itemMapper = new ItemMapper(conn);
             this.itemMapper = new ItemMapper();
@@ -48,8 +48,12 @@ public class Supplier_Manger {
 //            this.fixedDaySupplierMapper=new FixedDaySupplierMapper(conn);
             this.fixedDaySupplierMapper=new FixedDaySupplierMapper();
 
-            this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper(conn);
-            this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper(conn);
+//            this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper(conn);
+            this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper();
+
+//            this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper(conn);
+            this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper();
+
 //            this.contractMapper = new ContractMapper(conn);
             this.contractMapper = new ContractMapper();
 
@@ -62,7 +66,7 @@ public class Supplier_Manger {
             }
             contract.setContractIdCounter(this.contractMapper.findAll().get(this.contractMapper.findAll().size() - 1 ).contractId);
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             System.out.println(e.getMessage());
         }

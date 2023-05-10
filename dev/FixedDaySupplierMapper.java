@@ -25,6 +25,7 @@ public class FixedDaySupplierMapper{
         {
             return cache.get(supplierID);
         }
+
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
@@ -34,19 +35,19 @@ public class FixedDaySupplierMapper{
             stmt.setString(1, supplierID);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                Connection conn = null;
-                try {
-                    String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-                    conn = DriverManager.getConnection(url);
-                } catch (SQLException ignored) {
-                } finally {
-                    try {
-                        if (conn != null) {
-                            conn.close();
-                        }
-                    } catch (SQLException ignored) {
-                    }
-                }
+//                Connection conn = null;
+//                try {
+//                    String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
+//                    conn = DriverManager.getConnection(url);
+//                } catch (SQLException ignored) {
+//                } finally {
+//                    try {
+//                        if (conn != null) {
+//                            conn.close();
+//                        }
+//                    } catch (SQLException ignored) {
+//                    }
+//                }
 //                ContractMapper contractMapper = new ContractMapper(conn);
                 ContractMapper contractMapper = new ContractMapper();
 
@@ -54,8 +55,7 @@ public class FixedDaySupplierMapper{
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
-                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {
-                }.getType();
+//                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
                 Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 String currentDay = rs.getString("currentDeliveryDay");

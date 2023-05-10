@@ -10,8 +10,10 @@ public class NonDeliveringSupplierMapper {
     private Connection conn;
     private final Map<String,NonDeliveringSupplier> cache;
 
-    public NonDeliveringSupplierMapper(Connection conn) {
-        this.conn = conn;
+//    public NonDeliveringSupplierMapper(Connection conn)
+    public NonDeliveringSupplierMapper()
+    {
+//        this.conn = conn;
         this.cache = new HashMap<>();
     }
 
@@ -98,8 +100,9 @@ public class NonDeliveringSupplierMapper {
     public void insert(NonDeliveringSupplier nonDeliveringSupplier)
     {
         PreparedStatement stmt;
+        getConnection();
+
         try {
-            getConnection();
             stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method, supplier_ID, contract_person_name, contract_phone_number, items, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             String itemsJson = new Gson().toJson(nonDeliveringSupplier.getItems());
 

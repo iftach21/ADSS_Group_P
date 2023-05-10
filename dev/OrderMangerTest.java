@@ -20,7 +20,7 @@ class OrderMangerTest {
 //        item4.setMinimum_quantity(2);
 
 
-        Connection conn1 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//        Connection conn1 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         Supplier_Manger masupplier = new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonDeliveringSupplier supplier = new NonDeliveringSupplier("Supplier Inc.", "123456789", 1, "S001", contactPerson, null, null);
@@ -29,7 +29,9 @@ class OrderMangerTest {
         supplier.add_Items(item2,100,100);
         supplier.add_Items(item3,100,100);
         supplier.add_Items(item4,100,100);
-        NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
+//        NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
+        NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper();
+
 //        Connection conn2 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
 
 

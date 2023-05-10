@@ -33,7 +33,7 @@ public class SiteDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM Site WHERE siteId = ?";
+            String sql = "SELECT * FROM Site WHERE siteID = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
@@ -56,15 +56,15 @@ public class SiteDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Site SET siteId=?, siteName=?, address=?, phoneNumber=?, contactName=?, x_Coordinate=?, y_Coordinate=? WHERE siteId=?";
+            String sql = "UPDATE Site SET siteID=?, siteName=?, address=?, phoneNumber=?, contactName=?, x_Coordinate=?, y_Coordinate=? WHERE siteID=?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, site.getSiteId());
             stmt.setString(2, site.getSiteName());
             stmt.setString(3, site.getSiteAddress());
             stmt.setString(4, site.get_phoneNumber());
             stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getY_coordinate());
+            stmt.setDouble(6, site.getLatitude());
+            stmt.setDouble(7, site.getLongitude());
             stmt.setInt(8, site.getSiteId());
 
 
@@ -83,7 +83,7 @@ public class SiteDAO {
 
     public void add(Site site){
         try {
-            String sql = "INSERT INTO Site (siteId, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
+            String sql = "INSERT INTO Site (siteID, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -92,8 +92,8 @@ public class SiteDAO {
             stmt.setString(3, site.getSiteAddress());
             stmt.setString(4, site.get_phoneNumber());
             stmt.setString(5, site.get_contactName());
-            stmt.setDouble(6, site.getX_coordinate());
-            stmt.setDouble(7, site.getX_coordinate());
+            stmt.setDouble(6, site.getLatitude());
+            stmt.setDouble(7, site.getLongitude());
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -103,7 +103,7 @@ public class SiteDAO {
 
     public void delete(int id) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteId = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteID = ?");
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
@@ -132,7 +132,7 @@ public class SiteDAO {
         String phoneNumber = rs.getString("phoneNumber");
         String contactName = rs.getString("contactName");
         double x_Coordinate = rs.getDouble("x_Coordinate");
-        double y_Coordinate = rs.getDouble("x_Coordinate");
+        double y_Coordinate = rs.getDouble("y_Coordinate");
 
         Site siteToReturn = new Site(id, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate);
         return siteToReturn;
@@ -143,6 +143,22 @@ public class SiteDAO {
             if (site.getSiteId() == id) {
                 this.SiteList.remove(site.getSiteId());
             }
+        }
+    }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("TRUNCATE Site");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                SiteList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

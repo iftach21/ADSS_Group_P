@@ -42,7 +42,7 @@ public class Item_mockDAO {
                 item_mockToReturn = this.gettingNewItem_mock(rs,catalogNum);
                 this.ItemList.add(item_mockToReturn);
             } else {
-                System.out.println("No site found with ID " + catalogNum);
+                System.out.println("No item found with catalog num " + catalogNum);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -122,7 +122,7 @@ public class Item_mockDAO {
 
     private Item_mock gettingNewItem_mock(ResultSet rs, String catalogNum) throws SQLException {
         String name = rs.getString("name");
-        String tempLevel = rs.getString("phoneNumber");
+        String tempLevel = rs.getString("tempLevel");
 
 
         Item_mock Item_mockToReturn = new Item_mock(catalogNum, TempTypeFactory.TempLevelFromString(tempLevel), name);
@@ -134,6 +134,22 @@ public class Item_mockDAO {
             if (item_mock.getCatalogNum().equals(catalogNum)) {
                 this.ItemList.remove(item_mock.getCatalogNum());
             }
+        }
+    }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("TRUNCATE Item_Mock");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                ItemList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

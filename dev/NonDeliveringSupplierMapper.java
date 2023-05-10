@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.*;
 
 public class NonDeliveringSupplierMapper {
-    private final Connection conn;
+    private Connection conn;
     private final Map<String,NonDeliveringSupplier> cache;
 
     public NonDeliveringSupplierMapper(Connection conn) {
@@ -17,6 +17,7 @@ public class NonDeliveringSupplierMapper {
 
     public NonDeliveringSupplier findBySupplierId(String supplierID)
     {
+        getConnection();
         if(cache.containsKey(supplierID))
         {
             return cache.get(supplierID);
@@ -41,15 +42,26 @@ public class NonDeliveringSupplierMapper {
                 NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
 
                 cache.put(supplierID, nonDeliveringSupplier);
+                try
+                {
+                    conn.close();
+                }
+                catch (SQLException e){}
                 return nonDeliveringSupplier;
             }
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return null;
     }
 
     public List<NonDeliveringSupplier> findAll()
     {
+        getConnection();
         List<NonDeliveringSupplier> suppliers = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
@@ -73,6 +85,11 @@ public class NonDeliveringSupplierMapper {
             }
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return suppliers;
     }
 
@@ -82,6 +99,7 @@ public class NonDeliveringSupplierMapper {
     {
         PreparedStatement stmt;
         try {
+            getConnection();
             stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method, supplier_ID, contract_person_name, contract_phone_number, items, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             String itemsJson = new Gson().toJson(nonDeliveringSupplier.getItems());
 
@@ -100,11 +118,17 @@ public class NonDeliveringSupplierMapper {
             }
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
 
     public void update(NonDeliveringSupplier nonDeliveringSupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("UPDATE NonDeliveringSuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, contract_id = ? WHERE supplier_ID = ?");
@@ -124,10 +148,16 @@ public class NonDeliveringSupplierMapper {
             cache.put(nonDeliveringSupplier.getSupplierID(), nonDeliveringSupplier);
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
     }
 
     public void delete(NonDeliveringSupplier nonDeliveringSupplier)
     {
+        getConnection();
         PreparedStatement stmt;
         try {
             stmt = conn.prepareStatement("DELETE FROM NonDeliveringSuppliers WHERE supplier_ID = ?");
@@ -136,6 +166,19 @@ public class NonDeliveringSupplierMapper {
             cache.remove(nonDeliveringSupplier.getSupplierID());
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+    }
+    private void getConnection()
+    {
+        try
+        {
+            this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        }
+        catch (SQLException e){}
     }
 }
 

@@ -134,6 +134,8 @@ public class NonFixedDaySupplierMapper{
             stmt.setString(7, itemsJson);
             stmt.setString(8, String.valueOf(nonFixedDaySupplier.get_days()));
             stmt.setString(9, String.valueOf(nonFixedDaySupplier.getContract().contractId));
+            stmt.setString(10, String.valueOf(nonFixedDaySupplier.getSupplierID()));
+
             stmt.executeUpdate();
 
             cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);

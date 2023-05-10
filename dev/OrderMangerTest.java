@@ -372,8 +372,6 @@ class OrderMangerTest {
     void order_move_to_history(){
         Supplier_Manger masupplier=new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
-        NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);
-        masupplier.add_supplier(supplier_1);
         System.out.println(masupplier.getSuppliers().size());
         masupplier.update_suppliers();
         System.out.println(masupplier.getSuppliers().size());
@@ -385,9 +383,7 @@ class OrderMangerTest {
         Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
 //        item3.setMinimum_quantity(3);
         Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
-        masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
-        masupplier.add_item_discount_to_supplier("Supplier1 Inc.","Apple",10,0.8);
-        masupplier.update_suppliers();
+        System.out.println(masupplier.get_supplier_by_id("S0016").getItems().size());
 
         OrderManger orderManger=new OrderManger();
 
@@ -395,7 +391,7 @@ class OrderMangerTest {
         Map<Item,Integer> maplist = new HashMap<Item,Integer>();
         maplist.put(item1,10);
         //This is to add a peiod order
-        orderManger.period_order(supplier_1,maplist,20,40);
+        orderManger.period_order(masupplier.get_supplier_by_id("S0016"),maplist,20,40);
     }
     @Test
         //test 9

@@ -313,6 +313,7 @@ public class OrderManger {
         periodOrders.setStore_number(order.getStore_number());
         periodOrders.setCost(order.getCost());
         periodOrders.setItemList(order.getItemList());
+        periodOrders.setStatusOrder(order.getStatusOrder());
 
 
         this.periodicOrderMapper.insert(periodOrders);

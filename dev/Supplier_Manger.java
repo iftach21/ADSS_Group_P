@@ -177,6 +177,7 @@ public class Supplier_Manger {
                 }
             }
         }
+        this.update_suppliers();
     }
 
     public boolean remove_item_to_supplier(String name_1 ,String item_S) {

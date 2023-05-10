@@ -208,7 +208,7 @@ public class TrucksDAO {
                 stmt.setString(10, truck.getUnavailableEndTime().toString());
 
             stmt.executeUpdate();
-
+            TruckList.add(truck);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -274,13 +274,25 @@ public class TrucksDAO {
         String unavailableEndDateString = rs.getString("unavailableEndDate");
         String unavailableEndTimeString = rs.getString("unavailableEndTime");
 
-        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate unavailableStartDate = LocalDate.parse(unavailableStartDateString, formatterDate);
-        LocalDate unavailableEndDate = LocalDate.parse(unavailableEndDateString, formatterDate);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime unavailableStartTime = LocalTime.parse(unavailableStartTimeString, formatterTime);
-        LocalTime unavailableEndTime = LocalTime.parse(unavailableEndTimeString, formatterTime);
+        LocalDate inputDate1 = LocalDate.parse(unavailableStartDateString);
+        String outputString1 = inputDate1.format(outputFormatter);
+        LocalDate unavailableStartDate = LocalDate.parse(outputString1, outputFormatter);
+
+        LocalDate inputDate2 = LocalDate.parse(unavailableEndDateString);
+        String outputString2 = inputDate2.format(outputFormatter);
+        LocalDate unavailableEndDate = LocalDate.parse(outputString2, outputFormatter);
+
+        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalTime inputTime3 = LocalTime.parse(unavailableStartTimeString);
+        String outputString3 = inputTime3.format(outputFormatter2);
+        LocalTime unavailableStartTime = LocalTime.parse(outputString3, outputFormatter2);
+
+        LocalTime inputTime4 = LocalTime.parse(unavailableEndTimeString);
+        String outputString4 = inputTime3.format(outputFormatter2);
+        LocalTime unavailableEndTime = LocalTime.parse(outputString4, outputFormatter2);
 
         Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime);
 

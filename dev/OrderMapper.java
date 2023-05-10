@@ -6,11 +6,13 @@ import java.util.*;
 import java.sql.Connection;
 public class OrderMapper
 {
-    private final Connection conn;
+    private Connection conn;
     private final Map<Integer,Order> cache;
 
-    public OrderMapper(Connection conn) {
-        this.conn = conn;
+    public OrderMapper(Connection conn)
+    {
+//        this.conn = conn;
+
         this.cache = new HashMap<>();
     }
     public Order findByOrderNum(String orderNum)
@@ -21,6 +23,7 @@ public class OrderMapper
         }
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
         try {
             stmt = conn.prepareStatement("SELECT * FROM Orders WHERE order_num = ?");
             stmt.setString(1, orderNum);
@@ -35,10 +38,18 @@ public class OrderMapper
                 order.setSupplier(findSupplier(supplierId));
                 order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
                 cache.put(rs.getInt("order_num"), order);
+                conn.close();
                 return order;
             }
         }
         catch (SQLException e){}
+
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
         return null;
     }
 
@@ -47,6 +58,7 @@ public class OrderMapper
         List<Order> orders = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
         try {
             stmt = conn.prepareStatement("SELECT * FROM Orders");
             rs = stmt.executeQuery();
@@ -65,6 +77,11 @@ public class OrderMapper
             }
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return orders;
     }
 
@@ -73,6 +90,7 @@ public class OrderMapper
         List<Order> orders = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
 //        String waiting = "Waiting";
         try
         {
@@ -94,6 +112,13 @@ public class OrderMapper
 
         }
         catch (SQLException e){}
+
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
         return orders;
     }
 
@@ -101,6 +126,7 @@ public class OrderMapper
     public void insert(Order order)
     {
         PreparedStatement stmt;
+        getConnection();
         try {
             stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number,statusOrder)VALUES (?,?, ?, ?, ?, ?)");
             stmt.setInt(1, order.getOrderNum());
@@ -120,6 +146,15 @@ public class OrderMapper
                 cache.put(order.getOrderNum(), order);
             }
         }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        try
+        {
+            conn.close();
+        }
         catch (SQLException e){}
 
     }
@@ -127,6 +162,7 @@ public class OrderMapper
     public void update(Order order)
     {
         PreparedStatement stmt;
+        getConnection();
         try {
             stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ?, statusOrder = ? WHERE order_num = ?");
             stmt.setString(1, order.getSupplier().getSupplierID());
@@ -142,12 +178,18 @@ public class OrderMapper
             cache.put(order.getOrderNum(), order);// TODO check if there is no duplication after update in the cache
         }
         catch (SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
 
     public void delete(Order order)
     {
         PreparedStatement stmt;
+        getConnection();
         try {
             stmt = conn.prepareStatement("DELETE FROM Orders WHERE order_num = ?");
             stmt.setInt(1, order.getOrderNum());
@@ -158,6 +200,11 @@ public class OrderMapper
         {
             System.out.println(e.getMessage());
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
     private Supplier findSupplier(String supplierId)
@@ -182,6 +229,7 @@ public class OrderMapper
                     conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
                     FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
                     FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
+                    conn.close();
                     return fixedDaySupplier;
 //                order.setSupplier(fixedDaySupplier);
                 } else {
@@ -193,5 +241,14 @@ public class OrderMapper
         }
         catch (SQLException e){}
         return null;
+    }
+
+    private void getConnection()
+    {
+        try
+        {
+            this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        }
+        catch (SQLException e){}
     }
 }

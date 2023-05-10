@@ -42,7 +42,7 @@ public class Supplier_Manger {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
             System.out.println("Connection to SuperLeeDataBase.db has been established.");
-            this.itemMapper =new ItemMapper(conn);
+            this.itemMapper = new ItemMapper(conn);
             this.fixedDaySupplierMapper=new FixedDaySupplierMapper(conn);
             this.nonDeliveringSupplierMapper=new NonDeliveringSupplierMapper(conn);
             this.nonFixedDaySupplierMapper=new NonFixedDaySupplierMapper(conn);

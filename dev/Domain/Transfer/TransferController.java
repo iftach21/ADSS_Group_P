@@ -983,13 +983,13 @@ public class TransferController {
         Scanner scanner = new Scanner(System.in);
         System.out.println("To add a new truck to the transfer system, you'll need to enter the following details:");
 
-        System.out.println("Please enter the truck License Number:");
+        System.out.println("Please enter the truck License Number. Please note that license number is 8 digits long:");
         int licenseNumber;
         while(true)
         {
             try {
                 licenseNumber = scanner.nextInt();
-                if (licenseNumber >= 0)
+                if (licenseNumber >= 0 && licenseNumber <= 99999999)
                     break;
                 else
                     System.out.println("Sorry transfer manager, but your input is illegal. please try again");
@@ -1002,9 +1002,10 @@ public class TransferController {
         }
 
         System.out.println("Please enter the truck Model:");
-        String model = scanner.next();
+        String model = scanner.nextLine();
+        model += scanner.nextLine();
 
-        System.out.println("Please enter the truck net Weight:");
+        System.out.println("Please enter the truck net Weight. Note that truck weight is between 0 - 60 tons:");
         int netWeight;
         while(true)
         {
@@ -1028,7 +1029,7 @@ public class TransferController {
         {
             try {
                 maxWeight = scanner.nextInt();
-                if (netWeight >= 0 && netWeight <= 60)
+                if (maxWeight >= 0 && maxWeight <= 60 && maxWeight >= netWeight)
                     break;
                 else
                     System.out.println("Sorry transfer manager, but your input is illegal. please try again");

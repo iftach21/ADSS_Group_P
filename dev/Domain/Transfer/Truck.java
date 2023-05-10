@@ -103,17 +103,26 @@ public class Truck {
 
     public LocalDate getUnavailableStartDate()
     {
-        return _unavailableStartTime.toLocalDate();
+        if (_unavailableStartTime != null)
+            return _unavailableStartTime.toLocalDate();
+        return null;
     }
 
     public LocalTime getUnavailableStartTime()
     {
-        return _unavailableStartTime.toLocalTime();
+        if (_unavailableStartTime != null)
+            return _unavailableStartTime.toLocalTime();
+        return null;
     }
 
-    public LocalDate getUnavailableEndDate() {return  _unavailableEndTime.toLocalDate();}
+    public LocalDate getUnavailableEndDate() {
+        if (_unavailableEndTime != null)
+            return _unavailableEndTime.toLocalDate();
+        return null;}
 
-    public LocalTime getUnavailableEndTime() {return  _unavailableEndTime.toLocalTime();}
+    public LocalTime getUnavailableEndTime() {if (_unavailableEndTime != null)
+            return _unavailableEndTime.toLocalTime();
+        return null;}
 
 }
 

@@ -1,4 +1,3 @@
-package Test.DomainTest;
 
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;

@@ -1,19 +1,15 @@
-package Test.DAOTest;
-
 import Data.ShiftDAO;
-import Data.WorkersDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.Shift;
 import Domain.Employee.Workers;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShiftDAOTest {
     Workers w1;
@@ -44,8 +40,8 @@ public class ShiftDAOTest {
     void TestAddAndGetNewShift() throws SQLException {
 
         DAO.add(shift);
-        Assertions.assertEquals(shift.getId(), DAO.get(shift.getId()).getId());
-        Assertions.assertTrue(DAO.get(shift.getId()).checkIfWorkerInShift(w1.getId()));
+        Assert.assertEquals(shift.getId(), DAO.get(shift.getId()).getId());
+        Assert.assertTrue(DAO.get(shift.getId()).checkIfWorkerInShift(w1.getId()));
     }
 
     @Test

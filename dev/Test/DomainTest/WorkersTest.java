@@ -1,4 +1,3 @@
-package Test.DomainTest;
 
 import Domain.Enums.WindowType;
 import Domain.Employee.Workers;

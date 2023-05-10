@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class WeeklyShiftDAO {
 
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private java.sql.Connection conn = Connection.getConnectionToDatabase();
     private ShiftDAO shiftDAO = ShiftDAO.getInstance();
     private static WeeklyShiftDAO instance = null;
     private List<WeeklyShift> cache; //holds all the weeklyshifts

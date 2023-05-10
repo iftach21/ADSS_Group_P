@@ -1,4 +1,3 @@
-package Test.DomainTest;
 
 import Domain.Employee.WeeklyShift;
 import Domain.Enums.WindowType;

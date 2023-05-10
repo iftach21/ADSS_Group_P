@@ -1049,7 +1049,7 @@ public class TransferController {
         {
             try {
                 indexChosen = scanner.nextInt();
-                if (netWeight >= 1 && netWeight <= 3)
+                if (indexChosen >= 1 && indexChosen <= 3)
                     break;
                 else
                     System.out.println("Sorry transfer manager, but your input is illegal. please try again");

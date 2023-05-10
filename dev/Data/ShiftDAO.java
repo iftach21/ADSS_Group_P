@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 public class ShiftDAO {
-    private Connection conn = Database.Connection.getConnectionToDatabase();
+    private java.sql.Connection conn = Connection.getConnectionToDatabase();
     private static ShiftDAO instance = null;
 
     private ShiftWorkerDAO shiftWorkerDAO=ShiftWorkerDAO.getInstance();

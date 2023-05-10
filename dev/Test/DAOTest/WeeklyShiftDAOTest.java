@@ -1,5 +1,3 @@
-package Test.DAOTest;
-
 import Data.WeeklyShiftDAO;
 import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShift;

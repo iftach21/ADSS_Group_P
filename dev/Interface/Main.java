@@ -16,16 +16,16 @@ public class Main {
             throw new RuntimeException(e);
         }
         try {
-            bossInterface = new BossInterface();
+            transferInterface = new TransferManagerInterface();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            bossInterface = new BossInterface();
+            workerInterface = new WorkerInterface();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }//
 
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;

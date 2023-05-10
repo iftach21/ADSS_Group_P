@@ -150,7 +150,9 @@ public class OrderMapper
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage() + "insert");
+            System.out.println(e.getMessage() + "insert order");
+            e.printStackTrace();
+
         }
 
         try

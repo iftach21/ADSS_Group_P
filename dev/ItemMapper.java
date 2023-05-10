@@ -2,14 +2,15 @@ import java.sql.*;
 import java.util.*;
 import java.sql.Connection;
 public class ItemMapper {
-    private final Connection conn;
+    private Connection conn;
     private final Map<String,Item> cache;
-    public ItemMapper(Connection conn)
+//    public ItemMapper(Connection conn)
+    public ItemMapper()
     {
-        if (conn == null) {
-            throw new IllegalArgumentException("Connection cannot be null.");
-        }
-        this.conn = conn;
+//        if (conn == null) {
+//            throw new IllegalArgumentException("Connection cannot be null.");
+//        }
+//        this.conn = conn;
         this.cache = new HashMap<>();
     }
 
@@ -21,7 +22,10 @@ public class ItemMapper {
         }
         PreparedStatement stmt;
         ResultSet rs;
-        try {
+        getConnection();
+
+        try
+        {
             stmt = conn.prepareStatement("SELECT * FROM items WHERE catalog_number = ?");
             stmt.setString(1, catalogNum);
             rs = stmt.executeQuery();
@@ -36,10 +40,17 @@ public class ItemMapper {
                 item.setTemperature(tempValue);
                 item.setManufacturer((rs.getString("manufacturer")));
                 cache.put(catalogNum, item);
+                conn.close();
                 return item;
             }
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
         return null;
     }
 
@@ -48,6 +59,7 @@ public class ItemMapper {
         List<Item> items = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
         try {
             stmt = conn.prepareStatement("SELECT * FROM items");
             rs = stmt.executeQuery();
@@ -66,6 +78,13 @@ public class ItemMapper {
             }
         }
         catch(SQLException e){}
+
+        try
+        {
+            conn.close();
+        }
+
+        catch (SQLException e){}
         return items;
     }
 
@@ -73,6 +92,8 @@ public class ItemMapper {
     {
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
+
         try {
             stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, item.getCatalogNum());
@@ -93,11 +114,19 @@ public class ItemMapper {
         }
         catch(SQLException e){}
 
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
     }
 
     public void update(Item item)
     {
         PreparedStatement stmt;
+        getConnection();
+
         try {
             stmt = conn.prepareStatement("UPDATE items SET name = ?, weight = ?,  catalog_name = ?, temperature = ?, minimum_quantity = ?, price_history = ?, manufacturer = ? WHERE catalog_number = ?");
             stmt.setString(1, item.getName());
@@ -115,11 +144,18 @@ public class ItemMapper {
             cache.put(item.getCatalogNum(), item); // TODO check if there is no duplication after update in the cache
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
     }
 
     public void delete(Item item)
     {
         PreparedStatement stmt;
+        getConnection();
+
         try {
             stmt = conn.prepareStatement("DELETE FROM items WHERE catalog_number = ?");
             stmt.setString(1, item.getCatalogNum());
@@ -127,6 +163,11 @@ public class ItemMapper {
             cache.remove(item.getCatalogNum());
         }
         catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
     }
 
@@ -134,8 +175,9 @@ public class ItemMapper {
     {
         PreparedStatement stmt;
         ResultSet rs;
-        List<Item> items = new ArrayList<>();
+        getConnection();
 
+        List<Item> items = new ArrayList<>();
         try {
             stmt = conn.prepareStatement("SELECT * FROM items WHERE catalog_number = ?");
             stmt.setString(1, catalogNum);
@@ -154,7 +196,20 @@ public class ItemMapper {
             }
         }
         catch(SQLException e){}
-
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
         return items;
+    }
+
+    private void getConnection()
+    {
+        try
+        {
+            this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        }
+        catch (SQLException e){}
     }
 }

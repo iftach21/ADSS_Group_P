@@ -882,7 +882,7 @@ public class TransferController {
         System.out.println("Now, please choose 1 driver from the following list:");
         for (int i = 0; i < Drivers.size(); i++)
         {
-            System.out.println((i+1) + Drivers.get(i).getId() + ". ID: " + ", Name:" + Drivers.get(i).getName() + ", License Weight Capacity:" + Drivers.get(i).getDriverLicense().getLicenseWeightCapacity() + ", License Temp Capacity:" + Drivers.get(i).getDriverLicense().getLicenseTempCapacity());
+            System.out.println((i+1) + ". ID: " + Drivers.get(i).getId() + ", Name:" + Drivers.get(i).getName() + ", License Weight Capacity:" + Drivers.get(i).getDriverLicense().getLicenseWeightCapacity() + ", License Temp Capacity:" + Drivers.get(i).getDriverLicense().getLicenseTempCapacity());
         }
         Driver chosenDriver;
         int chosenDriverIndex;

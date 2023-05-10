@@ -29,7 +29,8 @@ public class NonDeliveringSupplierMapper {
             rs = stmt.executeQuery();
             if (rs.next())
             {
-                ContractMapper contractMapper = new ContractMapper(conn);
+//                ContractMapper contractMapper = new ContractMapper(conn);
+                ContractMapper contractMapper = new ContractMapper();
                 Contract contract;
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
@@ -56,7 +57,8 @@ public class NonDeliveringSupplierMapper {
             stmt = conn.prepareStatement("SELECT * FROM NonDeliveringSuppliers");
             rs = stmt.executeQuery();
             while (rs.next()) {
-                ContractMapper contractMapper = new ContractMapper(conn);
+//                ContractMapper contractMapper = new ContractMapper(conn);
+                ContractMapper contractMapper = new ContractMapper();
                 Contract contract;
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));

@@ -155,8 +155,10 @@ public class PeriodicOrderMapper {
                 NonFixedDaySupplier nonFixedDaySupplier = nonFixedDaySupplierMapper.findBySupplierId(supplierId);
                 if (nonFixedDaySupplier == null) {
                     conn.close();
-                    conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+//                    conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper();
+
                     FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
                     return fixedDaySupplier;
                 } else {

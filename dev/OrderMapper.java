@@ -9,7 +9,9 @@ public class OrderMapper
     private Connection conn;
     private final Map<Integer,Order> cache;
 
-    public OrderMapper(Connection conn)
+//    public OrderMapper(Connection conn)
+    public OrderMapper()
+
     {
 //        this.conn = conn;
 
@@ -148,7 +150,7 @@ public class OrderMapper
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "insert");
         }
 
         try
@@ -226,10 +228,12 @@ public class OrderMapper
                 NonFixedDaySupplier nonFixedDaySupplier = nonFixedDaySupplierMapper.findBySupplierId(supplierId);
                 if (nonFixedDaySupplier == null) {
                     conn.close();
-                    conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+//                    conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+                    FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper();
+
                     FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
-                    conn.close();
+//                    conn.close();
                     return fixedDaySupplier;
 //                order.setSupplier(fixedDaySupplier);
                 } else {

@@ -7,21 +7,28 @@ import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.*;
 public class FixedDaySupplierMapper{
-    private final Connection conn;
+    private Connection conn;
     private final Map<String, FixedDaySupplier> cache;
 
-    public FixedDaySupplierMapper(Connection conn) {
-        this.conn = conn;
+//    public FixedDaySupplierMapper(Connection conn) {
+//        this.conn = conn;
+//        this.cache = new HashMap<>();
+//    }
+    public FixedDaySupplierMapper() {
+//        this.conn = conn;
         this.cache = new HashMap<>();
     }
 
     public FixedDaySupplier findBySupplierId(String supplierID)
     {
-        if (cache.containsKey(supplierID)) {
+        if (cache.containsKey(supplierID))
+        {
             return cache.get(supplierID);
         }
         PreparedStatement stmt;
         ResultSet rs;
+        getConnection();
+
         try {
             stmt = conn.prepareStatement("SELECT * FROM FixedDaySuppliers WHERE supplier_ID = ?");
             stmt.setString(1, supplierID);
@@ -40,7 +47,9 @@ public class FixedDaySupplierMapper{
                     } catch (SQLException ignored) {
                     }
                 }
-                ContractMapper contractMapper = new ContractMapper(conn);
+//                ContractMapper contractMapper = new ContractMapper(conn);
+                ContractMapper contractMapper = new ContractMapper();
+
                 Contract contract;
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
@@ -69,7 +78,8 @@ public class FixedDaySupplierMapper{
             stmt = conn.prepareStatement("SELECT * FROM FixedDaySuppliers");
             rs = stmt.executeQuery();
             while (rs.next()) {
-                ContractMapper contractMapper = new ContractMapper(conn);
+//                ContractMapper contractMapper = new ContractMapper(conn);
+                ContractMapper contractMapper = new ContractMapper();
                 Contract contract;
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
@@ -148,6 +158,14 @@ public class FixedDaySupplierMapper{
             cache.remove(fixedDaySupplier.getSupplierID());
         }
         catch (SQLException e){}
+    }
 
+    private void getConnection()
+    {
+        try
+        {
+            this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+        }
+        catch (SQLException e){}
     }
 }

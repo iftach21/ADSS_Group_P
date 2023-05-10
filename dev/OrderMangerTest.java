@@ -30,10 +30,11 @@ class OrderMangerTest {
         supplier.add_Items(item3,100,100);
         supplier.add_Items(item4,100,100);
         NonDeliveringSupplierMapper mapper1 = new NonDeliveringSupplierMapper(conn1);
-        Connection conn2 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
+//        Connection conn2 = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
 
 
-        ContractMapper contractMapperTest =new ContractMapper(conn2);
+//        ContractMapper contractMapperTest =new ContractMapper(conn2);
+        ContractMapper contractMapperTest =new ContractMapper();
         Contract contractTest = new Contract();
         contractMapperTest.insert(contractTest);
         contractTest.add_to_contract(item1,100,50);
@@ -52,7 +53,9 @@ class OrderMangerTest {
         Contract supplierIdContractTest1 = contractMapperTest.findByContractId(2);
         List<Contract> allContractsTest = contractMapperTest.findAll();
         System.out.println("---------------------");
-        OrderMapper orderMapperTest = new OrderMapper(conn2);
+//        OrderMapper orderMapperTest = new OrderMapper(conn2);
+        OrderMapper orderMapperTest = new OrderMapper();
+
         Order orderTest = new Order();
         orderTest.setSupplier(supplier);
 

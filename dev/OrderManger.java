@@ -20,7 +20,8 @@ public class OrderManger {
         try
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-            orderMapper = new OrderMapper(conn);
+//            orderMapper = new OrderMapper(conn);
+            orderMapper = new OrderMapper();
             periodicOrderMapper=new PeriodicOrderMapper(conn);
         }
 

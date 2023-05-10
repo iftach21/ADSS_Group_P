@@ -35,7 +35,9 @@ public class FixedDaySupplier extends DeliveringSupplier {
 
         if(fixedDaySupplierMapper == null)
         {
-            fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+//            fixedDaySupplierMapper = new FixedDaySupplierMapper(conn);
+            fixedDaySupplierMapper = new FixedDaySupplierMapper();
+
         }
     }
 

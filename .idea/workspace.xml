@@ -11,10 +11,29 @@
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated all mappers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SupplierInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SupplierInterface.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,14 +187,7 @@
       <workItem from="1683656328685" duration="736000" />
       <workItem from="1683702205614" duration="2609000" />
       <workItem from="1683705392696" duration="3926000" />
-      <workItem from="1683709618437" duration="1172000" />
-    </task>
-    <task id="LOCAL-00025" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680950207486</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1680950207486</updated>
+      <workItem from="1683709618437" duration="3208000" />
     </task>
     <task id="LOCAL-00026" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680952955800</created>
@@ -513,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683709270922</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="updated all mappers">
+      <created>1683711294828</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1683711294829</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,22 +569,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>53</line>
+          <line>54</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/ContractMapper.java</url>
-          <line>146</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>475</line>
+          <line>478</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>204</line>
+          <line>205</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>

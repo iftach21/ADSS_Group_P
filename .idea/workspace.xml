@@ -10,12 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="started working on OrderManger">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Contract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Contract.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,14 +168,7 @@
       <workItem from="1682764325480" duration="1337000" />
       <workItem from="1683628162392" duration="9614000" />
       <workItem from="1683656328685" duration="736000" />
-      <workItem from="1683702205614" duration="1444000" />
-    </task>
-    <task id="LOCAL-00017" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680100822480</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1680100822480</updated>
+      <workItem from="1683702205614" duration="2609000" />
     </task>
     <task id="LOCAL-00018" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680347590514</created>
@@ -512,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683655895490</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="started working on OrderManger">
+      <created>1683703740793</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1683703740794</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,23 +562,9 @@
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>450</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/Supplier_Manger.java</url>
-          <line>264</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/Supplier_Manger.java</url>
-          <line>253</line>
-          <properties class="Supplier_Manger" method="update_suppliers">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="27" />
+          <url>file://$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

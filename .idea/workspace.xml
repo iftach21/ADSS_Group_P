@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated all mappers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,14 +172,7 @@
       <workItem from="1683725340405" duration="310000" />
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="365000" />
-      <workItem from="1683727372334" duration="682000" />
-    </task>
-    <task id="LOCAL-00030" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680961233507</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1680961233507</updated>
+      <workItem from="1683727372334" duration="2174000" />
     </task>
     <task id="LOCAL-00031" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680965924607</created>
@@ -518,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683726954496</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="updated all mappers">
+      <created>1683728197357</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1683728197357</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

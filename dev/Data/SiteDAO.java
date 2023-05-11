@@ -1,5 +1,6 @@
 package Data;
 
+import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 import Domain.Transfer.Transfer;
 
@@ -163,5 +164,10 @@ public class SiteDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public void addToChach(Site site)
+    {
+        this.SiteList.add(site);
     }
 }

@@ -77,6 +77,7 @@ public class TransferItemsDAO {
             stmt.setInt(7, siteId);
 
             int rowsAffected = stmt.executeUpdate();
+            updateCache(transferId, siteId, catalogNum, quantity);
 
             if (rowsAffected == 0) {
                 System.out.println("No transfer found with ID " + transferId + " to update.");
@@ -133,6 +134,22 @@ public class TransferItemsDAO {
             }
         }
         return null;
+    }
+
+    private void updateCache(int transferId, int siteId, String catalogNum, int quantity){
+        for (Integer Id : this.orderItemsList.keySet()) {
+            if (Id == transferId) {
+                for (Site site : this.orderItemsList.get(Id).keySet()) {
+                    if (site.getSiteId() == siteId) {
+                        for (Item_mock item : this.orderItemsList.get(Id).get(site).keySet()) {
+                            if (catalogNum.equals(item.getCatalogNum())) {
+                                this.orderItemsList.get(Id).get(site).put(item, quantity);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void deleteFromCache(int transferId, String catalogNum, int siteId, int quantity) throws SQLException {

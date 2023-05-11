@@ -202,10 +202,14 @@ public class Shift {
         this.id = id;
     }
     public List<Workers> getDiffWorkers(Shift shiftToCompare){
+
         List<Workers> ans = new ArrayList<>();
+        if(shiftToCompare==null){return ans;}
 
         List<Workers> inThisWorkers = this.getAllWorkers();
+        inThisWorkers.addAll(this.drivers);
         List<Workers> otherWorkers = shiftToCompare != null ? shiftToCompare.getAllWorkers()  : new ArrayList<>() ;
+        otherWorkers.addAll(shiftToCompare.drivers);
 
         for(Workers w1: inThisWorkers){
             int flag = 0;

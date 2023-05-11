@@ -61,24 +61,15 @@ public class Transfer {
             {
                 Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
                 //calculate how much to reduce from each item
-                int siteId = site.getSiteId();
 
-                Site current_site = null;
-                for(Site site_ : orderItems.keySet())
-                {
-                    if(site_.getSiteId() == siteId){
-                        current_site = site_;
-                        break;
-                    }
-                }
-                int quantityToUpdate = orderItems.get(current_site).get(product) - itemsToDelete.get(current_site).get(product);
+                int quantityToUpdate = orderItems.get(site).get(product) - itemsToDelete.get(site).get(product);
                 //update the database
                 _transferItemsDAO.update(_transferId, site.getSiteId(), product.getCatalogNum(), quantityToUpdate);
                 if (quantityToUpdate == 0) {
                     //update and remove product from the database
                     _transferItemsDAO.delete(_transferId, product.getCatalogNum(), site.getSiteId(), quantityToUpdate);
                     //if there are no more products to this destinations
-                    if (orderItems.get(current_site).size() == 0)
+                    if (orderItems.get(site).size() == 0)
                     {
                         //remove from the database
                         _transferDestinationsDAO.delete(_transferId, site.getSiteId());

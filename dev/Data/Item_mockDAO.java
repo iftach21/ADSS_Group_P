@@ -152,4 +152,9 @@ public class Item_mockDAO {
             System.err.println(e.getMessage());
         }
     }
+
+    public void addToChach(Item_mock item_mock)
+    {
+        this.ItemList.add(item_mock);
+    }
 }

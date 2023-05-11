@@ -1,8 +1,6 @@
 package Test.DomainTest;
 
-import Data.Item_mockDAO;
-import Data.SiteDAO;
-import Data.TransferDAO;
+import Data.*;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
@@ -11,6 +9,7 @@ import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 import Domain.Transfer.Transfer;
 import Domain.Transfer.Truck;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,6 +51,14 @@ class TransferTests {
 
     @BeforeEach
     void createMockTransfer() throws SQLException {
+        //Clear database before each test
+        siteDAO.deleteAll();
+        item_mockDAO.deleteAll();
+        TransferItemsDAO transferItemsDAO = TransferItemsDAO.getInstance();
+        transferItemsDAO.deleteAll();
+        TransferDestinationsDAO transferDestinationsDAO = TransferDestinationsDAO.getInstance();
+        transferDestinationsDAO.deleteAll();
+
         //create 3 sites for destinations
         this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe", 32.06845601633649, 34.783378215486955);
         siteDAO.add(site1);

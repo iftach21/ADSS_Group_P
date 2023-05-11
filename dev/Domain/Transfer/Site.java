@@ -78,4 +78,9 @@ public class Site {
     public double getLongitude() {
         return _longitude;
     }
+
+    public void setSiteAddress(String address)
+    {
+        this._address = address;
+    }
 }

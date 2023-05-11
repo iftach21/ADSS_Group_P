@@ -91,7 +91,7 @@ public class TransferItemsDAO {
 
     public void add(int transferId, int siteId, String catalogNum, int quantity){
         try {
-            String sql = "INSERT INTO TransferItems (transferId, catalogNum, siteId, quantity) " +
+            String sql = "INSERT or REPLACE INTO TransferItems (transferId, catalogNum, siteId, quantity) " +
                     "VALUES (?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);

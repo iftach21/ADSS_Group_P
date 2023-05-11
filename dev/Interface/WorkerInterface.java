@@ -55,15 +55,19 @@ public class WorkerInterface extends AInterface {
                 }
             }
             if (whattodo == 2) {
+                System.out.println("are you a Driver?\n1=yes, 2=no");
+                int driverFlag = myObj.nextInt();  // Read user input
 
                 System.out.println("please enter year");
                 int yearans = myObj.nextInt();  // Read user input
 
                 System.out.println("please enter week number");
                 int weeknum = myObj.nextInt();  // Read user input
-
-                System.out.println("please enter super number");
-                int supernum = myObj.nextInt();  // Read user input
+                int supernum = 0;
+                if(driverFlag != 1) {
+                    System.out.println("please enter super number");
+                    supernum = myObj.nextInt();  // Read user input
+                }
 
                 controller.printweeklyreq(weeknum, yearans, supernum);
 

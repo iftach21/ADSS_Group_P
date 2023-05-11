@@ -80,12 +80,20 @@ public class BossInterface extends AInterface {
                 //create new weekly shift
                 //-----------------------
                 case "1":{
+
+                    System.out.println("is it weekly shift for drivers?\n 1=yes, 2=no");
+                    int driversflag = myObj.nextInt();  // Read user input
+
                     System.out.println("please enter year");
                     int yearans = myObj.nextInt();  // Read user input
                     System.out.println("please enter week number");
                     int weeknum = myObj.nextInt();  // Read user input
-                    System.out.println("please enter super number");
-                    int supernum = myObj.nextInt();  // Read user input
+                    int supernum = 0;
+
+                    if (driversflag != 1) {
+                        System.out.println("please enter super number");
+                        supernum = myObj.nextInt();  // Read user input
+                    }
 
                     controller.createnewweeklyshift(weeknum,yearans,supernum);
 
@@ -111,21 +119,24 @@ public class BossInterface extends AInterface {
                         //set the time for the shift:
                         controller.settimeforweeklyshift(weeknum,yearans,supernum,daynum,don,starttime);
 
-
-                        System.out.println("please enter int for the persons prof");
-                        System.out.println("0=manager");
-                        System.out.println("1=cashier");
-                        System.out.println("2=stoke");
-                        System.out.println("3=security");
-                        System.out.println("4=cleaning");
-                        System.out.println("5=shelf-stoking");
-                        System.out.println("6= general-worker");
-                        int prof = myObj.nextInt();  // Read user input
+                        int prof = 7;
+                        if(driversflag != 1) {
+                            System.out.println("please enter int for the persons prof");
+                            System.out.println("0=manager");
+                            System.out.println("1=cashier");
+                            System.out.println("2=stoke");
+                            System.out.println("3=security");
+                            System.out.println("4=cleaning");
+                            System.out.println("5=shelf-stoking");
+                            System.out.println("6= general-worker");
+                            prof = myObj.nextInt();  // Read user input
+                        }
 
                         System.out.println("how much would you like from that type?");
                         int hm = myObj.nextInt();  // Read user input
 
                         controller.addreqtoweeklyshift(weeknum,yearans,supernum,daynum,don,prof,hm);
+
 
                         System.out.println("would you like to keep going? \n 1= yes, 0= no");
                         innerans = myObj.nextInt();  // Read user input
@@ -140,12 +151,13 @@ public class BossInterface extends AInterface {
                 //add to existing weekly shift
                 //----------------------------
                 case "2":{
-                    System.out.println("pleease enter yar");
+
+
+                    System.out.println("please enter year");
                     int year = myObj.nextInt();  // Read user input
 
                     System.out.println("please enter week number");
                     int weeknum = myObj.nextInt();  // Read user input
-
 
                     System.out.println("please enter super number");
                     int supernum = myObj.nextInt();  // Read user input
@@ -163,17 +175,16 @@ public class BossInterface extends AInterface {
                         while (changer == 1) {
                             //stayes on same shift:
                             WindowTypeCreater wc = new WindowTypeCreater();
+                                System.out.println("please enter int for the persons prof");
+                                System.out.println("0=manager");
+                                System.out.println("1=cashier");
+                                System.out.println("2=stoke");
+                                System.out.println("3=security");
+                                System.out.println("4=cleaning");
+                                System.out.println("5=shelf-stoking");
+                                System.out.println("6= general-worker");
 
-
-                            System.out.println("please enter int for the persons prof");
-                            System.out.println("0=manager");
-                            System.out.println("1=cashier");
-                            System.out.println("2=stoke");
-                            System.out.println("3=security");
-                            System.out.println("4=cleaning");
-                            System.out.println("5=shelf-stoking");
-                            System.out.println("6= general-worker");
-                            int prof = myObj.nextInt();  // Read user input
+                                int prof = myObj.nextInt();  // Read user input
 
 
 
@@ -322,11 +333,12 @@ public class BossInterface extends AInterface {
 
 
                 //-----------------------
-                //get monthly wage for employee
+                //get weekly wage for employee
                 //-----------------------
                 case "7":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
+
                     System.out.println("what week num do you need?");
                     int weeknum = myObj.nextInt();  // Read user input
 
@@ -412,6 +424,7 @@ public class BossInterface extends AInterface {
                 //-----------------------
                 //remove jobs for employee
                 //-----------------------
+                    
                 case "12":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input

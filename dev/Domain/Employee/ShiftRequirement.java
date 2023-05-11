@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ShiftRequirement {
     public ShiftRequirement() {
-        this.reqarray = new int[7];
+        this.reqarray = new int[8];
         Arrays.fill(reqarray, 0);
     }
 
@@ -25,6 +25,7 @@ public class ShiftRequirement {
         System.out.println("cleaning " + reqarray[4]);
         System.out.println("shelf-stoking " + reqarray[5]);
         System.out.println("general-worker " + reqarray[6]);
+        System.out.println("Drivers " + reqarray[7]);
     }
 
 }//endclass

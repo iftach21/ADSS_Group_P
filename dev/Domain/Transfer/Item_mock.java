@@ -26,4 +26,14 @@ public class Item_mock {
     public String getCatalogNum() {
         return _catalogNum;
     }
+
+    public void updateItemTemp(TempLevel temp)
+    {
+        this._temp = temp;
+    }
+
+    public void updateItemName(String itemName)
+    {
+        this._itemName =itemName;
+    }
 }

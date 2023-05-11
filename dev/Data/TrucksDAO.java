@@ -256,7 +256,7 @@ public class TrucksDAO {
         {
             Truck truck = TruckList.get(i);
             if (truck.getLicenseNumber() == licenseNumber) {
-                this.TruckList.remove(truck.getLicenseNumber());
+                this.TruckList.remove(i);
             }
         }
     }

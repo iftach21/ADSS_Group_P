@@ -24,7 +24,7 @@ public class SiteDAOTest {
         //clear database before each Test
         siteDAO.deleteAll();
 
-        //create 2 sites to database
+        //create 2 sites
         this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe", 32.06845601633649, 34.783378215486955);
         this.site2 = new Site(1,"Tara", "Masada 12 Beer-Sheva", "09-7887645", "Ron", 31.262913845991317, 34.79982446327962);
 

@@ -145,7 +145,8 @@ public class SiteDAO {
         {
             Site site = SiteList.get(i);
             if (site.getSiteId() == id) {
-                this.SiteList.remove(site.getSiteId());
+                this.SiteList.remove(i);
+                break;
             }
         }
     }

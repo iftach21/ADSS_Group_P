@@ -99,12 +99,12 @@ public class Transfer {
         try {
             FileWriter fileWriter = new FileWriter(fileName);
             fileWriter.write(documentAddUnderline("TRANSFER DETAILS:") + "\n\n");
-            fileWriter.write(String.format(" %20s %20s %20s %20s %20s \r\n\n", "Document ID: " +  _transferId, ", Date: "+ _dateOfTransfer.toString(), ", Track's number: "+ _truckLicenseNumber,  ", Leaving time: " +_leavingTime.toString(), ", Domain.Transfer.Transfer.Driver name: "+_driverName));
+            fileWriter.write(String.format(" %20s %20s %20s %20s %20s \r\n\n", "Document ID: " +  _transferId, ", Date: "+ _dateOfTransfer.toString(), ", Track's number: "+ _truckLicenseNumber,  ", Leaving time: " +_leavingTime.toString(), ", Driver name: "+_driverName));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             //fileWriter.write(String.format("%20s %20s %20s %20s %20s \r\n", _transferId, _dateOfTransfer.toString(), _truckLicenseNumber, _leavingTime.toString(), _driverName));
             fileWriter.write(documentAddUnderline(" SOURCE DETAILS: ") + "\n\n");
             fileWriter.write(String.format(" %20s \r\n", "Source name: "+ _source.getSiteName()));
-            fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: "+_source.getSiteAddress(), ", Contact name: "+ _source.get_contactName(), ", Phone: " + _source.get_phoneNumber(), ", Domain.Transfer.Transfer.Truck weight: " + "None"));
+            fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: "+_source.getSiteAddress(), ", Contact name: "+ _source.get_contactName(), ", Phone: " + _source.get_phoneNumber(), ", Truck weight: " + "None"));
             //fileWriter.write(String.format("%20s %20s %20s %20s\r\n", _source.getSiteAddress(), _source.get_contactName(), _source.get_phoneNumber(), ""));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("DESTINATION DETAILS:") + "\n\n");

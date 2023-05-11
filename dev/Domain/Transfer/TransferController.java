@@ -114,7 +114,7 @@ public class TransferController {
                     for(Integer transferId: currentTransfers.keySet())
                     {
                         Transfer transfer = currentTransfers.get(transferId);
-                        System.out.println("transfer Id: " + transferId + ", Source site: " + transfer.getSource().getSiteName() + ", Destination site: " + transfer.getDestinations().get(transfer.getDestinations().size()-1));
+                        System.out.println("transfer Id: " + transferId + ", Source site: " + transfer.getSource().getSiteName() + ", Destination site: " + transfer.getDestinations().get(transfer.getDestinations().size()-1).getSiteName());
                     }
                     System.out.println("Please enter the transferId of your chosen transfer");
                     int transferId;

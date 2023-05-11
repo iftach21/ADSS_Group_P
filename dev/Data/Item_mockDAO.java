@@ -2,6 +2,7 @@ package Data;
 
 import Domain.Enums.TempTypeFactory;
 import Domain.Transfer.Item_mock;
+import Domain.Transfer.Site;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,7 +131,9 @@ public class Item_mockDAO {
     }
 
     public void deleteFromCache(String catalogNum){
-        for (Item_mock item_mock : this.ItemList) {
+        for (int i = 0; i < ItemList.size(); i++)
+        {
+            Item_mock item_mock = ItemList.get(i);
             if (item_mock.getCatalogNum().equals(catalogNum)) {
                 this.ItemList.remove(item_mock.getCatalogNum());
             }

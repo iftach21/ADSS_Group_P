@@ -252,7 +252,9 @@ public class TrucksDAO {
     }
 
     public void deleteFromCache(int licenseNumber){
-        for (Truck truck : this.TruckList) {
+        for (int i = 0; i < TruckList.size(); i++)
+        {
+            Truck truck = TruckList.get(i);
             if (truck.getLicenseNumber() == licenseNumber) {
                 this.TruckList.remove(truck.getLicenseNumber());
             }

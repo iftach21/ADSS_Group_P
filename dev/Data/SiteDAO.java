@@ -1,6 +1,7 @@
 package Data;
 
 import Domain.Transfer.Site;
+import Domain.Transfer.Transfer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,7 +140,9 @@ public class SiteDAO {
     }
 
     public void deleteFromCache(int id){
-        for (Site site : this.SiteList) {
+        for (int i = 0; i < SiteList.size(); i++)
+        {
+            Site site = SiteList.get(i);
             if (site.getSiteId() == id) {
                 this.SiteList.remove(site.getSiteId());
             }

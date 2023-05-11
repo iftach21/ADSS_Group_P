@@ -69,7 +69,7 @@ public class Transfer {
                     //update and remove product from the database
                     _transferItemsDAO.delete(_transferId, product.getCatalogNum(), site.getSiteId(), quantityToUpdate);
                     //if there are no more products to this destinations
-                    if (orderItems.get(site).size() == 0)
+                    if (!orderItems.containsKey(site))
                     {
                         //remove from the database
                         _transferDestinationsDAO.delete(_transferId, site.getSiteId());

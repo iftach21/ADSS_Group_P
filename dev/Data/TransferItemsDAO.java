@@ -160,6 +160,10 @@ public class TransferItemsDAO {
                         for (Item_mock item: this.orderItemsList.get(Id).get(site).keySet()) {
                             if (catalogNum.equals(item.getCatalogNum())) {
                                 this.orderItemsList.get(Id).get(site).remove(item);
+                                if(this.orderItemsList.get(Id).get(site).size() == 0)
+                                {
+                                    this.orderItemsList.get(Id).remove(site);
+                                }
                                 break;
                             }
                         }

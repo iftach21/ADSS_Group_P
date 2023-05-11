@@ -66,9 +66,7 @@ public class WeeklyShiftDAOTest {
     @AfterEach
     void tearDown() {
 
-        Connection.DeleteRows()
-
-        ;
+        Connection.DeleteRows();
     }
 
     @Test

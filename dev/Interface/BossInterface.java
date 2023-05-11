@@ -152,6 +152,9 @@ public class BossInterface extends AInterface {
                 //----------------------------
                 case "2":{
 
+                    System.out.println("is it weekly shift for drivers?\n 1=yes, 2=no");
+                    int driversflag = myObj.nextInt();  // Read user input
+
 
                     System.out.println("please enter year");
                     int year = myObj.nextInt();  // Read user input
@@ -159,8 +162,11 @@ public class BossInterface extends AInterface {
                     System.out.println("please enter week number");
                     int weeknum = myObj.nextInt();  // Read user input
 
-                    System.out.println("please enter super number");
-                    int supernum = myObj.nextInt();  // Read user input
+                    int supernum = 0;
+                    if(driversflag != 1) {
+                        System.out.println("please enter super number");
+                        supernum = myObj.nextInt();  // Read user input
+                    }
 
 
                     while(true) {
@@ -174,7 +180,9 @@ public class BossInterface extends AInterface {
                         int changer = 1;
                         while (changer == 1) {
                             //stayes on same shift:
+                            int prof = 7;
                             WindowTypeCreater wc = new WindowTypeCreater();
+                            if(driversflag != 1) {
                                 System.out.println("please enter int for the persons prof");
                                 System.out.println("0=manager");
                                 System.out.println("1=cashier");
@@ -184,7 +192,8 @@ public class BossInterface extends AInterface {
                                 System.out.println("5=shelf-stoking");
                                 System.out.println("6= general-worker");
 
-                                int prof = myObj.nextInt();  // Read user input
+                                prof = myObj.nextInt();  // Read user input
+                            }
 
 
 
@@ -424,7 +433,7 @@ public class BossInterface extends AInterface {
                 //-----------------------
                 //remove jobs for employee
                 //-----------------------
-                    
+
                 case "12":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input

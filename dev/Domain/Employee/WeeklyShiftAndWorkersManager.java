@@ -33,6 +33,12 @@ public class WeeklyShiftAndWorkersManager {
 
     //function for the "2"
     public void addtoexistingweeklyshift(int weeknum, int year, int supernum, WindowType wt, int id , int profindx) throws SQLException {
+        if(profindx==7){
+            WeeklyShift weeklyShift = this.getweeklyshift(weeknum,year,0);
+            weeklyShift.addDriverToShift((Driver) this.getworkerbyid(id),wt);
+            this.weeklyShiftDAO.update(weeklyShift);
+            return;
+        }
         WeeklyShift weeklyShift = this.getweeklyshift(weeknum,year,supernum);
         weeklyShift.addworkertoshift(this.getworkerbyid(id),wt,profindx);
         this.weeklyShiftDAO.update(weeklyShift);
@@ -142,12 +148,21 @@ public class WeeklyShiftAndWorkersManager {
         }
     }
 
-    public void printAllWorkersWhoCanWork(int prof,int daynum, String don){
+    public void printAllWorkersWhoCanWork(int prof,int daynum, String don) {
+
         WindowTypeCreater wc = new WindowTypeCreater();
-        List <Workers> allworkerslist = this.workersDAO.getAllworkerslist();
-        for(int i=0;i<allworkerslist.size();i++){
-            if(allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum,don))){
-                allworkerslist.get(i).print();
+        List<Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+        if (prof != 7) {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+                    allworkerslist.get(i).print();
+                }
+            }
+        } else {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).amIDriver() && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+                    allworkerslist.get(i).print();
+                }
             }
         }
     }

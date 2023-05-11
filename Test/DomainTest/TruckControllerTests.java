@@ -1,4 +1,4 @@
-package Test.DomainTest;
+package DomainTest;
 
 import Data.TrucksDAO;
 import Domain.Employee.Driver;

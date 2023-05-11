@@ -198,5 +198,21 @@ public class TransferItemsDAO {
 
         return itemsOfSite;
     }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferItems");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                orderItemsList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
 

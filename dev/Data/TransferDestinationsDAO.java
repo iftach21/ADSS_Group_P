@@ -73,7 +73,7 @@ public class TransferDestinationsDAO {
         try {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferDestinations WHERE transferId = ? AND siteId = ?");
             stmt.setInt(1, transferId);
-            stmt.setInt(1, siteId);
+            stmt.setInt(2, siteId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("No transfer destination found with transfer Id " + transferId + "and site Id" + siteId);
@@ -96,7 +96,9 @@ public class TransferDestinationsDAO {
     }
 
     public void deleteFromCache(int transferId, int siteId){
-        for (Site site : this.destinationsList.get(transferId)) {
+        for (int i = 0; i < this.destinationsList.get(transferId).size(); i++)
+        {
+            Site site = this.destinationsList.get(transferId).get(i);
             if (site.getSiteId() == siteId) {
                 this.destinationsList.get(transferId).remove(site.getSiteId());
             }

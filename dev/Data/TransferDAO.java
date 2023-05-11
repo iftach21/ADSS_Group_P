@@ -213,7 +213,9 @@ public class TransferDAO {
     }
 
     public void deleteFromCache(int transferId){
-        for (Transfer transfer : this.TransferList) {
+        for (int i = 0; i < TransferList.size(); i++)
+        {
+            Transfer transfer = TransferList.get(i);
             if (transfer.getTransferId() == transferId) {
                 this.TransferList.remove(transfer.getTransferId());
             }

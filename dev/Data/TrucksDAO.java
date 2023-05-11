@@ -121,12 +121,13 @@ public class TrucksDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Truck SET model=?, netWeight=?, currentWeight=?, maxWeight=?, coolingCapacity=?, unavailableStartDate=?, unavailableStartTime=?, unavailableEndDate=?, unavailableEndTime=? WHERE licenseNumber=?";
+            String sql = "UPDATE Truck SET model=?, netWeight=?, maxWeight=?, currentWeight=?,  coolingCapacity=?, unavailableStartDate=?, unavailableStartTime=?, unavailableEndDate=?, unavailableEndTime=? WHERE licenseNumber=?";
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(10, truck.getLicenseNumber());
             stmt.setString(1, truck.getTruckModel());
             stmt.setInt(2, truck.getTruckNetWeight());
-            stmt.setInt(3, truck.getCurrentTruckWeight());
-            stmt.setInt(4, truck.getMaxWeight());
+            stmt.setInt(3, truck.getMaxWeight());
+            stmt.setInt(4, truck.getCurrentTruckWeight());
             stmt.setString(5, truck.getTempCapacity().name());
 
             if(truck.getUnavailableStartDate() == null)

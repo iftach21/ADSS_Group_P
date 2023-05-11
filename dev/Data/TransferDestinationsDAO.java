@@ -63,6 +63,7 @@ public class TransferDestinationsDAO {
                 stmt.setInt(2, dest.getSiteId());
                 stmt.executeUpdate();
             }
+            destinationsList.put(transferId, destinations);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

@@ -156,7 +156,7 @@ public class TransferDAO {
     public void add(Transfer transfer){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT or REPLACE INTO Truck (transferId, dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, sourceId) " +
+            String sql = "INSERT or REPLACE INTO Transfer (transferId, dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, sourceId) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class TransferDAO {
             stmt.setString(7, transfer.getDriverName());
             stmt.setInt(8, transfer.getSource().getSiteId());
             stmt.executeUpdate();
-
+            TransferList.add(transfer);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

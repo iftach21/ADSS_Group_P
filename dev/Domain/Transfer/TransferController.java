@@ -283,7 +283,7 @@ public class TransferController {
         Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
         if (chosenTruck == null)
         {
-            System.out.println("Unfortunately, there is no available truck to this transfer.");
+            System.out.println("Unfortunately, there is no available truck to this transfer. You'll have to start all over again.");
             _ordersQueue.add(orderItems);
             _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
             return;

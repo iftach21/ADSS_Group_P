@@ -124,8 +124,7 @@ public class TruckController {
 
         if (chosenTruck != null)
             return chosenTruck;
-        else
-            throw new NoSuchElementException("There is no available truck for this transfer");
+        return null;
     }
 
     public void addTruck(Truck newTrack)

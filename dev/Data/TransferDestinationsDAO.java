@@ -35,7 +35,7 @@ public class TransferDestinationsDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM TransferDestinationsDAO WHERE transferId = ?";
+            String sql = "SELECT * FROM TransferDestinations WHERE transferId = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, transferId);
             rs = stmt.executeQuery();
@@ -118,3 +118,4 @@ public class TransferDestinationsDAO {
         }
     }
 }
+

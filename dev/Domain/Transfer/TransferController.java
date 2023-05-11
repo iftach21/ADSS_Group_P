@@ -12,6 +12,7 @@ import java.util.*;
 import Data.Item_mockDAO;
 import Data.SiteDAO;
 import Data.TransferDAO;
+import Data.TrucksDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
@@ -57,7 +58,7 @@ public class TransferController {
             System.out.println("------------------------------------------------------------");
             System.out.println("Hello transfer manager, welcome to the transfer system!");
             System.out.println("Please pick one of the following options:");
-            System.out.println("1. View previous transfers");
+            System.out.println("1. View and download a transfer document of your choice");
             System.out.println("2. Create transfer for pending orders. you have " + _ordersQueue.size() + " orders waiting to transfer");
             System.out.println("3. Update current transfers ");
             System.out.println("4. Add a new truck to the system ");
@@ -83,41 +84,7 @@ public class TransferController {
 
             if (optionSelection == 1)
             {
-                if (transfersDAO.getAllTransfers().size() == 0)
-                {
-                    System.out.println("Unfortunatly, there are no previous transfers to watch. You'll be taken to the main menu.");
-                    System.out.println("------------------------------------------------------------");
-                }
-                else
-                {
-                    System.out.println("Please enter the transfer id of the transfer you would like to watch: ");
-                    int transferId;
-                    while(true) {
-                        try
-                        {
-                            transferId = scanner.nextInt();
-                            if (transfersDAO.get(transferId) == null ) {
-                                System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
-                            }
-                            else if (transfersDAO.get(transferId)!=null && (transfersDAO.get(transferId).getTransferStatus().equals("IN PROGRESS") || transfersDAO.get(transferId).getTransferStatus().equals("NOT START"))){
-                                System.out.println("Sorry transfer manager, but your selected transfer is in progress or has not start yet. Please choose another transfer");
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
-                            scanner.next();
-                        }
-                    }
-
-                    Transfer chosenTransfer = transfersDAO.get(transferId);
-                    chosenTransfer.createDocument();
-                    System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
-                }
+                viewTransferDocument();
             }
             else if (optionSelection == 2)
             {
@@ -612,6 +579,11 @@ public class TransferController {
             }
         }
         tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null, null, null);
+        tc.getTruck(chosenTruck).setTruckUnavailable(transfer.getLeavingDate(),transfer.getLeavingTime(),transfer.getArrivingDate(), transfer.get_arrivingTime());
+
+        tc.updateTruck(tc.getTruck(transfer.getTruckLicenseNumber()));
+        tc.updateTruck(tc.getTruck(chosenTruck));
+
         transfer.updateTransferTruck(chosenTruck);
         transfersDAO.update(transfer);
         transfer.documentUpdateTruckNumber();
@@ -1137,11 +1109,12 @@ public class TransferController {
                 System.out.println("---------------------------------------------------------------");
                 System.out.println("TRANSFER ID: " + currentTransfer.getTransferId());
                 System.out.println("Source site: " + currentTransfer.getTransferId());
-                System.out.println("Last destination: " + currentTransfer.getDestinations().get(currentTransfer.getDestinations().size()-1));
+                System.out.println("Last destination: " + currentTransfer.getDestinations().get(currentTransfer.getDestinations().size()-1).getSiteName());
                 System.out.println("Leaving date: " + currentTransfer.getLeavingDate());
                 System.out.println("Leaving time: " + currentTransfer.getLeavingTime());
                 System.out.println("Arriving date: " + currentTransfer.getArrivingDate());
                 System.out.println("Arriving time: " + currentTransfer.get_arrivingTime());
+                System.out.println("");
             }
         }
         if (numOfPlannedTransfer == 0)
@@ -1175,6 +1148,48 @@ public class TransferController {
         List<WindowType> stokeWindowTypes = weeklyShiftManager.doIHaveStokeForTheShipment(weekNumber, arrivingDate.getYear(), orderDestinationSiteId, wt);
 
         return stokeWindowTypes.contains(wt);
+    }
+
+    public void viewTransferDocument() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        Map<Integer, Transfer> allTransfers =  TransferDAO.getInstance().getAllTransfers();
+        if (allTransfers.size() == 0)
+        {
+            System.out.println("Unfortunatly, there are no transfers to watch. You'll be taken to the main menu.");
+            System.out.println("------------------------------------------------------------");
+        }
+        else
+        {
+            System.out.println("There are " + allTransfers.size() + " transfers documents in the system. here are basic details on some of them: ");
+            for (int i = 0; i < 5 && i < allTransfers.size(); i++)
+            {
+                System.out.println((i+1) + ". Transfer ID: " + allTransfers.get(i).getTransferId() + ", Source Site: " + allTransfers.get(i).getSource().getSiteName() + ", Final Destination: " + allTransfers.get(i).getDestinations().get(allTransfers.get(i).getDestinations().size() - 1).getSiteName());
+            }
+            System.out.println("Please enter the transfer id of the transfer document you would like to download: ");
+            int transferId;
+            while(true) {
+                try
+                {
+                    transferId = scanner.nextInt();
+                    if (transfersDAO.get(transferId) == null ) {
+                        System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Sorry transfer manager, but your input is illegal. please enter a valid transfer Id");
+                    scanner.next();
+                }
+            }
+
+            Transfer chosenTransfer = transfersDAO.get(transferId);
+            chosenTransfer.createDocument();
+            System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
+        }
     }
 
     public void createMockOrder() throws SQLException {

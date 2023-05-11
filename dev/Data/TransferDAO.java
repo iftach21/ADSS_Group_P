@@ -123,6 +123,7 @@ public class TransferDAO {
         try {
             String sql = "UPDATE Transfer SET dateOfTransfer=?, leavingTime=?, arrivingDate=?, arrivingTime=?, truckLicenseNumber=?, driverName=?, sourceId=? WHERE transferId=?";
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(8, transfer.getTransferId());
             stmt.setString(1, transfer.getDateOfTransfer().toString());
             stmt.setString(2, transfer.getLeavingTime().toString());
             stmt.setString(3, transfer.getArrivingDate().toString());
@@ -239,13 +240,11 @@ public class TransferDAO {
 
         Site site = SiteDAO.getInstance().get(sourceId);
 
-        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dateOfTransfer = LocalDate.parse(dateOfTransferString, formatterDate);
-        LocalDate arrivingDate = LocalDate.parse(arrivingDateString, formatterDate);
+        LocalDate dateOfTransfer = LocalDate.parse(dateOfTransferString);
+        LocalDate arrivingDate = LocalDate.parse(arrivingDateString);
 
-        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime leavingTime = LocalTime.parse(leavingTimeString, formatterTime);
-        LocalTime arrivingTime = LocalTime.parse(arrivingTimeString, formatterTime);
+        LocalTime leavingTime = LocalTime.parse(leavingTimeString);
+        LocalTime arrivingTime = LocalTime.parse(arrivingTimeString);
 
         List<Site> transferDestination = TransferDestinationsDAO.getInstance().get(transferId);
         Map<Site, Map<Item_mock, Integer>> transferOrderItems = TransferItemsDAO.getInstance().get(transferId);

@@ -112,9 +112,9 @@ public class TransferItemsDAO {
         try {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE transferId=? AND catalogNum=? AND siteId=? AND quantity=?");
             stmt.setInt(1, transferId);
-            stmt.setString(1, catalogNum);
-            stmt.setInt(1, siteId);
-            stmt.setInt(1, quantity);
+            stmt.setString(2, catalogNum);
+            stmt.setInt(3, siteId);
+            stmt.setInt(4, quantity);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("No transfer items found with ID " + transferId);
@@ -158,8 +158,10 @@ public class TransferItemsDAO {
                 for (Site site: this.orderItemsList.get(Id).keySet()) {
                     if (site.getSiteId() == siteId) {
                         for (Item_mock item: this.orderItemsList.get(Id).get(site).keySet()) {
-                            if (catalogNum.equals(item.getCatalogNum()))
-                                this.orderItemsList.remove(transferId);
+                            if (catalogNum.equals(item.getCatalogNum())) {
+                                this.orderItemsList.get(Id).get(site).remove(item);
+                                break;
+                            }
                         }
                     }
                 }

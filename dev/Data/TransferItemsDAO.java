@@ -29,8 +29,14 @@ public class TransferItemsDAO {
 
 
     public Map<Site, Map<Item_mock, Integer>> get(int transferId){
-        Map<Site, Map<Item_mock, Integer>> orderItemsToReturn = this.getFromCache(transferId);
-        if(orderItemsToReturn != null){return orderItemsToReturn;}
+        Map<Site, Map<Item_mock, Integer>> orderItemsToReturn;
+        orderItemsToReturn = this.getFromCache(transferId);
+        if(orderItemsToReturn != null){
+            return orderItemsToReturn;
+        }
+        else{
+            orderItemsToReturn = new HashMap<>();
+        }
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -85,7 +91,7 @@ public class TransferItemsDAO {
 
     public void add(int transferId, int siteId, String catalogNum, int quantity){
         try {
-            String sql = "INSERT or REPLACE INTO TransferItems (transferId, catalogNum, siteId, quantity) " +
+            String sql = "INSERT INTO TransferItems (transferId, catalogNum, siteId, quantity) " +
                     "VALUES (?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -169,20 +175,5 @@ public class TransferItemsDAO {
 
         return itemsOfSite;
     }
-
-    public void deleteAll()
-    {
-        try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferItems");
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected == 0) {
-                System.out.println("Table is empty");
-            } else {
-                System.out.println("Table deleted successfully");
-                orderItemsList.clear();
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-    }
 }
+

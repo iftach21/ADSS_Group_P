@@ -1,5 +1,8 @@
-package DomainTest;
+package Test.DomainTest;
 
+import Data.Item_mockDAO;
+import Data.SiteDAO;
+import Data.TransferDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
@@ -39,22 +42,36 @@ class TransferTests {
     DriverLicense dl1;
     Driver driver1;
     Transfer testTransfer;
+    final SiteDAO siteDAO;
+    final Item_mockDAO item_mockDAO;
+
+    TransferTests() throws SQLException {
+        this.siteDAO = SiteDAO.getInstance();
+        this.item_mockDAO = Item_mockDAO.getInstance();
+    }
 
     @BeforeEach
     void createMockTransfer() throws SQLException {
         //create 3 sites for destinations
         this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe", 32.06845601633649, 34.783378215486955);
+        siteDAO.add(site1);
         this.site2 = new Site(1,"Tara", "Masada 12 Beer-Sheva", "09-7887645", "Ron", 31.262913845991317, 34.79982446327962);
+        siteDAO.add(site2);
         this.site3 = new Site(2,"Supe-Li Krayot", "HaZayit 5 Kiryat Haim", "09-7863231", "Avram", 32.835899363273555, 35.066426063499215);
+        siteDAO.add(site3);
 
         //create 2 items for each site
         //items for site 1
         this.item11 = new Item_mock("1", TempLevel.regular, "Toilet Cleaner");
+        item_mockDAO.add(item11);
         this.item12 = new Item_mock("2", TempLevel.regular, "Sink Cleaner");
+        item_mockDAO.add(item12);
 
         //items for site 2
         this.item21 = new Item_mock("3", TempLevel.cold, "Almond Milk");
+        item_mockDAO.add(item21);
         this.item22 = new Item_mock("4", TempLevel.cold, "Cheddar Cheese");
+        item_mockDAO.add(item22);
 
         //create order items map and destinations list
         this.orderItems1 = new HashMap<>();
@@ -178,3 +195,4 @@ class TransferTests {
 
     }
 }
+

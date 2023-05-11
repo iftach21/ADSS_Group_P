@@ -51,8 +51,10 @@ public class WeeklyShiftDAO {
         try {
             // Update the day and night shifts in the WeeklyShift object
             for (int i = 0; i < 7; i++) {
-                shiftDAO.update(weeklyShift.getDayShift()[i]);
-                shiftDAO.update(weeklyShift.getNightShift()[i]);
+                if(weeklyShift.getDayShift()[i] != null){
+                shiftDAO.update(weeklyShift.getDayShift()[i]);}
+                if(weeklyShift.getNightShift()[i] != null){
+                shiftDAO.update(weeklyShift.getNightShift()[i]);}
             }
 
             // Update the corresponding record in the database

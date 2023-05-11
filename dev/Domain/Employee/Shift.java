@@ -205,13 +205,14 @@ public class Shift {
         List<Workers> ans = new ArrayList<>();
 
         List<Workers> inThisWorkers = this.getAllWorkers();
-        List<Workers> otherWorkers =shiftToCompare != null ? shiftToCompare.getAllWorkers()  : new ArrayList<>() ;
+        List<Workers> otherWorkers = shiftToCompare != null ? shiftToCompare.getAllWorkers()  : new ArrayList<>() ;
 
         for(Workers w1: inThisWorkers){
+            int flag = 0;
             for(Workers w2: otherWorkers){
-                if(w1.getId() == w2.getId()){continue;}
+                if(w1.getId() == w2.getId()){flag=1;}
             }
-            ans.add(w1);
+            if(flag==0){ans.add(w1);}
         }
         return ans;
     }

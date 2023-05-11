@@ -155,11 +155,12 @@ public class ShiftDAO {
             stmt.setInt(11, shift.getShiftRequirement().getreqbyprof(6));
             stmt.setInt(12,shift.getId());
 
-//            return the list of new worker
+            //return the list of new worker
             Shift oldshift = this.get(shift.getId());
             List<Workers> l1= shift.getDiffWorkers(oldshift);
-//            return the list of old worker
+            //return the list of old worker
             List<Workers> l2= oldshift.getDiffWorkers(shift);
+
             for(Workers worker:l1){
                 shiftWorkerDAO.add(worker,shift,shift.workerPro(worker));
             }

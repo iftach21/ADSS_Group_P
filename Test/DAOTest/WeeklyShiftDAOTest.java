@@ -2,6 +2,7 @@ package DAOTest;
 
 import Data.Connection;
 import Data.WeeklyShiftDAO;
+import Data.WorkersDAO;
 import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShift;
 import Domain.Employee.Workers;
@@ -19,9 +20,11 @@ public class WeeklyShiftDAOTest {
     Shift shift1;
     Shift shift2;
     WeeklyShift weeklyShift;
+    Workers w1;
 
 
     WeeklyShiftDAO DAO = WeeklyShiftDAO.getInstance();
+    WorkersDAO DAOWorkers = WorkersDAO.getInstance();
 
 
     public WeeklyShiftDAOTest() throws SQLException {
@@ -30,17 +33,31 @@ public class WeeklyShiftDAOTest {
     @BeforeEach
     void create()
     {
-        Connection.DeleteRows();
+        w1 = new Workers(2,"ofir","lotsofmoney","23.2.23",90,12345,"student",1234);
+        //Connection.DeleteRows();
         weeklyShift= new WeeklyShift(1,1,1);
         Workers w = new Workers(1,"ofir","lotsofmoney","23.2.23",90,12345,"student",1234);
+        w.addprof(0);
+        DAOWorkers.add(w);
         weeklyShift.addworkertoshift(w, WindowType.day1,0);
+
         shift1 = new Shift(w);
 
         shift2 = new Shift(w);
 
+        Shift[] s = new Shift[7];
+        Shift[] s2 =  new Shift[7];
 
-        Shift[] s = {new Shift(w),new Shift(w),new Shift(w),new Shift(w),new Shift(w),new Shift(w),new Shift(w)};
-        Shift[] s2 =  {new Shift(w),new Shift(w),new Shift(w),new Shift(w),new Shift(w),new Shift(w),new Shift(w)};
+        //for every shift i have worker:
+        for(int i=0;i<7;i++){
+
+            s[i] = new Shift();
+            s2[i] = new Shift();
+
+            s[i].insertToShift(w,0);
+            s2[i].insertToShift(w,0);
+        }
+
 
         weeklyShift.setDayShift(s);
         weeklyShift.setNightShift(s2);
@@ -48,7 +65,7 @@ public class WeeklyShiftDAOTest {
 
     @AfterEach
     void tearDown() {
-       // Connection.DeleteRows();
+        Connection.DeleteRows();
     }
 
     @Test
@@ -69,14 +86,10 @@ public class WeeklyShiftDAOTest {
     @Test
     void TestUpdate() throws SQLException {
         DAO.add(weeklyShift);
-        Shift[] shifts = weeklyShift.getNightShift();
-        shifts[1] = shift1;
-        ArrayList<Workers>[] w =  new ArrayList[1];
-        w[0]= new ArrayList<>();
-        w[0].add(new Workers(1,"ofir","lotsofmoney","23.2.23",90,12345,"student",1234));
-        shift1.setWorkerInShift(w);
+        DAOWorkers.add(w1);
+        weeklyShift.addworkertoshift(w1,WindowType.day1,0);
         DAO.update(weeklyShift);
-        Assertions.assertEquals(DAO.get(1,1,1),weeklyShift);
+        Assertions.assertTrue(DAO.get(1,1,1).checkifworkallready(w1.getId(),WindowType.day1));
     }
 
 

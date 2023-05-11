@@ -2,23 +2,15 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="Transfer_Employee" uuid="35dd39be-466a-49ba-9513-e8e9cacff78e">
-      <driver-ref>61669f10-2cf8-4e06-83ed-c19b1b609eb9</driver-ref>
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\iftac\Documents\GitHub\ADSS_Group_P\Transfer_Employee.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.40.1/sqlite-jdbc-3.40.1.jar</url>
         </library>
       </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Transfer_Employee.db" uuid="c28d6855-c987-4aeb-a812-d482894d1345">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Transfer_Employee.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

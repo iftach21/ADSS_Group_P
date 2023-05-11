@@ -272,14 +272,13 @@ public class TransferController {
         startTransfer(newTransfer);
     }
 
-    public void startTransfer(Transfer newTransfer)
-    {
+    public void startTransfer(Transfer newTransfer) throws SQLException {
         while(true)
         {
             boolean transferRearranged = false;
 
             Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-            transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
+            transferTruck.addToDAO(newTransfer.getTransferId(), newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
 
             System.out.println("The truck chosen to the transfer is: ");
             System.out.println("License Number: " + transferTruck.getLicenseNumber());
@@ -307,7 +306,7 @@ public class TransferController {
         }
     }
 
-    public void rearrangeTransfer(Transfer transfer){
+    public void rearrangeTransfer(Transfer transfer) throws SQLException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -396,13 +395,11 @@ public class TransferController {
         return currentTransfers;
     }
 
-    public boolean updateWeightsForTransfer(Transfer newTransfer, boolean happensRightNow)
-    {
+    public boolean updateWeightsForTransfer(Transfer newTransfer, boolean happensRightNow) throws SQLException {
         int truckWeight;
 
         Scanner scanner = new Scanner(System.in);
         Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-        transferTruck.setTruckUnavailable(newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
 
         boolean transferRearranged = false;
 
@@ -548,8 +545,7 @@ public class TransferController {
         transfer.removeTransferDestination(transfer.getDestinations().get(destToRemove - 1));
     }
 
-    public void changeTruckOfTransfer(Transfer transfer)
-    {
+    public void changeTruckOfTransfer(Transfer transfer) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("These are the available trucks. Please choose one of the trucks, by type its license number: ");
         for (Integer LicenseNum : tc.getAllAvailableTrucks(transfer.getLeavingDate(), transfer.getLeavingTime(), transfer.getArrivingDate(), transfer.get_arrivingTime()).keySet())
@@ -578,8 +574,8 @@ public class TransferController {
                 scanner.next();
             }
         }
-        tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null, null, null);
-        tc.getTruck(chosenTruck).setTruckUnavailable(transfer.getLeavingDate(),transfer.getLeavingTime(),transfer.getArrivingDate(), transfer.get_arrivingTime());
+        tc.getTruck(transfer.getTruckLicenseNumber()).deleteFromDAO(transfer.getTransferId());
+        tc.getTruck(chosenTruck).addToDAO(transfer.getTransferId(), transfer.getLeavingDate(),transfer.getLeavingTime(),transfer.getArrivingDate(), transfer.get_arrivingTime());
 
         tc.updateTruck(tc.getTruck(transfer.getTruckLicenseNumber()));
         tc.updateTruck(tc.getTruck(chosenTruck));
@@ -879,8 +875,7 @@ public class TransferController {
         return chosenDriver;
     }
 
-    public void updateCurrentTransferDetails(Transfer transferToUpdate)
-    {
+    public void updateCurrentTransferDetails(Transfer transferToUpdate) throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please choose one of the following options:");
@@ -955,8 +950,7 @@ public class TransferController {
         }
     }
 
-    public void addTruckToSystem()
-    {
+    public void addTruckToSystem() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("To add a new truck to the transfer system, you'll need to enter the following details:");
 
@@ -1054,7 +1048,7 @@ public class TransferController {
         }
 
         //create the truck
-        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity, null, null, null, null);
+        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity);
         tc.addTruck(newTruck);
     }
 

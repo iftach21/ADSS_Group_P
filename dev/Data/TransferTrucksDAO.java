@@ -103,6 +103,7 @@ public class TransferTrucksDAO {
             stmt.setString(6, arrivingTime.toString());
 
             stmt.executeUpdate();
+            addToCache(transferId, licenseNumber);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -118,7 +119,7 @@ public class TransferTrucksDAO {
             if (rowsAffected == 0) {
                 System.out.println("No transfer trucks found with ID " + transferId);
             } else {
-                System.out.println("transfer items with ID " + transferId + " deleted successfully");
+                System.out.println("transfer truck with licencse number " + licenseNumber + " deleted successfully");
                 deleteFromCache(transferId, licenseNumber);
             }
         } catch (SQLException e) {
@@ -142,7 +143,7 @@ public class TransferTrucksDAO {
         {
             Transfer transfer = this.trucksTransfers.get(licenseNumber).get(i);
             if (transfer.getTransferId() == transferId) {
-                this.trucksTransfers.get(transferId).remove(i);
+                this.trucksTransfers.get(licenseNumber).remove(i);
                 break;
             }
         }
@@ -161,6 +162,17 @@ public class TransferTrucksDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    public void addToCache(int transferId, int licenseNumber) throws SQLException {
+        if (trucksTransfers.keySet().contains(licenseNumber))
+            trucksTransfers.get(licenseNumber).add(TransferDAO.getInstance().get(transferId));
+        else
+        {
+            List<Transfer> transfersList = new ArrayList<>();
+            transfersList.add(TransferDAO.getInstance().get(transferId));
+            trucksTransfers.put(licenseNumber, transfersList);
         }
     }
 }

@@ -70,7 +70,7 @@ public class Truck {
     }
 
     public boolean isLightWeight(){
-        return this._truck_maxWeight>=3.5 && this._truck_maxWeight<=7.9;
+        return this._truck_maxWeight>=0 && this._truck_maxWeight<=7.9;
     }
 
     public TempLevel getTempCapacity(){return _coolingCapacity;}
@@ -97,8 +97,14 @@ public class Truck {
 
     public void setTruckUnavailable(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime)
     {
-        _unavailableStartTime = LocalDateTime.of(startDate, startTime);
-        _unavailableEndTime = LocalDateTime.of(endDate, endTime);;
+        if (startDate == null || startTime == null)
+            this._unavailableStartTime = null;
+        else
+            this._unavailableStartTime = LocalDateTime.of(startDate, startTime);
+        if (endDate == null || endTime == null)
+            this._unavailableEndTime = null;
+        else
+            this._unavailableEndTime = LocalDateTime.of(endDate, endTime);
     }
 
     public int getTruckNetWeight()

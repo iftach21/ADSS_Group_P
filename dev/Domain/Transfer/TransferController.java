@@ -12,6 +12,7 @@ import java.util.*;
 import Data.Item_mockDAO;
 import Data.SiteDAO;
 import Data.TransferDAO;
+import Data.TrucksDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
@@ -612,6 +613,11 @@ public class TransferController {
             }
         }
         tc.getTruck(transfer.getTruckLicenseNumber()).setTruckUnavailable(null, null, null, null);
+        tc.getTruck(chosenTruck).setTruckUnavailable(transfer.getLeavingDate(),transfer.getLeavingTime(),transfer.getArrivingDate(), transfer.get_arrivingTime());
+
+        tc.updateTruck(tc.getTruck(transfer.getTruckLicenseNumber()));
+        tc.updateTruck(tc.getTruck(chosenTruck));
+
         transfer.updateTransferTruck(chosenTruck);
         transfersDAO.update(transfer);
         transfer.documentUpdateTruckNumber();

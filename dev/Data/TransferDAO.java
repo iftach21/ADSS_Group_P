@@ -156,7 +156,7 @@ public class TransferDAO {
     public void add(Transfer transfer){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT INTO Truck (transferId, dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, sourceId) " +
+            String sql = "INSERT or REPLACE INTO Truck (transferId, dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, sourceId) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
@@ -251,5 +251,21 @@ public class TransferDAO {
         Transfer transfer = new Transfer(dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, site, transferDestination, transferOrderItems, transferId);
 
         return transfer;
+    }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Transfer");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                TransferList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

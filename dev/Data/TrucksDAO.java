@@ -175,7 +175,7 @@ public class TrucksDAO {
     public void add(Truck truck){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime) " +
+            String sql = "INSERT or REPLACE INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
@@ -208,7 +208,7 @@ public class TrucksDAO {
                 stmt.setString(10, truck.getUnavailableEndTime().toString());
 
             stmt.executeUpdate();
-
+            TruckList.add(truck);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -274,16 +274,75 @@ public class TrucksDAO {
         String unavailableEndDateString = rs.getString("unavailableEndDate");
         String unavailableEndTimeString = rs.getString("unavailableEndTime");
 
-        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate unavailableStartDate = LocalDate.parse(unavailableStartDateString, formatterDate);
-        LocalDate unavailableEndDate = LocalDate.parse(unavailableEndDateString, formatterDate);
+        DateTimeFormatter outputFormatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter outputFormatterTime = DateTimeFormatter.ofPattern("HH:mm");
 
-        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime unavailableStartTime = LocalTime.parse(unavailableStartTimeString, formatterTime);
-        LocalTime unavailableEndTime = LocalTime.parse(unavailableEndTimeString, formatterTime);
+        LocalDate unavailableStartDate;
+        LocalDate unavailableEndDate;
+        LocalTime unavailableStartTime;
+        LocalTime unavailableEndTime;
+        if (!unavailableStartDateString.isEmpty())
+        {
+            LocalDate inputDate1 = LocalDate.parse(unavailableStartDateString);
+            String outputString1 = inputDate1.format(outputFormatterDate);
+            unavailableStartDate = LocalDate.parse(outputString1, outputFormatterDate);
+        }
+        else
+        {
+            unavailableStartDate = null;
+        }
+
+        if (!unavailableEndDateString.isEmpty())
+        {
+            LocalDate inputDate2 = LocalDate.parse(unavailableEndDateString);
+            String outputString2 = inputDate2.format(outputFormatterDate);
+            unavailableEndDate = LocalDate.parse(outputString2, outputFormatterDate);
+        }
+        else
+        {
+            unavailableEndDate = null;
+        }
+
+        if (!unavailableStartTimeString.isEmpty())
+        {
+            LocalTime inputTime3 = LocalTime.parse(unavailableStartTimeString);
+            String outputString3 = inputTime3.format(outputFormatterTime);
+            unavailableStartTime = LocalTime.parse(outputString3, outputFormatterTime);
+        }
+        else
+        {
+            unavailableStartTime = null;
+        }
+
+        if (!unavailableEndTimeString.isEmpty())
+        {
+            LocalTime inputTime4 = LocalTime.parse(unavailableEndTimeString);
+            String outputString4 = inputTime4.format(outputFormatterTime);
+            unavailableEndTime = LocalTime.parse(outputString4, outputFormatterTime);
+        }
+        else
+        {
+            unavailableEndTime = null;
+        }
 
         Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime);
 
         return truck;
+    }
+
+    public void deleteAll()
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Truck");
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Table is empty");
+            } else {
+                System.out.println("Table deleted successfully");
+                TruckList.clear();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

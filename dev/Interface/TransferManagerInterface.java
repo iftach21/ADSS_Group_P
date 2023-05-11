@@ -19,6 +19,10 @@ public class TransferManagerInterface extends AInterface{
 
     @Override
     public void logIn() throws Exception {
+        //delete if any
+        Item_mockDAO.getInstance().deleteAll();
+        SiteDAO.getInstance().deleteAll();
+
         //create and add some data to the DB before starting the system
         //creating sites
         Site Yarkan = new Site(1, "HaYarkaniya Shel Moshe", "Ben-Gurion 34 Beer Sheva", "052-3878098", "Moshe", 31.261050989825964, 34.802749075835074);
@@ -54,7 +58,8 @@ public class TransferManagerInterface extends AInterface{
         Item_mockDAO.getInstance().add(CreamCheese);
 
         controller.startTransferSystem();
-        Item_mockDAO.getInstance().deleteAll();
+
         SiteDAO.getInstance().deleteAll();
+        Item_mockDAO.getInstance().deleteAll();
     }
 }

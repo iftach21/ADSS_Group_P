@@ -32,7 +32,7 @@ public class Truck {
         if (unavailableEndDate == null || unavailableEndTime == null)
             this._unavailableEndTime = null;
         else
-            this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
+            this._unavailableEndTime = LocalDateTime.of(unavailableEndDate, unavailableEndTime);
     }
 
     public int getCurrentTruckWeight()
@@ -52,7 +52,12 @@ public class Truck {
 
     public int getMaxWeight(){ return _truck_maxWeight;}
 
-    public boolean getIsUsedInDate(LocalDateTime leavingDate, LocalDateTime arrivingDate){ return !(leavingDate.isAfter(_unavailableEndTime) || arrivingDate.isBefore(_unavailableStartTime));}
+    public boolean getIsUsedInDate(LocalDateTime leavingDate, LocalDateTime arrivingDate)
+    {
+        if (_unavailableStartTime == null && _unavailableEndTime == null)
+            return false;
+        return !(leavingDate.isAfter(_unavailableEndTime) || arrivingDate.isBefore(_unavailableStartTime));
+    }
 
     public int getLicenseNumber(){return _truck_licenseNumber;}
 

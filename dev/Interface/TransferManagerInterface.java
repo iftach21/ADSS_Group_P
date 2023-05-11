@@ -2,6 +2,7 @@ package Interface;
 
 import Data.Item_mockDAO;
 import Data.SiteDAO;
+import Data.TransferDAO;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.TempLevel;
 import Domain.Transfer.Item_mock;
@@ -19,9 +20,6 @@ public class TransferManagerInterface extends AInterface{
 
     @Override
     public void logIn() throws Exception {
-        //delete if any
-        Item_mockDAO.getInstance().deleteAll();
-        SiteDAO.getInstance().deleteAll();
 
         //create and add some data to the DB before starting the system
         //creating sites

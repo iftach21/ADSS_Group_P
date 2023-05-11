@@ -819,7 +819,6 @@ public class TransferController {
             catch (Exception e)
             {
                 System.out.println("Sorry transfer manager, but your input is illegal. please try again");
-                scanner.next();
             }
         }
         return leavingDate;
@@ -841,7 +840,6 @@ public class TransferController {
             catch (Exception e)
             {
                 System.out.println("Sorry transfer manager, but your input is illegal. please try again");
-                scanner.next();
             }
         }
         return leavingTime;

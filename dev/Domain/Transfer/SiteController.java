@@ -1,7 +1,6 @@
 package Domain.Transfer;
 
-import Data.SiteDAO;
-import Domain.Employee.WeeklyShiftAndWorkersManager;
+import DataAccesObjects.Transfer.SiteDAO;
 
 import java.sql.SQLException;
 

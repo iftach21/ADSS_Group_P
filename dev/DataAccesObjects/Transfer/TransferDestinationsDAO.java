@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Site;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferDestinationsDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private Map<Integer, List<Site>> destinationsList;  //the key in the first map is transferId
     private static TransferDestinationsDAO instance = null;
 

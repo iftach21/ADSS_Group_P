@@ -1,5 +1,6 @@
-package Data;
+package DataAccesObjects.Employee;
 
+import DataAccesObjects.Pair;
 import Domain.Employee.Driver;
 import Domain.Employee.Shift;
 import Domain.Employee.ShiftRequirement;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 public class ShiftDAO {
-    private java.sql.Connection conn = Connection.getConnectionToDatabase();
+    private java.sql.Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private static ShiftDAO instance = null;
     private int shift_id_counter;
 

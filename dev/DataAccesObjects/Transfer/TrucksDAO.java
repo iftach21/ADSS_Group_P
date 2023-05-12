@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Enums.TempLevel;
 import Domain.Enums.TempTypeFactory;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TrucksDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private ArrayList<Truck> TruckList;
     private static TrucksDAO instance = null;
 

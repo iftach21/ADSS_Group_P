@@ -1,8 +1,8 @@
 package DAOTest;
 
-import Data.Connection;
-import Data.WeeklyShiftDAO;
-import Data.WorkersDAO;
+import DataAccesObjects.Connection;
+import DataAccesObjects.Employee.WeeklyShiftDAO;
+import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShift;
 import Domain.Employee.Workers;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 public class WeeklyShiftDAOTest {

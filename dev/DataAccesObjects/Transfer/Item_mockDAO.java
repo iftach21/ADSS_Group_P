@@ -1,8 +1,7 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Enums.TempTypeFactory;
 import Domain.Transfer.Item_mock;
-import Domain.Transfer.Site;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item_mockDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private List<Item_mock> ItemList;
     private static Item_mockDAO instance = null;
 

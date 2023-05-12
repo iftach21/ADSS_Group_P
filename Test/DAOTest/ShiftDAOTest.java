@@ -1,20 +1,15 @@
 package DAOTest;
 
-import Data.ShiftDAO;
-import Data.WorkersDAO;
+import DataAccesObjects.Employee.ShiftDAO;
+import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.Shift;
 import Domain.Employee.Workers;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.sql.SQLException;
 

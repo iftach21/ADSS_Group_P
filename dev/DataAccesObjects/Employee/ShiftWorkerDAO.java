@@ -14,7 +14,8 @@ import java.util.List;
 
 public class ShiftWorkerDAO {
 
-    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
+    private final Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
+    private final WorkersDAO workersDAO = WorkersDAO.getInstance();
     private static ShiftWorkerDAO instance = null;
 
     private ShiftWorkerDAO() throws SQLException {
@@ -56,7 +57,7 @@ public class ShiftWorkerDAO {
         while (rs.next()) {
             int workerId = rs.getInt("worker_id");
             int workersPro = rs.getInt("workers_pro");
-            Pair<Workers, Integer> pair = new Pair<Workers, Integer>(WorkersDAO.getInstance().get(workerId), workersPro);
+            Pair<Workers, Integer> pair = new Pair<Workers, Integer>(workersDAO.get(workerId), workersPro);
             workersList.add(pair);
         }
         return workersList;

@@ -2,6 +2,7 @@ package DataAccesObjects.Transfer;
 
 import Domain.Enums.TempLevel;
 import Domain.Enums.TempTypeFactory;
+import Domain.Transfer.Transfer;
 import Domain.Transfer.Truck;
 
 import java.sql.Connection;
@@ -135,6 +136,7 @@ public class TrucksDAO {
             if (rowsAffected == 0) {
                 System.out.println("No truck found with ID " + truck.getLicenseNumber() + " to update");
             } else {
+                updateCache(truck);
                 System.out.println("Truck with ID " + truck.getLicenseNumber() + " updated successfully.");
             }
         } catch (Exception e) {
@@ -216,6 +218,7 @@ public class TrucksDAO {
             Truck truck = TruckList.get(i);
             if (truck.getLicenseNumber() == licenseNumber) {
                 this.TruckList.remove(i);
+                break;
             }
         }
     }
@@ -250,6 +253,18 @@ public class TrucksDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    private void updateCache(Truck truck){
+        for (Truck track_ : TruckList) {
+            if (track_.getLicenseNumber() == truck.getLicenseNumber()) {
+                track_.setTruckModel(track_.getTruckModel());
+                track_.setTruckNetWeight(track_.getTruckNetWeight());
+                track_.setTruckMaxWeight(track_.getMaxWeight());
+                track_.updateWeight(track_.getCurrentTruckWeight());
+                track_.setTempCapacity(track_.getTempCapacity());
+            }
         }
     }
 }

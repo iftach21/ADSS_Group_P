@@ -112,5 +112,13 @@ public class Truck {
         return _truckNetoWeight;
     }
 
+    public void setTruckModel(String model){this._truckModel = model;}
+
+    public void setTruckNetWeight(int netWeight){this._truckNetoWeight = netWeight;}
+
+    public void setTruckMaxWeight(int maxWeight){this._truck_maxWeight = maxWeight;}
+
+    public void setTempCapacity(TempLevel tempCapacity){this._coolingCapacity = tempCapacity;}
+
 }
 

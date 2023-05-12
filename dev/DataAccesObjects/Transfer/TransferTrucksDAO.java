@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class TransferTrucksDAO {
     private java.sql.Connection conn = Connection.getConnectionToDatabase();
-    private Map<Integer, List<Transfer>> trucksTransfers;  //the key in the first map is licensenumber, value is its transfers
+    private Map<Integer, List<Transfer>> trucksTransfers;  //the key in the first map is licenseNumber, value is its transfers
     private static TransferTrucksDAO instance = null;
 
     private TransferTrucksDAO() throws SQLException
@@ -51,12 +51,25 @@ public class TransferTrucksDAO {
             while (rs.next()) {
                 Transfer transferToReturn = TransferDAO.getInstance().get(rs.getInt("transferId"));
                 trucksTransfers.add(transferToReturn);
+                this.trucksTransfers.put(licenseNumber, trucksTransfers);
             }
             if (trucksTransfers.size() == 0){
                 System.out.println("No transfer found for truck with license number " + licenseNumber);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
 
         return trucksTransfers;
@@ -78,20 +91,31 @@ public class TransferTrucksDAO {
             if (rowsAffected == 0) {
                 System.out.println("No transfer found for truck with license number " + licenseNumber + " to update.");
             } else {
+                updateCache(transferId, licenseNumber);
                 System.out.println("truck with license number " + licenseNumber + " and transfer Id " + transferId + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
 
     public void add(int transferId, int licenseNumber){
+        PreparedStatement stmt = null;
         try {
             String sql = "INSERT or REPLACE INTO TransferTrucks (licenseNumber, transferId) " +
                     "VALUES (?, ?)";
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setInt(1, licenseNumber);
             stmt.setInt(2, transferId);
 
@@ -101,11 +125,21 @@ public class TransferTrucksDAO {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
     public void delete(int transferId, int licenseNumber) {
+        PreparedStatement stmt = null;
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferTrucks WHERE licenseNumber=? AND transferId=?");
+            stmt = conn.prepareStatement("DELETE FROM TransferTrucks WHERE licenseNumber=? AND transferId=?");
             stmt.setInt(1, licenseNumber);
             stmt.setInt(2, transferId);
             int rowsAffected = stmt.executeUpdate();
@@ -117,6 +151,15 @@ public class TransferTrucksDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
     }
 
@@ -168,4 +211,31 @@ public class TransferTrucksDAO {
             trucksTransfers.put(licenseNumber, transfersList);
         }
     }
+
+    public void updateCache(int transferId, int licenseNumber) throws SQLException {
+        for (int licenseNumber_ : trucksTransfers.keySet()) {
+            if (licenseNumber_ != licenseNumber) {
+                for(int i=0; i<trucksTransfers.get(licenseNumber_).size(); i++) {
+                    if(trucksTransfers.get(licenseNumber_).get(i).getTransferId() == transferId) {
+                        //remove transfer object from the list of the previous truck
+                        trucksTransfers.get(licenseNumber_).remove(i);
+                        break;
+                    }
+                }
+            }
+        }
+        boolean isContain = false; //false as long as we don't find the given transferId in the map under the given licenseNumber key
+        for(int i=0; i<trucksTransfers.get(licenseNumber).size(); i++) {
+            if(trucksTransfers.get(licenseNumber).get(i).getTransferId() == transferId) {
+                isContain = true;
+                break;
+            }
+        }
+        if(!isContain) //if transfer not found, add it to the list
+        {
+            trucksTransfers.get(licenseNumber).add(TransferDAO.getInstance().get(transferId));
+        }
+    }
+
+
 }

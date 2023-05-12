@@ -291,6 +291,14 @@ public class Transfer {
         _arrivingTime = arrivingTime;
     }
 
+    public void setDateOfTransfer(LocalDate dateOfTransfer){_dateOfTransfer = dateOfTransfer;}
+
+    public void setLeavingTime(LocalTime leavingTime){_leavingTime = leavingTime;}
+
+    public void setDriverName(String driverName){_driverName = driverName;}
+
+    public void setSource(Site source){_source = source;}
+
     //from here i updated
     public String getTransferStatus()
     {

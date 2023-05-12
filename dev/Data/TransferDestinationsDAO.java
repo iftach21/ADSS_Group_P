@@ -50,15 +50,29 @@ public class TransferDestinationsDAO {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+
         return destsToReturn;
     }
 
     public void add(int transferId, List<Site> destinations){
+        PreparedStatement stmt = null;
         try {
             String sql = "INSERT or REPLACE INTO TransferDestinations (transferId, siteId) " +
                     "VALUES (?, ?)";
             for (Site dest: destinations) {
-                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt  = conn.prepareStatement(sql);
                 stmt.setInt(1, transferId);
                 stmt.setInt(2, dest.getSiteId());
                 stmt.executeUpdate();
@@ -67,11 +81,21 @@ public class TransferDestinationsDAO {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
     public void delete(int transferId, int siteId) {
+        PreparedStatement stmt = null;
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferDestinations WHERE transferId = ? AND siteId = ?");
+            stmt = conn.prepareStatement("DELETE FROM TransferDestinations WHERE transferId = ? AND siteId = ?");
             stmt.setInt(1, transferId);
             stmt.setInt(2, siteId);
             int rowsAffected = stmt.executeUpdate();
@@ -83,6 +107,15 @@ public class TransferDestinationsDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
     }
 
@@ -100,7 +133,7 @@ public class TransferDestinationsDAO {
         {
             Site site = this.destinationsList.get(transferId).get(i);
             if (site.getSiteId() == siteId) {
-                this.destinationsList.get(transferId).remove(site.getSiteId());
+                this.destinationsList.get(transferId).remove(site);
             }
         }
     }

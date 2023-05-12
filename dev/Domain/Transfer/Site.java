@@ -83,4 +83,30 @@ public class Site {
     {
         this._address = address;
     }
+
+    public void setSiteName(String name)
+    {
+        this._siteName = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this._phoneNumber = phoneNumber;
+    }
+
+    public void setContactName(String contactName)
+    {
+        this._contactName = contactName;
+    }
+
+    public void setLatitude(double latitude)
+    {
+        this._latitude = latitude;
+    }
+
+    public void setLongitude(double longitude)
+    {
+        this._longitude = longitude;
+    }
+
 }

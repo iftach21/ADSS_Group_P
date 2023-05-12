@@ -1,4 +1,4 @@
-package Test.DomainTest;
+package DomainTest;
 
 import Data.*;
 import Domain.Employee.Driver;
@@ -62,30 +62,30 @@ class TransferTests {
         //create 3 sites for destinations
         this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe", 32.06845601633649, 34.783378215486955);
         siteDAO.add(site1);
-        siteDAO.addToChach(site1);
+        siteDAO.addToCache(site1);
         this.site2 = new Site(1,"Tara", "Masada 12 Beer-Sheva", "09-7887645", "Ron", 31.262913845991317, 34.79982446327962);
         siteDAO.add(site2);
-        siteDAO.addToChach(site2);
+        siteDAO.addToCache(site2);
         this.site3 = new Site(2,"Supe-Li Krayot", "HaZayit 5 Kiryat Haim", "09-7863231", "Avram", 32.835899363273555, 35.066426063499215);
         siteDAO.add(site3);
-        siteDAO.addToChach(site3);
+        siteDAO.addToCache(site3);
 
         //create 2 items for each site
         //items for site 1
         this.item11 = new Item_mock("1", TempLevel.regular, "Toilet Cleaner");
         item_mockDAO.add(item11);
-        item_mockDAO.addToChach(item11);
+        item_mockDAO.addToCache(item11);
         this.item12 = new Item_mock("2", TempLevel.regular, "Sink Cleaner");
         item_mockDAO.add(item12);
-        item_mockDAO.addToChach(item12);
+        item_mockDAO.addToCache(item12);
 
         //items for site 2
         this.item21 = new Item_mock("3", TempLevel.cold, "Almond Milk");
         item_mockDAO.add(item21);
-        item_mockDAO.addToChach(item21);
+        item_mockDAO.addToCache(item21);
         this.item22 = new Item_mock("4", TempLevel.cold, "Cheddar Cheese");
         item_mockDAO.add(item22);
-        item_mockDAO.addToChach(item22);
+        item_mockDAO.addToCache(item22);
 
         //create order items map and destinations list
         this.orderItems1 = new HashMap<>();

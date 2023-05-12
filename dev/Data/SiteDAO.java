@@ -1,9 +1,6 @@
 package Data;
 
-import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
-import Domain.Transfer.Transfer;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,20 +72,31 @@ public class SiteDAO {
             if (rowsAffected == 0) {
                 System.out.println("No site found with ID " + site.getSiteId() + " to update.");
             } else {
+                updateCache(site);
                 System.out.println("Site with ID " + site.getSiteId() + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
 
     public void add(Site site){
+        PreparedStatement stmt = null;
         try {
             String sql = "INSERT or REPLACE INTO Site (siteID, siteName, address, phoneNumber, contactName, x_Coordinate, y_Coordinate) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setInt(1, site.getSiteId());
             stmt.setString(2, site.getSiteName());
             stmt.setString(3, site.getSiteAddress());
@@ -97,15 +105,26 @@ public class SiteDAO {
             stmt.setDouble(6, site.getLatitude());
             stmt.setDouble(7, site.getLongitude());
             stmt.executeUpdate();
+            addToCache(site);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
     public void delete(int id) {
+        PreparedStatement stmt = null;
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site WHERE siteID = ?");
+            stmt = conn.prepareStatement("DELETE FROM Site WHERE siteID = ?");
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
@@ -116,6 +135,15 @@ public class SiteDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
     }
 
@@ -167,8 +195,21 @@ public class SiteDAO {
         }
     }
 
-    public void addToChach(Site site)
+    public void addToCache(Site site)
     {
         this.SiteList.add(site);
+    }
+
+    private void updateCache(Site site){
+        for (Site site_ : SiteList) {
+            if (site_.getSiteId() == site.getSiteId()) {
+                site_.setSiteName(site.getSiteName());
+                site_.setSiteAddress(site.getSiteAddress());
+                site_.setPhoneNumber(site.get_phoneNumber());
+                site_.setContactName(site.get_contactName());
+                site_.setLatitude(site.getLatitude());
+                site_.setLongitude(site.getLongitude());
+            }
+        }
     }
 }

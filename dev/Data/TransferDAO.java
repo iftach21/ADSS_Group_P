@@ -137,6 +137,7 @@ public class TransferDAO {
             if (rowsAffected == 0) {
                 System.out.println("No transfer found with ID " + transfer.getTransferId() + " to update");
             } else {
+                updateCache(transfer);
                 System.out.println("Transfer with ID " + transfer.getTransferId() + " updated successfully.");
             }
         } catch (Exception e) {
@@ -218,7 +219,8 @@ public class TransferDAO {
         {
             Transfer transfer = TransferList.get(i);
             if (transfer.getTransferId() == transferId) {
-                this.TransferList.remove(transfer.getTransferId());
+                this.TransferList.remove(i);
+                break;
             }
         }
     }
@@ -267,6 +269,19 @@ public class TransferDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    private void updateCache(Transfer transfer){
+        for (Transfer transfer_ : TransferList) {
+            if (transfer_.getTransferId() == transfer.getTransferId()) {
+                transfer_.setDateOfTransfer(transfer.getDateOfTransfer());
+                transfer_.setLeavingTime(transfer.getLeavingTime());
+                transfer_.setArrivingTime(transfer.get_arrivingTime());
+                transfer_.updateTransferTruck(transfer.getTruckLicenseNumber());
+                transfer_.setDriverName(transfer.getDriverName());
+                transfer_.setSource(transfer.getSource());
+            }
         }
     }
 }

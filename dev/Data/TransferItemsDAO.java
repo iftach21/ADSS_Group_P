@@ -57,6 +57,18 @@ public class TransferItemsDAO {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
 
         return orderItemsToReturn;
     }
@@ -87,30 +99,52 @@ public class TransferItemsDAO {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
 
     public void add(int transferId, int siteId, String catalogNum, int quantity){
+        PreparedStatement stmt = null;
         try {
             String sql = "INSERT or REPLACE INTO TransferItems (transferId, catalogNum, siteId, quantity) " +
                     "VALUES (?, ?, ?, ?)";
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setInt(1, transferId);
             stmt.setString(2, catalogNum);
             stmt.setInt(3, siteId);
             stmt.setInt(4, quantity);
 
             stmt.executeUpdate();
+            addToCache(transferId, siteId, catalogNum, quantity);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
     public void delete(int transferId, String catalogNum, int siteId, int quantity) {
+        PreparedStatement stmt = null;
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE transferId=? AND catalogNum=? AND siteId=? AND quantity=?");
+            stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE transferId=? AND catalogNum=? AND siteId=? AND quantity=?");
             stmt.setInt(1, transferId);
             stmt.setString(2, catalogNum);
             stmt.setInt(3, siteId);
@@ -124,6 +158,15 @@ public class TransferItemsDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
     }
 
@@ -213,6 +256,25 @@ public class TransferItemsDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public void addToCache(int transferId, int siteId, String catalogNum, int quantity) throws SQLException {
+        // Update orderItemsList map
+        if (!orderItemsList.containsKey(transferId)) {
+            orderItemsList.put(transferId, new HashMap<>());
+        }
+
+        Map<Site, Map<Item_mock, Integer>> siteMap = orderItemsList.get(transferId);
+        Site site = SiteDAO.getInstance().get(siteId);
+
+        if (!siteMap.containsKey(site)) {
+            siteMap.put(site, new HashMap<>());
+        }
+
+        Map<Item_mock, Integer> itemMap = siteMap.get(site);
+        Item_mock item = Item_mockDAO.getInstance().get(catalogNum);
+
+        itemMap.put(item, quantity);
     }
 }
 

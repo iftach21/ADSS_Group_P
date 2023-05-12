@@ -65,40 +65,60 @@ public class Item_mockDAO {
             stmt.setString(3, item_mock.getItemTemp().name());
             stmt.setString(4, item_mock.getCatalogNum());
 
-
-
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
                 System.out.println("No item found with catalog num " + item_mock.getCatalogNum() + " to update.");
             } else {
                 System.out.println("item with catalog num " + item_mock.getCatalogNum() + " updated successfully.");
+                updateCache(item_mock);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
     }
 
 
     public void add(Item_mock item_mock){
+        PreparedStatement stmt = null;
         try {
             String sql = "INSERT or REPLACE INTO Item_mock (catalogNum, name, tempLevel) " +
                     "VALUES (?, ?, ?)";
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             stmt.setString(1, item_mock.getCatalogNum());
             stmt.setString(2, item_mock.getItemName());
             stmt.setString(3, item_mock.getItemTemp().name());
             stmt.executeUpdate();
+            ItemList.add(item_mock);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 
     public void delete(String catalogNum) {
+        PreparedStatement stmt = null;
         try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Item_mock WHERE catalogNum = ?");
+            stmt = conn.prepareStatement("DELETE FROM Item_mock WHERE catalogNum = ?");
             stmt.setString(1, catalogNum);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
@@ -109,6 +129,15 @@ public class Item_mockDAO {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
     }
 
@@ -135,7 +164,8 @@ public class Item_mockDAO {
         {
             Item_mock item_mock = ItemList.get(i);
             if (item_mock.getCatalogNum().equals(catalogNum)) {
-                this.ItemList.remove(item_mock.getCatalogNum());
+                this.ItemList.remove(i);
+                break;
             }
         }
     }
@@ -156,8 +186,17 @@ public class Item_mockDAO {
         }
     }
 
-    public void addToChach(Item_mock item_mock)
+    public void addToCache(Item_mock item_mock)
     {
         this.ItemList.add(item_mock);
+    }
+
+    private void updateCache(Item_mock item_mock){
+        for (Item_mock itemMock : ItemList) {
+            if (item_mock.getCatalogNum().equals(itemMock.getCatalogNum())) {
+                itemMock.updateItemTemp(item_mock.getItemTemp());
+                itemMock.updateItemName(item_mock.getItemName());
+            }
+        }
     }
 }

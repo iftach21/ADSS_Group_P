@@ -1,11 +1,13 @@
 package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Site;
+import Domain.Transfer.Transfer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ public class TransferDestinationsDAO {
         List<Site> destsToReturn = this.getFromCache(transferId);
         if(destsToReturn != null){return destsToReturn;}
 
+        destsToReturn = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -62,7 +65,8 @@ public class TransferDestinationsDAO {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
         }
-
+        if (destsToReturn.isEmpty())
+            return null;
         return destsToReturn;
     }
 
@@ -153,5 +157,69 @@ public class TransferDestinationsDAO {
             System.err.println(e.getMessage());
         }
     }
+
+    public void deleteAllByTransferId(int transferId)
+    {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferDestinations WHERE transferId = ?");
+            stmt.setInt(1, transferId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No transfer destination found with transfer Id " + transferId);
+            } else {
+                System.out.println("transfer destination with transfer Id " + transferId);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
+
+    public void deleteAllBySiteId(int siteId)
+    {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferDestinations WHERE siteId = ?");
+            stmt.setInt(1, siteId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No transfer destination found with site Id " + siteId);
+            } else {
+                System.out.println("transfer destination with site Id " + siteId);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
+
+    private void updateCache() throws SQLException {
+        destinationsList.clear();
+        Map<Integer, Transfer> transfers = TransferDAO.getInstance().getAllTransfers();
+        for (Integer transferId : transfers.keySet()) {
+            destinationsList.put(transferId, get(transferId));
+        }
+    }
+
+
 }
 

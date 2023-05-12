@@ -2,6 +2,7 @@ package DataAccesObjects.Transfer;
 
 import DataAccesObjects.Connection;
 import Domain.Transfer.Transfer;
+import Domain.Transfer.Truck;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -91,7 +92,7 @@ public class TransferTrucksDAO {
             if (rowsAffected == 0) {
                 System.out.println("No transfer found for truck with license number " + licenseNumber + " to update.");
             } else {
-                updateCache(transferId, licenseNumber);
+                updateCache();
                 System.out.println("truck with license number " + licenseNumber + " and transfer Id " + transferId + " updated successfully.");
             }
         } catch (Exception e) {
@@ -212,30 +213,65 @@ public class TransferTrucksDAO {
         }
     }
 
-    public void updateCache(int transferId, int licenseNumber) throws SQLException {
-        for (int licenseNumber_ : trucksTransfers.keySet()) {
-            if (licenseNumber_ != licenseNumber) {
-                for(int i=0; i<trucksTransfers.get(licenseNumber_).size(); i++) {
-                    if(trucksTransfers.get(licenseNumber_).get(i).getTransferId() == transferId) {
-                        //remove transfer object from the list of the previous truck
-                        trucksTransfers.get(licenseNumber_).remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-        boolean isContain = false; //false as long as we don't find the given transferId in the map under the given licenseNumber key
-        for(int i=0; i<trucksTransfers.get(licenseNumber).size(); i++) {
-            if(trucksTransfers.get(licenseNumber).get(i).getTransferId() == transferId) {
-                isContain = true;
-                break;
-            }
-        }
-        if(!isContain) //if transfer not found, add it to the list
-        {
-            trucksTransfers.get(licenseNumber).add(TransferDAO.getInstance().get(transferId));
+    public void updateCache() throws SQLException {
+        trucksTransfers.clear();
+        Map<Integer, Truck> trucks = TrucksDAO.getInstance().getAllTrucks();
+        for (Integer licenseNumber : trucks.keySet()) {
+            if (get(licenseNumber) != null)
+                trucksTransfers.put(licenseNumber, get(licenseNumber));
         }
     }
 
 
+    public void deleteAllByTransferId(int transferId) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferTrucks WHERE transferId = ?");
+            stmt.setInt(1, transferId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No transfer destination found with transfer Id " + transferId);
+            } else {
+                System.out.println("transfer destination with transfer Id " + transferId);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
+
+    public void deleteAllByLicenseNumber(int licenseNumber) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferTrucks WHERE licenseNumber = ?");
+            stmt.setInt(1, licenseNumber);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No truck found with licenseNumber " + licenseNumber);
+            } else {
+                System.out.println("truck found with licenseNumber " + licenseNumber);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
 }

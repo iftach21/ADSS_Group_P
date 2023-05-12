@@ -2,6 +2,7 @@ package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
+import Domain.Transfer.Transfer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,7 +71,8 @@ public class TransferItemsDAO {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
         }
-
+        if (orderItemsToReturn.isEmpty())
+            return null;
         return orderItemsToReturn;
     }
 
@@ -90,7 +92,7 @@ public class TransferItemsDAO {
             stmt.setInt(7, siteId);
 
             int rowsAffected = stmt.executeUpdate();
-            updateCache(transferId, siteId, catalogNum, quantity);
+            updateCache();
 
             if (rowsAffected == 0) {
                 System.out.println("No transfer found with ID " + transferId + " to update.");
@@ -180,19 +182,11 @@ public class TransferItemsDAO {
         return null;
     }
 
-    private void updateCache(int transferId, int siteId, String catalogNum, int quantity){
-        for (Integer Id : this.orderItemsList.keySet()) {
-            if (Id == transferId) {
-                for (Site site : this.orderItemsList.get(Id).keySet()) {
-                    if (site.getSiteId() == siteId) {
-                        for (Item_mock item : this.orderItemsList.get(Id).get(site).keySet()) {
-                            if (catalogNum.equals(item.getCatalogNum())) {
-                                this.orderItemsList.get(Id).get(site).put(item, quantity);
-                            }
-                        }
-                    }
-                }
-            }
+    private void updateCache() throws SQLException {
+        orderItemsList.clear();
+        Map<Integer, Transfer> transfers = TransferDAO.getInstance().getAllTransfers();
+        for (Integer transferId : transfers.keySet()) {
+            orderItemsList.put(transferId, get(transferId));
         }
     }
 
@@ -286,6 +280,87 @@ public class TransferItemsDAO {
         Item_mock item = Item_mockDAO.getInstance().get(catalogNum);
 
         itemMap.put(item, quantity);
+    }
+
+    public void deleteAllByTransferId(int transferId)
+    {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE transferId = ?");
+            stmt.setInt(1, transferId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No transfer destination found with transfer Id " + transferId);
+            } else {
+                System.out.println("transfer destination with transfer Id " + transferId);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
+
+    public void deleteAllBySiteId(int siteId)
+    {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE siteId = ?");
+            stmt.setInt(1, siteId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No transfer destination found with site Id " + siteId);
+            } else {
+                System.out.println("transfer destination with site Id " + siteId);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
+
+    public void deleteAllByCatalogNum(String catalogNum)
+    {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("DELETE FROM TransferItems WHERE catalogNum = ?");
+            stmt.setString(1, catalogNum);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No item found with catalog Id " + catalogNum);
+            } else {
+                System.out.println("item with catalog Id " + catalogNum);
+                updateCache();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
     }
 }
 

@@ -125,6 +125,7 @@ public class Item_mockDAO {
             } else {
                 System.out.println("Item with catalog num " + catalogNum + " deleted successfully");
                 deleteFromCache(catalogNum);
+                TransferItemsDAO.getInstance().deleteAllByCatalogNum(catalogNum);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

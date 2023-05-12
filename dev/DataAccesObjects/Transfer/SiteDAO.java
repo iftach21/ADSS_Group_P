@@ -133,6 +133,8 @@ public class SiteDAO {
             } else {
                 System.out.println("Site with ID " + id + " deleted successfully");
                 deleteFromCache(id);
+                TransferDestinationsDAO.getInstance().deleteAllBySiteId(id);
+                TransferItemsDAO.getInstance().deleteAllBySiteId(id);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

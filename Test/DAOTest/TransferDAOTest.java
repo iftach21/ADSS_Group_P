@@ -139,8 +139,6 @@ public class TransferDAOTest {
         transferDAO.delete(transfer2.getTransferId());
         Assertions.assertNull(transferDAO.get(transfer2.getTransferId()));
 
-        /*
-        //when deleting the transfer, it should delete the transfer from all other tables
         //check TransferDestinations table
         Assertions.assertNull(transferDestinationsDAO.get(transfer1.getTransferId()));
         Assertions.assertNull(transferDestinationsDAO.get(transfer2.getTransferId()));
@@ -152,7 +150,7 @@ public class TransferDAOTest {
         //check TransferTrucks table
         Assertions.assertNull(transferItemsDAO.get(transfer1.getTruckLicenseNumber()));
         Assertions.assertNull(transferItemsDAO.get(transfer2.getTruckLicenseNumber()));
-         */
+
     }
 
     @Test

@@ -197,6 +197,7 @@ public class TrucksDAO {
             {
                 System.out.println("Truck with ID " + licenseNumber + " deleted successfully");
                 deleteFromCache(licenseNumber);
+                TransferTrucksDAO.getInstance().deleteAllByLicenseNumber(licenseNumber);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

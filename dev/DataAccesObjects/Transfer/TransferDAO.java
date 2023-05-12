@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class TransferDAO {
     private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
-    private ArrayList<Transfer> TransferList;
+    private List<Transfer> TransferList;
     private static TransferDAO instance = null;
 
     private TransferDAO() throws SQLException {TransferList = new ArrayList<>();
@@ -54,7 +54,14 @@ public class TransferDAO {
             while (rs.next()) {
                 int transferId = rs.getInt("transferId");
                 Transfer transfer = this.createNewTransfer(rs);
-                this.TransferList.add(transfer);
+                boolean found = false;
+                for (int i = 0; i < TransferList.size(); i++)
+                {
+                    if (TransferList.get(i).getTransferId() == transfer.getTransferId())
+                        found = true;
+                }
+                if (!found)
+                    TransferList.add(transfer);
                 transfers.put(transferId, transfer);
             }
         } catch (Exception e) {
@@ -198,6 +205,9 @@ public class TransferDAO {
             {
                 System.out.println("Transfer with ID " + transferId + " deleted successfully");
                 deleteFromCache(transferId);
+                TransferDestinationsDAO.getInstance().deleteAllByTransferId(transferId);
+                TransferItemsDAO.getInstance().deleteAllByTransferId(transferId);
+                TransferTrucksDAO.getInstance().deleteAllByTransferId(transferId);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

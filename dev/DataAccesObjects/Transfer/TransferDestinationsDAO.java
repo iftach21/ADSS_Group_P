@@ -133,7 +133,7 @@ public class TransferDestinationsDAO {
         {
             Site site = this.destinationsList.get(transferId).get(i);
             if (site.getSiteId() == siteId) {
-                this.destinationsList.get(transferId).remove(site);
+                this.destinationsList.get(transferId).remove(i);
             }
         }
     }

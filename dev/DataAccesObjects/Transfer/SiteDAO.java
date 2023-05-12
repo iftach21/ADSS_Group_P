@@ -1,6 +1,7 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Site;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SiteDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private List<Site> SiteList;
     private static SiteDAO instance = null;
 

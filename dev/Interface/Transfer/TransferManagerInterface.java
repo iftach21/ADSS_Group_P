@@ -1,17 +1,16 @@
-package Interface;
+package Interface.Transfer;
 
-import Data.Item_mockDAO;
-import Data.SiteDAO;
-import Data.TransferDAO;
-import Domain.Employee.WeeklyShiftAndWorkersManager;
+import DataAccesObjects.Transfer.Item_mockDAO;
+import DataAccesObjects.Transfer.SiteDAO;
 import Domain.Enums.TempLevel;
 import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 import Domain.Transfer.TransferController;
+import Interface.AInterface;
 
 import java.sql.SQLException;
 
-public class TransferManagerInterface extends AInterface{
+public class TransferManagerInterface extends AInterface {
 
     private final TransferController controller = TransferController.getInstance();
 

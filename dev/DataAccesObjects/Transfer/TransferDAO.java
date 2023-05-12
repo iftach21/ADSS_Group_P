@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
@@ -10,14 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TransferDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private ArrayList<Transfer> TransferList;
     private static TransferDAO instance = null;
 

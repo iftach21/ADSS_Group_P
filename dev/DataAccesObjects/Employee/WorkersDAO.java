@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Employee;
 import java.sql.*;
 
 import Domain.Employee.Driver;
@@ -14,7 +14,7 @@ import static Domain.Enums.WindowType.*;
 
 public class WorkersDAO {
     private List <Workers> cache = new ArrayList<>();
-    private final java.sql.Connection conn = Connection.getConnectionToDatabase();
+    private final java.sql.Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private static WorkersDAO instance = null;
     private WorkersDAO() throws SQLException {
     }

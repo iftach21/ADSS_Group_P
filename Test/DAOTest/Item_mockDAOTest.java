@@ -1,15 +1,13 @@
 package DAOTest;
 
-import Data.Item_mockDAO;
+import DataAccesObjects.Transfer.Item_mockDAO;
 import Domain.Enums.TempLevel;
 import Domain.Transfer.Item_mock;
-import Domain.Transfer.Truck;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 public class Item_mockDAOTest {
     Item_mock item1;

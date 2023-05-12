@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Enums.TempLevel;
 import Domain.Enums.TempTypeFactory;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TrucksDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private ArrayList<Truck> TruckList;
     private static TrucksDAO instance = null;
 
@@ -121,35 +121,14 @@ public class TrucksDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Truck SET model=?, netWeight=?, maxWeight=?, currentWeight=?,  coolingCapacity=?, unavailableStartDate=?, unavailableStartTime=?, unavailableEndDate=?, unavailableEndTime=? WHERE licenseNumber=?";
+            String sql = "UPDATE Truck SET model=?, netWeight=?, maxWeight=?, currentWeight=?,  coolingCapacity=? WHERE licenseNumber=?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(10, truck.getLicenseNumber());
+            stmt.setInt(6, truck.getLicenseNumber());
             stmt.setString(1, truck.getTruckModel());
             stmt.setInt(2, truck.getTruckNetWeight());
             stmt.setInt(3, truck.getMaxWeight());
             stmt.setInt(4, truck.getCurrentTruckWeight());
             stmt.setString(5, truck.getTempCapacity().name());
-
-            if(truck.getUnavailableStartDate() == null)
-                stmt.setString(6, "");
-            else
-                stmt.setString(6, truck.getUnavailableStartDate().toString());
-
-            if(truck.getUnavailableStartTime() == null)
-                stmt.setString(7, "");
-            else
-                stmt.setString(7, truck.getUnavailableStartTime().toString());
-
-            if(truck.getUnavailableEndDate() == null)
-                stmt.setString(8, "");
-            else
-                stmt.setString(8, truck.getUnavailableEndDate().toString());
-
-            if(truck.getUnavailableEndTime() == null)
-                stmt.setString(9, "");
-            else
-                stmt.setString(9, truck.getUnavailableEndTime().toString());
-
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -176,8 +155,8 @@ public class TrucksDAO {
     public void add(Truck truck){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT or REPLACE INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT or REPLACE INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
 
@@ -187,26 +166,6 @@ public class TrucksDAO {
             stmt.setInt(4, truck.getCurrentTruckWeight());
             stmt.setInt(5, truck.getMaxWeight());
             stmt.setString(6, truck.getTempCapacity().name());
-
-            if(truck.getUnavailableStartDate() == null)
-                stmt.setString(7, "");
-            else
-                stmt.setString(7, truck.getUnavailableStartDate().toString());
-
-            if(truck.getUnavailableStartTime() == null)
-                stmt.setString(8, "");
-            else
-                stmt.setString(8, truck.getUnavailableStartTime().toString());
-
-            if(truck.getUnavailableEndDate() == null)
-                stmt.setString(9, "");
-            else
-                stmt.setString(9, truck.getUnavailableEndDate().toString());
-
-            if(truck.getUnavailableEndTime() == null)
-                stmt.setString(10, "");
-            else
-                stmt.setString(10, truck.getUnavailableEndTime().toString());
 
             stmt.executeUpdate();
             TruckList.add(truck);
@@ -272,63 +231,8 @@ public class TrucksDAO {
         int currentWeight = rs.getInt("currentWeight");
         int maxWeight = rs.getInt("maxWeight");
         TempLevel coolingCapacity = TempTypeFactory.TempLevelFromString(rs.getString("coolingCapacity"));
-        String unavailableStartDateString = rs.getString("unavailableStartDate");
-        String unavailableStartTimeString = rs.getString("unavailableStartTime");
-        String unavailableEndDateString = rs.getString("unavailableEndDate");
-        String unavailableEndTimeString = rs.getString("unavailableEndTime");
 
-        DateTimeFormatter outputFormatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter outputFormatterTime = DateTimeFormatter.ofPattern("HH:mm");
-
-        LocalDate unavailableStartDate;
-        LocalDate unavailableEndDate;
-        LocalTime unavailableStartTime;
-        LocalTime unavailableEndTime;
-        if (!unavailableStartDateString.isEmpty())
-        {
-            LocalDate inputDate1 = LocalDate.parse(unavailableStartDateString);
-            String outputString1 = inputDate1.format(outputFormatterDate);
-            unavailableStartDate = LocalDate.parse(outputString1, outputFormatterDate);
-        }
-        else
-        {
-            unavailableStartDate = null;
-        }
-
-        if (!unavailableEndDateString.isEmpty())
-        {
-            LocalDate inputDate2 = LocalDate.parse(unavailableEndDateString);
-            String outputString2 = inputDate2.format(outputFormatterDate);
-            unavailableEndDate = LocalDate.parse(outputString2, outputFormatterDate);
-        }
-        else
-        {
-            unavailableEndDate = null;
-        }
-
-        if (!unavailableStartTimeString.isEmpty())
-        {
-            LocalTime inputTime3 = LocalTime.parse(unavailableStartTimeString);
-            String outputString3 = inputTime3.format(outputFormatterTime);
-            unavailableStartTime = LocalTime.parse(outputString3, outputFormatterTime);
-        }
-        else
-        {
-            unavailableStartTime = null;
-        }
-
-        if (!unavailableEndTimeString.isEmpty())
-        {
-            LocalTime inputTime4 = LocalTime.parse(unavailableEndTimeString);
-            String outputString4 = inputTime4.format(outputFormatterTime);
-            unavailableEndTime = LocalTime.parse(outputString4, outputFormatterTime);
-        }
-        else
-        {
-            unavailableEndTime = null;
-        }
-
-        Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity, unavailableStartDate, unavailableStartTime, unavailableEndDate, unavailableEndTime);
+        Truck truck = new Truck(licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity);
 
         return truck;
     }

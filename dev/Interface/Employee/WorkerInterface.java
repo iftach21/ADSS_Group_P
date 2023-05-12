@@ -1,7 +1,9 @@
-package Interface;
+package Interface.Employee;
 
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.WindowTypeCreater;
+import Interface.AInterface;
+import Interface.ExitExeption;
 
 import java.sql.SQLException;
 import java.util.Scanner;

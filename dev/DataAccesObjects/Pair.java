@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects;
 
 public class Pair<T, U> {
     private T first;

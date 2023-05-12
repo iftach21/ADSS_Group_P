@@ -1,8 +1,6 @@
 package Domain.Transfer;
 
-import Data.TrucksDAO;
-import Data.WeeklyShiftDAO;
-import Data.WorkersDAO;
+import DataAccesObjects.Transfer.TrucksDAO;
 import Domain.Employee.Driver;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
@@ -12,9 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 public class TruckController {
     private static TruckController Instance = null;

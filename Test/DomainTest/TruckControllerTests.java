@@ -1,6 +1,6 @@
 package DomainTest;
 
-import Data.TrucksDAO;
+import DataAccesObjects.Transfer.TrucksDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
@@ -31,10 +31,10 @@ class TruckControllerTests {
     void createMockTransfer() throws SQLException {
         TrucksDAO trucksDAO = TrucksDAO.getInstance();
         //create 4 trucks
-        this.truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen,LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
-        this.truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
-        this.truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen,LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
-        this.truck4 = new Truck(1045277, "Kia", 14, 14,40,  TempLevel.cold,LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
+        this.truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen);
+        this.truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular);
+        this.truck3 = new Truck(2541998, "Tesla 690x", 50, 50,60,  TempLevel.frozen);
+        this.truck4 = new Truck(1045277, "Kia", 14, 14,40,  TempLevel.cold);
 
         //add trucks to DB
         trucksDAO.add(truck1);

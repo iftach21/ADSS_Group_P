@@ -1,5 +1,9 @@
 package Interface;
 
+import Interface.Employee.BossInterface;
+import Interface.Employee.WorkerInterface;
+import Interface.Transfer.TransferManagerInterface;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

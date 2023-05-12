@@ -1,6 +1,9 @@
 package DomainTest;
 
-import Data.*;
+import DataAccesObjects.Transfer.Item_mockDAO;
+import DataAccesObjects.Transfer.SiteDAO;
+import DataAccesObjects.Transfer.TransferDestinationsDAO;
+import DataAccesObjects.Transfer.TransferItemsDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
@@ -9,7 +12,6 @@ import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 import Domain.Transfer.Transfer;
 import Domain.Transfer.Truck;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -109,7 +111,7 @@ class TransferTests {
         destinations.add(site3);
 
         //create truck and driver
-        this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen, null, null, null, null);
+        this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen);
         this.dl1 = new DriverLicense(weightType.heavyWeight, TempLevel.frozen);
         this.driver1 = new Driver(1,"iftach","lotsofmoney",
                 "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);

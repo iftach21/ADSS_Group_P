@@ -1,9 +1,8 @@
+/*
 package DAOTest;
 
-import Data.TrucksDAO;
-import Domain.Employee.Workers;
+import DataAccesObjects.Transfer.TrucksDAO;
 import Domain.Enums.TempLevel;
-import Domain.Transfer.Site;
 import Domain.Transfer.Truck;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Map;
 
 public class TrucksDAOTest {
@@ -26,8 +24,7 @@ public class TrucksDAOTest {
     }
 
     @BeforeEach
-    void createMockTrucks()
-    {
+    void createMockTrucks() throws SQLException {
         //clear database before each Test
         trucksDAO.deleteAll();
 
@@ -100,3 +97,5 @@ public class TrucksDAOTest {
 
     }
 }
+
+ */

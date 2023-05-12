@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Employee;
 
 import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShift;
@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class WeeklyShiftDAO {
 
-    private java.sql.Connection conn = Connection.getConnectionToDatabase();
+    private java.sql.Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private ShiftDAO shiftDAO = ShiftDAO.getInstance();
     private static WeeklyShiftDAO instance = null;
     private List<WeeklyShift> cache; //holds all the weeklyshifts

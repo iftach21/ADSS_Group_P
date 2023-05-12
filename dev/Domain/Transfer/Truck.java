@@ -1,11 +1,14 @@
 package Domain.Transfer;
 
+import DataAccesObjects.Transfer.TransferTrucksDAO;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Truck {
     private int _truck_licenseNumber;
@@ -14,25 +17,18 @@ public class Truck {
     private int _truckWeight;
     private int _truck_maxWeight;
     private TempLevel _coolingCapacity;
-    private LocalDateTime _unavailableStartTime;
-    private LocalDateTime _unavailableEndTime;
+    private final TransferTrucksDAO _transferTrucksDAO;
 
-    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity, LocalDate unavailableStartDate, LocalTime unavailableStartTime, LocalDate unavailableEndDate, LocalTime unavailableEndTime)
-    {
+
+    public Truck(int truck_licenseNumber, String truckModel, int truckNetoWeight, int truckWeight, int truck_maxWeight, TempLevel coolingCapacity) throws SQLException {
         this._truck_licenseNumber = truck_licenseNumber;
         this._truckModel = truckModel;
         this._truckNetoWeight = truckNetoWeight;
         this._truckWeight = truckWeight;
         this._truck_maxWeight = truck_maxWeight;
         this._coolingCapacity = coolingCapacity;
-        if (unavailableStartDate == null || unavailableStartTime == null)
-            this._unavailableStartTime = null;
-        else
-            this._unavailableStartTime = LocalDateTime.of(unavailableStartDate, unavailableStartTime);
-        if (unavailableEndDate == null || unavailableEndTime == null)
-            this._unavailableEndTime = null;
-        else
-            this._unavailableEndTime = LocalDateTime.of(unavailableEndDate, unavailableEndTime);
+        this._transferTrucksDAO = TransferTrucksDAO.getInstance();
+
     }
 
     public int getCurrentTruckWeight()
@@ -54,9 +50,17 @@ public class Truck {
 
     public boolean getIsUsedInDate(LocalDateTime leavingDate, LocalDateTime arrivingDate)
     {
-        if (_unavailableStartTime == null && _unavailableEndTime == null)
-            return false;
-        return !(leavingDate.isAfter(_unavailableEndTime) || arrivingDate.isBefore(_unavailableStartTime));
+        List<Transfer> trucksTransfers =  _transferTrucksDAO.get(_truck_licenseNumber);
+        for (Transfer transfer : trucksTransfers)
+        {
+            LocalDateTime transferStartDate = LocalDateTime.of(transfer.getLeavingDate(), transfer.getLeavingTime());
+            LocalDateTime transferEndDate = LocalDateTime.of(transfer.getArrivingDate(), transfer.get_arrivingTime());
+            if (!(transferStartDate.isAfter(arrivingDate) || transferEndDate.isBefore(leavingDate)))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getLicenseNumber(){return _truck_licenseNumber;}
@@ -95,45 +99,18 @@ public class Truck {
             return weightType.heavyWeight;
     }
 
-    public void setTruckUnavailable(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime)
-    {
-        if (startDate == null || startTime == null)
-            this._unavailableStartTime = null;
-        else
-            this._unavailableStartTime = LocalDateTime.of(startDate, startTime);
-        if (endDate == null || endTime == null)
-            this._unavailableEndTime = null;
-        else
-            this._unavailableEndTime = LocalDateTime.of(endDate, endTime);
+    public void addToDAO(int transferId, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException {
+        _transferTrucksDAO.add(transferId, _truck_licenseNumber, leavingDate, leavingTime, arrivingDate, arrivingTime);
+    }
+
+    public void deleteFromDAO(int transferId) throws SQLException {
+        _transferTrucksDAO.delete(transferId, _truck_licenseNumber);
     }
 
     public int getTruckNetWeight()
     {
         return _truckNetoWeight;
     }
-
-    public LocalDate getUnavailableStartDate()
-    {
-        if (_unavailableStartTime != null)
-            return _unavailableStartTime.toLocalDate();
-        return null;
-    }
-
-    public LocalTime getUnavailableStartTime()
-    {
-        if (_unavailableStartTime != null)
-            return _unavailableStartTime.toLocalTime();
-        return null;
-    }
-
-    public LocalDate getUnavailableEndDate() {
-        if (_unavailableEndTime != null)
-            return _unavailableEndTime.toLocalDate();
-        return null;}
-
-    public LocalTime getUnavailableEndTime() {if (_unavailableEndTime != null)
-            return _unavailableEndTime.toLocalTime();
-        return null;}
 
 }
 

@@ -1,7 +1,7 @@
 package Domain.Employee;
 
-import Data.WeeklyShiftDAO;
-import Data.WorkersDAO;
+import DataAccesObjects.Employee.WeeklyShiftDAO;
+import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;
@@ -169,7 +169,15 @@ public class WeeklyShiftAndWorkersManager {
 
     public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm) throws SQLException {
         WindowTypeCreater wc = new WindowTypeCreater();
-        WeeklyShift weeklyShift = this.getweeklyshift(weeknum,year,supernum);
+        WeeklyShift weeklyShift;
+
+        if(prof != 7) {
+            weeklyShift = this.getweeklyshift(weeknum, year, supernum);
+        }
+        else{
+            weeklyShift = this.getweeklyshift(weeknum, year, 0);
+        }
+
         weeklyShift.addreqtoshift(wc.getwidowtype(daynum,don),prof,hm);
         this.weeklyShiftDAO.update(weeklyShift);
     }
@@ -186,7 +194,7 @@ public class WeeklyShiftAndWorkersManager {
     }
 
     //while giving the right info giving back if there is a stock viable.
-    public List<WindowType> doIHaveStokeForTheShipment(int weeknum, int year,int supernum,WindowType wt) throws SQLException {
+    public List<WindowType> doIHaveStokeForTheShipment(int weeknum, int year,int supernum) throws SQLException {
         List<WindowType> ans = new ArrayList<>();
         WeeklyShift weeklyShift = this.weeklyShiftDAO.get(weeknum,year,supernum);
         for(WindowType windowType: WindowTypeCreater.getAllWindowTypes()) {
@@ -213,6 +221,13 @@ public class WeeklyShiftAndWorkersManager {
         Workers workers = getworkerbyid(id);
         workers.setPersonalinfo(setPersonalinfo);
         this.workersDAO.update(workers);
+    }
+
+    public void checkIfShiftsFor24HourIsOkay(int weeknum,int day,int year){
+        List<WeeklyShift> weeklyShiftlist = this.weeklyShiftDAO.getWeeklyShiftList(weeknum,year);
+        for(WeeklyShift ws : weeklyShiftlist){
+           ws.checkIfMissingSomeThing(day + 1);
+        }
     }
 
 

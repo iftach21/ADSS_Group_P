@@ -1,4 +1,4 @@
-/*
+
 package DAOTest;
 
 import DataAccesObjects.Transfer.TrucksDAO;
@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Map;
 
 public class TrucksDAOTest {
@@ -29,8 +27,8 @@ public class TrucksDAOTest {
         trucksDAO.deleteAll();
 
         //create 2 trucks
-        this.truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen, LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
-        this.truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular,LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20));
+        this.truck1 = new Truck(9874321, "Mercedes 330g", 8, 8,15,  TempLevel.frozen);
+        this.truck2 = new Truck(8061999, "Nisan x", 4, 4,5,  TempLevel.regular);
     }
 
     @Test
@@ -40,8 +38,6 @@ public class TrucksDAOTest {
         Assertions.assertEquals(truck1.getLicenseNumber(), trucksDAO.get(truck1.getLicenseNumber()).getLicenseNumber());
         Assertions.assertEquals(truck1.getTruckModel(), trucksDAO.get(truck1.getLicenseNumber()).getTruckModel());
         Assertions.assertEquals(truck1.getTempCapacity(), trucksDAO.get(truck1.getLicenseNumber()).getTempCapacity());
-        Assertions.assertEquals(truck1.getUnavailableEndDate(), trucksDAO.get(truck1.getLicenseNumber()).getUnavailableEndDate());
-        Assertions.assertEquals(truck1.getUnavailableStartDate(), trucksDAO.get(truck1.getLicenseNumber()).getUnavailableStartDate());
         Assertions.assertEquals(truck1.getMaxWeight(), trucksDAO.get(truck1.getLicenseNumber()).getMaxWeight());
         Assertions.assertEquals(truck1.getCurrentTruckWeight(), trucksDAO.get(truck1.getLicenseNumber()).getCurrentTruckWeight());
         Assertions.assertEquals(truck1.getTruckNetWeight(), trucksDAO.get(truck1.getLicenseNumber()).getTruckNetWeight());
@@ -51,8 +47,6 @@ public class TrucksDAOTest {
         Assertions.assertEquals(truck2.getLicenseNumber(), trucksDAO.get(truck2.getLicenseNumber()).getLicenseNumber());
         Assertions.assertEquals(truck2.getTruckModel(), trucksDAO.get(truck2.getLicenseNumber()).getTruckModel());
         Assertions.assertEquals(truck2.getTempCapacity(), trucksDAO.get(truck2.getLicenseNumber()).getTempCapacity());
-        Assertions.assertEquals(truck2.getUnavailableEndDate(), trucksDAO.get(truck2.getLicenseNumber()).getUnavailableEndDate());
-        Assertions.assertEquals(truck2.getUnavailableStartDate(), trucksDAO.get(truck2.getLicenseNumber()).getUnavailableStartDate());
         Assertions.assertEquals(truck2.getMaxWeight(), trucksDAO.get(truck2.getLicenseNumber()).getMaxWeight());
         Assertions.assertEquals(truck2.getCurrentTruckWeight(), trucksDAO.get(truck2.getLicenseNumber()).getCurrentTruckWeight());
         Assertions.assertEquals(truck2.getTruckNetWeight(), trucksDAO.get(truck2.getLicenseNumber()).getTruckNetWeight());
@@ -97,5 +91,3 @@ public class TrucksDAOTest {
 
     }
 }
-
- */

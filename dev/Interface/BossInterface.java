@@ -5,6 +5,7 @@ import Domain.Enums.TempTypeFactory;
 import Domain.Enums.WeightTypeFactory;
 import Domain.Enums.WindowTypeCreater;
 
+import java.util.Calendar;
 import java.sql.SQLException;
 import java.util.Scanner;  // Import the Scanner class
 public class BossInterface extends AInterface {
@@ -27,6 +28,7 @@ public class BossInterface extends AInterface {
         //    login confirmation
         //===============================
 
+
         //scans the username and password:
        while(true) {
            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -41,6 +43,18 @@ public class BossInterface extends AInterface {
                System.out.println("invalid input, please try again");  // Output user input
            }
            }
+
+
+        //checks for 24 next 24 hrs if its ok:
+        Calendar cal = Calendar.getInstance();
+        int todayweek = cal.get(Calendar.WEEK_OF_YEAR);
+        int todayyear = cal.get(Calendar.YEAR);
+        int todaydayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+
+        controller.checkIfShiftsFor24HourIsOkay(todayweek,todaydayOfWeek,todayyear);
+
+
+
         //==================================================
         //
         //                      main menu

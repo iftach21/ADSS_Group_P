@@ -1,6 +1,7 @@
 package Domain.Employee;
 
 import Domain.Enums.WindowType;
+import Domain.Enums.WindowTypeCreater;
 
 import java.util.List;
 
@@ -179,6 +180,16 @@ public class WeeklyShift {
         }
         else {
             this.nightShift[shiftTime.ordinal()-7].addDriver(newWorker);
+        }
+    }
+    public void checkIfMissingSomeThing(int daynum){
+        WindowTypeCreater wt = new WindowTypeCreater();
+        WindowType shiftTime = wt.getwidowtype(daynum,"day");
+        if(this.dayShift[shiftTime.ordinal()].getShiftManager()==null){
+            System.out.println("there is no shift manager on week: " + this.weekNUm + " on year " + this.year + " on the day shift of day num" + daynum);
+        }
+        if(this.nightShift[shiftTime.ordinal()-7].getShiftManager()==null){
+            System.out.println("there is no shift manager on week: " + this.weekNUm + " on year " + this.year + " on the day shift of day num" + daynum);
         }
     }
 

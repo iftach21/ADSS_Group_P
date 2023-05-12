@@ -223,6 +223,13 @@ public class WeeklyShiftAndWorkersManager {
         this.workersDAO.update(workers);
     }
 
+    public void checkIfShiftsFor24HourIsOkay(int weeknum,int day,int year){
+        List<WeeklyShift> weeklyShiftlist = this.weeklyShiftDAO.getWeeklyShiftList(weeknum,year);
+        for(WeeklyShift ws : weeklyShiftlist){
+           ws.checkIfMissingSomeThing(day + 1);
+        }
+    }
+
 
 
 

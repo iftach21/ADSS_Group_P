@@ -26,8 +26,7 @@ public class TrucksDAOTest {
     }
 
     @BeforeEach
-    void createMockTrucks()
-    {
+    void createMockTrucks() throws SQLException {
         //clear database before each Test
         trucksDAO.deleteAll();
 

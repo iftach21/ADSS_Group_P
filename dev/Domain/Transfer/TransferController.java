@@ -1139,7 +1139,7 @@ public class TransferController {
 
         WindowType wt = wtc.getwidowtype(dayOfWeekNum, shift);
 
-        List<WindowType> stokeWindowTypes = weeklyShiftManager.doIHaveStokeForTheShipment(weekNumber, arrivingDate.getYear(), orderDestinationSiteId, wt);
+        List<WindowType> stokeWindowTypes = weeklyShiftManager.doIHaveStokeForTheShipment(weekNumber, arrivingDate.getYear(), orderDestinationSiteId);
 
         return stokeWindowTypes.contains(wt);
     }

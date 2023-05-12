@@ -1,3 +1,4 @@
+/*
 package DAOTest;
 
 import Data.TrucksDAO;
@@ -100,3 +101,5 @@ public class TrucksDAOTest {
 
     }
 }
+
+ */

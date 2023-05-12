@@ -1,4 +1,4 @@
-package Test.DomainTest;
+package DomainTest;
 
 import Data.*;
 import Domain.Employee.Driver;
@@ -109,7 +109,7 @@ class TransferTests {
         destinations.add(site3);
 
         //create truck and driver
-        this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen, null, null, null, null);
+        this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen);
         this.dl1 = new DriverLicense(weightType.heavyWeight, TempLevel.frozen);
         this.driver1 = new Driver(1,"iftach","lotsofmoney",
                 "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);

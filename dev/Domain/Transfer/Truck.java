@@ -99,8 +99,8 @@ public class Truck {
             return weightType.heavyWeight;
     }
 
-    public void addToDAO(int transferId, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException {
-        _transferTrucksDAO.add(transferId, _truck_licenseNumber, leavingDate, leavingTime, arrivingDate, arrivingTime);
+    public void addToDAO(int transferId) throws SQLException {
+        _transferTrucksDAO.add(transferId, _truck_licenseNumber);
     }
 
     public void deleteFromDAO(int transferId) throws SQLException {

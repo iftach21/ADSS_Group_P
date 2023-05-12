@@ -63,19 +63,15 @@ public class TransferTrucksDAO {
     }
 
 
-    public void update(int transferId, int licenseNumber, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) {
+    public void update(int transferId, int licenseNumber) {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE TransferTrucks SET licenseNumber=?, leavingDate=?, leavingTime=?, arrivingDate=?, arrivingTime=? WHERE transferId=? AND licenseNumber=?";
+            String sql = "UPDATE TransferTrucks SET licenseNumber=? WHERE transferId=? AND licenseNumber=?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, licenseNumber);
-            stmt.setString(2, leavingDate.toString());
-            stmt.setString(3, leavingTime.toString());
-            stmt.setString(4, arrivingDate.toString());
-            stmt.setString(5, arrivingTime.toString());
-            stmt.setInt(6, transferId);
-            stmt.setInt(7, licenseNumber);
+            stmt.setInt(2, transferId);
+            stmt.setInt(3, licenseNumber);
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -90,18 +86,14 @@ public class TransferTrucksDAO {
     }
 
 
-    public void add(int transferId, int licenseNumber, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime){
+    public void add(int transferId, int licenseNumber){
         try {
-            String sql = "INSERT or REPLACE INTO TransferTrucks (licenseNumber, transferId, leavingDate, leavingTime, arrivingDate, arrivingTime) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT or REPLACE INTO TransferTrucks (licenseNumber, transferId) " +
+                    "VALUES (?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, licenseNumber);
             stmt.setInt(2, transferId);
-            stmt.setString(3, leavingDate.toString());
-            stmt.setString(4, leavingTime.toString());
-            stmt.setString(5, arrivingDate.toString());
-            stmt.setString(6, arrivingTime.toString());
 
             stmt.executeUpdate();
             addToCache(transferId, licenseNumber);

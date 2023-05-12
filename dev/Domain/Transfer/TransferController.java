@@ -277,7 +277,7 @@ public class TransferController {
             boolean transferRearranged = false;
 
             Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-            transferTruck.addToDAO(newTransfer.getTransferId(), newTransfer.getLeavingDate(), newTransfer.getLeavingTime(), newTransfer.getArrivingDate(), newTransfer.get_arrivingTime());
+            transferTruck.addToDAO(newTransfer.getTransferId());
 
             System.out.println("The truck chosen to the transfer is: ");
             System.out.println("License Number: " + transferTruck.getLicenseNumber());
@@ -574,7 +574,7 @@ public class TransferController {
             }
         }
         tc.getTruck(transfer.getTruckLicenseNumber()).deleteFromDAO(transfer.getTransferId());
-        tc.getTruck(chosenTruck).addToDAO(transfer.getTransferId(), transfer.getLeavingDate(),transfer.getLeavingTime(),transfer.getArrivingDate(), transfer.get_arrivingTime());
+        tc.getTruck(chosenTruck).addToDAO(transfer.getTransferId());
 
         tc.updateTruck(tc.getTruck(transfer.getTruckLicenseNumber()));
         tc.updateTruck(tc.getTruck(chosenTruck));

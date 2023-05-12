@@ -1,7 +1,7 @@
 package Domain.Transfer;
 
-import Data.TransferDestinationsDAO;
-import Data.TransferItemsDAO;
+import DataAccesObjects.Transfer.TransferDestinationsDAO;
+import DataAccesObjects.Transfer.TransferItemsDAO;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Transfer {
     private int _transferId;

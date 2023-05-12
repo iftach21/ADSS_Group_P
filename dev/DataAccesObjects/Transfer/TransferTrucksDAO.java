@@ -1,5 +1,6 @@
-package Data;
+package DataAccesObjects.Transfer;
 
+import DataAccesObjects.Connection;
 import Domain.Transfer.Transfer;
 
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferTrucksDAO {
-    private java.sql.Connection conn = Data.Connection.getConnectionToDatabase();
+    private java.sql.Connection conn = Connection.getConnectionToDatabase();
     private Map<Integer, List<Transfer>> trucksTransfers;  //the key in the first map is licensenumber, value is its transfers
     private static TransferTrucksDAO instance = null;
 

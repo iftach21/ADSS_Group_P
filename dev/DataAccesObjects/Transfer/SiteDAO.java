@@ -1,8 +1,6 @@
-package Data;
+package DataAccesObjects.Transfer;
 
-import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
-import Domain.Transfer.Transfer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SiteDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private List<Site> SiteList;
     private static SiteDAO instance = null;
 

@@ -1,4 +1,4 @@
-package Data;
+package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TransferItemsDAO {
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private Map<Integer, Map<Site, Map<Item_mock, Integer>>> orderItemsList;  //the key in the first map is transferId
     private static TransferItemsDAO instance = null;
 

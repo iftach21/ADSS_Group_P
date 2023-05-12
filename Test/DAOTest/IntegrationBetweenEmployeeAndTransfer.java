@@ -1,22 +1,17 @@
 package DAOTest;
 
-import Data.Connection;
-import Data.ShiftDAO;
-import Data.WorkersDAO;
+import DataAccesObjects.Connection;
 import Domain.Employee.*;
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowType;
 import Domain.Enums.weightType;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.SQLException;
 public class IntegrationBetweenEmployeeAndTransfer {
 
     //todo: need to fix those tests!

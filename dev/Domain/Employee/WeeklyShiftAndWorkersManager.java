@@ -1,7 +1,7 @@
 package Domain.Employee;
 
-import Data.WeeklyShiftDAO;
-import Data.WorkersDAO;
+import DataAccesObjects.Employee.WeeklyShiftDAO;
+import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;

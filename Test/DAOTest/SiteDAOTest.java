@@ -1,6 +1,6 @@
 package DAOTest;
 
-import Data.SiteDAO;
+import DataAccesObjects.Transfer.SiteDAO;
 import Domain.Transfer.Site;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

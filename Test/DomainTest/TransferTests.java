@@ -1,6 +1,9 @@
 package Test.DomainTest;
 
-import Data.*;
+import DataAccesObjects.Transfer.Item_mockDAO;
+import DataAccesObjects.Transfer.SiteDAO;
+import DataAccesObjects.Transfer.TransferDestinationsDAO;
+import DataAccesObjects.Transfer.TransferItemsDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
@@ -9,7 +12,6 @@ import Domain.Transfer.Item_mock;
 import Domain.Transfer.Site;
 import Domain.Transfer.Transfer;
 import Domain.Transfer.Truck;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

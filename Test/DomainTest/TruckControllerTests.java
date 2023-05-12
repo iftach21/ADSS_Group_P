@@ -1,6 +1,6 @@
 package DomainTest;
 
-import Data.TrucksDAO;
+import DataAccesObjects.Transfer.TrucksDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;

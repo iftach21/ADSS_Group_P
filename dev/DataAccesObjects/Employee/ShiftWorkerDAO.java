@@ -1,5 +1,6 @@
-package Data;
+package DataAccesObjects.Employee;
 
+import DataAccesObjects.Pair;
 import Domain.Employee.Shift;
 import Domain.Employee.Workers;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class ShiftWorkerDAO {
 
-    private Connection conn = Data.Connection.getConnectionToDatabase();
+    private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
     private static ShiftWorkerDAO instance = null;
 
     private ShiftWorkerDAO() throws SQLException {

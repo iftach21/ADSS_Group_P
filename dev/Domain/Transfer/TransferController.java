@@ -9,10 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
-import Data.Item_mockDAO;
-import Data.SiteDAO;
-import Data.TransferDAO;
-import Data.TrucksDAO;
+import DataAccesObjects.Transfer.Item_mockDAO;
+import DataAccesObjects.Transfer.SiteDAO;
+import DataAccesObjects.Transfer.TransferDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;

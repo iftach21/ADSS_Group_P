@@ -40,10 +40,9 @@ public class Transfer {
         this._transferId = transferId;
         this._transferDestinationsDAO = TransferDestinationsDAO.getInstance();
         this._transferItemsDAO = TransferItemsDAO.getInstance();
-        addToDAO(orderItems, destinations);
     }
 
-    private void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, List<Site> destinations) throws SQLException {
+    public void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, List<Site> destinations) throws SQLException {
         _transferDestinationsDAO.add(_transferId, destinations);
         for (Site site : orderItems.keySet()) {
             for (Item_mock item : orderItems.get(site).keySet())

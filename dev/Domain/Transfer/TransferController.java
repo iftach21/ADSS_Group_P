@@ -265,6 +265,7 @@ public class TransferController {
 
         newTransfer.createDocument();
         transfersDAO.add(newTransfer);
+        newTransfer.addToDAO(orderItems, destinationSites);
         _documentsCounter++;
 
         System.out.println("Thanks manager! The transfer will be ready in short time. You'll now need to predict the weight in each destination, and rearrange the transfer if needed.");

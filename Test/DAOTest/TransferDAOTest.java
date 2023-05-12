@@ -91,22 +91,24 @@ public class TransferDAOTest {
         //create 2 transfers
         this.transfer1 = new Transfer(LocalDate.parse("2023-05-15"), LocalTime.parse("12:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("15:00:00"), 12345678, "Moshe", site1, dests1, destsAndItems1, 0);
         this.transfer2 = new Transfer(LocalDate.parse("2023-05-17"), LocalTime.parse("14:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("17:00:00"), 78776678, "Alon", site2, dests2, destsAndItems2, 1);
+        transferDAO.add(transfer1);
+        transferDAO.add(transfer2);
+        transfer1.addToDAO(destsAndItems1, dests1);
+        transfer2.addToDAO(destsAndItems2, dests2);
+        transferTrucksDAO.add(transfer1.getTransferId(), transfer1.getTruckLicenseNumber());
+        transferTrucksDAO.add(transfer2.getTransferId(), transfer2.getTruckLicenseNumber());
     }
 
     @Test
-    void addAndGetTransferTest(){
+    void addAndGetTransferTest() throws SQLException {
 
         //Check Transfer table
-        transferDAO.add(transfer1);
-        transferTrucksDAO.add(transfer1.getTransferId(), transfer1.getTruckLicenseNumber());
         Assertions.assertEquals(transfer1.getTransferId(), transferDAO.get(transfer1.getTransferId()).getTransferId());
         Assertions.assertEquals(transfer1.getDateOfTransfer(), transferDAO.get(transfer1.getTransferId()).getDateOfTransfer());
         Assertions.assertEquals(transfer1.getTruckLicenseNumber(), transferDAO.get(transfer1.getTransferId()).getTruckLicenseNumber());
         Assertions.assertEquals(transfer1.getDriverName(), transferDAO.get(transfer1.getTransferId()).getDriverName());
         Assertions.assertEquals(transfer1.getSource().getSiteId(), transferDAO.get(transfer1.getTransferId()).getSource().getSiteId());
 
-        transferDAO.add(transfer2);
-        transferTrucksDAO.add(transfer2.getTransferId(), transfer2.getTruckLicenseNumber());
         Assertions.assertEquals(transfer2.getTransferId(), transferDAO.get(transfer2.getTransferId()).getTransferId());
         Assertions.assertEquals(transfer2.getDateOfTransfer(), transferDAO.get(transfer2.getTransferId()).getDateOfTransfer());
         Assertions.assertEquals(transfer2.getTruckLicenseNumber(), transferDAO.get(transfer2.getTransferId()).getTruckLicenseNumber());
@@ -129,13 +131,11 @@ public class TransferDAOTest {
     }
 
     @Test
-    void deleteTransferTest(){
+    void deleteTransferTest() throws SQLException {
         //check Transfer table
-        transferDAO.add(transfer1);
         transferDAO.delete(transfer1.getTransferId());
         Assertions.assertNull(transferDAO.get(transfer1.getTransferId()));
 
-        transferDAO.add(transfer2);
         transferDAO.delete(transfer2.getTransferId());
         Assertions.assertNull(transferDAO.get(transfer2.getTransferId()));
 
@@ -159,12 +159,10 @@ public class TransferDAOTest {
     void updateTransferTest(){
 
         //check Transfer table
-        transferDAO.add(transfer1);
         transfer1.updateTransferTruck(98765432);
         transferDAO.update(transfer1);
         Assertions.assertEquals(98765432, transferDAO.get(transfer1.getTransferId()).getTruckLicenseNumber());
 
-        transferDAO.add(transfer2);
         transfer2.updateTransferTruck(98765432);
         transferDAO.update(transfer2);
         Assertions.assertEquals(98765432, transferDAO.get(transfer2.getTransferId()).getTruckLicenseNumber());
@@ -173,9 +171,6 @@ public class TransferDAOTest {
 
     @Test
     void getAllTransfersTest(){
-        transferDAO.add(transfer1);
-        transferDAO.add(transfer2);
-
         Map<Integer, Transfer> allTransfers = transferDAO.getAllTransfers();
 
         Assertions.assertEquals(transfer1.getTransferId(), allTransfers.get(transfer1.getTransferId()).getTransferId());

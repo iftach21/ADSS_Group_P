@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class TransferItemsDAO {
@@ -196,21 +197,31 @@ public class TransferItemsDAO {
     }
 
     public void deleteFromCache(int transferId, String catalogNum, int siteId, int quantity) throws SQLException {
-        for (Integer Id : this.orderItemsList.keySet()) {
+        Iterator<Integer> idIterator = orderItemsList.keySet().iterator();
+        while (idIterator.hasNext()) {
+            Integer Id = idIterator.next();
             if (Id == transferId) {
-                for (Site site: this.orderItemsList.get(Id).keySet()) {
+                Map<Site, Map<Item_mock, Integer>> siteMap = orderItemsList.get(Id);
+                Iterator<Site> siteIterator = siteMap.keySet().iterator();
+                while (siteIterator.hasNext()) {
+                    Site site = siteIterator.next();
                     if (site.getSiteId() == siteId) {
-                        for (Item_mock item: this.orderItemsList.get(Id).get(site).keySet()) {
+                        Map<Item_mock, Integer> itemMap = siteMap.get(site);
+                        Iterator<Item_mock> itemIterator = itemMap.keySet().iterator();
+                        while (itemIterator.hasNext()) {
+                            Item_mock item = itemIterator.next();
                             if (catalogNum.equals(item.getCatalogNum())) {
-                                this.orderItemsList.get(Id).get(site).remove(item);
-                                if(this.orderItemsList.get(Id).get(site).size() == 0)
-                                {
-                                    this.orderItemsList.get(Id).remove(site);
+                                itemIterator.remove();
+                                if (itemMap.isEmpty()) {
+                                    siteIterator.remove();
                                 }
                                 break;
                             }
                         }
                     }
+                }
+                if (siteMap.isEmpty()) {
+                    idIterator.remove();
                 }
             }
         }

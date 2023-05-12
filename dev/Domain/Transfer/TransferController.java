@@ -105,7 +105,6 @@ public class TransferController {
                 {
                     System.out.println("Unfortunatly, there are no orders to handle. You'll be taken to the main menu.");
                     System.out.println("------------------------------------------------------------");
-                    break;
                 }
                 else
                 {
@@ -773,7 +772,7 @@ public class TransferController {
     public LocalDate chooseDateForTransfer()
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the leaving date of the transfer, in this format - dd/mm/yyy: ");
+        System.out.println("Please enter the leaving date of the transfer, in this format - dd/mm/yyyy: ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate leavingDate;
         while(true)

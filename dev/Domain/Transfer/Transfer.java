@@ -351,5 +351,10 @@ public class Transfer {
         return _destinations;
     }
 
+    public int getWeightInSource()
+    {
+        return _weightAtSource;
+    }
+
 }
 

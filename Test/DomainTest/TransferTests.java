@@ -1,9 +1,6 @@
 package DomainTest;
 
-import DataAccesObjects.Transfer.Item_mockDAO;
-import DataAccesObjects.Transfer.SiteDAO;
-import DataAccesObjects.Transfer.TransferDestinationsDAO;
-import DataAccesObjects.Transfer.TransferItemsDAO;
+import DataAccesObjects.Transfer.*;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverLicense;
 import Domain.Enums.TempLevel;
@@ -60,6 +57,7 @@ class TransferTests {
         transferItemsDAO.deleteAll();
         TransferDestinationsDAO transferDestinationsDAO = TransferDestinationsDAO.getInstance();
         transferDestinationsDAO.deleteAll();
+        TransferDAO.getInstance().deleteAll();
 
         //create 3 sites for destinations
         this.site1 = new Site(0,"Sano", "Zabotinski 12 Tel-Aviv", "09-7863908", "Moshe", 32.06845601633649, 34.783378215486955);

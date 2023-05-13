@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class Transfer {
         this._transferId = transferId;
         this._transferDestinationsDAO = TransferDestinationsDAO.getInstance();
         this._transferItemsDAO = TransferItemsDAO.getInstance();
-        this._destinations = destinations.keySet().stream().toList();
+        this._destinations = new LinkedList<>(destinations.keySet().stream().toList());
     }
 
     public void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, Map<Site, Integer> destinations) throws SQLException {

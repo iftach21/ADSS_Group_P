@@ -260,7 +260,7 @@ public class TransferController {
             weights.put(sites[i], 0);
         }
 
-        Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationSites, orderItems, _documentsCounter);
+        Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationSites, orderItems, _documentsCounter, -1);
         newTransfer.addToDAO(orderItems, destinationSites);
         transfersDAO.add(newTransfer);
 
@@ -432,6 +432,8 @@ public class TransferController {
                 {
                     transferTruck.updateWeight(truckWeight);
                     tc.updateTruck(transferTruck);
+                    newTransfer.setWeightAtSource(truckWeight);
+                    transfersDAO.update(newTransfer);
                     break;
                 }
                 else

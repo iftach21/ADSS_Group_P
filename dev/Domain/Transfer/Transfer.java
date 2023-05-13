@@ -24,12 +24,13 @@ public class Transfer {
     private int _truckLicenseNumber;
     private String _driverName;
     private Site _source;
+    private int _weightAtSource;
     private final TransferDestinationsDAO _transferDestinationsDAO;
     private final TransferItemsDAO _transferItemsDAO;
     //private List<Site> _destinations;
     //private Map<Site, Map<Item_mock, Integer>> _orderItems;
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId) throws SQLException {
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId, int weightAtSource) throws SQLException {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
         this._arrivingDate = arrivingDate;
@@ -37,6 +38,7 @@ public class Transfer {
         this._truckLicenseNumber = truck_LicenseNumber;
         this._driverName = driverName;
         this._source = source;
+        this._weightAtSource = weightAtSource; //-1 if no weight
         this._transferId = transferId;
         this._transferDestinationsDAO = TransferDestinationsDAO.getInstance();
         this._transferItemsDAO = TransferItemsDAO.getInstance();
@@ -102,7 +104,10 @@ public class Transfer {
             //fileWriter.write(String.format("%20s %20s %20s %20s %20s \r\n", _transferId, _dateOfTransfer.toString(), _truckLicenseNumber, _leavingTime.toString(), _driverName));
             fileWriter.write(documentAddUnderline(" SOURCE DETAILS: ") + "\n\n");
             fileWriter.write(String.format(" %20s \r\n", "Source name: "+ _source.getSiteName()));
-            fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: "+_source.getSiteAddress(), ", Contact name: "+ _source.get_contactName(), ", Phone: " + _source.get_phoneNumber(), ", Truck weight: " + "None"));
+            String truckWeight = "None";
+            if(_weightAtSource != -1)
+                truckWeight = Integer.toString(_weightAtSource);
+            fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: "+_source.getSiteAddress(), ", Contact name: "+ _source.get_contactName(), ", Phone: " + _source.get_phoneNumber(), ", Truck weight: " + truckWeight));
             //fileWriter.write(String.format("%20s %20s %20s %20s\r\n", _source.getSiteAddress(), _source.get_contactName(), _source.get_phoneNumber(), ""));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("DESTINATION DETAILS:") + "\n\n");
@@ -110,7 +115,7 @@ public class Transfer {
             {
                 fileWriter.write(String.format(" %20s \r\n","Destination name: "+ destinations.get(i).getSiteName()));
                 if(i<destinations.size()-1) {
-                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + destinations.get(i).getSiteAddress(), ", Contact name: "+destinations.get(i).get_contactName(), ", Phone: "+destinations.get(i).get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ "None"));
+                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + destinations.get(i).getSiteAddress(), ", Contact name: "+destinations.get(i).get_contactName(), ", Phone: "+destinations.get(i).get_phoneNumber(), ", Truck Weight: "+ "None"));
                     //fileWriter.write(String.format("%20s %20s %20s %20s \r\n", _destinations.get(i).getSiteAddress(), _destinations.get(i).get_contactName(), _destinations.get(i).get_phoneNumber(), ""));
                 }
                 else {
@@ -152,9 +157,9 @@ public class Transfer {
                 String line = lines.get(i);
                 if (line.contains(site.getSiteAddress())) {
                     if(weight!=null)
-                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ weight));
+                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Truck Weight: "+ weight));
                     else
-                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Domain.Transfer.Transfer.Truck Weight: "+ "None"));
+                        lines.set(i, String.format("%20s %20s %20s %20s ", "Address: " + site.getSiteAddress(), ", Contact name: "+site.get_contactName(), ", Phone: "+site.get_phoneNumber(), ", Truck Weight: "+ "None"));
                     //lines.set(i, String.format("%20s %20s %20s %20s \r\n", site.getSiteAddress(), site.get_contactName(), site.get_phoneNumber(), weight));
                     break;
                 }
@@ -322,7 +327,10 @@ public class Transfer {
         return _transferId;
     }
 
-
+    public void setWeightAtSource(int weight)
+    {
+        this._weightAtSource = weight;
+    }
 
 }
 

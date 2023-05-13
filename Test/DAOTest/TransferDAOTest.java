@@ -64,14 +64,14 @@ public class TransferDAOTest {
         Item_mockDAO.getInstance().add(item2);
 
         //dests to transfer1
-        List<Site> dests1 = new ArrayList<>();
-        dests1.add(site1);
-        dests1.add(site3);
+        Map<Site, Integer> dests1 = new HashMap<>();
+        dests1.put(site1, 0);
+        dests1.put(site3, 0);
 
         //dests to transfer2
-        List<Site> dests2 = new ArrayList<>();
-        dests2.add(site2);
-        dests2.add(site3);
+        Map<Site, Integer> dests2 = new HashMap<>();
+        dests2.put(site2, 0);
+        dests2.put(site3, 0);
 
         //item 1 quantity
         Map<Item_mock, Integer> items1 = new HashMap<>();
@@ -89,8 +89,8 @@ public class TransferDAOTest {
         destsAndItems2.put(site2, items2);
 
         //create 2 transfers
-        this.transfer1 = new Transfer(LocalDate.parse("2023-05-15"), LocalTime.parse("12:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("15:00:00"), 12345678, "Moshe", site1, dests1, destsAndItems1, 0);
-        this.transfer2 = new Transfer(LocalDate.parse("2023-05-17"), LocalTime.parse("14:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("17:00:00"), 78776678, "Alon", site2, dests2, destsAndItems2, 1);
+        this.transfer1 = new Transfer(LocalDate.parse("2023-05-15"), LocalTime.parse("12:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("15:00:00"), 12345678, "Moshe", site1, dests1, destsAndItems1, 0, 0);
+        this.transfer2 = new Transfer(LocalDate.parse("2023-05-17"), LocalTime.parse("14:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("17:00:00"), 78776678, "Alon", site2, dests2, destsAndItems2, 1, 0);
         transferDAO.add(transfer1);
         transferDAO.add(transfer2);
         transfer1.addToDAO(destsAndItems1, dests1);

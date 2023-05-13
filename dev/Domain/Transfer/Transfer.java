@@ -27,7 +27,7 @@ public class Transfer {
     private int _weightAtSource;
     private final TransferDestinationsDAO _transferDestinationsDAO;
     private final TransferItemsDAO _transferItemsDAO;
-    //private List<Site> _destinations;
+    private List<Site> _destinations;
     //private Map<Site, Map<Item_mock, Integer>> _orderItems;
 
     public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, Map<Site, Integer> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId, int weightAtSource) throws SQLException {
@@ -42,6 +42,7 @@ public class Transfer {
         this._transferId = transferId;
         this._transferDestinationsDAO = TransferDestinationsDAO.getInstance();
         this._transferItemsDAO = TransferItemsDAO.getInstance();
+        this._destinations = destinations.keySet().stream().toList();
     }
 
     public void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, Map<Site, Integer> destinations) throws SQLException {
@@ -72,7 +73,7 @@ public class Transfer {
                     if (!orderItems.containsKey(site))
                     {
                         //remove from the database
-                        _transferDestinationsDAO.delete(_transferId, site.getSiteId());
+                        removeTransferDestination(site);
                         System.out.println("Please notice that you removed every item from this destination, so the destination has been removed from the transfer!");
                     }
                 }
@@ -88,6 +89,14 @@ public class Transfer {
     public void removeTransferDestination(Site destinationToDelete)
     {
         _transferDestinationsDAO.delete(_transferId, destinationToDelete.getSiteId());
+        for (int i = 0; i < _destinations.size() ; i++)
+        {
+            if (_destinations.get(i).getSiteId() == destinationToDelete.getSiteId())
+            {
+                _destinations.remove(i);
+                break;
+            }
+        }
     }
 
     public void createDocument()
@@ -335,6 +344,11 @@ public class Transfer {
     public void setWeightAtSource(int weight)
     {
         this._weightAtSource = weight;
+    }
+
+    public List<Site> getListOfDestinations()
+    {
+        return _destinations;
     }
 
 }

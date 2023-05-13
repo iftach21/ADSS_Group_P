@@ -36,7 +36,7 @@ class TransferTests {
     Item_mock item21;
     Item_mock item22;
     Map<Site, Map<Item_mock, Integer>> orderItems1;
-    List<Site> destinations;
+    Map<Site, Integer> destinations;
     Map<Item_mock, Integer> orderItems1site1;
     Map<Item_mock, Integer> orderItems1site2;
     Truck truck1;
@@ -91,7 +91,7 @@ class TransferTests {
 
         //create order items map and destinations list
         this.orderItems1 = new HashMap<>();
-        this.destinations = new ArrayList<>();
+        this.destinations = new HashMap<>();
 
         //create map for each item with quantity for site 1
         this.orderItems1site1 = new HashMap<>();
@@ -107,8 +107,8 @@ class TransferTests {
         orderItems1.put(site1, orderItems1site1);
         orderItems1.put(site2, orderItems1site2);
 
-        destinations.add(site2);
-        destinations.add(site3);
+        destinations.put(site2, 0);
+        destinations.put(site3, 0);
 
         //create truck and driver
         this.truck1 = new Truck(123456, "Mercedes 330", 8, 8, 15, TempLevel.frozen);
@@ -117,7 +117,7 @@ class TransferTests {
                 "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);
 
         //create the transfer
-        this.testTransfer = new Transfer(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20), 123456, "Arnon", site1,destinations, orderItems1, 0);
+        this.testTransfer = new Transfer(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20), 123456, "Arnon", site1,destinations, orderItems1, 0, 0);
         testTransfer.addToDAO(orderItems1, destinations);
         truck1.addToDAO(testTransfer.getTransferId());
     }

@@ -112,7 +112,7 @@ public class TransferController {
                     for(Integer transferId: currentTransfers.keySet())
                     {
                         Transfer transfer = currentTransfers.get(transferId);
-                        System.out.println("transfer Id: " + transferId + ", Source site: " + transfer.getSource().getSiteName() + ", Destination site: " + transfer.getDestinations().get(transfer.getDestinations().size()-1).getSiteName());
+                        System.out.println("transfer Id: " + transferId + ", Source site: " + transfer.getSource().getSiteName() + ", Destination site: " + transfer.getListOfDestinations().get(transfer.getDestinations().size()-1).getSiteName());
                     }
                     System.out.println("Please enter the transferId of your chosen transfer");
                     int transferId;
@@ -254,14 +254,14 @@ public class TransferController {
             return;
         }
 
-        Map<Site, Integer> weights = new HashMap<>();
+        Map<Site, Integer> destinationAndWeights = new HashMap<>();
         for(int i=0; i < sites.length; i++)
         {
-            weights.put(sites[i], 0);
+            destinationAndWeights.put(sites[i], 0);
         }
 
-        Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationSites, orderItems, _documentsCounter, -1);
-        newTransfer.addToDAO(orderItems, destinationSites);
+        Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationAndWeights, orderItems, _documentsCounter, -1);
+        newTransfer.addToDAO(orderItems, destinationAndWeights);
         transfersDAO.add(newTransfer);
 
         newTransfer.createDocument();
@@ -297,7 +297,7 @@ public class TransferController {
             }
             else
             {
-                List<Site> transferDest = newTransfer.getDestinations();
+                List<Site> transferDest = newTransfer.getListOfDestinations();
                 System.out.println("It will unload all the items at his final destination - " + transferDest.get(transferDest.size() - 1).getSiteName());
                 System.out.println("------------------------------------------------------------");
                 break;
@@ -338,7 +338,7 @@ public class TransferController {
         if (selectedOption == 1)
         {
             removeOneDestOfTransfer(transfer);
-            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getListOfDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
             transfer.setArrivingTime(arrivingTime.toLocalTime());
             transfersDAO.update(transfer);
             transfer.setArrivingDate(arrivingTime.toLocalDate());
@@ -351,7 +351,7 @@ public class TransferController {
         else if (selectedOption == 3)
         {
             removeItemsOfTransfer(transfer);
-            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getListOfDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
             transfer.setArrivingTime(arrivingTime.toLocalTime());
             transfersDAO.update(transfer);
             transfer.setArrivingDate(arrivingTime.toLocalDate());
@@ -360,7 +360,7 @@ public class TransferController {
 
         transfer.documentUpdateTruckWeight(null, transfer.getSource());
         for(int i=0; i<transfer.getDestinations().size()-1; i++){
-            transfer.documentUpdateTruckWeight(null, transfer.getDestinations().get(i));
+            transfer.documentUpdateTruckWeight(null, transfer.getListOfDestinations().get(i));
         }
     }
 
@@ -460,7 +460,7 @@ public class TransferController {
         if (transferRearranged) {
             return true;
         }
-        List<Site> transferDest = newTransfer.getDestinations();
+        List<Site> transferDest = newTransfer.getListOfDestinations();
         for (int i=0; i<transferDest.size() - 1 && !transferRearranged; i++)
         {
             if (!happensRightNow)
@@ -518,7 +518,7 @@ public class TransferController {
         System.out.println("These are the transfer destinations. Please choose one destination to remove: ");
         for (int i = 0; i < transfer.getDestinations().size() - 1; i++)
         {
-            System.out.println((i + 1) + "." + transfer.getDestinations().get(i).getSiteName());
+            System.out.println((i + 1) + "." + transfer.getListOfDestinations().get(i).getSiteName());
         }
 
         int destToRemove;
@@ -542,8 +542,8 @@ public class TransferController {
             }
         }
 
-        transfer.documentRemoveDestination(transfer.getDestinations().get(destToRemove - 1));
-        transfer.removeTransferDestination(transfer.getDestinations().get(destToRemove - 1));
+        transfer.documentRemoveDestination(transfer.getListOfDestinations().get(destToRemove - 1));
+        transfer.removeTransferDestination(transfer.getListOfDestinations().get(destToRemove - 1));
     }
 
     public void changeTruckOfTransfer(Transfer transfer) throws SQLException {
@@ -592,7 +592,7 @@ public class TransferController {
         Map<Site, Map<Item_mock, Integer>> orderItemsToDelete = new HashMap<>();
         boolean removeMoreDestinations = true;
 
-        List<Site> allDestinations = new ArrayList<>(transfer.getDestinations());
+        List<Site> allDestinations = new ArrayList<>(transfer.getListOfDestinations());
         List<Site> allDestToReduceItems = new ArrayList<>();
         while (removeMoreDestinations)
         {
@@ -1104,7 +1104,7 @@ public class TransferController {
                 System.out.println("---------------------------------------------------------------");
                 System.out.println("TRANSFER ID: " + currentTransfer.getTransferId());
                 System.out.println("Source site: " + currentTransfer.getTransferId());
-                System.out.println("Last destination: " + currentTransfer.getDestinations().get(currentTransfer.getDestinations().size()-1).getSiteName());
+                System.out.println("Last destination: " + currentTransfer.getListOfDestinations().get(currentTransfer.getListOfDestinations().size()-1).getSiteName());
                 System.out.println("Leaving date: " + currentTransfer.getLeavingDate());
                 System.out.println("Leaving time: " + currentTransfer.getLeavingTime());
                 System.out.println("Arriving date: " + currentTransfer.getArrivingDate());
@@ -1158,7 +1158,7 @@ public class TransferController {
             System.out.println("There are " + allTransfers.size() + " transfers documents in the system. here are basic details on some of them: ");
             for (int i = 0; i < 5 && i < allTransfers.size(); i++)
             {
-                System.out.println((i+1) + ". Transfer ID: " + allTransfers.get(i).getTransferId() + ", Source Site: " + allTransfers.get(i).getSource().getSiteName() + ", Final Destination: " + allTransfers.get(i).getDestinations().get(allTransfers.get(i).getDestinations().size() - 1).getSiteName());
+                System.out.println((i+1) + ". Transfer ID: " + allTransfers.get(i).getTransferId() + ", Source Site: " + allTransfers.get(i).getSource().getSiteName() + ", Final Destination: " + allTransfers.get(i).getListOfDestinations().get(allTransfers.get(i).getDestinations().size() - 1).getSiteName());
             }
             System.out.println("Please enter the transfer id of the transfer document you would like to download: ");
             int transferId;

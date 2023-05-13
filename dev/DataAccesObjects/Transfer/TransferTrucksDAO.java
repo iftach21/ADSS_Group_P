@@ -113,7 +113,7 @@ public class TransferTrucksDAO {
     public void add(int transferId, int licenseNumber){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT or REPLACE INTO TransferTrucks (licenseNumber, transferId) " +
+            String sql = "INSERT or IGNORE INTO TransferTrucks (licenseNumber, transferId) " +
                     "VALUES (?, ?)";
 
             stmt = conn.prepareStatement(sql);

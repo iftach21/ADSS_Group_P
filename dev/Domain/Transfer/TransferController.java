@@ -261,10 +261,10 @@ public class TransferController {
         }
 
         Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationSites, orderItems, _documentsCounter);
+        newTransfer.addToDAO(orderItems, destinationSites);
+        transfersDAO.add(newTransfer);
 
         newTransfer.createDocument();
-        transfersDAO.add(newTransfer);
-        newTransfer.addToDAO(orderItems, destinationSites);
         _documentsCounter++;
 
         System.out.println("Thanks manager! The transfer will be ready in short time. You'll now need to predict the weight in each destination, and rearrange the transfer if needed.");

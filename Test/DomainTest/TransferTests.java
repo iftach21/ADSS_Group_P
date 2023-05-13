@@ -118,6 +118,8 @@ class TransferTests {
 
         //create the transfer
         this.testTransfer = new Transfer(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20), 123456, "Arnon", site1,destinations, orderItems1, 0);
+        testTransfer.addToDAO(orderItems1, destinations);
+        truck1.addToDAO(testTransfer.getTransferId());
     }
 
     @Test

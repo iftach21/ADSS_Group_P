@@ -92,7 +92,7 @@ public class Transfer {
 
     public void createDocument()
     {
-        Map<Site, Integer> destinations = _transferDestinationsDAO.get(_transferId);
+        Map<Site, Integer> destinations = _transferDestinationsDAO.get(_transferId); //value is the truck weight
         Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
         System.out.println("Creating transfer document (a text file will be created in current directory)...");
         String fileName = "transfer" + _transferId +"_Document.txt";
@@ -111,17 +111,22 @@ public class Transfer {
             //fileWriter.write(String.format("%20s %20s %20s %20s\r\n", _source.getSiteAddress(), _source.get_contactName(), _source.get_phoneNumber(), ""));
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("DESTINATION DETAILS:") + "\n\n");
-            for(int i=0; i<destinations.size(); i++)
+            int siteCounter = 0;
+            for(Site dest: destinations.keySet())
             {
-                fileWriter.write(String.format(" %20s \r\n","Destination name: "+ destinations.get(i).getSiteName()));
-                if(i<destinations.size()-1) {
-                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + destinations.get(i).getSiteAddress(), ", Contact name: "+destinations.get(i).get_contactName(), ", Phone: "+destinations.get(i).get_phoneNumber(), ", Truck Weight: "+ "None"));
+                fileWriter.write(String.format(" %20s \r\n","Destination name: "+ dest.getSiteName()));
+                if(siteCounter<destinations.size()-1) {
+                    truckWeight = "None";
+                    if(destinations.get(dest) != -1)
+                        truckWeight = Integer.toString(destinations.get(dest));
+                    fileWriter.write(String.format(" %20s %20s %20s %20s \r\n\n", "Address: " + dest.getSiteAddress(), ", Contact name: "+dest.get_contactName(), ", Phone: "+dest.get_phoneNumber(), ", Truck Weight: "+ truckWeight));
                     //fileWriter.write(String.format("%20s %20s %20s %20s \r\n", _destinations.get(i).getSiteAddress(), _destinations.get(i).get_contactName(), _destinations.get(i).get_phoneNumber(), ""));
                 }
                 else {
-                    fileWriter.write(String.format(" %20s %20s %20s \r\n\n", "Address: "+destinations.get(i).getSiteAddress() , ", Contact name: "+destinations.get(i).get_contactName(), ", Phone: "+destinations.get(i).get_phoneNumber()));
+                    fileWriter.write(String.format(" %20s %20s %20s \r\n\n", "Address: "+ dest.getSiteAddress() , ", Contact name: "+dest.get_contactName(), ", Phone: "+dest.get_phoneNumber()));
                     //fileWriter.write(String.format("%20s %20s %20s \r\n", _destinations.get(i).getSiteAddress(), _destinations.get(i).get_contactName(), _destinations.get(i).get_phoneNumber()));
                 }
+                siteCounter++;
             }
             fileWriter.write("---------------------------------------------------------------------------------------------------------------------------------------------------\n");
             fileWriter.write(documentAddUnderline("TRANSFER ITEMS CONTENT:") + "\n\n");

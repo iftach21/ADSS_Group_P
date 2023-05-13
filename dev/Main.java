@@ -4,8 +4,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Interface inter = new Interface();
-        inter.logIn();
+        //
+        Interface in = new Interface();
+        in.logIn();
+        //
 
         AInterface[] interfaces = new AInterface[2];
         interfaces[0] = new SupplierInterface();

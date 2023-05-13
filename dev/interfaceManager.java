@@ -310,7 +310,8 @@ public class interfaceManager {
                                 System.out.println("What is the catalog of the general item?");
                                 itemInput = new Scanner(System.in);
                                 String itemCatalogNumber = itemInput.nextLine();
-                                currentItem = Inventory.getItemByCatalogNumber(itemCatalogNumber);
+                                //currentItem = Inventory.getItemByCatalogNumber(itemCatalogNumber);
+                                currentItem = Inventory.findItemByCatalogNum(itemCatalogNumber);
                                 System.out.println("Does you item have an expiration date? Y) Yes N) No");
                                 itemInput = new Scanner(System.in);
                                 String expirationAns = itemInput.nextLine();
@@ -332,7 +333,8 @@ public class interfaceManager {
                                 }
                                 specificItem currentSpecificItem = new specificItem(currentDate, false, Location.Storage, currentItem);
                                 Inventory.addSpecificItem(currentItem, currentSpecificItem);
-                                //currentItem.addSpecificItem(currentSpecificItem);
+                                Inventory.insertNewSpecificToMapper(currentSpecificItem);
+
                                 System.out.println("New specific item has been added!");
                                 System.out.println(currentItem.toString());
 
@@ -603,16 +605,12 @@ public class interfaceManager {
                 //-----------------------
                 case "8": {
 
-                    System.out.println("What is the item ID for the item to be set as defected?");
+                    System.out.println("What is the serial number for the item to be set as defected?");
                     Scanner defectedItemInput = new Scanner(System.in);
                     int defectedserialNumber = Integer.parseInt(defectedItemInput.nextLine());
-                    specificItem currentSpecific = Inventory.findSpecificItem(defectedserialNumber);
-                    currentSpecific.setDefected(true);
-                    currentSpecific.setLocation(Location.Storage);
+                    Inventory.moveSpecificItemToDefectiveMapper(defectedserialNumber);
                     System.out.println("Item numbered " + defectedserialNumber + " has been set has defected and" +
-                            "moved into the warehouse storage." );
-                    System.out.println(currentSpecific.toString());
-
+                            " moved into the warehouse storage." );
                     break;
                 }
 
@@ -620,7 +618,8 @@ public class interfaceManager {
                 //Print full inventory report
                 //-----------------------
                 case "9": {
-                    System.out.println(this.Inventory.toString());
+                    //System.out.println(this.Inventory.toString());
+                    this.Inventory.printAllItems();
                     break;
                 }
 

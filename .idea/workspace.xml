@@ -9,22 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated stockMapper">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="Mapper update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/InventoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/categoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/categoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/specificItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItemMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InventoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ItemMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Order.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderManger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interfaceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interfaceManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,13 +116,12 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ADSS_Group_P" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager">
+    <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/df6b1986-9990-446a-96ba-1d8e678a5cc5/console.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="df6b1986-9990-446a-96ba-1d8e678a5cc5" />
+      <method v="2" />
     </configuration>
     <configuration name="OrderMangerTest.manipule_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
@@ -181,7 +176,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest.order_move_to_history" />
         <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
         <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
@@ -208,13 +202,6 @@
       <workItem from="1683725340405" duration="310000" />
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
-    </task>
-    <task id="LOCAL-00036" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1681045399457</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1681045399457</updated>
     </task>
     <task id="LOCAL-00037" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681047579444</created>
@@ -545,14 +532,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683910740492</updated>
     </task>
-    <task id="LOCAL‎-00084" summary="updated stockMapper">
-      <created>1683967915445</created>
+    <task id="LOCAL-00084" summary="updated StockMappers">
+      <created>1683984037655</created>
       <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL‎-00084" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1683967915445</updated>
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1683984037655</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Mapper update">
+      <created>1683984135196</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1683984135196</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -583,8 +577,8 @@
     <MESSAGE value="Updated payment method" />
     <MESSAGE value="updated all mappers" />
     <MESSAGE value="updated StockMappers" />
-    <MESSAGE value="updated stockMapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated stockMapper" />
+    <MESSAGE value="Mapper update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mapper update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -614,21 +608,6 @@
           <line>393</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/Main.java</url>
-          <line>7</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/interfaceManager.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/interfaceManager.java</url>
-          <line>7</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/Period_Order.java</url>
           <line>20</line>
@@ -638,22 +617,13 @@
           </properties>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>
-          <line>10</line>
-          <properties class="categoryMapper" method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

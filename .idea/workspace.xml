@@ -9,11 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated all mappers">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated StockMappers">
+      <change afterPath="$PROJECT_DIR$/dev/DAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/categoryMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,13 +195,6 @@
       <workItem from="1683725340405" duration="310000" />
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
-    </task>
-    <task id="LOCAL-00034" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680970188957</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1680970188957</updated>
     </task>
     <task id="LOCAL-00035" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680972229166</created>
@@ -539,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683734652443</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL‎-00083" summary="updated StockMappers">
+      <created>1683910740492</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL‎-00083" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1683910740492</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +569,8 @@
     <MESSAGE value="started working on OrderManger" />
     <MESSAGE value="Updated payment method" />
     <MESSAGE value="updated all mappers" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated all mappers" />
+    <MESSAGE value="updated StockMappers" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated StockMappers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

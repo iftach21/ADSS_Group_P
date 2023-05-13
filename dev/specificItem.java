@@ -43,7 +43,7 @@ public class specificItem extends Item{
         this.location = location;
     }
 
-    public void setName(String name) { this.setName(name); }
+    public void setName(String name) { super.setName(name); }
 
     public boolean isExpired()
     {
@@ -55,10 +55,16 @@ public class specificItem extends Item{
     }
 
     public String getLocationString() {
-        return location.toString();
+        return location.toString().toLowerCase();
     }
     public Date getDate() {return this.expirationDate; }
     public int getSerialNumber() {return this.serialNumber; }
+    public String getSerialNumberString() {
+        String nameSerial = this.getName();
+        String serialNumber = String.valueOf(this.serialNumber);
+        String returnName = nameSerial + serialNumber;
+        return returnName;
+    }
 
     public boolean isDefected()
     {
@@ -85,5 +91,6 @@ public class specificItem extends Item{
                 ", isDefected: " + isDefected +
                 ", location: " + location;
     }
+
 
 }

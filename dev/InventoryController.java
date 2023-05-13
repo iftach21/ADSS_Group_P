@@ -4,11 +4,21 @@ public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
     private LinkedHashMap<Item, List<specificItem>> specificItemsMap;
+    private ItemMapper itemMapper;
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
         this.specificItemsMap = new LinkedHashMap<Item, List<specificItem>>();
+        this.itemMapper = new ItemMapper();
+    }
+
+    //MAPPER FUN
+    public void printAllItems(){
+        for(Item item: itemMapper.findAll())
+        {
+            System.out.println(item);
+        }
     }
 
     public specificItem findSpecificItem(int serialNumber){

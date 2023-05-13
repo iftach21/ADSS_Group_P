@@ -620,7 +620,8 @@ public class interfaceManager {
                 //Print full inventory report
                 //-----------------------
                 case "9": {
-                    System.out.println(this.Inventory.toString());
+                    //System.out.println(this.Inventory.toString());
+                    this.Inventory.printAllItems();
                     break;
                 }
 

@@ -9,12 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated all mappers">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated StockMappers">
+      <change afterPath="$PROJECT_DIR$/dev/DAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/categoryMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +24,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,7 +50,15 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2NeI9zUNLgjzxbSv1ARiyXCyGjb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -148,13 +156,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.OrderMangerTest.order_move_to_history" />
         <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
         <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
         <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_one_supplier" />
-        <item itemvalue="Database Script.console.sql" />
       </list>
     </recent_temporary>
   </component>
@@ -177,13 +195,6 @@
       <workItem from="1683725340405" duration="310000" />
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
-    </task>
-    <task id="LOCAL-00034" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1680970188957</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1680970188957</updated>
     </task>
     <task id="LOCAL-00035" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1680972229166</created>
@@ -521,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683734652443</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL‎-00083" summary="updated StockMappers">
+      <created>1683910740492</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL‎-00083" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1683910740492</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +569,8 @@
     <MESSAGE value="started working on OrderManger" />
     <MESSAGE value="Updated payment method" />
     <MESSAGE value="updated all mappers" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated all mappers" />
+    <MESSAGE value="updated StockMappers" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated StockMappers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -596,7 +615,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        Interface inter = new Interface();
+        inter.logIn();
+
         AInterface[] interfaces = new AInterface[2];
         interfaces[0] = new SupplierInterface();
         interfaces[1] = new OrderInterface(interfaces[0].getSupplier_manger());

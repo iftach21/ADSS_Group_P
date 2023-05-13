@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class TransferDestinationsDAO {
     private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
-    private Map<Integer, List<Site>> destinationsList;  //the key in the first map is transferId
+    private Map<Integer, Map<Site, Integer>> destinationsList;  //the key in the first map is transferId
     private static TransferDestinationsDAO instance = null;
 
     private TransferDestinationsDAO() throws SQLException
@@ -30,11 +30,11 @@ public class TransferDestinationsDAO {
     }
 
 
-    public List<Site> get(int transferId){
-        List<Site> destsToReturn = this.getFromCache(transferId);
-        if(destsToReturn != null){return destsToReturn;}
+    public Map<Site, Integer> get(int transferId){
+        Map<Site, Integer> destsAndWeightsToReturn = this.getFromCache(transferId);
+        if(destsAndWeightsToReturn != null){return destsAndWeightsToReturn;}
 
-        destsToReturn = new ArrayList<>();
+        destsAndWeightsToReturn = new HashMap<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -44,10 +44,11 @@ public class TransferDestinationsDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Site siteToReturn = SiteDAO.getInstance().get(rs.getInt("siteId"));
-                destsToReturn.add(siteToReturn);
+                int weightInSite =  rs.getInt("weightInSite");
+                destsAndWeightsToReturn.put(siteToReturn, weightInSite);
             }
-            destinationsList.put(transferId, destsToReturn);
-            if (destsToReturn == null){
+            destinationsList.put(transferId, destsAndWeightsToReturn);
+            if (destsAndWeightsToReturn == null){
                 System.out.println("No transfer found with ID " + transferId);
             }
         } catch (Exception e) {
@@ -65,20 +66,21 @@ public class TransferDestinationsDAO {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
         }
-        if (destsToReturn.isEmpty())
+        if (destsAndWeightsToReturn.isEmpty())
             return null;
-        return destsToReturn;
+        return destsAndWeightsToReturn;
     }
 
-    public void add(int transferId, List<Site> destinations){
+    public void add(int transferId, Map<Site, Integer> destinations){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT or REPLACE INTO TransferDestinations (transferId, siteId) " +
-                    "VALUES (?, ?)";
-            for (Site dest: destinations) {
+            String sql = "INSERT or REPLACE INTO TransferDestinations (transferId, siteId, weightInSite) " +
+                    "VALUES (?, ?, ?)";
+            for (Site dest: destinations.keySet()) {
                 stmt  = conn.prepareStatement(sql);
                 stmt.setInt(1, transferId);
                 stmt.setInt(2, dest.getSiteId());
+                stmt.setInt(3, destinations.get(dest));
                 stmt.executeUpdate();
             }
             destinationsList.put(transferId, destinations);
@@ -123,7 +125,7 @@ public class TransferDestinationsDAO {
         }
     }
 
-    private List<Site> getFromCache(int transferId){
+    private Map<Site, Integer> getFromCache(int transferId){
         for (Integer Id : this.destinationsList.keySet()) {
             if (Id == transferId) {
                 return destinationsList.get(Id);
@@ -132,12 +134,16 @@ public class TransferDestinationsDAO {
         return null;
     }
 
-    public void deleteFromCache(int transferId, int siteId){
-        for (int i = 0; i < this.destinationsList.get(transferId).size(); i++)
-        {
-            Site site = this.destinationsList.get(transferId).get(i);
-            if (site.getSiteId() == siteId) {
-                this.destinationsList.get(transferId).remove(i);
+    public void deleteFromCache(int transferId, int siteId) throws SQLException {
+        Map<Site, Integer> innerMap = destinationsList.get(transferId);
+
+        if (innerMap != null) {
+            // If the inner map is not null, remove the entry with the given site
+            innerMap.remove(SiteDAO.getInstance().get(siteId));
+
+            // If the inner map is now empty, remove the entire entry from the outer map
+            if (innerMap.isEmpty()) {
+                destinationsList.remove(transferId);
             }
         }
     }

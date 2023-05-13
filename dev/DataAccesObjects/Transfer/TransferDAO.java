@@ -248,6 +248,7 @@ public class TransferDAO {
         int truckLicenseNumber = rs.getInt("truckLicenseNumber");
         String driverName = rs.getString("driverName");
         int sourceId = rs.getInt("sourceId");
+        int weightAtSource = rs.getInt("weightAtSource");
 
         Site site = SiteDAO.getInstance().get(sourceId);
 
@@ -257,10 +258,10 @@ public class TransferDAO {
         LocalTime leavingTime = LocalTime.parse(leavingTimeString);
         LocalTime arrivingTime = LocalTime.parse(arrivingTimeString);
 
-        List<Site> transferDestination = TransferDestinationsDAO.getInstance().get(transferId);
+        Map<Site, Integer> transferDestination = TransferDestinationsDAO.getInstance().get(transferId);
         Map<Site, Map<Item_mock, Integer>> transferOrderItems = TransferItemsDAO.getInstance().get(transferId);
 
-        Transfer transfer = new Transfer(dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, site, transferDestination, transferOrderItems, transferId);
+        Transfer transfer = new Transfer(dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, site, transferDestination, transferOrderItems, transferId, weightAtSource);
 
         return transfer;
     }

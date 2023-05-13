@@ -30,7 +30,7 @@ public class Transfer {
     //private List<Site> _destinations;
     //private Map<Site, Map<Item_mock, Integer>> _orderItems;
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, List<Site> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId, int weightAtSource) throws SQLException {
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, Map<Site, Integer> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId, int weightAtSource) throws SQLException {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
         this._arrivingDate = arrivingDate;
@@ -44,7 +44,7 @@ public class Transfer {
         this._transferItemsDAO = TransferItemsDAO.getInstance();
     }
 
-    public void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, List<Site> destinations) throws SQLException {
+    public void addToDAO(Map<Site, Map<Item_mock, Integer>> orderItems, Map<Site, Integer> destinations) throws SQLException {
         _transferDestinationsDAO.add(_transferId, destinations);
         for (Site site : orderItems.keySet()) {
             for (Item_mock item : orderItems.get(site).keySet())
@@ -92,7 +92,7 @@ public class Transfer {
 
     public void createDocument()
     {
-        List<Site> destinations = _transferDestinationsDAO.get(_transferId);
+        Map<Site, Integer> destinations = _transferDestinationsDAO.get(_transferId);
         Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
         System.out.println("Creating transfer document (a text file will be created in current directory)...");
         String fileName = "transfer" + _transferId +"_Document.txt";
@@ -264,7 +264,7 @@ public class Transfer {
 
     public LocalDate getArrivingDate(){return this._arrivingDate;}
 
-    public List<Site> getDestinations(){
+    public Map<Site, Integer> getDestinations(){
         return _transferDestinationsDAO.get(_transferId);
     }
 

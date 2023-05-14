@@ -97,7 +97,7 @@ public class OrderMapper
                 suppliersId.add(supplierId);
 //                order.setSupplier(findSupplier(supplierId));
                 order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
-                cache.put(rs.getInt("order_num"), order);
+//                cache.put(rs.getInt("order_num"), order);
                 orders.add(order);
             }
         }

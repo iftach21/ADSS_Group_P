@@ -45,6 +45,10 @@ public class ItemMapper {
                 TempLevel tempValue = TempLevel.valueOf(tempLevel);
                 item.setTemperature(tempValue);
                 item.setManufacturer((rs.getString("manufacturer")));
+                String price_his= ((rs.getString("price_history")));
+                PriceHistoryParser parser=new PriceHistoryParser();
+                if(!price_his.equals("[]")){
+                    item.setPriceHistory(parser.parse(price_his));}
                 cache.put(catalogNum, item);
                 conn.close();
                 return item;
@@ -228,6 +232,7 @@ public class ItemMapper {
                 item.setTemperature(tempValue);
                 item.setManufacturer((rs.getString("manufacturer")));
                 items.add(item);
+
             }
         }
         catch(SQLException e){}

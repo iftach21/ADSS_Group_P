@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="fix the period order need also to cheak why the price history dont work there">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderManger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Item.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,43 +80,58 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684101255765</updated>
-      <workItem from="1684101257324" duration="1340000" />
+      <workItem from="1684101257324" duration="2920000" />
     </task>
+    <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
+      <created>1684102806712</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684102806712</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix the period order need also to cheak why the price history dont work there" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the period order need also to cheak why the price history dont work there" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/OrderMapper.java</url>
-          <line>128</line>
-          <properties class="OrderMapper" method="findAllOrderWithStatus">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
+          <line>276</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>290</line>
-          <properties class="OrderManger" method="period_order">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="3" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/Item.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>329</line>
-          <option name="timeStamp" value="2" />
+          <line>260</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>296</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/dev/PeriodicOrderMapper.java</url>
+          <line>122</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

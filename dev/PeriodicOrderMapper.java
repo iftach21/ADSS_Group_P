@@ -114,7 +114,9 @@ public class PeriodicOrderMapper {
         {
             conn.close();
         }
-        catch (SQLException e){}
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
 
         for(int i = 0; i < orders.size(); i++)
         {

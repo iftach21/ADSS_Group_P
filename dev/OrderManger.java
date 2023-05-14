@@ -373,7 +373,7 @@ public class OrderManger {
         orderMapper.delete(orderMapper.findByOrderNum(id));
     }
 
-
+    //delete all db of orders
     public void  delte_db(){
         orderMapper.deleteAll();
         periodicOrderMapper.deleteAll();

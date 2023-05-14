@@ -87,12 +87,14 @@ public class ContractMapper {
 //                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
                 itemIdMap = ParserForContractItemIntegerDouble.parse(itemsMapJson); // TODO build the needed mapper
                 contract.itemsMapDiscount = getItems(itemIdMap);
-                cache.put(rs.getInt("contract_id"), contract);
+                cache.put(contract.contractId, contract);
                 return contract;
             }
         }
         catch(SQLException ignored)
-        {}
+        {
+            System.out.println(ignored.getMessage());
+        }
         try
         {
             conn.close();

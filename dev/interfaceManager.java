@@ -597,7 +597,7 @@ public class interfaceManager extends AInterface {
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
                     String catalogNumber = Input.nextLine();
-                    Reports.addReportHistory(Inventory.priceHistoryReport(catalogNumber));
+                    Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
 
 
                     break;

@@ -26,9 +26,8 @@ public class ReportMapper implements DAO<Report>{
                 String reportInformationString = rs.getString("reportInformationString");
                 String reportTypeString = rs.getString("reportType");
                 reportType reportTypeEnum = reportType.valueOf(reportTypeString);
-                String reportItems = rs.getString("reportItems");
-                String repurtNumString = String.valueOf(reportNum);
-                report = getById(repurtNumString);
+                String reportNumString = String.valueOf(reportNum);
+                report = getById(reportNumString);
                 if (report == null){
                     //TODO create another constructor for Report the include everything
                     report = new Report(reportTypeEnum,reportDate);
@@ -66,13 +65,13 @@ public class ReportMapper implements DAO<Report>{
                 String reportInformationString = rs.getString("reportInformationString");
                 String reportTypeString = rs.getString("reportType");
                 reportType reportTypeEnum = reportType.valueOf(reportTypeString);
-                String reportItems = rs.getString("reportItems");
+//                String reportItems = rs.getString("reportItems");
 
-                Gson gson = new Gson();
-                Type itemType = new com.google.gson.reflect.TypeToken<LinkedHashMap<Item, Integer>>() {}.getType();
-                LinkedHashMap<Item, Integer> reportItemsMap = gson.fromJson(reportItems, itemType);
+//                Gson gson = new Gson();
+//                Type itemType = new com.google.gson.reflect.TypeToken<LinkedHashMap<Item, Integer>>() {}.getType();
+//                LinkedHashMap<Item, Integer> reportItemsMap = gson.fromJson(reportItems, itemType);
 
-                Report report = new Report(reportTypeEnum,reportDate,reportInformationString,reportNum, reportItemsMap);
+                Report report = new Report(reportTypeEnum,reportDate,reportInformationString,reportNum);
                 identityMap.add(report);
                 return report;
             }
@@ -89,15 +88,15 @@ public class ReportMapper implements DAO<Report>{
 
     @Override
     public void insert(Report report) throws SQLException {
-        String sql = "INSERT INTO Reports (reportNum, reportDate, reportInformationString, reportType, reportItems) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Reports (reportNum, reportDate, reportInformationString, reportType) VALUES (?, ?, ?, ?)";
         getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
-            String reportJson = new JSONObject(report.getReportItems()).toString();
+//            String reportJson = new JSONObject(report.getReportItems()).toString();
             statement.setInt(1,report.getReportNum());
             statement.setDate(2, (java.sql.Date) report.getReportDate());
             statement.setString(3,report.getreportInformationString());
             statement.setString(4,report.getType().name());
-            statement.setString(5,reportJson);
+//            statement.setString(5,reportJson);
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()){
@@ -115,15 +114,15 @@ public class ReportMapper implements DAO<Report>{
 
     @Override
     public void update(Report report) throws SQLException {
-        String sql = "UPDATE Reports SET reportDate = ?, reportInformationString = ?, reportType = ?, reportItems = ? WHERE reportNum = ?";
+        String sql = "UPDATE Reports SET reportDate = ?, reportInformationString = ?, reportType = ? WHERE reportNum = ?";
         getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
-            String reportJson = new JSONObject(report.getReportItems()).toString();
+//            String reportJson = new JSONObject(report.getReportItems()).toString();
             statement.setDate(1, (java.sql.Date) report.getReportDate());
             statement.setString(2,report.getreportInformationString());
             statement.setString(3,report.getType().name());
-            statement.setString(4,reportJson);
-            statement.setInt(5,report.getReportNum());
+//            statement.setString(4,reportJson);
+            statement.setInt(4,report.getReportNum());
             statement.executeUpdate();
 
             //TODO check if need to update in the idintityMap

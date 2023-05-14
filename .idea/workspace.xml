@@ -9,7 +9,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated orderMapper" />
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated orderMapper">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ReportMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Category.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CategoryController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Database.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ItemController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/JsonToMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Notification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ParserForContractItemIntegerDouble.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PaymentCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Period_Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Report.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReportController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReportItemsMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReportMapper$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReportMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StatusOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SupplierInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WindowTypeCreater.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/categoryMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interfaceManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interfaceWorker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/manufacturer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/notificationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/reportType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/specificItemMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/stockTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/subCategory.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,12 +147,13 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderMangerTest.test_only_supplier_exist">
-    <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/df6b1986-9990-446a-96ba-1d8e678a5cc5/console.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="df6b1986-9990-446a-96ba-1d8e678a5cc5" />
-      <method v="2" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ADSS_Group_P" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="OrderMangerTest.manipule_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
@@ -164,6 +208,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
         <item itemvalue="JUnit.OrderMangerTest.order_move_to_history" />
         <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
@@ -191,6 +236,7 @@
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
       <workItem from="1684057352276" duration="10179000" />
+      <workItem from="1684071107476" duration="2469000" />
     </task>
     <task id="LOCAL-00044" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681128508682</created>
@@ -613,13 +659,22 @@
           </properties>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/dev/interfaceManager.java</url>
+          <line>134</line>
+          <properties class="interfaceManager" method="interfaceManagerLogin">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

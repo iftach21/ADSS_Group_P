@@ -123,7 +123,7 @@ public class ItemMapper {
 
             if (rs.next()) {
                 cache.put(item.getCatalogNum(), item); //We insert the new item into the cache
-            }
+           }
         }
         catch(SQLException e){}
 
@@ -187,6 +187,24 @@ public class ItemMapper {
         catch (SQLException e){}
 
     }
+    public void deleteAll() {
+        PreparedStatement stmt;
+        getConnection();
+
+        try {
+            stmt = conn.prepareStatement("DELETE FROM items");
+            stmt.executeUpdate();
+            cache.clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public List<Item> findAllByCatalogNum(String catalogNum)
     {
@@ -230,4 +248,5 @@ public class ItemMapper {
         }
         catch (SQLException e){}
     }
+
 }

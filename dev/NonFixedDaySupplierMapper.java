@@ -257,5 +257,22 @@ public class NonFixedDaySupplierMapper{
         }
         return itemList;
     }
+    public void deleteAll() {
+        getConnection();
+        PreparedStatement stmt;
+
+        try {
+            // Delete all rows from NonDeliveringSuppliers table
+            stmt = conn.prepareStatement("DELETE FROM NonFixedDaySuppliers");
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Clear cache
+        cache.clear();
+    }
+
 
 }

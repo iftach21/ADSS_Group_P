@@ -247,6 +247,24 @@ public class ContractMapper {
         }
         catch (SQLException e){}
     }
+    public void deleteAll() {
+        PreparedStatement stmt;
+        getConnection();
+
+        try {
+            stmt = conn.prepareStatement("DELETE FROM Contracts");
+            stmt.executeUpdate();
+            cache.clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     //This helper function gives us a connection to the DB
     private void getConnection()

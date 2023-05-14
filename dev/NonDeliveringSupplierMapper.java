@@ -239,5 +239,22 @@ public class NonDeliveringSupplierMapper {
         }
         return itemList;
     }
+    public void deleteAll() {
+        getConnection();
+        PreparedStatement stmt;
+
+        try {
+            // Delete all rows from NonDeliveringSuppliers table
+            stmt = conn.prepareStatement("DELETE FROM NonDeliveringSuppliers");
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Clear cache
+        cache.clear();
+    }
+
 }
 

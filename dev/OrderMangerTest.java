@@ -318,7 +318,7 @@ class OrderMangerTest {
 
 
     }
-    // test 7 this Test is to cheak that an order is put right in the data base
+    // test 7 this Test is to
     @Test
     void three_supllier_split(){
         ItemMapper itemMapper=new ItemMapper();
@@ -341,11 +341,6 @@ class OrderMangerTest {
         item1.addNewPrice(10,25);
         item1.addNewPrice(10,40);
         itemMapper.insert(item1);
-        WindowType currentDeliveryDay =WindowType.day2;
-        FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
-
-        NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
-        masupplier.add_supplier(supplier_3);
 
         masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
         OrderManger orderManger = new OrderManger();

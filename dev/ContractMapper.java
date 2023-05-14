@@ -178,7 +178,6 @@ public class ContractMapper {
             rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
-                contract.contractId = rs.getInt(1);
                 cache.put(contract.contractId, contract);//We insert the new contract into the cache
             }
         }

@@ -10,6 +10,10 @@ public class ReportItemsMapper implements DAO<Report>{
     private Connection connection;
     private List<Report> identityMap;
 
+    public ReportItemsMapper() {
+        this.connection = connection;
+        this.identityMap = new ArrayList<>();
+    }
 
 
     @Override

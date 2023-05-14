@@ -166,12 +166,11 @@ public class Item {
     }
 
     public int getMinimum_quantity() {
-        return minimum_quantity;
+        return this.minimum_quantity;
     }
 
     public void setMinimum_quantity(int minimum_quantity) {
         this.minimum_quantity = minimum_quantity;
-
     }
 
     @Override

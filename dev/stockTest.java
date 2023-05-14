@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class stockTest {
     //Test 1: Check item's current price
     @Test

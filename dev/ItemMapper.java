@@ -80,6 +80,7 @@ public class ItemMapper {
                 String tempLevel = rs.getString("temperature");
                 TempLevel tempValue = TempLevel.valueOf(tempLevel);
                 item.setTemperature(tempValue);
+                item.setMinQuantity(rs.getInt("minimum_quantity"));
                 item.setManufacturer((rs.getString("manufacturer")));
                 String price_his= ((rs.getString("price_history")));
                 PriceHistoryParser parser=new PriceHistoryParser();

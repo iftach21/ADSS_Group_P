@@ -97,6 +97,7 @@ public class NonFixedDaySupplierMapper{
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
+                suppliersId.add(rs.getString("supplier_ID"));
                 itemsIdMap.add(Parser.parse(itemsMapJson)); // TODO build needed parser
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
 //                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
@@ -176,6 +177,7 @@ public class NonFixedDaySupplierMapper{
         getConnection();
         PreparedStatement stmt;
         Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+
         for(Map.Entry<Item,Pair<Integer,Float>> entry : nonFixedDaySupplier.getItems().entrySet())
         {
             String key = entry.getKey().getCatalogNum();

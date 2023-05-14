@@ -34,6 +34,8 @@ public class PeriodicOrderMapper {
 
         PreparedStatement stmt;
         ResultSet rs;
+        String itemsFromTable;
+        Map<String,Pair<Integer,Float>> itemIdMap;
         getConnection();// The function that gets us the connection to the DB
 
         //If it doesnt exist in the cache we check if it exists in the DB
@@ -47,7 +49,9 @@ public class PeriodicOrderMapper {
             {
                 Period_Order order = new Period_Order();
                 order.setOrderNum(rs.getInt("order_num"));
-                order.setItemList(Parser.parse(rs.getString("item_list")));
+//                order.setItemList(Parser.parse(rs.getString("item_list")));
+                itemsFromTable = rs.getString("item_list");
+                itemIdMap = Parser.parse(itemsFromTable); // TODO build the needed mapper
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");

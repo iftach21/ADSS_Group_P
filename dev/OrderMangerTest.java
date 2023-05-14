@@ -443,12 +443,13 @@ class OrderMangerTest {
         item1.addNewPrice(10,25);
         WindowType currentDeliveryDay =WindowType.day2;
         FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
-        masupplier.add_supplier(supplier_2);
-        masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
-        NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
+//        masupplier.add_supplier(supplier_2);
+//        masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
+        NonDeliveringSupplier supplier_3 = new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
         masupplier.add_supplier(supplier_3);
         item1.addNewPrice(10,25);
         item1.addNewPrice(10,40);
+        masupplier.add_item_to_contract(item1,10, 10.0F,"Supplier1 Inc.");
         masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
         OrderManger orderManger = new OrderManger();
 

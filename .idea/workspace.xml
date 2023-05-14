@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="fix the period order need also to cheak why the price history dont work there">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/SupplierInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/SupplierInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SupplierInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SupplierInterface.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +40,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ADSS_Group_P" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OrderMangerTest.move_order_to_approvel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -67,6 +70,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount" />
         <item itemvalue="JUnit.OrderMangerTest.move_order_to_approvel" />
       </list>
@@ -80,7 +84,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684101255765</updated>
-      <workItem from="1684101257324" duration="2920000" />
+      <workItem from="1684101257324" duration="4057000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -89,7 +93,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684102806712</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix the period order need also to cheak why the price history dont work there">
+      <created>1684104195665</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684104195665</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix the period order need also to cheak why the price history dont work there">
+      <created>1684104611204</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684104611204</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +150,11 @@
           <url>file://$PROJECT_DIR$/dev/PeriodicOrderMapper.java</url>
           <line>122</line>
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/SupplierInterface.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

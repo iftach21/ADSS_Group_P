@@ -29,6 +29,14 @@ public class Report {
         this.reportItems = reportItems;
     }
 
+    public Report(reportType type, Date reportDate, String reportInformationString, int reportNum) {
+        this.type = type;
+        this.reportDate = reportDate;
+        this.reportNum = nextReportNum;
+        this.reportInformationString = reportInformationString;
+        this.reportItems = new LinkedHashMap<>();
+    }
+
     public reportType getType() {
         return type;
     }

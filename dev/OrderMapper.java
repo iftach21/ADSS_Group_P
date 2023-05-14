@@ -30,6 +30,8 @@ public class OrderMapper
         }
         PreparedStatement stmt;
         ResultSet rs;
+        String itemsFromTable;
+        Map<String,Pair<Integer,Float>> itemIdMap;
         getConnection(); // The function that gets us the connection to the DB
 
         //If it doesnt exist in the cache we check if it exists in the DB
@@ -42,13 +44,17 @@ public class OrderMapper
             {
                 Order order = new Order();
                 order.setOrderNum(rs.getInt("order_num"));
-                order.setItemList(Parser.parse(rs.getString("item_list")));
+//                order.setItemList(Parser.parse(rs.getString("item_list")));
+                itemsFromTable = rs.getString("item_list");
+                itemIdMap = Parser.parse(itemsFromTable); // TODO build the needed mapper
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
                 order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
                 conn.close();
                 order.setSupplier(findSupplier(supplierId));
+
+                order.setItemList(getItems(itemIdMap));
                 cache.put(rs.getInt("order_num"), order);
                 return order;
             }
@@ -64,10 +70,13 @@ public class OrderMapper
         return null;  // if it wasnt found in the DB or in the cache
     }
 
+
+
     //This function gives all the Order that are currently in the DB
     public List<Order> findAll()
     {
         List<Order> orders = new ArrayList<>();// The list that will hold all the Order that we will return
+        List<Map<String,Pair<Integer,Float>>> itemsIdMap = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
@@ -79,7 +88,9 @@ public class OrderMapper
             {
                 Order order = new Order();
                 order.setOrderNum(rs.getInt("order_num"));
-                order.setItemList(Parser.parse(rs.getString("item_list")));
+//                order.setItemList(Parser.parse(rs.getString("item_list")));
+                String itemsFromTable = rs.getString("item_list");
+                itemsIdMap.add(Parser.parse(itemsFromTable)); // TODO build needed parser
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
@@ -99,7 +110,14 @@ public class OrderMapper
 
         for(int i = 0; i < orders.size(); i++)
         {
+            Map<Item,Pair<Integer,Float>> itemsMap = getItems(itemsIdMap.get(i));
+            orders.get(i).setItemList(itemsMap);
+        }
+
+        for(int i = 0; i < orders.size(); i++)
+        {
             orders.get(i).setSupplier(findSupplier(suppliersId.get(i)));
+            cache.put(orders.get(i).getOrderNum(),orders.get(i));
         }
 
         return orders; // we return all the Order that we found
@@ -111,7 +129,7 @@ public class OrderMapper
     {
         List<Order> orders = new ArrayList<>();// The list that will hold all the Order that we will return
         List<String> suppliersId = new ArrayList<>();
-
+        List<Map<String,Pair<Integer,Float>>> itemsIdMap = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
@@ -124,7 +142,9 @@ public class OrderMapper
             {
                 Order order = new Order();
                 order.setOrderNum(rs.getInt("order_num"));
-                order.setItemList(Parser.parse(rs.getString("item_list")));
+//                order.setItemList(Parser.parse(rs.getString("item_list")));
+                String itemsFromTable = rs.getString("item_list");
+                itemsIdMap.add(Parser.parse(itemsFromTable)); // TODO build needed parser
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
@@ -145,6 +165,12 @@ public class OrderMapper
 
         for(int i = 0; i < orders.size(); i++)
         {
+            Map<Item,Pair<Integer,Float>> itemsMap = getItems(itemsIdMap.get(i));
+            orders.get(i).setItemList(itemsMap);
+        }
+
+        for(int i = 0; i < orders.size(); i++)
+        {
             orders.get(i).setSupplier(findSupplier(suppliersId.get(i)));
         }
 
@@ -156,12 +182,22 @@ public class OrderMapper
     {
         PreparedStatement stmt;
         getConnection();
+        Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+
+        for(Map.Entry<Item,Pair<Integer,Float>> entry : order.getItemList().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Pair<Integer,Float> pair = entry.getValue();
+            insertItem.put(key,pair);
+        }
+
         try {
             stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number,statusOrder)VALUES (?,?, ?, ?, ?, ?)");//This is the SQL query that we use to insert a new Order into the DB
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
             stmt.setString(2, supplier.getSupplierID());
-            String itemsJson = new JSONObject(order.getItemList()).toString();
+//            String itemsJson = new JSONObject(order.getItemList()).toString();
+            String itemsJson = new JSONObject(insertItem).toString();
             stmt.setString(3, itemsJson);
             stmt.setFloat(4, order.getCost());
             stmt.setInt(5, order.getStore_number());
@@ -195,10 +231,21 @@ public class OrderMapper
     {
         PreparedStatement stmt;
         getConnection();
+
+        Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+
+        for(Map.Entry<Item,Pair<Integer,Float>> entry : order.getItemList().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Pair<Integer,Float> pair = entry.getValue();
+            insertItem.put(key,pair);
+        }
+
         try {
             stmt = conn.prepareStatement("UPDATE Orders SET supplier_id = ?,  item_list = ?, cost = ?, store_number = ?, statusOrder = ? WHERE order_num = ?");//This is the SQL query that we use for updating a value
             stmt.setString(1, order.getSupplier().getSupplierID());
-            String itemsJson = new JSONObject(order.getItemList()).toString();
+//            String itemsJson = new JSONObject(order.getItemList()).toString();
+            String itemsJson = new JSONObject(insertItem).toString();
             stmt.setString(2, itemsJson);
             stmt.setFloat(3, order.getCost());
             stmt.setInt(4, order.getStore_number());
@@ -278,5 +325,19 @@ public class OrderMapper
             this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         }
         catch (SQLException e){}
+    }
+
+    private Map<Item,Pair<Integer,Float>> getItems(Map<String,Pair<Integer,Float>> itemIdMap)
+    {
+        ItemMapper itemMapper = new ItemMapper();
+        Map<Item,Pair<Integer,Float>> itemList = new HashMap<>();
+        for(Map.Entry<String,Pair<Integer,Float>> entry : itemIdMap.entrySet())
+        {
+            String key = entry.getKey();
+            Pair<Integer,Float> value = entry.getValue();
+            Item item = itemMapper.findByCatalogNum(key);
+            itemList.put(item,value);
+        }
+        return itemList;
     }
 }

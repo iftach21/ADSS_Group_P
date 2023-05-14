@@ -1,5 +1,6 @@
 package Interface;
 
+import DataAccesObjects.Connection;
 import Interface.Employee.BossInterface;
 import Interface.Employee.WorkerInterface;
 import Interface.Transfer.TransferManagerInterface;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
     static BossInterface bossInterface;
 
     static {
@@ -33,7 +33,7 @@ public class Main {
 
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         List<AInterface> intefaceList = new ArrayList<>();
         intefaceList.add(bossInterface);
         intefaceList.add(workerInterface);
@@ -73,6 +73,5 @@ public class Main {
                 System.out.println("Seems to be a problem, please contact IT");
             }
         }
-
     }
 }

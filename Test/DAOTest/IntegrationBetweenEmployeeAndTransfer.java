@@ -25,55 +25,57 @@ public class IntegrationBetweenEmployeeAndTransfer {
 
     Workers stoke2;
 
-    WeeklyShiftAndWorkersManager wscontroller;
+    WeeklyShiftAndWorkersManager wscontroller = WeeklyShiftAndWorkersManager.getInstance();
 
     List<Driver> drivers;
     DriverController driverControllerTest;
 
+    public IntegrationBetweenEmployeeAndTransfer() throws SQLException {
+    }
 
 
     @BeforeEach
     void createTransfer() throws SQLException {
 
-        //create 4 drivers :
+//create 4 drivers :
 
-        wscontroller.addNewDriver(11,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.lightWeight);
+        wscontroller.addNewDriver(111,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234, TempLevel.cold, weightType.lightWeight);
 
-        wscontroller.addNewDriver(22,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
+        wscontroller.addNewDriver(222,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
 
-        wscontroller.addNewDriver(33,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
+        wscontroller.addNewDriver(333,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
 
-        wscontroller.addNewDriver(44,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
+        wscontroller.addNewDriver(444,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
 
-        wscontroller.addemployee(55,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+        wscontroller.addemployee(555,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
 
-        wscontroller.addemployee(66,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+        wscontroller.addemployee(666,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
 
         //creating weeklyshift for the stokes:
-        wscontroller.createnewweeklyshift(1,1,1);
+        wscontroller.createnewweeklyshift(11,1999,12);
 
-        wscontroller.createnewweeklyshift(1,1,0);
+        wscontroller.createnewweeklyshift(11,1999,0);
 
 
         // all of the data is for week num 1 and year 1:
 
         //stokes will be available for day1, day 2 on day shift:
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,55,2);
-        wscontroller.addtoexistingweeklyshift(1,1,0,WindowType.day1,66,2);
+        wscontroller.addtoexistingweeklyshift(11,1999,12, WindowType.day1,555,2);
+        wscontroller.addtoexistingweeklyshift(11,1999,12,WindowType.day1,666,2);
 
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,55,2);
-        wscontroller.addtoexistingweeklyshift(1,1,0,WindowType.day3,66,2);
+        wscontroller.addtoexistingweeklyshift(11,1999,12, WindowType.day3,555,2);
+        wscontroller.addtoexistingweeklyshift(11,1999,12,WindowType.day3,666,2);
 
         //available for drivers:
         //for day 3: all of them
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,11,7);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,22,7);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,33,7);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,44,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,111,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,222,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,333,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,444,7);
 
         // for day 1 just driver 1 and 2.
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,11,7);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,22,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day1,111,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day1,222,7);
 
     }
 

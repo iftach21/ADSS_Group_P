@@ -4,12 +4,61 @@ public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
     private LinkedHashMap<Item, List<specificItem>> specificItemsMap;
+    private ItemMapper itemMapper;
+    private specificItemMapper specificItemMapper;
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
         this.specificItemsMap = new LinkedHashMap<Item, List<specificItem>>();
+        this.itemMapper = new ItemMapper();
+        this.specificItemMapper = new specificItemMapper();
     }
+
+    //Items Mapper
+    public void printAllItems(){
+        for(Item item: itemMapper.findAll())
+        {
+            System.out.println(item);
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                System.out.println(specificItem);
+            }
+        }
+    }
+
+    public Item findItemByCatalogNum(String catalogNum){
+        Item currentItem = itemMapper.findByCatalogNum(catalogNum);
+        return currentItem;
+    }
+
+    //Specific Items Mapper
+    /*
+    insertNewSpecificToMapper
+    This function recieves a specificItem, and enters it into the specificItemsMapper.
+     */
+    public void insertNewSpecificToMapper(specificItem currentSpecific){
+        specificItemMapper.insert(currentSpecific);
+    }
+
+    public void moveSpecificItemToDefectiveMapper(int serialNumber) {
+        List<specificItem> itemList = specificItemMapper.findAll();
+        if (itemList != null) {
+            Iterator<specificItem> iterator = itemList.iterator();
+            while (iterator.hasNext()) {
+                specificItem specificItem = iterator.next();
+                if (specificItem.getserialNumber() == serialNumber) {
+                    specificItem.setDefected(true);
+                    specificItem.setLocation(Location.Storage);
+                    specificItemMapper.delete(specificItem);
+                    specificItemMapper.insert(specificItem);
+                }
+            }
+        }
+    }
+
+
+    //END M
 
     public specificItem findSpecificItem(int serialNumber){
         specificItem currentSpecificItem;

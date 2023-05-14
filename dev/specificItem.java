@@ -3,8 +3,8 @@ import java.util.Date;
 
 public class specificItem extends Item{
 
-    private final int serialNumber;
-    private final Date expirationDate;
+    private int serialNumber;
+    private Date expirationDate;
     private boolean isDefected = false;
     private Location location;
     private static int nextserialNumber = 1;
@@ -18,6 +18,13 @@ public class specificItem extends Item{
         this.location = location;
     }
 
+    public specificItem() {
+        this.expirationDate = null;
+        this.location = null;
+        this.serialNumber = nextserialNumber;
+        nextserialNumber++;
+    }
+
     public int getserialNumber() {
         return serialNumber;
     }
@@ -25,6 +32,8 @@ public class specificItem extends Item{
     public void setDefected(boolean defected) {
         isDefected = defected;
     }
+    public void setDate(Date currentDate) {this.expirationDate = currentDate; }
+    public void setSerialNumber(int newSerial) {this.serialNumber = newSerial; }
 
     public Location getLocation() {
         return location;
@@ -33,6 +42,8 @@ public class specificItem extends Item{
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public void setName(String name) { super.setName(name); }
 
     public boolean isExpired()
     {
@@ -44,7 +55,15 @@ public class specificItem extends Item{
     }
 
     public String getLocationString() {
-        return location.toString();
+        return location.toString().toLowerCase();
+    }
+    public Date getDate() {return this.expirationDate; }
+    public int getSerialNumber() {return this.serialNumber; }
+    public String getSerialNumberString() {
+        String nameSerial = this.getName();
+        String serialNumber = String.valueOf(this.serialNumber);
+        String returnName = nameSerial + serialNumber;
+        return returnName;
     }
 
     public boolean isDefected()
@@ -72,5 +91,6 @@ public class specificItem extends Item{
                 ", isDefected: " + isDefected +
                 ", location: " + location;
     }
+
 
 }

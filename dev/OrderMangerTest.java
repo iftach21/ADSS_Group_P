@@ -425,6 +425,7 @@ class OrderMangerTest {
     //test 10
     @Test
     void test_only_supplier_exist(){
+        ItemMapper itemMapper=new ItemMapper();
         Supplier_Manger masupplier=new Supplier_Manger();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);
@@ -441,21 +442,21 @@ class OrderMangerTest {
 //        item3.setMinimum_quantity(3);
         Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
         item1.addNewPrice(10,25);
-        WindowType currentDeliveryDay =WindowType.day2;
-        FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
-        masupplier.add_supplier(supplier_2);
-        masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
-        NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
-        masupplier.add_supplier(supplier_3);
         item1.addNewPrice(10,25);
         item1.addNewPrice(10,40);
+        itemMapper.insert(item1);
+        WindowType currentDeliveryDay =WindowType.day2;
+        FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
+
+        NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
+        masupplier.add_supplier(supplier_3);
+
         masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
         OrderManger orderManger = new OrderManger();
 
         Map<Item,Integer> maplist = new HashMap<Item,Integer>();
 
         orderManger.assing_Orders_to_Suppliers(maplist,masupplier,50);
-        ItemMapper itemMapper =new ItemMapper();
         itemMapper.findAll().get(0).print_item();
         itemMapper.findAll().get(1).print_item();
 

@@ -70,6 +70,7 @@ public class Supplier_Manger {
 
     //add supplier to the data-base and also to a list of all supplier so i can play with it when i want and i always love to play
     public boolean add_supplier(Supplier supplier) {
+        this.update_suppliers();
         if(supplier.getType()==0){
             this.fixedDaySupplierMapper.insert((FixedDaySupplier) supplier);
         } else if (supplier.getType()==2) {

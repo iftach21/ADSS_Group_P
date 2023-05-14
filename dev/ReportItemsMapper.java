@@ -17,7 +17,7 @@ public class ReportItemsMapper implements DAO<Report>{
         Report report = null;
         getConnection();
         String sql = "SELECT r.reportNum, r.reportType, r.reportDate, r.reportInformationString, " +
-                "i.catalog_number, i.quantity, i.name, i.weight, i.catalog_name, " +
+                "i.catalog_number,ri.quantity, i.name, i.weight, i.catalog_name, " +
                 "i.temperature, i.minimum_quantity, i.price_history, i.manufacturer " +
                 "FROM Reports r " +
                 "JOIN ReportItems ri ON r.reportNum = ri.reportNum " +

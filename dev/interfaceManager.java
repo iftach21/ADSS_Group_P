@@ -224,7 +224,8 @@ public class interfaceManager extends AInterface {
                                 System.out.println("What would you like to name the new category?");
                                 Scanner categoryInput = new Scanner(System.in);
                                 String categoryName = categoryInput.nextLine();
-                                Inventory.getCategoryControl().addCategory(categoryName);
+                                Category currentCategory = new Category(categoryName);
+                                //Inventory.getCategoryControl().addCategory(categoryName);
                                 System.out.println("New category " + categoryName + " has been created!");
                                 break;
                             //Create a new sub-category

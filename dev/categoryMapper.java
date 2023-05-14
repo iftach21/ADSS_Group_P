@@ -8,14 +8,14 @@ public class categoryMapper implements DAO<Category>{
 
 
     //constructor
-    public categoryMapper(){
+    public categoryMapper() throws SQLException{
+        this.connection = Database.connect();
         this.identityMap = new ArrayList<>();
     }
 
     @Override
     public List<Category> getAll() throws SQLException {
         Category category = null;
-        getConnection();
         String sql = "SELECT * FROM Categories";
         List<Category> categoryList = new ArrayList<>();
         try (Statement statement = connection.createStatement()){
@@ -26,7 +26,6 @@ public class categoryMapper implements DAO<Category>{
                 category = getById(categoryName);
                 if (category == null){
                     category = new Category(categoryName);
-                    category.setAmount(amount);
                     identityMap.add(category);
                 }
                 categoryList.add(category);
@@ -35,10 +34,6 @@ public class categoryMapper implements DAO<Category>{
         catch (SQLException e){
             e.printStackTrace();
         }
-        try {
-            connection.close();
-        }
-        catch (SQLException e){}
         return categoryList;
     }
 
@@ -49,16 +44,13 @@ public class categoryMapper implements DAO<Category>{
                 return category;
             }
         }
-        getConnection();
         String sql = "SELECT * FROM Categories WHERE categoryName = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()){
                 String categoryName = rs.getString("categoryName");
-                int amount = rs.getInt("amount");
                 Category category = new Category(id);
-                category.setAmount(amount);
                 identityMap.add(category);
                 return category;
             }
@@ -66,17 +58,12 @@ public class categoryMapper implements DAO<Category>{
         catch (SQLException e){
             e.printStackTrace();
         }
-        try {
-            connection.close();
-        }
-        catch (SQLException e){}
         return null;
     }
 
     @Override
     public void insert(Category category) throws SQLException {
         String sql = "INSERT INTO Categories (categoryName, amount) VALUES (?, ?)";
-        getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1,category.getCategoryName());
             statement.setInt(2,category.getAmount());
@@ -85,58 +72,32 @@ public class categoryMapper implements DAO<Category>{
             if (rs.next()){
                 identityMap.add(category);
             }
+            //TODO check if needed
+            connection.close();
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        try {
-            connection.close();
-        }
-        catch (SQLException e){}
     }
 
     @Override
     public void update(Category category) throws SQLException {
-        String sql = "UPDATE Categories SET amount = ? WHERE categoryName = ?";
-        getConnection();
+        String sql = "UPDATE Categories SET amount = ?WHERE categoryName = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1,category.getAmount());
             statement.setString(2,category.getCategoryName());
             statement.executeUpdate();
-
-            //TODO check if need to update in the idintityMap
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        try {
-            connection.close();
-        }
-        catch (SQLException e){}
     }
 
     @Override
     public void delete(Category category) throws SQLException {
         String sql = "DELETE FROM Categories WHERE categoryName = ?";
-        getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1,category.getCategoryName());
         statement.executeUpdate();
-        //TODO maybe to remove from the identityMap
-        try {
-            connection.close();
-        }
-        catch (SQLException e){}
-    }
-
-
-    private void getConnection()
-    {
-        try
-        {
-            this.connection = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
-        }
-        catch (SQLException e){}
     }
 }
-

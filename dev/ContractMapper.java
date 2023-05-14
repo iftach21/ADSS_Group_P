@@ -27,6 +27,8 @@ public class ContractMapper {
         {
             return cache.get(contractId);
         }
+
+        Map<String,Map<Integer,Double>> itemIdMap;
          //If it doesnt exist in the cache we check if it exists in the DB
         getConnection(); // The function that gets us the connection to the DB
         try
@@ -41,9 +43,11 @@ public class ContractMapper {
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
-                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
-                cache.put(contractId,contract);
+                itemIdMap = Parser.parse(itemsMapJson); // TODO build the needed mapper
+//                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
                 conn.close();
+                contract.itemsMapDiscount = getItems(itemIdMap);
+                cache.put(contractId,contract);
                 return contract;
             }
         }
@@ -73,15 +77,17 @@ public class ContractMapper {
                 {
                     return cache.get(rs.getInt("contract_id"));
                 }
-
+                Map<String,Map<Integer,Double>> itemIdMap;
                 Contract contract = new Contract();
                 contract.setContractId(rs.getInt("contract_id"));
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
-                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
-                cache.put(rs.getInt("contract_id"), contract);
                 conn.close();
+//                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
+                itemIdMap = Parser.parse(itemsMapJson); // TODO build the needed mapper
+                contract.itemsMapDiscount = getItems(itemIdMap);
+                cache.put(rs.getInt("contract_id"), contract);
                 return contract;
             }
         }
@@ -100,6 +106,7 @@ public class ContractMapper {
     public List<Contract> findAll()
     {
         List<Contract> contracts = new ArrayList<>(); // The list that will hold all the contracts that we will return
+        List<Map<String,Map<Integer,Double>>> itemsIdMap = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
@@ -113,8 +120,9 @@ public class ContractMapper {
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
-                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
-                cache.put(contract.contractId, contract);
+
+//                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
+//                cache.put(contract.contractId, contract);
                 contracts.add(contract);
             }
         }
@@ -126,6 +134,13 @@ public class ContractMapper {
         }
         catch (SQLException e){}
 
+        for(int i = 0; i < contracts.size(); i++)
+        {
+            Map<Item,Map<Integer,Double>> itemsMap = getItems(itemsIdMap.get(i));
+            contracts.get(i).itemsMapDiscount = itemsMap;
+            cache.put(contracts.get(i).contractId, contracts.get(i));
+        }
+
         return contracts; // we return all the contracts that we found
     }
 
@@ -135,9 +150,19 @@ public class ContractMapper {
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
+        Map<String, Map<Integer,Double>> insertItem = new HashMap<>();
+
+        for(Map.Entry<Item,Map<Integer,Double>> entry : contract.getItemsMapDiscount().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Map<Integer,Double> map = entry.getValue();
+            insertItem.put(key,map);
+        }
+
         try {
             stmt = conn.prepareStatement("INSERT INTO contracts (contract_id, supplier_id, items_Map_discount,total_discount) VALUES (?, ?, ?, ?)"); //This is the SQL query that we use to insert a new contract into the DB
-            String itemsJson = new Gson().toJson(contract.getItemsMapDiscount()).toString();
+//            String itemsJson = new Gson().toJson(contract.getItemsMapDiscount()).toString();
+            String itemsJson = new Gson().toJson(insertItem).toString();
             stmt.setString(1, Integer.toString(contract.contractId));
             stmt.setString(2, contract.supplierId);
             stmt.setString(3, itemsJson);
@@ -166,11 +191,22 @@ public class ContractMapper {
     {
         PreparedStatement stmt;
         getConnection();
+
+        Map<String, Map<Integer,Double>> insertItem = new HashMap<>();
+
+        for(Map.Entry<Item,Map<Integer,Double>> entry : contract.getItemsMapDiscount().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Map<Integer,Double> map = entry.getValue();
+            insertItem.put(key,map);
+        }
+
         try{
             stmt = conn.prepareStatement("UPDATE Contracts SET supplier_id = ?,  items_Map_discount = ?, total_discount = ? WHERE contract_id = ?");//This is the SQL query that we use for updating a value
             stmt.setInt(4,contract.contractId);
             stmt.setString(1,contract.supplierId);
-            String itemsJson = new JSONObject(contract.getItemsMapDiscount()).toString();
+//            String itemsJson = new JSONObject(contract.getItemsMapDiscount()).toString();
+            String itemsJson = new JSONObject(insertItem).toString();
             stmt.setString(2, itemsJson);
             stmt.setDouble(3, contract.getTotal_discount());
             stmt.executeUpdate();
@@ -214,5 +250,19 @@ public class ContractMapper {
             this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         }
         catch (SQLException e){}
+    }
+
+    private Map<Item,Map<Integer,Double>> getItems(Map<String,Map<Integer,Double>> itemIdMap)
+    {
+        ItemMapper itemMapper = new ItemMapper();
+        Map<Item,Map<Integer,Double>> itemList = new HashMap<>();
+        for(Map.Entry<String,Map<Integer,Double>> entry : itemIdMap.entrySet())
+        {
+            String key = entry.getKey();
+            Map<Integer,Double> value = entry.getValue();
+            Item item = itemMapper.findByCatalogNum(key);
+            itemList.put(item,value);
+        }
+        return itemList;
     }
 }

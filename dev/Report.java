@@ -41,6 +41,11 @@ public class Report {
         return type;
     }
 
+    public String getTypeString() {
+        String type = this.getType().toString();
+        return type;
+    }
+
     public int getReportNum() {
         return reportNum;
     }

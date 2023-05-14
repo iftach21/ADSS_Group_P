@@ -111,7 +111,6 @@ public class specificItemMapper {
         }
         catch(SQLException e){}
         catch(ParseException e){}
-
         try
         {
             conn.close();

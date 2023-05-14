@@ -30,6 +30,10 @@ public class OrderMapper
         }
         PreparedStatement stmt;
         ResultSet rs;
+        List<String> itemsId = new ArrayList<>();
+        String itemsFromTable;
+        Map<Item,Pair<Integer,Float>> itemList = new HashMap<>();
+        Map<String,Pair<Integer,Float>> itemIdMap = new HashMap<>();
         getConnection(); // The function that gets us the connection to the DB
 
         //If it doesnt exist in the cache we check if it exists in the DB
@@ -42,13 +46,20 @@ public class OrderMapper
             {
                 Order order = new Order();
                 order.setOrderNum(rs.getInt("order_num"));
-                order.setItemList(Parser.parse(rs.getString("item_list")));
+//                order.setItemList(Parser.parse(rs.getString("item_list")));
+                itemsFromTable = rs.getString("item_list");
+                itemIdMap = Parser.parse(itemsFromTable); // TODO build the needed mapper
                 order.setCost(rs.getFloat("cost"));
                 order.setStore_number(rs.getInt("store_number"));
                 String supplierId = rs.getString("supplier_id");
                 order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
                 conn.close();
                 order.setSupplier(findSupplier(supplierId));
+                for(Map.Entry<String,Pair<Integer,Float>> entry : itemIdMap.entrySet())
+                {
+
+                }
+
                 cache.put(rs.getInt("order_num"), order);
                 return order;
             }
@@ -156,12 +167,22 @@ public class OrderMapper
     {
         PreparedStatement stmt;
         getConnection();
+        Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+
+        for(Map.Entry<Item,Pair<Integer,Float>> entry : order.getItemList().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Pair<Integer,Float> pair = entry.getValue();
+            insertItem.put(key,pair);
+        }
+
         try {
             stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number,statusOrder)VALUES (?,?, ?, ?, ?, ?)");//This is the SQL query that we use to insert a new Order into the DB
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
             stmt.setString(2, supplier.getSupplierID());
-            String itemsJson = new JSONObject(order.getItemList()).toString();
+//            String itemsJson = new JSONObject(order.getItemList()).toString();
+            String itemsJson = new JSONObject(insertItem).toString();
             stmt.setString(3, itemsJson);
             stmt.setFloat(4, order.getCost());
             stmt.setInt(5, order.getStore_number());

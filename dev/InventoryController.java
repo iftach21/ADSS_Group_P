@@ -426,23 +426,22 @@ public class InventoryController {
 
     public Report CategoryDefectiveReport(String categoryName) {
         //Set variables for method
+        //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int defectiveAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogName().equals(categoryName)){
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            for (specificItem value : values) {
-                if (value.getisDefected()){
+            int defectiveAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                if (specificItem.getisDefected()){
                     defectiveAmount++;
                 }
             }
-            currentReport.addReportItem(key, defectiveAmount);
-            defectiveAmount = 0;
+            currentReport.addReportItem(item, defectiveAmount);
         }
         return currentReport;
     }
@@ -450,23 +449,22 @@ public class InventoryController {
     public Report ItemDefectiveReport(String CatalogNum)
     {
         //Set variables for method
+        //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int defectiveAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(CatalogNum)){
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(CatalogNum)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            for (specificItem value : values) {
-                if (value.getisDefected()){
+            int defectiveAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                if (specificItem.getisDefected()){
                     defectiveAmount++;
                 }
             }
-            currentReport.addReportItem(key, defectiveAmount);
-            defectiveAmount = 0;
+            currentReport.addReportItem(item, defectiveAmount);
         }
         return currentReport;
     }

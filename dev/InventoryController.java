@@ -480,47 +480,46 @@ public class InventoryController {
     {
         for(Item item: itemMapper.findAll())
         {
-            System.out.println(item.getPriceHistory().toString());
-            /*
             double newPrice = item.getSellPrice() - _amount;
             item.addNewPrice(item.getBuyPrice(), newPrice);
+            //System.out.println(item.getPriceHistory().toString());
             itemMapper.update(item);
-
-             */
         }
     }
 
     public void FullPercentageDiscount(double _amount)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+        for(Item item: itemMapper.findAll())
+        {
+            double newPrice = item.getSellPrice() - (item.getSellPrice()) * (_amount / 100);
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
         }
-
     }
 
     public void CategoryPercentageDiscount(double _amount, String _CategoryName)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogName().equals(_CategoryName)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogName().equals(_CategoryName)){
                 continue;
             }
-            double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+            double newPrice = item.getSellPrice() - (item.getSellPrice()) * (_amount / 100);
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
         }
     }
 
     public void CategoryStandardDiscount(double _amount, String _CategoryName)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogName().equals(_CategoryName)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogName().equals(_CategoryName)){
                 continue;
             }
-            double newPrice = key.getSellPrice() - _amount;
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+            double newPrice = item.getSellPrice() - _amount;
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
         }
 
     }
@@ -574,25 +573,27 @@ public class InventoryController {
 
     public void SpecificStandardDiscount(double _amount, String _CatalogNum)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(_CatalogNum)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(_CatalogNum)){
                 continue;
             }
-            double newPrice = key.getSellPrice() - _amount;
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+            double newPrice = item.getSellPrice() - _amount;
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
         }
     }
 
     public void SpecificPercentageDiscount(double _amount, String _CatalogNum)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(_CatalogNum)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(_CatalogNum)){
                 continue;
             }
-            double newPrice = key.getSellPrice() - (key.getSellPrice()) * (_amount / 100);
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+            double newPrice = item.getSellPrice() - (item.getSellPrice()) * (_amount / 100);
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
         }
     }
 

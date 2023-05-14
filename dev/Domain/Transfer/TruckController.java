@@ -89,23 +89,17 @@ public class TruckController {
     public Truck findTruckByDriver(Driver chosenDriver, TempLevel currMinTemp, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) {
         Map<Integer, Truck> availableTrucks;
 
-        if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.lightWeight)
+        availableTrucks = getAvailableTrucksOfLightWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
+
+        if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.mediumWeight || chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.heavyWeight)
         {
-            availableTrucks = getAvailableTrucksOfLightWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
-        }
-        else if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.mediumWeight)
-        {
-            availableTrucks = getAvailableTrucksOfMiddleWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
-            Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
-            availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
-        }
-        else
-        {
-            availableTrucks = getAvailableTrucksOfHeavyWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
             Map<Integer, Truck> availableTrucksMiddleWeight = getAvailableTrucksOfMiddleWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
-            Map<Integer, Truck> availableTrucksLightWeight = getAvailableTrucksOfLightWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
-            availableTrucksMiddleWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
-            availableTrucksLightWeight.forEach((k, v) -> availableTrucks.putIfAbsent(k, v));
+            availableTrucks.putAll(availableTrucksMiddleWeight);
+        }
+        if (chosenDriver.getDriverLicense().getLicenseWeightCapacity() == weightType.heavyWeight)
+        {
+            Map<Integer, Truck> availableTrucksHeavyWeight = getAvailableTrucksOfHeavyWeight(leavingDate, leavingTime, arrivingDate, arrivingTime);
+            availableTrucks.putAll(availableTrucksHeavyWeight);
         }
 
         Truck chosenTruck = null;

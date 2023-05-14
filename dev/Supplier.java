@@ -108,8 +108,9 @@ public abstract class Supplier {
         this.items = items;
     }
     public void add_Items(Item item,int num,float cost) {
+        if(item!=null){
         Pair<Integer,Float> pair=new Pair<Integer,Float>(num,cost);
-        items.put(item,pair);
+        items.put(item,pair);}
     }
     public  void add_item_to_contract(String name,int num,double discount){
         for(Item item : items.keySet()){

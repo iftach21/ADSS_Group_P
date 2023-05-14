@@ -144,6 +144,7 @@ public class Item {
         System.out.println("weight: "+this.weight );
         System.out.println("catalog Name :" +this.catalogName );
         System.out.println("temperature :"+ this.temperature);
+        System.out.println("Pricer History :" +this.priceHistory.toString());
     }
 
     public void setManufacturer(String manufacturer) {
@@ -181,7 +182,7 @@ public class Item {
                 ", weight=" + weight +
                 ", catalogName='" + catalogName + '\'' +
                 ", temperature=" + temperature +
-                //", priceHistory=" + priceHistory +
+                ", priceHistory=" + priceHistory.toString() +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", minimum_quantity=" + minimum_quantity +
                 '}';

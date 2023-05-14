@@ -11,6 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
@@ -19,6 +20,9 @@
       <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/dev/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Item.java" afterDir="false" />
+>>>>>>> origin/320827637_209512722_206719346_311451058
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ContractMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ContractMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" afterDir="false" />
@@ -212,13 +216,7 @@
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
       <workItem from="1684060586685" duration="6756000" />
-    </task>
-    <task id="LOCAL-00051" summary="dfg">
-      <created>1683628308610</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1683628308610</updated>
+      <workItem from="1684097257081" duration="678000" />
     </task>
     <task id="LOCAL-00052" summary="dfg">
       <created>1683630085344</created>
@@ -556,7 +554,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684095661435</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="updated orderMapper">
+      <created>1684096150452</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1684096150452</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -59,7 +59,7 @@ public class OrderMapper
                 for(Map.Entry<String,Pair<Integer,Float>> entry : itemIdMap.entrySet())
                 {
                     String key = entry.getKey();
-
+                    Pair<Integer,Float> value = entry.getValue();
                 }
 
                 cache.put(rs.getInt("order_num"), order);

@@ -96,17 +96,18 @@ public class ReportMapper implements DAO<Report>{
         String sql = "INSERT INTO Reports (reportNum, reportDate, reportInformationString, reportType) VALUES (?, ?, ?, ?)";
         getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
-//            String reportJson = new JSONObject(report.getReportItems()).toString();
-            statement.setInt(1,report.getReportNum());
+            int reportNum = report.getReportNum();
+            if (reportNumExists(reportNum)) {
+                reportNum = generateReportNum();
+            }
+            statement.setInt(1, reportNum);
             if (report.getReportDate() != null) {
                 statement.setDate(2, new java.sql.Date(report.getReportDate().getTime()));
             } else {
                 statement.setDate(2, null);
             }
-            statement.setString(3,report.getreportInformationString());
-            //statement.setString(4,report.getType().name());
-            statement.setString(4,report.getType().name());
-//            statement.setString(5,reportJson);
+            statement.setString(3, report.getreportInformationString());
+            statement.setString(4, report.getType().name());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()){
@@ -121,6 +122,28 @@ public class ReportMapper implements DAO<Report>{
         }
         catch (SQLException e){}
     }
+
+    private boolean reportNumExists(int reportNum) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Reports WHERE reportNum = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, reportNum);
+            ResultSet rs = statement.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        }
+    }
+
+    private int generateReportNum() throws SQLException {
+        String sql = "SELECT MAX(reportNum) FROM Reports";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) + 1;
+            } else {
+                return 1;
+            }
+        }
+    }
+
 
     @Override
     public void update(Report report) throws SQLException {

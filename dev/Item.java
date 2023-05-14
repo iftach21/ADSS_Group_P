@@ -175,16 +175,16 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "-- " +
                 "name='" + name + '\'' +
                 ", catalogNum='" + catalogNum + '\'' +
                 ", weight=" + weight +
                 ", catalogName='" + catalogName + '\'' +
                 ", temperature=" + temperature +
-                ", priceHistory=" + priceHistory.toString() +
                 ", manufacturer='" + manufacturer + '\'' +
-                ", minimum_quantity=" + minimum_quantity +
-                '}';
+                ", minimum_quantity=" + minimum_quantity + '\n' +
+                //"buy price: " + this.getBuyPrice() + " , sell price: " + this.getSellPrice() +
+                "";
     }
     @Override
     public boolean equals(Object o) {

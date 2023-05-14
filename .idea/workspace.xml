@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated ReportMapper">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ParserForContractItemIntegerDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ParserForContractItemIntegerDouble.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/specificItem.class" beforeDir="false" />
-    </list>
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated ReportMapper" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,13 +191,6 @@
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
       <workItem from="1684060586685" duration="6756000" />
-    </task>
-    <task id="LOCAL-00041" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1681052190812</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1681052190812</updated>
     </task>
     <task id="LOCAL-00042" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681052352386</created>
@@ -543,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684074653168</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="updated ReportMapper">
+      <created>1684075696969</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1684075696969</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -110,7 +110,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderMangerTest.three_supllier_split">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ADSS_Group_P" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OrderMangerTest.manipule_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -126,16 +133,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
       <option name="METHOD_NAME" value="order_move_to_history" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderMangerTest.test_add_item_list_one_supplier" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="test_add_item_list_one_supplier" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest.three_supllier_split" />
         <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
         <item itemvalue="JUnit.OrderMangerTest.order_move_to_history" />
         <item itemvalue="JUnit.OrderMangerTest.manipule_supplier" />
-        <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_one_supplier" />
       </list>
     </recent_temporary>
   </component>

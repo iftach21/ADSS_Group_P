@@ -14,7 +14,7 @@ public class OrderInterface extends AInterface {
         int option_1;
 
 
- /*       while (true) {
+        while (true) {
              //orders menu to add new and to approve them
              System.out.println("You selected Order manger");
              System.out.println("1.add new Order");
@@ -55,12 +55,13 @@ public class OrderInterface extends AInterface {
                          store_numberInput = checkNumber(store_numberInput);
                          int option_11 = Integer.parseInt(store_numberInput);
 
-                         //add item to the order list
+                         // Option 1: add item to the order list
+
                          if (option_11 == 1) {
                              List<Item> itemList_sub = new ArrayList<>();
                              int op = 1;
-                             for (Item item : supplier_manger.getItemslist().keySet()) {
-                                 if (supplier_manger.getItemslist().get(item) > 0) {
+                             for (Item item : supplier_manger.get_itemlist_ofallsuppliers()) {
+                                 if (supplier_manger.get_itemlist_ofallsuppliers().size() > 0) {
                                      System.out.print(op + ".");
                                      item.print_item();
                                      itemList_sub.add(item);
@@ -73,7 +74,6 @@ public class OrderInterface extends AInterface {
                              int item_number = Integer.parseInt(item_numberInput);
                              int count = 1;
                              for (Item item : itemList_sub) {
-                                 if (supplier_manger.getItemslist().get(item) > 0) {
                                      if (count == item_number) {
                                          System.out.println("Enter the quantity:");
                                          String quantityInput = scanner.next();
@@ -83,7 +83,7 @@ public class OrderInterface extends AInterface {
                                          break;
                                      }
                                      count++;
-                                 }
+
                              }
                          }
 
@@ -201,6 +201,6 @@ public class OrderInterface extends AInterface {
                 System.out.println("number:");
                 input = scanner.next();
             }
-        }*/
+        }
     }
 }

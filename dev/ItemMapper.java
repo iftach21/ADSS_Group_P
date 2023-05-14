@@ -1,35 +1,41 @@
 import java.sql.*;
 import java.util.*;
 import java.sql.Connection;
+
+/**
+ * This is the mapper class for the Item class
+ **/
 public class ItemMapper {
     private Connection conn;
     private final Map<String,Item> cache;
-//    public ItemMapper(Connection conn)
+    //This is the constructor for the class, it doesnt get any arguments and only initialize the cache
+
     public ItemMapper()
     {
-//        if (conn == null) {
-//            throw new IllegalArgumentException("Connection cannot be null.");
-//        }
-//        this.conn = conn;
+
         this.cache = new HashMap<>();
     }
+    //This function finds a Item in the DB by the catalogNum
 
     public Item findByCatalogNum(String catalogNum)
     {
+        //First we check if we have this Item in the cache
+
         if(cache.containsKey(catalogNum))
         {
             return cache.get(catalogNum);
         }
         PreparedStatement stmt;
         ResultSet rs;
-        getConnection();
-
+        getConnection();// The function that gets us the connection to the DB
+        //If it doesnt exist in the cache we check if it exists in the DB
         try
         {
-            stmt = conn.prepareStatement("SELECT * FROM items WHERE catalog_number = ?");
+            stmt = conn.prepareStatement("SELECT * FROM items WHERE catalog_number = ?");//The SQL query that we use to find the Item
             stmt.setString(1, catalogNum);
             rs = stmt.executeQuery();
-            if (rs.next()) {
+            if (rs.next()) // if we found the FixedDaySupplier in the DB we build the Item class instance
+            {
                 Item item = new Item();
                 item.setName(rs.getString("name"));
                 item.setCatalogNum(rs.getString("catalog_number"));
@@ -51,19 +57,21 @@ public class ItemMapper {
         }
         catch (SQLException e){}
 
-        return null;
+        return null; // if it wasnt found in the DB or in the cache
     }
 
+    //This function gives all the Item that are currently in the DB
     public List<Item> findAll()
     {
-        List<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>(); // The list that will hold all the Items that we will return
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
         try {
-            stmt = conn.prepareStatement("SELECT * FROM items");
+            stmt = conn.prepareStatement("SELECT * FROM items"); //The SQL query that we use to get all the Item in the DB
             rs = stmt.executeQuery();
-            while (rs.next()) {
+            while (rs.next())//If there are any Item in the DB we create an instance for each and one of them
+            {
                 Item item = new Item();
                 item.setName(rs.getString("name"));
                 item.setCatalogNum(rs.getString("catalog_number"));
@@ -85,9 +93,10 @@ public class ItemMapper {
         }
 
         catch (SQLException e){}
-        return items;
+        return items; // we return all the items that we found
     }
 
+    //This function lets us insert a new Item in the system
     public void insert(Item item)
     {
         PreparedStatement stmt;
@@ -95,7 +104,7 @@ public class ItemMapper {
         getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO items(catalog_number,name,weight,catalog_name,temperature,minimum_quantity,price_history,manufacturer)VALUES (?, ?, ?, ?, ?, ?, ?, ?)");//This is the SQL query that we use to insert a new item into the DB
             stmt.setString(1, item.getCatalogNum());
             stmt.setString(2, item.getName());
             stmt.setString(3, Double.toString(item.getWeight()));
@@ -109,7 +118,7 @@ public class ItemMapper {
 
             if (rs.next()) {
                 item.setCatalogNum(rs.getString(1));
-                cache.put(item.getCatalogNum(), item);
+                cache.put(item.getCatalogNum(), item); //We insert the new item into the cache
             }
         }
         catch(SQLException e){}
@@ -122,13 +131,15 @@ public class ItemMapper {
 
     }
 
+    //This function lets us update a value that is already in the DB
+
     public void update(Item item)
     {
         PreparedStatement stmt;
         getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE items SET name = ?, weight = ?,  catalog_name = ?, temperature = ?, minimum_quantity = ?, price_history = ?, manufacturer = ? WHERE catalog_number = ?");
+            stmt = conn.prepareStatement("UPDATE items SET name = ?, weight = ?,  catalog_name = ?, temperature = ?, minimum_quantity = ?, price_history = ?, manufacturer = ? WHERE catalog_number = ?");//This is the SQL query that we use for updating a value
             stmt.setString(1, item.getName());
             stmt.setString(2, Double.toString(item.getWeight()));
             stmt.setString(3, item.getCatalogName());
@@ -138,8 +149,8 @@ public class ItemMapper {
             stmt.setString(7, item.getManufacturer());
             stmt.setString(8, item.getCatalogNum());
 
-
             stmt.executeUpdate();
+
             cache.remove(item.getCatalogNum());
             cache.put(item.getCatalogNum(), item); // TODO check if there is no duplication after update in the cache
         }
@@ -151,13 +162,15 @@ public class ItemMapper {
         catch (SQLException e){}
     }
 
+    //This function lets us delete a value from the DB
+
     public void delete(Item item)
     {
         PreparedStatement stmt;
         getConnection();
 
         try {
-            stmt = conn.prepareStatement("DELETE FROM items WHERE catalog_number = ?");
+            stmt = conn.prepareStatement("DELETE FROM items WHERE catalog_number = ?");//This is the SQL query that we use for deleting a value
             stmt.setString(1, item.getCatalogNum());
             stmt.executeUpdate();
             cache.remove(item.getCatalogNum());
@@ -204,6 +217,7 @@ public class ItemMapper {
         return items;
     }
 
+    //This helper function gives us a connection to the DB
     private void getConnection()
     {
         try

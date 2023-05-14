@@ -234,18 +234,20 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
-        int specificAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            List<specificItem> values = entry.getValue();
-            specificAmount = values.size();
-            if (specificAmount < key.getMinQuantity()){
-                currentReport.addReportItem(key, key.getMinQuantity() - specificAmount);
+        for(Item item: itemMapper.findAll())
+        {
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
             }
-            specificAmount = 0;
+            if (specificAmount < item.getMinQuantity()){
+                currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+            }
         }
-
+        if(currentReport.getReportItems().size() == 0){
+            System.out.println("E");
+        }
         return currentReport;
     }
 

@@ -1,36 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="ADSS_Group_P:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Supplier_Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Manger.java" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/dev/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Item.java" afterDir="false" />
->>>>>>> origin/320827637_209512722_206719346_311451058
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ContractMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ContractMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ItemMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderManger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMangerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,103 +22,31 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JUnit5 Test Class" />
-        <option value="Enum" />
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="482e421e-609a-47a0-b79c-469797ae8ba1" />
-        <option name="url" value="https://github.com/iftach21/ADSS_Group_P.git" />
-      </UrlAndAccount>
-    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="2NeI9zUNLgjzxbSv1ARiyXCyGjb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2PnmWhXYC8QDy6ufybPw5sLMlJ0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;320827637__209512722__206719346__311451058&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marik/Documents/GitHub/ADSS_Group_P/dev/res&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;RunConfigurationTargetLRU&quot;: [
-      &quot;df6b1986-9990-446a-96ba-1d8e678a5cc5&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "320827637__209512722__206719346__311451058",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\marik\Documents\GitHub\ADSS_Group_P\dev" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.OrderMangerTest.move_order_to_approvel">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ADSS_Group_P" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RunManager" selected="JUnit.OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount">
     <configuration name="OrderMangerTest.move_order_to_approvel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
@@ -145,574 +57,75 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderMangerTest.testAddItems" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="testAddItems" />
+      <option name="METHOD_NAME" value="test_add_item_list_two_supplier_split_orders_with_deals_on_amount" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderMangerTest.testHistoryParser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="testHistoryParser" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderMangerTest.three_supllier_split" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="three_supllier_split" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount" />
         <item itemvalue="JUnit.OrderMangerTest.move_order_to_approvel" />
-        <item itemvalue="JUnit.OrderMangerTest.three_supllier_split" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.OrderMangerTest.testAddItems" />
-        <item itemvalue="JUnit.OrderMangerTest.testHistoryParser" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
-      <created>1680017976928</created>
+      <changelist id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="" />
+      <created>1684101255765</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1680017976928</updated>
-      <workItem from="1682607405112" duration="31000" />
-      <workItem from="1682681197620" duration="18796000" />
-      <workItem from="1682764325480" duration="1337000" />
-      <workItem from="1683628162392" duration="9614000" />
-      <workItem from="1683656328685" duration="736000" />
-      <workItem from="1683702205614" duration="2609000" />
-      <workItem from="1683705392696" duration="3926000" />
-      <workItem from="1683709618437" duration="3208000" />
-      <workItem from="1683725340405" duration="310000" />
-      <workItem from="1683725830986" duration="805000" />
-      <workItem from="1683726868993" duration="10511000" />
-      <workItem from="1684060586685" duration="6756000" />
-      <workItem from="1684097257081" duration="678000" />
+      <updated>1684101255765</updated>
+      <workItem from="1684101257324" duration="1340000" />
     </task>
-    <task id="LOCAL-00052" summary="dfg">
-      <created>1683630085344</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1683630085344</updated>
-    </task>
-    <task id="LOCAL-00053" summary="dfg">
-      <created>1683630244316</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1683630244316</updated>
-    </task>
-    <task id="LOCAL-00054" summary="working ContractMapper">
-      <created>1683635045067</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1683635045067</updated>
-    </task>
-    <task id="LOCAL-00055" summary="working ContractMapper">
-      <created>1683639462595</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1683639462595</updated>
-    </task>
-    <task id="LOCAL-00056" summary="working ContractMapper">
-      <created>1683645070518</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1683645070518</updated>
-    </task>
-    <task id="LOCAL-00057" summary="working ContractMapper">
-      <created>1683645806703</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1683645806703</updated>
-    </task>
-    <task id="LOCAL-00058" summary="working ContractMapper">
-      <created>1683647419289</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1683647419289</updated>
-    </task>
-    <task id="LOCAL-00059" summary="working ContractMapper">
-      <created>1683648856077</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1683648856078</updated>
-    </task>
-    <task id="LOCAL-00060" summary="working ContractMapper">
-      <created>1683649351291</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1683649351291</updated>
-    </task>
-    <task id="LOCAL-00061" summary="working ContractMapper">
-      <created>1683649980754</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1683649980754</updated>
-    </task>
-    <task id="LOCAL-00062" summary="working ContractMapper">
-      <created>1683653026896</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1683653026897</updated>
-    </task>
-    <task id="LOCAL-00063" summary="working ContractMapper">
-      <created>1683653044115</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1683653044115</updated>
-    </task>
-    <task id="LOCAL-00064" summary="started working on OrderManger">
-      <created>1683655739191</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1683655739191</updated>
-    </task>
-    <task id="LOCAL-00065" summary="started working on OrderManger">
-      <created>1683655895490</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1683655895490</updated>
-    </task>
-    <task id="LOCAL-00066" summary="started working on OrderManger">
-      <created>1683703740793</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1683703740794</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Updated payment method">
-      <created>1683706527695</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1683706527695</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Updated payment method">
-      <created>1683706543387</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1683706543387</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Updated payment method">
-      <created>1683706574198</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1683706574198</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Updated payment method">
-      <created>1683707280867</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1683707280867</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Updated payment method">
-      <created>1683707836303</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1683707836303</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Updated payment method">
-      <created>1683707936977</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1683707936978</updated>
-    </task>
-    <task id="LOCAL-00073" summary="updated all mappers">
-      <created>1683709270922</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1683709270922</updated>
-    </task>
-    <task id="LOCAL-00074" summary="updated all mappers">
-      <created>1683711294828</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1683711294829</updated>
-    </task>
-    <task id="LOCAL-00075" summary="updated all mappers">
-      <created>1683720902828</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1683720902828</updated>
-    </task>
-    <task id="LOCAL-00076" summary="updated all mappers">
-      <created>1683720919163</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1683720919163</updated>
-    </task>
-    <task id="LOCAL-00077" summary="updated all mappers">
-      <created>1683723501851</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1683723501851</updated>
-    </task>
-    <task id="LOCAL-00078" summary="updated all mappers">
-      <created>1683726954496</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1683726954496</updated>
-    </task>
-    <task id="LOCAL-00079" summary="updated all mappers">
-      <created>1683727316529</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1683727316530</updated>
-    </task>
-    <task id="LOCAL-00080" summary="updated all mappers">
-      <created>1683728115172</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1683728115172</updated>
-    </task>
-    <task id="LOCAL-00081" summary="updated all mappers">
-      <created>1683734634660</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1683734634660</updated>
-    </task>
-    <task id="LOCAL-00082" summary="updated all mappers">
-      <created>1683734652442</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1683734652443</updated>
-    </task>
-    <task id="LOCAL‎-00083" summary="updated StockMappers">
-      <created>1683910740492</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL‎-00083" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1683910740492</updated>
-    </task>
-    <task id="LOCAL-00084" summary="updated StockMappers">
-      <created>1683984037655</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1683984037655</updated>
-    </task>
-    <task id="LOCAL-00085" summary="Mapper update">
-      <created>1683984135196</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1683984135196</updated>
-    </task>
-    <task id="LOCAL‎-00086" summary="updated ReportMapper">
-      <created>1684002050843</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL‎-00086" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1684002050843</updated>
-    </task>
-    <task id="LOCAL-00087" summary="updated ReportMapper">
-      <created>1684074002095</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1684074002095</updated>
-    </task>
-    <task id="LOCAL-00088" summary="updated ReportMapper">
-      <created>1684074012690</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1684074012690</updated>
-    </task>
-    <task id="LOCAL-00089" summary="updated ReportMapper">
-      <created>1684074653168</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1684074653168</updated>
-    </task>
-    <task id="LOCAL-00090" summary="updated ReportMapper">
-      <created>1684075696969</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1684075696969</updated>
-    </task>
-    <task id="LOCAL-00091" summary="updated ReportMapper">
-      <created>1684075716559</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1684075716559</updated>
-    </task>
-    <task id="LOCAL-00092" summary="updated">
-      <created>1684086095495</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1684086095496</updated>
-    </task>
-    <task id="LOCAL-00093" summary="updated">
-      <created>1684086115475</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1684086115475</updated>
-    </task>
-    <task id="LOCAL-00094" summary="updated">
-      <created>1684088943648</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1684088943648</updated>
-    </task>
-    <task id="LOCAL-00095" summary="updated orderMapper">
-      <created>1684091054308</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1684091054308</updated>
-    </task>
-    <task id="LOCAL-00096" summary="updated orderMapper">
-      <created>1684091766216</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1684091766216</updated>
-    </task>
-    <task id="LOCAL-00097" summary="updated orderMapper">
-      <created>1684092641406</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1684092641406</updated>
-    </task>
-    <task id="LOCAL-00098" summary="updated orderMapper">
-      <created>1684094896960</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1684094896960</updated>
-    </task>
-    <task id="LOCAL-00099" summary="updated orderMapper">
-      <created>1684095661435</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1684095661435</updated>
-    </task>
-    <task id="LOCAL-00100" summary="updated orderMapper">
-      <created>1684096150452</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1684096150452</updated>
-    </task>
-    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="day" />
-    <MESSAGE value="df" />
-    <MESSAGE value="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
-    <MESSAGE value="Added database" />
-    <MESSAGE value="כן" />
-    <MESSAGE value="sadf" />
-    <MESSAGE value="database" />
-    <MESSAGE value="dfg" />
-    <MESSAGE value="working ContractMapper" />
-    <MESSAGE value="started working on OrderManger" />
-    <MESSAGE value="Updated payment method" />
-    <MESSAGE value="updated all mappers" />
-    <MESSAGE value="updated StockMappers" />
-    <MESSAGE value="Mapper update" />
-    <MESSAGE value="updated ReportMapper" />
-    <MESSAGE value="updated" />
-    <MESSAGE value="updated orderMapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated orderMapper" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>55</line>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/dev/OrderMapper.java</url>
+          <line>128</line>
+          <properties class="OrderMapper" method="findAllOrderWithStatus">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
-          <line>288</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>392</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/ItemMapper.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/PriceHistoryParser.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/FixedDaySupplierMapper.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>460</line>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>438</line>
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/Supplier_Manger.java</url>
-          <line>238</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>335</line>
-          <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="107" />
+          <line>290</line>
+          <properties class="OrderManger" method="period_order">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>529</line>
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/ParserForContractItemIntegerDouble.java</url>
-          <line>4</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>364</line>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>316</line>
-          <option name="timeStamp" value="141" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
+          <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
           <line>329</line>
-          <properties class="OrderMangerTest" method="three_supllier_split">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="142" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>283</line>
-          <properties class="OrderMangerTest" method="move_order_to_approvel">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="143" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
+          <line>296</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo parentTag="NonFixedDaySupplier" memberName="items" />
-        <PinnedItemInfo parentTag="FixedDaySupplier" memberName="contract" />
-        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="value" />
+        <PinnedItemInfo parentTag="Period_Order" memberName="cost" />
       </pinned-members>
     </pin-to-top-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

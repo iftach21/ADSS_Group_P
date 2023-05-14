@@ -289,4 +289,22 @@ public class PeriodicOrderMapper {
         }
         return itemList;
     }
+    public void deleteAll() {
+        PreparedStatement stmt;
+        getConnection();
+        try {
+            stmt = conn.prepareStatement("DELETE FROM PeriodicOrders");
+            // This is the SQL query that we use for deleting all values
+            stmt.executeUpdate();
+            cache.clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

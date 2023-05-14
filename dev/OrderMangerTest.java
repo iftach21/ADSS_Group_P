@@ -238,42 +238,55 @@ class OrderMangerTest {
 
     }
 
+
+
+    ///cheak period order to see that its work
     @Test
     void test_add_item_list_two_supplier_split_orders_with_deals_on_amount(){
+        //init an item mapper
+        ItemMapper itemMapper=new ItemMapper();
+        Supplier_Manger masupplier=new Supplier_Manger();
+        masupplier.delte_all();
+        masupplier.delte_all();
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
+        NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);
+        masupplier.add_supplier(supplier_1);
+        System.out.println(masupplier.getSuppliers().size());
+        masupplier.update_suppliers();
+        System.out.println(masupplier.getSuppliers().size());
+//        assertEquals(1,masupplier.getSuppliers().size());
+        Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+//        item1.setMinimum_quantity(10);
+        Item item2 = new Item("Milk", "200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
+//        item2.setMinimum_quantity(5);
+        Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
+//        item3.setMinimum_quantity(3);
+        Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
+        item1.addNewPrice(10,25);
+        item1.addNewPrice(10,25);
+        item1.addNewPrice(10,40);
+        itemMapper.insert(item1);
 
-        var ordermanger=new OrderManger();
-        Map<Item,Integer> maplist =new HashMap<Item,Integer>();
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
+        OrderManger orderManger = new OrderManger();
+        orderManger.delte_db();
 
-//        Item item1 = new Item("Apple", "1001", "12/10/1992", 0.5, "Fruits", 10.0);
-//        Item item2 = new Item("Milk", "2002", "12/10/1992", 1.0, "Dairy", 4.0);
-//        Item item3 = new Item("Bread", "3003", "12/10/1992", 0.8, "Bakery", 25.0);
-//        Item item4 = new Item("Salmon", "4004", "12/10/1992", 0.3, "Seafood", -2.0);
-//
-//        maplist.put(item1,100);
-//        maplist.put(item2,100);
-//        maplist.put(item3,100);
-//        maplist.put(item4,100);
-//
-//        Supplier_Manger masupplier=new Supplier_Manger();
-//        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
-//        NonDeliveringSupplier supplier_1 = new NonDeliveringSupplier("Supplier1 Inc.", "123456789", 1, "S001", contactPerson, null, null);
-//        supplier_1.add_Items(item1,100,100);
-//        supplier_1.add_item_to_contract(item1.getName(),100,0.1);
-//        supplier_1.add_Items(item2,100,100);
-//        supplier_1.add_Items(item3,100,100);
-//        supplier_1.add_Items(item4,100,100);
-//        supplier_1.add_total_discount(0.5);
-//        supplier_1.add_item_to_contract(item1.getName(),20,0.1);;
-//        NonDeliveringSupplier supplier_2 = new NonDeliveringSupplier("Supplier2 Inc.", "123456789", 1, "S001", contactPerson, null, null);
-//        supplier_2.add_Items(item1,100,100);
-//        supplier_2.add_Items(item2,100,100);
-//        supplier_2.add_Items(item3,100,100);
-//        supplier_2.add_Items(item4,100,100);
-//        supplier_2.add_total_discount(0.5);
-//        masupplier.getSuppliers().add(supplier_1);
-//        masupplier.getSuppliers().add(supplier_2);
-//        ordermanger.assing_Orders_to_Suppliers(maplist,masupplier,20);
-//        assertEquals("Supplier1 Inc.",ordermanger.getPending_for_apporval().get(0).getSupplier().getName());
+        Map<Item,Integer> maplist = new HashMap<Item,Integer>();
+        maplist.put(item1,10);
+        orderManger.period_order(masupplier.get_supplier_by_id(supplier_1.getSupplierID()),maplist,5,5);
+        orderManger.print_all_orders_details();
+
+
+
+        orderManger.delte_db();
+
+
+
+
+
+
+
+        masupplier.delte_all();
 
     }
 
@@ -286,6 +299,7 @@ class OrderMangerTest {
         //init an item mapper
         ItemMapper itemMapper=new ItemMapper();
         Supplier_Manger masupplier=new Supplier_Manger();
+        masupplier.delte_all();
         masupplier.delte_all();
         ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
         NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);

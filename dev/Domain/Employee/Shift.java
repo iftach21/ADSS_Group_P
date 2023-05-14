@@ -112,6 +112,7 @@ public class Shift {
             System.out.println("he is allready exist");
             return false;
         }
+        if(profindx == 7){this.drivers.add((Driver)newWorker);return true;}
         this.workerInShift[profindx].add(newWorker);
         if(profindx==0){this.shiftManager=newWorker;}
         if(this.shiftManager==null){

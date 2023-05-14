@@ -5,9 +5,9 @@ public class Database {
     private Database(){}
 
     public static Connection connect() throws SQLException{
-        Connection connection = null;
-        connection = DriverManager.getConnection(url);
-        return connection;
+//        Connection connection = null;
+//        connection = DriverManager.getConnection(url);
+        return DriverManager.getConnection(url);
     }
 
     public static void closeConnection(Connection connection){

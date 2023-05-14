@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.*;
 
 public class InventoryController {
@@ -300,14 +301,12 @@ public class InventoryController {
         Report currentReport = new Report(reportType.PriceHistory, currentDate);
         String reportInformationString = "";
 
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(catalogNumber)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
-            for (int i = 0; i < key.getPriceHistorySize(); i++){
-                reportInformationString += key.getPriceHistorySpecific(i);
-            }
+            reportInformationString += item.getPriceHistory().toString();
         }
         currentReport.setReportData(reportInformationString);
         return currentReport;
@@ -352,7 +351,7 @@ public class InventoryController {
     public Report FullCountingReport() {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for(Item item: itemMapper.findAll())
         {
             int specificAmount = 0;
@@ -368,7 +367,7 @@ public class InventoryController {
     public Report CategoryCountingReport(String categoryName) {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogName().equals(categoryName)){
@@ -389,7 +388,7 @@ public class InventoryController {
     {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(catalogNumber)){
@@ -409,7 +408,7 @@ public class InventoryController {
     {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Defective, currentDate);
         for(Item item: itemMapper.findAll())
         {
             int defectiveAmount = 0;
@@ -426,23 +425,22 @@ public class InventoryController {
 
     public Report CategoryDefectiveReport(String categoryName) {
         //Set variables for method
+        //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int defectiveAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogName().equals(categoryName)){
+        Report currentReport = new Report(reportType.Defective, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            for (specificItem value : values) {
-                if (value.getisDefected()){
+            int defectiveAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                if (specificItem.getisDefected()){
                     defectiveAmount++;
                 }
             }
-            currentReport.addReportItem(key, defectiveAmount);
-            defectiveAmount = 0;
+            currentReport.addReportItem(item, defectiveAmount);
         }
         return currentReport;
     }
@@ -450,23 +448,22 @@ public class InventoryController {
     public Report ItemDefectiveReport(String CatalogNum)
     {
         //Set variables for method
+        //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int defectiveAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(CatalogNum)){
+        Report currentReport = new Report(reportType.Defective, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(CatalogNum)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            for (specificItem value : values) {
-                if (value.getisDefected()){
+            int defectiveAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                if (specificItem.getisDefected()){
                     defectiveAmount++;
                 }
             }
-            currentReport.addReportItem(key, defectiveAmount);
-            defectiveAmount = 0;
+            currentReport.addReportItem(item, defectiveAmount);
         }
         return currentReport;
     }

@@ -235,7 +235,7 @@ public class TransferController {
         TempLevel currMinTemp = lowestTempItem(orderItems);
 
         //choose driver for transfer
-        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp, orderItems);
+        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp);
         if (chosenDriver == null)
         {
             System.out.println("Unfortunately, there is no available driver to this transfer.");
@@ -821,7 +821,7 @@ public class TransferController {
 
     }
 
-    public Driver chooseDriverForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp, Map<Site, Map<Item_mock, Integer>> orderItems) throws SQLException {
+    public Driver chooseDriverForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         //get week num
         WeekFields weekFields = WeekFields.of(Locale.getDefault());

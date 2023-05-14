@@ -4,6 +4,7 @@ import java.util.List;
 
 public class subCategory {
     private String subCategoryName;
+    private String categoryName;
     private int amount = 0;
     private List<Item> generalItemsList;
 
@@ -11,6 +12,13 @@ public class subCategory {
         this.subCategoryName = subCategoryName;
         this.generalItemsList = new ArrayList<Item>();
     }
+
+    public subCategory() {
+        this.subCategoryName = "";
+        this.generalItemsList = new ArrayList<Item>();
+    }
+
+    public void setName(String name){ this.subCategoryName = name;}
 
     public String getSubCategoryName() {
         return subCategoryName;
@@ -57,5 +65,9 @@ public class subCategory {
     public void addGeneralItem(Item generalItem) {
         this.amount ++;
         generalItemsList.add(generalItem);
+    }
+
+    public void setCategory(String category) {
+        this.categoryName = category;
     }
 }

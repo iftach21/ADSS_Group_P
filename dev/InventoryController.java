@@ -1,9 +1,12 @@
+import java.sql.SQLException;
 import java.util.*;
 
 public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
     private LinkedHashMap<Item, List<specificItem>> specificItemsMap;
+    //private categoryMapper categoryMapper;
+    private subCategoryMapper subCategoryMapper;
     private ItemMapper itemMapper;
     private specificItemMapper specificItemMapper;
 
@@ -11,9 +14,21 @@ public class InventoryController {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
         this.specificItemsMap = new LinkedHashMap<Item, List<specificItem>>();
+        /*
+        try {
+            this.categoryMapper = new categoryMapper();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         */
+        this.subCategoryMapper = new subCategoryMapper();
         this.itemMapper = new ItemMapper();
         this.specificItemMapper = new specificItemMapper();
     }
+
+    //Category Mapper
+
+    //Sub-Category Mapper
 
     //Items Mapper
     public void printAllItems(){
@@ -31,6 +46,15 @@ public class InventoryController {
         Item currentItem = itemMapper.findByCatalogNum(catalogNum);
         return currentItem;
     }
+    /*
+
+     */
+    public void insertNewItemToMapper(Item currentItem) {itemMapper.insert(currentItem);}
+    /*
+
+     */
+    public void deleteItemFromMapper(Item currentItem) {itemMapper.delete(currentItem);}
+
 
     //Specific Items Mapper
     /*
@@ -39,6 +63,17 @@ public class InventoryController {
      */
     public void insertNewSpecificToMapper(specificItem currentSpecific){
         specificItemMapper.insert(currentSpecific);
+    }
+    /*
+
+     */
+    public void deleteSpecificFromMapper(specificItem currentSpecific) {specificItemMapper.delete(currentSpecific);}
+    /*
+
+     */
+    public specificItem findSpecificItemBySerialNumber(int serialNumber){
+        specificItem currentSpecific = specificItemMapper.findSpecificItemBySerial(serialNumber);
+        return currentSpecific;
     }
 
     public void moveSpecificItemToDefectiveMapper(int serialNumber) {
@@ -50,6 +85,26 @@ public class InventoryController {
                 if (specificItem.getserialNumber() == serialNumber) {
                     specificItem.setDefected(true);
                     specificItem.setLocation(Location.Storage);
+                    specificItemMapper.delete(specificItem);
+                    specificItemMapper.insert(specificItem);
+                }
+            }
+        }
+    }
+
+    public void moveSpecificItemMapper(int serialNumber){
+        List<specificItem> itemList = specificItemMapper.findAll();
+        if (itemList != null) {
+            Iterator<specificItem> iterator = itemList.iterator();
+            while (iterator.hasNext()) {
+                specificItem specificItem = iterator.next();
+                if (specificItem.getserialNumber() == serialNumber) {
+                    if (specificItem.getLocationString() == "Store"){
+                        specificItem.setLocation(Location.Storage);
+                    }
+                    else {
+                        specificItem.setLocation(Location.Store);
+                    }
                     specificItemMapper.delete(specificItem);
                     specificItemMapper.insert(specificItem);
                 }

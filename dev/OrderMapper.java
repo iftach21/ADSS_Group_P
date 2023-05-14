@@ -35,6 +35,7 @@ public class OrderMapper
         Map<Item,Pair<Integer,Float>> itemList = new HashMap<>();
         Map<String,Pair<Integer,Float>> itemIdMap = new HashMap<>();
         getConnection(); // The function that gets us the connection to the DB
+        ItemMapper itemMapper = new ItemMapper();
 
         //If it doesnt exist in the cache we check if it exists in the DB
         try

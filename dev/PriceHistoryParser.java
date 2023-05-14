@@ -13,17 +13,13 @@ public class PriceHistoryParser {
 
         // Split the input string into individual price history entries
         String[] entries = input.split(", ");
-
-        // Iterate over each entry and parse the values
-        for (String entry : entries) {
-            // Extract and parse the buy price
-            double buyPrice = getValueFromEntry1(entry, "Buy price");
-
-            // Extract and parse the sell price
-            double sellPrice = getValueFromEntry1(entry, "sell price");
-
-            // Extract and parse the date
-            String dateString = getValueFromEntry2(entry, "updated in");
+        for (int i=0; i<(entries.length);i++) {
+            double buyPrice = (double) getValueFromEntry(entries[i], "Buy price");
+            i++;
+            double sellPrice = (double) getValueFromEntry(entries[i], "sell price");
+            i++;
+            String temp =entries[i].replace("\\n", "").trim();
+            String dateString = (String) getValueFromEntry(entries[i].substring(0,temp.length()-1), "updated in");
             Date currentDate;
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
@@ -42,22 +38,18 @@ public class PriceHistoryParser {
         return priceHistoryList;
     }
 
-    private double getValueFromEntry1(String entry, String key) {
+    private Object getValueFromEntry(String entry, String key) {
         // Extract the value associated with the given key from the entry
         int startIndex = entry.indexOf(key) + key.length() + 2;
-        int endIndex = entry.indexOf(",", startIndex);
-        String valueString = entry.substring(startIndex, endIndex);
-
-        // Parse and return the value
-        return Double.parseDouble(valueString);
-    }
-    private String getValueFromEntry2(String entry, String key) {
-        // Extract the value associated with the given key from the entry
-        int startIndex = entry.indexOf(key) + key.length() + 2;
-        int endIndex = entry.indexOf(",", startIndex);
+        int endIndex = entry.length()-1;
         String valueString = entry.substring(startIndex, endIndex).trim();
 
-        // Return the value
-        return valueString;
+        // Try to parse the value as a double
+        try {
+            return Double.parseDouble(valueString);
+        } catch (NumberFormatException e) {
+            // Return the value as a string if parsing as double fails
+            return valueString;
+        }
     }
 }

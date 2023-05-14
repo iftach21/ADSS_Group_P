@@ -457,6 +457,8 @@ class OrderMangerTest {
         orderManger.assing_Orders_to_Suppliers(maplist,masupplier,50);
         ItemMapper itemMapper =new ItemMapper();
         itemMapper.findAll().get(0).print_item();
+        itemMapper.findAll().get(1).print_item();
+
 
 
     }

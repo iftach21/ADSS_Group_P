@@ -224,7 +224,8 @@ public class interfaceManager extends AInterface {
                                 System.out.println("What would you like to name the new category?");
                                 Scanner categoryInput = new Scanner(System.in);
                                 String categoryName = categoryInput.nextLine();
-                                Inventory.getCategoryControl().addCategory(categoryName);
+                                Inventory.addCategoryToMapper(categoryName);
+                                //Inventory.getCategoryControl().addCategory(categoryName);
                                 System.out.println("New category " + categoryName + " has been created!");
                                 break;
                             //Create a new sub-category
@@ -236,7 +237,8 @@ public class interfaceManager extends AInterface {
                                 categoryInput = new Scanner(System.in);
                                 categoryName = categoryInput.nextLine();
                                 subCategory currentSubCategory = new subCategory(subCategoryName);
-                                Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory(categoryName), currentSubCategory);
+                                Inventory.addSubCatToMapper(categoryName, currentSubCategory);
+                                //Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory(categoryName), currentSubCategory);
                                 System.out.println("A new sub-category " + subCategoryName + " was added into category " + categoryName);
                                 break;
                             //Create new general item
@@ -346,15 +348,10 @@ public class interfaceManager extends AInterface {
                             //Delete category
                             case "5":
 
-                                System.out.println("What is theCategory you would like to delete?");
+                                System.out.println("What is the Category you would like to delete?");
                                 Scanner Input = new Scanner(System.in);
                                 String CatName = Input.nextLine();
-                                if (Inventory.deleteCat(CatName)){
-                                    System.out.println("Category" + CatName + " has been deleted.");
-                                }
-                                else {
-                                    System.out.println("Could not find such an item.");
-                                }
+                                Inventory.removeCategoryFromMapper(CatName);
 
                                 break;
                             //Delete general item

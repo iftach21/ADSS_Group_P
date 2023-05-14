@@ -4,6 +4,7 @@ public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
     private LinkedHashMap<Item, List<specificItem>> specificItemsMap;
+    private subCategoryMapper subCategoryMapper;
     private ItemMapper itemMapper;
     private specificItemMapper specificItemMapper;
 
@@ -11,8 +12,23 @@ public class InventoryController {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
         this.specificItemsMap = new LinkedHashMap<Item, List<specificItem>>();
+        this.subCategoryMapper = new subCategoryMapper();
         this.itemMapper = new ItemMapper();
         this.specificItemMapper = new specificItemMapper();
+    }
+
+    //Category Mapper
+    public void addCategoryToMapper(String categoryName){
+        CategoryControl.addCategory(categoryName);
+    }
+
+    public void removeCategoryFromMapper(String categoryName){
+        CategoryControl.removeCategory(categoryName);
+    }
+
+    //Sub category mapper
+    public void addSubCatToMapper(String categoryName, subCategory currentSub){
+        subCategoryMapper.insertSubCategory(categoryName, currentSub);
     }
 
     //Items Mapper
@@ -458,10 +474,15 @@ public class InventoryController {
 
     public void FullStandardDiscount(double _amount)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            double newPrice = key.getSellPrice() - _amount;
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+        for(Item item: itemMapper.findAll())
+        {
+            System.out.println(item.getPriceHistory().toString());
+            /*
+            double newPrice = item.getSellPrice() - _amount;
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
+
+             */
         }
     }
 

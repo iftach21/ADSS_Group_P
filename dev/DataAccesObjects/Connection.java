@@ -1,5 +1,10 @@
 package DataAccesObjects;
 
+import Domain.Employee.WeeklyShiftAndWorkersManager;
+import Domain.Enums.TempLevel;
+import Domain.Enums.WindowType;
+import Domain.Enums.weightType;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -266,5 +271,49 @@ public class Connection {
     private static void extracted(java.sql.Connection c, String name) throws SQLException {
         var stet = c.prepareStatement("delete\nfrom "+ name +"\nwhere 1=1; ;");
         stet.execute();
+    }
+
+    public void databaseReboot() throws SQLException {
+        WeeklyShiftAndWorkersManager wscontroller = WeeklyShiftAndWorkersManager.getInstance();
+
+        //create 4 drivers :
+
+        wscontroller.addNewDriver(111,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234, TempLevel.cold, weightType.lightWeight);
+
+        wscontroller.addNewDriver(222,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
+
+        wscontroller.addNewDriver(333,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
+
+        wscontroller.addNewDriver(444,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
+
+        wscontroller.addemployee(555,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+
+        wscontroller.addemployee(666,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+
+        //creating weeklyshift for the stokes:
+        wscontroller.createnewweeklyshift(11,1999,12);
+
+        wscontroller.createnewweeklyshift(11,1999,0);
+
+
+        // all of the data is for week num 1 and year 1:
+
+        //stokes will be available for day1, day 2 on day shift:
+        wscontroller.addtoexistingweeklyshift(11,1999,12, WindowType.day1,555,2);
+        wscontroller.addtoexistingweeklyshift(11,1999,12,WindowType.day1,666,2);
+
+        wscontroller.addtoexistingweeklyshift(1,1,12, WindowType.day3,555,2);
+        wscontroller.addtoexistingweeklyshift(1,1,12,WindowType.day3,666,2);
+
+        //available for drivers:
+        //for day 3: all of them
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,111,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,222,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,333,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day3,444,7);
+
+        // for day 1 just driver 1 and 2.
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day1,111,7);
+        wscontroller.addtoexistingweeklyshift(11,1999,0, WindowType.day1,222,7);
     }
 }

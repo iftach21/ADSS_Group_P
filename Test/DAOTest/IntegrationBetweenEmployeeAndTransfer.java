@@ -37,17 +37,17 @@ public class IntegrationBetweenEmployeeAndTransfer {
 
         //create 4 drivers :
 
-        wscontroller.addNewDriver(1,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.lightWeight);
+        wscontroller.addNewDriver(11,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.lightWeight);
 
-        wscontroller.addNewDriver(2,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
+        wscontroller.addNewDriver(22,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
 
-        wscontroller.addNewDriver(3,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
+        wscontroller.addNewDriver(33,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
 
-        wscontroller.addNewDriver(4,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
+        wscontroller.addNewDriver(44,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
 
-        wscontroller.addemployee(5,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+        wscontroller.addemployee(55,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
 
-        wscontroller.addemployee(6,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+        wscontroller.addemployee(66,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
 
         //creating weeklyshift for the stokes:
         wscontroller.createnewweeklyshift(1,1,1);
@@ -58,23 +58,22 @@ public class IntegrationBetweenEmployeeAndTransfer {
         // all of the data is for week num 1 and year 1:
 
         //stokes will be available for day1, day 2 on day shift:
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,5,2);
-        wscontroller.addtoexistingweeklyshift(1,1,0,WindowType.day1,6,2);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,55,2);
+        wscontroller.addtoexistingweeklyshift(1,1,0,WindowType.day1,66,2);
 
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,5,2);
-        wscontroller.addtoexistingweeklyshift(1,1,0,WindowType.day3,6,2);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,55,2);
+        wscontroller.addtoexistingweeklyshift(1,1,0,WindowType.day3,66,2);
 
         //available for drivers:
         //for day 3: all of them
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,1,2);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,2,2);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,3,2);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,4,2);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,11,7);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,22,7);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,33,7);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day3,44,7);
 
         // for day 1 just driver 1 and 2.
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,1,2);
-        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,2,2);
-
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,11,7);
+        wscontroller.addtoexistingweeklyshift(1,1,1, WindowType.day1,22,7);
 
     }
 

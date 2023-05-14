@@ -3,8 +3,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ParserForContractItemIntegerDouble {
-    public static Map<Item, Map<Integer, Double>> parse(String input) {
-        Map<Item, Map<Integer, Double>> map = new HashMap<>();
+    public static Map<String, Map<Integer, Double>> parse(String input) {
+        Map<String, Map<Integer, Double>> map = new HashMap<>();
         if(Objects.equals(input, "{}"))
         {
             return map;
@@ -14,7 +14,7 @@ public class ParserForContractItemIntegerDouble {
 
         for (String pair : pairs) {
             String[] parts = pair.split(":\\{");
-            Item item = getItem(parts[0]);
+            String item = parts[0];
             Map<Integer, Double> priceMap = getPriceMap(parts[1]);
             map.put(item, priceMap);
         }
@@ -22,44 +22,7 @@ public class ParserForContractItemIntegerDouble {
         return map;
     }
 
-    private static Item getItem(String input) {
-        String[] parts = input.split(",");
-        Item item = new Item();
-        for (String part : parts) {
-            String[] kv = part.split("=");
-            String key = kv[0].replaceAll("[{}\"' ]", "");
-            String value = kv[1].replaceAll("[{}\"' ]", "");
-            switch (key) {
-                case "Itemname":
-                    item.setName(value);
-                    break;
-                case "catalogNum":
-                    item.setCatalogNum(value);
-                    break;
-                case "weight":
-                    item.setWeight(Float.parseFloat(value));
-                    break;
-                case "catalogName":
-                    item.setCatalogName(value);
-                    break;
-                case "temperature":
-                    item.setTemperature(TempLevel.valueOf(value));
-                    break;
-                case "manufacturer":
-                    item.setManufacturer(value);
-                    break;
-                case "minimum_quantity":
-                    item.setMinimum_quantity(Integer.parseInt(value));
-                    break;
-                case "priceHistory":
-                    // ignore this field
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid key: " + key);
-            }
-        }
-        return item;
-    }
+
 
     private static Map<Integer, Double> getPriceMap(String input) {
         String[] parts = input.split(",");

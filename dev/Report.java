@@ -11,7 +11,6 @@ public class Report {
     private String reportInformationString;
     private LinkedHashMap<Item, Integer> reportItems;
 
-
     public Report(reportType type, Date reportDate) {
         this.type = type;
         this.reportDate = reportDate;
@@ -19,14 +18,6 @@ public class Report {
         nextReportNum++;
         this.reportInformationString = "";
         this.reportItems = new LinkedHashMap<Item, Integer>();
-    }
-
-    public Report(reportType type, Date reportDate, String reportInformationString, int reportNum,LinkedHashMap<Item,Integer> reportItems) {
-        this.type = type;
-        this.reportDate = reportDate;
-        this.reportNum = nextReportNum;
-        this.reportInformationString = reportInformationString;
-        this.reportItems = reportItems;
     }
 
     public reportType getType() {
@@ -53,10 +44,6 @@ public class Report {
 
     public void addReportItem(Item currentItem, int amount){
         this.reportItems.put(currentItem, amount);
-    }
-
-    public LinkedHashMap<Item, Integer> getReportItems() {
-        return reportItems;
     }
 
     @Override

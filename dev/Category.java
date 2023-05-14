@@ -26,14 +26,6 @@ public class Category {
         return this.subCategoriesList.get(index);
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setSubCategoriesList(List<subCategory> subCategoriesList) {
-        this.subCategoriesList = subCategoriesList;
-    }
-
     public subCategory getSubCategoryByName(String subName){
         subCategory currentSubCat;
         for (int i = 0; i < subCategoriesList.size(); i++){

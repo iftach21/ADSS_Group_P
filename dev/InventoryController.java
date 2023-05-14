@@ -1,9 +1,12 @@
+import java.sql.SQLException;
 import java.util.*;
 
 public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
     private LinkedHashMap<Item, List<specificItem>> specificItemsMap;
+    //private categoryMapper categoryMapper;
+    private subCategoryMapper subCategoryMapper;
     private ItemMapper itemMapper;
     private specificItemMapper specificItemMapper;
 
@@ -11,9 +14,21 @@ public class InventoryController {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
         this.specificItemsMap = new LinkedHashMap<Item, List<specificItem>>();
+        /*
+        try {
+            this.categoryMapper = new categoryMapper();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         */
+        this.subCategoryMapper = new subCategoryMapper();
         this.itemMapper = new ItemMapper();
         this.specificItemMapper = new specificItemMapper();
     }
+
+    //Category Mapper
+
+    //Sub-Category Mapper
 
     //Items Mapper
     public void printAllItems(){

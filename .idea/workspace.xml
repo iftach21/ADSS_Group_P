@@ -9,12 +9,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated ReportMapper">
+    <list default="true" id="be81bcb0-bed6-4aea-8635-7281b93c47c6" name="Changes" comment="Mapper update + interface + specificitem">
+      <change afterPath="$PROJECT_DIR$/dev/subCategoryMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportItemsMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportMapper.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/categoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/categoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/subCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/subCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/categoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/categoryMapper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +122,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Database Script.console.sql">
+  <component name="RunManager">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/df6b1986-9990-446a-96ba-1d8e678a5cc5/console.sql" />
       <script-mode>FILE</script-mode>
@@ -180,7 +192,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS" />
+      <changelist id="be81bcb0-bed6-4aea-8635-7281b93c47c6" name="Changes" comment="Mapper update + interface + specificitem" />
       <created>1680017976928</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -196,6 +208,7 @@
       <workItem from="1683725340405" duration="310000" />
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
+      <workItem from="1684065423648" duration="1985000" />
     </task>
     <task id="LOCAL-00038" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681048204588</created>
@@ -616,9 +629,9 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

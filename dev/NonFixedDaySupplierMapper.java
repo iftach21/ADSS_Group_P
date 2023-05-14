@@ -6,80 +6,40 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.*;
+
+/**
+ * This is the mapper class for the NonFixedDaySupplier class
+ **/
 public class NonFixedDaySupplierMapper{
 
     private Connection conn;
     private final Map<String, NonFixedDaySupplier> cache;
 
-//    public NonFixedDaySupplierMapper(Connection conn)
+    //This is the constructor for the class, it doesnt get any arguments and only initialize the cache
     public NonFixedDaySupplierMapper()
     {
-//        this.conn = conn;
         this.cache = new HashMap<>();
     }
 
+    //This function finds a NonFixedDaySupplierMapper in the DB by the supplierID
     public NonFixedDaySupplier findBySupplierId(String supplierID)
     {
-        if (cache.containsKey(supplierID)) {
+        //First we check if we have this FixedDaySupplier in the cache
+        if (cache.containsKey(supplierID))
+        {
             return cache.get(supplierID);
         }
-
         PreparedStatement stmt;
         ResultSet rs;
-        getConnection();
+        getConnection();// The function that gets us the connection to the DB
 
-//        try
-//        {
-//            stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
-//            stmt.setString(1, supplierID);
-//            rs = stmt.executeQuery();
-//            if (rs.next()) {
-//                Connection conn = null;
-//                try {
-//                    String url = "jdbc:sqlite:dev/res/SuperLeeDataBase.db.db";
-//                    conn = DriverManager.getConnection(url);
-//                }
-//                catch (SQLException ignored)
-//                {
-//                }
-//                finally
-//                {
-//                    try
-//                    {
-//                        if (conn != null)
-//                        {
-//                            conn.close();
-//                        }
-//                    }
-//                    catch (SQLException ignored)
-//                    {}
-//                }
-////                ContractMapper contractMapper = new ContractMapper(conn);
-//                ContractMapper contractMapper = new ContractMapper();
-//
-//                Contract contract;
-//                contract = contractMapper.findBySupplierId(supplierID);
-//                ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
-//                String itemsMapJson = rs.getString("items");
-////                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
-//                int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-//                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
-//                NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
-//                cache.put(supplierID, nonFixedDaySupplier);
-//                try
-//                {
-//                    conn.close();
-//                }
-//                catch (SQLException e){}
-//                return nonFixedDaySupplier;
-//            }
-//        }
+        //If it doesnt exist in the cache we check if it exists in the DB
         try
         {
-            stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers WHERE supplier_ID = ?");
+            stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers WHERE supplier_ID = ?");//The SQL query that we use to find the NonFixedDaySupplier
             stmt.setString(1, supplierID);
             rs = stmt.executeQuery();
-            if(rs.next())
+            if(rs.next())// if we found the NonFixedDaySupplier in the DB we build the NonFixedDaySupplier class instance
             {
                 ContractMapper contractMapper = new ContractMapper();
                 Contract contract;
@@ -109,27 +69,27 @@ public class NonFixedDaySupplierMapper{
             conn.close();
         }
         catch (SQLException e){}
-        return null;
+        return null; // if it wasnt found in the DB or in the cache
     }
 
+    //This function gives all the NonFixedDaySupplier that are currently in the DB
     public List<NonFixedDaySupplier> findAll()
     {
         getConnection();
-        List<NonFixedDaySupplier> suppliers = new ArrayList<>();
+        List<NonFixedDaySupplier> suppliers = new ArrayList<>(); // The list that will hold all the NonFixedDaySupplier that we will return
         PreparedStatement stmt;
         ResultSet rs;
         try {
-            stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers");
+            stmt = conn.prepareStatement("SELECT * FROM NonFixedDaySuppliers"); //The SQL query that we use to get all the NonFixedDaySupplier in the DB
             rs = stmt.executeQuery();
-            while (rs.next()) {
-//                ContractMapper contractMapper = new ContractMapper(conn);
+            while (rs.next())  //If there are any NonFixedDaySupplier in the DB we create an instance for each and one of them
+            {
                 ContractMapper contractMapper = new ContractMapper();
 
                 Contract contract;
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
-//                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
                 Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 NonFixedDaySupplier nonFixedDaySupplier = new NonFixedDaySupplier(rs.getInt("numOfDayToDeliver"), rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
@@ -146,17 +106,18 @@ public class NonFixedDaySupplierMapper{
             conn.close();
         }
         catch (SQLException e){}
-        return suppliers;
+        return suppliers; // we return all the FixedDaySupplier that we found
     }
 
 
+    //This function lets us insert a new NonFixedDaySupplier in the system
     public void insert(NonFixedDaySupplier nonFixedDaySupplier)
     {
         getConnection();
         PreparedStatement stmt;
         ResultSet rs;
         try {
-            stmt = conn.prepareStatement("INSERT INTO NonFixedDaySuppliers (business_id, name, payment_method ,supplier_ID, contract_person_name, contract_phone_number, items, numOfDayToDeliver, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO NonFixedDaySuppliers (business_id, name, payment_method ,supplier_ID, contract_person_name, contract_phone_number, items, numOfDayToDeliver, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");// This SQL query that lets us insert values into the DB
             String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
             stmt.setString(1, nonFixedDaySupplier.getBusinessId());
             stmt.setString(2, nonFixedDaySupplier.getName());
@@ -172,7 +133,7 @@ public class NonFixedDaySupplierMapper{
 
             rs = stmt.getGeneratedKeys();
             if (rs.next()) {
-                cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier);
+                cache.put(nonFixedDaySupplier.getSupplierID(), nonFixedDaySupplier); //We insert the new FixedDaySupplier into the cache
             }
         }
         catch (SQLException e){System.out.println(e.getMessage());}
@@ -183,12 +144,14 @@ public class NonFixedDaySupplierMapper{
         catch (SQLException e){}
 
     }
+
+    //This function lets us update a value that is already in the DB
     public void update(NonFixedDaySupplier nonFixedDaySupplier)
     {
         getConnection();
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement("UPDATE NonFixedDaySuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, numOfDayToDeliver = ?, contract_id = ? WHERE supplier_ID = ?");
+            stmt = conn.prepareStatement("UPDATE NonFixedDaySuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, numOfDayToDeliver = ?, contract_id = ? WHERE supplier_ID = ?");//This is the SQL query that we use for updating a value
             String itemsJson = new JSONObject(nonFixedDaySupplier.getItems()).toString();
             stmt.setString(1, nonFixedDaySupplier.getBusinessId());
             stmt.setString(2, nonFixedDaySupplier.getName());
@@ -213,6 +176,8 @@ public class NonFixedDaySupplierMapper{
         catch (SQLException e){}
 
     }
+
+    //This function lets us delete a value from the DB
     public void delete(NonFixedDaySupplier nonFixedDaySupplier)
     {
         getConnection();
@@ -233,6 +198,8 @@ public class NonFixedDaySupplierMapper{
         }
         catch (SQLException e){}
     }
+
+    //This helper function gives us a connection to the DB
     private void getConnection()
     {
         try

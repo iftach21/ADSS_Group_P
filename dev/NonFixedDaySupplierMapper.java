@@ -176,6 +176,7 @@ public class NonFixedDaySupplierMapper{
         getConnection();
         PreparedStatement stmt;
         Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+
         for(Map.Entry<Item,Pair<Integer,Float>> entry : nonFixedDaySupplier.getItems().entrySet())
         {
             String key = entry.getKey().getCatalogNum();

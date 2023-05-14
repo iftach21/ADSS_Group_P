@@ -29,6 +29,8 @@ public class NonDeliveringSupplierMapper {
         }
         PreparedStatement stmt;
         ResultSet rs;
+        Map<String,Pair<Integer,Float>> itemIdMap;
+
         getConnection(); // The function that gets us the connection to the DB
 
         //If it doesnt exist in the cache we check if it exists in the DB
@@ -43,17 +45,22 @@ public class NonDeliveringSupplierMapper {
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
-                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
+                itemIdMap = Parser.parse(itemsMapJson); // TODO build the needed mapper
+
+//                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
 
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-                NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
+                NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, null);
 
-                cache.put(supplierID, nonDeliveringSupplier);
+//                cache.put(supplierID, nonDeliveringSupplier);
                 try
                 {
                     conn.close();
                 }
                 catch (SQLException e){}
+
+                nonDeliveringSupplier.setItems(getItems(itemIdMap));
+                cache.put(supplierID, nonDeliveringSupplier);
                 return nonDeliveringSupplier;
             }
         }
@@ -71,6 +78,8 @@ public class NonDeliveringSupplierMapper {
     {
         getConnection();
         List<NonDeliveringSupplier> suppliers = new ArrayList<>();// The list that will hold all the NonDeliveringSupplier that we will return
+        List<Map<String,Pair<Integer,Float>>> itemsIdMap = new ArrayList<>();
+        List<String> suppliersId = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
         try {
@@ -82,13 +91,15 @@ public class NonDeliveringSupplierMapper {
                 Contract contract;
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
+                suppliersId.add(rs.getString("supplier_ID"));
                 String itemsMapJson = rs.getString("items");
-                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {
-                }.getType();
+                itemsIdMap.add(Parser.parse(itemsMapJson)); // TODO build needed parser
+//                Type type = new TypeToken<Map<Item, Pair<Integer, Float>>>() {}.getType();
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
-                NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
-                cache.put(rs.getString("supplier_ID"), nonDeliveringSupplier);
+//                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
+
+                NonDeliveringSupplier nonDeliveringSupplier = new NonDeliveringSupplier(rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, null);
+//                cache.put(rs.getString("supplier_ID"), nonDeliveringSupplier);
                 suppliers.add(nonDeliveringSupplier);
             }
         }
@@ -98,6 +109,13 @@ public class NonDeliveringSupplierMapper {
             conn.close();
         }
         catch (SQLException e){}
+
+        for(int i = 0; i < suppliers.size(); i++)
+        {
+            Map<Item,Pair<Integer,Float>> itemsMap = getItems(itemsIdMap.get(i));
+            suppliers.get(i).setItems(itemsMap);
+            cache.put(suppliers.get(i).getSupplierID(), suppliers.get(i));
+        }
         return suppliers; // we return all the FixedDaySupplier that we found
     }
 
@@ -106,11 +124,17 @@ public class NonDeliveringSupplierMapper {
     {
         PreparedStatement stmt;
         getConnection();
-
+        Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+        for(Map.Entry<Item,Pair<Integer,Float>> entry : nonDeliveringSupplier.getItems().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Pair<Integer,Float> pair = entry.getValue();
+            insertItem.put(key,pair);
+        }
         try {
             stmt = conn.prepareStatement("INSERT INTO NonDeliveringSuppliers (business_id, name, payment_method, supplier_ID, contract_person_name, contract_phone_number, items, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");//This is the SQL query that we use to insert a new NonDeliveringSupplier into the DB
-            String itemsJson = new Gson().toJson(nonDeliveringSupplier.getItems());
-
+//            String itemsJson = new Gson().toJson(nonDeliveringSupplier.getItems());
+            String itemsJson = new JSONObject(insertItem).toString();
             stmt.setString(1, nonDeliveringSupplier.getBusinessId());
             stmt.setString(2, nonDeliveringSupplier.getName());
             stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
@@ -139,9 +163,17 @@ public class NonDeliveringSupplierMapper {
     {
         getConnection();
         PreparedStatement stmt;
+        Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
+        for(Map.Entry<Item,Pair<Integer,Float>> entry : nonDeliveringSupplier.getItems().entrySet())
+        {
+            String key = entry.getKey().getCatalogNum();
+            Pair<Integer,Float> pair = entry.getValue();
+            insertItem.put(key,pair);
+        }
         try {
             stmt = conn.prepareStatement("UPDATE NonDeliveringSuppliers SET business_id = ?,  name = ?, payment_method = ?, supplier_ID = ?, contract_person_name = ?, contract_phone_number = ?, items = ?, contract_id = ? WHERE supplier_ID = ?");//This is the SQL query that we use for updating a value
-            String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+//            String itemsJson = new JSONObject(nonDeliveringSupplier.getItems()).toString();
+            String itemsJson = new JSONObject(insertItem).toString();
             stmt.setString(1, nonDeliveringSupplier.getBusinessId());
             stmt.setString(2, nonDeliveringSupplier.getName());
             stmt.setString(3, (nonDeliveringSupplier.getPaymentMethod()).toString());
@@ -151,9 +183,9 @@ public class NonDeliveringSupplierMapper {
             stmt.setString(7, itemsJson);
             stmt.setString(8, String.valueOf(nonDeliveringSupplier.getContract().contractId));
             stmt.setString(9, String.valueOf(nonDeliveringSupplier.getSupplierID()));
-
             stmt.executeUpdate();
 
+            cache.remove(nonDeliveringSupplier.getSupplierID());
             cache.put(nonDeliveringSupplier.getSupplierID(), nonDeliveringSupplier);
         }
         catch(SQLException e){}
@@ -192,6 +224,20 @@ public class NonDeliveringSupplierMapper {
             this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         }
         catch (SQLException e){}
+    }
+
+    private Map<Item,Pair<Integer,Float>> getItems(Map<String,Pair<Integer,Float>> itemIdMap)
+    {
+        ItemMapper itemMapper = new ItemMapper();
+        Map<Item,Pair<Integer,Float>> itemList = new HashMap<>();
+        for(Map.Entry<String,Pair<Integer,Float>> entry : itemIdMap.entrySet())
+        {
+            String key = entry.getKey();
+            Pair<Integer,Float> value = entry.getValue();
+            Item item = itemMapper.findByCatalogNum(key);
+            itemList.put(item,value);
+        }
+        return itemList;
     }
 }
 

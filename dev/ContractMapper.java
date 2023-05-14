@@ -1,3 +1,4 @@
+import java.io.StringReader;
 import java.sql.*;
 import java.util.*;
 
@@ -75,7 +76,9 @@ public class ContractMapper {
                 //First we check if we have this contract in the cache
                 if (cache.containsKey(rs.getInt("contract_id")))
                 {
-                    return cache.get(rs.getInt("contract_id"));
+                    int contractId = rs.getInt("contract_id");
+                    conn.close();
+                    return cache.get(contractId);
                 }
                 Map<String,Map<Integer,Double>> itemIdMap;
                 Contract contract = new Contract();
@@ -87,12 +90,14 @@ public class ContractMapper {
 //                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
                 itemIdMap = ParserForContractItemIntegerDouble.parse(itemsMapJson); // TODO build the needed mapper
                 contract.itemsMapDiscount = getItems(itemIdMap);
-                cache.put(rs.getInt("contract_id"), contract);
+                cache.put(contract.contractId, contract);
                 return contract;
             }
         }
         catch(SQLException ignored)
-        {}
+        {
+            System.out.println(ignored.getMessage());
+        }
         try
         {
             conn.close();

@@ -185,7 +185,8 @@ public class Supplier_Manger {
                     this.nonFixedDaySupplierMapper.update((NonFixedDaySupplier) suppleir);
 
                 }
-                this.itemMapper.insert(item);
+                if(itemMapper.findByCatalogNum(item.getCatalogNum())==null){
+                this.itemMapper.insert(item);}
             }
         }
         this.update_suppliers();

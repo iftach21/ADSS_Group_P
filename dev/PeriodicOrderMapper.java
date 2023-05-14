@@ -48,7 +48,8 @@ public class PeriodicOrderMapper {
             if (rs.next())// if we found the Order in the DB we build the Period_Order class instance
             {
                 Period_Order order = new Period_Order();
-                order.setOrderNum(rs.getInt("order_num"));
+                int orderNumCache = rs.getInt("order_num");
+                order.setOrderNum(orderNumCache);
 //                order.setItemList(Parser.parse(rs.getString("item_list")));
                 itemsFromTable = rs.getString("item_list");
                 itemIdMap = Parser.parse(itemsFromTable); // TODO build the needed mapper
@@ -62,7 +63,7 @@ public class PeriodicOrderMapper {
                 order.setSupplier(findSupplier(supplierId));
                 order.setItemList(getItems(itemIdMap));
 
-                cache.put(rs.getInt("order_num"), order);
+                cache.put(orderNumCache, order);
 
                 return order;
             }

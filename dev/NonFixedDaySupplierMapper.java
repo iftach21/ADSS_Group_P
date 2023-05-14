@@ -92,7 +92,6 @@ public class NonFixedDaySupplierMapper{
             while (rs.next())  //If there are any NonFixedDaySupplier in the DB we create an instance for each and one of them
             {
                 ContractMapper contractMapper = new ContractMapper();
-
                 Contract contract;
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));

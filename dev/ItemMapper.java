@@ -122,7 +122,6 @@ public class ItemMapper {
             rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
-                item.setCatalogNum(rs.getString(1));
                 cache.put(item.getCatalogNum(), item); //We insert the new item into the cache
             }
         }

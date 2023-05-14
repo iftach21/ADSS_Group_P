@@ -43,7 +43,8 @@ public class OrderMapper
             if (rs.next()) // if we found the Order in the DB we build the Order class instance
             {
                 Order order = new Order();
-                order.setOrderNum(rs.getInt("order_num"));
+                int orderNumCache = rs.getInt("order_num");
+                order.setOrderNum(orderNumCache);
 //                order.setItemList(Parser.parse(rs.getString("item_list")));
                 itemsFromTable = rs.getString("item_list");
                 itemIdMap = Parser.parse(itemsFromTable); // TODO build the needed mapper
@@ -55,7 +56,7 @@ public class OrderMapper
                 order.setItemList(getItems(itemIdMap));
                 order.setSupplier(findSupplier(supplierId));
 
-                cache.put(rs.getInt("order_num"), order);
+                cache.put(orderNumCache, order);
                 return order;
             }
         }

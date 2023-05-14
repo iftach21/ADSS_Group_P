@@ -71,6 +71,9 @@ public class Shift {
                 pShift.append("name: ").append(this.workerInShift[i].get(j).getName()).append(" id: ").append(this.workerInShift[i].get(j).getId());
             }
         }
+        for( Driver driver:this.drivers){
+            pShift.append("name: ").append(driver.getName()).append(" id: ").append(driver.getId());
+        }
         return pShift;
     }
 

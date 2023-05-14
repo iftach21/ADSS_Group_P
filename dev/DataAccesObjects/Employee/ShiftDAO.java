@@ -120,7 +120,7 @@ public class ShiftDAO {
             //getting the workers back in:
             List<Pair<Workers, Integer>> listForShift = shiftWorkerDAO.get(shiftId);
             for(Pair p: listForShift){
-                if((Integer) p.getSecond() == 7){
+                if((Integer) p.getSecond() == -1){
                     shift.addDriver((Driver)p.getFirst());
                 }
                 else{

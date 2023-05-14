@@ -52,9 +52,9 @@ public class OrderMapper
                 String supplierId = rs.getString("supplier_id");
                 order.setStatusOrder(StatusOrder.valueOf(rs.getString("statusOrder")));
                 conn.close();
+                order.setItemList(getItems(itemIdMap));
                 order.setSupplier(findSupplier(supplierId));
 
-                order.setItemList(getItems(itemIdMap));
                 cache.put(rs.getInt("order_num"), order);
                 return order;
             }
@@ -190,8 +190,8 @@ public class OrderMapper
             Pair<Integer,Float> pair = entry.getValue();
             insertItem.put(key,pair);
         }
-
-        try {
+        try
+        {
             stmt = conn.prepareStatement("INSERT INTO Orders(order_num,supplier_id,item_list,cost,store_number,statusOrder)VALUES (?,?, ?, ?, ?, ?)");//This is the SQL query that we use to insert a new Order into the DB
             stmt.setInt(1, order.getOrderNum());
             Supplier supplier = order.getSupplier();
@@ -202,7 +202,6 @@ public class OrderMapper
             stmt.setFloat(4, order.getCost());
             stmt.setInt(5, order.getStore_number());
             stmt.setString(6, order.getStatusOrder().toString());
-
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
 

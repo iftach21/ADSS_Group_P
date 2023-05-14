@@ -58,6 +58,7 @@ public class OrderMapper
                 order.setSupplier(findSupplier(supplierId));
                 for(Map.Entry<String,Pair<Integer,Float>> entry : itemIdMap.entrySet())
                 {
+                    String key = entry.getKey();
 
                 }
 

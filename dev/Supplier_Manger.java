@@ -7,15 +7,9 @@ import java.util.*;
 // It contains various methods for managing suppliers, contracts, and items.
 public class Supplier_Manger {
     private List<Supplier> suppliers;
-    private Map<Item,Integer> itemslist;
 
-    public Map<Item,Integer> getItemslist() {
-        return itemslist;
-    }
 
-    public void setItemslist(Map<Item,Integer>itemslist) {
-        this.itemslist = itemslist ;
-    }
+
 
     public List<Supplier> getSuppliers() {
         return suppliers;
@@ -38,7 +32,6 @@ public class Supplier_Manger {
 
     public Supplier_Manger() {
         this.suppliers = new ArrayList<Supplier>();
-        this.itemslist = new HashMap<Item,Integer>();
         try
         {
 //            Connection conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
@@ -191,6 +184,7 @@ public class Supplier_Manger {
                     this.nonFixedDaySupplierMapper.update((NonFixedDaySupplier) suppleir);
 
                 }
+                this.itemMapper.insert(item);
             }
         }
         this.update_suppliers();
@@ -288,7 +282,7 @@ public class Supplier_Manger {
 
 
 
-
+    //update the supplier base on the data base
     public void update_suppliers()
     {
         this.suppliers = new ArrayList<Supplier>();
@@ -304,6 +298,21 @@ public class Supplier_Manger {
         {
             this.suppliers.addAll(this.nonFixedDaySupplierMapper.findAll());
         }
+    }
+
+    //get a seet with all the items that can be supplie by the suppliers
+    public Set<Item> get_itemlist(){
+        Set<Item> itemSet =new HashSet<>();
+        this.update_suppliers();
+        for(Supplier supplier : this.suppliers){
+            for(Item item: supplier.getItems().keySet()) {
+                itemSet.add(item);
+
+            }
+
+        }
+        return itemSet;
+
     }
 
 

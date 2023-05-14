@@ -3,9 +3,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.Date;
 
 class OrderMangerTest {
     @Test
@@ -441,24 +440,23 @@ class OrderMangerTest {
         Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
 //        item3.setMinimum_quantity(3);
         Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
-        masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
-        masupplier.add_item_discount_to_supplier("Supplier1 Inc.","Apple",10,0.8);
-        masupplier.update_suppliers();
+        item1.addNewPrice(10,25);
         WindowType currentDeliveryDay =WindowType.day2;
         FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
         masupplier.add_supplier(supplier_2);
         masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
         NonDeliveringSupplier supplier_3 =new NonDeliveringSupplier("Supplier3 Inc.", "143446789", 1, "S4056", contactPerson, null, null);
         masupplier.add_supplier(supplier_3);
-
-
+        item1.addNewPrice(10,25);
+        item1.addNewPrice(10,40);
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
         OrderManger orderManger = new OrderManger();
 
         Map<Item,Integer> maplist = new HashMap<Item,Integer>();
-        maplist.put(item1,100);
-        maplist.put(item2,100);
 
         orderManger.assing_Orders_to_Suppliers(maplist,masupplier,50);
+        ItemMapper itemMapper =new ItemMapper();
+        itemMapper.findAll().get(0).print_item();
 
 
     }

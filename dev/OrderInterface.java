@@ -14,7 +14,7 @@ public class OrderInterface extends AInterface {
         int option_1;
 
 
-        while (true) {
+ /*       while (true) {
              //orders menu to add new and to approve them
              System.out.println("You selected Order manger");
              System.out.println("1.add new Order");
@@ -201,6 +201,6 @@ public class OrderInterface extends AInterface {
                 System.out.println("number:");
                 input = scanner.next();
             }
-        }
+        }*/
     }
 }

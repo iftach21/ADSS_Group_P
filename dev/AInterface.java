@@ -9,4 +9,10 @@ abstract class AInterface
     {
         return supplier_manger;
     }
+
+    public void interfaceManagerLogin() {
+    }
+
+    public void interfaceWorkerLogin() {
+    }
 }

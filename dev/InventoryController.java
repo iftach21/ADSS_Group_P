@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.*;
 
 public class InventoryController {
@@ -300,14 +301,12 @@ public class InventoryController {
         Report currentReport = new Report(reportType.PriceHistory, currentDate);
         String reportInformationString = "";
 
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(catalogNumber)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
-            for (int i = 0; i < key.getPriceHistorySize(); i++){
-                reportInformationString += key.getPriceHistorySpecific(i);
-            }
+            reportInformationString += item.getPriceHistory().toString();
         }
         currentReport.setReportData(reportInformationString);
         return currentReport;

@@ -16,7 +16,10 @@ public class Parser {
         for (String pair : pairs) {
             String[] keyValuePair =  pair.split("\\:\\{");
             String key = keyValuePair[0].substring(0);
-            String number_two = keyValuePair[1].substring(0,keyValuePair[1].length()-1);
+            String number_two = keyValuePair[1].substring(0,keyValuePair[1].length());
+            if(number_two.contains("}")){
+                 number_two = keyValuePair[1].substring(0,keyValuePair[1].length()-1);
+            }
 
 
             String[] valuePair = number_two.split(",");

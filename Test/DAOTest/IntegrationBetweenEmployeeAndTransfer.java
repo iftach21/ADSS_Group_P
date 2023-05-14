@@ -20,20 +20,9 @@ import java.util.stream.Collectors;
 
 public class IntegrationBetweenEmployeeAndTransfer {
 
-    //todo: need to fix those tests!
-
-    Driver driver1;
-    Driver driver2;
-    Driver driver3;
-    Driver driver4;
-
-    Workers stoke1;
-
-    Workers stoke2;
 
     WeeklyShiftAndWorkersManager wscontroller = WeeklyShiftAndWorkersManager.getInstance();
 
-    List<Driver> drivers;
     DriverController driverControllerTest = DriverController.getInstance();
 
     public IntegrationBetweenEmployeeAndTransfer() throws SQLException {

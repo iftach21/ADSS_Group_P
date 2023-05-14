@@ -182,8 +182,8 @@ public class Item {
                 ", catalogName='" + catalogName + '\'' +
                 ", temperature=" + temperature +
                 ", manufacturer='" + manufacturer + '\'' +
-                ", minimum_quantity=" + minimum_quantity + '\n' +
-                //"buy price: " + this.getBuyPrice() + " , sell price: " + this.getSellPrice() +
+                ", minimum_quantity=" + minimum_quantity +
+                '\n' + "buy price: " + this.getBuyPrice() + " , sell price: " + this.getSellPrice() +
                 "";
     }
     @Override

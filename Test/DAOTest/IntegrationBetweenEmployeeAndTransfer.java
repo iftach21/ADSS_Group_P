@@ -106,7 +106,7 @@ public class IntegrationBetweenEmployeeAndTransfer {
 
     @AfterEach
     void tearDown() {
-       //Connection.DeleteRows();
+       Connection.DeleteRows();
     }
 
 
@@ -128,10 +128,9 @@ public class IntegrationBetweenEmployeeAndTransfer {
     {
         //todo: complete
     }
-
-    void doIHaveDriver()
-    {
-        //wscontroller.doIHaveStokeForTheShipment()
+    @Test
+    void doIHaveDriver() throws SQLException {
+        wscontroller.doIHaveStokeForTheShipment(1,2024,4);
     }
 
 }

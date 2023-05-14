@@ -43,7 +43,7 @@ public class ContractMapper {
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
-                itemIdMap = Parser.parse(itemsMapJson); // TODO build the needed mapper
+                itemIdMap = ParserForContractItemIntegerDouble.parse(itemsMapJson); // TODO build the needed mapper
 //                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
                 conn.close();
                 contract.itemsMapDiscount = getItems(itemIdMap);
@@ -85,7 +85,7 @@ public class ContractMapper {
                 String itemsMapJson = rs.getString("items_Map_discount");
                 conn.close();
 //                contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
-                itemIdMap = Parser.parse(itemsMapJson); // TODO build the needed mapper
+                itemIdMap = ParserForContractItemIntegerDouble.parse(itemsMapJson); // TODO build the needed mapper
                 contract.itemsMapDiscount = getItems(itemIdMap);
                 cache.put(rs.getInt("contract_id"), contract);
                 return contract;

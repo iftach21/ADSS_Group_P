@@ -4,14 +4,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        //
-        Interface in = new Interface();
-        in.logIn();
-        //
-
-        AInterface[] interfaces = new AInterface[2];
+        AInterface[] interfaces = new AInterface[4];
         interfaces[0] = new SupplierInterface();
         interfaces[1] = new OrderInterface(interfaces[0].getSupplier_manger());
+        interfaces[2] = new interfaceManager();
+        interfaces[3] = new interfaceWorker();
 
         String option;
         int choice = 0;
@@ -21,7 +18,9 @@ public class Main {
             System.out.println("Hello this is the manger suppliers board press on the right option");
             System.out.println("1.Supplier manger");
             System.out.println("2.Order manger");
-            System.out.println("4.Exit");
+            System.out.println("3.Stock manger");
+            System.out.println("4.Stock worker");
+            System.out.println("5.Exit");
             option = scanner.nextLine();
 
             while(true)
@@ -29,7 +28,7 @@ public class Main {
                 try
                 {
                     choice = Integer.parseInt(option);
-                    if(choice < 1 || choice > 4)
+                    if(choice < 1 || choice > 5)
                     {
                         //the main menu there he can choose what to do
                         System.out.println("Please enter a valid option");
@@ -57,6 +56,12 @@ public class Main {
                 case 2:
                     interfaces[1].interfaceStartup();
                 case 3:
+                    //interfaces[2].interfaceStartup();
+                    interfaces[2].interfaceManagerLogin();
+                case 4:
+                    //interfaces[3].interfaceStartup();
+                    interfaces[3].interfaceWorkerLogin();
+                case 5:
                     System.out.println("Thank you and goodbye");
                     System.exit(0);
                     break;

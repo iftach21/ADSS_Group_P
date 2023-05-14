@@ -9,18 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="Mapper update">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="Mapper update + interface + specificitem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/AInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/AInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/InventoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/interfaceWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/specificItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InventoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ItemMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderManger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interfaceManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/specificItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/specificItem.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,13 +203,7 @@
       <workItem from="1683725340405" duration="310000" />
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
-    </task>
-    <task id="LOCAL-00037" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1681047579444</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1681047579444</updated>
+      <workItem from="1684062889250" duration="1799000" />
     </task>
     <task id="LOCAL-00038" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681048204588</created>
@@ -546,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683984135196</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Mapper update + interface + specificitem">
+      <created>1683996514952</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1683996514952</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -578,7 +580,8 @@
     <MESSAGE value="updated all mappers" />
     <MESSAGE value="updated StockMappers" />
     <MESSAGE value="Mapper update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mapper update" />
+    <MESSAGE value="Mapper update + interface + specificitem" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mapper update + interface + specificitem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

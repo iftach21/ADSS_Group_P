@@ -56,8 +56,7 @@ public class FixedDaySupplierMapper{
                     conn.close();
                 }
                 catch (SQLException e){}
-
-
+                fixedDaySupplier.setItems(getItems(itemIdMap));
                 cache.put(supplierID, fixedDaySupplier);
                 return fixedDaySupplier;
             }
@@ -76,6 +75,8 @@ public class FixedDaySupplierMapper{
     public List<FixedDaySupplier> findAll()
     {
         List<FixedDaySupplier> suppliers = new ArrayList<>();// The list that will hold all the FixedDaySupplier that we will return
+        List<Map<String,Pair<Integer,Float>>> itemsIdMap = new ArrayList<>();
+        List<String> suppliersId = new ArrayList<>();
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
@@ -87,14 +88,18 @@ public class FixedDaySupplierMapper{
                 ContractMapper contractMapper = new ContractMapper();
                 Contract contract;
                 contract = contractMapper.findBySupplierId(rs.getString("supplier_ID"));
+                suppliersId.add(rs.getString("supplier_ID"));
+
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
+                itemsIdMap.add(Parser.parse(itemsMapJson)); // TODO build needed parser
+
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
+//                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 String currentDay = rs.getString("currentDeliveryDay");
                 WindowType currentDeliveryDay = WindowType.valueOf(currentDay);
-                FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay, rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
-                cache.put(rs.getString("supplier_ID"), fixedDaySupplier);
+                FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay, rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, null);
+//                cache.put(rs.getString("supplier_ID"), fixedDaySupplier);
                 suppliers.add(fixedDaySupplier);
             }
         }
@@ -105,6 +110,14 @@ public class FixedDaySupplierMapper{
             conn.close();
         }
         catch (SQLException e){}
+
+        for(int i = 0; i < suppliers.size(); i++)
+        {
+            Map<Item,Pair<Integer,Float>> itemsMap = getItems(itemsIdMap.get(i));
+            suppliers.get(i).setItems(itemsMap);
+            cache.put(suppliers.get(i).getSupplierID(), suppliers.get(i));
+        }
+
         return suppliers;// we return all the FixedDaySupplier that we found
     }
 
@@ -113,6 +126,7 @@ public class FixedDaySupplierMapper{
     {
         getConnection();
         PreparedStatement stmt;
+        Map<String, Pair<Integer,Float>> insertItem = new HashMap<>();
         try {
             stmt = conn.prepareStatement("INSERT INTO FixedDaySuppliers (business_id, name, currentDeliveryDay, payment_method, supplier_ID, contract_person_name, contract_phone_number, items, contract_id) VALUES (?,?, ?, ?, ?,?,?,?,?)");//This is the SQL query that we use to insert a new FixedDaySupplier into the DB
             String itemsJson = new JSONObject(fixedDaySupplier.getItems()).toString();

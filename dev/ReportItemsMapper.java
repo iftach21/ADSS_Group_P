@@ -143,6 +143,9 @@ public class ReportItemsMapper implements DAO<Report>{
                 statement.executeUpdate();
                 ResultSet rs = statement.getGeneratedKeys();
                 if (rs.next()){
+                    if (identityMap == null) {
+                        identityMap = new ArrayList<>();
+                    }
                     identityMap.add(report);
                 }
             }

@@ -104,13 +104,10 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderMangerTest.testAddItems">
-    <configuration name="OrderMangerTest.order_move_to_history" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="order_move_to_history" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -168,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.OrderMangerTest.testAddItems" />
         <item itemvalue="JUnit.OrderMangerTest.testHistoryParser" />
         <item itemvalue="JUnit.OrderMangerTest.three_supllier_split" />
         <item itemvalue="JUnit.OrderMangerTest.test_only_supplier_exist" />
-        <item itemvalue="JUnit.OrderMangerTest.order_move_to_history" />
       </list>
     </recent_temporary>
   </component>

@@ -12,6 +12,17 @@ public class specificItemMapper {
         this.cache = new HashMap<>();
     }
 
+    public specificItem findSpecificItemBySerial(int serialNumber) {
+        for (List<specificItem> itemList : cache.values()) {
+            for (specificItem item : itemList) {
+                if (item.getserialNumber() == serialNumber) {
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
+
     public List<specificItem> findByCatalogNum(String catalogNum)
     {
         if(cache.containsKey(catalogNum))
@@ -100,7 +111,6 @@ public class specificItemMapper {
         }
         catch(SQLException e){}
         catch(ParseException e){}
-
         try
         {
             conn.close();

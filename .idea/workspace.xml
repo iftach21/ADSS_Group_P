@@ -9,16 +9,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="fix the praser">
+    <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated ReportMapper">
+      <change afterPath="$PROJECT_DIR$/dev/subCategoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/PriceHistoryParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PriceHistoryParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/AInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/AInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonDeliveringSupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PeriodicOrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportItemsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ReportItemsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ReportMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/interfaceWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/interfaceWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CategoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ItemMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Report.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Report.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/categoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/categoryMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/specificItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/specificItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AbstractSupplierMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Contract.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ContractMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Database.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DeliveringSupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FixedDaySupplierMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InventoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ItemController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/JsonToMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonDeliveringSupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NonFixedDaySupplierMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Notification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderManger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ParserForContractItemIntegerDouble.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PaymentCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Period_Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PeriodicOrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReportController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StatusOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Supplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SupplierInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WindowTypeCreater.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interfaceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interfaceManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interfaceWorker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/manufacturer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/notificationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/reportType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/stockTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/subCategory.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,38 +121,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;320827637__209512722__206719346__311451058&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marik/Documents/GitHub/ADSS_Group_P/dev/res&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindowRun.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "Merging 320827637__209512722__206719346__311451058",
+    "last_opened_file_path": "C:/Users/marik/Documents/GitHub/ADSS_Group_P/dev/res",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.build",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;RunConfigurationTargetLRU&quot;: [
-      &quot;df6b1986-9990-446a-96ba-1d8e678a5cc5&quot;
+  "keyToStringList": {
+    "RunConfigurationTargetLRU": [
+      "df6b1986-9990-446a-96ba-1d8e678a5cc5"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -201,20 +254,6 @@
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
       <workItem from="1684060586685" duration="6756000" />
-    </task>
-    <task id="LOCAL-00038" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1681048204588</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1681048204588</updated>
-    </task>
-    <task id="LOCAL-00039" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1681048499127</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1681048499127</updated>
     </task>
     <task id="LOCAL-00040" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681051877689</created>
@@ -545,7 +584,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1684002050843</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="updated ReportMapper">
+      <created>1684074002095</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1684074002095</updated>
+    </task>
+    <task id="LOCAL-00088" summary="updated ReportMapper">
+      <created>1684074012690</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1684074012690</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,27 +658,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/ItemMapper.java</url>
-          <line>140</line>
+          <line>151</line>
           <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/ItemMapper.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/PriceHistoryParser.java</url>
           <line>21</line>
           <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
-          <line>426</line>
-          <properties class="OrderMangerTest" method="test_only_supplier_exist">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

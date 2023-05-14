@@ -6,42 +6,41 @@ import org.json.*;
 import com.google.gson.*;
 import java.lang.reflect.Type;
 
-
+/**
+ * This is the mapper class for the contract class
+ **/
 public class ContractMapper {
     private Connection conn;
     private final Map<Integer,Contract> cache;
 
-//    public ContractMapper(Connection conn)
-//    {
-//        this.conn = conn;
-//        this.cache = new HashMap<>();
-//    }
-
+    //This is the constructor for the class, it doesnt get any arguments and only initialize the cache
     public ContractMapper()
     {
         this.cache = new HashMap<>();
     }
+
+    //This function finds a contract in the DB by the contract ID
     public Contract findByContractId(int contractId)
     {
+        //First we check if we have this contract in the cache
         if(cache.containsKey(contractId))
         {
             return cache.get(contractId);
         }
-
-        getConnection();
+         //If it doesnt exist in the cache we check if it exists in the DB
+        getConnection(); // The function that gets us the connection to the DB
         try
         {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE contract_id = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE contract_id = ?");//The SQL query that we use to find the contract
             stmt.setInt(1,contractId);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next())
+            if(rs.next()) // if we found the contract in the DB we build the contract class instance
             {
                 Contract contract = new Contract();
                 contract.setContractId(rs.getInt("contract_id"));
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
-//                Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
                 contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
                 cache.put(contractId,contract);
                 conn.close();
@@ -54,28 +53,32 @@ public class ContractMapper {
             conn.close();
         }
         catch (SQLException e){}
-        return null;
+        return null; // if it wasnt found in the DB or in the cache
     }
 
+    //This function lets us find a contract by its supplier ID
     public Contract findBySupplierId(String supplierID)
     {
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
         try {
-            stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE supplier_id = ?");
+            stmt = conn.prepareStatement("SELECT * FROM Contracts WHERE supplier_id = ?");//The SQL query that we use to find the contract by the supplier ID
             stmt.setString(1, supplierID);
             rs = stmt.executeQuery();
-            if (rs.next()) {
-                if (cache.containsKey(rs.getInt("contract_id"))) {
+            if (rs.next())// if we found the contract in the DB we build the contract class instance
+            {
+                //First we check if we have this contract in the cache
+                if (cache.containsKey(rs.getInt("contract_id")))
+                {
                     return cache.get(rs.getInt("contract_id"));
                 }
+
                 Contract contract = new Contract();
                 contract.setContractId(rs.getInt("contract_id"));
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
-//            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
                 contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
                 cache.put(rs.getInt("contract_id"), contract);
                 conn.close();
@@ -89,30 +92,28 @@ public class ContractMapper {
             conn.close();
         }
         catch (SQLException e){}
-        return null;
+        return null; // if it wasnt found in the DB or in the cache
     }
 
 
+    //This function gives all the contracts that are currently in the DB
     public List<Contract> findAll()
     {
-        List<Contract> contracts = new ArrayList<>();
+        List<Contract> contracts = new ArrayList<>(); // The list that will hold all the contracts that we will return
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
         try {
-            stmt = conn.prepareStatement("SELECT * FROM Contracts");
+            stmt = conn.prepareStatement("SELECT * FROM Contracts");//The SQL query that we use to get all the contracts in the DB
             rs = stmt.executeQuery();
-            while (rs.next()) {
+            while (rs.next()) //If there are any contracts in the DB we create an instance for each and one of them
+            {
                 Contract contract = new Contract();
                 contract.setContractId(rs.getInt("contract_id"));
                 contract.setSupplierId(rs.getString("supplier_id"));
                 contract.setTotalDiscount(rs.getDouble("total_discount"));
                 String itemsMapJson = rs.getString("items_Map_discount");
                 contract.itemsMapDiscount = ParserForContractItemIntegerDouble.parse(itemsMapJson);
-//            Type type = new TypeToken<Map<Item, Map<Integer, Double>>>(){}.getType();
-//
-//            contract.itemsMapDiscount = new Gson().fromJson(itemsMapJson, type);
-
                 cache.put(contract.contractId, contract);
                 contracts.add(contract);
             }
@@ -124,28 +125,29 @@ public class ContractMapper {
             conn.close();
         }
         catch (SQLException e){}
-        return contracts;
+
+        return contracts; // we return all the contracts that we found
     }
 
+    //This function lets us insert a new contract in the system
     public void insert(Contract contract)
     {
         PreparedStatement stmt;
         ResultSet rs;
         getConnection();
         try {
-            stmt = conn.prepareStatement("INSERT INTO contracts (contract_id, supplier_id, items_Map_discount,total_discount) VALUES (?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO contracts (contract_id, supplier_id, items_Map_discount,total_discount) VALUES (?, ?, ?, ?)"); //This is the SQL query that we use to insert a new contract into the DB
             String itemsJson = new Gson().toJson(contract.getItemsMapDiscount()).toString();
             stmt.setString(1, Integer.toString(contract.contractId));
             stmt.setString(2, contract.supplierId);
             stmt.setString(3, itemsJson);
             stmt.setDouble(4, contract.getTotal_discount());
-
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
                 contract.contractId = rs.getInt(1);
-                cache.put(contract.contractId, contract);
+                cache.put(contract.contractId, contract);//We insert the new contract into the cache
             }
         }
         catch (SQLException e)
@@ -159,13 +161,13 @@ public class ContractMapper {
         catch (SQLException e){}
     }
 
+    //This function lets us update a value that is already in the DB
     public void update(Contract contract)
     {
         PreparedStatement stmt;
         getConnection();
         try{
-
-            stmt = conn.prepareStatement("UPDATE Contracts SET supplier_id = ?,  items_Map_discount = ?, total_discount = ? WHERE contract_id = ?");
+            stmt = conn.prepareStatement("UPDATE Contracts SET supplier_id = ?,  items_Map_discount = ?, total_discount = ? WHERE contract_id = ?");//This is the SQL query that we use for updating a value
             stmt.setInt(4,contract.contractId);
             stmt.setString(1,contract.supplierId);
             String itemsJson = new JSONObject(contract.getItemsMapDiscount()).toString();
@@ -184,19 +186,19 @@ public class ContractMapper {
         }
         catch (SQLException e){}
     }
+    //This function lets us delete a value from the DB
     public void delete(Contract contract)
     {
         PreparedStatement stmt;
         getConnection();
         try {
-            stmt = conn.prepareStatement("DELETE FROM Contracts WHERE contract_id = ?");
+            stmt = conn.prepareStatement("DELETE FROM Contracts WHERE contract_id = ?");//This is the SQL query that we use for deleting a value
             stmt.setString(1, Integer.toString(contract.contractId));
             stmt.executeUpdate();
             cache.remove(contract.contractId);
         }
         catch (SQLException e)
-        {
-        }
+        {}
         try
         {
             conn.close();
@@ -204,6 +206,7 @@ public class ContractMapper {
         catch (SQLException e){}
     }
 
+    //This helper function gives us a connection to the DB
     private void getConnection()
     {
         try
@@ -212,6 +215,4 @@ public class ContractMapper {
         }
         catch (SQLException e){}
     }
-
-
 }

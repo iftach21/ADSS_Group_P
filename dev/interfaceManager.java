@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.Scanner;
 
-public class interfaceManager {
+public class interfaceManager extends AInterface {
     private final InventoryController Inventory;
     private final ReportController Reports;
     public interfaceManager() {
@@ -224,7 +224,8 @@ public class interfaceManager {
                                 System.out.println("What would you like to name the new category?");
                                 Scanner categoryInput = new Scanner(System.in);
                                 String categoryName = categoryInput.nextLine();
-                                Inventory.getCategoryControl().addCategory(categoryName);
+                                Inventory.addCategoryToMapper(categoryName);
+                                //Inventory.getCategoryControl().addCategory(categoryName);
                                 System.out.println("New category " + categoryName + " has been created!");
                                 break;
                             //Create a new sub-category
@@ -236,7 +237,8 @@ public class interfaceManager {
                                 categoryInput = new Scanner(System.in);
                                 categoryName = categoryInput.nextLine();
                                 subCategory currentSubCategory = new subCategory(subCategoryName);
-                                Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory(categoryName), currentSubCategory);
+                                Inventory.addSubCatToMapper(categoryName, currentSubCategory);
+                                //Inventory.getCategoryControl().addSubCategory(Inventory.getCategoryControl().getCategory(categoryName), currentSubCategory);
                                 System.out.println("A new sub-category " + subCategoryName + " was added into category " + categoryName);
                                 break;
                             //Create new general item
@@ -286,19 +288,22 @@ public class interfaceManager {
                                 System.out.println("To which category would you like to add the general item?");
                                 itemInput = new Scanner(System.in);
                                 String itemCat = itemInput.nextLine();
-                                Category currentCategory = Inventory.getCategoryControl().getCategory(itemCat);
+                                currentItem.setCatalogName(itemCat);
+                                //Category currentCategory = Inventory.getCategoryControl().getCategory(itemCat);
 
                                 System.out.println("To which sub category would you like to add the general item?");
                                 itemInput = new Scanner(System.in);
                                 String itemSubCat = itemInput.nextLine();
-                                subCategory currentSubCat = currentCategory.getSubCategoryByName(itemSubCat);
-                                Inventory.addGeneralItem(currentItem);
-                                currentSubCat.addGeneralItem(currentItem);
+                                //subCategory currentSubCat = currentCategory.getSubCategoryByName(itemSubCat);
+                                //Inventory.addGeneralItem(currentItem);
+                                //currentSubCat.addGeneralItem(currentItem);
 
                                 //Announce new product
-                                System.out.println("New general item has been created!\nCategory: " + currentCategory.getCategoryName() +
-                                        " Sub-Category: " + currentSubCat.getSubCategoryName());
-                                System.out.println(currentItem.toString());
+                                //System.out.println("New general item has been created!\nCategory: " + currentCategory.getCategoryName() +
+                                //       " Sub-Category: " + currentSubCat.getSubCategoryName());
+                                //System.out.println(currentItem.toString());
+
+                                Inventory.insertNewItemToMapper(currentItem);
 
                                 break;
                             //Add new specific item
@@ -343,15 +348,10 @@ public class interfaceManager {
                             //Delete category
                             case "5":
 
-                                System.out.println("What is theCategory you would like to delete?");
+                                System.out.println("What is the Category you would like to delete?");
                                 Scanner Input = new Scanner(System.in);
                                 String CatName = Input.nextLine();
-                                if (Inventory.deleteCat(CatName)){
-                                    System.out.println("Category" + CatName + " has been deleted.");
-                                }
-                                else {
-                                    System.out.println("Could not find such an item.");
-                                }
+                                Inventory.removeCategoryFromMapper(CatName);
 
                                 break;
                             //Delete general item
@@ -360,28 +360,30 @@ public class interfaceManager {
                                 System.out.println("What is the Catalog Number for the general item you wish to remove?");
                                 Input = new Scanner(System.in);
                                 itemCatalogNumber = Input.nextLine();
-                                if (Inventory.deleteGeneralItem(itemCatalogNumber)){
-                                    System.out.println("Item" + itemCatalogNumber + " has been deleted.");
-                                }
-                                else {
+                                currentItem = Inventory.findItemByCatalogNum(itemCatalogNumber);
+                                Inventory.deleteItemFromMapper(currentItem);
+                                if (currentItem == null){
                                     System.out.println("Could not find such an item.");
                                 }
-
+                                else {
+                                    System.out.println("Item" + itemCatalogNumber + " has been deleted.");
+                                }
                                 break;
+
                             //Delete specific item
                             case "7":
 
                                 System.out.println("What is the ID for the specific item you wish to remove?");
                                 Input = new Scanner(System.in);
                                 int serialNumber = Integer.parseInt(Input.nextLine());
-                                if (Inventory.deleteSpecificItem(serialNumber)){
-                                    System.out.println("Item" + serialNumber + " has been deleted.");
+                                specificItem currentSpecific = Inventory.findSpecificItemBySerialNumber(serialNumber);
+                                Inventory.deleteSpecificFromMapper(currentSpecific);
+                                if (currentSpecific == null){
+                                    System.out.println("item was not found.");
                                 }
                                 else {
-                                    System.out.println("Could not find such an item.");
+                                    System.out.println("Item" + serialNumber + " has been deleted.");
                                 }
-
-
                                 break;
                             //Move specific item
                             case "8":
@@ -389,10 +391,8 @@ public class interfaceManager {
                                 System.out.println("What is the item ID for the specific item you wish to move?");
                                 Input = new Scanner(System.in);
                                 serialNumber = Integer.parseInt(Input.nextLine());
-                                currentSpecificItem = Inventory.findSpecificItem(serialNumber);
-                                currentSpecificItem.moveSpecificItem();
+                                Inventory.moveSpecificItemMapper(serialNumber);
                                 System.out.println("Item has been moved!");
-                                System.out.println(currentSpecificItem.toString());
 
                                 break;
                             case "0":
@@ -594,7 +594,7 @@ public class interfaceManager {
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
                     String catalogNumber = Input.nextLine();
-                    Reports.addReportHistory(Inventory.priceHistoryReport(catalogNumber));
+                    Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
 
 
                     break;

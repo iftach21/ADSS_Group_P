@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.Scanner;
 
-public class interfaceWorker {
+public class interfaceWorker extends AInterface {
     private final InventoryController Inventory;
     private final ReportController Reports;
     public interfaceWorker() {

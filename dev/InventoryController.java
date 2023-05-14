@@ -4,6 +4,7 @@ public class InventoryController {
     private CategoryController CategoryControl;
     private List<Item> ItemsList;
     private LinkedHashMap<Item, List<specificItem>> specificItemsMap;
+    private subCategoryMapper subCategoryMapper;
     private ItemMapper itemMapper;
     private specificItemMapper specificItemMapper;
 
@@ -11,8 +12,23 @@ public class InventoryController {
         this.CategoryControl = new CategoryController();
         this.ItemsList = new ArrayList<Item>();
         this.specificItemsMap = new LinkedHashMap<Item, List<specificItem>>();
+        this.subCategoryMapper = new subCategoryMapper();
         this.itemMapper = new ItemMapper();
         this.specificItemMapper = new specificItemMapper();
+    }
+
+    //Category Mapper
+    public void addCategoryToMapper(String categoryName){
+        CategoryControl.addCategory(categoryName);
+    }
+
+    public void removeCategoryFromMapper(String categoryName){
+        CategoryControl.removeCategory(categoryName);
+    }
+
+    //Sub category mapper
+    public void addSubCatToMapper(String categoryName, subCategory currentSub){
+        subCategoryMapper.insertSubCategory(categoryName, currentSub);
     }
 
     //Items Mapper
@@ -31,6 +47,15 @@ public class InventoryController {
         Item currentItem = itemMapper.findByCatalogNum(catalogNum);
         return currentItem;
     }
+    /*
+
+     */
+    public void insertNewItemToMapper(Item currentItem) {itemMapper.insert(currentItem);}
+    /*
+
+     */
+    public void deleteItemFromMapper(Item currentItem) {itemMapper.delete(currentItem);}
+
 
     //Specific Items Mapper
     /*
@@ -39,6 +64,17 @@ public class InventoryController {
      */
     public void insertNewSpecificToMapper(specificItem currentSpecific){
         specificItemMapper.insert(currentSpecific);
+    }
+    /*
+
+     */
+    public void deleteSpecificFromMapper(specificItem currentSpecific) {specificItemMapper.delete(currentSpecific);}
+    /*
+
+     */
+    public specificItem findSpecificItemBySerialNumber(int serialNumber){
+        specificItem currentSpecific = specificItemMapper.findSpecificItemBySerial(serialNumber);
+        return currentSpecific;
     }
 
     public void moveSpecificItemToDefectiveMapper(int serialNumber) {
@@ -50,6 +86,26 @@ public class InventoryController {
                 if (specificItem.getserialNumber() == serialNumber) {
                     specificItem.setDefected(true);
                     specificItem.setLocation(Location.Storage);
+                    specificItemMapper.delete(specificItem);
+                    specificItemMapper.insert(specificItem);
+                }
+            }
+        }
+    }
+
+    public void moveSpecificItemMapper(int serialNumber){
+        List<specificItem> itemList = specificItemMapper.findAll();
+        if (itemList != null) {
+            Iterator<specificItem> iterator = itemList.iterator();
+            while (iterator.hasNext()) {
+                specificItem specificItem = iterator.next();
+                if (specificItem.getserialNumber() == serialNumber) {
+                    if (specificItem.getLocationString() == "Store"){
+                        specificItem.setLocation(Location.Storage);
+                    }
+                    else {
+                        specificItem.setLocation(Location.Store);
+                    }
                     specificItemMapper.delete(specificItem);
                     specificItemMapper.insert(specificItem);
                 }
@@ -418,10 +474,15 @@ public class InventoryController {
 
     public void FullStandardDiscount(double _amount)
     {
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            double newPrice = key.getSellPrice() - _amount;
-            key.addNewPrice(key.getBuyPrice(), newPrice);
+        for(Item item: itemMapper.findAll())
+        {
+            System.out.println(item.getPriceHistory().toString());
+            /*
+            double newPrice = item.getSellPrice() - _amount;
+            item.addNewPrice(item.getBuyPrice(), newPrice);
+            itemMapper.update(item);
+
+             */
         }
     }
 

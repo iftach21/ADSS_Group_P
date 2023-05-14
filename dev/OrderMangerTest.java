@@ -448,7 +448,59 @@ class OrderMangerTest {
         itemMapper.findAll().get(0).print_item();
         itemMapper.findAll().get(1).print_item();
 
+    }
 
+    @Test
+    void testHistoryParser()
+    {
+        ItemMapper itemMapper=new ItemMapper();
+        Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+        itemMapper.insert(item1);
+        item1.addNewPrice(10,25);
+        itemMapper.update(item1);
+        item1.addNewPrice(5,78);
+        itemMapper.update(item1);
+        item1.addNewPrice(420,69);
+        itemMapper.update(item1);
+        item1.addNewPrice(69,420);
+        itemMapper.update(item1);
+        item1.addNewPrice(80085,80085);
+        itemMapper.update(item1);
+
+        Item itemTest = itemMapper.findByCatalogNum("100");
+        System.out.println(itemTest);
+    }
+    @Test
+    void testAddItems()
+    {
+        Supplier_Manger masupplier = new Supplier_Manger();
+        ContactPerson contactPerson = new ContactPerson("John Smith", "555-1234");
+        NonFixedDaySupplier supplier_1 = new NonFixedDaySupplier(1,"Supplier1 Inc.", "123456789", 1, "S0016", contactPerson, null, null);
+        masupplier.add_supplier(supplier_1);
+        masupplier.update_suppliers();
+        Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+        Item item2 = new Item("Milk", "200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
+        Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
+        Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item1,100,100);
+        ItemMapper itemMapper=new ItemMapper();
+        itemMapper.insert(item1);
+        item1.addNewPrice(10,25);
+        itemMapper.update(item1);
+        item1.addNewPrice(5,78);
+        itemMapper.update(item1);
+        item1.addNewPrice(420,69);
+        itemMapper.update(item1);
+        item1.addNewPrice(69,420);
+        itemMapper.update(item1);
+        item1.addNewPrice(80085,80085);
+        itemMapper.update(item1);
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item2,69,420);
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item3,7,85);
+        masupplier.add_item_to_supplier("Supplier1 Inc.",item4,12,45);
+        NonFixedDaySupplier supplierTes = (NonFixedDaySupplier) masupplier.get_supplier_by_id("S0016");
+        System.out.println(supplierTes);
 
     }
+
 }

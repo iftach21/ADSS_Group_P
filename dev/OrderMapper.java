@@ -302,12 +302,15 @@ public class OrderMapper
 
             if (flag == 0) {
                 NonFixedDaySupplier nonFixedDaySupplier = nonFixedDaySupplierMapper.findBySupplierId(supplierId);
-                if (nonFixedDaySupplier == null) {
+                if (nonFixedDaySupplier == null)
+                {
                     FixedDaySupplierMapper fixedDaySupplierMapper = new FixedDaySupplierMapper();
 
                     FixedDaySupplier fixedDaySupplier = fixedDaySupplierMapper.findBySupplierId(supplierId);
                     return fixedDaySupplier;
-                } else {
+                }
+                else
+                {
                     return nonFixedDaySupplier;
 
                 }

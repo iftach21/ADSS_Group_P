@@ -7,6 +7,8 @@ public class InventoryController {
     private subCategoryMapper subCategoryMapper;
     private ItemMapper itemMapper;
     private specificItemMapper specificItemMapper;
+    private ReportMapper reportMapper;
+    private ReportItemsMapper reportItemsMapper;
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
@@ -15,6 +17,8 @@ public class InventoryController {
         this.subCategoryMapper = new subCategoryMapper();
         this.itemMapper = new ItemMapper();
         this.specificItemMapper = new specificItemMapper();
+        this.reportMapper = new ReportMapper();
+        this.reportItemsMapper = new ReportItemsMapper();
     }
 
     //Category Mapper

@@ -9,6 +9,8 @@ public class ReportController {
     private ReportItemsMapper reportItemsMapper;
 
     public ReportController() {
+        this.reportMapper = new ReportMapper();
+        this.reportItemsMapper = new ReportItemsMapper();
         this.reportsList = new ArrayList<Report>();
     }
 

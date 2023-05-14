@@ -10,11 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated orderMapper">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ItemMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/OrderMangerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMangerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +197,7 @@
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
       <workItem from="1684060586685" duration="6756000" />
+      <workItem from="1684077975742" duration="3508000" />
     </task>
     <task id="LOCAL-00043" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
       <created>1681056792277</created>
@@ -580,40 +581,70 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
           <line>55</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
           <line>203</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderManger.java</url>
           <line>288</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
           <line>390</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/ItemMapper.java</url>
           <line>151</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/PriceHistoryParser.java</url>
           <line>21</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/dev/FixedDaySupplierMapper.java</url>
           <line>173</line>
           <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/dev/NonFixedDaySupplierMapper.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/dev/Supplier_Manger.java</url>
+          <line>176</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
+          <line>432</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/dev/ParserForContractItemIntegerDouble.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
+          <line>451</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/Parser.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

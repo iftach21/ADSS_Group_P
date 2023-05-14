@@ -351,7 +351,7 @@ public class InventoryController {
     public Report FullCountingReport() {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for(Item item: itemMapper.findAll())
         {
             int specificAmount = 0;
@@ -367,7 +367,7 @@ public class InventoryController {
     public Report CategoryCountingReport(String categoryName) {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogName().equals(categoryName)){
@@ -388,7 +388,7 @@ public class InventoryController {
     {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Inventory, currentDate);
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(catalogNumber)){
@@ -408,7 +408,7 @@ public class InventoryController {
     {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Defective, currentDate);
         for(Item item: itemMapper.findAll())
         {
             int defectiveAmount = 0;
@@ -427,7 +427,7 @@ public class InventoryController {
         //Set variables for method
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Defective, currentDate);
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogName().equals(categoryName)){
@@ -450,7 +450,7 @@ public class InventoryController {
         //Set variables for method
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Shortage, currentDate);
+        Report currentReport = new Report(reportType.Defective, currentDate);
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(CatalogNum)){

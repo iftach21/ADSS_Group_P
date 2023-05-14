@@ -922,7 +922,6 @@ public class TransferController {
                 catch (Exception e)
                 {
                     System.out.println("Sorry transfer manager, but your input is illegal. please try again");
-                    scanner.next();
                 }
             }
 
@@ -1103,7 +1102,7 @@ public class TransferController {
                 numOfPlannedTransfer++;
                 System.out.println("---------------------------------------------------------------");
                 System.out.println("TRANSFER ID: " + currentTransfer.getTransferId());
-                System.out.println("Source site: " + currentTransfer.getTransferId());
+                System.out.println("Source site: " + currentTransfer.getSource().getSiteName());
                 System.out.println("Last destination: " + currentTransfer.getListOfDestinations().get(currentTransfer.getListOfDestinations().size()-1).getSiteName());
                 System.out.println("Leaving date: " + currentTransfer.getLeavingDate());
                 System.out.println("Leaving time: " + currentTransfer.getLeavingTime());

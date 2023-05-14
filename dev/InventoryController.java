@@ -245,9 +245,6 @@ public class InventoryController {
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
             }
         }
-        if(currentReport.getReportItems().size() == 0){
-            System.out.println("E");
-        }
         return currentReport;
     }
 
@@ -257,19 +254,19 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
-        int specificAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogName().equals(categoryName)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            specificAmount = values.size();
-            if (specificAmount < key.getMinQuantity()){
-                currentReport.addReportItem(key, key.getMinQuantity() - specificAmount);
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
             }
-            specificAmount = 0;
+            if (specificAmount < item.getMinQuantity()){
+                currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+            }
         }
         return currentReport;
     }
@@ -280,19 +277,19 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
-        int specificAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(catalogNumber)){
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            specificAmount = values.size();
-            if (specificAmount < key.getMinQuantity()){
-                currentReport.addReportItem(key, key.getMinQuantity() - specificAmount);
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
             }
-            specificAmount = 0;
+            if (specificAmount < item.getMinQuantity()){
+                currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+            }
         }
         return currentReport;
     }
@@ -355,35 +352,34 @@ public class InventoryController {
     public Report FullCountingReport() {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int specificAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            List<specificItem> values = entry.getValue();
-            specificAmount = values.size();
-            currentReport.addReportItem(key, specificAmount);
-            specificAmount = 0;
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
+            }
+            currentReport.addReportItem(item, specificAmount);
         }
-
         return currentReport;
     }
 
     public Report CategoryCountingReport(String categoryName) {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int specificAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogName().equals(categoryName)){
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            specificAmount = values.size();
-            currentReport.addReportItem(key, specificAmount);
-            specificAmount = 0;
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
+            }
+            currentReport.addReportItem(item, specificAmount);
         }
         return currentReport;
     }
@@ -393,18 +389,18 @@ public class InventoryController {
     {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int specificAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (!key.getCatalogNum().equals(catalogNumber)){
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
-            List<specificItem> values = entry.getValue();
-            specificAmount = values.size();
-            currentReport.addReportItem(key, specificAmount);
-            specificAmount = 0;
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
+            }
+            currentReport.addReportItem(item, specificAmount);
         }
         return currentReport;
     }
@@ -413,21 +409,18 @@ public class InventoryController {
     {
         //Set variables for method
         Date currentDate = new Date();
-        Report currentReport = new Report(reportType.Inventory, currentDate);
-        int defectiveAmount = 0;
-
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            List<specificItem> values = entry.getValue();
-            for (specificItem value : values) {
-                if (value.getisDefected()){
+        Report currentReport = new Report(reportType.Shortage, currentDate);
+        for(Item item: itemMapper.findAll())
+        {
+            int defectiveAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                if (specificItem.getisDefected()){
                     defectiveAmount++;
                 }
             }
-            currentReport.addReportItem(key, defectiveAmount);
-            defectiveAmount = 0;
+            currentReport.addReportItem(item, defectiveAmount);
         }
-
         return currentReport;
     }
 

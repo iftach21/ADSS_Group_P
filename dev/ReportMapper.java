@@ -12,6 +12,11 @@ public class ReportMapper implements DAO<Report>{
     private Connection connection;
     private List<Report> identityMap;
 
+    public ReportMapper() {
+        this.connection = connection;
+        this.identityMap = new ArrayList<>();
+    }
+
     @Override
     public List<Report> getAll() throws SQLException {
         Report report = null;
@@ -93,8 +98,13 @@ public class ReportMapper implements DAO<Report>{
         try (PreparedStatement statement = connection.prepareStatement(sql)){
 //            String reportJson = new JSONObject(report.getReportItems()).toString();
             statement.setInt(1,report.getReportNum());
-            statement.setDate(2, (java.sql.Date) report.getReportDate());
+            if (report.getReportDate() != null) {
+                statement.setDate(2, new java.sql.Date(report.getReportDate().getTime()));
+            } else {
+                statement.setDate(2, null);
+            }
             statement.setString(3,report.getreportInformationString());
+            //statement.setString(4,report.getType().name());
             statement.setString(4,report.getType().name());
 //            statement.setString(5,reportJson);
             statement.executeUpdate();

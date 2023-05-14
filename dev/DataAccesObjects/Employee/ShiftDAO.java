@@ -76,8 +76,6 @@ public class ShiftDAO {
             // close resources
             stmt.close();
 
-            System.out.println("New record inserted into Shift table with primary key " + primaryKey);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

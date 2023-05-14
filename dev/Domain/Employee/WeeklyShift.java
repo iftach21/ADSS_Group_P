@@ -45,10 +45,11 @@ public class WeeklyShift {
         this.year = year;
         this.supernum = supernum;
         this.dayShift = new Shift[7];
+
         this.nightShift = new Shift[7];
         for(int i=0;i< 7;i++){
-            dayShift[i] = new Shift(" "+i + " /" + weekNUm);
-            nightShift[i] = new Shift(" "+i + " /" + weekNUm);
+            dayShift[i] = new Shift();
+            nightShift[i] = new Shift();
         }
 
     }

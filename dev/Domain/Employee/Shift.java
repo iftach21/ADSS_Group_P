@@ -183,6 +183,7 @@ public class Shift {
         return shiftManager;
     }
     public int getShiftManagerID() {
+        if(shiftManager == null){return 0;}
         return shiftManager.getId();
     }
 

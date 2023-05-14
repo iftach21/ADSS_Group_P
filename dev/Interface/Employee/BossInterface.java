@@ -32,19 +32,19 @@ public class BossInterface extends AInterface {
 
 
         //scans the username and password:
-       while(true) {
-           Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter username");
-            String userName = myObj.nextLine();  // Read user input
-            System.out.println("Enter password");  // Output user input
-            String password = myObj.nextLine();  // Read user input
-            if(userName.equals(username)&&password.equals(passward)){
-                break;
-          }
-            else{
-               System.out.println("invalid input, please try again");  // Output user input
-           }
-           }
+//       while(true) {
+//           Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+//            System.out.println("Enter username");
+//            String userName = myObj.nextLine();  // Read user input
+//            System.out.println("Enter password");  // Output user input
+//            String password = myObj.nextLine();  // Read user input
+//            if(userName.equals(username)&&password.equals(passward)){
+//                break;
+//          }
+//            else{
+//               System.out.println("invalid input, please try again");  // Output user input
+//           }
+//           }
 
 
         //checks for 24 next 24 hrs if its ok:
@@ -219,10 +219,8 @@ public class BossInterface extends AInterface {
                                 controller.printAllWorkersWhoCanWork(prof, daynum, don);
                                 System.out.println("please enter id");
                                 int id = myObj.nextInt();  // Read user input
-
-                                //checking if allready has shift at other super:
-                                    controller.addtoexistingweeklyshift(weeknum, year, supernum, wc.getwidowtype(daynum, don), id, prof);
-                                    break;}
+                                controller.addtoexistingweeklyshift(weeknum, year, supernum, wc.getwidowtype(daynum, don), id, prof);
+                                break;}
                                 catch (Exception e){}
 
                             }
@@ -268,6 +266,7 @@ public class BossInterface extends AInterface {
                     System.out.println("4=cleaning");
                     System.out.println("5=shelf-stoking");
                     System.out.println("6= general-worker");
+                    System.out.println("7= Driver");
                     int prof = myObj.nextInt();  // Read user input
 
                     System.out.println("please enter id for the employee you want to remove");

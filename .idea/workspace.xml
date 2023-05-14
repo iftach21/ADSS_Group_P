@@ -11,7 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c0f1b0b4-ddcf-4518-821a-2fb00b30b0c6" name="Changes" comment="updated orderMapper">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/ContractMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/ContractMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/FixedDaySupplierMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,14 +198,7 @@
       <workItem from="1683725830986" duration="805000" />
       <workItem from="1683726868993" duration="10511000" />
       <workItem from="1684057352276" duration="10179000" />
-      <workItem from="1684069797015" duration="1620000" />
-    </task>
-    <task id="LOCAL-00045" summary="CHANGE IN THE CONSTARCTOR OF ALL SUPPLIERS">
-      <created>1681148152759</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1681148152759</updated>
+      <workItem from="1684069797015" duration="4728000" />
     </task>
     <task id="LOCAL-00046" summary="Added database">
       <created>1682695565978</created>
@@ -542,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684069850530</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="updated orderMapper">
+      <created>1684072140447</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1684072140447</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,11 +606,6 @@
           <url>file://$PROJECT_DIR$/dev/OrderMangerTest.java</url>
           <line>393</line>
           <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/OrderMapper.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/Period_Order.java</url>

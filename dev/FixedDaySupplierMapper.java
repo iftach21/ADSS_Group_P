@@ -30,6 +30,7 @@ public class FixedDaySupplierMapper{
 
         PreparedStatement stmt;
         ResultSet rs;
+        Map<String,Pair<Integer,Float>> itemIdMap;
         getConnection();// The function that gets us the connection to the DB
 
         //If it doesnt exist in the cache we check if it exists in the DB
@@ -44,17 +45,20 @@ public class FixedDaySupplierMapper{
                 contract = contractMapper.findBySupplierId(supplierID);
                 ContactPerson person = new ContactPerson(rs.getString("contract_person_name"), rs.getString("contract_phone_number"));
                 String itemsMapJson = rs.getString("items");
+                itemIdMap = Parser.parse(itemsMapJson); // TODO build the needed mapper
                 int paymentMethod = PaymentMethod.valueOf(rs.getString("payment_method")).getNumericValue();
-                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
+//                Map<Item, Pair<Integer, Float>> map = Parser.parse(itemsMapJson);
                 String currentDay = rs.getString("currentDeliveryDay");
                 WindowType currentDeliveryDay = WindowType.valueOf(currentDay);
-                FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay, rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, map);
-                cache.put(supplierID, fixedDaySupplier);
+                FixedDaySupplier fixedDaySupplier = new FixedDaySupplier(currentDeliveryDay, rs.getString("name"), rs.getString("business_id"), paymentMethod, rs.getString("supplier_ID"), person, contract, null);
                 try
                 {
                     conn.close();
                 }
                 catch (SQLException e){}
+
+
+                cache.put(supplierID, fixedDaySupplier);
                 return fixedDaySupplier;
             }
         }
@@ -195,5 +199,19 @@ public class FixedDaySupplierMapper{
             this.conn = DriverManager.getConnection("jdbc:sqlite:dev/res/SuperLeeDataBase.db");
         }
         catch (SQLException e){}
+    }
+
+    private Map<Item,Pair<Integer,Float>> getItems(Map<String,Pair<Integer,Float>> itemIdMap)
+    {
+        ItemMapper itemMapper = new ItemMapper();
+        Map<Item,Pair<Integer,Float>> itemList = new HashMap<>();
+        for(Map.Entry<String,Pair<Integer,Float>> entry : itemIdMap.entrySet())
+        {
+            String key = entry.getKey();
+            Pair<Integer,Float> value = entry.getValue();
+            Item item = itemMapper.findByCatalogNum(key);
+            itemList.put(item,value);
+        }
+        return itemList;
     }
 }

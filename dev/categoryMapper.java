@@ -26,6 +26,7 @@ public class categoryMapper implements DAO<Category>{
                 category = getById(categoryName);
                 if (category == null){
                     category = new Category(categoryName);
+                    category.setAmount(amount);
                     identityMap.add(category);
                 }
                 categoryList.add(category);
@@ -55,7 +56,9 @@ public class categoryMapper implements DAO<Category>{
             ResultSet rs = statement.executeQuery();
             if (rs.next()){
                 String categoryName = rs.getString("categoryName");
+                int amount = rs.getInt("amount");
                 Category category = new Category(id);
+                category.setAmount(amount);
                 identityMap.add(category);
                 return category;
             }

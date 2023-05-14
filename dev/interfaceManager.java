@@ -144,7 +144,7 @@ public class interfaceManager extends AInterface {
             System.out.println("6: Place an order from a supplier");
             System.out.println("7: Provide a price history report for a product");
             System.out.println("8: Insert a defective product into the defective inventory");
-            System.out.println("9: Print full inventory report");
+            System.out.println("9: Print full inventory");
 
             System.out.println("0: Exit the system ");
 
@@ -169,20 +169,20 @@ public class interfaceManager extends AInterface {
 
                         switch (Sub_Ans) {
                             case "1":
-                                Reports.addReport(Inventory.shortageReportFull());
+                                Reports.addShortageReport(Inventory.shortageReportFull());
                                 break;
 
                             case "2":
                                 System.out.println("For which category?");
                                 Scanner categoryInput = new Scanner(System.in);
                                 String categoryName = categoryInput.nextLine();
-                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
+                                Reports.addShortageReport(Inventory.shortageReportCategory(categoryName));
                                 break;
                             case "3":
                                 System.out.println("Please enter the catalog number for the product you would like to provide a shortage report for:");
                                 Scanner Product = new Scanner(System.in);
                                 String productNumber = Product.nextLine();
-                                Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
+                                Reports.addShortageReport(Inventory.shortageReportGeneralItem(productNumber));
                                 break;
 
                             case "0":
@@ -615,7 +615,7 @@ public class interfaceManager extends AInterface {
                 }
 
                 //-----------------------
-                //Print full inventory report
+                //Print full inventory
                 //-----------------------
                 case "9": {
                     //System.out.println(this.Inventory.toString());

@@ -837,9 +837,9 @@ public class TransferController {
         //check whether the transfer leaves in dayshift or nightshift
         String shift;
         if (leavingTime.isAfter(LocalTime.NOON))
-            shift = "day";
-        else
             shift = "night";
+        else
+            shift = "day";
         //
         List<Driver> Drivers = dc.findDriver(currMinTemp, weekNumber, leavingDate.getYear(), wt.getwidowtype(dayOfWeekNum, shift));
 

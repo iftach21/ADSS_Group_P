@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="updated Date">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="updated interfaceManager + interfaceWorker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CategoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InventoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderInterface$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderInterface$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OrderInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OrderInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SupplierInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SupplierInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier_Manger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/categoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/categoryMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interfaceManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/specificItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/specificItemMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/subCategoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/subCategoryMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/subCategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/subCategoryMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +163,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684152346111</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="updated interfaceManager + interfaceWorker">
+      <created>1684160811383</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1684160811383</updated>
+    </task>
+    <task id="LOCAL-00013" summary="updated interfaceManager + interfaceWorker">
+      <created>1684160907327</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684160907327</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,7 +198,8 @@
     <MESSAGE value="fix the period order need also to cheak why the price history dont work there" />
     <MESSAGE value="update the period ireder in the interface" />
     <MESSAGE value="updated Date" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated Date" />
+    <MESSAGE value="updated interfaceManager + interfaceWorker" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated interfaceManager + interfaceWorker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

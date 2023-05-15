@@ -27,6 +27,42 @@ public class subCategoryMapper {
         }
     }
 
+    public List<subCategory> getAll(String categoryName) {
+        List<subCategory> subCategories = cacheSubCategories.get(categoryName);
+        if (subCategories != null) {
+            return subCategories;
+        }
+
+        List<subCategory> subCategoryList = new ArrayList<>();
+        try {
+            getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM subCategories WHERE categoryName = ?");
+            stmt.setString(1, categoryName);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String subCategoryName = rs.getString("subCategoryName");
+                int amount = rs.getInt("amount");
+
+                subCategory subCat = new subCategory(subCategoryName);
+                subCategoryList.add(subCat);
+            }
+
+            cacheSubCategories.put(categoryName, subCategoryList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return subCategoryList;
+    }
+
+
     public void insertSubCategory(String categoryName, subCategory subCat) {
         try {
             getConnection();

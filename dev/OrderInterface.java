@@ -22,13 +22,14 @@ public class OrderInterface extends AInterface {
              System.out.println("3.print all order number's");
              System.out.println("4.print all order's from supplier");
              System.out.println("5.print all order's from all supplier with all the details");
-             System.out.println("6.get back to previous menu");
+             System.out.println("6.add new Period Order");
+             System.out.println("7.get back to previous menu");
              String choice_1 = scanner.nextLine();
              option_1 = 0;
              while (true) {
                  try {
                      option_1 = Integer.parseInt(choice_1);
-                     if (option_1 < 1 || option_1 > 6) {
+                     if (option_1 < 1 || option_1 > 7) {
                          System.out.println("Please enter a valid option");
                          choice_1 = scanner.nextLine();
                          continue;
@@ -132,6 +133,89 @@ public class OrderInterface extends AInterface {
                  case 5:
                      orderManger.print_all_orders_details();
                  case 6:
+                     System.out.println("add new Period Order:");
+                     Map<Item, Integer> itemlist1 = new HashMap<Item, Integer>();
+                     System.out.println("store number:");
+                     String store_numberInput1 = scanner.next();
+                     store_numberInput1 = checkNumber(store_numberInput1);
+                     int store_number1 = Integer.parseInt(store_numberInput1);
+                     System.out.println("number of days until new cycle:");
+                     String days = scanner.next();
+                     days = checkNumber(store_numberInput1);
+                     int days1 = Integer.parseInt(days);
+                     System.out.println("Supplier id:");
+                     String supplier_id = scanner.next();
+                     Supplier supplier1=supplier_manger.get_supplier_by_id(supplier_id);
+                     while (true) {
+                         System.out.println("1.add item to list");
+                         System.out.println("2.done and ready to go to orders");
+                         store_numberInput = scanner.next();
+                         store_numberInput = checkNumber(store_numberInput);
+                         int option_11 = Integer.parseInt(store_numberInput);
+
+                         // Option 1: add item to the order list
+
+                         if (option_11 == 1) {
+                             List<Item> itemList_sub = new ArrayList<>();
+                             int op = 1;
+                             for (Item item : supplier1.getItems().keySet()) {
+                                 if (supplier1.getItems().keySet().size() > 0) {
+                                     System.out.print(op + ".");
+                                     item.print_item();
+                                     itemList_sub.add(item);
+                                     op++;
+                                 }
+                             }
+                             System.out.println("Enter the number of the item you want to add:");
+                             String item_numberInput = scanner.next();
+                             item_numberInput = checkNumber(item_numberInput);
+                             int item_number = Integer.parseInt(item_numberInput);
+                             int count = 1;
+                             for (Item item : itemList_sub) {
+                                 if (count == item_number) {
+                                     System.out.println("Enter the quantity:");
+                                     String quantityInput = scanner.next();
+                                     quantityInput = checkNumberWithDot(quantityInput);
+                                     int quantity = Integer.parseInt(quantityInput);
+                                     itemlist1.put(item, quantity);
+                                     break;
+                                 }
+                                 count++;
+
+                             }
+                         }
+
+                         if (option_11 == 2) {
+                             if (!orderManger.period_order(supplier1,itemlist1,store_number1,days1)) {
+                                 System.out.println("failed to make an order make sure that the items can be provied");
+                             }
+                             break;
+                         }
+                     }
+
+                 case 7:
+                     System.out.println("change period_order");
+                     orderManger.print_period_orders();
+                     System.out.println("enter a period id:");
+                     String id = scanner.next();
+                     if(!orderManger.contain_Period_order(id)){
+                         System.out.println("id not in the system");
+                     }
+                     else {
+                         System.out.println("1.choose what you want to do:");
+                         System.out.println("2.delete period order:");
+                         System.out.println("3.add_item_to_order");
+                         System.out.println("4.remove_item");
+
+
+                     }
+
+                 }
+
+
+
+
+                 case 8:
                      System.out.println("Redirecting back to main menu");
                      break;
              }

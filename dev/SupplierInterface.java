@@ -207,8 +207,28 @@ public class SupplierInterface extends AInterface
                         System.out.println("catalog Name");
                         String catalogName = scanner.next();
 //                        catalogName = checkName(catalogName);// TODO maybe its needed
+
                         System.out.println("temperature ((0)regular,(1)frozen,(2)cold)");// TODO there are only 3 options : regular, frozen, cold
-                        String tempInput = scanner.next();
+                        String tempInput;
+                        int tempLevelInt = -1;
+                        while(true)
+                        {
+                            tempInput = scanner.next();
+
+                            try {
+                                tempLevelInt = Integer.parseInt(tempInput);
+                                if (tempLevelInt < 0 || tempLevelInt > 2) {
+                                    System.out.println("Please enter a option");
+                                    tempInput = scanner.next();
+                                    continue;
+                                }
+                                break;
+                            } catch (Exception ignored) {
+                                System.out.println("Please enter a valid option");
+                                tempInput = scanner.next();
+                            }
+
+                        }
                         TempLevel tempLevel = TempLevel.valueOf(tempInput);
 //                            tempInput = checkNumberWithDot(tempInput);
                         double temp = Double.parseDouble(tempInput);

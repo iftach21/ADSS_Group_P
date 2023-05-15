@@ -96,7 +96,7 @@ public class ContractMapper {
         }
         catch(SQLException ignored)
         {
-            System.out.println(ignored.getMessage());
+//            System.out.println(ignored.getMessage());
         }
         try
         {
@@ -183,7 +183,7 @@ public class ContractMapper {
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage() + " error");
+//            System.out.println(e.getMessage() + " error");
         }
         try
         {
@@ -220,7 +220,7 @@ public class ContractMapper {
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage() + " error");
+//            System.out.println(e.getMessage() + " error");
         }
         try
         {

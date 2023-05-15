@@ -126,12 +126,28 @@ public abstract class Supplier {
         this.contract.total_discount=discount;
     }
 
+//    public  void remove_item(String item_to_remove){
+//        Item item1 =null;
+//        for(Item item :items.keySet())
+//        {
+//            if(item.getName().equals(item_to_remove))
+//            {
+//            this.contract.remove_by_item(item);
+//            item1 = item;
+//            }
+//        }
+//        items.remove(item1);
+//    }
+
     public  void remove_item(String item_to_remove){
         Item item1 =null;
-        for(Item item :items.keySet()){
-            if(item.getName().equals(item_to_remove)){
-            this.contract.remove_by_item(item);
-            item1=item;}
+        for(Item item :items.keySet())
+        {
+            if(item.getCatalogNum().equals(item_to_remove))
+            {
+                this.contract.remove_by_item(item);
+                item1 = item;
+            }
         }
         items.remove(item1);
     }

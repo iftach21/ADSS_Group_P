@@ -1048,7 +1048,7 @@ public class TransferController {
         }
 
         //create the truck
-        Truck newTruck = new Truck(licenseNumber, model, netWeight, maxWeight, netWeight, coolingCapacity);
+        Truck newTruck = new Truck(licenseNumber, model, netWeight, netWeight, maxWeight, coolingCapacity);
         tc.addTruck(newTruck);
     }
 

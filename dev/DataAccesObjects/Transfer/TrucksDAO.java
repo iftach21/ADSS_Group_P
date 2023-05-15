@@ -124,12 +124,12 @@ public class TrucksDAO {
         try {
             String sql = "UPDATE Truck SET model=?, netWeight=?, maxWeight=?, currentWeight=?,  coolingCapacity=? WHERE licenseNumber=?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(6, truck.getLicenseNumber());
             stmt.setString(1, truck.getTruckModel());
             stmt.setInt(2, truck.getTruckNetWeight());
             stmt.setInt(3, truck.getMaxWeight());
             stmt.setInt(4, truck.getCurrentTruckWeight());
             stmt.setString(5, truck.getTempCapacity().name());
+            stmt.setInt(6, truck.getLicenseNumber());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -157,7 +157,7 @@ public class TrucksDAO {
     public void add(Truck truck){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT or REPLACE INTO Truck (licenseNumber, model, netWeight, currentWeight, maxWeight, coolingCapacity) " +
+            String sql = "INSERT or REPLACE INTO Truck (licenseNumber, model, netWeight, maxWeight, currentWeight, coolingCapacity) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
@@ -165,8 +165,8 @@ public class TrucksDAO {
             stmt.setInt(1, truck.getLicenseNumber());
             stmt.setString(2, truck.getTruckModel());
             stmt.setInt(3, truck.getTruckNetWeight());
-            stmt.setInt(4, truck.getCurrentTruckWeight());
-            stmt.setInt(5, truck.getMaxWeight());
+            stmt.setInt(4, truck.getMaxWeight());
+            stmt.setInt(5, truck.getCurrentTruckWeight());
             stmt.setString(6, truck.getTempCapacity().name());
 
             stmt.executeUpdate();

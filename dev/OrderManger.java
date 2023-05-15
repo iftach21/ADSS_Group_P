@@ -378,6 +378,26 @@ public class OrderManger {
         orderMapper.deleteAll();
         periodicOrderMapper.deleteAll();
     }
+
+    //prient all the periods order's
+    public void print_period_orders(){
+        List<Period_Order>periodOrders=periodicOrderMapper.findAll();
+        for(Period_Order periodOrder: periodOrders){
+            periodOrder.print_order_detail();
+
+        }
+    }
+    public List<Period_Order>get_Periodorders(){
+        return periodicOrderMapper.findAll();
+    }
+
+    public boolean contain_Period_order(String string){
+        if(periodicOrderMapper.findByContractId(string)!=null)
+            return true;
+        else{
+            return false;
+        }
+    }
 }
 
 

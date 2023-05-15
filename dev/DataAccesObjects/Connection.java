@@ -14,16 +14,8 @@ public class Connection {
 
     public static java.sql.Connection getConnectionToDatabase() throws SQLException {
         if(conn == null){
-            try{
-            conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db;ifexists=true");
-            }
-            catch (SQLException e){
-                conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db");
-                CreateTables();
-                }
-
-            }
-
+            conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db");
+        }
         return conn;
     }
 
@@ -281,9 +273,9 @@ public class Connection {
             var c =   getConnectionToDatabase();
             extracted(c, "weekly_shift");
             extracted(c, "shift_worker_in_shift");
-            //extracted(c, "item_Mock");
+            extracted(c, "item_Mock");
             extracted(c, "Shift");
-            //extracted(c, "Site");
+            extracted(c, "Site");
             //extracted(c, "Transfer");
             //extracted(c, "TransferDestinations");
             //extracted(c, "TransferItems");

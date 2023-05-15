@@ -38,6 +38,17 @@ public class TransferController {
         _documentsCounter = 0;
         this._ordersQueue = new LinkedList<>();
         this._orderDestinationSiteIdQueue = new LinkedList<>();
+        this._documentsCounter = getDocumentId();
+    }
+
+    private int getDocumentId() throws SQLException {
+        Map<Integer, Transfer> transfers = TransferDAO.getInstance().getAllTransfers();
+        int max = 0;
+        for (Integer transferId : transfers.keySet()) {
+            if (transferId > max)
+                max = transferId;
+        }
+        return max+1;
     }
 
     public static TransferController getInstance() throws SQLException {

@@ -67,6 +67,41 @@ public class Supplier_Manger {
 
     }
 
+    public boolean checkExistingSupplierId(String supplierId)
+    {
+        for(Supplier supplier : this.suppliers)
+        {
+            if(supplier.getSupplierID().equals(supplierId))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkExistingBusinessId(String supplierBusinessId)
+    {
+        for(Supplier supplier : this.suppliers)
+        {
+            if(supplier.getBusinessId().equals(supplierBusinessId))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkExistingSupplierName(String supplierName)
+    {
+        for(Supplier supplier : this.suppliers)
+        {
+            if(supplier.getName().equals(supplierName))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     //add supplier to the data-base and also to a list of all supplier so i can play with it when i want and i always love to play
     public boolean add_supplier(Supplier supplier) {

@@ -48,11 +48,11 @@ public class SupplierInterface extends AInterface
                 switch (option_1) {
                     case 1:
                         System.out.println("name:");
-                        String name = scanner.next();
+                        String name = scanner.nextLine();
                         name = checkName(name);
                         System.out.println("business id:");
                         String business_id = scanner.next();
-                        business_id = checkNumber(business_id);
+                        business_id = checkBusinessId(business_id);
                         //payment opiton
                         System.out.println("Payment method:");
                         System.out.println("1.SHOTEF");
@@ -197,7 +197,7 @@ public class SupplierInterface extends AInterface
                         item_name = checkName(item_name);
                         System.out.println("Item catlog number:");
                         String catalogNum = scanner.next();
-                        catalogNum = checkNumber(catalogNum);
+                        catalogNum = checkNumber(catalogNum); // TODO check that the catalogNumber is uniq
                         System.out.println("Item weight:");
                         String weightInput = scanner.next();
                         weightInput = checkNumberWithDot(weightInput);
@@ -287,28 +287,58 @@ public class SupplierInterface extends AInterface
             }
         }
     }
-    public static String checkName (String input)
+    public String checkName (String input)
     {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            int counter = 0;
-            for (int i = 0; i < input.length(); i++) {
-                if (Character.isDigit(input.charAt(i))) {
-                    System.out.println("A name has to be letters only");
-                    break;
-                } else {
-                    counter++;
-                }
-            }
-            if (counter == input.length()) {
+//            int counter = 0;
+//            for (int i = 0; i < input.length(); i++) {
+//                if (Character.isDigit(input.charAt(i))) {
+//                    System.out.println("A name has to be letters only");
+//                    break;
+//                } else {
+//                    counter++;
+//                }
+//            }
+//            if (counter == input.length() && this.supplier_manger.checkExistingSupplierName(input))
+//            {
+//                return input;
+//            }
+            if (this.supplier_manger.checkExistingSupplierName(input))
+            {
                 return input;
-            } else {
+            }
+            else
+            {
                 System.out.println("name:");
-                input = scanner.next();
+                input = scanner.nextLine();
             }
         }
+
     }
-    public static String checkNumber (String input)
+//    public static String checkNumber (String input)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        while (true) {
+//            int counter = 0;
+//            for (int i = 0; i < input.length(); i++) {
+//                if (!Character.isDigit(input.charAt(i))) {
+//                    System.out.println("has to be numbers only");
+//                    break;
+//                } else {
+//                    counter++;
+//                }
+//            }
+//            if (counter == input.length()) {
+//                return input;
+//            } else {
+//                System.out.println("number:");
+//                input = scanner.next();
+//            }
+//        }
+//    }
+
+    public String checkBusinessId (String input)
     {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -321,7 +351,29 @@ public class SupplierInterface extends AInterface
                     counter++;
                 }
             }
-            if (counter == input.length()) {
+            if (counter == input.length() && this.supplier_manger.checkExistingBusinessId(input)) {
+                return input;
+            } else {
+                System.out.println("number:");
+                input = scanner.next();
+            }
+        }
+    }
+
+    public String checkSupplierId(String input)
+    {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    System.out.println("has to be numbers only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length() && this.supplier_manger.checkExistingSupplierId(input)) {
                 return input;
             } else {
                 System.out.println("number:");

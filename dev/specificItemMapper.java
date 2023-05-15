@@ -141,7 +141,13 @@ public class specificItemMapper {
                     stmt.setDate(4, null);
                 }
                 stmt.setBoolean(5, item.getisDefected());
-                stmt.setInt(6, item.getserialNumber());
+
+                int serialNumber = item.getserialNumber();
+                if (serialNumberExists(serialNumber)) {
+                    serialNumber = generateSerialNumber();
+                }
+                stmt.setInt(6, serialNumber);
+
                 stmt.executeUpdate();
                 nameConflict = false;
                 cache.clear(); // clear cache since it's outdated
@@ -161,6 +167,34 @@ public class specificItemMapper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean serialNumberExists(int serialNumber) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM specific_items WHERE serial_number = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, serialNumber);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private int generateSerialNumber() throws SQLException {
+        String sql = "SELECT MAX(serial_number) FROM specific_items";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) + 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 
     public void update(specificItem item) {

@@ -263,7 +263,7 @@ public class specificItemMapper {
 
     public void deleteAll() throws SQLException {
         getConnection();
-        String sql = "DELETE FROM " + "specific_items";
+        String sql = "DELETE FROM " + "specificItems";
         try (Statement statement = conn.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {

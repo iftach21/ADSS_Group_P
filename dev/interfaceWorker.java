@@ -140,20 +140,20 @@ public class interfaceWorker extends AInterface {
 
                         switch (Sub_Ans) {
                             case "1":
-                                Reports.addShortageReport(Inventory.shortageReportFull());
+                                Reports.addReport(Inventory.shortageReportFull());
                                 break;
 
                             case "2":
                                 System.out.println("For which category?");
                                 Scanner categoryInput = new Scanner(System.in);
                                 String categoryName = categoryInput.nextLine();
-                                Reports.addShortageReport(Inventory.shortageReportCategory(categoryName));
+                                Reports.addReport(Inventory.shortageReportCategory(categoryName));
                                 break;
                             case "3":
                                 System.out.println("Please enter the catalog number for the product you would like to provide a shortage report for:");
                                 Scanner Product = new Scanner(System.in);
                                 String productNumber = Product.nextLine();
-                                Reports.addShortageReport(Inventory.shortageReportGeneralItem(productNumber));
+                                Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
                                 break;
 
                             case "0":
@@ -173,7 +173,6 @@ public class interfaceWorker extends AInterface {
                 //Provide an inventory counting report
                 //-----------------------
                 case "2": {
-
                     boolean flag = true;
                     while (flag) {
                         System.out.println("which report to provide:");
@@ -214,7 +213,6 @@ public class interfaceWorker extends AInterface {
                                 break;
                         }
                     }
-
                     break;
                 }
 
@@ -269,13 +267,11 @@ public class interfaceWorker extends AInterface {
                 //Provide a price history report for a product
                 //-----------------------
                 case "4": {
-
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
                     String catalogNumber = Input.nextLine();
                     Reports.addReport(Inventory.priceHistoryReport(catalogNumber));
-
-
+                    //Reports.addReport(Inventory.shortageReportGeneralItem(productNumber));
                     break;
                 }
 
@@ -283,13 +279,15 @@ public class interfaceWorker extends AInterface {
                 //Insert a defective product into the defective inventory
                 //-----------------------
                 case "5": {
-
-                    System.out.println("What is the serial number for the item to be set as defected?");
+                    System.out.println("What is the item ID for the item to be set as defected?");
                     Scanner defectedItemInput = new Scanner(System.in);
                     int defectedserialNumber = Integer.parseInt(defectedItemInput.nextLine());
-                    Inventory.moveSpecificItemToDefectiveMapper(defectedserialNumber);
+                    specificItem currentSpecific = Inventory.findSpecificItem(defectedserialNumber);
+                    currentSpecific.setDefected(true);
+                    currentSpecific.setLocation(Location.Storage);
                     System.out.println("Item numbered " + defectedserialNumber + " has been set has defected and" +
-                            " moved into the warehouse storage." );
+                            "moved into the warehouse storage." );
+                    System.out.println(currentSpecific.toString());
                     break;
                 }
 
@@ -305,7 +303,7 @@ public class interfaceWorker extends AInterface {
                     System.out.println("please enter valid input");
                 }
 
+            }
         }
-    }
 
-}}
+    }}

@@ -90,6 +90,15 @@ public class Main {
                     item1.setMinQuantity(10);
                     item2.setMinQuantity(50);
 
+                    //Dates
+                    Date dateMilk1 = new Date(2023, 10, 7);
+                    Date dateMilk2 = new Date(2024, 1, 9);
+                    Date dateMilk3 = new Date(2025, 5, 11);
+                    Date dateMilk4 = new Date(2026, 6, 13);
+
+                    //Specific Items
+
+
                     //supplier manger to insert the supplier
                     Supplier_Manger masupplier=new Supplier_Manger();
 

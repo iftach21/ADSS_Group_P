@@ -1200,6 +1200,10 @@ public class TransferController {
     }
 
     public void createMockOrder() throws SQLException {
+        //clear data
+        _ordersQueue.clear();
+        _orderDestinationSiteIdQueue.clear();
+
         //get all sites
         Site Yarkan = SiteDAO.getInstance().get(1);
         Site Tnuva = SiteDAO.getInstance().get(2);

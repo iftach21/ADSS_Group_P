@@ -110,12 +110,12 @@ public class Main {
 
                     //Specific Items
                     specificItem apple1 = new specificItem(date1, false, Location.Store, item1);
-                    specificItem apple2 = new specificItem(date2, false, Location.Store, item1);
-                    specificItem apple3 = new specificItem(date3, false, Location.Store, item1);
-                    specificItem apple4 = new specificItem(date4, false, Location.Store, item1);
+                    specificItem apple2 = new specificItem(date2, true, Location.Storage, item1);
+                    specificItem apple3 = new specificItem(date3, true, Location.Storage, item1);
+                    specificItem apple4 = new specificItem(date4, true, Location.Storage, item1);
                     specificItem milk1 = new specificItem(date1, false, Location.Store, item2);
                     specificItem milk2 = new specificItem(date2, true, Location.Storage, item2);
-                    specificItem milk3 = new specificItem(date3, false, Location.Store, item2);
+                    specificItem milk3 = new specificItem(date3, true, Location.Storage, item2);
                     specificItem milk4 = new specificItem(date4, true, Location.Storage, item2);
 
                     //Stock Manager interface to insert
@@ -166,7 +166,7 @@ public class Main {
                     break;
 
 
-                    ///add more demo data here(*nati and ofir)
+                ///add more demo data here(*nati and ofir)
 
 
                 case 6:

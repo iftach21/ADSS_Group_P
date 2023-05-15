@@ -191,7 +191,7 @@ public class SupplierInterface extends AInterface
 
                     case 4:
                         System.out.println("name of the supplier:");
-                        String name_s3 = scanner.next();
+                        String name_s3 = scanner.nextLine();
 //                        name_s3 = checkSupplierNameExistInTheSystemForInserting(name_s3);
                         name_s3 = checkSupplierNameExistInTheSystemForDeleting(name_s3);
                         System.out.println("Item name:");
@@ -210,35 +210,38 @@ public class SupplierInterface extends AInterface
 
                         System.out.println("temperature ((0)regular,(1)frozen,(2)cold)");// TODO there are only 3 options : regular, frozen, cold
                         String tempInput;
-                        int tempLevelInt = -1;
+//                        int tempLevelInt = -1;
                         while(true)
                         {
                             tempInput = scanner.next();
-
-                            try {
-                                tempLevelInt = Integer.parseInt(tempInput);
-                                if (tempLevelInt < 0 || tempLevelInt > 2) {
-                                    System.out.println("Please enter a option");
-                                    tempInput = scanner.next();
-                                    continue;
+//                            try {
+//                                tempLevelInt = Integer.parseInt(tempInput);
+                                if (tempInput.equals("regular") || tempInput.equals("cold") || tempInput.equals("frozen"))
+                                {
+                                    break;
                                 }
-                                break;
-                            } catch (Exception ignored) {
-                                System.out.println("Please enter a valid option");
-                                tempInput = scanner.next();
-                            }
-
+                                else
+                                {
+                                    System.out.println("Please enter a valid option");
+//                                    tempInput = scanner.next();
+                                }
+//                            }
+//                            catch (Exception ignored)
+//                            {
+//                                System.out.println("Please enter a valid option");
+//                                tempInput = scanner.next();
+//                            }
                         }
                         TempLevel tempLevel = TempLevel.valueOf(tempInput);
 //                            tempInput = checkNumberWithDot(tempInput);
-                        double temp = Double.parseDouble(tempInput);
+//                        double temp = Double.parseDouble(tempInput);
                         System.out.println("manufacturer:");
                         String manufacturer = scanner.next();
                         manufacturer = checkName(manufacturer);
 
                         //create the new item
 //                            Item item = new Item(item_name, catalogName, expirationDate_s, weight, catalogNum, temp);
-                        Item item = new Item(item_name, catalogName, weight, catalogName, tempLevel, manufacturer);
+                        Item item = new Item(item_name, catalogNum, weight, catalogName, tempLevel, manufacturer);
 
 //                            try {
 //                                Date date = item.getDate();
@@ -263,23 +266,24 @@ public class SupplierInterface extends AInterface
 
                     case 5:
                         System.out.println("name of the supplier:");
-                        String name_s4 = scanner.next();
-                        name_s4 = checkSupplierNameExistInTheSystemForInserting(name_s4);
-                        System.out.println("name of the item");
+                        String name_s4 = scanner.nextLine();
+                        name_s4 = checkSupplierNameExistInTheSystemForDeleting(name_s4);
+                        System.out.println("catalog number of the item");
                         String item_c5 = scanner.next();
-                        item_c5 = checkName(item_c5);
+//                        item_c5 = checkName(item_c5);
                         if (!supplier_manger.remove_item_to_supplier(name_s4, item_c5)) {
                             System.out.println("Supplier or item does not exist");
                         }
+                        supplier_manger.remove_item_to_supplier(name_s4,item_c5);
                         break;
 
                     case 6:
                         System.out.println("name of the supplier:");
-                        String name_s6 = scanner.next();
-                        name_s6 = checkSupplierNameExistInTheSystemForInserting(name_s6);
-                        System.out.println("name of the item");
+                        String name_s6 = scanner.nextLine();
+                        name_s6 = checkSupplierNameExistInTheSystemForDeleting(name_s6);
+                        System.out.println("catalog number of the item");
                         String item_c6 = scanner.next();
-                        item_c6 = checkName(item_c6);
+//                        item_c6 = checkName(item_c6);
                         System.out.println("amount:");
                         String amount_6Input = scanner.next();
                         amount_6Input = checkNumber(amount_6Input);
@@ -296,16 +300,14 @@ public class SupplierInterface extends AInterface
                     case 8:
                         System.out.println("supplier id:");
                         String id_sup1 = scanner.next();
-                        int amount_7 = Integer.parseInt(id_sup1);
+//                        int amount_7 = Integer.parseInt(id_sup1);
                         supplier_manger.get_supplier_by_id(id_sup1).print();
 
                     case 9:
                         System.out.println("Redirecting back to main menu");
-                        break;
-
-
+//                        break;
                 }
-
+                break;
             }
         }
     }

@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class InventoryController {
     private CategoryController CategoryControl;
@@ -10,6 +11,8 @@ public class InventoryController {
     private specificItemMapper specificItemMapper;
     private ReportMapper reportMapper;
     private ReportItemsMapper reportItemsMapper;
+//    private static final long DELAY = TimeUnit.DAYS.toMillis(0);
+//    private static final long PERIOD = TimeUnit.DAYS.toMillis(2);
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
@@ -597,6 +600,42 @@ public class InventoryController {
         }
     }
 
+//    public void checkForShortageTask(){
+//        Timer timer = new Timer();
+//        timer.schedule(new ShortageCheck(), DELAY, PERIOD);
+//    }
+//
+//    private static class ShortageCheck extends TimerTask{
+//
+//        @Override
+//        public void run() {
+//            try {
+//                checkMissingItems();
+//            }
+//            catch (SQLException e){
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        private void checkMissingItems() throws SQLException{
+//            for(Item item: itemMapper.findAll())
+//            {
+//                if (!item.getCatalogName().equals(categoryName)){
+//                    continue;
+//                }
+//                int specificAmount = 0;
+//                for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+//                {
+//                    specificAmount++;
+//                }
+//                if (specificAmount < item.getMinQuantity()){
+//                    currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+//                }
+//        }
 
 
-}
+    }
+
+
+
+//}

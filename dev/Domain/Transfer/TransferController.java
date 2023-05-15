@@ -829,7 +829,7 @@ public class TransferController {
 
         //get the day number in the week
         DayOfWeek dayOfWeek = leavingDate.getDayOfWeek();
-        int dayOfWeekNum = dayOfWeek.getValue();
+        int dayOfWeekNum = dayOfWeek.getValue() + 1;
 
         //create window type
         WindowTypeCreater wt = new WindowTypeCreater();
@@ -1126,7 +1126,7 @@ public class TransferController {
 
         //get the day number in the week
         DayOfWeek dayOfWeek = arrivingDate.getDayOfWeek();
-        int dayOfWeekNum = dayOfWeek.getValue();
+        int dayOfWeekNum = dayOfWeek.getValue() + 1;
 
         WindowTypeCreater wtc = new WindowTypeCreater();
 
@@ -1194,6 +1194,24 @@ public class TransferController {
         Site SuperLiAshkelon = SiteDAO.getInstance().get(4);
         Site SuperLiMetula = SiteDAO.getInstance().get(5);
 
+        Site Golda = SiteDAO.getInstance().get(6);
+        Site Tivol = SiteDAO.getInstance().get(7);
+        Site Elit = SiteDAO.getInstance().get(8);
+        Site SuperLiBeerSheva = SiteDAO.getInstance().get(9);
+        Site SuperLiTelAviv = SiteDAO.getInstance().get(10);
+
+        Site Shtraus = SiteDAO.getInstance().get(11);
+        Site Telma = SiteDAO.getInstance().get(12);
+        Site Tapuzina = SiteDAO.getInstance().get(13);
+        Site SuperLiPetahTikva = SiteDAO.getInstance().get(14);
+        Site SuperLiHolon = SiteDAO.getInstance().get(15);
+
+        Site PriGat = SiteDAO.getInstance().get(16);
+        Site Nestle = SiteDAO.getInstance().get(17);
+        Site Maadanot = SiteDAO.getInstance().get(18);
+        Site SuperLiEilat = SiteDAO.getInstance().get(19);
+        Site SuperLiHodHasharon = SiteDAO.getInstance().get(20);
+
         //get all items
         Item_mock Bamba = Item_mockDAO.getInstance().get("45325");
         Item_mock Yolo = Item_mockDAO.getInstance().get("hr4565");
@@ -1203,6 +1221,33 @@ public class TransferController {
         Item_mock Doritos = Item_mockDAO.getInstance().get("jl829kl");
         Item_mock ChocolateIceCream = Item_mockDAO.getInstance().get("84390j");
         Item_mock CreamCheese = Item_mockDAO.getInstance().get("23719g");
+
+        Item_mock Petiber = Item_mockDAO.getInstance().get("125sa");
+        Item_mock Coffee = Item_mockDAO.getInstance().get("mn5050");
+        Item_mock Milk = Item_mockDAO.getInstance().get("1154n2");
+        Item_mock Strawberry = Item_mockDAO.getInstance().get("98988f");
+        Item_mock VanillaIceCream = Item_mockDAO.getInstance().get("3232mm");
+        Item_mock Bagel = Item_mockDAO.getInstance().get("jb668kd");
+        Item_mock Bread = Item_mockDAO.getInstance().get("d4040g");
+        Item_mock Onion = Item_mockDAO.getInstance().get("3030g");
+
+        Item_mock Garlic = Item_mockDAO.getInstance().get("1111fu");
+        Item_mock Salt = Item_mockDAO.getInstance().get("hh2222");
+        Item_mock Nuts = Item_mockDAO.getInstance().get("32ede4");
+        Item_mock Sugar = Item_mockDAO.getInstance().get("cwec44");
+        Item_mock SoySauce = Item_mockDAO.getInstance().get("32e453");
+        Item_mock ChilliSauce = Item_mockDAO.getInstance().get("sfv334");
+        Item_mock blackPepper = Item_mockDAO.getInstance().get("ref452");
+        Item_mock CottageCheese = Item_mockDAO.getInstance().get("2324gr");
+
+        Item_mock Mayonnaise = Item_mockDAO.getInstance().get("25fe3e");
+        Item_mock GarlicSauce = Item_mockDAO.getInstance().get("3ef63");
+        Item_mock Parmesan = Item_mockDAO.getInstance().get("43f465");
+        Item_mock Cucumber = Item_mockDAO.getInstance().get("4r367j8");
+        Item_mock CherryTomatoes = Item_mockDAO.getInstance().get("54tg78");
+        Item_mock Apple = Item_mockDAO.getInstance().get("fb1t87");
+        Item_mock ChocolateNutella = Item_mockDAO.getInstance().get("6cw352");
+        Item_mock ChocolateHashahar = Item_mockDAO.getInstance().get("vt653c2");
 
         //create order items with quantity
         Map<Item_mock, Integer> OsemOrder1Items = new HashMap<>();
@@ -1219,11 +1264,47 @@ public class TransferController {
         YarkanOrder1Items.put(Potato, 450);
         YarkanOrder1Items.put(Tomato, 600);
 
-        //create order
-        Map<Site, Map<Item_mock, Integer>> order1 = new HashMap<>();
-        order1.put(Yarkan, YarkanOrder1Items);
-        order1.put(Tnuva, TnuvaOrder1Items);
-        order1.put(Osem, OsemOrder1Items);
+        Map<Item_mock, Integer> GoldaOrder1Items = new HashMap<>();
+        GoldaOrder1Items.put(Petiber, 700);
+        GoldaOrder1Items.put(Coffee, 130);
+        GoldaOrder1Items.put(Milk, 250);
+
+        Map<Item_mock, Integer> TivolOrder1Items = new HashMap<>();
+        TivolOrder1Items.put(Strawberry, 350);
+        TivolOrder1Items.put(VanillaIceCream, 200);
+        TivolOrder1Items.put(Bagel, 550);
+
+        Map<Item_mock, Integer> ElitOrder1Items = new HashMap<>();
+        ElitOrder1Items.put(Bread, 450);
+        ElitOrder1Items.put(Onion, 650);
+
+        Map<Item_mock, Integer> ShtrausOrder1Items = new HashMap<>();
+        ShtrausOrder1Items.put(Garlic, 100);
+        ShtrausOrder1Items.put(Salt, 200);
+        ShtrausOrder1Items.put(Nuts, 300);
+
+        Map<Item_mock, Integer> TelmaOrder1Items = new HashMap<>();
+        TelmaOrder1Items.put(Sugar, 400);
+        TelmaOrder1Items.put(SoySauce, 150);
+        TelmaOrder1Items.put(ChilliSauce, 300);
+
+        Map<Item_mock, Integer> TapuzinaOrder1Items = new HashMap<>();
+        TapuzinaOrder1Items.put(blackPepper, 500);
+        TapuzinaOrder1Items.put(CottageCheese, 350);
+
+        Map<Item_mock, Integer> PriGatOrder1Items = new HashMap<>();
+        PriGatOrder1Items.put(Mayonnaise, 200);
+        PriGatOrder1Items.put(GarlicSauce, 200);
+        PriGatOrder1Items.put(Parmesan, 400);
+
+        Map<Item_mock, Integer> NestleOrder1Items = new HashMap<>();
+        NestleOrder1Items.put(Cucumber, 500);
+        NestleOrder1Items.put(CherryTomatoes, 200);
+        NestleOrder1Items.put(Apple, 400);
+
+        Map<Item_mock, Integer> MaadanotOrder1Items = new HashMap<>();
+        MaadanotOrder1Items.put(ChocolateNutella, 200);
+        MaadanotOrder1Items.put(ChocolateHashahar, 450);
 
         //create order items with quantity
         Map<Item_mock, Integer> OsemOrder2Items = new HashMap<>();
@@ -1238,15 +1319,42 @@ public class TransferController {
         YarkanOrder2Items.put(Potato, 450);
         YarkanOrder2Items.put(Tomato, 900);
 
-        //create order
+        //create order 1
+        Map<Site, Map<Item_mock, Integer>> order1 = new HashMap<>();
+        order1.put(Yarkan, YarkanOrder1Items);
+        order1.put(Tnuva, TnuvaOrder1Items);
+        order1.put(Osem, OsemOrder1Items);
+
+        //create order 2
         Map<Site, Map<Item_mock, Integer>> order2 = new HashMap<>();
-        order2.put(Yarkan, YarkanOrder1Items);
-        order2.put(Tnuva, TnuvaOrder1Items);
-        order2.put(Osem, OsemOrder1Items);
+        order2.put(Yarkan, YarkanOrder2Items);
+        order2.put(Tnuva, TnuvaOrder2Items);
+        order2.put(Osem, OsemOrder2Items);
+
+        //create order 3
+        Map<Site, Map<Item_mock, Integer>> order3 = new HashMap<>();
+        order3.put(Golda, GoldaOrder1Items);
+        order3.put(Tivol, TivolOrder1Items);
+        order3.put(Elit, ElitOrder1Items);
+
+        //create order 4
+        Map<Site, Map<Item_mock, Integer>> order4 = new HashMap<>();
+        order4.put(Shtraus, ShtrausOrder1Items);
+        order4.put(Telma, TelmaOrder1Items);
+        order4.put(Tapuzina, TapuzinaOrder1Items);
+
+        //create order 5
+        Map<Site, Map<Item_mock, Integer>> order5 = new HashMap<>();
+        order5.put(PriGat, PriGatOrder1Items);
+        order5.put(Nestle, NestleOrder1Items);
+        order5.put(Maadanot, MaadanotOrder1Items);
 
         //add orders to the orders queue
         newOrderReceived(order1, SuperLiAshkelon.getSiteId());
         newOrderReceived(order2, SuperLiMetula.getSiteId());
+        newOrderReceived(order3, SuperLiBeerSheva.getSiteId());
+        newOrderReceived(order4, SuperLiTelAviv.getSiteId());
+        newOrderReceived(order5, SuperLiPetahTikva.getSiteId());
 
     }
 }

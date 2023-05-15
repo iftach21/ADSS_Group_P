@@ -1,4 +1,7 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class PriceHistory {
     private double buyPrice;
@@ -25,8 +28,9 @@ public class PriceHistory {
 
     @Override
     public String toString() {
+        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         return "Buy price: " + buyPrice +
                 ", sell price: " + sellPrice +
-                ", updated in: " + currentDate + "\n";
+                ", updated in: " + dateFormat.format(currentDate) + "\n";
     }
 }

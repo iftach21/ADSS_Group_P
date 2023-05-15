@@ -144,7 +144,8 @@ public class Item {
         System.out.println("weight: "+this.weight );
         System.out.println("catalog Name :" +this.catalogName );
         System.out.println("temperature :"+ this.temperature);
-        System.out.println("Pricer History :" +this.priceHistory.toString());
+        for(PriceHistory priceHistory1: this.priceHistory){
+        System.out.println("Pricer History :" +priceHistory1.toString());}
     }
 
     public void setManufacturer(String manufacturer) {
@@ -175,16 +176,16 @@ public class Item {
 
     @Override
     public String toString() {
-        return "-- " +
+        return "Item{" +
                 "name='" + name + '\'' +
                 ", catalogNum='" + catalogNum + '\'' +
                 ", weight=" + weight +
                 ", catalogName='" + catalogName + '\'' +
                 ", temperature=" + temperature +
+                ", priceHistory=" + priceHistory.toString() +
                 ", manufacturer='" + manufacturer + '\'' +
-                ", minimum_quantity=" + minimum_quantity + '\n' +
-                //"buy price: " + this.getBuyPrice() + " , sell price: " + this.getSellPrice() +
-                "";
+                ", minimum_quantity=" + minimum_quantity +
+                '}';
     }
     @Override
     public boolean equals(Object o) {

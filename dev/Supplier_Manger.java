@@ -239,7 +239,9 @@ public class Supplier_Manger {
                 contractMapper.update(suppleir.getContract());
 
     }
-}}
+
+    }
+        this.update_suppliers();}
 
 
     //This fuction sort the supplier array by the days that each on can deliver
@@ -315,6 +317,13 @@ public class Supplier_Manger {
         }
         return itemSet;
 
+    }
+    public void delte_all(){
+        this.itemMapper.deleteAll();
+        this.contractMapper.deleteAll();
+        this.nonDeliveringSupplierMapper.deleteAll();
+        this.nonFixedDaySupplierMapper.deleteAll();
+        this.fixedDaySupplierMapper.deleteAll();
     }
 
 

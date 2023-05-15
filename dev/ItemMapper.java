@@ -45,6 +45,10 @@ public class ItemMapper {
                 TempLevel tempValue = TempLevel.valueOf(tempLevel);
                 item.setTemperature(tempValue);
                 item.setManufacturer((rs.getString("manufacturer")));
+                String price_his= ((rs.getString("price_history")));
+                PriceHistoryParser parser=new PriceHistoryParser();
+                if(!price_his.equals("[]")){
+                    item.setPriceHistory(parser.parse(price_his));}
                 cache.put(catalogNum, item);
                 conn.close();
                 return item;
@@ -123,7 +127,7 @@ public class ItemMapper {
 
             if (rs.next()) {
                 cache.put(item.getCatalogNum(), item); //We insert the new item into the cache
-            }
+           }
         }
         catch(SQLException e){}
 
@@ -187,6 +191,24 @@ public class ItemMapper {
         catch (SQLException e){}
 
     }
+    public void deleteAll() {
+        PreparedStatement stmt;
+        getConnection();
+
+        try {
+            stmt = conn.prepareStatement("DELETE FROM items");
+            stmt.executeUpdate();
+            cache.clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public List<Item> findAllByCatalogNum(String catalogNum)
     {
@@ -210,6 +232,7 @@ public class ItemMapper {
                 item.setTemperature(tempValue);
                 item.setManufacturer((rs.getString("manufacturer")));
                 items.add(item);
+
             }
         }
         catch(SQLException e){}
@@ -230,4 +253,5 @@ public class ItemMapper {
         }
         catch (SQLException e){}
     }
+
 }

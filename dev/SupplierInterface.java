@@ -28,8 +28,7 @@ public class SupplierInterface extends AInterface
                 System.out.println("7.print all suppliers");
                 System.out.println("8.print supplier  by id's");
                 System.out.println("9.get back to previous menu");
-                option = scanner.nextLine();
-                choice = Integer.parseInt(option);
+
 
                 while (true) {
                     try {

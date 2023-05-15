@@ -257,6 +257,13 @@ public class OrderManger {
     //Prints the details of all pending, approved, and historical orders.
     public void print_all_orders_details()
     {
+        System.out.println("periodOrder:");
+        for(Period_Order periodOrder: periodicOrderMapper.findAll())
+
+        {
+            periodOrder.print_order_detail();
+        }
+
         System.out.println("pending:");
 
         for(Order order: orderMapper.findAllOrderWithStatus("Waiting"))
@@ -282,6 +289,7 @@ public class OrderManger {
     //Creates a periodic order by specifying the supplier, item list, store number, and the number of days in the order cycle. It calculates the cost of the order and inserts it into the database using the PeriodicOrderMapper.
     // Returns true if the periodic order creation is successful.
     public boolean period_order(Supplier supplier,Map<Item,Integer> list_items, int store_num ,int numberofdayscycle) {
+
         Map<Item, Pair<Integer, Float>> maplist;
         Order order = new Order(null, supplier, 0, store_num);
         for (Item item : list_items.keySet())
@@ -363,6 +371,32 @@ public class OrderManger {
     //Deletes an order with the specified order number from the database using the OrderMapper.
     public  void delte_a_order(String id){
         orderMapper.delete(orderMapper.findByOrderNum(id));
+    }
+
+    //delete all db of orders
+    public void  delte_db(){
+        orderMapper.deleteAll();
+        periodicOrderMapper.deleteAll();
+    }
+
+    //prient all the periods order's
+    public void print_period_orders(){
+        List<Period_Order>periodOrders=periodicOrderMapper.findAll();
+        for(Period_Order periodOrder: periodOrders){
+            periodOrder.print_order_detail();
+
+        }
+    }
+    public List<Period_Order>get_Periodorders(){
+        return periodicOrderMapper.findAll();
+    }
+
+    public boolean contain_Period_order(String string){
+        if(periodicOrderMapper.findByContractId(string)!=null)
+            return true;
+        else{
+            return false;
+        }
     }
 }
 

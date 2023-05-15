@@ -9,13 +9,14 @@ public class ParserForContractItemIntegerDouble {
         {
             return map;
         }
-
+        input =input.substring(1,input.length()-1);
+        input=input.replace("\"","");
         String[] pairs = input.split("},");
 
         for (String pair : pairs) {
             String[] parts = pair.split(":\\{");
             String item = parts[0];
-            Map<Integer, Double> priceMap = getPriceMap(parts[1]);
+            Map<Integer, Double> priceMap = getPriceMap(parts[1].substring(0,parts[1].length()-1));
             map.put(item, priceMap);
         }
 

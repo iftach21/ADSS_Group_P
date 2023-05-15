@@ -207,7 +207,7 @@ public class OrderMapper
             ResultSet rs = stmt.getGeneratedKeys();
 
             if (rs.next()) {
-                order.setOrderNum(rs.getInt(1));
+
                 cache.put(order.getOrderNum(), order);//We insert the new Order into the cache
             }
         }
@@ -342,5 +342,23 @@ public class OrderMapper
             itemList.put(item,value);
         }
         return itemList;
+    }
+    public void deleteAll() {
+        PreparedStatement stmt;
+        getConnection();
+
+        try {
+            stmt = conn.prepareStatement("DELETE FROM Orders"); // SQL query to delete all rows from the table
+            stmt.executeUpdate();
+            cache.clear(); // Clear the cache
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

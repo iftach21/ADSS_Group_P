@@ -96,6 +96,8 @@ public class ReportMapper implements DAO<Report>{
         String sql = "INSERT INTO Reports (reportNum, reportDate, reportInformationString, reportType) VALUES (?, ?, ?, ?)";
         getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
+//            String reportJson = new JSONObject(report.getReportItems()).toString();
+            statement.setInt(1,report.getReportNum());
             int reportNum = report.getReportNum();
             if (reportNumExists(reportNum)) {
                 reportNum = generateReportNum();
@@ -106,6 +108,10 @@ public class ReportMapper implements DAO<Report>{
             } else {
                 statement.setDate(2, null);
             }
+            statement.setString(3,report.getreportInformationString());
+            //statement.setString(4,report.getType().name());
+            statement.setString(4,report.getType().name());
+//            statement.setString(5,reportJson);
             statement.setString(3, report.getreportInformationString());
             statement.setString(4, report.getType().name());
             statement.executeUpdate();
@@ -143,6 +149,7 @@ public class ReportMapper implements DAO<Report>{
             }
         }
     }
+
 
 
     @Override

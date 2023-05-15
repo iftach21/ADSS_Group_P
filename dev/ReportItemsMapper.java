@@ -131,32 +131,51 @@ public class ReportItemsMapper implements DAO<Report>{
     public void insert(Report report) throws SQLException {
         String sql = "INSERT INTO ReportItems (reportNum, catalog_number, quantity) VALUES (?, ?, ?)";
         getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(sql)){
-            LinkedHashMap<Item,Integer> reportItemsList = report.getReportItems();
-            for (Map.Entry<Item,Integer> entry : reportItemsList.entrySet()){
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            LinkedHashMap<Item, Integer> reportItemsList = report.getReportItems();
+            int reportNum = report.getReportNum();
+            while (reportNumExists(reportNum)) {
+                reportNum++;
+            }
+            for (Map.Entry<Item, Integer> entry : reportItemsList.entrySet()) {
                 Item item = entry.getKey();
                 int quantity = entry.getValue();
                 String catalog_number = item.getCatalogNum();
-                statement.setInt(1,report.getReportNum());
+                statement.setInt(1, reportNum);
                 statement.setString(2, catalog_number);
-                statement.setInt(3,quantity);
+                statement.setInt(3, quantity);
                 statement.executeUpdate();
                 ResultSet rs = statement.getGeneratedKeys();
-                if (rs.next()){
+                if (rs.next()) {
                     if (identityMap == null) {
                         identityMap = new ArrayList<>();
                     }
                     identityMap.add(report);
                 }
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         try {
             connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        catch (SQLException e){}
+    }
+
+    private boolean reportNumExists(int reportNum) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM ReportItems WHERE reportNum = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, reportNum);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

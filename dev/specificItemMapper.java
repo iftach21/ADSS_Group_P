@@ -1,3 +1,4 @@
+import org.sqlite.SQLiteErrorCode;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -124,29 +125,76 @@ public class specificItemMapper {
         PreparedStatement stmt;
         getConnection();
 
-        try {
-            stmt = conn.prepareStatement("INSERT INTO specific_items (name, catalog_number, location, expiration_date, defected, serial_number) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, item.getSerialNumberString());
-            stmt.setString(2, item.getCatalogNum());
-            stmt.setString(3, item.getLocationString());
-            if (item.getDate() != null) {
-                stmt.setDate(4, new java.sql.Date(item.getDate().getTime()));
-            } else {
-                stmt.setDate(4, null);
-            }
-            stmt.setBoolean(5, item.getisDefected());
-            stmt.setInt(6, item.getserialNumber());
-            stmt.executeUpdate();
-            cache.clear(); // clear cache since it's outdated
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+        String itemName = item.getSerialNumberString();
+        boolean nameConflict = true;
+        int suffix = 1;
+
+        while (nameConflict) {
             try {
-                conn.close();
+                stmt = conn.prepareStatement("INSERT INTO specific_items (name, catalog_number, location, expiration_date, defected, serial_number) VALUES (?, ?, ?, ?, ?, ?)");
+                stmt.setString(1, itemName);
+                stmt.setString(2, item.getCatalogNum());
+                stmt.setString(3, item.getLocationString());
+                if (item.getDate() != null) {
+                    stmt.setDate(4, new java.sql.Date(item.getDate().getTime()));
+                } else {
+                    stmt.setDate(4, null);
+                }
+                stmt.setBoolean(5, item.getisDefected());
+
+                int serialNumber = item.getserialNumber();
+                if (serialNumberExists(serialNumber)) {
+                    serialNumber = generateSerialNumber();
+                }
+                stmt.setInt(6, serialNumber);
+
+                stmt.executeUpdate();
+                nameConflict = false;
+                cache.clear(); // clear cache since it's outdated
             } catch (SQLException e) {
-                e.printStackTrace();
+                if (e.getErrorCode() == SQLiteErrorCode.SQLITE_CONSTRAINT.code && e.getMessage().contains("UNIQUE constraint failed: specific_items.name")) {
+                    itemName = item.getSerialNumberString() + "+" + suffix;
+                    suffix++;
+                } else {
+                    e.printStackTrace();
+                    break;
+                }
             }
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean serialNumberExists(int serialNumber) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM specific_items WHERE serial_number = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, serialNumber);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private int generateSerialNumber() throws SQLException {
+        String sql = "SELECT MAX(serial_number) FROM specific_items";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) + 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 
     public void update(specificItem item) {

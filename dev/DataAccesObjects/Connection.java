@@ -14,25 +14,51 @@ public class Connection {
 
     public static java.sql.Connection getConnectionToDatabase() throws SQLException {
         if(conn == null){
-            conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db");
-        }
+            try{
+            conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db;ifexists=true");
+            }
+            catch (SQLException e){
+                conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db");
+                CreateTables();
+                }
+
+            }
+
         return conn;
-        //sd
     }
 
     public static void CreateTables(){
-        String sql = "create table Item_Mock\n" +
+        String sql = "create table Item_mock\n" +
                 "(\n" +
                 "    catalogNum TEXT\n" +
+                "        primary key\n" +
+                "        unique,\n" +
+                "    name       TEXT,\n" +
+                "    tempLevel  TEXT\n" +
+                ");\n" +
+                "\n" +
+                "create table Shift\n" +
+                "(\n" +
+                "    shift_id         INT AUTO_INCREMENT\n" +
                 "        primary key,\n" +
-                "    name       INTEGER,\n" +
-                "    tempLevel  INTEGER\n" +
+                "    date             DATE not null,\n" +
+                "    shift_manager_id INT,\n" +
+                "    log              TEXT,\n" +
+                "    start_time       TIME,\n" +
+                "    req_1            INT,\n" +
+                "    req_2            INT,\n" +
+                "    req_3            INT,\n" +
+                "    req_4            INT,\n" +
+                "    req_5            INT,\n" +
+                "    req_6            INT,\n" +
+                "    req_7            INT\n" +
                 ");\n" +
                 "\n" +
                 "create table Site\n" +
                 "(\n" +
                 "    siteID       INTEGER\n" +
-                "        primary key,\n" +
+                "        primary key\n" +
+                "        unique,\n" +
                 "    siteName     TEXT,\n" +
                 "    address      TEXT,\n" +
                 "    phoneNumber  TEXT,\n" +
@@ -43,23 +69,21 @@ public class Connection {
                 "\n" +
                 "create table Truck\n" +
                 "(\n" +
-                "    licenseNumber        INTEGER\n" +
-                "        primary key,\n" +
-                "    model                TEXT,\n" +
-                "    netWeight            INTEGER,\n" +
-                "    maxWeight            INTEGER,\n" +
-                "    currentWeight        INTEGER,\n" +
-                "    coolingCapacity      TEXT,\n" +
-                "    unavailableStartDate TEXT,\n" +
-                "    unavailableStartTime TEXT,\n" +
-                "    unavailableEndDate   TEXT,\n" +
-                "    unavailableEndTime   TEXT\n" +
+                "    licenseNumber   INTEGER\n" +
+                "        primary key\n" +
+                "        unique,\n" +
+                "    model           TEXT,\n" +
+                "    netWeight       INTEGER,\n" +
+                "    maxWeight       INTEGER,\n" +
+                "    currentWeight   INTEGER,\n" +
+                "    coolingCapacity TEXT\n" +
                 ");\n" +
                 "\n" +
                 "create table Transfer\n" +
                 "(\n" +
                 "    transferId         INTEGER\n" +
-                "        primary key,\n" +
+                "        primary key\n" +
+                "        unique,\n" +
                 "    dateOfTransfer     TEXT,\n" +
                 "    leavingTime        TEXT,\n" +
                 "    arrivingDate       TEXT,\n" +
@@ -68,15 +92,18 @@ public class Connection {
                 "        references Truck,\n" +
                 "    driverName         TEXT,\n" +
                 "    sourceId           INTEGER\n" +
-                "        references Site\n" +
+                "        references Site,\n" +
+                "    weightInSource     INTEGER\n" +
                 ");\n" +
                 "\n" +
                 "create table TransferDestinations\n" +
                 "(\n" +
-                "    transferId INTEGER\n" +
+                "    transferId   INTEGER\n" +
                 "        references Transfer,\n" +
-                "    siteId     INTEGER\n" +
-                "        references Site\n" +
+                "    siteId       INTEGER\n" +
+                "        references Site,\n" +
+                "    weightInSite INTEGER,\n" +
+                "    unique (transferId, siteId)\n" +
                 ");\n" +
                 "\n" +
                 "create table TransferItems\n" +
@@ -84,80 +111,29 @@ public class Connection {
                 "    transferId INTEGER\n" +
                 "        references Transfer,\n" +
                 "    catalogNum TEXT\n" +
-                "        references Item_Mock,\n" +
+                "        references Item_mock,\n" +
                 "    siteId     INTEGER\n" +
                 "        references Site,\n" +
-                "    quantity   INTEGER\n" +
+                "    quantity   INTEGER,\n" +
+                "    unique (transferId, catalogNum, siteId)\n" +
                 ");\n" +
                 "\n" +
-                "create table workers\n" +
+                "create table TransferTrucks\n" +
                 "(\n" +
-                "    id           INTEGER\n" +
-                "        primary key,\n" +
-                "    name         TEXT,\n" +
-                "    contract     TEXT,\n" +
-                "    start_date   TEXT,\n" +
-                "    wage         INTEGER,\n" +
-                "    phoneNUM     INTEGER,\n" +
-                "    personalinfo TEXT,\n" +
-                "    bankNum      INTEGER,\n" +
-                "    pro0         BOOLEAN,\n" +
-                "    pro1         BOOLEAN,\n" +
-                "    pro2         BOOLEAN,\n" +
-                "    pro3         BOOLEAN,\n" +
-                "    pro4         BOOLEAN,\n" +
-                "    pro5         BOOLEAN,\n" +
-                "    pro6         BOOLEAN,\n" +
-                "    weightType   TEXT,\n" +
-                "    TempType     TEXT,\n" +
-                "    day1         BOOLEAN,\n" +
-                "    day2         BOOLEAN,\n" +
-                "    day3         BOOLEAN,\n" +
-                "    day4         BOOLEAN,\n" +
-                "    day5         BOOLEAN,\n" +
-                "    day6         BOOLEAN,\n" +
-                "    day7         BOOLEAN,\n" +
-                "    night1       BOOLEAN,\n" +
-                "    night2       BOOLEAN,\n" +
-                "    night3       BOOLEAN,\n" +
-                "    night4       BOOLEAN,\n" +
-                "    night5       BOOLEAN,\n" +
-                "    night6       BOOLEAN,\n" +
-                "    night7       BOOLEAN\n" +
+                "    licenseNumber INTEGER\n" +
+                "        references Truck,\n" +
+                "    transferId    INTEGER\n" +
+                "        references Transfer,\n" +
+                "    unique (licenseNumber, transferId)\n" +
                 ");\n" +
                 "\n" +
-                "create table Shift\n" +
+                "create table sqlite_master\n" +
                 "(\n" +
-                "    shift_id         INT AUTO_INCREMENT\n" +
-                "        primary key,\n" +
-                "    date             TEXT,\n" +
-                "    shift_manager_id INT\n" +
-                "        constraint fk_shift_manager\n" +
-                "            references workers,\n" +
-                "    log              TEXT,\n" +
-                "    start_time       TEXT,\n" +
-                "    req_1            INT,\n" +
-                "    req_2            INT,\n" +
-                "    req_3            INT,\n" +
-                "    req_4            INT,\n" +
-                "    req_5            INT,\n" +
-                "    req_6            INT,\n" +
-                "    req_7            INT\n" +
-                ");\n" +
-                "\n" +
-                "create table shift_worker_in_shift\n" +
-                "(\n" +
-                "    id          INT AUTO_INCREMENT\n" +
-                "        primary key,\n" +
-                "    shift_id    INT not null\n" +
-                "        constraint fk_shift_worker\n" +
-                "            references Shift,\n" +
-                "    worker_id   INT not null\n" +
-                "        constraint fk_worker_in_shift\n" +
-                "            references workers,\n" +
-                "    workers_pro INT not null,\n" +
-                "    constraint uc_shift_worker\n" +
-                "        unique (shift_id, worker_id, workers_pro)\n" +
+                "    type     TEXT,\n" +
+                "    name     TEXT,\n" +
+                "    tbl_name TEXT,\n" +
+                "    rootpage INT,\n" +
+                "    sql      TEXT\n" +
                 ");\n" +
                 "\n" +
                 "create table weekly_shift\n" +
@@ -209,7 +185,57 @@ public class Connection {
                 "            references Shift,\n" +
                 "    primary key (week_num, year, supernum)\n" +
                 ");\n" +
-                "\n";
+                "\n" +
+                "create table workers\n" +
+                "(\n" +
+                "    id           INTEGER\n" +
+                "        primary key,\n" +
+                "    name         TEXT,\n" +
+                "    contract     TEXT,\n" +
+                "    start_date   TEXT,\n" +
+                "    wage         INTEGER,\n" +
+                "    phoneNUM     INTEGER,\n" +
+                "    personalinfo TEXT,\n" +
+                "    bankNum      INTEGER,\n" +
+                "    pro0         BOOLEAN,\n" +
+                "    pro1         BOOLEAN,\n" +
+                "    pro2         BOOLEAN,\n" +
+                "    pro3         BOOLEAN,\n" +
+                "    pro4         BOOLEAN,\n" +
+                "    pro5         BOOLEAN,\n" +
+                "    pro6         BOOLEAN,\n" +
+                "    weightType   TEXT,\n" +
+                "    TempType     TEXT,\n" +
+                "    day1         BOOLEAN,\n" +
+                "    day2         BOOLEAN,\n" +
+                "    day3         BOOLEAN,\n" +
+                "    day4         BOOLEAN,\n" +
+                "    day5         BOOLEAN,\n" +
+                "    day6         BOOLEAN,\n" +
+                "    day7         BOOLEAN,\n" +
+                "    night1       BOOLEAN,\n" +
+                "    night2       BOOLEAN,\n" +
+                "    night3       BOOLEAN,\n" +
+                "    night4       BOOLEAN,\n" +
+                "    night5       BOOLEAN,\n" +
+                "    night6       BOOLEAN,\n" +
+                "    night7       BOOLEAN\n" +
+                ");\n" +
+                "\n" +
+                "create table shift_worker_in_shift\n" +
+                "(\n" +
+                "    id          INT AUTO_INCREMENT\n" +
+                "        primary key,\n" +
+                "    shift_id    INT not null\n" +
+                "        constraint fk_shift_worker\n" +
+                "            references Shift,\n" +
+                "    worker_id   INT not null\n" +
+                "        constraint fk_worker_in_shift\n" +
+                "            references workers,\n" +
+                "    workers_pro INT not null,\n" +
+                "    constraint uc_shift_worker\n" +
+                "        unique (shift_id, worker_id, workers_pro)\n" +
+                ");";
 
         try {
             var c =   getConnectionToDatabase();

@@ -21,7 +21,9 @@ public class Main {
             System.out.println("3.Stock manger");
             System.out.println("4.Stock worker");
             System.out.println("5.insert demo data to the system for test and playing ");
-            System.out.println("6.Exit");
+            System.out.println("6.delete the db ");
+
+            System.out.println("7.Exit");
             option = scanner.nextLine();
 
             while(true)
@@ -29,7 +31,7 @@ public class Main {
                 try
                 {
                     choice = Integer.parseInt(option);
-                    if(choice < 1 || choice > 5)
+                    if(choice < 1 || choice > 7)
                     {
                         //the main menu there he can choose what to do
                         System.out.println("Please enter a valid option");
@@ -38,10 +40,11 @@ public class Main {
                         System.out.println("3.Stock manger");
                         System.out.println("4.Stock worker");
                         System.out.println("5.insert demo data to the system for test and playing ");
-                        System.out.println("6.Exit");
+                        System.out.println("6.delete the db ");
+                        System.out.println("7.Exit");
 
 
-                        System.out.println("4.Exit");
+
                         option = scanner.nextLine();
                         continue;
                     }
@@ -58,17 +61,21 @@ public class Main {
             {
                 case 1:
                     interfaces[0].interfaceStartup();
+                    break;
 
                 case 2:
                     interfaces[1].interfaceStartup();
+                    break;
 
                 case 3:
                     //interfaces[2].interfaceStartup();
                     interfaces[2].interfaceManagerLogin();
+                    break;
 
                 case 4:
                     //interfaces[3].interfaceStartup();
                     interfaces[3].interfaceWorkerLogin();
+                    break;
 
                 case 5:
                     //4 items to be add to the db
@@ -106,12 +113,21 @@ public class Main {
                     FixedDaySupplier supplier_2 = new FixedDaySupplier(currentDeliveryDay,"Supplier2 Inc.", "123446789", 1, "S0056", contactPerson, null, null);
                     masupplier.add_supplier(supplier_2);
                     masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
+                    break;
 
 
                     ///add more demo data here(*nati and ofir)
 
 
                 case 6:
+                     masupplier=new Supplier_Manger();
+                    masupplier.delte_all();
+                    OrderManger orderManger=new OrderManger();
+                    orderManger.delte_db();
+                    break;
+
+
+                case 7:
                     System.out.println("Thank you and goodbye");
                     System.exit(0);
                     break;

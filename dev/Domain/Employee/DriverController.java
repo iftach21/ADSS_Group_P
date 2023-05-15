@@ -1,10 +1,17 @@
 package Domain.Employee;
 
+import DataAccesObjects.Transfer.TransferDAO;
+import DataAccesObjects.Transfer.TrucksDAO;
 import Domain.Enums.TempLevel;
 import Domain.Enums.WindowType;
+import Domain.Enums.WindowTypeCreater;
+import Domain.Transfer.Transfer;
 import Domain.Transfer.TruckController;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.WeekFields;
 import java.util.*;
 
 public class DriverController {
@@ -28,7 +35,42 @@ public class DriverController {
     }
 
     public List<Driver> getAvailableDrivers(int weekNum, int yearNum, WindowType wt) throws SQLException {
-        return weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);
+        List<Driver> driversInShifts =  weeklyShiftAndWorkersManager.giveMeViableDrivers(weekNum,yearNum,wt);
+
+        Map<Integer,Transfer> transfers = TransferDAO.getInstance().getAllTransfers();
+        List<Driver> driversToDelete = new ArrayList<>();
+
+        for(Integer transferId: transfers.keySet())
+        {
+            int driverId  = transfers.get(transferId).getDriverId();
+            LocalDate dateOfTransfer = transfers.get(transferId).getDateOfTransfer();
+            int day = dateOfTransfer.getDayOfMonth() % 7;
+            WeekFields weekFields = WeekFields.of(Locale.getDefault());
+            int weekNumber = dateOfTransfer.get(weekFields.weekOfWeekBasedYear());
+            int year = dateOfTransfer.getYear();
+            LocalTime time = transfers.get(transferId).getLeavingTime();
+            String shift;
+            if (time.isAfter(LocalTime.NOON))
+                shift = "night";
+            else
+                shift = "day";
+
+            //create window type
+            WindowTypeCreater wtTransferCreate = new WindowTypeCreater();
+            WindowType wtTransfer = wtTransferCreate.getwidowtype(day, shift);
+
+            for(int i=0; i<driversInShifts.size(); i++)
+            {
+                if(driversInShifts.get(i).getId() == driverId && year==yearNum && weekNumber==weekNum && wt.equals(wtTransfer))
+                {
+                    driversToDelete.add(driversInShifts.get(i));
+                }
+
+            }
+        }
+
+        driversInShifts.removeAll(driversToDelete);
+        return driversInShifts;
     }
 
     public List<Driver> findDriver(TempLevel currMinTemp, int weekNum, int yearNum, WindowType wt) throws SQLException {

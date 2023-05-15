@@ -89,8 +89,8 @@ public class TransferDAOTest {
         destsAndItems2.put(site2, items2);
 
         //create 2 transfers
-        this.transfer1 = new Transfer(LocalDate.parse("2023-05-15"), LocalTime.parse("12:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("15:00:00"), 12345678, "Moshe", site1, dests1, destsAndItems1, 0, 0);
-        this.transfer2 = new Transfer(LocalDate.parse("2023-05-17"), LocalTime.parse("14:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("17:00:00"), 78776678, "Alon", site2, dests2, destsAndItems2, 1, 0);
+        this.transfer1 = new Transfer(LocalDate.parse("2023-05-15"), LocalTime.parse("12:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("15:00:00"), 12345678, "Moshe", site1, dests1, destsAndItems1, 0, 0, 1234);
+        this.transfer2 = new Transfer(LocalDate.parse("2023-05-17"), LocalTime.parse("14:00:00"), LocalDate.parse("2023-05-15"), LocalTime.parse("17:00:00"), 78776678, "Alon", site2, dests2, destsAndItems2, 1, 0, 5422);
         transferDAO.add(transfer1);
         transferDAO.add(transfer2);
         transfer1.addToDAO(destsAndItems1, dests1);

@@ -126,7 +126,7 @@ public class OrderMapper
 
     //This function gives all the Orders with a specific status that are currently in the DB
 
-    public List <Order> findAllOrderWithStatus(String status)
+        public List <Order> findAllOrderWithStatus(String status)
     {
         List<Order> orders = new ArrayList<>();// The list that will hold all the Order that we will return
         List<String> suppliersId = new ArrayList<>();

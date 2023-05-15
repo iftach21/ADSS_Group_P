@@ -398,6 +398,33 @@ public class OrderManger {
             return false;
         }
     }
+    public Period_Order get_period_order_by_id(String id){
+        return periodicOrderMapper.findByContractId(id);
+    }
+    public boolean can_update_period_order(Period_Order periodOrder){
+        return periodOrder.can_update();
+    }
+
+    public void checkPeriodOrders() {
+        List<Period_Order> periodOrders = periodicOrderMapper.findAll();
+
+        for (Period_Order periodOrder : periodOrders) {
+            int remainingDays = periodOrder.getDay_left();
+            if (remainingDays == 0) {
+                // Period order has reached zero days, update its status
+                Order order=new Order(periodOrder.getItemList(),periodOrder.getSupplier(),periodOrder.getCost(),periodOrder.getStore_number());
+                orderMapper.insert(order);
+                periodOrder.setDay_left(periodOrder.getDays_to_cycle());
+                periodicOrderMapper.update(periodOrder);
+                System.out.println("Periodic Order with ID " + periodOrder.getOrderNum() + " has reached zero days.");
+            } else {
+                // Decrease the remaining days by 1
+                periodOrder.setDay_left(remainingDays - 1);
+                periodicOrderMapper.update(periodOrder);
+            }
+        }
+    }
+
 }
 
 

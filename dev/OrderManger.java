@@ -398,6 +398,12 @@ public class OrderManger {
             return false;
         }
     }
+    public Period_Order get_period_order_by_id(String id){
+        return periodicOrderMapper.findByContractId(id);
+    }
+    public boolean can_update_period_order(Period_Order periodOrder){
+        return periodOrder.can_update();
+    }
 }
 
 

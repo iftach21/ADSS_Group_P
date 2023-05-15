@@ -14,10 +14,17 @@ public class Connection {
 
     public static java.sql.Connection getConnectionToDatabase() throws SQLException {
         if(conn == null){
-            conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db");
-        }
+            try{
+            conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db;ifexists=true");
+            }
+            catch (SQLException e){
+                conn = DriverManager.getConnection("jdbc:sqlite:Transfer_Employee.db");
+                CreateTables();
+                }
+
+            }
+
         return conn;
-        //sd
     }
 
     public static void CreateTables(){

@@ -11,6 +11,9 @@ public class OrderInterface extends AInterface {
     public OrderInterface(Supplier_Manger supplier_manger) {
         this.orderManger = new OrderManger();
         this.supplier_manger = supplier_manger;
+        if(supplier_manger==null){
+            this.supplier_manger=new Supplier_Manger();
+        }
         this.calnd(this.orderManger);
 
 
@@ -149,10 +152,13 @@ public class OrderInterface extends AInterface {
                     int store_number1 = Integer.parseInt(store_numberInput1);
                     System.out.println("number of days until new cycle:");
                     String days = scanner.next();
-                    days = checkNumber(store_numberInput1);
+                    days = checkNumber(days);
                     int days1 = Integer.parseInt(days);
                     System.out.println("Supplier id:");
                     String supplier_id = scanner.next();
+
+                    supplier_manger.update_suppliers();
+
                     Supplier supplier1 = supplier_manger.get_supplier_by_id(supplier_id);
                     while (true) {
                         System.out.println("1.add item to list");
@@ -200,6 +206,7 @@ public class OrderInterface extends AInterface {
                             break;
                         }
                     }
+                    break;
 
                 case 7:
                     System.out.println("change period_order");
@@ -271,6 +278,7 @@ public class OrderInterface extends AInterface {
 
                         }
                     }
+                    break;
 
 
                 case 8:

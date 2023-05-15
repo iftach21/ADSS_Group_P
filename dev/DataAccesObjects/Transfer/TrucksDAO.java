@@ -97,7 +97,7 @@ public class TrucksDAO {
             }
             else
             {
-                System.out.println("No truck found with licenseNumber " + licenseNumber);
+                //System.out.println("No truck found with licenseNumber " + licenseNumber);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -134,10 +134,10 @@ public class TrucksDAO {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No truck found with ID " + truck.getLicenseNumber() + " to update");
+                //System.out.println("No truck found with ID " + truck.getLicenseNumber() + " to update");
             } else {
                 updateCache(truck);
-                System.out.println("Truck with ID " + truck.getLicenseNumber() + " updated successfully.");
+                //System.out.println("Truck with ID " + truck.getLicenseNumber() + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -192,10 +192,10 @@ public class TrucksDAO {
             stmt.setInt(1, licenseNumber);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No Truck found with ID " + licenseNumber);
+                //System.out.println("No Truck found with ID " + licenseNumber);
             } else
             {
-                System.out.println("Truck with ID " + licenseNumber + " deleted successfully");
+                //System.out.println("Truck with ID " + licenseNumber + " deleted successfully");
                 deleteFromCache(licenseNumber);
                 TransferTrucksDAO.getInstance().deleteAllByLicenseNumber(licenseNumber);
             }
@@ -247,9 +247,9 @@ public class TrucksDAO {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Truck");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Table is empty");
+                //System.out.println("Table is empty");
             } else {
-                System.out.println("Table deleted successfully");
+                //System.out.println("Table deleted successfully");
                 TruckList.clear();
             }
         } catch (SQLException e) {

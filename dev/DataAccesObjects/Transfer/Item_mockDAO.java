@@ -42,7 +42,7 @@ public class Item_mockDAO {
                 item_mockToReturn = this.gettingNewItem_mock(rs,catalogNum);
                 this.ItemList.add(item_mockToReturn);
             } else {
-                System.out.println("No item found with catalog num " + catalogNum);
+                //System.out.println("No item found with catalog num " + catalogNum);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -67,9 +67,9 @@ public class Item_mockDAO {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No item found with catalog num " + item_mock.getCatalogNum() + " to update.");
+                //System.out.println("No item found with catalog num " + item_mock.getCatalogNum() + " to update.");
             } else {
-                System.out.println("item with catalog num " + item_mock.getCatalogNum() + " updated successfully.");
+                //System.out.println("item with catalog num " + item_mock.getCatalogNum() + " updated successfully.");
                 updateCache(item_mock);
             }
         } catch (Exception e) {
@@ -121,9 +121,9 @@ public class Item_mockDAO {
             stmt.setString(1, catalogNum);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No item found with catalog num " + catalogNum);
+                //System.out.println("No item found with catalog num " + catalogNum);
             } else {
-                System.out.println("Item with catalog num " + catalogNum + " deleted successfully");
+                //System.out.println("Item with catalog num " + catalogNum + " deleted successfully");
                 deleteFromCache(catalogNum);
                 TransferItemsDAO.getInstance().deleteAllByCatalogNum(catalogNum);
             }
@@ -176,9 +176,9 @@ public class Item_mockDAO {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Item_Mock");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Table is empty");
+                //System.out.println("Table is empty");
             } else {
-                System.out.println("Table deleted successfully");
+                //System.out.println("Table deleted successfully");
                 ItemList.clear();
             }
         } catch (SQLException e) {

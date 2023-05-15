@@ -115,7 +115,7 @@ class TransferTests {
                 "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);
 
         //create the transfer
-        this.testTransfer = new Transfer(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20), 123456, "Arnon", site1,destinations, orderItems1, 0, 0);
+        this.testTransfer = new Transfer(LocalDate.now().plusDays(10), LocalTime.now().plusHours(10), LocalDate.now().plusDays(20), LocalTime.now().plusHours(20), 123456, "Arnon", site1,destinations, orderItems1, 0, 0, 8735);
         testTransfer.addToDAO(orderItems1, destinations);
         truck1.addToDAO(testTransfer.getTransferId());
     }

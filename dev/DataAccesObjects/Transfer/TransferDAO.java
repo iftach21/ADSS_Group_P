@@ -127,9 +127,8 @@ public class TransferDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE Transfer SET dateOfTransfer=?, leavingTime=?, arrivingDate=?, arrivingTime=?, truckLicenseNumber=?, driverName=?, sourceId=?, weightInSource=? WHERE transferId=?";
+            String sql = "UPDATE Transfer SET dateOfTransfer=?, leavingTime=?, arrivingDate=?, arrivingTime=?, truckLicenseNumber=?, driverName=?, sourceId=?, weightInSource=?, driverId=? WHERE transferId=?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(9, transfer.getTransferId());
             stmt.setString(1, transfer.getDateOfTransfer().toString());
             stmt.setString(2, transfer.getLeavingTime().toString());
             stmt.setString(3, transfer.getArrivingDate().toString());
@@ -138,6 +137,8 @@ public class TransferDAO {
             stmt.setString(6, transfer.getDriverName());
             stmt.setInt(7, transfer.getSource().getSiteId());
             stmt.setInt(8, transfer.getWeightInSource());
+            stmt.setInt(9, transfer.getDriverId());
+            stmt.setInt(10, transfer.getTransferId());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -165,8 +166,8 @@ public class TransferDAO {
     public void add(Transfer transfer){
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT or REPLACE INTO Transfer (transferId, dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, sourceId, weightInSource) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT or REPLACE INTO Transfer (transferId, dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, sourceId, weightInSource, driverId) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sql);
 
@@ -179,6 +180,8 @@ public class TransferDAO {
             stmt.setString(7, transfer.getDriverName());
             stmt.setInt(8, transfer.getSource().getSiteId());
             stmt.setInt(9, transfer.getWeightInSource());
+            stmt.setInt(10, transfer.getDriverId());
+
             stmt.executeUpdate();
             TransferList.add(transfer);
         } catch (Exception e) {
@@ -251,6 +254,7 @@ public class TransferDAO {
         String driverName = rs.getString("driverName");
         int sourceId = rs.getInt("sourceId");
         int weightAtSource = rs.getInt("weightInSource");
+        int driverId = rs.getInt("driverId");
 
         Site site = SiteDAO.getInstance().get(sourceId);
 
@@ -263,7 +267,7 @@ public class TransferDAO {
         Map<Site, Integer> transferDestination = TransferDestinationsDAO.getInstance().get(transferId);
         Map<Site, Map<Item_mock, Integer>> transferOrderItems = TransferItemsDAO.getInstance().get(transferId);
 
-        Transfer transfer = new Transfer(dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, site, transferDestination, transferOrderItems, transferId, weightAtSource);
+        Transfer transfer = new Transfer(dateOfTransfer, leavingTime, arrivingDate, arrivingTime, truckLicenseNumber, driverName, site, transferDestination, transferOrderItems, transferId, weightAtSource, driverId);
 
         return transfer;
     }

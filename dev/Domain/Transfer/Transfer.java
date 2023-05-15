@@ -24,6 +24,7 @@ public class Transfer {
     private LocalTime _arrivingTime;
     private int _truckLicenseNumber;
     private String _driverName;
+    private int _driverId;
     private Site _source;
     private int _weightAtSource;
     private final TransferDestinationsDAO _transferDestinationsDAO;
@@ -31,13 +32,14 @@ public class Transfer {
     private List<Site> _destinations;
     //private Map<Site, Map<Item_mock, Integer>> _orderItems;
 
-    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, Map<Site, Integer> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId, int weightAtSource) throws SQLException {
+    public Transfer(LocalDate dateOfTransfer, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, int truck_LicenseNumber, String driverName, Site source, Map<Site, Integer> destinations, Map<Site, Map<Item_mock, Integer>> orderItems, int transferId, int weightAtSource, int driverId) throws SQLException {
         this._dateOfTransfer = dateOfTransfer;
         this._leavingTime = leavingTime;
         this._arrivingDate = arrivingDate;
         this._arrivingTime = arrivingTime;
         this._truckLicenseNumber = truck_LicenseNumber;
         this._driverName = driverName;
+        this._driverId = driverId;
         this._source = source;
         this._weightAtSource = weightAtSource; //-1 if no weight
         this._transferId = transferId;
@@ -357,5 +359,9 @@ public class Transfer {
         return _weightAtSource;
     }
 
+    public int getDriverId()
+    {
+        return _driverId;
+    }
 }
 

@@ -13,8 +13,8 @@ public class InventoryController {
     private ReportItemsMapper reportItemsMapper;
     private OrderManger orderManger;
     private Supplier_Manger supplierManger;
-    private static final long DELAY = TimeUnit.DAYS.toMillis(0);
-    private static final long PERIOD = TimeUnit.DAYS.toMillis(2);
+    private static final long DELAY = (0);
+    private static final long PERIOD = 1000*10;
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();

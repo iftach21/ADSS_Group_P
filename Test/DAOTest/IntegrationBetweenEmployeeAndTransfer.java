@@ -85,7 +85,7 @@ public class IntegrationBetweenEmployeeAndTransfer {
 
     @AfterEach
     void tearDown() {
-       Connection.DeleteRows();
+        Connection.DeleteRows();
     }
 
 

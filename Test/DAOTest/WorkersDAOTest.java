@@ -1,10 +1,12 @@
 package DAOTest;
 
+import DataAccesObjects.Connection;
 import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.Workers;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +31,10 @@ public class WorkersDAOTest {
 
         this.w2 = new Driver(2,"iftach","lotsofmoney",
                 "23.2.23",90,12345,"student",1234,TempLevel.cold,weightType.heavyWeight);
+    }
+    @AfterEach
+    void tearDown() {
+        Connection.DeleteRows();
     }
 
     @Test

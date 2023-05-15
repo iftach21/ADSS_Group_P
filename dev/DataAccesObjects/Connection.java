@@ -250,7 +250,7 @@ public class Connection {
         }
     }
 
-    public static void DeleteRows(){
+    public static Connection DeleteRows(){
         try {
             var c =   getConnectionToDatabase();
             extracted(c, "weekly_shift");
@@ -266,6 +266,7 @@ public class Connection {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     private static void extracted(java.sql.Connection c, String name) throws SQLException {

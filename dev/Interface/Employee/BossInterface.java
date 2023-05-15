@@ -1,9 +1,7 @@
 package Interface.Employee;
 
 import Domain.Employee.WeeklyShiftAndWorkersManager;
-import Domain.Enums.TempTypeFactory;
-import Domain.Enums.WeightTypeFactory;
-import Domain.Enums.WindowTypeCreater;
+import Domain.Enums.*;
 import Interface.AInterface;
 import Interface.ExitExeption;
 
@@ -26,9 +24,11 @@ public class BossInterface extends AInterface {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
     public void logIn() throws Exception {
+        //this.startup();
         //===============================
         //    login confirmation
         //===============================
+
 
 
         //scans the username and password:

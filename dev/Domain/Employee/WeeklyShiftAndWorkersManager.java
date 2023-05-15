@@ -1,5 +1,6 @@
 package Domain.Employee;
 
+import DataAccesObjects.Connection;
 import DataAccesObjects.Employee.WeeklyShiftDAO;
 import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Enums.TempLevel;
@@ -228,6 +229,10 @@ public class WeeklyShiftAndWorkersManager {
         for(WeeklyShift ws : weeklyShiftlist){
            ws.checkIfMissingSomeThing(day + 1);
         }
+    }
+
+    public void deleteAllRows() throws SQLException {
+        Connection.DeleteRows();
     }
 
 

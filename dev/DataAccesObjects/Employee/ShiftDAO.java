@@ -171,8 +171,6 @@ public class ShiftDAO {
             stmt.executeUpdate();
 
             stmt.close();
-            System.out.println("New UPDATE");
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

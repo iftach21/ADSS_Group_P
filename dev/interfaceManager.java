@@ -714,4 +714,16 @@ public class interfaceManager extends AInterface {
             }
         }
     }
+
+    public void insertSpecificItem(specificItem currentItem) {
+        Inventory.insertNewSpecificToMapper(currentItem);
+    }
+
+    public void insertCategory(Category currentCat) {
+        Inventory.addCategoryToMapper(currentCat.getCategoryName());
+    }
+
+    public void insertSubCat(Category currentCat, subCategory currentSub) {
+        Inventory.addSubCatToMapper(currentCat.getCategoryName(), currentSub);
+    }
 }

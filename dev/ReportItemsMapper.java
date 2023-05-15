@@ -205,6 +205,22 @@ public class ReportItemsMapper implements DAO<Report>{
 
     }
 
+    public void deleteAll() throws SQLException {
+        getConnection();
+        String sql = "DELETE FROM " + "ReportItems";
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void delete(Report report) throws SQLException {
         String sql1 = "DELETE FROM ReportItems WHERE reportNum = ?";

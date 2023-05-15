@@ -87,6 +87,9 @@ public class Main {
 
                     Item item4 = new Item("Chicken", "400", 2.0, "Meat", TempLevel.cold, "Fresh Farms");
 
+                    item1.setMinQuantity(10);
+                    item2.setMinQuantity(50);
+
                     //supplier manger to insert the supplier
                     Supplier_Manger masupplier=new Supplier_Manger();
 
@@ -124,6 +127,8 @@ public class Main {
                     masupplier.delte_all();
                     OrderManger orderManger=new OrderManger();
                     orderManger.delte_db();
+                    interfaceManager interfaceManager = new interfaceManager();
+                    interfaceManager.delete_db();
                     break;
 
 

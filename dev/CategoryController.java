@@ -104,4 +104,12 @@ public class CategoryController {
             }
         }
     }
+
+    public void deleteCatMapper() {
+        try {
+            catMap.deleteAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

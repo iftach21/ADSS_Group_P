@@ -70,16 +70,7 @@ public class Period_Order extends Order {
 
 
     //lower the days to the period orders when the day pass
-    public int lower_days(){
-        if(this.day_left!=0){
-        this.day_left=this.day_left-1;
-        return 0;}
-        else {
-            this.day_left=this.days_to_cycle;
-            return 1;}
 
-
-    }
     //to check if the period order can be updated
     public boolean can_update(){
         if(this.day_left>1){
@@ -92,6 +83,8 @@ public class Period_Order extends Order {
     public void setOrdernumber(int sum){
         ordernumber=sum+1;
     }
+
+
 
 
 }

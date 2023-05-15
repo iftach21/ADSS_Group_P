@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class InventoryController {
     private CategoryController CategoryControl;
@@ -10,6 +11,10 @@ public class InventoryController {
     private specificItemMapper specificItemMapper;
     private ReportMapper reportMapper;
     private ReportItemsMapper reportItemsMapper;
+    private OrderManger orderManger;
+    private Supplier_Manger supplierManger;
+    private static final long DELAY = TimeUnit.DAYS.toMillis(0);
+    private static final long PERIOD = TimeUnit.DAYS.toMillis(2);
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
@@ -20,6 +25,8 @@ public class InventoryController {
         this.specificItemMapper = new specificItemMapper();
         this.reportMapper = new ReportMapper();
         this.reportItemsMapper = new ReportItemsMapper();
+        this.orderManger = new OrderManger();
+        this.supplierManger= new Supplier_Manger();
     }
 
     //Category Mapper
@@ -597,6 +604,35 @@ public class InventoryController {
         }
     }
 
+    public void checkForShortageTask(){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    ShortageCheck();
+                }
+                catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }, DELAY, PERIOD);
+    }
 
+    private void ShortageCheck() throws SQLException{
+        Map ShortageOrderList = new HashMap<Item,Integer>();
+        for(Item item: itemMapper.findAll())
+        {
+            int specificAmount = 0;
+            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
+            {
+                specificAmount++;
+            }
+            if (specificAmount < item.getMinQuantity()){
+                ShortageOrderList.put(item, item.getMinQuantity() - specificAmount);
+            }
+        }
+        orderManger.assing_Orders_to_Suppliers(ShortageOrderList,supplierManger,1);
+    }
 
 }

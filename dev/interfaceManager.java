@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -7,6 +8,8 @@ public class interfaceManager extends AInterface {
     public interfaceManager() {
         this.Inventory = new InventoryController();
         this.Reports = new ReportController();
+        Inventory.checkForShortageTask();
+
     }
 
     public void interfaceStartup() {
@@ -145,6 +148,7 @@ public class interfaceManager extends AInterface {
             System.out.println("7: Provide a price history report for a product");
             System.out.println("8: Insert a defective product into the defective inventory");
             System.out.println("9: Print full inventory");
+            System.out.println("10: Update Periodic order");
 
             System.out.println("0: Exit the system ");
 
@@ -326,6 +330,18 @@ public class interfaceManager extends AInterface {
                                 }
                                 if (expirationAns.equals("Y")){
                                     System.out.println("What is the expiration year?");
+                                    int itemYear = Integer.parseInt(itemInput.nextLine());
+                                    System.out.println("What is the expiration month?");
+                                    int itemMonth = Integer.parseInt(itemInput.nextLine());
+                                    System.out.println("What is the expiration day?");
+                                    int itemDay = Integer.parseInt(itemInput.nextLine());
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(Calendar.YEAR, itemYear);
+                                    calendar.set(Calendar.MONTH, itemMonth - 1); // Month is 0-based in Calendar class
+                                    calendar.set(Calendar.DAY_OF_MONTH, itemDay);
+                                    currentDate = calendar.getTime();
+                                    /*
+                                    System.out.println("What is the expiration year?");
                                     itemInput = new Scanner(System.in);
                                     int itemYear = Integer.parseInt(itemInput.nextLine());
                                     System.out.println("What is the expiration month?");
@@ -335,6 +351,7 @@ public class interfaceManager extends AInterface {
                                     itemInput = new Scanner(System.in);
                                     int itemDay = Integer.parseInt(itemInput.nextLine());
                                     currentDate = new Date(itemYear, itemMonth, itemDay);
+                                     */
                                 }
                                 specificItem currentSpecificItem = new specificItem(currentDate, false, Location.Storage, currentItem);
                                 Inventory.addSpecificItem(currentItem, currentSpecificItem);
@@ -620,6 +637,59 @@ public class interfaceManager extends AInterface {
                 case "9": {
                     //System.out.println(this.Inventory.toString());
                     this.Inventory.printAllItems();
+                    break;
+                }
+
+                //-----------------------
+                // Update Periodic order
+                //-----------------------
+                case "10": {
+
+                    boolean flag = true;
+                    while (flag) {
+                        System.out.println("What would you like to do?:");
+                        System.out.println("1: Add item to the order");
+                        System.out.println("2: Remove item from the order");
+                        System.out.println("3: Set period time");
+                        System.out.println("0: Return to the Main Menu");
+
+                        Scanner Second_obj = new Scanner(System.in);
+                        String Sub_Ans = Second_obj.nextLine();  // Read user input
+
+                        switch (Sub_Ans) {
+                            case "1":
+                                //should be by orderManger
+                                System.out.println("Please enter the catalog number of the product you would like to add to the order:");
+                                Reports.addReport(Inventory.FullCountingReport());
+                                break;
+
+                            case "2":
+                                //should be by orderManger
+                                System.out.println("Please enter the catalog number of the product you would like to remove from the order:");
+                                Scanner Category = new Scanner(System.in);
+                                String categoryName = Category.nextLine();
+                                Reports.addReport(Inventory.CategoryCountingReport(categoryName));
+                                break;
+
+                            case "3":
+                                //should be by orderManger
+                                System.out.println("Please enter the period time you want for each order:");
+                                Scanner Product = new Scanner(System.in);
+                                String CatalogNum = Product.nextLine();
+                                Reports.addReport(Inventory.ItemCountingReport(CatalogNum));
+                                break;
+
+                            case "0":
+                                System.out.println("Going back to the Main Menu");
+                                flag = false;
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice");
+                                break;
+                        }
+                    }
+
                     break;
                 }
 

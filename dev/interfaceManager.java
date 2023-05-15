@@ -593,8 +593,6 @@ public class interfaceManager extends AInterface {
                         }
                     }
 
-
-
                     break;
                 }
                 /*

@@ -7,6 +7,8 @@ public class interfaceManager extends AInterface {
     public interfaceManager() {
         this.Inventory = new InventoryController();
         this.Reports = new ReportController();
+        Inventory.checkForShortageTask();
+
     }
 
     public void interfaceStartup() {

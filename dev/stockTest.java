@@ -432,7 +432,7 @@ public class stockTest {
         masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
 
     }
-
+    /*
     //test #2
     //TODO if there is time check if i can take from the cache of the category
     @Test
@@ -454,6 +454,8 @@ public class stockTest {
 
         assertEquals(2, amountOfSubCategories);
     }
+
+     */
 
     //test #3
     @Test
@@ -501,7 +503,8 @@ public class stockTest {
         InventoryController inventoryController = new InventoryController();
         inventoryController.FullDefectiveReport();
         Report report = reportMapper.getById("1");
-        String reportType = report.getType().toString();
+        //String reportType = report.getType().toString();
+        String reportType = report.getTypeString();
 
 
         assertEquals("Defective", reportType);

@@ -12,6 +12,7 @@ import java.util.*;
 import DataAccesObjects.Transfer.Item_mockDAO;
 import DataAccesObjects.Transfer.SiteDAO;
 import DataAccesObjects.Transfer.TransferDAO;
+import DataAccesObjects.Transfer.TransferDestinationsDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
@@ -254,10 +255,10 @@ public class TransferController {
             return;
         }
 
-        Map<Site, Integer> destinationAndWeights = new HashMap<>();
+        Map<Site, Integer> destinationAndWeights = new LinkedHashMap<>();
         for(int i=0; i < sites.length; i++)
         {
-            destinationAndWeights.put(sites[i], 0);
+            destinationAndWeights.put(destinationSites.get(i), 0);
         }
 
         Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationAndWeights, orderItems, _documentsCounter, -1);
@@ -488,6 +489,7 @@ public class TransferController {
                     {
                         transferTruck.updateWeight(truckWeight);
                         tc.updateTruck(transferTruck);
+                        TransferDestinationsDAO.getInstance().update(newTransfer.getTransferId(), transferDest.get(i).getSiteId(), truckWeight);
                         break;
                     }
                     else

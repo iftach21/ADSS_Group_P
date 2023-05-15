@@ -1,3 +1,4 @@
+import org.sqlite.SQLiteErrorCode;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -124,28 +125,41 @@ public class specificItemMapper {
         PreparedStatement stmt;
         getConnection();
 
-        try {
-            stmt = conn.prepareStatement("INSERT INTO specific_items (name, catalog_number, location, expiration_date, defected, serial_number) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, item.getSerialNumberString());
-            stmt.setString(2, item.getCatalogNum());
-            stmt.setString(3, item.getLocationString());
-            if (item.getDate() != null) {
-                stmt.setDate(4, new java.sql.Date(item.getDate().getTime()));
-            } else {
-                stmt.setDate(4, null);
+        String itemName = item.getSerialNumberString();
+        boolean nameConflict = true;
+        int suffix = 1;
+
+        while (nameConflict) {
+            try {
+                stmt = conn.prepareStatement("INSERT INTO specific_items (name, catalog_number, location, expiration_date, defected, serial_number) VALUES (?, ?, ?, ?, ?, ?)");
+                stmt.setString(1, itemName);
+                stmt.setString(2, item.getCatalogNum());
+                stmt.setString(3, item.getLocationString());
+                if (item.getDate() != null) {
+                    stmt.setDate(4, new java.sql.Date(item.getDate().getTime()));
+                } else {
+                    stmt.setDate(4, null);
+                }
+                stmt.setBoolean(5, item.getisDefected());
+                stmt.setInt(6, item.getserialNumber());
+                stmt.executeUpdate();
+                nameConflict = false;
+                cache.clear(); // clear cache since it's outdated
+            } catch (SQLException e) {
+                if (e.getErrorCode() == SQLiteErrorCode.SQLITE_CONSTRAINT.code && e.getMessage().contains("UNIQUE constraint failed: specific_items.name")) {
+                    itemName = item.getSerialNumberString() + "+" + suffix;
+                    suffix++;
+                } else {
+                    e.printStackTrace();
+                    break;
+                }
             }
-            stmt.setBoolean(5, item.getisDefected());
-            stmt.setInt(6, item.getserialNumber());
-            stmt.executeUpdate();
-            cache.clear(); // clear cache since it's outdated
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 

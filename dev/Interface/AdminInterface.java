@@ -67,50 +67,117 @@ public class AdminInterface extends AInterface {
 
     }
     public void startup() throws SQLException {
-        controller.addNewDriver(111,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234, TempLevel.cold, weightType.lightWeight);
 
-        controller.addNewDriver(222,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
+        //drivers:
+        controller.addNewDriver(111,"Moshe","lotsofmoney","23.2.23",90,12345,"student",1234, TempLevel.cold, weightType.lightWeight);
 
-        controller.addNewDriver(333,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
+        controller.addNewDriver(222,"Yaakov","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
 
-        controller.addNewDriver(444,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
+        controller.addNewDriver(333,"Gilad","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
 
-        controller.addemployee(555,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+        controller.addNewDriver(444,"Shimon","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
 
-        controller.addemployee(666,"iftach","lotsofmoney", "23.2.23",90,12345,"student",1234);
+        controller.addNewDriver(888,"Bracha","lotsofmoney","23.2.23",90,12345,"student",1234, TempLevel.cold, weightType.lightWeight);
 
-        //creating weeklyshift for the stokes:
+        controller.addNewDriver(999,"Tomer","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.mediumWeight);
+
+        controller.addNewDriver(1212,"iftach","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.frozen,weightType.heavyWeight);
+
+        controller.addNewDriver(1313,"shani","lotsofmoney","23.2.23",90,12345,"student",1234,TempLevel.regular,weightType.lightWeight);
+
+
+        //stoke workers:
+        controller.addemployee(555,"Posa","lotsofmoney", "23.2.23",90,12345,"student",1234);
+
+        controller.addemployee(666,"Yishai","lotsofmoney", "23.2.23",90,12345,"student",1234);
+
+        controller.addemployee(1919,"Nimi","lotsofmoney", "23.2.23",90,12345,"student",1234);
+
+        controller.addemployee(2020,"Tooli","lotsofmoney", "23.2.23",90,12345,"student",1234);
+
+
+        //creating weeklyshift:
         controller.createnewweeklyshift(1,2024,4);
 
         controller.createnewweeklyshift(1,2024,5);
 
         controller.createnewweeklyshift(1,2024,0);
 
+        controller.createnewweeklyshift(1,2024,9);
+
+        controller.createnewweeklyshift(1,2024,10);
+
+        controller.createnewweeklyshift(1,2024,14);
+
+        controller.createnewweeklyshift(1,2024,15);
+
+
 
         // all of the data is for week num 1 and year 1:
-
-        //stokes will be available for day1, day 2 on day shift:
+        //stokes will be available for shipment:
+        //super 4:
         controller.addtoexistingweeklyshift(1,2024,4, WindowType.day1,555,2);
         controller.addtoexistingweeklyshift(1,2024,4,WindowType.day1,666,2);
 
         controller.addtoexistingweeklyshift(1,2024,4, WindowType.day2,555,2);
         controller.addtoexistingweeklyshift(1,2024,4,WindowType.day2,666,2);
 
+        //super 5:
         controller.addtoexistingweeklyshift(1,2024,5, WindowType.day3,555,2);
         controller.addtoexistingweeklyshift(1,2024,5,WindowType.day3,666,2);
 
         controller.addtoexistingweeklyshift(1,2024,5, WindowType.day4,555,2);
         controller.addtoexistingweeklyshift(1,2024,5,WindowType.day4,666,2);
 
+        //super 9:
+        controller.addtoexistingweeklyshift(1,2024,9, WindowType.day4,1919,2);
+        controller.addtoexistingweeklyshift(1,2024,9,WindowType.day3,2020,2);
+
+        //super 10:
+        controller.addtoexistingweeklyshift(1,2024,10,WindowType.day4,2020,2);
+        controller.addtoexistingweeklyshift(1,2024,10, WindowType.day1,1919,2);
+
+        //super 14:
+        controller.addtoexistingweeklyshift(1,2024,14, WindowType.day2,2020,2);
+        controller.addtoexistingweeklyshift(1,2024,14,WindowType.day2,1919,2);
+
+        //super 15:
+        controller.addtoexistingweeklyshift(1,2024,15,WindowType.day1,2020,2);
+        controller.addtoexistingweeklyshift(1,2024,15, WindowType.day3,1919,2);
+
+
+
+
+
+
         //available for drivers:
-        //for day 3: all of them
+        //day 1:
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day1,111,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day1,222,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day1,1212,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day1,1313,7);
+
+        //day 2
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day2,888,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day2,999,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day2,1212,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day2,1313,7);
+
+        //day 3:
         controller.addtoexistingweeklyshift(1,2024,0, WindowType.day3,111,7);
         controller.addtoexistingweeklyshift(1,2024,0, WindowType.day3,222,7);
         controller.addtoexistingweeklyshift(1,2024,0, WindowType.day3,333,7);
         controller.addtoexistingweeklyshift(1,2024,0, WindowType.day3,444,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day3,888,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day3,999,7);
 
-        // for day 1 just driver 1 and 2.
-        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day1,111,7);
-        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day1,222,7);
+        //day 4
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day4,1212,7);
+        controller.addtoexistingweeklyshift(1,2024,0, WindowType.day4,1313,7);
+
+
+
+
+
     }
 }

@@ -32,7 +32,6 @@ public class ShiftDAOTest {
         this.w1 =new Workers(1,"iftach","lotsofmoney",
                 "23.2.23",90,12345,"student",1234);
         w1.addprof(0);
-
         DAOWorkers.add(w1);
 
 

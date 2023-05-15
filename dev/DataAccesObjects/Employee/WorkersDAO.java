@@ -147,40 +147,41 @@ public class WorkersDAO {
 
     public void add(Workers w){
         try {
-            String sql = "INSERT INTO workers (name, contract, start_date, wage, phoneNUM, personalinfo, bankNum, pro0, pro1, pro2, pro3, pro4, pro5, pro6, weightType, TempType, day1, day2, day3, day4, day5, day6, day7, night1, night2, night3, night4, night5, night6, night7) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO workers (id, name, contract, start_date, wage, phoneNUM, personalinfo, bankNum, pro0, pro1, pro2, pro3, pro4, pro5, pro6, weightType, TempType, day1, day2, day3, day4, day5, day6, day7, night1, night2, night3, night4, night5, night6, night7) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, w.getName());
-            stmt.setString(2, w.getContract());
-            stmt.setString(3, w.getStart_date());
-            stmt.setInt(4, w.getWage());
-            stmt.setInt(5, w.getPhoneNUM());
-            stmt.setString(6, w.getPersonalinfo());
-            stmt.setInt(7, w.getBankNum());
-            stmt.setBoolean(8, w.getPro()[0]);
-            stmt.setBoolean(9, w.getPro()[1]);
-            stmt.setBoolean(10, w.getPro()[2]);
-            stmt.setBoolean(11, w.getPro()[3]);
-            stmt.setBoolean(12, w.getPro()[4]);
-            stmt.setBoolean(13, w.getPro()[5]);
-            stmt.setBoolean(14, w.getPro()[6]);
-            stmt.setString(15, w.getWeightType());
-            stmt.setString(16, w.getTempType());
-            stmt.setBoolean(17, w.canIworkat(day1));
-            stmt.setBoolean(18, w.canIworkat(day2));
-            stmt.setBoolean(19, w.canIworkat(day3));
-            stmt.setBoolean(20, w.canIworkat(day4));
-            stmt.setBoolean(21, w.canIworkat(day5));
-            stmt.setBoolean(22, w.canIworkat(day6));
-            stmt.setBoolean(23, w.canIworkat(day7));
-            stmt.setBoolean(24, w.canIworkat(night1));
-            stmt.setBoolean(25, w.canIworkat(night2));
-            stmt.setBoolean(26, w.canIworkat(night3));
-            stmt.setBoolean(27, w.canIworkat(night4));
-            stmt.setBoolean(28, w.canIworkat(night5));
-            stmt.setBoolean(29, w.canIworkat(night6));
-            stmt.setBoolean(30, w.canIworkat(night7));
+            stmt.setInt(1, w.getId());
+            stmt.setString(2, w.getName());
+            stmt.setString(3, w.getContract());
+            stmt.setString(4, w.getStart_date());
+            stmt.setInt(5, w.getWage());
+            stmt.setInt(6, w.getPhoneNUM());
+            stmt.setString(7, w.getPersonalinfo());
+            stmt.setInt(8, w.getBankNum());
+            stmt.setBoolean(9, w.getPro()[0]);
+            stmt.setBoolean(10, w.getPro()[1]);
+            stmt.setBoolean(11, w.getPro()[2]);
+            stmt.setBoolean(12, w.getPro()[3]);
+            stmt.setBoolean(13, w.getPro()[4]);
+            stmt.setBoolean(14, w.getPro()[5]);
+            stmt.setBoolean(15, w.getPro()[6]);
+            stmt.setString(16, w.getWeightType());
+            stmt.setString(17, w.getTempType());
+            stmt.setBoolean(18, w.canIworkat(day1));
+            stmt.setBoolean(19, w.canIworkat(day2));
+            stmt.setBoolean(20, w.canIworkat(day3));
+            stmt.setBoolean(21, w.canIworkat(day4));
+            stmt.setBoolean(22, w.canIworkat(day5));
+            stmt.setBoolean(23, w.canIworkat(day6));
+            stmt.setBoolean(24, w.canIworkat(day7));
+            stmt.setBoolean(25, w.canIworkat(night1));
+            stmt.setBoolean(26, w.canIworkat(night2));
+            stmt.setBoolean(27, w.canIworkat(night3));
+            stmt.setBoolean(28, w.canIworkat(night4));
+            stmt.setBoolean(29, w.canIworkat(night5));
+            stmt.setBoolean(30, w.canIworkat(night6));
+            stmt.setBoolean(31, w.canIworkat(night7));
             stmt.executeUpdate();
 
             cache.add(w);

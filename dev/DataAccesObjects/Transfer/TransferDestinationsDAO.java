@@ -2,6 +2,7 @@ package DataAccesObjects.Transfer;
 
 import Domain.Transfer.Site;
 import Domain.Transfer.Transfer;
+import Domain.Transfer.Truck;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -226,6 +227,36 @@ public class TransferDestinationsDAO {
         }
     }
 
+    public void update(int transferId, int siteId, int weight) {
+        PreparedStatement stmt = null;
 
+        try {
+            String sql = "UPDATE TransferDestinations SET weightInSite=? WHERE transferId=? AND siteId=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, weight);
+            stmt.setInt(2, transferId);
+            stmt.setInt(3, siteId);
+
+            int rowsAffected = stmt.executeUpdate();
+            updateCache();
+
+            if (rowsAffected == 0) {
+                System.out.println("No transfer found with ID " + transferId + " to update.");
+            } else {
+                System.out.println("transfer with ID " + transferId + " updated successfully.");
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+        }
+    }
 }
 

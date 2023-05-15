@@ -12,6 +12,7 @@ import java.util.*;
 import DataAccesObjects.Transfer.Item_mockDAO;
 import DataAccesObjects.Transfer.SiteDAO;
 import DataAccesObjects.Transfer.TransferDAO;
+import DataAccesObjects.Transfer.TransferDestinationsDAO;
 import Domain.Employee.Driver;
 import Domain.Employee.DriverController;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
@@ -37,6 +38,17 @@ public class TransferController {
         _documentsCounter = 0;
         this._ordersQueue = new LinkedList<>();
         this._orderDestinationSiteIdQueue = new LinkedList<>();
+        this._documentsCounter = getDocumentId();
+    }
+
+    private int getDocumentId() throws SQLException {
+        Map<Integer, Transfer> transfers = TransferDAO.getInstance().getAllTransfers();
+        int max = 0;
+        for (Integer transferId : transfers.keySet()) {
+            if (transferId > max)
+                max = transferId;
+        }
+        return max+1;
     }
 
     public static TransferController getInstance() throws SQLException {
@@ -254,13 +266,13 @@ public class TransferController {
             return;
         }
 
-        Map<Site, Integer> destinationAndWeights = new HashMap<>();
+        Map<Site, Integer> destinationAndWeights = new LinkedHashMap<>();
         for(int i=0; i < sites.length; i++)
         {
-            destinationAndWeights.put(sites[i], 0);
+            destinationAndWeights.put(destinationSites.get(i), 0);
         }
 
-        Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationAndWeights, orderItems, _documentsCounter, -1);
+        Transfer newTransfer = new Transfer(leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck.getLicenseNumber(), chosenDriver.getName(), sourceSite, destinationAndWeights, orderItems, _documentsCounter, -1, chosenDriver.getId());
         newTransfer.addToDAO(orderItems, destinationAndWeights);
         transfersDAO.add(newTransfer);
 
@@ -488,6 +500,7 @@ public class TransferController {
                     {
                         transferTruck.updateWeight(truckWeight);
                         tc.updateTruck(transferTruck);
+                        TransferDestinationsDAO.getInstance().update(newTransfer.getTransferId(), transferDest.get(i).getSiteId(), truckWeight);
                         break;
                     }
                     else

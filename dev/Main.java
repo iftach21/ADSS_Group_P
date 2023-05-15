@@ -80,8 +80,12 @@ public class Main {
                 case 5:
                     //4 items to be add to the db
                     Item item1 = new Item("Apple", "100", 0.5, "Fruits", TempLevel.cold, "Green Farms");
+                    item1.addNewPrice(20, 40);
+                    item1.addNewPrice(20, 30);
 
                     Item item2 = new Item("Milk", "200", 1.0, "Dairy", TempLevel.cold, "Happy Cow Dairy");
+                    item2.addNewPrice(20, 40);
+                    item2.addNewPrice(20, 30);
 
                     Item item3 = new Item("Bread", "300", 1.0, "Bakery", TempLevel.cold, "Whole Grain Bakers");
 
@@ -91,12 +95,46 @@ public class Main {
                     item2.setMinQuantity(50);
 
                     //Dates
-                    Date dateMilk1 = new Date(2023, 10, 7);
-                    Date dateMilk2 = new Date(2024, 1, 9);
-                    Date dateMilk3 = new Date(2025, 5, 11);
-                    Date dateMilk4 = new Date(2026, 6, 13);
+                    Date date1 = new Date(2023, 10, 7);
+                    Date date2 = new Date(2024, 1, 9);
+                    Date date3 = new Date(2025, 5, 11);
+                    Date date4 = new Date(2026, 6, 13);
+
+                    //Categories
+                    Category dairyCat = new Category("Dairy");
+                    Category fruitsCat = new Category("Fruits");
+
+                    //Sub-Categories
+                    subCategory milksSub = new subCategory("Milks");
+                    subCategory applesSub = new subCategory("Apples");
 
                     //Specific Items
+                    specificItem apple1 = new specificItem(date1, false, Location.Store, item1);
+                    specificItem apple2 = new specificItem(date2, false, Location.Store, item1);
+                    specificItem apple3 = new specificItem(date3, false, Location.Store, item1);
+                    specificItem apple4 = new specificItem(date4, false, Location.Store, item1);
+                    specificItem milk1 = new specificItem(date1, false, Location.Store, item2);
+                    specificItem milk2 = new specificItem(date2, true, Location.Storage, item2);
+                    specificItem milk3 = new specificItem(date3, false, Location.Store, item2);
+                    specificItem milk4 = new specificItem(date4, true, Location.Storage, item2);
+
+                    //Stock Manager interface to insert
+                    interfaceManager interfaceManagerInsert = new interfaceManager();
+                    interfaceManagerInsert.insertSpecificItem(apple1);
+                    interfaceManagerInsert.insertSpecificItem(apple2);
+                    interfaceManagerInsert.insertSpecificItem(apple3);
+                    interfaceManagerInsert.insertSpecificItem(apple4);
+                    interfaceManagerInsert.insertSpecificItem(milk1);
+                    interfaceManagerInsert.insertSpecificItem(milk2);
+                    interfaceManagerInsert.insertSpecificItem(milk3);
+                    interfaceManagerInsert.insertSpecificItem(milk4);
+
+                    interfaceManagerInsert.insertCategory(dairyCat);
+                    interfaceManagerInsert.insertCategory(fruitsCat);
+
+                    interfaceManagerInsert.insertSubCat(dairyCat, milksSub);
+                    interfaceManagerInsert.insertSubCat(fruitsCat, applesSub);
+
 
 
                     //supplier manger to insert the supplier
@@ -132,7 +170,7 @@ public class Main {
 
 
                 case 6:
-                     masupplier=new Supplier_Manger();
+                    masupplier=new Supplier_Manger();
                     masupplier.delte_all();
                     OrderManger orderManger=new OrderManger();
                     orderManger.delte_db();

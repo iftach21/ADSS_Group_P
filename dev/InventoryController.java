@@ -426,11 +426,11 @@ public class InventoryController {
                 }
             }
             currentReport.addReportItem(item, defectiveAmount);
-            try {
-                this.reportMapper.insert(currentReport);
-            } catch (SQLException var8) {
-                throw new RuntimeException(var8);
-            }
+        }
+        try {
+            this.reportMapper.insert(currentReport);
+        } catch (SQLException var8) {
+            throw new RuntimeException(var8);
         }
         return currentReport;
     }

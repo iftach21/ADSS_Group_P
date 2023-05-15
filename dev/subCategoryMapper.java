@@ -62,6 +62,29 @@ public class subCategoryMapper {
         return subCategoryList;
     }
 
+    public subCategory getByID(String subCategoryName) {
+        getConnection();
+        String sql = "SELECT * FROM subCategories WHERE subCategoryName = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, subCategoryName);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                String categoryName = rs.getString("categoryName");
+                int amount = rs.getInt("amount");
+                return new subCategory(subCategoryName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
     public void insertSubCategory(String categoryName, subCategory subCat) {
         try {

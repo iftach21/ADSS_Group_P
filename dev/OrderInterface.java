@@ -201,16 +201,80 @@ public class OrderInterface extends AInterface {
                      if(!orderManger.contain_Period_order(id)){
                          System.out.println("id not in the system");
                      }
+
                      else {
-                         System.out.println("1.choose what you want to do:");
-                         System.out.println("2.delete period order:");
-                         System.out.println("3.add_item_to_order");
-                         System.out.println("4.remove_item");
+                         Period_Order periodOrder = orderManger.get_period_order_by_id(id);
+                         if (!orderManger.can_update_period_order(periodOrder)) {
+                             System.out.println("cant update a day before");
+                             break;
+                         }
+                         System.out.println("choose what you want to do:");
+                         System.out.println("1.delete period order:");
+                         System.out.println("2.add_item_to_order");
+                         String choice_14 = scanner.nextLine();
+                         int option_14 = 0;
+                         while (true) {
+                             try {
+                                 option_14 = Integer.parseInt(choice_14);
+                                 if (option_14 < 1 || option_14 > 7) {
+                                     System.out.println("Please enter a valid option");
+                                     choice_1 = scanner.nextLine();
+                                     continue;
+                                 }
+                                 break;
+                             } catch (Exception ignored) {
+                                 System.out.println("Please enter a valid option");
+                                 choice_1 = scanner.nextLine();
+                             }
+                         }
 
+                         switch (option_14) {
+                             case 1:
+                                 this.orderManger.delete_a_period_order(id);
+                                 break;
+                             case 2:
+                                 int op = 0;
+                                 List<Item> itemList2 = new ArrayList<>();
+                                 Supplier supplier2 = supplier_manger.get_supplier_by_id(periodOrder.getSupplier().getSupplierID());
+                                 for (Item item : supplier2.getItems().keySet()) {
+                                     if (supplier2.getItems().keySet().size() > 0) {
+                                         System.out.print(op + ".");
+                                         item.print_item();
+                                         itemList2.add(item);
+                                         op++;
+                                     }
+                                 }
+                                 System.out.println("Enter the number of the item you want to add:");
+                                 String item_numberInput = scanner.next();
+                                 item_numberInput = checkNumber(item_numberInput);
+                                 int item_number = Integer.parseInt(item_numberInput);
+                                 int count = 1;
+                                 for (Item item : itemList2) {
+                                     if (count == item_number) {
+                                         System.out.println("Enter the quantity:");
+                                         String quantityInput = scanner.next();
+                                         quantityInput = checkNumberWithDot(quantityInput);
+                                         int quantity = Integer.parseInt(quantityInput);
+                                         String id40 = "" + periodOrder.getOrderNum();
+                                         orderManger.update_add_to_period_order(id40, item, quantity, supplier2.getItems().get(item).getSecond());
+                                         break;
+                                     }
+                                     count++;
 
+                                 }
+
+                         }
                      }
 
-                 }
+
+
+
+
+
+
+
+
+
 
 
 

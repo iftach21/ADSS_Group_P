@@ -318,7 +318,19 @@ public class Supplier_Manger {
         return items;
     }
 
+    public boolean checkExistingItemCatalogNumber(String ItemCatalogNumber)
+    {
+        Set<Item> items = get_itemlist_ofallsuppliers();
 
+        for(Item item : items)
+        {
+            if(item.getCatalogNum().equals(ItemCatalogNumber))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     //update the supplier base on the data base

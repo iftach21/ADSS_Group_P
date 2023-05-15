@@ -49,7 +49,7 @@ public class SupplierInterface extends AInterface
                     case 1:
                         System.out.println("name:");
                         String name = scanner.nextLine();
-                        name = checkName(name);
+                        name = checkSupplierNameExistInTheSystemForInserting(name);
                         System.out.println("business id:");
                         String business_id = scanner.next();
                         business_id = checkBusinessId(business_id);
@@ -80,7 +80,7 @@ public class SupplierInterface extends AInterface
 
                         System.out.println("Supplier ID");
                         String id = scanner.next();
-                        id = checkNumber(id);
+                        id = checkSupplierId(id);
                         System.out.println("Contact name");
                         String contact_name = scanner.next();
                         contact_name = checkName(contact_name);
@@ -113,7 +113,7 @@ public class SupplierInterface extends AInterface
 
 
                         if (option_4 == 1) {
-                            NonDeliveringSupplier supplier = new NonDeliveringSupplier(name, business_id, paymentNum, id, con_person, null, null);
+                            NonDeliveringSupplier supplier = new NonDeliveringSupplier(name, business_id, paymentNum - 1, id, con_person, null, null);
                             supplier_manger.add_supplier(supplier);
                         } else if (option_4 == 2) {
                             System.out.println("day:");
@@ -135,7 +135,7 @@ public class SupplierInterface extends AInterface
                             }
                             WindowType day_window;
                             day_window = WindowTypeCreater.getwindowtype(dayNum);
-                            FixedDaySupplier supplier = new FixedDaySupplier(day_window, name, business_id, paymentNum, id, con_person, null, null);
+                            FixedDaySupplier supplier = new FixedDaySupplier(day_window, name, business_id, paymentNum - 1, id, con_person, null, null);
                             supplier_manger.add_supplier(supplier);
 
                         } else {
@@ -156,7 +156,7 @@ public class SupplierInterface extends AInterface
                                     day = scanner.next();
                                 }
                             }
-                            NonFixedDaySupplier supplier = new NonFixedDaySupplier(numOfDeliveryDays, name, business_id, paymentNum, id, con_person, null, null);
+                            NonFixedDaySupplier supplier = new NonFixedDaySupplier(numOfDeliveryDays, name, business_id, paymentNum - 1, id, con_person, null, null);
                             supplier_manger.add_supplier(supplier);
                         }
                         break;
@@ -165,11 +165,11 @@ public class SupplierInterface extends AInterface
                     case 2:
                         System.out.println("name:");
                         String name_s = scanner.next();
-                        name_s = checkName(name_s);
+                        name_s = checkSupplierNameExistInTheSystemForDeleting(name_s);
                         if (!supplier_manger.remove_supplier(name_s)) {
                             System.out.println("No supplier like this exist");
                         }
-                        ;
+
                         break;
 
 
@@ -177,7 +177,7 @@ public class SupplierInterface extends AInterface
 
                         System.out.println("name of the supplier:");
                         String name_s1 = scanner.next();
-                        name_s1 = checkName(name_s1);
+                        name_s1 = checkSupplierNameExistInTheSystemForInserting(name_s1);
                         System.out.println("name of the new contact:");
                         String name_s2 = scanner.next();
                         name_s2 = checkName(name_s2);
@@ -191,13 +191,13 @@ public class SupplierInterface extends AInterface
                     case 4:
                         System.out.println("name of the supplier:");
                         String name_s3 = scanner.next();
-                        name_s3 = checkName(name_s3);
+                        name_s3 = checkSupplierNameExistInTheSystemForInserting(name_s3);
                         System.out.println("Item name:");
                         String item_name = scanner.next();
                         item_name = checkName(item_name);
                         System.out.println("Item catlog number:");
                         String catalogNum = scanner.next();
-                        catalogNum = checkNumber(catalogNum); // TODO check that the catalogNumber is uniq
+                        catalogNum = checkItemCatalogNumber(catalogNum); // TODO check that the catalogNumber is uniq
                         System.out.println("Item weight:");
                         String weightInput = scanner.next();
                         weightInput = checkNumberWithDot(weightInput);
@@ -242,7 +242,7 @@ public class SupplierInterface extends AInterface
                     case 5:
                         System.out.println("name of the supplier:");
                         String name_s4 = scanner.next();
-                        name_s4 = checkName(name_s4);
+                        name_s4 = checkSupplierNameExistInTheSystemForInserting(name_s4);
                         System.out.println("name of the item");
                         String item_c5 = scanner.next();
                         item_c5 = checkName(item_c5);
@@ -254,7 +254,7 @@ public class SupplierInterface extends AInterface
                     case 6:
                         System.out.println("name of the supplier:");
                         String name_s6 = scanner.next();
-                        name_s6 = checkName(name_s6);
+                        name_s6 = checkSupplierNameExistInTheSystemForInserting(name_s6);
                         System.out.println("name of the item");
                         String item_c6 = scanner.next();
                         item_c6 = checkName(item_c6);
@@ -291,20 +291,16 @@ public class SupplierInterface extends AInterface
     {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-//            int counter = 0;
-//            for (int i = 0; i < input.length(); i++) {
-//                if (Character.isDigit(input.charAt(i))) {
-//                    System.out.println("A name has to be letters only");
-//                    break;
-//                } else {
-//                    counter++;
-//                }
-//            }
-//            if (counter == input.length() && this.supplier_manger.checkExistingSupplierName(input))
-//            {
-//                return input;
-//            }
-            if (this.supplier_manger.checkExistingSupplierName(input))
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (Character.isDigit(input.charAt(i))) {
+                    System.out.println("A name has to be letters only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length())
             {
                 return input;
             }
@@ -314,29 +310,65 @@ public class SupplierInterface extends AInterface
                 input = scanner.nextLine();
             }
         }
-
     }
-//    public static String checkNumber (String input)
-//    {
-//        Scanner scanner = new Scanner(System.in);
-//        while (true) {
-//            int counter = 0;
-//            for (int i = 0; i < input.length(); i++) {
-//                if (!Character.isDigit(input.charAt(i))) {
-//                    System.out.println("has to be numbers only");
-//                    break;
-//                } else {
-//                    counter++;
-//                }
-//            }
-//            if (counter == input.length()) {
-//                return input;
-//            } else {
-//                System.out.println("number:");
-//                input = scanner.next();
-//            }
-//        }
-//    }
+
+    public String checkSupplierNameExistInTheSystemForInserting (String input)
+    {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+            if (this.supplier_manger.checkExistingSupplierName(input))
+            {
+                return input;
+            }
+            else
+            {
+                System.out.println("this name exists in the system already");
+                System.out.println("name:");
+                input = scanner.nextLine();
+            }
+        }
+    }
+
+    public String checkSupplierNameExistInTheSystemForDeleting (String input)
+    {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+            if (!this.supplier_manger.checkExistingSupplierName(input))
+            {
+                return input;
+            }
+            else
+            {
+//                System.out.println("this name exists in the system already");
+                System.out.println("name:");
+                input = scanner.nextLine();
+            }
+        }
+    }
+
+    public static String checkNumber (String input)
+    {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    System.out.println("has to be numbers only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length()) {
+                return input;
+            } else {
+                System.out.println("number:");
+                input = scanner.next();
+            }
+        }
+    }
 
     public String checkBusinessId (String input)
     {
@@ -354,7 +386,29 @@ public class SupplierInterface extends AInterface
             if (counter == input.length() && this.supplier_manger.checkExistingBusinessId(input)) {
                 return input;
             } else {
-                System.out.println("number:");
+                System.out.println("BusinessId number:");
+                input = scanner.next();
+            }
+        }
+    }
+
+    public String checkItemCatalogNumber (String input)
+    {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    System.out.println("has to be numbers only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length() && this.supplier_manger.checkExistingItemCatalogNumber(input)) {
+                return input;
+            } else {
+                System.out.println(" catalog number:");
                 input = scanner.next();
             }
         }
@@ -376,7 +430,7 @@ public class SupplierInterface extends AInterface
             if (counter == input.length() && this.supplier_manger.checkExistingSupplierId(input)) {
                 return input;
             } else {
-                System.out.println("number:");
+                System.out.println("SupplierId number:");
                 input = scanner.next();
             }
         }

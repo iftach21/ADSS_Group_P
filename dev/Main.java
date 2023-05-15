@@ -127,6 +127,8 @@ public class Main {
                     masupplier.delte_all();
                     OrderManger orderManger=new OrderManger();
                     orderManger.delte_db();
+                    interfaceManager interfaceManager = new interfaceManager();
+                    interfaceManager.delete_db();
                     break;
 
 

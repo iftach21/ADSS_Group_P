@@ -635,4 +635,16 @@ public class InventoryController {
         orderManger.assing_Orders_to_Suppliers(ShortageOrderList,supplierManger,1);
     }
 
+    public void delete_db(){
+        try {
+            reportMapper.deleteAll();
+            specificItemMapper.deleteAll();
+            reportItemsMapper.deleteAll();
+            CategoryControl.deleteCatMapper();
+            subCategoryMapper.deleteAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -55,7 +55,7 @@ public class TransferTrucksDAO {
                 this.trucksTransfers.put(licenseNumber, trucksTransfers);
             }
             if (trucksTransfers.size() == 0){
-                System.out.println("No transfer found for truck with license number " + licenseNumber);
+                //System.out.println("No transfer found for truck with license number " + licenseNumber);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -90,10 +90,10 @@ public class TransferTrucksDAO {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No transfer found for truck with license number " + licenseNumber + " to update.");
+                //System.out.println("No transfer found for truck with license number " + licenseNumber + " to update.");
             } else {
                 updateCache();
-                System.out.println("truck with license number " + licenseNumber + " and transfer Id " + transferId + " updated successfully.");
+                //System.out.println("truck with license number " + licenseNumber + " and transfer Id " + transferId + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -145,9 +145,9 @@ public class TransferTrucksDAO {
             stmt.setInt(2, transferId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No transfer trucks found with ID " + transferId);
+                //System.out.println("No transfer trucks found with ID " + transferId);
             } else {
-                System.out.println("transfer truck with licencse number " + licenseNumber + " deleted successfully");
+                //System.out.println("transfer truck with licencse number " + licenseNumber + " deleted successfully");
                 deleteFromCache(transferId, licenseNumber);
             }
         } catch (SQLException e) {
@@ -192,9 +192,9 @@ public class TransferTrucksDAO {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferTrucks");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Table is empty");
+                //System.out.println("Table is empty");
             } else {
-                System.out.println("Table deleted successfully");
+                //System.out.println("Table deleted successfully");
                 trucksTransfers.clear();
             }
         } catch (SQLException e) {
@@ -230,9 +230,9 @@ public class TransferTrucksDAO {
             stmt.setInt(1, transferId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No transfer destination found with transfer Id " + transferId);
+                //System.out.println("No transfer destination found with transfer Id " + transferId);
             } else {
-                System.out.println("transfer destination with transfer Id " + transferId);
+                //System.out.println("transfer destination with transfer Id " + transferId);
                 updateCache();
             }
         } catch (SQLException e) {
@@ -256,9 +256,9 @@ public class TransferTrucksDAO {
             stmt.setInt(1, licenseNumber);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No truck found with licenseNumber " + licenseNumber);
+                //System.out.println("No truck found with licenseNumber " + licenseNumber);
             } else {
-                System.out.println("truck found with licenseNumber " + licenseNumber);
+                //System.out.println("truck found with licenseNumber " + licenseNumber);
                 updateCache();
             }
         } catch (SQLException e) {

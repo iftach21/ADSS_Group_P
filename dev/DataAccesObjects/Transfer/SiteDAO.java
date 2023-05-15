@@ -41,7 +41,7 @@ public class SiteDAO {
                 siteToReturn = this.gettingNewSite(rs,id);
                 this.SiteList.add(siteToReturn);
             } else {
-                System.out.println("No site found with ID " + id);
+                //System.out.println("No site found with ID " + id);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -71,10 +71,10 @@ public class SiteDAO {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No site found with ID " + site.getSiteId() + " to update.");
+                //System.out.println("No site found with ID " + site.getSiteId() + " to update.");
             } else {
                 updateCache(site);
-                System.out.println("Site with ID " + site.getSiteId() + " updated successfully.");
+                //System.out.println("Site with ID " + site.getSiteId() + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -129,9 +129,9 @@ public class SiteDAO {
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No site found with ID " + id);
+                //System.out.println("No site found with ID " + id);
             } else {
-                System.out.println("Site with ID " + id + " deleted successfully");
+                //System.out.println("Site with ID " + id + " deleted successfully");
                 deleteFromCache(id);
                 TransferDestinationsDAO.getInstance().deleteAllBySiteId(id);
                 TransferItemsDAO.getInstance().deleteAllBySiteId(id);
@@ -188,9 +188,9 @@ public class SiteDAO {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Site");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Table is empty");
+                //System.out.println("Table is empty");
             } else {
-                System.out.println("Table deleted successfully");
+                //System.out.println("Table deleted successfully");
                 SiteList.clear();
             }
         } catch (SQLException e) {

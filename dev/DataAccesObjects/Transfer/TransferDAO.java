@@ -102,7 +102,7 @@ public class TransferDAO {
             }
             else
             {
-                System.out.println("No truck found with licenseNumber " + transferId);
+                //System.out.println("No truck found with licenseNumber " + transferId);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -143,10 +143,10 @@ public class TransferDAO {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("No transfer found with ID " + transfer.getTransferId() + " to update");
+                //System.out.println("No transfer found with ID " + transfer.getTransferId() + " to update");
             } else {
                 updateCache(transfer);
-                System.out.println("Transfer with ID " + transfer.getTransferId() + " updated successfully.");
+                //System.out.println("Transfer with ID " + transfer.getTransferId() + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -205,10 +205,10 @@ public class TransferDAO {
             stmt.setInt(1, transferId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No Transfer found with ID " + transferId);
+                //System.out.println("No Transfer found with ID " + transferId);
             } else
             {
-                System.out.println("Transfer with ID " + transferId + " deleted successfully");
+                //System.out.println("Transfer with ID " + transferId + " deleted successfully");
                 deleteFromCache(transferId);
                 TransferDestinationsDAO.getInstance().deleteAllByTransferId(transferId);
                 TransferItemsDAO.getInstance().deleteAllByTransferId(transferId);
@@ -278,9 +278,9 @@ public class TransferDAO {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM Transfer");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Table is empty");
+                //System.out.println("Table is empty");
             } else {
-                System.out.println("Table deleted successfully");
+                //System.out.println("Table deleted successfully");
                 TransferList.clear();
             }
         } catch (SQLException e) {

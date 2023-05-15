@@ -54,7 +54,7 @@ public class TransferItemsDAO {
                 this.orderItemsList.put(transferId, orderItemsToReturn);
             }
             if (orderItemsToReturn.size() == 0){
-                System.out.println("No transfer found with ID " + transferId);
+                //System.out.println("No transfer found with ID " + transferId);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -95,9 +95,9 @@ public class TransferItemsDAO {
             updateCache();
 
             if (rowsAffected == 0) {
-                System.out.println("No transfer found with ID " + transferId + " to update.");
+                //System.out.println("No transfer found with ID " + transferId + " to update.");
             } else {
-                System.out.println("transfer with ID " + transferId + " updated successfully.");
+                //System.out.println("transfer with ID " + transferId + " updated successfully.");
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -154,9 +154,9 @@ public class TransferItemsDAO {
             stmt.setInt(4, quantity);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No transfer items found with ID " + transferId);
+                //System.out.println("No transfer items found with ID " + transferId);
             } else {
-                System.out.println("transfer items with ID " + transferId + " deleted successfully");
+                //System.out.println("transfer items with ID " + transferId + " deleted successfully");
                 deleteFromCache(transferId, catalogNum, siteId, quantity);
             }
         } catch (SQLException e) {
@@ -238,7 +238,7 @@ public class TransferItemsDAO {
                 itemsOfSite.put(item_mock, quantity);
             }
             if (itemsOfSite.size() == 0){
-                System.out.println("No items found for transfer with ID " + transferId + " and site with ID " + siteId);
+                //System.out.println("No items found for transfer with ID " + transferId + " and site with ID " + siteId);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -253,9 +253,9 @@ public class TransferItemsDAO {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM TransferItems");
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Table is empty");
+                //System.out.println("Table is empty");
             } else {
-                System.out.println("Table deleted successfully");
+                //System.out.println("Table deleted successfully");
                 orderItemsList.clear();
             }
         } catch (SQLException e) {
@@ -290,9 +290,9 @@ public class TransferItemsDAO {
             stmt.setInt(1, transferId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No transfer destination found with transfer Id " + transferId);
+                //System.out.println("No transfer destination found with transfer Id " + transferId);
             } else {
-                System.out.println("transfer destination with transfer Id " + transferId);
+                //System.out.println("transfer destination with transfer Id " + transferId);
                 updateCache();
             }
         } catch (SQLException e) {
@@ -317,9 +317,9 @@ public class TransferItemsDAO {
             stmt.setInt(1, siteId);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No transfer destination found with site Id " + siteId);
+                //System.out.println("No transfer destination found with site Id " + siteId);
             } else {
-                System.out.println("transfer destination with site Id " + siteId);
+                //System.out.println("transfer destination with site Id " + siteId);
                 updateCache();
             }
         } catch (SQLException e) {
@@ -344,9 +344,9 @@ public class TransferItemsDAO {
             stmt.setString(1, catalogNum);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("No item found with catalog Id " + catalogNum);
+                //System.out.println("No item found with catalog Id " + catalogNum);
             } else {
-                System.out.println("item with catalog Id " + catalogNum);
+                //System.out.println("item with catalog Id " + catalogNum);
                 updateCache();
             }
         } catch (SQLException e) {

@@ -50,7 +50,7 @@ public class TransferDestinationsDAO {
             }
             destinationsList.put(transferId, destsAndWeightsToReturn);
             if (destsAndWeightsToReturn == null){
-                System.out.println("No transfer found with ID " + transferId);
+                //System.out.println("No transfer found with ID " + transferId);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

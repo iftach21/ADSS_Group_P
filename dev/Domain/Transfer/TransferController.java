@@ -828,8 +828,8 @@ public class TransferController {
         int weekNumber = leavingDate.get(weekFields.weekOfWeekBasedYear());
 
         //get the day number in the week
-        DayOfWeek dayOfWeek = leavingDate.getDayOfWeek();
-        int dayOfWeekNum = dayOfWeek.getValue() + 1;
+        int dayOfWeek = leavingDate.getDayOfMonth();
+        int dayOfWeekNum = dayOfWeek % 7;
 
         //create window type
         WindowTypeCreater wt = new WindowTypeCreater();
@@ -1125,8 +1125,8 @@ public class TransferController {
         int weekNumber = arrivingDate.get(weekFields.weekOfWeekBasedYear());
 
         //get the day number in the week
-        DayOfWeek dayOfWeek = arrivingDate.getDayOfWeek();
-        int dayOfWeekNum = dayOfWeek.getValue() + 1;
+        int dayOfWeek = arrivingDate.getDayOfMonth();
+        int dayOfWeekNum = dayOfWeek % 7;
 
         WindowTypeCreater wtc = new WindowTypeCreater();
 

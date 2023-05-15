@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -326,6 +327,18 @@ public class interfaceManager extends AInterface {
                                 }
                                 if (expirationAns.equals("Y")){
                                     System.out.println("What is the expiration year?");
+                                    int itemYear = Integer.parseInt(itemInput.nextLine());
+                                    System.out.println("What is the expiration month?");
+                                    int itemMonth = Integer.parseInt(itemInput.nextLine());
+                                    System.out.println("What is the expiration day?");
+                                    int itemDay = Integer.parseInt(itemInput.nextLine());
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(Calendar.YEAR, itemYear);
+                                    calendar.set(Calendar.MONTH, itemMonth - 1); // Month is 0-based in Calendar class
+                                    calendar.set(Calendar.DAY_OF_MONTH, itemDay);
+                                    currentDate = calendar.getTime();
+                                    /*
+                                    System.out.println("What is the expiration year?");
                                     itemInput = new Scanner(System.in);
                                     int itemYear = Integer.parseInt(itemInput.nextLine());
                                     System.out.println("What is the expiration month?");
@@ -335,6 +348,7 @@ public class interfaceManager extends AInterface {
                                     itemInput = new Scanner(System.in);
                                     int itemDay = Integer.parseInt(itemInput.nextLine());
                                     currentDate = new Date(itemYear, itemMonth, itemDay);
+                                     */
                                 }
                                 specificItem currentSpecificItem = new specificItem(currentDate, false, Location.Storage, currentItem);
                                 Inventory.addSpecificItem(currentItem, currentSpecificItem);

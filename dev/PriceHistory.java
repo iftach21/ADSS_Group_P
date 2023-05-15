@@ -1,17 +1,17 @@
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class PriceHistory {
     private double buyPrice;
     private double sellPrice;
-    private Date currentDate;
+    private SimpleDateFormat currentDate;
 
     public PriceHistory(double buyPrice, double sellPrice, Date currentDate) {
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
-        this.currentDate = currentDate;
+        this.currentDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        this.currentDate.setLenient(false);
+        this.currentDate.format(currentDate);
     }
 
     public double getBuyPrice() {
@@ -22,15 +22,14 @@ public class PriceHistory {
         return sellPrice;
     }
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public String getCurrentDate() {
+        return currentDate.format(new Date());
     }
 
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         return "Buy price: " + buyPrice +
                 ", sell price: " + sellPrice +
-                ", updated in: " + dateFormat.format(currentDate) + "\n";
+                ", updated in: " + getCurrentDate() + "\n";
     }
 }

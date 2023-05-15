@@ -34,13 +34,14 @@ public class OrderInterface extends AInterface {
             System.out.println("4.print all order's from supplier");
             System.out.println("5.print all order's from all supplier with all the details");
             System.out.println("6.add new Period Order");
-            System.out.println("7.get back to previous menu");
+            System.out.println("7.change period_order");
+            System.out.println("8.get back to previous menu");
             String choice_1 = scanner.nextLine();
             option_1 = 0;
             while (true) {
                 try {
                     option_1 = Integer.parseInt(choice_1);
-                    if (option_1 < 1 || option_1 > 7) {
+                    if (option_1 < 1 || option_1 > 8) {
                         System.out.println("Please enter a valid option");
                         choice_1 = scanner.nextLine();
                         continue;

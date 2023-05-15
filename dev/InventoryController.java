@@ -25,6 +25,8 @@ public class InventoryController {
         this.specificItemMapper = new specificItemMapper();
         this.reportMapper = new ReportMapper();
         this.reportItemsMapper = new ReportItemsMapper();
+        this.orderManger = new OrderManger();
+        this.supplierManger= new Supplier_Manger();
     }
 
     //Category Mapper

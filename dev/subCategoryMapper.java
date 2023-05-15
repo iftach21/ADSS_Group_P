@@ -11,6 +11,22 @@ public class subCategoryMapper {
         this.cacheSubCategories = new HashMap<>();
     }
 
+    public void deleteAll() throws SQLException {
+        getConnection();
+        String sql = "DELETE FROM " + "subCategories";
+        try (Statement statement = conn.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void insertSubCategory(String categoryName, subCategory subCat) {
         try {
             getConnection();

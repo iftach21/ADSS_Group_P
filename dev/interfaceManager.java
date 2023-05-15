@@ -12,6 +12,10 @@ public class interfaceManager extends AInterface {
 
     }
 
+    public void delete_db() {
+        Inventory.delete_db();
+    }
+
     public void interfaceStartup() {
         // -------------------------------------------------------
         // Demo categories, general items, and specific items for demonstration

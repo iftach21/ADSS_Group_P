@@ -200,5 +200,21 @@ public class ReportMapper implements DAO<Report>{
         }
         catch (SQLException e){}
     }
+
+    public void deleteAll() throws SQLException {
+        getConnection();
+        String sql = "DELETE FROM " + "Reports";
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 

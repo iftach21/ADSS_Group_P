@@ -57,8 +57,8 @@ public class categoryMapper implements DAO<Category>{
             if (rs.next()){
                 String categoryName = rs.getString("categoryName");
                 int amount = rs.getInt("amount");
-                Category category = new Category(id);
-                category.setAmount(amount);
+                Category category = new Category(id, amount);
+//                category.setAmount(amount);
                 identityMap.add(category);
                 return category;
             }

@@ -28,6 +28,7 @@ public class subCategoryMapper {
                 subCategories.add(subCat);
                 cacheSubCategories.put(categoryName, subCategories);
             }
+            updateCategoryAmount(categoryName);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -37,6 +38,12 @@ public class subCategoryMapper {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void updateCategoryAmount(String categoryName) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE Categories SET amount = amount + 1 WHERE categoryName = ?");
+        stmt.setString(1, categoryName);
+        stmt.executeUpdate();
     }
 
     private void getConnection()

@@ -14,6 +14,12 @@ public class Category {
         this.subCategoriesList = new ArrayList<subCategory>();
     }
 
+    public Category(String categoryName,int amount) {
+        this.categoryName = categoryName;
+        this.subCategoriesList = new ArrayList<subCategory>();
+        this.amount =amount;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }

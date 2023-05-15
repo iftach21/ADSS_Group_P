@@ -6,10 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="update the period ireder in the interface">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderManger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Period_Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Period_Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/categoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/categoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/stockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/stockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/subCategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/subCategoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InventoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/categoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/categoryMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/stockTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/stockTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/subCategoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/subCategoryMapper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +30,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PnmWhXYC8QDy6ufybPw5sLMlJ0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,29 +48,52 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ADSS_Group_P" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderMangerTest.move_order_to_approvel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.stockTest.testReportTypeByReportNum">
+    <configuration name="stockTest.testCheckAmountOfSubCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="move_order_to_approvel" />
+      <option name="MAIN_CLASS_NAME" value="stockTest" />
+      <option name="METHOD_NAME" value="testCheckAmountOfSubCategories" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="stockTest.testCheckItemGetNameDB" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ADSS_Group_P" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderMangerTest" />
-      <option name="METHOD_NAME" value="test_add_item_list_two_supplier_split_orders_with_deals_on_amount" />
+      <option name="MAIN_CLASS_NAME" value="stockTest" />
+      <option name="METHOD_NAME" value="testCheckItemGetNameDB" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="stockTest.testGetNameCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="stockTest" />
+      <option name="METHOD_NAME" value="testGetNameCategory" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="stockTest.testReportTypeByReportNum" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="stockTest" />
+      <option name="METHOD_NAME" value="testReportTypeByReportNum" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="stockTest.testShortageOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ADSS_Group_P" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="stockTest" />
+      <option name="METHOD_NAME" value="testShortageOrder" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -70,9 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount" />
-        <item itemvalue="JUnit.OrderMangerTest.move_order_to_approvel" />
+        <item itemvalue="JUnit.stockTest.testReportTypeByReportNum" />
+        <item itemvalue="JUnit.stockTest.testCheckItemGetNameDB" />
+        <item itemvalue="JUnit.stockTest.testGetNameCategory" />
+        <item itemvalue="JUnit.stockTest.testCheckAmountOfSubCategories" />
+        <item itemvalue="JUnit.stockTest.testShortageOrder" />
       </list>
     </recent_temporary>
   </component>
@@ -199,6 +232,25 @@
           <line>24</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/stockTest.java</url>
+          <line>391</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/stockTest.java</url>
+          <line>433</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>
+          <line>45</line>
+          <properties class="categoryMapper" method="getById">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -206,5 +258,11 @@
         <PinnedItemInfo parentTag="Period_Order" memberName="cost" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_test_add_item_list_two_supplier_split_orders_with_deals_on_amount.ic" NAME="OrderMangerTest.test_add_item_list_two_supplier_split_orders_with_deals_on_amount Coverage Results" MODIFIED="1680965200494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_three_supllier_split.ic" NAME="OrderMangerTest.three_supllier_split Coverage Results" MODIFIED="1680966694724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest.ic" NAME="OrderMangerTest Coverage Results" MODIFIED="1681124374583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ADSS_Group_P$OrderMangerTest_order_delete.ic" NAME="OrderMangerTest.order_delete Coverage Results" MODIFIED="1680967494058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

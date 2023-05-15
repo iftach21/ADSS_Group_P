@@ -279,11 +279,11 @@ public class SupplierInterface extends AInterface
 
                     case 6:
                         System.out.println("name of the supplier:");
-                        String name_s6 = scanner.next();
+                        String name_s6 = scanner.nextLine();
                         name_s6 = checkSupplierNameExistInTheSystemForDeleting(name_s6);
-                        System.out.println("name of the item");
+                        System.out.println("catalog number of the item");
                         String item_c6 = scanner.next();
-                        item_c6 = checkName(item_c6);
+//                        item_c6 = checkName(item_c6);
                         System.out.println("amount:");
                         String amount_6Input = scanner.next();
                         amount_6Input = checkNumber(amount_6Input);
@@ -300,7 +300,7 @@ public class SupplierInterface extends AInterface
                     case 8:
                         System.out.println("supplier id:");
                         String id_sup1 = scanner.next();
-                        int amount_7 = Integer.parseInt(id_sup1);
+//                        int amount_7 = Integer.parseInt(id_sup1);
                         supplier_manger.get_supplier_by_id(id_sup1).print();
 
                     case 9:

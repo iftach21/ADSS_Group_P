@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/dev/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/SupplierInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/SupplierInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Supplier.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SupplierInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SupplierInterface.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684156784024</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="123">
+      <created>1684160163117</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1684160163117</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,11 +283,20 @@
           <line>267</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/SupplierInterface.java</url>
+          <line>294</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/SupplierInterface.java</url>
+          <line>303</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo parentTag="NonFixedDaySupplier" memberName="items" />
         <PinnedItemInfo parentTag="FixedDaySupplier" memberName="contract" />
         <PinnedItemInfo parentTag="Period_Order" memberName="cost" />
       </pinned-members>

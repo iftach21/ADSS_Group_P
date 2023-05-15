@@ -112,12 +112,18 @@ public abstract class Supplier {
         Pair<Integer,Float> pair=new Pair<Integer,Float>(num,cost);
         items.put(item,pair);}
     }
-    public  void add_item_to_contract(String name,int num,double discount){
-        for(Item item : items.keySet()){
-            if(item.getName().equals(name)){
+//    public  void add_item_to_contract(String name,int num,double discount){
+//        for(Item item : items.keySet()){
+//            if(item.getName().equals(name)){
+//
+//            this.contract.add_to_contract(item,num,discount);}
+//    }}
 
-            this.contract.add_to_contract(item,num,discount);}
-    }}
+    public  void add_item_to_contract(String catalogNum,int num,double discount){
+        for(Item item : items.keySet()){
+            if(item.getCatalogNum().equals(catalogNum)){
+                this.contract.add_to_contract(item,num,discount);}
+        }}
     public void update_contact_person(String name ,String number){
         ContactPerson contact_person=new ContactPerson(name,number);
         this.person=contact_person;

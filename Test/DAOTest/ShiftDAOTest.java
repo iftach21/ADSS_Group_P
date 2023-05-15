@@ -1,5 +1,6 @@
 package DAOTest;
 
+import DataAccesObjects.Connection;
 import DataAccesObjects.Employee.ShiftDAO;
 import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Employee.Driver;
@@ -7,6 +8,7 @@ import Domain.Employee.Shift;
 import Domain.Employee.Workers;
 import Domain.Enums.TempLevel;
 import Domain.Enums.weightType;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +46,10 @@ public class ShiftDAOTest {
         shift.addDriver(w2);
         shift.insertToShift(w1,0);
 
+    }
+    @AfterEach
+    void tearDown() {
+        Connection.DeleteRows();
     }
 
     @Test

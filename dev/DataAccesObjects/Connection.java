@@ -250,22 +250,23 @@ public class Connection {
         }
     }
 
-    public static void DeleteRows(){
+    public static Connection DeleteRows(){
         try {
             var c =   getConnectionToDatabase();
             extracted(c, "weekly_shift");
             extracted(c, "shift_worker_in_shift");
-            //extracted(c, "item_Mock");
+            extracted(c, "item_Mock");
             extracted(c, "Shift");
-            //extracted(c, "Site");
-            //extracted(c, "Transfer");
-            //extracted(c, "TransferDestinations");
-            //extracted(c, "TransferItems");
-            //extracted(c, "Truck");
+            extracted(c, "Site");
+            extracted(c, "Transfer");
+            extracted(c, "TransferDestinations");
+            extracted(c, "TransferItems");
+            extracted(c, "Truck");
             extracted(c, "workers");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     private static void extracted(java.sql.Connection c, String name) throws SQLException {

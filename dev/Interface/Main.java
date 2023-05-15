@@ -29,18 +29,27 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        try {
+            adminInterface = new AdminInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }//
 
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;
+    static AdminInterface adminInterface;
     public static void main(String[] args) throws SQLException {
         List<AInterface> intefaceList = new ArrayList<>();
         intefaceList.add(bossInterface);
         intefaceList.add(workerInterface);
         intefaceList.add(transferInterface);
+        intefaceList.add(adminInterface);
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
         int option = 1;
         while(option != 0){
+            System.out.println("------------------------------------------");
             System.out.println("What system would you like to log into?");
             System.out.println("1 = HR Manager's");
             System.out.println("2 = Employee's");
@@ -48,7 +57,7 @@ public class Main {
             System.out.println("0 = Exit system");
 
 
-            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+
             option = myObj.nextInt();  // Read user input
 
             if(option==0){
@@ -57,7 +66,7 @@ public class Main {
             }
 
             //checking if the option works
-            if(option > 3 || option < 0){
+            if(option > 4 || option < 0){
                 System.out.println("Invalid Input");
                 continue;
             }

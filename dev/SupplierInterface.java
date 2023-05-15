@@ -41,7 +41,7 @@ public class SupplierInterface extends AInterface
                         break;
                     } catch (Exception ignored) {
                         System.out.println("Please enter a valid option");
-                        option = scanner.nextLine();
+                        //option = scanner.nextLine();
                     }
                 }
 
@@ -177,7 +177,8 @@ public class SupplierInterface extends AInterface
 
                         System.out.println("name of the supplier:");
                         String name_s1 = scanner.next();
-                        name_s1 = checkSupplierNameExistInTheSystemForInserting(name_s1);
+//                        name_s1 = checkSupplierNameExistInTheSystemForInserting(name_s1);
+                        name_s1 = checkSupplierNameExistInTheSystemForDeleting(name_s1);
                         System.out.println("name of the new contact:");
                         String name_s2 = scanner.next();
                         name_s2 = checkName(name_s2);
@@ -191,10 +192,11 @@ public class SupplierInterface extends AInterface
                     case 4:
                         System.out.println("name of the supplier:");
                         String name_s3 = scanner.next();
-                        name_s3 = checkSupplierNameExistInTheSystemForInserting(name_s3);
+//                        name_s3 = checkSupplierNameExistInTheSystemForInserting(name_s3);
+                        name_s3 = checkSupplierNameExistInTheSystemForDeleting(name_s3);
                         System.out.println("Item name:");
                         String item_name = scanner.next();
-                        item_name = checkName(item_name);
+//                        item_name = checkName(item_name); // TODO maybe its needed
                         System.out.println("Item catlog number:");
                         String catalogNum = scanner.next();
                         catalogNum = checkItemCatalogNumber(catalogNum); // TODO check that the catalogNumber is uniq
@@ -204,8 +206,8 @@ public class SupplierInterface extends AInterface
                         double weight = Double.parseDouble(weightInput);
                         System.out.println("catalog Name");
                         String catalogName = scanner.next();
-                        catalogName = checkName(catalogName);
-                        System.out.println("temperature (regular,frozen,cold)");// TODO there are only 3 options : regular, frozen, cold
+//                        catalogName = checkName(catalogName);// TODO maybe its needed
+                        System.out.println("temperature ((0)regular,(1)frozen,(2)cold)");// TODO there are only 3 options : regular, frozen, cold
                         String tempInput = scanner.next();
                         TempLevel tempLevel = TempLevel.valueOf(tempInput);
 //                            tempInput = checkNumberWithDot(tempInput);

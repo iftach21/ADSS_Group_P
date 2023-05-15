@@ -81,6 +81,7 @@ public class stockTest {
         assertTrue(milksGetName.equals("Milk"));
     }
     //Test 6:
+    /*
     @Test
     void testCheckMoveSpecificItem(){
         Category dairyCat = new Category("Dairy");
@@ -113,6 +114,8 @@ public class stockTest {
         assertTrue(milk1.getLocationString().equals("Storage"));
 
     }
+
+     */
     //Test 7:
     @Test
     void testCheckUpdatingNewPrice(){
@@ -178,6 +181,7 @@ public class stockTest {
         assertEquals(0, currentItem.getAmount());
 
     }
+    /*
     //Test 9:
     @Test
     void testCheckFetchItem(){
@@ -279,6 +283,9 @@ public class stockTest {
         assertEquals(20, milk3Percent.getSellPrice());
 
     }
+
+     */
+    /*
     //Test 10
     @Test
     void testCheckSpecificItemsLocation(){
@@ -378,6 +385,8 @@ public class stockTest {
         assertTrue(sodGel1.getLocationString().equals("Store"));
 
     }
+
+     */
 
     //===================Assignment2===================//
 

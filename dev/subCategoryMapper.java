@@ -11,6 +11,81 @@ public class subCategoryMapper {
         this.cacheSubCategories = new HashMap<>();
     }
 
+    public void deleteAll() throws SQLException {
+        getConnection();
+        String sql = "DELETE FROM " + "subCategories";
+        try (Statement statement = conn.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public List<subCategory> getAll(String categoryName) {
+        List<subCategory> subCategories = cacheSubCategories.get(categoryName);
+        if (subCategories != null) {
+            return subCategories;
+        }
+
+        List<subCategory> subCategoryList = new ArrayList<>();
+        try {
+            getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM subCategories WHERE categoryName = ?");
+            stmt.setString(1, categoryName);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String subCategoryName = rs.getString("subCategoryName");
+                int amount = rs.getInt("amount");
+
+                subCategory subCat = new subCategory(subCategoryName);
+                subCategoryList.add(subCat);
+            }
+
+            cacheSubCategories.put(categoryName, subCategoryList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return subCategoryList;
+    }
+
+    public subCategory getByID(String subCategoryName) {
+        getConnection();
+        String sql = "SELECT * FROM subCategories WHERE subCategoryName = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, subCategoryName);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                String categoryName = rs.getString("categoryName");
+                int amount = rs.getInt("amount");
+                return new subCategory(subCategoryName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
     public void insertSubCategory(String categoryName, subCategory subCat) {
         try {
             getConnection();

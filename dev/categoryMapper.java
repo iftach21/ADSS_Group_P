@@ -12,6 +12,22 @@ public class categoryMapper implements DAO<Category>{
         this.identityMap = new ArrayList<>();
     }
 
+    public void deleteAll() throws SQLException {
+        getConnection();
+        String sql = "DELETE FROM " + "Categories";
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public List<Category> getAll() throws SQLException {
         Category category = null;

@@ -12,6 +12,10 @@ public class interfaceManager extends AInterface {
 
     }
 
+    public void delete_db() {
+        Inventory.delete_db();
+    }
+
     public void interfaceStartup() {
         // -------------------------------------------------------
         // Demo categories, general items, and specific items for demonstration
@@ -144,11 +148,9 @@ public class interfaceManager extends AInterface {
             System.out.println("3: Provide an inventory counting report");
             System.out.println("4: Provide a defective products report");
             System.out.println("5: Update discount on products");
-            System.out.println("6: Place an order from a supplier");
-            System.out.println("7: Provide a price history report for a product");
-            System.out.println("8: Insert a defective product into the defective inventory");
-            System.out.println("9: Print full inventory");
-            System.out.println("10: Update Periodic order");
+            System.out.println("6: Provide a price history report for a product");
+            System.out.println("7: Insert a defective product into the defective inventory");
+            System.out.println("8: Print full inventory");
 
             System.out.println("0: Exit the system ");
 
@@ -493,7 +495,7 @@ public class interfaceManager extends AInterface {
 
                         switch (Sub_Ans) {
                             case "1":
-                                    Reports.addReport(Inventory.FullDefectiveReport());
+                                Reports.addReport(Inventory.FullDefectiveReport());
                                 break;
 
                             case "2":
@@ -591,9 +593,11 @@ public class interfaceManager extends AInterface {
                         }
                     }
 
+
+
                     break;
                 }
-
+                /*
                 //-----------------------
                 //Place an order from a supplier
                 //-----------------------
@@ -602,11 +606,13 @@ public class interfaceManager extends AInterface {
                     break;
                 }
 
+                 */
+
 
                 //-----------------------
                 //Provide a price history report for a product
                 //-----------------------
-                case "7": {
+                case "6": {
 
                     System.out.println("What is the catalog number for the product?");
                     Scanner Input = new Scanner(System.in);
@@ -620,7 +626,7 @@ public class interfaceManager extends AInterface {
                 //-----------------------
                 //Insert a defective product into the defective inventory
                 //-----------------------
-                case "8": {
+                case "7": {
 
                     System.out.println("What is the serial number for the item to be set as defected?");
                     Scanner defectedItemInput = new Scanner(System.in);
@@ -634,12 +640,12 @@ public class interfaceManager extends AInterface {
                 //-----------------------
                 //Print full inventory
                 //-----------------------
-                case "9": {
+                case "8": {
                     //System.out.println(this.Inventory.toString());
                     this.Inventory.printAllItems();
                     break;
                 }
-
+                /*
                 //-----------------------
                 // Update Periodic order
                 //-----------------------
@@ -698,6 +704,8 @@ public class interfaceManager extends AInterface {
                 //-----------------------
                 //Exit the system
                 //-----------------------
+
+                 */
                 case "0": {
                     exit = false;
                     break;
@@ -709,5 +717,17 @@ public class interfaceManager extends AInterface {
 
             }
         }
+    }
+
+    public void insertSpecificItem(specificItem currentItem) {
+        Inventory.insertNewSpecificToMapper(currentItem);
+    }
+
+    public void insertCategory(Category currentCat) {
+        Inventory.addCategoryToMapper(currentCat.getCategoryName());
+    }
+
+    public void insertSubCat(Category currentCat, subCategory currentSub) {
+        Inventory.addSubCatToMapper(currentCat.getCategoryName(), currentSub);
     }
 }

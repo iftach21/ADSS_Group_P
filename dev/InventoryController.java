@@ -13,10 +13,8 @@ public class InventoryController {
     private ReportItemsMapper reportItemsMapper;
     private OrderManger orderManger;
     private Supplier_Manger supplierManger;
-    private static final long DELAY = 0/*TimeUnit.DAYS.toMillis(0)*/;
-    private static final long PERIOD = 1000 * 10/*TimeUnit.DAYS.toMillis(1)*/;
-//    private static final long DELAY_PERIODIC = TimeUnit.DAYS.toMillis(0);
-//    private static final long PERIOD_PERIODIC = TimeUnit.DAYS.toMillis(2);
+    private static final long DELAY = (0);
+    private static final long PERIOD = 1000*10;
 
     public InventoryController() {
         this.CategoryControl = new CategoryController();
@@ -428,11 +426,6 @@ public class InventoryController {
                 }
             }
             currentReport.addReportItem(item, defectiveAmount);
-            try {
-                reportMapper.insert(currentReport);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
         return currentReport;
     }
@@ -642,37 +635,16 @@ public class InventoryController {
         orderManger.assing_Orders_to_Suppliers(ShortageOrderList,supplierManger,1);
     }
 
-//    public void PeridicTask(){
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                try {
-//                    ShortageCheck();
-//                }
-//                catch (SQLException e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, DELAY_PERIODIC, PERIOD_PERIODIC);
-//    }
-//
-//    private void PeriodicOrder() throws SQLException{
-//        Map ShortageOrderList = new HashMap<Item,Integer>();
-//        for(Item item: itemMapper.findAll())
-//        {
-//            int specificAmount = 0;
-//            for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
-//            {
-//                specificAmount++;
-//            }
-//            if (specificAmount < item.getMinQuantity()){
-//                ShortageOrderList.put(item, item.getMinQuantity() - specificAmount);
-//            }
-//        }
-//        orderManger.assing_Orders_to_Suppliers(ShortageOrderList,supplierManger,1);
-//    }
-
-
+    public void delete_db(){
+        try {
+            reportMapper.deleteAll();
+            specificItemMapper.deleteAll();
+            reportItemsMapper.deleteAll();
+            CategoryControl.deleteCatMapper();
+            subCategoryMapper.deleteAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

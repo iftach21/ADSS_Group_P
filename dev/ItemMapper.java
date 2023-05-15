@@ -200,12 +200,12 @@ public class ItemMapper {
             stmt.executeUpdate();
             cache.clear();
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
     }

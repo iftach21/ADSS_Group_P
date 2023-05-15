@@ -192,10 +192,30 @@ public class OrderInterface extends AInterface {
                              break;
                          }
                      }
-                     break;
-
 
                  case 7:
+                     System.out.println("change period_order");
+                     orderManger.print_period_orders();
+                     System.out.println("enter a period id:");
+                     String id = scanner.next();
+                     if(!orderManger.contain_Period_order(id)){
+                         System.out.println("id not in the system");
+                     }
+                     else {
+                         System.out.println("1.choose what you want to do:");
+                         System.out.println("2.delete period order:");
+                         System.out.println("3.add_item_to_order");
+                         System.out.println("4.remove_item");
+
+
+                     }
+
+                 }
+
+
+
+
+                 case 8:
                      System.out.println("Redirecting back to main menu");
                      break;
              }

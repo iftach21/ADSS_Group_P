@@ -33,6 +33,7 @@ public class subCategoryMapper {
             return subCategories;
         }
 
+
         List<subCategory> subCategoryList = new ArrayList<>();
         try {
             getConnection();

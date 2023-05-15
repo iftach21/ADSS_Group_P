@@ -64,27 +64,27 @@ public class TransferManagerInterface extends AInterface {
 
         Item_mock Petiber = new Item_mock("125sa", TempLevel.regular, "Petiber");
         Item_mock Coffee = new Item_mock("mn5050", TempLevel.regular, "Coffee");
-        Item_mock Milk = new Item_mock("1154n2", TempLevel.cold, "Milk");
+        Item_mock Milk = new Item_mock("1154n2", TempLevel.regular, "Milk");
         Item_mock Strawberry = new Item_mock("98988f", TempLevel.regular, "Strawberry");
-        Item_mock VanillaIceCream = new Item_mock("3232mm", TempLevel.frozen, "Vanilla iceCream");
+        Item_mock VanillaIceCream = new Item_mock("3232mm", TempLevel.regular, "Vanilla iceCream");
         Item_mock Bagel = new Item_mock("jb668kd", TempLevel.regular, "Bagel");
-        Item_mock Bread = new Item_mock("d4040g", TempLevel.frozen, "Bread");
+        Item_mock Bread = new Item_mock("d4040g", TempLevel.regular, "Bread");
         Item_mock Onion = new Item_mock("3030g", TempLevel.regular, "Onion");
 
         Item_mock Garlic = new Item_mock("1111fu", TempLevel.regular, "Garlic");
         Item_mock Salt = new Item_mock("hh2222", TempLevel.cold, "Salt");
         Item_mock Nuts = new Item_mock("32ede4", TempLevel.regular, "Nuts");
         Item_mock Sugar = new Item_mock("cwec44", TempLevel.regular, "Sugar");
-        Item_mock SoySauce = new Item_mock("32e453", TempLevel.frozen, "Soy Sauce");
+        Item_mock SoySauce = new Item_mock("32e453", TempLevel.cold, "Soy Sauce");
         Item_mock ChilliSauce = new Item_mock("sfv334", TempLevel.cold, "Chilli Sauce");
         Item_mock blackPepper = new Item_mock("ref452", TempLevel.cold, "black Pepper");
-        Item_mock CottageCheese = new Item_mock("2324gr", TempLevel.frozen, "Cottage Cheese");
+        Item_mock CottageCheese = new Item_mock("2324gr", TempLevel.cold, "Cottage Cheese");
 
         Item_mock Mayonnaise = new Item_mock("25fe3e", TempLevel.cold, "Mayonnaise");
         Item_mock GarlicSauce = new Item_mock("3ef63", TempLevel.cold, "Garlic Sauce");
-        Item_mock Parmesan = new Item_mock("43f465", TempLevel.frozen, "Parmesan");
+        Item_mock Parmesan = new Item_mock("43f465", TempLevel.cold, "Parmesan");
         Item_mock Cucumber = new Item_mock("4r367j8", TempLevel.regular, "Cucumber");
-        Item_mock CherryTomatoes = new Item_mock("54tg78", TempLevel.frozen, "Cherry Tomatoes");
+        Item_mock CherryTomatoes = new Item_mock("54tg78", TempLevel.cold, "Cherry Tomatoes");
         Item_mock Apple = new Item_mock("fb1t87", TempLevel.regular, "Apple");
         Item_mock ChocolateNutella = new Item_mock("6cw352", TempLevel.cold, "Chocolate Nutella");
         Item_mock ChocolateHashahar = new Item_mock("vt653c2", TempLevel.cold, "Chocolate Hashahar");

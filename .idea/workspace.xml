@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="reinsert for lost code">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="serialNumbers update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/PriceHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/PriceHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/specificItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ReportItemsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ReportItemsMapper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684139837713</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="serialNumbers update">
+      <created>1684140418582</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1684140418582</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +173,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix the period order need also to cheak why the price history dont work there" />
     <MESSAGE value="reinsert for lost code" />
-    <option name="LAST_COMMIT_MESSAGE" value="reinsert for lost code" />
+    <MESSAGE value="serialNumbers update" />
+    <option name="LAST_COMMIT_MESSAGE" value="serialNumbers update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

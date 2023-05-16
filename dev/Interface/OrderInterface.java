@@ -146,6 +146,7 @@ public class OrderInterface extends AInterface {
                     break;
                 case 5:
                     orderManger.print_all_orders_details();
+                    break;
                 case 6:
                     System.out.println("add new Period Order:");
                     Map<Item, Integer> itemlist1 = new HashMap<Item, Integer>();
@@ -242,6 +243,7 @@ public class OrderInterface extends AInterface {
                                 System.out.println("Please enter a valid option");
                                 choice_1 = scanner.nextLine();
                             }
+
                         }
 
                         switch (option_14) {

@@ -10,9 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="test update">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ADSS_Group_P_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ADSS_Group_P_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface/OrderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/OrderInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/release/dev/res/SuperLeeDataBase.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +43,8 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -110,7 +109,7 @@
       <updated>1684101255765</updated>
       <workItem from="1684101257324" duration="13816000" />
       <workItem from="1684174763540" duration="2917000" />
-      <workItem from="1684250825669" duration="635000" />
+      <workItem from="1684250825669" duration="736000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -196,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684175097874</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="test update">
+      <created>1684251469239</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684251469239</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

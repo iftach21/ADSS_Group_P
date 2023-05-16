@@ -2,7 +2,7 @@ package DataAccesObject;
 import Domain.*;
 import DataAccesObject.FixedDaySupplierMapper;
 import DataAccesObject.NonFixedDaySupplierMapper;
-import Interface.NonDeliveringSupplierMapper;
+
 import org.json.JSONObject;
 
 import java.sql.*;

@@ -1,6 +1,6 @@
 package Domain;
 
-import Interface.NonDeliveringSupplierMapper;
+import DataAccesObject.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

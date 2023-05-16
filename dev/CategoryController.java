@@ -44,12 +44,6 @@ public class CategoryController {
         catch (SQLException e){
             e.printStackTrace();
         }
-//        for (int i = 0; i < this.amount; i++){
-//            currentCategory = this.CategoriesList.get(i);
-//            if (currentCategory.getCategoryName().equals(categoryName)){
-//                return currentCategory;
-//            }
-//        }
         return currentCategory;
     }
 
@@ -68,6 +62,8 @@ public class CategoryController {
         amount ++;
     }
 
+    //Method 2: removeCategory
+    //This method recieves a category's name, and deletes it from the store's inventory
     public void removeCategory(String categoryName){
         Category _Category = null;
         try {
@@ -79,20 +75,8 @@ public class CategoryController {
         }
         catch (SQLException e){}
         amount--;
-//        todo check if needed
-//        CategoriesList.remove(_Category);
     }
 
-    //Method 2: removeCategory
-    //This method recieves a category's name, and deletes it from the store's inventory
-
-//    public void removeCategory(String categoryName){
-//        for (int i = 0; i < this.CategoriesList.size(); i++) {
-//            if (this.CategoriesList.get(i).getCategoryName() == categoryName)
-//                CategoriesList.remove(CategoriesList.get(i));
-//        }
-//        amount --;
-//    }
 
     //Method 3: addSubCategory
     //This method adds a new sub category into a super category's list

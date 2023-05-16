@@ -60,7 +60,6 @@ public class ReportController {
         return report;
     }
 
-    //TODO check if needed
 //    public void addReportHistory(Report priceHistoryReport) {
 //        System.out.println(priceHistoryReport.printPriceHistory());
 //        reportsList.add(priceHistoryReport);

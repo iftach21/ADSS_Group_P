@@ -43,7 +43,6 @@ public class ReportItemsMapper implements DAO<Report>{
                 String temperature = rs.getString("i.temperature");
                 TempLevel tempValue = TempLevel.valueOf(temperature);
                 int minimumQuantity = rs.getInt("i.minimum_quantity");
-                //todo check what to do with PriceHistory
                 String priceHistory = rs.getString("i.price_history");
                 String manufacturer = rs.getString("i.manufacturer");
 
@@ -71,7 +70,6 @@ public class ReportItemsMapper implements DAO<Report>{
 
     @Override
     public Report getById(String id) throws SQLException {
-        //TODO check how i get it from the identityMap
         int reportid = Integer.parseInt(id);
         for (Report report: identityMap){
             if (report.getReportNum() == reportid){
@@ -106,10 +104,7 @@ public class ReportItemsMapper implements DAO<Report>{
                 int minimumQuantity = rs.getInt("i.minimum_quantity");
                 String priceHistory = rs.getString("i.price_history");
                 String manufacturer = rs.getString("i.manufacturer");
-
-                //TODO add set PriceHistory for Item and add it here
                 Item item = new Item(ItemName,catalogNumber,weight,catalogName,tempValue,manufacturer,minimumQuantity);
-
                 reportItems.put(item,quantity);
                 Report report = new Report(reportTypeEnum,reportDate,reportInformationString,reportid,reportItems);
 
@@ -234,7 +229,6 @@ public class ReportItemsMapper implements DAO<Report>{
             statement.setInt(1, report.getReportNum());
             statement.executeUpdate();
         }
-        //TODO maybe to remove from the identityMap
         try {
             connection.close();
         }

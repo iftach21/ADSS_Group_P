@@ -120,7 +120,6 @@ public class categoryMapper implements DAO<Category>{
             statement.setString(2,category.getCategoryName());
             statement.executeUpdate();
 
-            //TODO check if need to update in the idintityMap
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -138,7 +137,6 @@ public class categoryMapper implements DAO<Category>{
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1,category.getCategoryName());
         statement.executeUpdate();
-        //TODO maybe to remove from the identityMap
         try {
             connection.close();
         }

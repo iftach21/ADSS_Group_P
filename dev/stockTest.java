@@ -432,32 +432,8 @@ public class stockTest {
         masupplier.add_item_to_supplier(supplier_2.getName(),item2,100,10);
 
     }
-    /*
+
     //test #2
-    //TODO if there is time check if i can take from the cache of the category
-    @Test
-    void testCheckAmountOfSubCategories(){
-        subCategoryMapper subCategoryMapper = new subCategoryMapper();
-        CategoryController categoryController = new CategoryController();
-
-        categoryController.addCategory("Dairy");
-        subCategory milkSubCat = new subCategory("Milk");
-        subCategory butterSubCat = new subCategory("Butter");
-        subCategoryMapper.insertSubCategory("Dairy", milkSubCat);
-        subCategoryMapper.insertSubCategory("Dairy", butterSubCat);
-
-
-        Category category = categoryController.getCategory("Dairy");
-
-
-        int amountOfSubCategories = category.getAmount();
-
-        assertEquals(2, amountOfSubCategories);
-    }
-
-     */
-
-    //test #3
     @Test
     void testGetNameCategory(){
         CategoryController categoryController = new CategoryController();
@@ -470,20 +446,19 @@ public class stockTest {
     }
 
     //test #4
-//    @Test
-//    void testGetNameSubCategory(){
-//        CategoryController categoryController = new CategoryController();
-//        InventoryController inventoryController = new InventoryController();
-//
-//        categoryController.addCategory("Dairy");
-//        subCategory milkSubCat = new subCategory("Milk");
-//        inventoryController.addSubCatToMapper("Dairy",milkSubCat);
-//        //todo add the getSubCat func
-//        subCategory subcategory = inventoryController.("Dairy");
-//        String subCategoryName = subcategory.getSubCategoryName();
-//
-//        assertEquals("Milk", subCategoryName);
-//    }
+    @Test
+    void testGetNameSubCategory(){
+        CategoryController categoryController = new CategoryController();
+        InventoryController inventoryController = new InventoryController();
+
+        categoryController.addCategory("Dairy");
+        subCategory milkSubCat = new subCategory("Milk");
+        inventoryController.addSubCatToMapper("Dairy",milkSubCat);
+        subCategory subcategory = inventoryController.getSubCategory("Milk");
+        String subCategoryName = subcategory.getSubCategoryName();
+
+        assertEquals("Milk", subCategoryName);
+    }
 
     //test #5
     @Test

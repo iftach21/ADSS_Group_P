@@ -43,6 +43,13 @@ public class InventoryController {
         subCategoryMapper.insertSubCategory(categoryName, currentSub);
     }
 
+    public subCategory getSubCategory(String subcategoryName){
+        subCategory subCategory = null;
+        subCategory = subCategoryMapper.getByID(subcategoryName);;
+        return subCategory;
+    }
+
+
     //Items Mapper
     public void printAllItems(){
         for(Item item: itemMapper.findAll())

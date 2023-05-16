@@ -217,8 +217,7 @@ public class OrderMapper
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage() + "insert order");
-            e.printStackTrace();
+
 
         }
 
@@ -282,7 +281,7 @@ public class OrderMapper
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+
         }
         try
         {
@@ -356,13 +355,13 @@ public class OrderMapper
             stmt.executeUpdate();
             cache.clear(); // Clear the cache
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
         }
 
         try {
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
         }
     }
 }

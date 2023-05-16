@@ -10,8 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="test update">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ADSS_Group_P_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ADSS_Group_P_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/PeriodicOrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/PeriodicOrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/adss2023_v02.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/release/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DataAccesObject/OrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DataAccesObject/OrderMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DataAccesObject/PeriodicOrderMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DataAccesObject/PeriodicOrderMapper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,13 +48,32 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JAR Application.ADSS_Group_P.jar">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release" />
+      <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release\dev" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Interface.Main">
+    <configuration name="Interface.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Interface.Main" />
+      <module name="ADSS_Group_P" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Interface.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_P" />
@@ -61,16 +86,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="stockTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="stockTest.testCheckItemGetNameDB" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_P" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="stockTest" />
-      <option name="METHOD_NAME" value="testCheckItemGetNameDB" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -91,11 +106,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.ADSS_Group_P.jar" />
+        <item itemvalue="Application.Interface.Main" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.ADSS_Group_P.jar" />
         <item itemvalue="JUnit.stockTest" />
         <item itemvalue="JUnit.stockTest.testReportTypeByReportNum" />
-        <item itemvalue="JUnit.stockTest.testCheckItemGetNameDB" />
       </list>
     </recent_temporary>
   </component>
@@ -109,7 +124,7 @@
       <updated>1684101255765</updated>
       <workItem from="1684101257324" duration="13816000" />
       <workItem from="1684174763540" duration="2917000" />
-      <workItem from="1684250825669" duration="736000" />
+      <workItem from="1684250825669" duration="2782000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -202,7 +217,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684251469239</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="test update">
+      <created>1684251751721</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1684251751721</updated>
+    </task>
+    <task id="LOCAL-00015" summary="test update">
+      <created>1684251765915</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1684251765915</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +291,11 @@
           <url>file://$PROJECT_DIR$/dev/stockTest.java</url>
           <line>442</line>
           <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/Interface/OrderInterface.java</url>
+          <line>357</line>
+          <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>

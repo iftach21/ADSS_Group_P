@@ -121,7 +121,7 @@ public class PeriodicOrderMapper {
             conn.close();
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
+
         }
 
         for(int i = 0; i < orders.size(); i++)
@@ -306,12 +306,12 @@ public class PeriodicOrderMapper {
             stmt.executeUpdate();
             cache.clear();
         } catch (SQLException e) {
-            e.printStackTrace();
+
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+
             }
         }
     }

@@ -132,4 +132,11 @@ public class HRManagerService {
         return controller.getProfessionCounts(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
 
+    /**
+     * will create in the data-base new weekly shift
+     * */
+    public void createNewWeeklyShift(int weekNum,int yearNum,int superNum) throws SQLException {
+        controller.createnewweeklyshift(weekNum, yearNum, superNum);
+    }
+
 }

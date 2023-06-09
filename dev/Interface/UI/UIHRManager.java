@@ -3,6 +3,7 @@ package Interface.UI;
 import Service.HRManagerService;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -157,17 +158,102 @@ public class UIHRManager {
 
 
         // Creating the Weekly Shift menu
+        //--------------------------------------------------------------------------------------------------------------
         JMenu weeklyShiftMenu = new JMenu("Weekly Shift");
 
-        JMenuItem createShiftItem = new JMenuItem("Create Shift");
-        createShiftItem.addActionListener(new ActionListener() {
+
+        //---------------------------
+        //actions for weekly shift:
+        //---------------------------
+
+
+
+        //creation of new Weekly shift:
+        JMenuItem CreateNewWeeklyShift = new JMenuItem("Create new Weekly Shift");
+        CreateNewWeeklyShift.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Create Shift action performed");
+                // Create input fields
+                JTextField weekNumberField = new JTextField();
+                JTextField yearNumberField = new JTextField();
+                JTextField superNumberField = new JTextField();
+
+                // Create the panel to hold the input fields
+                JPanel inputPanel = new JPanel(new GridLayout(3, 2));
+                inputPanel.add(new JLabel("Week Number:"));
+                inputPanel.add(weekNumberField);
+                inputPanel.add(new JLabel("Year Number:"));
+                inputPanel.add(yearNumberField);
+                inputPanel.add(new JLabel("Super Number:"));
+                inputPanel.add(superNumberField);
+
+                // Show the input dialog and get the user's input
+                int result = JOptionPane.showConfirmDialog(frame, inputPanel, "Enter Weekly Shift Details",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                // If the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    // Get the values from the input fields
+                    int weekNum = Integer.parseInt(weekNumberField.getText());
+                    int yearNum = Integer.parseInt(yearNumberField.getText());
+                    int superNum = Integer.parseInt(superNumberField.getText());
+
+                    // Create an instance of new weekly shift
+                    try {
+                        HRManagerService.createNewWeeklyShift(weekNum,yearNum,superNum);
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
             }
         });
 
-        weeklyShiftMenu.add(createShiftItem);
+        weeklyShiftMenu.add(CreateNewWeeklyShift);
+
+
+
+        //weekly shift req:
+        JMenuItem createShiftReq = new JMenuItem("Edit and view Weekly Shift Req");
+        createShiftReq.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create input fields
+                JTextField weekNumberField = new JTextField();
+                JTextField yearNumberField = new JTextField();
+                JTextField superNumberField = new JTextField();
+
+                // Create the panel to hold the input fields
+                JPanel inputPanel = new JPanel(new GridLayout(3, 2));
+                inputPanel.add(new JLabel("Week Number:"));
+                inputPanel.add(weekNumberField);
+                inputPanel.add(new JLabel("Year Number:"));
+                inputPanel.add(yearNumberField);
+                inputPanel.add(new JLabel("Super Number:"));
+                inputPanel.add(superNumberField);
+
+                // Show the input dialog and get the user's input
+                int result = JOptionPane.showConfirmDialog(frame, inputPanel, "Enter Weekly Shift Details",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                // If the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    // Get the values from the input fields
+                    int weekNum = Integer.parseInt(weekNumberField.getText());
+                    int yearNum = Integer.parseInt(yearNumberField.getText());
+                    int superNum = Integer.parseInt(superNumberField.getText());
+
+                    // Create an instance of UIWeeklyShiftReq with the provided input values
+                    try {
+                        UIWeeklyShiftReq weeklyShiftReq = new UIWeeklyShiftReq(weekNum, yearNum, superNum);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
+
+        weeklyShiftMenu.add(createShiftReq);
 
         JMenuItem editShiftItem = new JMenuItem("Edit Shift");
         editShiftItem.addActionListener(new ActionListener() {
@@ -178,6 +264,7 @@ public class UIHRManager {
         });
         weeklyShiftMenu.add(editShiftItem);
 
+        //-------------------------------------------------------------------------------------------------------------
         // Adding the menus to the menu bar
         menuBar.add(employeesMenu);
         menuBar.add(weeklyShiftMenu);
@@ -414,7 +501,7 @@ public class UIHRManager {
             int prof = proComboBox.getSelectedIndex();
 
             // Call the addEmployee function with the gathered input
-            JOptionPane.showMessageDialog(null, "Added newpro for employee!");
+            JOptionPane.showMessageDialog(null, "Added new pro for employee!");
             HRManagerService.addnewproforemployee(id,prof);
         }
     }

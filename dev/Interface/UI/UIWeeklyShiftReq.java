@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class UIWeeklyShiftReq {
@@ -30,7 +29,7 @@ public class UIWeeklyShiftReq {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         frame.add(panel);
-        frame.setSize(900, 350);
+        frame.setSize(900, 450);
         frame.setVisible(true);
 
         createWeeklyShift(WeekNum,yearNum,superNum);

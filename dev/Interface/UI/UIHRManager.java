@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class UIHRManager {
-    private JPanel panel1;
     static HRManagerService HRManagerService;
 
     static {
@@ -34,7 +33,6 @@ public class UIHRManager {
 
         //all of the drops for it:
         //------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
         //adding new emp:
         JMenuItem addEmployeeItem = new JMenuItem("Add Employee");
@@ -201,9 +199,11 @@ public class UIHRManager {
                     // Create an instance of new weekly shift
                     try {
                         HRManagerService.createNewWeeklyShift(weekNum,yearNum,superNum);
+                        JOptionPane.showMessageDialog(null, "Weekly Shift was created successfully!");
 
                     } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
+                        JOptionPane.showMessageDialog(null, "something went wrong," +
+                                " Maybe it's already exist");
                     }
                 }
             }

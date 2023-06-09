@@ -249,5 +249,12 @@ public class Shift {
             }
             return -1;
         }
+    public ArrayList<String> workerByPro(int pro){
+        ArrayList<String> listWorkerBypro= new ArrayList<>();
+        for (Workers worker:this.workerInShift[pro]){
+            listWorkerBypro.add(worker.getName());
+        }
+        return listWorkerBypro;
+    }
 
 }

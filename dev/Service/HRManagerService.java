@@ -6,7 +6,7 @@ import Domain.Enums.WeightTypeFactory;
 import Domain.Enums.WindowTypeCreater;
 
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class HRManagerService {
@@ -137,6 +137,12 @@ public class HRManagerService {
      * */
     public void createNewWeeklyShift(int weekNum,int yearNum,int superNum) throws SQLException {
         controller.createnewweeklyshift(weekNum, yearNum, superNum);
+    }
+    public Map<String, ArrayList<String>> HRgetWorkersByProDay(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+        return controller.getWorkersByProDay(day,shiftType,WeekNum,yearNum,superNum,professions);
+    }
+    public  Map<String, ArrayList<String>> HRgetWorkersByProNight(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+        return controller.getWorkersByProNight(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
 
 }

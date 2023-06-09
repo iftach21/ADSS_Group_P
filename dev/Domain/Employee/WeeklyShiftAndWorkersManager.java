@@ -9,8 +9,7 @@ import Domain.Enums.WindowTypeCreater;
 import Domain.Enums.weightType;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class WeeklyShiftAndWorkersManager {
     private static WeeklyShiftAndWorkersManager Instance = null;
@@ -233,6 +232,24 @@ public class WeeklyShiftAndWorkersManager {
 
     public void deleteAllRows() throws SQLException {
         Connection.DeleteRows();
+    }
+
+    public Map<String, Integer> getProfessionCounts(String day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+
+        WeeklyShift ws = this.weeklyShiftDAO.get(WeekNum,yearNum,superNum);
+        Map<String, Integer> professionCounts = new HashMap<>();
+        int i=0;
+        for (String profession : professions) {
+            if(Objects.equals(shiftType, "day shift")) {
+                int count = ws.getDayShift()[Integer.parseInt(day)].getShiftRequirement().getreqbyprof(i++);
+                professionCounts.put(profession, count);
+            }
+            else{
+                int count = ws.getNightShift()[Integer.parseInt(day)].getShiftRequirement().getreqbyprof(i++);
+                professionCounts.put(profession, count);
+            }
+        }
+        return professionCounts;
     }
 
 

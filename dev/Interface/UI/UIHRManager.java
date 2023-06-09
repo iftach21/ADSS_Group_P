@@ -320,7 +320,7 @@ public class UIHRManager {
             int id = Integer.parseInt(idField.getText());
             int wage = Integer.parseInt(wageField.getText());
             JOptionPane.showMessageDialog(null, "added " +wage+" wage to employee!");
-//            HRManagerService.addwagetoemployee(id,wage);
+            HRManagerService.addwagetoemployee(id,wage);
         }
     }
     private void showChangeemployeecontractDialog() {
@@ -335,7 +335,7 @@ public class UIHRManager {
         panel.add(new JLabel("Start Date:"));
         int result = JOptionPane.showConfirmDialog(null, panel, "Change Employee Contract", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(null, "Changeed Employee Contract!");
+            JOptionPane.showMessageDialog(null, "Changed Employee Contract!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             String contract = contractField.getText();
@@ -378,7 +378,7 @@ public class UIHRManager {
         panel.add(new JLabel("nord:"));
         panel.add(nordField);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Add avilable for employee", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add available for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(null, "Added avilable for employee!");
             // Get the values from the text fields
@@ -406,7 +406,7 @@ public class UIHRManager {
         panel.add(new JLabel("prof Number:"));
         panel.add(proComboBox);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Add newpro for employee", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add new prof for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
 
             // Get the values from the text fields
@@ -458,9 +458,9 @@ public class UIHRManager {
         panel.add(daynumField);
         panel.add(new JLabel("nord:"));
         panel.add(nordField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "removeavalble for employee", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "remove available for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(null, "removeavalbled for employee!");
+            JOptionPane.showMessageDialog(null, "remove available for employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int daynum =  Integer.parseInt(daynumField.getText());

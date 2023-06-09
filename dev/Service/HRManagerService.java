@@ -6,6 +6,8 @@ import Domain.Enums.WeightTypeFactory;
 import Domain.Enums.WindowTypeCreater;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HRManagerService {
     private WeeklyShiftAndWorkersManager controller =  WeeklyShiftAndWorkersManager.getInstance();
@@ -125,6 +127,9 @@ public class HRManagerService {
         controller.setPersonalinfo(id,persoinfo);
     }
 
-    //todo: need here in the future to get some sort of all employees:
+
+    public Map<String, Integer> getProfessionCounts(String day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
+        return controller.getProfessionCounts(day,shiftType,WeekNum,yearNum,superNum,professions);
+    }
 
 }

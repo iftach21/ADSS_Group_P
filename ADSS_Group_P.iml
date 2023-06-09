@@ -2,11 +2,11 @@
 <module version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/dev" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dev/Test" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/dev/Test/DAOTest" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/dev/Test/DomainTest" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
     </content>
   </component>
 </module>

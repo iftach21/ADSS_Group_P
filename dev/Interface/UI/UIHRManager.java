@@ -51,7 +51,7 @@ public class UIHRManager {
         addNewDriverEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: add new driver *************************************************
+                showaddNewDriverDialog();
             }
         });
         employeesMenu.add(addNewDriverEmployee);
@@ -62,7 +62,7 @@ public class UIHRManager {
         removeEmployeeItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: add fire employee *************************************************
+                showfireemployeeDialog();
             }
         });
         employeesMenu.add(removeEmployeeItem);
@@ -82,7 +82,7 @@ public class UIHRManager {
         changeContractForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: change contract *************************************************
+                showChangeemployeecontractDialog();
             }
         });
         employeesMenu.add(changeContractForEmployee);
@@ -93,7 +93,7 @@ public class UIHRManager {
         changeBankNumForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: change bank number *************************************************
+                showUpdateemployeesbankDialog();
             }
         });
         employeesMenu.add(changeBankNumForEmployee);
@@ -103,7 +103,7 @@ public class UIHRManager {
         changePersonalInfoForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: change personal info *************************************************
+                showsetPersonalinfoDialog();
             }
         });
         employeesMenu.add(changePersonalInfoForEmployee);
@@ -114,7 +114,7 @@ public class UIHRManager {
         AddAvailableForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: add Available for employee *************************************************
+                showAddavilableforemployeeDialog();
             }
         });
         employeesMenu.add(AddAvailableForEmployee);
@@ -124,7 +124,7 @@ public class UIHRManager {
         removeAvailableForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: remove Available for employee *************************************************
+                showremoveavalbleforemployeeDialog();
             }
         });
         employeesMenu.add(removeAvailableForEmployee);
@@ -135,7 +135,7 @@ public class UIHRManager {
         addProfForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: radd prof for employee *************************************************
+                showAddnewproforemployeeDialog();
             }
         });
         employeesMenu.add(addProfForEmployee);
@@ -145,7 +145,7 @@ public class UIHRManager {
         removeProfForEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //todo: remove prof for employee *************************************************
+                showremoveprofforemployeeDialog();
             }
         });
         employeesMenu.add(removeProfForEmployee);
@@ -187,7 +187,76 @@ public class UIHRManager {
 
         frame.setVisible(true);
     }
+    private void showaddNewDriverDialog() {
+        JTextField idField = new JTextField();
+        JTextField nameField = new JTextField();
+        JTextField contractField = new JTextField();
+        JTextField startDateField = new JTextField();
+        JTextField wageField = new JTextField();
+        JTextField phoneNumField = new JTextField();
+        JTextField personalInfoField = new JTextField();
+        JTextField bankNumField = new JTextField();
+        JTextField tempTypeField = new JTextField();
+        JTextField weightTypeField = new JTextField();
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("ID:"));
+        panel.add(idField);
+        panel.add(new JLabel("Name:"));
+        panel.add(nameField);
+        panel.add(new JLabel("Contract:"));
+        panel.add(contractField);
+        panel.add(new JLabel("Start Date:"));
+        panel.add(startDateField);
+        panel.add(new JLabel("Wage:"));
+        panel.add(wageField);
+        panel.add(new JLabel("Phone Number:"));
+        panel.add(phoneNumField);
+        panel.add(new JLabel("Personal Info:"));
+        panel.add(personalInfoField);
+        panel.add(new JLabel("Bank Number:"));
+        panel.add(bankNumField);
+        panel.add(new JLabel("tempType Info:"));
+        panel.add(tempTypeField);
+        panel.add(new JLabel("weight Type:"));
+        panel.add(weightTypeField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "add Driver", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Added Driver");
+            // Get the values from the text fields
+            int id = Integer.parseInt(idField.getText());
+            String name = nameField.getText();
+            String contract = contractField.getText();
+            String startDate = startDateField.getText();
+            int wage = Integer.parseInt(wageField.getText());
+            int phoneNum = Integer.parseInt(phoneNumField.getText());
+            String personalInfo = personalInfoField.getText();
+            int bankNum = Integer.parseInt(bankNumField.getText());
+            int tempType = Integer.parseInt(tempTypeField.getText());
+            int weightType = Integer.parseInt(weightTypeField.getText());
+            // Call the addEmployee function with the gathered input
+            HRManagerService.addNewDriver(id,name,contract,startDate,wage,phoneNum,personalInfo,bankNum,tempType,weightType);
+        }
+    }
+    private void showfireemployeeDialog() {
+        JTextField idField = new JTextField();
+
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("ID:"));
+        panel.add(idField);
+        int result = JOptionPane.showConfirmDialog(null, panel, "add Driver", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "fired employee");
+            // Get the values from the text fields
+            int id = Integer.parseInt(idField.getText());
+            // Call the addEmployee function with the gathered input
+            HRManagerService.fireemployee(id);
+        }
+    }
     private void showAddEmployeeDialog() {
         JTextField idField = new JTextField();
         JTextField nameField = new JTextField();
@@ -219,6 +288,7 @@ public class UIHRManager {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Add Employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Added Employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             String name = nameField.getText();
@@ -232,6 +302,7 @@ public class UIHRManager {
         HRManagerService.addemployee(id,name,contract,startDate,wage,phoneNum,personalInfo,bankNum);
     }
 }
+
     private void showAddwagetoemployeeDialog() {
         JTextField idField = new JTextField();
         JTextField wageField = new JTextField();
@@ -241,10 +312,10 @@ public class UIHRManager {
         panel.add(idField);
         panel.add(new JLabel("Wage:"));
         panel.add(wageField);
-        panel.add(new JLabel("Phone Number:"));
 
         int result = JOptionPane.showConfirmDialog(null, panel, "add wage to employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "added wage to employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int wage = Integer.parseInt(wageField.getText());
@@ -263,6 +334,7 @@ public class UIHRManager {
         panel.add(new JLabel("Start Date:"));
         int result = JOptionPane.showConfirmDialog(null, panel, "Change Employee Contract", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Changeed Employee Contract!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             String contract = contractField.getText();
@@ -283,6 +355,7 @@ public class UIHRManager {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Add Update Employee Bank num", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Updated Employee Bank num!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int bankNum = Integer.parseInt(bankNumField.getText());
@@ -305,8 +378,9 @@ public class UIHRManager {
         panel.add(new JLabel("nord:"));
         panel.add(nordField);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Adda vilable for employee", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add avilable for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Added avilable for employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int daynum = Integer.parseInt(daynumField.getText());
@@ -329,6 +403,7 @@ public class UIHRManager {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Add newpro for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Added newpro for employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int prof = Integer.parseInt(profField.getText());
@@ -349,6 +424,7 @@ public class UIHRManager {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "remove pro for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "removed pro for employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int prof = Integer.parseInt(profField.getText());
@@ -371,6 +447,7 @@ public class UIHRManager {
         panel.add(nordField);
         int result = JOptionPane.showConfirmDialog(null, panel, "removeavalble for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "removeavalbled for employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int daynum =  Integer.parseInt(daynumField.getText());
@@ -394,6 +471,7 @@ public class UIHRManager {
         panel.add(persoinfoField);
         int result = JOptionPane.showConfirmDialog(null, panel, "set Personal info", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "set Personal infofor employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             String persoinfo = persoinfoField.getText();

@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="test update">
-      <change afterPath="$PROJECT_DIR$/dev/services/Supplier_GUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/services/Supplier_GUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/services/AddSupplier_GUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/services/AddSupplier_GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,6 +128,7 @@
       <workItem from="1684174763540" duration="2917000" />
       <workItem from="1684250825669" duration="2782000" />
       <workItem from="1686334806837" duration="782000" />
+      <workItem from="1686339178693" duration="666000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>

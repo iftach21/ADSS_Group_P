@@ -87,6 +87,7 @@ public class WeeklyShiftAndWorkersManager {
         worker.setContract(contract);
         this.workersDAO.update(worker);
     }
+
     //function for the "9"
     public void updateemployeesbank(int id,int newbanknum) {
         Workers worker = this.getworkerbyid(id);

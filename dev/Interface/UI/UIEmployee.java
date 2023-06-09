@@ -14,4 +14,9 @@ public class UIEmployee extends JFrame {
         this.setIconImage(imageIcon.getImage());
 
     }
+
+    //for testing this:
+    public static void main(String[] args){
+        UIEmployee ui = new UIEmployee();
+    }
 }

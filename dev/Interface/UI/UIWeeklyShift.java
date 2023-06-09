@@ -3,6 +3,8 @@ package Interface.UI;
 import Service.HRManagerService;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -36,7 +38,7 @@ public class UIWeeklyShift {
         createWeeklyShift(WeekNum,yearNum,superNum);
     }
 
-    private void createWeeklyShift(int WeekNum,int yearNum,int superNum) throws SQLException {
+    private void createWeeklyShift(int WeekNum, int yearNum, int superNum) throws SQLException {
         // Create the professions
         String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
 
@@ -55,42 +57,127 @@ public class UIWeeklyShift {
         dayShiftRow[0] = "<html><body><b>Day Shift</b></body></html>";
         nightShiftRow[0] = "<html><body><b>Night Shift</b></body></html>";
 
-        // Iterate over the days and populate the cells with profession counts
+        // Iterate over the days and populate the cells with profession requirements
         for (int i = 1; i < 8; i++) {
-            int day = i-1;
+            int day = i - 1;
 
-            Map<String, Integer> dayShiftProfessions = getProfessionCounts(day, "Day Shift",WeekNum,yearNum,superNum, professions);
-            Map<String, Integer> nightShiftProfessions = getProfessionCounts(day, "Night Shift",WeekNum,yearNum,superNum, professions);
+            Map<String, Integer> dayShiftRequirements = getProfessionCounts(day, "Day Shift", WeekNum, yearNum, superNum, professions);
+            Map<String, Integer> nightShiftRequirements = getProfessionCounts(day, "Night Shift", WeekNum, yearNum, superNum, professions);
 
-            StringBuilder dayShiftBuilder = new StringBuilder("<html><body>");
-            StringBuilder nightShiftBuilder = new StringBuilder("<html><body>");
+            JPanel dayShiftPanel = new JPanel(new GridLayout(0, 1));
+            JPanel nightShiftPanel = new JPanel(new GridLayout(0, 1));
 
-            // Build the profession count strings for the day shift
+            // Add the profession requirements text fields for the day shift
             for (String profession : professions) {
-                int count = dayShiftProfessions.getOrDefault(profession, 0);
-                dayShiftBuilder.append(profession).append(": ").append(count).append("<br>");
-            }
-            dayShiftBuilder.append("</body></html>");
-            dayShiftRow[i] = dayShiftBuilder.toString();
+                int count = dayShiftRequirements.getOrDefault(profession, 0);
+                JLabel professionLabel = new JLabel(profession);
+                JTextField requirementField = new JTextField(String.valueOf(count));
 
-            // Build the profession count strings for the night shift
-            for (String profession : professions) {
-                int count = nightShiftProfessions.getOrDefault(profession, 0);
-                nightShiftBuilder.append(profession).append(": ").append(count).append("<br>");
+                dayShiftPanel.add(professionLabel);
+                dayShiftPanel.add(requirementField);
+
+                // Update the requirement when the text field value changes
+                requirementField.getDocument().addDocumentListener(new DocumentListener() {
+                    @Override
+                    public void insertUpdate(DocumentEvent e) {
+                        try {
+                            updateRequirement(day, "Day Shift", profession, requirementField.getText(), WeekNum, yearNum, superNum);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
+                    @Override
+                    public void removeUpdate(DocumentEvent e) {
+                        try {
+                            updateRequirement(day, "Day Shift", profession, requirementField.getText(), WeekNum, yearNum, superNum);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
+                    @Override
+                    public void changedUpdate(DocumentEvent e) {
+                        try {
+                            updateRequirement(day, "Day Shift", profession, requirementField.getText(), WeekNum, yearNum, superNum);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
             }
-            nightShiftBuilder.append("</body></html>");
-            nightShiftRow[i] = nightShiftBuilder.toString();
+
+            // Add the profession requirements text fields for the night shift
+            for (String profession : professions) {
+                int count = nightShiftRequirements.getOrDefault(profession, 0);
+                JLabel professionLabel = new JLabel(profession);
+                JTextField requirementField = new JTextField(String.valueOf(count));
+
+                nightShiftPanel.add(professionLabel);
+                nightShiftPanel.add(requirementField);
+
+                // Update the requirement when the text field value changes
+                requirementField.getDocument().addDocumentListener(new DocumentListener() {
+                    @Override
+                    public void insertUpdate(DocumentEvent e) {
+                        try {
+                            updateRequirement(day, "Night Shift", profession, requirementField.getText(), WeekNum, yearNum, superNum);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
+                    @Override
+                    public void removeUpdate(DocumentEvent e) {
+                        try {
+                            updateRequirement(day, "Night Shift", profession, requirementField.getText(), WeekNum, yearNum, superNum);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
+                    @Override
+                    public void changedUpdate(DocumentEvent e) {
+                        try {
+                            updateRequirement(day, "Night Shift", profession, requirementField.getText(), WeekNum, yearNum, superNum);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+            }
+
+            dayShiftRow[i] = dayShiftPanel;
+            nightShiftRow[i] = nightShiftPanel;
         }
 
         // Add the rows to the table model
         tableModel.addRow(dayShiftRow);
         tableModel.addRow(nightShiftRow);
-
-        // Set row height explicitly
-        int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
-        table.setRowHeight(lineHeight * (professions.length + 1));
     }
 
+    // Update the requirement in your data using the provided day, shiftType, profession, count, WeekNum, yearNum, and superNum
+    private void updateRequirement(int day, String shiftType, String profession, String requirement, int WeekNum, int yearNum, int superNum) throws SQLException {
+        HRManagerService hr = new HRManagerService();
+        String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
+        int index = -1;  // Default index if string is not found
+
+        for (int i = 0; i < professions.length; i++) {
+            if (professions[i].equals(profession)) {
+                index = i;  // Update the index if the string is found
+                break;
+            }
+        }
+        String shift = "";
+        if(shiftType.equals("Day shift")){
+            shift = "day";
+        }
+        else{
+            shift = "night";
+        }
+
+        hr.addreqtoweeklyshift(WeekNum,yearNum,superNum,day,shift,index, Integer.parseInt(requirement));
+    }
 
 
 
@@ -100,6 +187,7 @@ public class UIWeeklyShift {
     }
 
     public static void main(String[] args) throws SQLException {
+        //just for my test:
         UIWeeklyShift ws = new UIWeeklyShift(10,1997,0);
     }
 

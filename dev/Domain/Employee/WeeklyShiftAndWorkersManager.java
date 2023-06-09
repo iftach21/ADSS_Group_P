@@ -251,6 +251,14 @@ public class WeeklyShiftAndWorkersManager {
         }
         return professionCounts;
     }
+    public Map<String, List<String>> getShiftProfession(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+
+        WeeklyShift ws = this.weeklyShiftDAO.get(WeekNum,yearNum,superNum);
+        Map<String, List<String>>  ShiftProfession = new HashMap<>();
+        Shift shift =ws.getNightShift()[day];
+
+        return professionCounts;
+    }
 
 
 

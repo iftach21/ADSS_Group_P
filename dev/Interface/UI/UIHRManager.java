@@ -31,6 +31,11 @@ public class UIHRManager {
         // Creating the Employees menu
         JMenu employeesMenu = new JMenu("Employees");
 
+        //all of the drops for it:
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        //adding new emp:
         JMenuItem addEmployeeItem = new JMenuItem("Add Employee");
         addEmployeeItem.addActionListener(new ActionListener() {
             @Override
@@ -40,14 +45,116 @@ public class UIHRManager {
         });
         employeesMenu.add(addEmployeeItem);
 
+
+        //add new driver:
+        JMenuItem addNewDriverEmployee = new JMenuItem("Add Driver");
+        addNewDriverEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: add new driver *************************************************
+            }
+        });
+        employeesMenu.add(addNewDriverEmployee);
+
+
+        //fire employee
         JMenuItem removeEmployeeItem = new JMenuItem("Remove Employee");
         removeEmployeeItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Remove Employee action performed");
+                //todo: add fire employee *************************************************
             }
         });
         employeesMenu.add(removeEmployeeItem);
+
+        //change wage
+        JMenuItem changeWageForEmployee = new JMenuItem("Change Wage");
+        changeWageForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: change wage *************************************************
+            }
+        });
+        employeesMenu.add(changeWageForEmployee);
+
+        //change contract
+        JMenuItem changeContractForEmployee = new JMenuItem("Change Contract");
+        changeContractForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: change contract *************************************************
+            }
+        });
+        employeesMenu.add(changeContractForEmployee);
+
+
+        //update bank Number
+        JMenuItem changeBankNumForEmployee = new JMenuItem("Change Bank number");
+        changeBankNumForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: change bank number *************************************************
+            }
+        });
+        employeesMenu.add(changeBankNumForEmployee);
+
+        //change personal info
+        JMenuItem changePersonalInfoForEmployee = new JMenuItem("Change personal Info");
+        changePersonalInfoForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: change personal info *************************************************
+            }
+        });
+        employeesMenu.add(changePersonalInfoForEmployee);
+
+
+        //add Available for employee
+        JMenuItem AddAvailableForEmployee = new JMenuItem("Add when can work");
+        AddAvailableForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: add Available for employee *************************************************
+            }
+        });
+        employeesMenu.add(AddAvailableForEmployee);
+
+        //remove Available for employee
+        JMenuItem removeAvailableForEmployee = new JMenuItem("Remove when can work");
+        removeAvailableForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: remove Available for employee *************************************************
+            }
+        });
+        employeesMenu.add(removeAvailableForEmployee);
+
+
+        //add prof for employee
+        JMenuItem addProfForEmployee = new JMenuItem("Add prof for Employee");
+        addProfForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: radd prof for employee *************************************************
+            }
+        });
+        employeesMenu.add(addProfForEmployee);
+
+        //remove prof for employee
+        JMenuItem removeProfForEmployee = new JMenuItem("Remove prof for Employee");
+        removeProfForEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //todo: remove prof for employee *************************************************
+            }
+        });
+        employeesMenu.add(removeProfForEmployee);
+
+
+
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
         // Creating the Weekly Shift menu
         JMenu weeklyShiftMenu = new JMenu("Weekly Shift");
@@ -59,6 +166,7 @@ public class UIHRManager {
                 JOptionPane.showMessageDialog(null, "Create Shift action performed");
             }
         });
+
         weeklyShiftMenu.add(createShiftItem);
 
         JMenuItem editShiftItem = new JMenuItem("Edit Shift");

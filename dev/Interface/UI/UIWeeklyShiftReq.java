@@ -89,9 +89,92 @@ public class UIWeeklyShiftReq {
         // Set row height explicitly
         int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
         table.setRowHeight(lineHeight * (professions.length + 1));
+
+
+
+        // Create the edit button
+        JButton editButton = new JButton("Edit");
+        editButton.addActionListener(e -> {
+            // Get the selected cell coordinates
+            int selectedRow = table.getSelectedRow();
+            int selectedColumn = table.getSelectedColumn();
+
+            // Check if a valid cell is selected
+            if (selectedRow != -1 && selectedColumn != -1) {
+                // Create the input fields for arguments
+                JComboBox<String> professionComboBox = new JComboBox<>(professions);
+                JTextField requirementField = new JTextField();
+
+                // Create the panel to hold the input fields
+                JPanel inputPanel = new JPanel(new GridLayout(2, 2));
+                inputPanel.add(new JLabel("Profession:"));
+                inputPanel.add(professionComboBox);
+                inputPanel.add(new JLabel("Requirement Count:"));
+                inputPanel.add(requirementField);
+
+                // Show the input dialog and get the user's input
+                int result = JOptionPane.showConfirmDialog(frame, inputPanel, "Edit Requirement",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                // If the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    // Get the values from the input fields
+                    String profession = (String) professionComboBox.getSelectedItem();
+                    String requirementStr = requirementField.getText();
+                    int requirement = Integer.parseInt(requirementStr);
+
+                    // Update the table model with the new requirement count
+                    tableModel.setValueAt(requirement, selectedRow, selectedColumn);
+                    String shiftType = selectedRow == 0 ? "Day Shift" : "Night Shift";
+
+                    // Update the requirement in your data using the selected day, shiftType, and profession
+                    try {
+                        updateRequirement(selectedColumn, shiftType, profession, requirementStr, WeekNum, yearNum, superNum);
+                        JOptionPane.showMessageDialog(frame, "Requirement updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                        // Reload the screen to see the updated data
+                        reloadScreen(WeekNum, yearNum, superNum);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
+
+        // Add the edit button to the panel
+        panel.add(editButton, BorderLayout.SOUTH);
+    }
+    private void reloadScreen(int WeekNum, int yearNum, int superNum) throws SQLException {
+        // Clear the table model
+        tableModel.setRowCount(0);
+        tableModel.setColumnCount(0);
+
+        // Call the createWeeklyShift method again to populate the table with updated data
+        createWeeklyShift(WeekNum, yearNum, superNum);
     }
 
+    // Update the requirement in your data using the provided day, shiftType, profession, count, WeekNum, yearNum, and superNum
+    private void updateRequirement(int day, String shiftType, String profession, String requirement, int WeekNum, int yearNum, int superNum) throws SQLException {
+        HRManagerService hr = new HRManagerService();
+        String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
+        int index = -1;  // Default index if string is not found
 
+        for (int i = 0; i < professions.length; i++) {
+            if (professions[i].equals(profession)) {
+                index = i;  // Update the index if the string is found
+                break;
+            }
+        }
+        String shift = "";
+        if(shiftType.equals("Day Shift")){
+            shift = "day";
+        }
+        else{
+            shift = "night";
+        }
+
+        hr.addreqtoweeklyshift(WeekNum,yearNum,superNum,day,shift,index, Integer.parseInt(requirement));
+    }
 
 
     private Map<String, Integer> getProfessionCounts(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
@@ -100,7 +183,7 @@ public class UIWeeklyShiftReq {
     }
 
     public static void main(String[] args) throws SQLException {
-        UIWeeklyShiftReq ws = new UIWeeklyShiftReq(10,1997,0);
+        UIWeeklyShiftReq ws = new UIWeeklyShiftReq(1,2024,4);
     }
 
     private class WeeklyShiftCellRenderer extends DefaultTableCellRenderer {

@@ -9,16 +9,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
-public class UIWeeklyShift {
+public class UIWeeklyShiftReq {
     private JFrame frame;
     private JPanel panel;
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public UIWeeklyShift(int WeekNum,int yearNum,int superNum) throws SQLException {
+    public UIWeeklyShiftReq(int WeekNum, int yearNum, int superNum) throws SQLException {
         frame = new JFrame("Weekly Shift");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -188,7 +187,7 @@ public class UIWeeklyShift {
 
     public static void main(String[] args) throws SQLException {
         //just for my test:
-        UIWeeklyShift ws = new UIWeeklyShift(10,1997,0);
+        UIWeeklyShiftReq ws = new UIWeeklyShiftReq(10,1997,0);
     }
 
     private class WeeklyShiftCellRenderer extends DefaultTableCellRenderer {

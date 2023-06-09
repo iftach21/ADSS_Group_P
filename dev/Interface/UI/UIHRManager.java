@@ -315,11 +315,12 @@ public class UIHRManager {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "add wage to employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(null, "added wage to employee!");
+
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
             int wage = Integer.parseInt(wageField.getText());
-            HRManagerService.addwagetoemployee(id,wage);
+            JOptionPane.showMessageDialog(null, "added " +wage+" wage to employee!");
+//            HRManagerService.addwagetoemployee(id,wage);
         }
     }
     private void showChangeemployeecontractDialog() {
@@ -365,7 +366,6 @@ public class UIHRManager {
     }
     private void showAddavilableforemployeeDialog() {
         JTextField idField = new JTextField();
-
         JTextField daynumField = new JTextField();
         JTextField nordField = new JTextField();
 
@@ -392,42 +392,55 @@ public class UIHRManager {
     }
     private void showAddnewproforemployeeDialog() {
         JTextField idField = new JTextField();
-        JTextField profField = new JTextField();
-
+        JComboBox<Object> proComboBox=new JComboBox<>();
+        proComboBox.addItem("manager");
+        proComboBox.addItem("cashier");
+        proComboBox.addItem("stoke");
+        proComboBox.addItem("cleaning");
+        proComboBox.addItem("shelf-stoking");
+        proComboBox.addItem("general-worker");
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(new JLabel("ID:"));
         panel.add(idField);
-        panel.add(new JLabel("Bank Number:"));
-        panel.add(profField);
+        panel.add(new JLabel("prof Number:"));
+        panel.add(proComboBox);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Add newpro for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(null, "Added newpro for employee!");
+
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
-            int prof = Integer.parseInt(profField.getText());
+            int prof = proComboBox.getSelectedIndex();
+
             // Call the addEmployee function with the gathered input
+            JOptionPane.showMessageDialog(null, "Added newpro for employee!");
             HRManagerService.addnewproforemployee(id,prof);
         }
     }
     private void showremoveprofforemployeeDialog() {
         JTextField idField = new JTextField();
-        JTextField profField = new JTextField();
+        JComboBox<Object> proComboBox=new JComboBox<>();
+        proComboBox.addItem("manager");
+        proComboBox.addItem("cashier");
+        proComboBox.addItem("stoke");
+        proComboBox.addItem("cleaning");
+        proComboBox.addItem("shelf-stoking");
+        proComboBox.addItem("general-worker");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(new JLabel("ID:"));
         panel.add(idField);
-        panel.add(new JLabel("Bank Number:"));
-        panel.add(profField);
+        panel.add(new JLabel("prof Number:"));
+        panel.add(proComboBox);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "remove pro for employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(null, "removed pro for employee!");
             // Get the values from the text fields
             int id = Integer.parseInt(idField.getText());
-            int prof = Integer.parseInt(profField.getText());
+            int prof = proComboBox.getSelectedIndex();
             // Call the addEmployee function with the gathered input
             HRManagerService.removeprofforemployee(id,prof);
         }

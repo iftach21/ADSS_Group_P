@@ -234,18 +234,18 @@ public class WeeklyShiftAndWorkersManager {
         Connection.DeleteRows();
     }
 
-    public Map<String, Integer> getProfessionCounts(String day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+    public Map<String, Integer> getProfessionCounts(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
 
         WeeklyShift ws = this.weeklyShiftDAO.get(WeekNum,yearNum,superNum);
         Map<String, Integer> professionCounts = new HashMap<>();
         int i=0;
         for (String profession : professions) {
-            if(Objects.equals(shiftType, "day shift")) {
-                int count = ws.getDayShift()[Integer.parseInt(day)].getShiftRequirement().getreqbyprof(i++);
+            if(Objects.equals(shiftType, "Day Shift")) {
+                int count = ws.getDayShift()[day].getShiftRequirement().getreqbyprof(i++);
                 professionCounts.put(profession, count);
             }
             else{
-                int count = ws.getNightShift()[Integer.parseInt(day)].getShiftRequirement().getreqbyprof(i++);
+                int count = ws.getNightShift()[day].getShiftRequirement().getreqbyprof(i++);
                 professionCounts.put(profession, count);
             }
         }

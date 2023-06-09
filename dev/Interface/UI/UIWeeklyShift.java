@@ -57,7 +57,7 @@ public class UIWeeklyShift {
 
         // Iterate over the days and populate the cells with profession counts
         for (int i = 1; i < 8; i++) {
-            String day = daysOfWeek[i - 1];
+            int day = i-1;
 
             Map<String, Integer> dayShiftProfessions = getProfessionCounts(day, "Day Shift",WeekNum,yearNum,superNum, professions);
             Map<String, Integer> nightShiftProfessions = getProfessionCounts(day, "Night Shift",WeekNum,yearNum,superNum, professions);
@@ -94,13 +94,13 @@ public class UIWeeklyShift {
 
 
 
-    private Map<String, Integer> getProfessionCounts(String day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
+    private Map<String, Integer> getProfessionCounts(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
         HRManagerService hr = new HRManagerService();
-        return getProfessionCounts(day,shiftType,WeekNum,yearNum,superNum,professions);
+        return hr.getProfessionCounts(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
 
     public static void main(String[] args) throws SQLException {
-        UIWeeklyShift ws = new UIWeeklyShift(1,1,1);
+        UIWeeklyShift ws = new UIWeeklyShift(10,1997,0);
     }
 
     private class WeeklyShiftCellRenderer extends DefaultTableCellRenderer {

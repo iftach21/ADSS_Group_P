@@ -128,7 +128,7 @@ public class HRManagerService {
     }
 
 
-    public Map<String, Integer> getProfessionCounts(String day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
+    public Map<String, Integer> getProfessionCounts(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
         return controller.getProfessionCounts(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
 

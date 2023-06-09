@@ -4,7 +4,9 @@ import DataAccesObjects.Connection;
 import Interface.Employee.BossInterface;
 import Interface.Employee.WorkerInterface;
 import Interface.Transfer.TransferManagerInterface;
+import Interface.UI.UIEmployee;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,7 @@ public class Main {
     static TransferManagerInterface transferInterface;
     static AdminInterface adminInterface;
     public static void main(String[] args) throws SQLException {
+        UIEmployee uiEmployee= new UIEmployee();
         List<AInterface> intefaceList = new ArrayList<>();
         intefaceList.add(bossInterface);
         intefaceList.add(workerInterface);

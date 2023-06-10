@@ -296,12 +296,25 @@ public class UIHRManager {
         weeklyShiftMenu.add(editShiftItem);
 
         //-------------------------------------------------------------------------------------------------------------
+
+
+
         // Adding the menus to the menu bar
         menuBar.add(employeesMenu);
         menuBar.add(weeklyShiftMenu);
 
         // Setting the menu bar on the frame
         frame.setJMenuBar(menuBar);
+
+        // Create a JPanel to hold the task box components
+        UITaskBox taskBox = new UITaskBox();
+        JPanel taskPanel = taskBox.createPanel();
+
+        // Add the task panel to the main frame
+        frame.add(taskPanel, BorderLayout.CENTER);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
 
         frame.setVisible(true);
     }

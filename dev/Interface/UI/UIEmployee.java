@@ -39,13 +39,19 @@ public class UIEmployee extends JFrame {
         panel.setLayout(new GridLayout(3, 1));
 
         idField = new JTextField();
+        idField.setPreferredSize(new Dimension(200, idField.getPreferredSize().height)); // Set preferred width
         loginButton = new JButton("Log In");
         viewWeeklyReqButton = new JButton("View Weekly Requests");
         updateButton = new JButton("Update When Available");
         showWeeklyIncomeButton = new JButton("Show My Weekly Income");
 
-        // Add components to the panel
-        panel.add(idField);
+        // Create ID panel
+        JPanel idPanel = new JPanel();
+        idPanel.add(new JLabel("Enter ID:"));
+        idPanel.add(idField);
+
+        // Add components to the main panel
+        panel.add(idPanel);
         panel.add(loginButton);
 
         // Add action listeners
@@ -107,13 +113,12 @@ public class UIEmployee extends JFrame {
 
                     // Create an instance of UIWeeklyShiftReq with the provided input values
                     try {
-                        UIWeeklyShiftReq weeklyShiftReq = new UIWeeklyShiftReq(weekNum, yearNum, superNum,true);
+                        UIWeeklyShiftReq weeklyShiftReq = new UIWeeklyShiftReq(weekNum, yearNum, superNum, true);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
             }
-
         });
 
         updateButton.addActionListener(new ActionListener() {
@@ -129,7 +134,6 @@ public class UIEmployee extends JFrame {
                 // Create a dialog to get the week number, year number, and super number
                 JTextField weekField = new JTextField();
                 JTextField yearField = new JTextField();
-                JTextField superNumberField = new JTextField();
 
                 JPanel panel = new JPanel(new GridLayout(3, 2));
                 panel.add(new JLabel("Week Number:"));
@@ -168,6 +172,7 @@ public class UIEmployee extends JFrame {
             }
         });
     }
+
     private void showAddavilableforemployeeDialog() {
         final String[] DAYS_OF_WEEK = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         final String[] NORD_OPTIONS = {"night", "day"};
@@ -177,7 +182,7 @@ public class UIEmployee extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(new JLabel("Day Num:"));
+        panel.add(new JLabel("Day of the week:"));
         panel.add(daynumCombo);
         panel.add(new JLabel("Night or Day:"));
         panel.add(nordCombo);
@@ -192,12 +197,12 @@ public class UIEmployee extends JFrame {
             String nordInfo = nordCombo.getSelectedItem().toString();
 
             // Call the addEmployee function with the gathered input
-            HRManagerService.addavilableforemployee(id,daynum,nordInfo);
+            HRManagerService.addavilableforemployee(id, daynum, nordInfo);
         }
     }
-    private int getWeeklyIncome(int weekNum,int yearNum){
-        return HRManagerService.getwageforemployee(Integer.parseInt(this.loggedInId),weekNum,yearNum);
+
+    private int getWeeklyIncome(int weekNum, int yearNum) {
+        return HRManagerService.getwageforemployee(Integer.parseInt(this.loggedInId), weekNum, yearNum);
     }
 
 }
-

@@ -24,27 +24,9 @@ public class BossInterface extends AInterface {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
     public void logIn() throws Exception {
-        //this.startup();
         //===============================
         //    login confirmation
         //===============================
-
-
-
-        //scans the username and password:
-       while(true) {
-           Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter username");
-            String userName = myObj.nextLine();  // Read user input
-            System.out.println("Enter password");  // Output user input
-            String password = myObj.nextLine();  // Read user input
-            if(userName.equals(username)&&password.equals(passward)){
-                break;
-          }
-            else{
-               System.out.println("invalid input, please try again");  // Output user input
-           }
-           }
 
 
         //checks for 24 next 24 hrs if its ok:
@@ -390,9 +372,9 @@ public class BossInterface extends AInterface {
                 }
 
 
-                //-----------------------
+                //----------------------------
                 //update employees bank number
-                //-----------------------
+                //----------------------------
                 case "9":{
                     System.out.println("please enter id for the employee");
                     int idans = myObj.nextInt();  // Read user input
@@ -402,9 +384,9 @@ public class BossInterface extends AInterface {
                     break;
                 }
 
-                //-----------------------
+                //-----------------------------
                 //update available for employee
-                //-----------------------
+                //-----------------------------
                 case "10":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
@@ -422,9 +404,9 @@ public class BossInterface extends AInterface {
 
                 }
 
-                //-----------------------
+                //------------------------
                 //add new jobs for employee
-                //-----------------------
+                //------------------------
                 case "11":{
                     System.out.println("please enter id for the employee");
                     int id = myObj.nextInt();  // Read user input
@@ -445,9 +427,9 @@ public class BossInterface extends AInterface {
                 }
 
 
-                //-----------------------
+                //------------------------
                 //remove jobs for employee
-                //-----------------------
+                //------------------------
 
                 case "12":{
                     System.out.println("please enter id for the employee");

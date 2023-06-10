@@ -21,7 +21,7 @@ public class UIHRManager {
 
     public UIHRManager(){
 
-        JFrame frame = new JFrame("App");
+        JFrame frame = new JFrame("HR - Manager");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

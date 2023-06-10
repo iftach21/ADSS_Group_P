@@ -43,8 +43,13 @@ public class Main {
     static AdminInterface adminInterface;
     public static void main(String[] args) throws Exception {
         if(args.length==1 && args[0].compareTo("admin")==0){
-            adminInterface.logIn();
-            return;
+            try{
+                adminInterface.logIn();}
+            catch (ExitExeption e){
+                System.out.print("come back again!\n");
+                return;
+            }
+
         }
         if(args.length != 2){
             System.out.print("the number of arg are incorrect, please try again:\nfor example: java -jar adss2023_v03.jar CLI HRManager\n");
@@ -83,13 +88,25 @@ public class Main {
     }
 
     private static void CLIHRManager() throws Exception {
-        bossInterface.logIn();
+        try{
+        bossInterface.logIn();}
+        catch (ExitExeption e){
+         System.out.print("come back again!\n");
+        }
     }
     private static void CLIEmployee() throws Exception {
-        workerInterface.logIn();
+        try{
+            workerInterface.logIn();}
+        catch (ExitExeption e){
+            System.out.print("come back again!\n");
+        }
     }
     private static void CLITransferManager() throws Exception {
-        transferInterface.logIn();
+        try{
+            transferInterface.logIn();}
+        catch (ExitExeption e){
+            System.out.print("come back again!\n");
+        }
     }
     private static void CLIStoreManager() throws Exception {
         //todo: complete later

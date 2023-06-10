@@ -1,5 +1,6 @@
 package Service;
 
+import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.TempTypeFactory;
 import Domain.Enums.WeightTypeFactory;
@@ -147,5 +148,7 @@ public class HRManagerService {
     public ArrayList<Integer> AllWorkersWhoCanWorkList(int prof, int daynum, String don) {
         return controller.AllWorkersWhoCanWorkList(prof,daynum,don);
     }
-
+    public void addWorkerToShift(int workerId,int shiftId,int workersPro){
+        controller.addWorkerToShift(workerId,shiftId,workersPro);
+    }
 }

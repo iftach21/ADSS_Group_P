@@ -1,6 +1,7 @@
 package Domain.Employee;
 
 import DataAccesObjects.Connection;
+import DataAccesObjects.Employee.ShiftWorkerDAO;
 import DataAccesObjects.Employee.WeeklyShiftDAO;
 import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Enums.TempLevel;
@@ -15,13 +16,16 @@ public class WeeklyShiftAndWorkersManager {
     private static WeeklyShiftAndWorkersManager Instance = null;
     private final WorkersDAO workersDAO;
     private final WeeklyShiftDAO weeklyShiftDAO;
+    private final ShiftWorkerDAO shiftWorkerDAO;
 
 
 
     private WeeklyShiftAndWorkersManager() throws SQLException {
         workersDAO = WorkersDAO.getInstance();
         weeklyShiftDAO = WeeklyShiftDAO.getInstance();
+        shiftWorkerDAO = ShiftWorkerDAO.getInstance();
     }
+
     public static WeeklyShiftAndWorkersManager getInstance() throws SQLException {
         if(Instance==null){Instance = new WeeklyShiftAndWorkersManager();}
         return Instance;
@@ -295,6 +299,10 @@ public class WeeklyShiftAndWorkersManager {
             i++;
         }
         return WorkerProMap;
+    }
+
+    public void addWorkerToShift(int w, int s, int workersPro){
+        this.shiftWorkerDAO.add(w,s,workersPro);
     }
 
 

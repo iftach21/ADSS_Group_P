@@ -41,9 +41,14 @@ public class Main {
     static TransferManagerInterface transferInterface;
     static AdminInterface adminInterface;
     public static void main(String[] args) throws Exception {
+        if(args.length==1 && args[0].compareTo("admin")==0){
+            adminInterface.logIn();
+            return;
+        }
         if(args.length != 2){
             System.out.print("the number of arg are incorrect, please try again:\nfor example: java -jar adss2023_v03.jar CLI HRManager\n");
         }
+
         if("CLI".compareTo(args[0])==0){
             if("HRManager".compareTo(args[1])==0){
                 CLIHRManager();

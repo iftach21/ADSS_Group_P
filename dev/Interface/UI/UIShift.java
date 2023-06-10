@@ -31,7 +31,8 @@ public class UIShift {
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
-
+//        JLabel jLabel=new JLabel( getAllWorkerAvelibel(2,1,"manager").get(1).toString());
+//        panel.add(jLabel);
         frame.add(panel);
         frame.setSize(900, 350);
         frame.setVisible(true);
@@ -115,6 +116,9 @@ public class UIShift {
                 inputPanel.add(professionComboBox);
                 inputPanel.add(new JLabel("Available to work:"));
                 JComboBox<Integer> WorkersComboBox = new JComboBox<>();
+                inputPanel.add(WorkersComboBox);
+//                JLabel jLabel=new JLabel();
+//                inputPanel.add(jLabel);
 
                 // Add ActionListener to professionComboBox
                 professionComboBox.addActionListener(new ActionListener() {
@@ -138,6 +142,7 @@ public class UIShift {
                         for (Integer item : dataList) {
                             WorkersComboBox.addItem(item);
                         }
+                        //jLabel.setText(selectedProfession);
                     }
                 });
 

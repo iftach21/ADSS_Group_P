@@ -144,5 +144,8 @@ public class HRManagerService {
     public  Map<String, ArrayList<String>> HRgetWorkersByProNight(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
         return controller.getWorkersByProNight(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
+    public ArrayList<Integer> AllWorkersWhoCanWorkList(int prof, int daynum, String don) {
+        return controller.AllWorkersWhoCanWorkList(prof,daynum,don);
+    }
 
 }

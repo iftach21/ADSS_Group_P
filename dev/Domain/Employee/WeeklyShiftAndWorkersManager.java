@@ -167,6 +167,27 @@ public class WeeklyShiftAndWorkersManager {
             }
         }
     }
+    public ArrayList<Integer> AllWorkersWhoCanWorkList(int prof,int daynum, String don) {
+
+        WindowTypeCreater wc = new WindowTypeCreater();
+        List<Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+        ArrayList<Integer> allworkers=new ArrayList<Integer>();
+        if (prof != 7) {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+                    allworkers.add(allworkerslist.get(i).getId());
+                }
+            }
+        } else {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).amIDriver() && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+
+                    allworkers.add(allworkerslist.get(i).getId());
+                }
+            }
+        }
+        return allworkers;
+    }
 
     public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm) throws SQLException {
         WindowTypeCreater wc = new WindowTypeCreater();

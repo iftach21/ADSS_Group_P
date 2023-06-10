@@ -169,24 +169,27 @@ public class UIEmployee extends JFrame {
         });
     }
     private void showAddavilableforemployeeDialog() {
+        final String[] DAYS_OF_WEEK = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        final String[] NORD_OPTIONS = {"night", "day"};
         JTextField idField = new JTextField();
-        JTextField daynumField = new JTextField();
-        JTextField nordField = new JTextField();
+        JComboBox<String> daynumCombo = new JComboBox<>(DAYS_OF_WEEK);
+        JComboBox<String> nordCombo = new JComboBox<>(NORD_OPTIONS);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(new JLabel("day num Info:"));
-        panel.add(daynumField);
-        panel.add(new JLabel("night or day:"));
-        panel.add(nordField);
+        panel.add(new JLabel("Day Num:"));
+        panel.add(daynumCombo);
+        panel.add(new JLabel("Night or Day:"));
+        panel.add(nordCombo);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Add available for employee", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add Available for Employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(null, "Added available for employee!");
-            // Get the values from the text fields
+            JOptionPane.showMessageDialog(null, "Added Available for Employee!");
+            // Get the values from the text field and combo boxes
             int id = Integer.parseInt(this.loggedInId);
-            int daynum = Integer.parseInt(daynumField.getText());
-            String nordInfo = nordField.getText();
+            // Use the index of the selected day
+            int daynum = daynumCombo.getSelectedIndex() + 1;
+            String nordInfo = nordCombo.getSelectedItem().toString();
 
             // Call the addEmployee function with the gathered input
             HRManagerService.addavilableforemployee(id,daynum,nordInfo);

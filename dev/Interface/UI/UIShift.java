@@ -130,7 +130,7 @@ public class UIShift {
                         // Update the comboBox based on the selected profession
                         ArrayList<Integer> dataList = null;
                         try {
-                            dataList = getAllWorkerAvelibel(selectedRow, selectedColumn, selectedProfession);
+                            dataList = getAllWorkerAvelibel( selectedColumn,selectedRow, selectedProfession);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -186,7 +186,7 @@ public class UIShift {
         String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
         int promumber=pronum(profession);
         String shift = "";
-        if(shiftType==1){
+        if(shiftType==0){
             shift = "day";
         }
         else{

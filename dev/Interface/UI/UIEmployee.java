@@ -3,6 +3,7 @@ package Interface.UI;
 import Service.HRManagerService;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +42,12 @@ public class UIEmployee extends JFrame {
         idField = new JTextField();
         idField.setPreferredSize(new Dimension(200, idField.getPreferredSize().height)); // Set preferred width
         loginButton = new JButton("Log In");
+        loginButton.setPreferredSize(new Dimension(100, loginButton.getPreferredSize().height)); // Set preferred size for the button
+
+        // Add padding to the button
+        int padding = 10; // Adjust the padding value as needed
+        loginButton.setBorder(new EmptyBorder(padding, padding, padding, padding));
+
         viewWeeklyReqButton = new JButton("View Weekly Requests");
         updateButton = new JButton("Update When Available");
         showWeeklyIncomeButton = new JButton("Show My Weekly Income");

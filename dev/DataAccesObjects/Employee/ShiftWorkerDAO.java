@@ -42,6 +42,20 @@ public class ShiftWorkerDAO {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
+    public void add(int w, int s, int workersPro) {
+        try {
+            String sql = "INSERT INTO shift_worker_in_shift (shift_id, worker_id, workers_pro) VALUES (?, ?, ?)";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, s);
+            stmt.setInt(2, w);
+            stmt.setInt(3, workersPro);
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
 
     ///
     public List<Pair<Workers, Integer>> get(int shiftId) throws SQLException {

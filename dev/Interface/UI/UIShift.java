@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class UIShift {
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public UIShift(int WeekNum,int yearNum,int superNum) throws SQLException {
+    public UIShift(int WeekNum,int yearNum,int superNum,boolean viewOnly) throws SQLException {
         frame = new JFrame("Weekly Shift");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -34,10 +36,12 @@ public class UIShift {
         frame.setSize(900, 350);
         frame.setVisible(true);
 
-        createWeeklyShift(WeekNum,yearNum,superNum);
+        createWeeklyShift(WeekNum,yearNum,superNum, viewOnly);
     }
-
-    private void createWeeklyShift(int WeekNum,int yearNum,int superNum) throws SQLException {
+    public UIShift(int WeekNum,int yearNum,int superNum) throws SQLException {
+        this(WeekNum,yearNum,superNum,false);
+    }
+    private void createWeeklyShift(int WeekNum,int yearNum,int superNum,boolean viewOnly) throws SQLException {
         // Create the professions
         String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
 
@@ -91,8 +95,140 @@ public class UIShift {
         // Set row height explicitly
         int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
         table.setRowHeight(lineHeight * (professions.length + 1));
-    }
 
+
+        // Create the edit button
+        JButton editButton = new JButton("Edit");
+        editButton.addActionListener(e -> {
+            // Get the selected cell coordinates
+            int selectedRow = table.getSelectedRow();
+            int selectedColumn = table.getSelectedColumn();
+
+            // Check if a valid cell is selected
+            if (selectedRow != -1 && selectedColumn != -1) {
+
+                // Create the input fields for arguments
+                JComboBox<String> professionComboBox = new JComboBox<>(professions);
+                // Create the panel to hold the input fields
+                JPanel inputPanel = new JPanel(new GridLayout(2, 2));
+                inputPanel.add(new JLabel("Profession:"));
+                inputPanel.add(professionComboBox);
+                inputPanel.add(new JLabel("Available to work:"));
+                JComboBox<Integer> WorkersComboBox = new JComboBox<>();
+
+                // Add ActionListener to professionComboBox
+                professionComboBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Retrieve selected profession
+                        String selectedProfession = professionComboBox.getSelectedItem().toString();
+
+                        // Update the comboBox based on the selected profession
+                        ArrayList<Integer> dataList = null;
+                        try {
+                            dataList = getAllWorkerAvelibel(selectedRow, selectedColumn, selectedProfession);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        // Clear previous items in the comboBox
+                        WorkersComboBox.removeAllItems();
+
+                        // Add new items to the comboBox
+                        for (Integer item : dataList) {
+                            WorkersComboBox.addItem(item);
+                        }
+                    }
+                });
+
+                // Show the input dialog and get the user's input
+                int result = JOptionPane.showConfirmDialog(frame, inputPanel, "Edit Requirement",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                // If the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    // Get the values from the input fields
+                    String profession = (String) professionComboBox.getSelectedItem();
+                    String workerStr = WorkersComboBox.getSelectedItem().toString();
+                    int workerID = Integer.parseInt(workerStr);
+
+                    // Update the table model with the new requirement count
+//                    tableModel.setValueAt(requirement, selectedRow, selectedColumn);
+                    String shiftType = selectedRow == 0 ? "Day Shift" : "Night Shift";
+
+                    // Update the requirement in your data using the selected day, shiftType, and profession
+                    try {
+                        addWorkerToShift(selectedColumn, shiftType, profession, WeekNum, yearNum, superNum,workerID);
+                        JOptionPane.showMessageDialog(frame, "Requirement updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                        // Reload the screen to see the updated data
+                        reloadScreen(WeekNum, yearNum, superNum);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
+
+        // Add the edit button to the panel only if it's not view only
+        if(! viewOnly) {
+            panel.add(editButton, BorderLayout.SOUTH);
+        }
+    }
+    private ArrayList<Integer> getAllWorkerAvelibel(int day, int shiftType, String profession) throws SQLException {
+        //, int WeekNum, int yearNum, int superNum
+        HRManagerService hr = new HRManagerService();
+        String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
+        int promumber=pronum(profession);
+        String shift = "";
+        if(shiftType==1){
+            shift = "day";
+        }
+        else{
+            shift = "night";
+        }
+
+        return hr.AllWorkersWhoCanWorkList(promumber,day,shift);
+    }
+    public int pronum(String pro){
+        String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
+        int i=0;
+        for (i=0; i<professions.length;i++){
+            if(professions[i].equals(pro)){
+                return i;
+            }
+        }
+        return i;
+    }
+    private void reloadScreen(int WeekNum, int yearNum, int superNum) throws SQLException {
+        // Clear the table model
+        tableModel.setRowCount(0);
+        tableModel.setColumnCount(0);
+
+        // Call the createWeeklyShift method again to populate the table with updated data
+        createWeeklyShift(WeekNum, yearNum, superNum,false);
+    }
+    private void addWorkerToShift(int day, String shiftType, String profession, int WeekNum, int yearNum, int superNum, int workerID) throws SQLException {
+        HRManagerService hr = new HRManagerService();
+        String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
+        int index = -1;  // Default index if string is not found
+
+        for (int i = 0; i < professions.length; i++) {
+            if (professions[i].equals(profession)) {
+                index = i;  // Update the index if the string is found
+                break;
+            }
+        }
+        String shift = "";
+        if(shiftType.equals("Day Shift")){
+            shift = "day";
+        }
+        else{
+            shift = "night";
+        }
+
+        hr.addWorkerToShift(WeekNum,yearNum,superNum,day,shift,index, workerID);
+    }
 
     private String getStringWorker(ArrayList<String> list ){
         StringBuilder sb = new StringBuilder();

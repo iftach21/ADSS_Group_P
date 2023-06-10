@@ -1,5 +1,6 @@
 package Service;
 
+import Domain.Employee.Shift;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
 import Domain.Enums.TempTypeFactory;
 import Domain.Enums.WeightTypeFactory;
@@ -144,5 +145,10 @@ public class HRManagerService {
     public  Map<String, ArrayList<String>> HRgetWorkersByProNight(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
         return controller.getWorkersByProNight(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
-
+    public ArrayList<Integer> AllWorkersWhoCanWorkList(int prof, int daynum, String don) {
+        return controller.AllWorkersWhoCanWorkList(prof,daynum,don);
+    }
+    public void addWorkerToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
+        controller.addWorkerToShift(weeknum,year,supernum,daynum,don,prof,workerID);
+    }
 }

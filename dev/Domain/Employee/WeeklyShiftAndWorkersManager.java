@@ -1,6 +1,7 @@
 package Domain.Employee;
 
 import DataAccesObjects.Connection;
+import DataAccesObjects.Employee.ShiftWorkerDAO;
 import DataAccesObjects.Employee.WeeklyShiftDAO;
 import DataAccesObjects.Employee.WorkersDAO;
 import Domain.Enums.TempLevel;
@@ -15,13 +16,16 @@ public class WeeklyShiftAndWorkersManager {
     private static WeeklyShiftAndWorkersManager Instance = null;
     private final WorkersDAO workersDAO;
     private final WeeklyShiftDAO weeklyShiftDAO;
+    private final ShiftWorkerDAO shiftWorkerDAO;
 
 
 
     private WeeklyShiftAndWorkersManager() throws SQLException {
         workersDAO = WorkersDAO.getInstance();
         weeklyShiftDAO = WeeklyShiftDAO.getInstance();
+        shiftWorkerDAO = ShiftWorkerDAO.getInstance();
     }
+
     public static WeeklyShiftAndWorkersManager getInstance() throws SQLException {
         if(Instance==null){Instance = new WeeklyShiftAndWorkersManager();}
         return Instance;
@@ -167,6 +171,27 @@ public class WeeklyShiftAndWorkersManager {
             }
         }
     }
+    public ArrayList<Integer> AllWorkersWhoCanWorkList(int prof,int daynum, String don) {
+
+        WindowTypeCreater wc = new WindowTypeCreater();
+        List<Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+        ArrayList<Integer> allworkers= new ArrayList<>();
+        if (prof != 7) {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+                    allworkers.add(allworkerslist.get(i).getId());
+                }
+            }
+        } else {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).amIDriver() && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+
+                    allworkers.add(allworkerslist.get(i).getId());
+                }
+            }
+        }
+        return allworkers;
+    }
 
     public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm) throws SQLException {
         WindowTypeCreater wc = new WindowTypeCreater();
@@ -274,6 +299,21 @@ public class WeeklyShiftAndWorkersManager {
             i++;
         }
         return WorkerProMap;
+    }
+
+
+    public void addWorkerToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
+        WindowTypeCreater wc = new WindowTypeCreater();
+        WeeklyShift weeklyShift;
+        Workers worker= this.getworkerbyid(workerID);
+        if(prof != 7) {
+            weeklyShift = this.getweeklyshift(weeknum, year, supernum);
+        }
+        else{
+            weeklyShift = this.getweeklyshift(weeknum, year, 0);
+        }
+        weeklyShift.addworkertoshift(worker,wc.getwidowtype(daynum,don),prof);
+        this.weeklyShiftDAO.update(weeklyShift);
     }
 
 

@@ -50,7 +50,7 @@ public class UIHRManager {
         addNewDriverEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showaddNewDriverDialog();
+                showAddNewDriverDialog();
             }
         });
         employeesMenu.add(addNewDriverEmployee);
@@ -318,7 +318,10 @@ public class UIHRManager {
 
         frame.setVisible(true);
     }
-    private void showaddNewDriverDialog() {
+    private  void showAddNewDriverDialog() {
+        final String[] TEMP_TYPES = {"lightWeight", "mediumWeight", "heavyWeight"};
+        final String[] WEIGHT_TYPES = {"regular", "cold", "frozen"};
+
         JTextField idField = new JTextField();
         JTextField nameField = new JTextField();
         JTextField contractField = new JTextField();
@@ -327,8 +330,8 @@ public class UIHRManager {
         JTextField phoneNumField = new JTextField();
         JTextField personalInfoField = new JTextField();
         JTextField bankNumField = new JTextField();
-        JTextField tempTypeField = new JTextField();
-        JTextField weightTypeField = new JTextField();
+        JComboBox<String> tempTypeCombo = new JComboBox<>(TEMP_TYPES);
+        JComboBox<String> weightTypeCombo = new JComboBox<>(WEIGHT_TYPES);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -348,15 +351,15 @@ public class UIHRManager {
         panel.add(personalInfoField);
         panel.add(new JLabel("Bank Number:"));
         panel.add(bankNumField);
-        panel.add(new JLabel("tempType Info:"));
-        panel.add(tempTypeField);
-        panel.add(new JLabel("weight Type:"));
-        panel.add(weightTypeField);
+        panel.add(new JLabel("Temp Type:"));
+        panel.add(tempTypeCombo);
+        panel.add(new JLabel("Weight Type:"));
+        panel.add(weightTypeCombo);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "add Driver", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add Driver", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(null, "Added Driver");
-            // Get the values from the text fields
+            // Get the values from the text fields and combo boxes
             int id = Integer.parseInt(idField.getText());
             String name = nameField.getText();
             String contract = contractField.getText();
@@ -365,10 +368,11 @@ public class UIHRManager {
             int phoneNum = Integer.parseInt(phoneNumField.getText());
             String personalInfo = personalInfoField.getText();
             int bankNum = Integer.parseInt(bankNumField.getText());
-            int tempType = Integer.parseInt(tempTypeField.getText());
-            int weightType = Integer.parseInt(weightTypeField.getText());
-            // Call the addEmployee function with the gathered input
-            HRManagerService.addNewDriver(id,name,contract,startDate,wage,phoneNum,personalInfo,bankNum,tempType,weightType);
+            int tempType = tempTypeCombo.getSelectedIndex();
+            int weightType = weightTypeCombo.getSelectedIndex();
+
+            // Call the addNewDriver function with the gathered input
+            HRManagerService.addNewDriver(id,name,contract,startDate,wage,phoneNum,personalInfo,bankNum,tempType+1,weightType+1);
         }
     }
     private void showfireemployeeDialog() {

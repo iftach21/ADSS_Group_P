@@ -1,0 +1,35 @@
+
+
+Font's:
+//for a header:
+Font header = new Font("Roboto Slab", Font.BOLD, 50);
+
+
+
+
+
+//to maximize the window:
+jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+
+
+
+// to get input from the user use JOptionPane its a pop up window that take input from the user
+
+
+
+
+//this i the class that you should make btton from
+
+
+   private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(180, 60));
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setBackground(new Color(235, 235, 235));
+        button.setForeground(Color.DARK_GRAY);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return button;
+    }

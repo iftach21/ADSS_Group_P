@@ -3,12 +3,19 @@ package Interface;
 import Interface.OrderInterface;
 import Interface.interfaceManager;
 import  Domain.*;
+import services.*;
 import DataAccesObject.*;
 import java.util.*;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
+        Supplier_Manger_GUI supplierMangerGui =new Supplier_Manger_GUI();
+
+
+
+
 
         AInterface[] interfaces = new AInterface[4];
         interfaces[0] = new SupplierInterface();

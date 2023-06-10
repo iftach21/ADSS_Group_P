@@ -259,7 +259,38 @@ public class UIHRManager {
         editShiftItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Edit Shift action performed");
+                // Create input fields
+                JTextField weekNumberField = new JTextField();
+                JTextField yearNumberField = new JTextField();
+                JTextField superNumberField = new JTextField();
+
+                // Create the panel to hold the input fields
+                JPanel inputPanel = new JPanel(new GridLayout(3, 2));
+                inputPanel.add(new JLabel("Week Number:"));
+                inputPanel.add(weekNumberField);
+                inputPanel.add(new JLabel("Year Number:"));
+                inputPanel.add(yearNumberField);
+                inputPanel.add(new JLabel("Super Number:"));
+                inputPanel.add(superNumberField);
+
+                // Show the input dialog and get the user's input
+                int result = JOptionPane.showConfirmDialog(frame, inputPanel, "Enter Weekly Shift Details",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                // If the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    // Get the values from the input fields
+                    int weekNum = Integer.parseInt(weekNumberField.getText());
+                    int yearNum = Integer.parseInt(yearNumberField.getText());
+                    int superNum = Integer.parseInt(superNumberField.getText());
+
+                    // Create an instance of UIWeeklyShiftReq with the provided input values
+                    try {
+                        UIShift weeklyShiftReq = new UIShift(weekNum, yearNum, superNum);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
             }
         });
         weeklyShiftMenu.add(editShiftItem);

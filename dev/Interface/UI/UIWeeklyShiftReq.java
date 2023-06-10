@@ -15,7 +15,7 @@ public class UIWeeklyShiftReq {
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public UIWeeklyShiftReq(int WeekNum,int yearNum,int superNum) throws SQLException {
+    public UIWeeklyShiftReq(int WeekNum,int yearNum,int superNum, boolean viewOnly) throws SQLException {
         frame = new JFrame("Weekly Shift");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -32,10 +32,14 @@ public class UIWeeklyShiftReq {
         frame.setSize(900, 450);
         frame.setVisible(true);
 
-        createWeeklyShift(WeekNum,yearNum,superNum);
+        createWeeklyShift(WeekNum,yearNum,superNum,viewOnly);
     }
 
-    private void createWeeklyShift(int WeekNum,int yearNum,int superNum) throws SQLException {
+    public UIWeeklyShiftReq(int WeekNum, int yearNum, int superNum) throws SQLException {
+        this(WeekNum,yearNum,superNum,false);
+    }
+
+    private void createWeeklyShift(int WeekNum, int yearNum, int superNum, boolean viewOnly) throws SQLException {
         // Create the professions
         String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
 
@@ -89,8 +93,6 @@ public class UIWeeklyShiftReq {
         int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
         table.setRowHeight(lineHeight * (professions.length + 1));
 
-
-
         // Create the edit button
         JButton editButton = new JButton("Edit");
         editButton.addActionListener(e -> {
@@ -140,8 +142,10 @@ public class UIWeeklyShiftReq {
             }
         });
 
-        // Add the edit button to the panel
-        panel.add(editButton, BorderLayout.SOUTH);
+        // Add the edit button to the panel only if it's not view only
+        if(! viewOnly) {
+            panel.add(editButton, BorderLayout.SOUTH);
+        }
     }
     private void reloadScreen(int WeekNum, int yearNum, int superNum) throws SQLException {
         // Clear the table model
@@ -149,7 +153,7 @@ public class UIWeeklyShiftReq {
         tableModel.setColumnCount(0);
 
         // Call the createWeeklyShift method again to populate the table with updated data
-        createWeeklyShift(WeekNum, yearNum, superNum);
+        createWeeklyShift(WeekNum, yearNum, superNum,false);
     }
 
     // Update the requirement in your data using the provided day, shiftType, profession, count, WeekNum, yearNum, and superNum

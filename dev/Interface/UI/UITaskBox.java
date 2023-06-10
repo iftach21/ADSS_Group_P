@@ -12,6 +12,19 @@ public class UITaskBox {
     public JPanel createPanel() {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
+        // Create a label for the task list
+        JLabel label = new JLabel("Todo List");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 18));
+        label.setForeground(Color.WHITE);
+        label.setOpaque(true);
+        label.setBackground(new Color(51, 102, 204)); // Set a custom background color
+
+        // Create a panel for the label
+        JPanel labelPanel = new JPanel(new BorderLayout());
+        labelPanel.setBackground(new Color(240, 240, 240)); // Set a custom background color
+        labelPanel.add(label, BorderLayout.CENTER);
+
         // Create a panel for task input and add button
         JPanel inputPanel = new JPanel(new BorderLayout());
         taskInput = new JTextField();
@@ -30,17 +43,23 @@ public class UITaskBox {
 
         // Create a panel for delete button
         JPanel deletePanel = new JPanel();
-        JButton deleteButton = new JButton("Delete");
+        JButton deleteButton = new JButton("Complete mission");
         deleteButton.addActionListener(new DeleteButtonListener());
         deletePanel.add(deleteButton);
 
+        // Create a panel for the label and inputPanel
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(labelPanel, BorderLayout.NORTH);
+        topPanel.add(inputPanel, BorderLayout.CENTER);
+
         // Add the components to the main panel
-        mainPanel.add(inputPanel, BorderLayout.NORTH);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(listPanel, BorderLayout.CENTER);
         mainPanel.add(deletePanel, BorderLayout.SOUTH);
 
         return mainPanel;
     }
+
 
     private class AddButtonListener implements ActionListener {
         @Override

@@ -22,7 +22,7 @@ public class UIHRManager {
     public UIHRManager(){
 
         JFrame frame = new JFrame("HR - Manager");
-        frame.setSize(500, 500);
+        frame.setSize(900, 900);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Creating the menu bar

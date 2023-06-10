@@ -33,7 +33,6 @@ public class StoreManagerInterface extends AInterface{
 
 
                 System.out.println("Please insert ID:");
-
                 int id = myObj.nextInt();  // Read user input
                 System.out.println("Press 1 to remove or 2 to add  available ");
                 int c = myObj.nextInt();  // Read user input

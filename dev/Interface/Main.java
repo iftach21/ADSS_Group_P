@@ -3,6 +3,7 @@ package Interface;
 import Interface.Employee.BossInterface;
 import Interface.Employee.WorkerInterface;
 import Interface.Transfer.TransferManagerInterface;
+import Interface.UI.UIEmployee;
 import Interface.UI.UIHRManager;
 
 import java.net.StandardSocketOptions;
@@ -98,7 +99,7 @@ public class Main {
     }
 
     private static void GUIEmployee() throws Exception {
-        //todo: complete later
+        UIEmployee ui = new UIEmployee();
     }
 
     private static void GUITransferManager() throws Exception {

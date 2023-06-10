@@ -245,10 +245,32 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-                    NonFixedDaySupplier supplier3 = new NonFixedDaySupplier(numOfDeliveryDays, name, business_id, paymentNum - 1, id, con_person, null, null);
-                    supplier_manger.add_supplier(supplier);
+                    String numOfDeliveryDays =null;
+                    validInput=false;
+
+                    while (!validInput) {
+                        String input = JOptionPane.showInputDialog("Days to delivery:");
+
+                        // Check if the input consists only of numeric characters
+                        if (input.matches("\\d+")) {
+                            supplier_ID = input;
+                            validInput = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                        }
+                    }
+
+
+                    int number = Integer.parseInt(numOfDeliveryDays);
+
+
+
+                    NonFixedDaySupplier supplier3 = new NonFixedDaySupplier(number, name_suppleir, business_id, paymentNum - 1, supplier_ID, con_person, null, null);
+                    supplier_manger.add_supplier(supplier3);
                     break;
                 default:
+
+
                     // Code for handling other cases or no selection
 
 

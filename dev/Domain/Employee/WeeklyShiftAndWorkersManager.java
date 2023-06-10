@@ -175,7 +175,7 @@ public class WeeklyShiftAndWorkersManager {
 
         WindowTypeCreater wc = new WindowTypeCreater();
         List<Workers> allworkerslist = this.workersDAO.getAllworkerslist();
-        ArrayList<Integer> allworkers=new ArrayList<Integer>();
+        ArrayList<Integer> allworkers= new ArrayList<>();
         if (prof != 7) {
             for (int i = 0; i < allworkerslist.size(); i++) {
                 if (allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {

@@ -148,7 +148,7 @@ public class HRManagerService {
     public ArrayList<Integer> AllWorkersWhoCanWorkList(int prof, int daynum, String don) {
         return controller.AllWorkersWhoCanWorkList(prof,daynum,don);
     }
-    public void addWorkerToShift(int workerId,int shiftId,int workersPro){
-        controller.addWorkerToShift(workerId,shiftId,workersPro);
+    public void addWorkerToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
+        controller.addWorkerToShift(weeknum,year,supernum,daynum,don,prof,workerID);
     }
 }

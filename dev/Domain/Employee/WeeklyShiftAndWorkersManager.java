@@ -301,8 +301,19 @@ public class WeeklyShiftAndWorkersManager {
         return WorkerProMap;
     }
 
-    public void addWorkerToShift(int w, int s, int workersPro){
-        this.shiftWorkerDAO.add(w,s,workersPro);
+
+    public void addWorkerToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
+        WindowTypeCreater wc = new WindowTypeCreater();
+        WeeklyShift weeklyShift;
+        Workers worker= this.getworkerbyid(workerID);
+        if(prof != 7) {
+            weeklyShift = this.getweeklyshift(weeknum, year, supernum);
+        }
+        else{
+            weeklyShift = this.getweeklyshift(weeknum, year, 0);
+        }
+        weeklyShift.addworkertoshift(worker,wc.getwidowtype(daynum,don),prof);
+        this.weeklyShiftDAO.update(weeklyShift);
     }
 
 

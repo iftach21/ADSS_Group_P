@@ -158,7 +158,7 @@ public class UIShift {
 
                     // Update the requirement in your data using the selected day, shiftType, and profession
                     try {
-                        updateRequirement(selectedColumn, shiftType, profession, requirementStr, WeekNum, yearNum, superNum);
+                        addWorkerToShift(selectedColumn, shiftType, profession, WeekNum, yearNum, superNum,workerID);
                         JOptionPane.showMessageDialog(frame, "Requirement updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
                         // Reload the screen to see the updated data
@@ -208,7 +208,7 @@ public class UIShift {
         // Call the createWeeklyShift method again to populate the table with updated data
         createWeeklyShift(WeekNum, yearNum, superNum,false);
     }
-    private void updateRequirement(int day, String shiftType, String profession, String requirement, int WeekNum, int yearNum, int superNum) throws SQLException {
+    private void addWorkerToShift(int day, String shiftType, String profession, int WeekNum, int yearNum, int superNum, int workerID) throws SQLException {
         HRManagerService hr = new HRManagerService();
         String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
         int index = -1;  // Default index if string is not found
@@ -227,7 +227,7 @@ public class UIShift {
             shift = "night";
         }
 
-        hr.addreqtoweeklyshift(WeekNum,yearNum,superNum,day,shift,index, Integer.parseInt(requirement));
+        hr.addWorkerToShift(WeekNum,yearNum,superNum,day,shift,index, workerID);
     }
 
     private String getStringWorker(ArrayList<String> list ){

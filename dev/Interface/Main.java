@@ -127,6 +127,7 @@ public class Main {
         UIHRManager UIHRManager = new UIHRManager();
     }
 
+
     private static void GUIEmployee() throws Exception {
         UIEmployee ui = new UIEmployee();
     }

@@ -475,7 +475,9 @@ public class Supplier_Manger_GUI   implements ActionListener {
             int selectedOption = JOptionPane.showOptionDialog(null, "Select an option:", "Temperature",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
-            TempLevel tempLevel = TempLevel.valueOf(selectedOption);
+            String temp =String.valueOf(selectedOption);
+
+            TempLevel tempLevel = TempLevel.valueOf(temp);
 
             String manufacturer= JOptionPane.showInputDialog("manufacturer name:");
 

@@ -226,7 +226,7 @@ public class Shift {
         return ans;
     }
 
-    private ArrayList<Workers> getAllWorkers(){
+    public ArrayList<Workers> getAllWorkers(){
         // Create a new ArrayList to store all the workers
         ArrayList<Workers> allWorkers = new ArrayList<>();
 

@@ -1,7 +1,9 @@
 package Service;
 
 import Domain.Employee.Shift;
+import Domain.Employee.WeeklyShift;
 import Domain.Employee.WeeklyShiftAndWorkersManager;
+import Domain.Employee.Workers;
 import Domain.Enums.TempTypeFactory;
 import Domain.Enums.WeightTypeFactory;
 import Domain.Enums.WindowTypeCreater;
@@ -151,4 +153,36 @@ public class HRManagerService {
     public void addWorkerToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
         controller.addWorkerToShift(weeknum,year,supernum,daynum,don,prof,workerID);
     }
+
+    /**
+     * return a string of all the workers in the company
+     * */
+    public String getAllworkersString(){
+        return controller.getAllworkersString();
+    }
+
+    /**
+     * writes message to the log of a shift
+     * */
+    public void writeToEventOfShift(int weeknum, int year,int supernum, int daynum, String don,String messege) throws SQLException {
+        controller.writeToEventOfShift(weeknum, year,supernum,daynum,don,messege);
+    }
+
+    /**
+     * gets a string of all the events in a single shift
+     * */
+    public String getEventOfShift(int weeknum, int year,int supernum, int daynum, String don) throws SQLException {
+
+        return controller.getEventOfShift(weeknum, year,supernum,daynum,don);
+    }
+
+
+    /**
+     * will return all workers for specific week:
+     * */
+    public String getAllWorkersThatWorkedInSpecificWeek(int weeknum, int year,int supernum) throws SQLException {
+        return controller.getAllWorkersThatWorkedInSpecificWeek(weeknum,year,supernum);
+
+    }
+
 }

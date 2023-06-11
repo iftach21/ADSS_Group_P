@@ -366,11 +366,38 @@ public class WeeklyShiftAndWorkersManager {
     public String getAllworkersString(){
         StringBuilder StringWorkers = new StringBuilder();
          for(Workers worker: this.workersDAO.getAllworkerslist()){
-             StringWorkers.append(worker.getName()+" "+worker.getId()+ " | ");
+             StringWorkers.append(worker.getName()+" "+worker.getId()+ "\n");
          }
          return StringWorkers.toString();
     }
 
+    public void writeToEventOfShift(int weeknum, int year,int supernum, int daynum, String don,String messege) throws SQLException {
+        WeeklyShift weeklyShift;
+        WindowTypeCreater wc = new WindowTypeCreater();
+        weeklyShift = this.getweeklyshift(weeknum,year,supernum);
+        weeklyShift.writeEventToShift(wc.getwidowtype(daynum,don),messege);
+    }
+
+    public String getEventOfShift(int weeknum, int year,int supernum, int daynum, String don) throws SQLException {
+        WeeklyShift weeklyShift;
+        WindowTypeCreater wc = new WindowTypeCreater();
+        weeklyShift = this.getweeklyshift(weeknum,year,supernum);
+        return weeklyShift.getEventToShift(wc.getwidowtype(daynum,don));
+    }
+
+    public String getAllWorkersThatWorkedInSpecificWeek(int weeknum, int year,int supernum) throws SQLException {
+        WeeklyShift weeklyShift = this.getweeklyshift(weeknum,year,supernum);
+        ArrayList<Workers> allWorkers = new ArrayList<>();
+        allWorkers = weeklyShift.getAllWorkers();
+
+
+        StringBuilder StringWorkers = new StringBuilder();
+        for(Workers worker: allWorkers){
+            StringWorkers.append(worker.getName()+" "+worker.getId()+ "\n");
+        }
+        return StringWorkers.toString();
+
+    }
 
 
 

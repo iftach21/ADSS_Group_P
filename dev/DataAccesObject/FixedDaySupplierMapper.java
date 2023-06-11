@@ -264,5 +264,26 @@ public class FixedDaySupplierMapper{
         // Clear cache
         cache.clear();
     }
+    public String getAllSuppliersForJTable() {
+        List<FixedDaySupplier> suppliers = findAll();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Append column names
+
+        // Append data for each supplier
+        for (FixedDaySupplier supplier : suppliers) {
+            stringBuilder.append(supplier.getSupplierID()).append(", ");
+            stringBuilder.append(supplier.getName()).append(", ");
+            stringBuilder.append(supplier.getBusinessId()).append(", ");
+            stringBuilder.append(supplier.getPaymentMethod()).append(", ");
+            stringBuilder.append(supplier.getPerson().getName()).append(", ");
+            stringBuilder.append(supplier.getPerson().getPhoneNumber()).append(", ");
+            stringBuilder.append(supplier.getCurrentDeliveryDay().name()).append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
+
 
 }

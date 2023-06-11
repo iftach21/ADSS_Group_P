@@ -199,4 +199,37 @@ public abstract class Supplier {
         return 0;
    }
 
+
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Supplier Details:\n");
+        sb.append("Name: ").append(name).append("\n");
+        sb.append("Business ID: ").append(business_id).append("\n");
+        sb.append("Payment Method: ").append(paymentMethod).append("\n");
+        sb.append("Supplier ID: ").append(Supplier_ID).append("\n");
+
+        sb.append("\nContact Person Details:\n");
+        sb.append("Name: ").append(person.getName()).append("\n");
+        sb.append("Phone Number: ").append(person.getPhoneNumber()).append("\n");
+
+        sb.append("\nContract Details:\n");
+        sb.append("Contract ID: ").append(contract.getContractId()).append("\n");
+        sb.append("Supplier ID: ").append(contract.getSupplierId()).append("\n");
+        sb.append("Total Discount: ").append(contract.getTotal_discount()).append("\n");
+
+        sb.append("\nItems:\n");
+        for (Item item : items.keySet()) {
+            Pair<Integer, Float> itemDetails = items.get(item);
+            sb.append("Item Name: ").append(item.getName()).append("\n");
+            sb.append("Quantity: ").append(itemDetails.getFirst()).append("\n");
+            sb.append("Cost: ").append(itemDetails.getSecond()).append("\n");
+            sb.append("-------------------\n");
+        }
+
+        return sb.toString();
+    }
+
 }

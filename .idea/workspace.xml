@@ -10,8 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="test update">
-      <change beforePath="$PROJECT_DIR$/.idea/ADSS_Group_P.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Domain/TempLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/TempLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/FixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/FixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/NonDeliveringSupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/NonDeliveringSupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/NonFixedDaySupplierMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/NonFixedDaySupplierMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Domain/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Domain/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +143,7 @@
       <workItem from="1686339178693" duration="666000" />
       <workItem from="1686382069694" duration="19520000" />
       <workItem from="1686477726441" duration="6039000" />
-      <workItem from="1686483802933" duration="329000" />
+      <workItem from="1686483802933" duration="7951000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -326,8 +332,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>207</line>
+          <line>211</line>
           <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
+          <line>739</line>
+          <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>

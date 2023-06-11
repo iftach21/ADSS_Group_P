@@ -277,4 +277,26 @@ public class NonFixedDaySupplierMapper{
     }
 
 
+    public String getAllSuppliersForJTable() {
+        List<NonFixedDaySupplier> suppliers = findAll();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Append column names
+
+        // Append data for each supplier
+        for (NonFixedDaySupplier supplier : suppliers) {
+            stringBuilder.append(supplier.getSupplierID()).append(", ");
+            stringBuilder.append(supplier.getName()).append(", ");
+            stringBuilder.append(supplier.getBusinessId()).append(", ");
+            stringBuilder.append(supplier.getPaymentMethod()).append(", ");
+            stringBuilder.append(supplier.getPerson().getName()).append(", ");
+            stringBuilder.append(supplier.getPerson().getPhoneNumber()).append(", ");
+            stringBuilder.append(supplier.getNumOfDayToDeliver()).append(", ");
+
+        }
+
+        return stringBuilder.toString();
+    }
+
+
 }

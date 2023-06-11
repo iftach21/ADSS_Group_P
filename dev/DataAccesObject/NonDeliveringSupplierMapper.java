@@ -259,5 +259,25 @@ public class NonDeliveringSupplierMapper {
         cache.clear();
     }
 
+    public String getAllSuppliersForJTable() {
+        List<NonDeliveringSupplier> suppliers = findAll();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Append column names
+
+        // Append data for each supplier
+        for (NonDeliveringSupplier supplier : suppliers) {
+            stringBuilder.append(supplier.getSupplierID()).append(", ");
+            stringBuilder.append(supplier.getName()).append(", ");
+            stringBuilder.append(supplier.getBusinessId()).append(", ");
+            stringBuilder.append(supplier.getPaymentMethod()).append(", ");
+            stringBuilder.append(supplier.getPerson().getName()).append(", ");
+            stringBuilder.append(supplier.getPerson().getPhoneNumber()).append(", ");
+
+        }
+
+        return stringBuilder.toString();
+    }
+
 }
 

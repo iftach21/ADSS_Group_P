@@ -93,4 +93,11 @@ public class Contract {
         contractIdCounter = num + 1;
     }
 
+    public int getContractId() {
+        return contractId;
+    }
+
+    public String getSupplierId() {
+        return supplierId;
+    }
 }

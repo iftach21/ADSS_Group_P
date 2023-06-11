@@ -546,7 +546,99 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-        } else if (e.getSource()==addItemtoSupplier) {
+        } else if (e.getSource()==removeItemFromSupplier) {
+            //supplier aname cheak
+            boolean valid =false;
+            String input1 =null;
+            while ((!valid)) {
+                input1 = JOptionPane.showInputDialog("Name of the Supplier");
+
+                if (input1 == null) {
+                    return;
+                }
+
+
+                if (!this.supplier_manger.checkExistingSupplierName(input1)) {
+
+                    valid = true;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Supplier not in the System");
+                }
+            }
+
+
+
+
+            String catlog_number = null;
+            boolean validInput2 = false;
+
+            while (!validInput2) {
+                String input = JOptionPane.showInputDialog("catlog number : ");
+
+                // Check if the input consists only of numeric characters
+                if (input.matches("\\d+")) {
+                    catlog_number = input;
+                    validInput2 = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                }
+            }
+
+            if (catlog_number == null) {
+                return;
+            }
+
+
+
+            //the amount
+            boolean validInteger = false;
+            int integerValue = 0;
+
+            while (!validInteger) {
+                String input = JOptionPane.showInputDialog("Enter an integer value fot he amount:");
+
+                try {
+                    integerValue = Integer.parseInt(input);
+                    validInteger = true;
+                } catch (NumberFormatException ek) {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid integer.");
+                }
+            }
+
+
+            boolean validDouble = false;
+            double doubleValue = 0.0;
+
+            while (!validDouble) {
+                String input = JOptionPane.showInputDialog("Enter a double value for the discount:");
+
+                try {
+                    doubleValue = Double.parseDouble(input);
+                    validDouble = true;
+                } catch (NumberFormatException es) {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid double.");
+                }
+            }
+            supplier_manger.add_item_discount_to_supplier(input1, catlog_number, integerValue , doubleValue);
+
+
+
+
+
+
+
+
+        } else if (  e.getSource()==print_all_suppliers) {
+            JFrame jFrame2 =new JFrame();
+            JTable NonDeliveringTabel =new JTable();
+            JTable NonFiexdDayTabel =new JTable();
+            JTable FiexdDayTabel =new JTable();
+
+
+
+
+
 
         }
 

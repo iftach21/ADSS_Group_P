@@ -17,6 +17,7 @@ public class Main {
 
 
 
+
         AInterface[] interfaces = new AInterface[4];
         interfaces[0] = new SupplierInterface();
         interfaces[1] = new OrderInterface(interfaces[0].getSupplier_manger());

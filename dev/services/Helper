@@ -18,6 +18,12 @@ jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 
 
+// String[] options = {"1. SHOTEF", "2. SHOTEF+30", "3. SHOTEF+60"};
+              String message = "Payment method:";
+              int paymentNum = JOptionPane.showOptionDialog(null, message, "Payment Method", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+
+
 
 //this i the class that you should make btton from
 
@@ -33,3 +39,15 @@ jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         return button;
     }
+
+    // JButton backButton = new JButton("Back");
+                      backButton.addActionListener(new ActionListener() {
+                      @Override
+                      public void actionPerformed(ActionEvent e) {
+                          // Handle the back button click event
+                          // Add your code here to go back to the previous view or screen
+
+                          // For example, you can close the current JFrame
+                          JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                          frame.dispose();
+                      }

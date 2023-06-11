@@ -292,6 +292,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
         } else if (e.getSource()==removeSupplierButton) {
 
+            
+
         } else if (e.getSource() ==UpdateContactToSupplier) {
 
         } else if (e.getSource()==UpdateContactToSupplier) {

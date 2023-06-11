@@ -24,7 +24,7 @@ public class StoreManagerInterface extends AInterface{
         while (ans == 1) {
             System.out.println("What information would you like to receive?");
             System.out.println("1 = reports");
-            System.out.println("2 = data");
+            System.out.println("2 = ????????????");
             System.out.println("0 = leave");
 
             int whattodo = myObj.nextInt();  // Read user input
@@ -33,11 +33,30 @@ public class StoreManagerInterface extends AInterface{
 
                 System.out.println("What report would you like?");
                 System.out.println("1 = List of all employees in the store");
-                System.out.println("2 = ??????");
+                System.out.println("2 = list of all employees who are available to work in day ");
+                System.out.println("3 = list of all employees who are available to work this week");
                 int c = myObj.nextInt();  // Read user input
 
                 if (c == 1) {
                     System.out.println(controller.getAllworkersString());
+
+                }
+                if (c == 2) {
+
+                    System.out.println("What is the profession? [manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker 6]");
+                    int prof = myObj.nextInt();
+                    System.out.println("What day number?");
+                    int daynum = myObj.nextInt();
+                    String inputString = myObj.nextLine();
+                    System.out.println("day or night?");
+                    String don = myObj.nextLine();
+                    System.out.println(controller.AllWorkersWhoCanWorkString(prof,daynum,don));
+                }
+                if (c == 3) {
+
+                    System.out.println("What is the profession? [manager 0, cashier 1,stoke 2 , security 3, cleaning 4, shelfstoking 5 ,general worker 6]");
+                    int prof = myObj.nextInt();
+                    System.out.println(controller.AllWorkersWhoCanWorkWeekString(prof));
                 }
             }
             if (whattodo == 2) {

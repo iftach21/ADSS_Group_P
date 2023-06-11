@@ -192,7 +192,55 @@ public class WeeklyShiftAndWorkersManager {
         }
         return allworkers;
     }
+    public String AllWorkersWhoCanWorkString(int prof,int daynum, String don) {
 
+        WindowTypeCreater wc = new WindowTypeCreater();
+        List<Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+
+        StringBuilder StringWorkers = new StringBuilder();
+
+        if (prof != 7) {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).caniworkatprofindx(prof) && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+                    StringWorkers.append(allworkerslist.get(i).getName()+" "+allworkerslist.get(i).getId()+" |");
+                }
+            }
+        } else {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                if (allworkerslist.get(i).amIDriver() && allworkerslist.get(i).canIworkat(wc.getwidowtype(daynum, don))) {
+
+                    StringWorkers.append(allworkerslist.get(i).getName()+" "+allworkerslist.get(i).getId()+" |");
+                }
+            }
+        }
+        return StringWorkers.toString();
+    }
+    public String AllWorkersWhoCanWorkWeekString(int prof) {
+
+        WindowTypeCreater wc = new WindowTypeCreater();
+        List<Workers> allworkerslist = this.workersDAO.getAllworkerslist();
+
+        StringBuilder StringWorkers = new StringBuilder();
+
+        if (prof != 7) {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                for (int daynum=0; daynum<=7;daynum++){
+                    if (allworkerslist.get(i).caniworkatprofindx(prof)) {
+                        StringWorkers.append(allworkerslist.get(i).getName()+" "+allworkerslist.get(i).getId()+" in day num:"+daynum +" |");
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < allworkerslist.size(); i++) {
+                for (int daynum=0; daynum<=7;daynum++){
+                if (allworkerslist.get(i).caniworkatprofindx(prof)) {
+                    StringWorkers.append(allworkerslist.get(i).getName()+" "+allworkerslist.get(i).getId()+" in day num:"+daynum +" |");
+                }
+                }
+            }
+        }
+        return StringWorkers.toString();
+    }
     public void addreqtoweeklyshift(int weeknum, int year,int supernum, int daynum, String don,int prof,int hm) throws SQLException {
         WindowTypeCreater wc = new WindowTypeCreater();
         WeeklyShift weeklyShift;

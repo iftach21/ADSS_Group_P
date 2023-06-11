@@ -59,33 +59,33 @@ public class Main {
 
         }
 
-        if(args.length != 5){
+        if(args.length !=2){
             System.out.print("the number of arg are incorrect, please try again:\nfor example: java -jar adss2023_v03.jar CLI HRManager\n");
         }
 
-        if("CLI".compareTo(args[3])==0){
-            if("HRManager".compareTo(args[4])==0){
+        if("CLI".compareTo(args[0])==0){
+            if("HRManager".compareTo(args[1])==0){
                 CLIHRManager();
             }
-            else if("Employee".compareTo(args[4])==0){
+            else if("Employee".compareTo(args[1])==0){
                 CLIEmployee();
             }
-            else if("TransferManager".compareTo(args[4])==0){
+            else if("TransferManager".compareTo(args[1])==0){
                 CLITransferManager();
             }
-            else if("StoreManager".compareTo(args[4])==0){
+            else if("StoreManager".compareTo(args[1])==0){
                 CLIStoreManager();
             }
             else{System.out.print("the second arg is incorrect\n");}
         }
-        else if("GUI".compareTo(args[3])==0) {
-            if ("HRManager".compareTo(args[4]) == 0) {
+        else if("GUI".compareTo(args[0])==0) {
+            if ("HRManager".compareTo(args[1]) == 0) {
                 GUIHRManager();
-            } else if ("Employee".compareTo(args[4]) == 0) {
+            } else if ("Employee".compareTo(args[1]) == 0) {
                 GUIEmployee();
-            } else if ("TransferManager".compareTo(args[4]) == 0) {
+            } else if ("TransferManager".compareTo(args[1]) == 0) {
                 GUITransferManager();
-            } else if ("StoreManager".compareTo(args[4]) == 0) {
+            } else if ("StoreManager".compareTo(args[1]) == 0) {
                 GUIStoreManager();
             } else {
                 System.out.print("the second arg is incorrect\n");

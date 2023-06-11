@@ -45,7 +45,6 @@ public class StoreManagerInterface extends AInterface{
                     System.out.println("please enter day/night shift");
                     String nord = myObj.nextLine();  // Read user input
                     WindowTypeCreater wdc = new WindowTypeCreater();
-
                     controller.removeavalbleforemployee(id, wdc.getwidowtype(daynum, nord));
                 } else {
                     System.out.println("please enter day num");
@@ -84,5 +83,9 @@ public class StoreManagerInterface extends AInterface{
             }
 
         }
+    }
+    public static void main(String[] args) throws Exception {
+        StoreManagerInterface storeManagerInterface= new StoreManagerInterface();
+        storeManagerInterface.logIn();
     }
 }

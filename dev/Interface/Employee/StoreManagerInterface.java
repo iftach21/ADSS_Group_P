@@ -17,14 +17,15 @@ public class StoreManagerInterface extends AInterface{
 
     public void logIn() throws ExitExeption, SQLException {
 
-        //todo: complete.... currently isn't correct.
+
 
         int ans = 1;
         Scanner myObj = new Scanner(System.in);
         while (ans == 1) {
             System.out.println("What information would you like to receive?");
             System.out.println("1 = reports");
-            System.out.println("2 = ????????????");
+            //todo: complete
+            System.out.println("2 = Complete!");
             System.out.println("0 = leave");
 
             int whattodo = myObj.nextInt();  // Read user input
@@ -33,8 +34,8 @@ public class StoreManagerInterface extends AInterface{
 
                 System.out.println("What report would you like?");
                 System.out.println("1 = List of all employees in the store");
-                System.out.println("2 = list of all employees who are available to work in day ");
-                System.out.println("3 = list of all employees who are available to work this week");
+                System.out.println("2 = list of all employees who are available to work on a specific day ");
+                System.out.println("3 = list of all employees who are available to work this week in a specific profession");
                 int c = myObj.nextInt();  // Read user input
 
                 if (c == 1) {

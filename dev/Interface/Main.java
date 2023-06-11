@@ -1,6 +1,7 @@
 package Interface;
 
 import Interface.Employee.BossInterface;
+import Interface.Employee.StoreManagerInterface;
 import Interface.Employee.WorkerInterface;
 import Interface.Transfer.TransferManagerInterface;
 import Interface.UI.UIEmployee;
@@ -35,12 +36,18 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        try {
+            storeManagerInterface = new StoreManagerInterface();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }//
 
     static WorkerInterface workerInterface;
     static TransferManagerInterface transferInterface;
     static AdminInterface adminInterface;
+    static StoreManagerInterface storeManagerInterface;
     public static void main(String[] args) throws Exception {
         if(args.length==1 && args[0].compareTo("admin")==0){
             try{
@@ -51,33 +58,34 @@ public class Main {
             }
 
         }
-        if(args.length != 2){
+
+        if(args.length != 5){
             System.out.print("the number of arg are incorrect, please try again:\nfor example: java -jar adss2023_v03.jar CLI HRManager\n");
         }
 
-        if("CLI".compareTo(args[0])==0){
-            if("HRManager".compareTo(args[1])==0){
+        if("CLI".compareTo(args[3])==0){
+            if("HRManager".compareTo(args[4])==0){
                 CLIHRManager();
             }
-            else if("Employee".compareTo(args[1])==0){
+            else if("Employee".compareTo(args[4])==0){
                 CLIEmployee();
             }
-            else if("TransferManager".compareTo(args[1])==0){
+            else if("TransferManager".compareTo(args[4])==0){
                 CLITransferManager();
             }
-            else if("StoreManager".compareTo(args[1])==0){
+            else if("StoreManager".compareTo(args[4])==0){
                 CLIStoreManager();
             }
             else{System.out.print("the second arg is incorrect\n");}
         }
-        else if("GUI".compareTo(args[0])==0) {
-            if ("HRManager".compareTo(args[1]) == 0) {
+        else if("GUI".compareTo(args[3])==0) {
+            if ("HRManager".compareTo(args[4]) == 0) {
                 GUIHRManager();
-            } else if ("Employee".compareTo(args[1]) == 0) {
+            } else if ("Employee".compareTo(args[4]) == 0) {
                 GUIEmployee();
-            } else if ("TransferManager".compareTo(args[1]) == 0) {
+            } else if ("TransferManager".compareTo(args[4]) == 0) {
                 GUITransferManager();
-            } else if ("StoreManager".compareTo(args[1]) == 0) {
+            } else if ("StoreManager".compareTo(args[4]) == 0) {
                 GUIStoreManager();
             } else {
                 System.out.print("the second arg is incorrect\n");
@@ -109,7 +117,11 @@ public class Main {
         }
     }
     private static void CLIStoreManager() throws Exception {
-        //todo: complete later
+        try{
+            storeManagerInterface.logIn();}
+        catch (ExitExeption e){
+            System.out.print("come back again!\n");
+        }
     }
     private static void GUIHRManager() throws Exception {
         UIHRManager UIHRManager = new UIHRManager();

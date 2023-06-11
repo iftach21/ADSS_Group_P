@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class StoreManagerInterface extends AInterface{
     private final WeeklyShiftAndWorkersManager controller;
 
-    public StoreManagerInterface(WeeklyShiftAndWorkersManager controller) throws SQLException {
+    public StoreManagerInterface() throws SQLException {
         this.controller = WeeklyShiftAndWorkersManager.getInstance();
     }
 

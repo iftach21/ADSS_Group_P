@@ -22,40 +22,22 @@ public class StoreManagerInterface extends AInterface{
         int ans = 1;
         Scanner myObj = new Scanner(System.in);
         while (ans == 1) {
-            System.out.println("what would you like to do?");
-            System.out.println("1 = assign to shift");
-            System.out.println("2 = see the weekly requirements");
+            System.out.println("What information would you like to receive?");
+            System.out.println("1 = reports");
+            System.out.println("2 = data");
             System.out.println("0 = leave");
 
             int whattodo = myObj.nextInt();  // Read user input
 
             if (whattodo == 1) {
 
-
-                System.out.println("Please insert ID:");
-                int id = myObj.nextInt();  // Read user input
-                System.out.println("Press 1 to remove or 2 to add  available ");
+                System.out.println("What report would you like?");
+                System.out.println("1 = List of all employees in the store");
+                System.out.println("2 = ??????");
                 int c = myObj.nextInt();  // Read user input
+
                 if (c == 1) {
-
-                    System.out.println("please enter day num");
-                    int daynum = myObj.nextInt();  // Read user input
-                    myObj.nextLine();
-
-                    System.out.println("please enter day/night shift");
-                    String nord = myObj.nextLine();  // Read user input
-                    WindowTypeCreater wdc = new WindowTypeCreater();
-                    controller.removeavalbleforemployee(id, wdc.getwidowtype(daynum, nord));
-                } else {
-                    System.out.println("please enter day num");
-                    int daynum = myObj.nextInt();  // Read user input
-                    myObj.nextLine();
-
-                    System.out.println("please enter day/night shift");
-                    String nord = myObj.nextLine();  // Read user input
-                    WindowTypeCreater wdc = new WindowTypeCreater();
-
-                    controller.addavilableforemployee(id, wdc.getwidowtype(daynum, nord));
+                    System.out.println(controller.getAllworkersString());
                 }
             }
             if (whattodo == 2) {

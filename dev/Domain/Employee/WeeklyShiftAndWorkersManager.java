@@ -315,6 +315,13 @@ public class WeeklyShiftAndWorkersManager {
         weeklyShift.addworkertoshift(worker,wc.getwidowtype(daynum,don),prof);
         this.weeklyShiftDAO.update(weeklyShift);
     }
+    public String getAllworkersString(){
+        StringBuilder StringWorkers = new StringBuilder();
+         for(Workers worker: this.workersDAO.getAllworkerslist()){
+             StringWorkers.append(worker.getName()+" "+worker.getId()+ " | ");
+         }
+         return StringWorkers.toString();
+    }
 
 
 

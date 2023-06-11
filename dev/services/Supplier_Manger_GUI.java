@@ -89,6 +89,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //**************this is the option case switch*****************************************************************/
         if(e.getSource()==addnewSupplierButton){
 
             String name_suppleir=   JOptionPane.showInputDialog("What is the Supplier name:");
@@ -180,7 +181,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
             validInput=false;
 
             while (!validInput) {
-                String input = JOptionPane.showInputDialog("phone_numberD:");
+                String input = JOptionPane.showInputDialog("phone_number : ");
 
                 // Check if the input consists only of numeric characters
                 if (input.matches("\\d+")) {
@@ -291,12 +292,257 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
         } else if (e.getSource()==removeSupplierButton) {
+            boolean valid =false;
+            while ((!valid)) {
+                String input = JOptionPane.showInputDialog("Name of the Supplier");
 
-            
+                if (input == null) {
+                    return;
+                }
+
+
+                if (!this.supplier_manger.checkExistingSupplierName(input)) {
+                    supplier_manger.remove_supplier(input);
+                    valid = true;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Supplier not in the System");
+                }
+            }
+
+
 
         } else if (e.getSource() ==UpdateContactToSupplier) {
 
-        } else if (e.getSource()==UpdateContactToSupplier) {
+            //first cheak the supplier name
+            boolean valid = false;
+            String input1 = null;
+            while ((!valid)) {
+                 input1 = JOptionPane.showInputDialog("Name of the Supplier");
+
+                if (input1 == null) {
+                    return;
+                }
+
+
+                if (!this.supplier_manger.checkExistingSupplierName(input1)) {
+
+                    valid = true;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Supplier not in the System");
+                }
+            }
+
+            //after cheak that the contact name is a string
+            String contact_name = null;
+            boolean validInput = false;
+            while (!validInput) {
+                String input = JOptionPane.showInputDialog("Contact Name:");
+
+                // Check if the input consists only of alphabetic characters
+                if (input.matches("[a-zA-Z]+")) {
+                    contact_name = input;
+                    validInput = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                }
+            }
+            if (contact_name == null) {
+                return;
+            }
+
+            //after cheak that the phone number is a numeric
+            String phone_number = null;
+            validInput = false;
+
+            while (!validInput) {
+                String input = JOptionPane.showInputDialog("phone_number : ");
+
+                // Check if the input consists only of numeric characters
+                if (input.matches("\\d+")) {
+                    phone_number = input;
+                    validInput = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                }
+            }
+
+            if (phone_number == null) {
+                return;
+            }
+
+            //in the end insert it to the system
+
+            supplier_manger.update_contact_preson(input1, contact_name, phone_number);
+
+
+
+
+
+
+
+
+
+
+
+        } else if (e.getSource()==addItemtoSupplier) {
+
+            //supplier aname cheak
+            boolean valid =false;
+            String input1 =null;
+            while ((!valid)) {
+                input1 = JOptionPane.showInputDialog("Name of the Supplier");
+
+                if (input1 == null) {
+                    return;
+                }
+
+
+                if (!this.supplier_manger.checkExistingSupplierName(input1)) {
+
+                    valid = true;
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Supplier not in the System");
+                }
+            }
+
+            //item name cheak
+
+
+            String item_name = null;
+            boolean validInput = false;
+            while (!validInput) {
+                String input = JOptionPane.showInputDialog("Contact Name:");
+
+                // Check if the input consists only of alphabetic characters
+                if (input.matches("[a-zA-Z]+")) {
+                    item_name = input;
+                    validInput = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                }
+            }
+
+            //catalog number cheak
+
+
+            String catlog_number = null;
+            validInput = false;
+
+            while (!validInput) {
+                String input = JOptionPane.showInputDialog("catlog number : ");
+
+                // Check if the input consists only of numeric characters
+                if (input.matches("\\d+")) {
+                    catlog_number = input;
+                    validInput = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                }
+            }
+
+            if (catlog_number == null) {
+                return;
+            }
+
+
+
+            boolean isDoubleString =false;
+            String weight_s=null;
+            while(!isDoubleString) {
+                weight_s = JOptionPane.showInputDialog("Item weight: ");
+                if(weight_s ==null){
+                    return;
+                }
+                isDoubleString = isDoubleString(weight_s);
+            }
+
+            double weight = Double.parseDouble(weight_s);
+
+
+
+
+            String catalog = JOptionPane.showInputDialog("catalog name");
+
+            if(catalog ==null){
+                return;
+            }
+
+
+            String[] options = {"Regular", "Frozen", "Cold"};
+            int selectedOption = JOptionPane.showOptionDialog(null, "Select an option:", "Temperature",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            TempLevel tempLevel = TempLevel.valueOf(selectedOption);
+
+            String manufacturer= JOptionPane.showInputDialog("manufacturer name:");
+
+
+
+
+
+
+
+
+
+            Item item = new Item(item_name, catlog_number, weight, catalog, tempLevel, manufacturer);
+
+
+
+
+
+            boolean validFloat = false;
+            float floatValue = 0;
+
+            while (!validFloat) {
+                String input = JOptionPane.showInputDialog("Enter a float value:");
+
+                try {
+                    floatValue = Float.parseFloat(input);
+                    validFloat = true;
+                } catch (NumberFormatException ed) {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid float.");
+                }
+            }
+
+
+            boolean validInteger = false;
+            int integerValue = 0;
+
+            while (!validInteger) {
+                String input = JOptionPane.showInputDialog("Enter an integer value fot he amount:");
+
+                try {
+                    integerValue = Integer.parseInt(input);
+                    validInteger = true;
+                } catch (NumberFormatException ek) {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid integer.");
+                }
+            }
+            supplier_manger.add_item_to_supplier( input1, item, integerValue, floatValue);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         } else if (e.getSource()==addItemtoSupplier) {
 
@@ -304,4 +550,33 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static boolean isDoubleString(String input) {
+        try {
+            Double.parseDouble(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+
+
+
 }
+
+
+

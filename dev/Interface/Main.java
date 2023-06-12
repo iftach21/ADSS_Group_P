@@ -6,6 +6,7 @@ import Interface.Employee.WorkerInterface;
 import Interface.Transfer.TransferManagerInterface;
 import Interface.UI.UIEmployee;
 import Interface.UI.UIHRManager;
+import Interface.UI.UITransferManager;
 
 import java.net.StandardSocketOptions;
 import java.sql.SQLException;
@@ -133,7 +134,7 @@ public class Main {
     }
 
     private static void GUITransferManager() throws Exception {
-        //todo: complete later
+        UITransferManager ui = new UITransferManager();
     }
     private static void GUIStoreManager() throws Exception {
         //todo: complete later

@@ -295,6 +295,42 @@ public class UIHRManager {
         });
         weeklyShiftMenu.add(editShiftItem);
 
+        JMenuItem editShiftItemDrivers = new JMenuItem("Edit Shift for drivers");
+        editShiftItemDrivers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create input fields
+                JTextField weekNumberField = new JTextField();
+                JTextField yearNumberField = new JTextField();
+
+                // Create the panel to hold the input fields
+                JPanel inputPanel = new JPanel(new GridLayout(2, 2));
+                inputPanel.add(new JLabel("Week Number:"));
+                inputPanel.add(weekNumberField);
+                inputPanel.add(new JLabel("Year Number:"));
+                inputPanel.add(yearNumberField);
+
+                // Show the input dialog and get the user's input
+                int result = JOptionPane.showConfirmDialog(frame, inputPanel, "Enter Weekly Shift Details",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+                // If the user clicked "OK"
+                if (result == JOptionPane.OK_OPTION) {
+                    // Get the values from the input fields
+                    int weekNum = Integer.parseInt(weekNumberField.getText());
+                    int yearNum = Integer.parseInt(yearNumberField.getText());
+
+                    // Create an instance of UIWeeklyShiftReq with the provided input values
+                    try {
+                        new UIShiftDriver(weekNum, yearNum, 0);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
+        weeklyShiftMenu.add(editShiftItemDrivers);
+
         //-------------------------------------------------------------------------------------------------------------
 
 

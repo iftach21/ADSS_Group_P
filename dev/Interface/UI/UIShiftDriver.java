@@ -115,8 +115,6 @@ public class UIShiftDriver {
                 inputPanel.add(new JLabel("Available to work:"));
                 JComboBox<Integer> WorkersComboBox = new JComboBox<>();
                 inputPanel.add(WorkersComboBox);
-//                JLabel jLabel=new JLabel();
-//                inputPanel.add(jLabel);
 
                 // Add ActionListener to professionComboBox
                 professionComboBox.addActionListener(new ActionListener() {

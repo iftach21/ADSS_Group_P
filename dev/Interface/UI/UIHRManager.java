@@ -419,7 +419,7 @@ public class UIHRManager {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(new JLabel("ID:"));
         panel.add(idField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "add Driver", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, panel, "fire employee", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(null, "fired employee");
             // Get the values from the text fields
@@ -503,7 +503,6 @@ public class UIHRManager {
         panel.add(idField);
         panel.add(new JLabel("Contract:"));
         panel.add(contractField);
-        panel.add(new JLabel("Start Date:"));
         int result = JOptionPane.showConfirmDialog(null, panel, "Change Employee Contract", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(null, "Changed Employee Contract!");
@@ -588,8 +587,9 @@ public class UIHRManager {
             int prof = proComboBox.getSelectedIndex();
 
             // Call the addEmployee function with the gathered input
-            JOptionPane.showMessageDialog(null, "Added new pro for employee!");
             HRManagerService.addnewproforemployee(id,prof);
+            JOptionPane.showMessageDialog(null, "Added new pro for employee!");
+
         }
     }
     private void showremoveprofforemployeeDialog() {

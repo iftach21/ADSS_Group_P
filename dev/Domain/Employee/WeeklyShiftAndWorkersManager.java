@@ -410,12 +410,23 @@ public class WeeklyShiftAndWorkersManager {
 
     }
 
-    public List<String> getAllDrivers(int day, int WeekNum, int yearNum, int superNum) throws SQLException {
+    public ArrayList<String> getAllDrivers(int day, int WeekNum, int yearNum, int superNum) throws SQLException {
         WeeklyShift ws = this.weeklyShiftDAO.get(WeekNum,yearNum,superNum);
         return ws.getDayShift()[day].giveDriversString();
     }
 
+    public  ArrayList<String> getDriverByNight(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
 
+        WeeklyShift ws = this.weeklyShiftDAO.get(WeekNum,yearNum,superNum);
+
+        return ws.getNightShift()[day].giveDriversString();
+    }
+    public  ArrayList<String> getDriverByDay(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+
+        WeeklyShift ws = this.weeklyShiftDAO.get(WeekNum,yearNum,superNum);
+
+        return ws.getDayShift()[day].giveDriversString();
+    }
 
 }
 

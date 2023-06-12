@@ -166,8 +166,8 @@ public class Shift {
         return ! workerInShift[2].isEmpty();
     }
     public List<Driver> giveDrivers(){return this.drivers;}
-    public List<String> giveDriversString(){
-        List<String> listDtiver=new ArrayList<>();
+    public ArrayList<String> giveDriversString(){
+        ArrayList<String> listDtiver=new ArrayList<>();
         for(Driver driver:this.drivers){
             listDtiver.add(driver.getName());
         }

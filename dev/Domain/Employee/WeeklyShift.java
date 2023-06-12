@@ -3,6 +3,7 @@ package Domain.Employee;
 import Domain.Enums.WindowType;
 import Domain.Enums.WindowTypeCreater;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeeklyShift {
@@ -196,6 +197,36 @@ public class WeeklyShift {
                 System.out.println("there is no shift manager on week: " + this.weekNUm + " on year " + this.year + " on the day shift of day num" + daynum);
             }
         }
+    }
+
+    public void writeEventToShift(WindowType shiftTime,String massage){
+        if(shiftTime.ordinal()<7){
+            this.dayShift[shiftTime.ordinal()].setLog(this.dayShift[shiftTime.ordinal()].getLog() +"\n" + massage);
+        }
+        else {
+            this.nightShift[shiftTime.ordinal()].setLog(this.dayShift[shiftTime.ordinal()].getLog() +"\n" + massage);
+        }
+
+    }
+
+    public String getEventToShift(WindowType shiftTime){
+        if(shiftTime.ordinal()<7){
+            return this.dayShift[shiftTime.ordinal()].getLog();
+        }
+        else {
+            return this.nightShift[shiftTime.ordinal()].getLog();
+        }
+    }
+    public ArrayList<Workers> getAllWorkers(){
+        ArrayList<Workers> ans = new ArrayList<Workers>();
+        for (int i = 0; i < 7; i++){
+            ans.addAll(dayShift[i].getAllWorkers());
+            ans.addAll(dayShift[i].getDrivers());
+            ans.addAll(nightShift[i].getAllWorkers());
+            ans.addAll(nightShift[i].getDrivers());
+        }
+        return ans;
+
     }
 
 

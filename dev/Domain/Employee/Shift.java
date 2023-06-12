@@ -1,7 +1,9 @@
 package Domain.Employee;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Shift {
     private String date;
@@ -164,6 +166,13 @@ public class Shift {
         return ! workerInShift[2].isEmpty();
     }
     public List<Driver> giveDrivers(){return this.drivers;}
+    public List<String> giveDriversString(){
+        List<String> listDtiver=new ArrayList<>();
+        for(Driver driver:this.drivers){
+            listDtiver.add(driver.getName());
+        }
+        return listDtiver;
+    }
 
     public void addDriver(Driver driver){this.drivers.add(driver);}
 

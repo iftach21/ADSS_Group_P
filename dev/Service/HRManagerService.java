@@ -10,6 +10,7 @@ import Domain.Enums.WindowTypeCreater;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class HRManagerService {
@@ -185,4 +186,8 @@ public class HRManagerService {
 
     }
 
+    public List<String> getAllDriversCanWork(int day, int weekNum, int yearNum) throws SQLException {
+        return controller.getAllDrivers(day,weekNum,yearNum,0);
+
+    }
 }

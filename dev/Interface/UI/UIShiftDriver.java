@@ -12,14 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UIShift {
+public class UIShiftDriver {
 
     private JFrame frame;
     private JPanel panel;
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public UIShift(int WeekNum,int yearNum,int superNum,boolean viewOnly) throws SQLException {
+    public UIShiftDriver(int WeekNum,int yearNum,int superNum,boolean viewOnly) throws SQLException {
         frame = new JFrame("Weekly Shift");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -27,7 +27,7 @@ public class UIShift {
         tableModel = new DefaultTableModel();
 
         table = new JTable(tableModel);
-        table.setDefaultRenderer(Object.class, new UIShift.WeeklyShiftCellRenderer());
+        table.setDefaultRenderer(Object.class, new UIShiftDriver.WeeklyShiftCellRenderer());
 
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -35,14 +35,14 @@ public class UIShift {
         frame.setSize(900, 350);
         frame.setVisible(true);
 
-        createWeeklyShift(WeekNum,yearNum,superNum, viewOnly);
+        createWeeklyShift(WeekNum,yearNum,0, viewOnly);
     }
-    public UIShift(int WeekNum,int yearNum,int superNum) throws SQLException {
-        this(WeekNum,yearNum,superNum,false);
+    public UIShiftDriver(int WeekNum,int yearNum,int superNum) throws SQLException {
+        this(WeekNum,yearNum,0,false);
     }
     private void createWeeklyShift(int WeekNum,int yearNum,int superNum,boolean viewOnly) throws SQLException {
         // Create the professions
-        String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
+        String[] professions = {"driver"};
 
         // Iterate over the days of the week
         String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -63,7 +63,7 @@ public class UIShift {
         for (int i = 1; i < 8; i++) {
             int day = i-1;
 
-            Map<String, ArrayList<String>> dayShiftProfessions = getWorkersByProDay(day, "Day Shift",WeekNum,yearNum,superNum, professions);
+            ArrayList<String> dayShiftProfessions = getAllDriversCanWork(day,WeekNum,yearNum);
             Map<String, ArrayList<String>> nightShiftProfessions = getWorkersByProNight(day, "Night Shift",WeekNum,yearNum,superNum, professions);
 
             StringBuilder dayShiftBuilder = new StringBuilder("<html><body>");
@@ -255,7 +255,7 @@ public class UIShift {
         return hr.HRgetWorkersByProNight(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
     public static void main(String[] args) throws SQLException {
-        UIShift ws = new UIShift(1,2024,4);
+        UIShiftDriver ws = new UIShiftDriver(1,2024,4);
     }
     private class WeeklyShiftCellRenderer extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,

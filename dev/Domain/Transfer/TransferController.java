@@ -1152,6 +1152,28 @@ public class TransferController {
         }
     }
 
+    public Map<Integer, List<String>> getDetailsForPlannedTransfers(){
+        Map<Integer, List<String>> details = new HashMap<>();
+        Map<Integer,Transfer> allTransfers = transfersDAO.getAllTransfers();
+        for(Integer trandferId: allTransfers.keySet()) {
+            Transfer currentTransfer = allTransfers.get(trandferId);
+            if (currentTransfer.getTransferStatus().equals("NOT START") || currentTransfer.getTransferStatus().equals("IN PROGRESS")) {
+                List<String> currentDetials = new ArrayList<>(7);
+                currentDetials.add(String.valueOf(currentTransfer.getTransferId()));
+                currentDetials.add(currentTransfer.getSource().getSiteName());
+                currentDetials.add(currentTransfer.getListOfDestinations().get(currentTransfer.getListOfDestinations().size() - 1).getSiteName());
+                currentDetials.add(currentTransfer.getLeavingDate() + "");
+                currentDetials.add(currentTransfer.getLeavingTime() + "");
+                currentDetials.add(currentTransfer.getArrivingDate() + "");
+                currentDetials.add(currentTransfer.get_arrivingTime() + "");
+
+                details.put(trandferId, currentDetials);
+            }
+        }
+
+        return details;
+    }
+
     public boolean checkIfStoreKeeperIsThere(LocalDate arrivingDate, LocalTime arrivingTime, int orderDestinationSiteId) throws SQLException {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         int weekNumber = arrivingDate.get(weekFields.weekOfWeekBasedYear());

@@ -93,4 +93,14 @@ public class TransferManagerService {
     public void initializeAndAddNewTruck(int licenseNumber, String model, int netWeight, int maxWeight, int indexChosen) throws SQLException {
         transferController.initializeAndAddNewTruck(licenseNumber, model, netWeight, maxWeight, indexChosen);
     }
+
+    /**
+     * view planned transfers details.
+     * Return: Map<Integer, List<String>>. The keys are the transfers ids and the values are the next details:
+     * TRANSFER ID, Source site, Last destination, Leaving date, Leaving time, Arriving date, Arriving time
+     */
+    public Map<Integer, List<String>> getDetailsForPlannedTransfers(){
+        return transferController.getDetailsForPlannedTransfers();
+    }
+
 }

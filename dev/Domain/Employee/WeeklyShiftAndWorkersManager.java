@@ -389,10 +389,21 @@ public class WeeklyShiftAndWorkersManager {
         WeeklyShift weeklyShift = this.getweeklyshift(weeknum,year,supernum);
         ArrayList<Workers> allWorkers = new ArrayList<>();
         allWorkers = weeklyShift.getAllWorkers();
+        ArrayList<Workers> allWorkersNoDup = new ArrayList<>();
+        for(Workers worker: allWorkers){
+            int flag = 0;
+            for(Workers w_d : allWorkersNoDup){
+                if(w_d.getId() == worker.getId()){
+                    flag =1;
+                    break;
+                }
+            }
+            if(flag==0){allWorkersNoDup.add(worker);}
+        }
 
 
         StringBuilder StringWorkers = new StringBuilder();
-        for(Workers worker: allWorkers){
+        for(Workers worker: allWorkersNoDup){
             StringWorkers.append(worker.getName()+" "+worker.getId()+ "\n");
         }
         return StringWorkers.toString();

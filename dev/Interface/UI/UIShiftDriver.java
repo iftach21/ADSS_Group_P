@@ -63,26 +63,19 @@ public class UIShiftDriver {
         for (int i = 1; i < 8; i++) {
             int day = i-1;
 
-            ArrayList<String> dayShiftProfessions = getAllDriversCanWork(day,WeekNum,yearNum);
-            Map<String, ArrayList<String>> nightShiftProfessions = getWorkersByProNight(day, "Night Shift",WeekNum,yearNum,superNum, professions);
 
+            ArrayList<String> dayDriver = getDriverByDay(day,"day",WeekNum,yearNum,0,professions);
+            ArrayList<String> NightDriver = getDriverByNight(day,"Night",WeekNum,yearNum,0,professions);
             StringBuilder dayShiftBuilder = new StringBuilder("<html><body>");
             StringBuilder nightShiftBuilder = new StringBuilder("<html><body>");
 
             // Build the profession count strings for the day shift
-            for (String profession : professions) {
-                String dayWorkers = getStringWorker(dayShiftProfessions.get(profession));
-
-                dayShiftBuilder.append(profession).append(": ").append(dayWorkers).append("<br>");
-            }
+            dayShiftBuilder.append("Driver").append(": ").append(getStringWorker(dayDriver)).append("<br>");
             dayShiftBuilder.append("</body></html>");
             dayShiftRow[i] = dayShiftBuilder.toString();
 
             // Build the profession count strings for the night shift
-            for (String profession : professions) {
-                String nightWorkers = getStringWorker(nightShiftProfessions.get(profession));
-                nightShiftBuilder.append(profession).append(": ").append(nightWorkers).append("<br>");
-            }
+            nightShiftBuilder.append("Driver").append(": ").append(getStringWorker(NightDriver)).append("<br>");
             nightShiftBuilder.append("</body></html>");
             nightShiftRow[i] = nightShiftBuilder.toString();
         }
@@ -243,14 +236,17 @@ public class UIShiftDriver {
         return labelText;
 
     }
-
-    private Map<String, ArrayList<String>> getWorkersByProDay(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
+    private ArrayList<String> getDriverByNight(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
         HRManagerService hr = new HRManagerService();
-        return hr.HRgetWorkersByProDay(day,shiftType,WeekNum,yearNum,superNum,professions);
+        return hr.getDriverByNight(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
-    private Map<String, ArrayList<String>> getWorkersByProNight(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
+    private ArrayList<String> getDriverByDay(int day,String shiftType, int WeekNum,int yearNum,int superNum, String[] professions) throws SQLException {
         HRManagerService hr = new HRManagerService();
-        return hr.HRgetWorkersByProNight(day,shiftType,WeekNum,yearNum,superNum,professions);
+        return hr.getDriverByDay(day,shiftType,WeekNum,yearNum,superNum,professions);
+    }
+    private ArrayList<String> getAllDriversCanWork(int day, int WeekNum,int yearNum) throws SQLException {
+        HRManagerService hr = new HRManagerService();
+        return hr.getAllDriversCanWork(day,WeekNum,yearNum);
     }
     public static void main(String[] args) throws SQLException {
         UIShiftDriver ws = new UIShiftDriver(1,2024,4);

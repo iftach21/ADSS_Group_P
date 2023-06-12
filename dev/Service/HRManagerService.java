@@ -18,7 +18,6 @@ public class HRManagerService {
 
     public HRManagerService() throws SQLException {
     }
-
     /**
      * will add req how many needed for each prof index to which weekly shift identify as weeknum, year, and super num.
      * */
@@ -186,8 +185,14 @@ public class HRManagerService {
 
     }
 
-    public List<String> getAllDriversCanWork(int day, int weekNum, int yearNum) throws SQLException {
+    public ArrayList<String> getAllDriversCanWork(int day, int weekNum, int yearNum) throws SQLException {
         return controller.getAllDrivers(day,weekNum,yearNum,0);
 
+    }
+    public  ArrayList<String> getDriverByDay(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+        return controller.getDriverByDay(day,shiftType,WeekNum,yearNum,superNum,professions);
+    }
+    public  ArrayList<String> getDriverByNight(int day, String shiftType, int WeekNum, int yearNum, int superNum, String[] professions) throws SQLException {
+        return controller.getDriverByNight(day,shiftType,WeekNum,yearNum,superNum,professions);
     }
 }

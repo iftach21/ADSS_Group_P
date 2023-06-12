@@ -204,7 +204,7 @@ public class WeeklyShift {
             this.dayShift[shiftTime.ordinal()].setLog(this.dayShift[shiftTime.ordinal()].getLog() +"\n" + massage);
         }
         else {
-            this.nightShift[shiftTime.ordinal()].setLog(this.dayShift[shiftTime.ordinal()].getLog() +"\n" + massage);
+            this.nightShift[shiftTime.ordinal()-7].setLog(this.dayShift[shiftTime.ordinal()].getLog() +"\n" + massage);
         }
 
     }

@@ -247,7 +247,9 @@ public class TransferController {
         TempLevel currMinTemp = lowestTempItem(orderItems);
 
         //choose driver for transfer
-        Driver chosenDriver = chooseDriverForTransfer(leavingDate, leavingTime, currMinTemp);
+        List<Driver> drivers = findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
+        Driver chosenDriver = chooseDriverForTransfer(drivers);
+
         if (chosenDriver == null)
         {
             System.out.println("Unfortunately, there is no available driver to this transfer.");
@@ -266,6 +268,13 @@ public class TransferController {
             return;
         }
 
+        Transfer newTransfer = initializeNewTransfer(destinationSites, sites, leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck, chosenDriver, sourceSite, orderItems);
+
+        System.out.println("Thanks manager! The transfer will be ready in short time. You'll now need to predict the weight in each destination, and rearrange the transfer if needed.");
+        startTransfer(newTransfer);
+    }
+
+    public Transfer initializeNewTransfer(List<Site> destinationSites, Site[] sites, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, Truck chosenTruck, Driver chosenDriver, Site sourceSite, Map<Site, Map<Item_mock, Integer>> orderItems) throws SQLException {
         Map<Site, Integer> destinationAndWeights = new LinkedHashMap<>();
         for(int i=0; i < sites.length; i++)
         {
@@ -279,8 +288,7 @@ public class TransferController {
         newTransfer.createDocument();
         _documentsCounter++;
 
-        System.out.println("Thanks manager! The transfer will be ready in short time. You'll now need to predict the weight in each destination, and rearrange the transfer if needed.");
-        startTransfer(newTransfer);
+        return newTransfer;
     }
 
     public void startTransfer(Transfer newTransfer) throws SQLException {
@@ -834,8 +842,7 @@ public class TransferController {
 
     }
 
-    public Driver chooseDriverForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp) throws SQLException {
-        Scanner scanner = new Scanner(System.in);
+    public List<Driver> findDriversForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp) throws SQLException {
         //get week num
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         int weekNumber = leavingDate.get(weekFields.weekOfWeekBasedYear());
@@ -858,6 +865,13 @@ public class TransferController {
 
         if (Drivers.size() ==0)
             return null;
+
+        return Drivers;
+    }
+
+    public Driver chooseDriverForTransfer(List<Driver> Drivers)
+    {
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Now, please choose 1 driver from the following list:");
         for (int i = 0; i < Drivers.size(); i++)
@@ -1193,10 +1207,16 @@ public class TransferController {
                 }
             }
 
-            Transfer chosenTransfer = transfersDAO.get(transferId);
+            Transfer chosenTransfer =getTransferByTransferId(transferId);
             chosenTransfer.createDocument();
             System.out.println("A document with transfer details has been downloaded. You'll be taken to the main menu.");
         }
+    }
+
+    public Transfer getTransferByTransferId(int transferId)
+    {
+        Transfer chosenTransfer = transfersDAO.get(transferId);
+        return chosenTransfer;
     }
 
     public void createMockOrder() throws SQLException {

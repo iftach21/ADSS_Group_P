@@ -1059,6 +1059,12 @@ public class TransferController {
                 scanner.next();
             }
         }
+
+        //create the truck
+        initializeAndAddNewTruck(licenseNumber, model, netWeight, maxWeight, indexChosen);
+    }
+
+    public void initializeAndAddNewTruck(int licenseNumber, String model, int netWeight, int maxWeight, int indexChosen) throws SQLException {
         TempLevel coolingCapacity;
 
         if (indexChosen == 1)
@@ -1074,7 +1080,6 @@ public class TransferController {
             coolingCapacity = TempLevel.frozen;
         }
 
-        //create the truck
         Truck newTruck = new Truck(licenseNumber, model, netWeight, netWeight, maxWeight, coolingCapacity);
         tc.addTruck(newTruck);
     }

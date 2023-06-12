@@ -87,4 +87,10 @@ public class TransferManagerService {
         transfer.createDocument();
     }
 
+    /**
+     * Create new track
+     */
+    public void initializeAndAddNewTruck(int licenseNumber, String model, int netWeight, int maxWeight, int indexChosen) throws SQLException {
+        transferController.initializeAndAddNewTruck(licenseNumber, model, netWeight, maxWeight, indexChosen);
+    }
 }

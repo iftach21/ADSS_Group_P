@@ -54,8 +54,8 @@ public class TransferManagerService {
      */
     public Map<Integer, String>  getOrderSitesNames(){
         Map<Integer, String> sitesNames = new HashMap<>();
-        sites = orderItems.keySet().toArray(new Site[0]);
         initializeOrderItems();
+        sites = orderItems.keySet().toArray(new Site[0]);
         initializeOrderDestinationSiteId();
 
         for(int i=0; i<sites.length; i++){

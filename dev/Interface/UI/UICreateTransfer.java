@@ -10,6 +10,9 @@ import java.io.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
@@ -18,8 +21,8 @@ public class UICreateTransfer {
     private TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();
     private JCheckBox[] checkboxes;
     private JTextField dateSelected;
-    private JTextField timeSelected;
     private JButton nextButton;
+    private JSpinner spinner;
 
 
     public UICreateTransfer() throws SQLException {
@@ -28,7 +31,7 @@ public class UICreateTransfer {
 
     private void initializeUI() {
         Transferframe = new JFrame("Create a transfer");
-        Transferframe.setSize(500, 400);
+        Transferframe.setSize(500, 430);
         Transferframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Transferframe.setLayout(null);
 
@@ -44,25 +47,31 @@ public class UICreateTransfer {
         chooseSourceHeadline.setText("Please choose source from the following options: ");
         chooseSourceHeadline.setBounds(20, 30, 650, 50);
         Transferframe.add(chooseSourceHeadline);
-        List<String> sites = TransferManagerService.getOrderSitesNames();
-        JPanel checkboxesPanel = new JPanel(new GridLayout(sites.size(), 1));
-        checkboxes = new JCheckBox[sites.size()];
-        for (int i = 0; i < sites.size(); i++) {
-            String string = sites.get(i);
-            checkboxes[i] = new JCheckBox(string);
-            checkboxesPanel.add(checkboxes[i]);
+        Map<Integer, String> sites = TransferManagerService.getOrderSitesNames();
+
+        JLabel[] sitesHeadlines = new JLabel[sites.size()];
+        int index = 0;
+        for (Integer siteId : sites.keySet())
+        {
+            sitesHeadlines[index] = new JLabel((index + 1) + ". ID: " + siteId + "   Site Name: " + sites.get(siteId));
+            sitesHeadlines[index].setBounds(20, 80 + (index * 20), 650, 20);
+            Transferframe.add(sitesHeadlines[index]);
+            index++;
+            if (index == 3)
+                break;
         }
-        ButtonGroup buttonGroup = new ButtonGroup();
-        for (JCheckBox checkbox: checkboxes) {
-            buttonGroup.add(checkbox);
-        }
-        checkboxesPanel.setBounds(20, 80, 650, 60);
-        Transferframe.add(checkboxesPanel);
+
+        JTextField siteIdField = new JTextField();
+        JPanel inputPanel = new JPanel(new GridLayout(1, 2));
+        inputPanel.add(new JLabel("Site ID:"));
+        inputPanel.add(siteIdField);
+        inputPanel.setBounds(20, 150, 100, 20);
+        Transferframe.add(inputPanel);
 
         //Add date picker
         final JLabel selectDateLabel=new JLabel();
         selectDateLabel.setText("Please choose transfer leaving date: ");
-        selectDateLabel.setBounds(20, 150, 650, 35);
+        selectDateLabel.setBounds(20, 180, 650, 35);
         Transferframe.add(selectDateLabel);
 
         JLabel label = new JLabel("Selected Date:");
@@ -72,7 +81,7 @@ public class UICreateTransfer {
         p.add(label);
         p.add(dateSelected);
         p.add(b);
-        p.setBounds(-130, 185, 650, 60);
+        p.setBounds(-130, 215, 650, 40);
         Transferframe.add(p);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -81,10 +90,10 @@ public class UICreateTransfer {
         });
 
         //Add time picker
+
         SpinnerDateModel spinnerDateModel = new SpinnerDateModel();
         spinnerDateModel.setCalendarField(Calendar.MINUTE); // Set the field to modify (in this case, minutes)
-
-        JSpinner spinner = new JSpinner(spinnerDateModel);
+        spinner = new JSpinner(spinnerDateModel);
 
         // Set a custom date format for the spinner
         JSpinner.DateEditor spinnerEditor = new JSpinner.DateEditor(spinner, "HH:mm");
@@ -94,15 +103,15 @@ public class UICreateTransfer {
 
         final JLabel selectTimeLabel=new JLabel();
         selectTimeLabel.setText("Please choose transfer leaving time: ");
-        selectTimeLabel.setBounds(20, 245, 650, 35);
+        selectTimeLabel.setBounds(20, 255, 650, 35);
         Transferframe.add(selectTimeLabel);
 
-        spinner.setBounds(20, 280, 100, 20);
+        spinner.setBounds(20, 290, 100, 20);
         Transferframe.add(spinner);
 
         //Add button to check the desired details entered
         nextButton = new JButton("NEXT");
-        nextButton.setBounds(200,300,100, 40);
+        nextButton.setBounds(200,310,100, 40);
         Transferframe.add(nextButton);
 
         //start transfer manager interface
@@ -112,6 +121,42 @@ public class UICreateTransfer {
 
     private void startCreateTransferUI() {
         Transferframe.setVisible(true);
-        
+        //TODO : check if date and time are legal and checkedbox. if true open choose driver dialog
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //Check if Date and time are legal
+                //Time parser to LocalTime
+                Date selectedDate = (Date) spinner.getValue();
+                java.time.Instant instant = selectedDate.toInstant();
+                // Convert Instant to LocalTime
+                LocalTime leavingTime = instant.atZone(ZoneId.systemDefault()).toLocalTime();
+
+                //Date parser to LocalDate
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate leavingDate = LocalDate.parse(dateSelected.getText(), formatter);
+
+                //Check if Legal
+                try {
+                    if (!TransferManagerService.checkIfDateIsLegal(leavingDate, leavingTime))
+                    {
+                        JOptionPane.showMessageDialog(Transferframe, "Your Date is not Legal! Please try again",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else if(!TransferManagerService.checkIfStoreKeeperIsThere(0, leavingTime, leavingDate))
+                    {
+                        JOptionPane.showMessageDialog(Transferframe, "There is no storekeeper in the final destination. Please try again",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else
+                    {
+
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 }

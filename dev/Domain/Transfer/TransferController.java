@@ -246,8 +246,7 @@ public class TransferController {
         if (drivers == null)
         {
             System.out.println("Unfortunately, there is no available driver to this transfer.");
-            _ordersQueue.add(orderItems);
-            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            resetQueue(orderItems, orderDestinationSiteId);
             return;
         }
 
@@ -258,8 +257,7 @@ public class TransferController {
         if (chosenTruck == null)
         {
             System.out.println("Unfortunately, there is no available truck to this transfer. You'll have to start all over again.");
-            _ordersQueue.add(orderItems);
-            _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
+            resetQueue(orderItems, orderDestinationSiteId);
             return;
         }
 
@@ -1259,6 +1257,12 @@ public class TransferController {
     public Integer getOrderDestinationSiteIdFromQueue()
     {
         return _orderDestinationSiteIdQueue.remove();
+    }
+
+    public void resetQueue(Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId)
+    {
+        _ordersQueue.add(orderItems);
+        _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
     }
 
     public void createMockOrder() throws SQLException {

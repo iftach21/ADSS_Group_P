@@ -32,6 +32,11 @@ public class TransferManagerService {
         orderDestinationSiteId = transferController.getOrderDestinationSiteIdFromQueue();
     }
 
+    private void resetQueueIfNoAvailableTruckOrDriver()
+    {
+        transferController.resetQueue(orderItems, orderDestinationSiteId);
+    }
+
     /**
      * Returns order's sites names
      */
@@ -82,8 +87,10 @@ public class TransferManagerService {
         List<Driver> drivers = transferController.findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
         Map<Integer, List<String>> details = new HashMap<>();
 
-        if(drivers.size() == 0)
+        if(drivers.size() == 0) {
+            resetQueueIfNoAvailableTruckOrDriver();
             return null;
+        }
 
         for(int i=0; i<drivers.size(); i++) {
             Driver currentDriver = drivers.get(i);
@@ -110,7 +117,12 @@ public class TransferManagerService {
                 break;
             }
         }
-        return truckController.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
+        Truck truck = truckController.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
+        if(truck == null)
+        {
+            resetQueueIfNoAvailableTruckOrDriver();
+        }
+        return truck;
     }
 
     /**

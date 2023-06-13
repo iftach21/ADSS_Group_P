@@ -242,15 +242,16 @@ public class TransferController {
 
         //choose driver for transfer
         List<Driver> drivers = findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
-        Driver chosenDriver = chooseDriverForTransfer(drivers);
 
-        if (chosenDriver == null)
+        if (drivers == null)
         {
             System.out.println("Unfortunately, there is no available driver to this transfer.");
             _ordersQueue.add(orderItems);
             _orderDestinationSiteIdQueue.add(orderDestinationSiteId);
             return;
         }
+
+        Driver chosenDriver = chooseDriverForTransfer(drivers);
 
         //choose truck by the chosen driver
         Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);

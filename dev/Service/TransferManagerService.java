@@ -23,11 +23,11 @@ public class TransferManagerService {
     /**
      * Initialize order items.
      */
-    public void initializeOrderItems(){
+    private void initializeOrderItems(){
         orderItems = transferController.getOrderItemsFromQueue();
     }
 
-    public void initializeOrderDestinationSiteId()
+    private void initializeOrderDestinationSiteId()
     {
         orderDestinationSiteId = transferController.getOrderDestinationSiteIdFromQueue();
     }
@@ -49,7 +49,7 @@ public class TransferManagerService {
     /**
      * Calculate arriving date and time based on leaving date and time.
      */
-    public LocalDateTime calculateArrivingTime(Integer sourceSiteIndex, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
+    private LocalDateTime calculateArrivingTime(Integer sourceSiteIndex, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
         Site[] sites = orderItems.keySet().toArray(new Site[0]);
         Site sourceSite = sites[sourceSiteIndex];
         List<Site> destinationSites = transferController.initializeDestinationsSites(sites, sourceSite, orderDestinationSiteId);
@@ -66,19 +66,24 @@ public class TransferManagerService {
     /**
      * check if there is an available storekeeper in the Super-Branch in the arriving date
      */
-    public boolean checkIfStoreKeeperIsThere(LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException {
-        return transferController.checkIfStoreKeeperIsThere(arrivingDate, arrivingTime, orderDestinationSiteId);
+    public boolean checkIfStoreKeeperIsThere(Integer sourceSiteIndex, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
+        LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSiteIndex, leavingTime, leavingDate);
+        return transferController.checkIfStoreKeeperIsThere(arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), orderDestinationSiteId);
     }
 
     /**
         find all the details of available drivers based on the transfer's leaving time
         * return: Map<Integer, List<String>>.The key is driverID, The value is list which contains the next details:
           driver name, temp type, weight type
+          if there are no available drivers, return null.
      */
     public Map<Integer, List<String>> findDriversDetailsForTransfer(LocalDate leavingDate, LocalTime leavingTime) throws SQLException {
         TempLevel currMinTemp = transferController.lowestTempItem(orderItems);
         List<Driver> drivers = transferController.findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
         Map<Integer, List<String>> details = new HashMap<>();
+
+        if(drivers.size() == 0)
+            return null;
 
         for(int i=0; i<drivers.size(); i++) {
             Driver currentDriver = drivers.get(i);

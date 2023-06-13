@@ -202,13 +202,7 @@ public class TransferController {
             }
         }
 
-        List<Site> tempList = Arrays.asList(sites);
-
-        List<Site> destinationSites = new ArrayList<>(tempList);
-
-        destinationSites.remove(sourceSite);
-
-        destinationSites.add(sc.getSiteById(orderDestinationSiteId));
+        List<Site> destinationSites = initializeDestinationsSites(sites, sourceSite, orderDestinationSiteId);
 
         LocalDate arrivingDate;
         LocalTime arrivingTime;
@@ -272,6 +266,16 @@ public class TransferController {
 
         System.out.println("Thanks manager! The transfer will be ready in short time. You'll now need to predict the weight in each destination, and rearrange the transfer if needed.");
         startTransfer(newTransfer);
+    }
+
+    public List<Site> initializeDestinationsSites(Site[] sites, Site sourceSite, Integer orderDestinationSiteId)
+    {
+        List<Site> tempList = Arrays.asList(sites);
+        List<Site> destinationSites = new ArrayList<>(tempList);
+        destinationSites.remove(sourceSite);
+        destinationSites.add(sc.getSiteById(orderDestinationSiteId));
+
+        return destinationSites;
     }
 
     public Transfer initializeNewTransfer(List<Site> destinationSites, Site[] sites, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, Truck chosenTruck, Driver chosenDriver, Site sourceSite, Map<Site, Map<Item_mock, Integer>> orderItems) throws SQLException {
@@ -1244,6 +1248,16 @@ public class TransferController {
     {
         Transfer chosenTransfer = transfersDAO.get(transferId);
         return chosenTransfer;
+    }
+
+    public Map<Site, Map<Item_mock, Integer>> getOrderItemsFromQueue()
+    {
+        return _ordersQueue.remove();
+    }
+
+    public Integer getOrderDestinationSiteIdFromQueue()
+    {
+        return _orderDestinationSiteIdQueue.remove();
     }
 
     public void createMockOrder() throws SQLException {

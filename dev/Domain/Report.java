@@ -3,6 +3,7 @@ package Domain;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.*;
 
 public class Report {
     private reportType type;
@@ -86,6 +87,25 @@ public class Report {
             reportString += item.getName() + ", Catalog number: " + item.getCatalogNum() + " : " + amount + "\n";
         }
         return reportString;
+    }
+
+    public String[] toStringArray() {
+        List<String> stringList = new ArrayList<>();
+
+        stringList.add("Report: ");
+        stringList.add("Report Type: " + type);
+        stringList.add("Report number: " + reportNum);
+        stringList.add("Report Date: " + reportDate);
+        stringList.add("Report Information: ");
+        stringList.add(reportInformationString);
+
+        for (Map.Entry<Item, Integer> entry : reportItems.entrySet()) {
+            Item item = entry.getKey();
+            int amount = entry.getValue();
+            stringList.add(item.getName() + ", Catalog number: " + item.getCatalogNum() + " : " + amount);
+        }
+
+        return stringList.toArray(new String[0]);
     }
 
 

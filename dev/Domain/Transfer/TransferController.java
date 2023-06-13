@@ -300,13 +300,19 @@ public class TransferController {
         return newTransfer;
     }
 
+    public void addTransferTruckToDao(Transfer newTransfer) throws SQLException
+    {
+        Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
+        transferTruck.addToDAO(newTransfer.getTransferId());
+    }
+
     public void startTransfer(Transfer newTransfer) throws SQLException {
         while(true)
         {
             boolean transferRearranged = false;
 
+            addTransferTruckToDao(newTransfer);
             Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
-            transferTruck.addToDAO(newTransfer.getTransferId());
 
             System.out.println("The truck chosen to the transfer is: ");
             System.out.println("License Number: " + transferTruck.getLicenseNumber());
@@ -442,8 +448,8 @@ public class TransferController {
             System.out.println("And he picked up the following items: ");
         }
 
-        Map<Site, Map<Item_mock, Integer>> transferOrderItems = newTransfer.getOrderItems();
-        Map<Item_mock, Integer> sourceItems = transferOrderItems.get(newTransfer.getSource());
+        //get source items
+        Map<Item_mock, Integer> sourceItems = getSiteItems(newTransfer.getSource().getSiteId(), newTransfer);
         for (Item_mock item : sourceItems.keySet()) {
             System.out.println("Item name: " + item.getItemName() + ", Quantity: " + sourceItems.get(item));
         }
@@ -503,7 +509,8 @@ public class TransferController {
                 System.out.println("And he picked up the following items: ");
             }
 
-            Map<Item_mock, Integer> destItems = transferOrderItems.get(transferDest.get(i));
+            //get current destination items
+            Map<Item_mock, Integer> destItems = getSiteItems(transferDest.get(i).getSiteId(), newTransfer);
             for (Item_mock item : destItems.keySet()) {
                 System.out.println("Item name: " + item.getItemName() + ", Quantity: " + destItems.get(item));
             }
@@ -540,6 +547,13 @@ public class TransferController {
             }
         }
         return transferRearranged;
+    }
+
+    public Map<Item_mock, Integer> getSiteItems(Integer siteId, Transfer newTransfer)
+    {
+        Site site = sc.getSiteById(siteId);
+        Map<Site, Map<Item_mock, Integer>> transferOrderItems = newTransfer.getOrderItems();
+        return transferOrderItems.get(site);
     }
 
     public void removeOneDestOfTransfer(Transfer transfer)

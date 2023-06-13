@@ -3,7 +3,6 @@ package Service;
 import Domain.Employee.Driver;
 import Domain.Enums.TempLevel;
 import Domain.Transfer.*;
-import Interface.Transfer.TransferManagerInterface;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -22,6 +21,7 @@ public class TransferManagerService {
     private List<Site> destinationSites;
     private List<Driver> drivers;
     private Site[] sites;
+    private Truck chosenTruck;
 
     public TransferManagerService() throws SQLException {
         transferController.createMockOrder();
@@ -39,11 +39,18 @@ public class TransferManagerService {
         orderItems = transferController.getOrderItemsFromQueue();
     }
 
+    /**
+     * Initialize orderDestinationSiteId from queue
+     */
     private void initializeOrderDestinationSiteId()
     {
         orderDestinationSiteId = transferController.getOrderDestinationSiteIdFromQueue();
     }
 
+    /**
+     * Initialize destination sites based on transfer source Site.
+     * @param sourceSiteId
+     */
     private void initializeDestinationsSites(Integer sourceSiteId){
         Site sourceSite = siteController.getSiteById(sourceSiteId);
         destinationSites = transferController.initializeDestinationsSites(sites, sourceSite, orderDestinationSiteId);
@@ -117,24 +124,40 @@ public class TransferManagerService {
     /**
         find truck to the transfer
      */
-    private Truck findTruckByDriver(Driver chosenDriver, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException{
+    private void findTruckByDriver(Driver chosenDriver, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException{
         TempLevel currMinTemp = transferController.lowestTempItem(orderItems);
-        Truck truck = transferController.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime, orderItems, orderDestinationSiteId);
-
-        return truck;
+        chosenTruck = transferController.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime, orderItems, orderDestinationSiteId);
     }
 
     /**
      *  create new transfer, and add it to DAO.
+     * @return: transfer id of the new transfer
      */
-    public Transfer initializeNewTransfer(LocalDate leavingDate, LocalTime leavingTime, Integer chosenDriverId, Integer sourceSiteId) throws SQLException{
+    public Integer initializeNewTransfer(LocalDate leavingDate, LocalTime leavingTime, Integer chosenDriverId, Integer sourceSiteId) throws SQLException{
         Site sourceSite = siteController.getSiteById(sourceSiteId);
         LocalDateTime arrivingDateTime = transferController.calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
 
         Driver chosenDriver = getChosenDriver(chosenDriverId);
 
-        Truck chosenTruck = findTruckByDriver(chosenDriver, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime());
-        return transferController.initializeNewTransfer(destinationSites, sites, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), chosenTruck, chosenDriver, sourceSite, orderItems);
+        findTruckByDriver(chosenDriver, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime());
+
+        Transfer newTransfer = transferController.initializeNewTransfer(destinationSites, sites, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), chosenTruck, chosenDriver, sourceSite, orderItems);
+        transferController.addTransferTruckToDao(newTransfer);
+        return newTransfer.getTransferId();
+    }
+
+    /**
+     * get details for chosen truck
+     */
+    public List<String> getChosenTruckDetails()
+    {
+        List<String> details = new LinkedList<>();
+        details.add(chosenTruck.getLicenseNumber()+"");
+        details.add(chosenTruck.getTruckModel());
+        details.add(chosenTruck.getMaxWeight()+"");
+        details.add(chosenTruck.getTempCapacity()+"");
+
+        return details;
     }
 
     /**
@@ -173,7 +196,6 @@ public class TransferManagerService {
     }
 
     /**
-     *
      * @param chosenDriverId
      * @return chosen Driver by id
      */
@@ -187,6 +209,47 @@ public class TransferManagerService {
             }
         }
         return chosenDriver;
+    }
+
+    /**
+     * get specific site items details
+     * @return: Map<String, List<String>>. The key is the item catalog number, the values are:
+     * item name, item quantity.
+     */
+    private Map<String, List<String>> getSiteDetailsItems(Integer siteId, Integer transferId)
+    {
+        Transfer newTransfer = transferController.getTransferByTransferId(transferId);
+        Map<Item_mock, Integer> siteItems = transferController.getSiteItems(siteId, newTransfer);
+        Map<String, List<String>> siteItemsDetails = new HashMap<>();
+        List<String> details = new LinkedList<>();
+        for (Item_mock item : siteItems.keySet()) {
+            details.add(item.getItemName());
+            details.add(siteItems.get(item)+"");
+            siteItemsDetails.put(item.getCatalogNum(), details);
+        }
+        return siteItemsDetails;
+    }
+
+    /**
+     * get all sites items details
+     * @return: Map<Integer, Map<String, List<String>>). The key is the siteId, the value is the map as described in
+     * getSiteDetailsItems() function.
+     */
+    public Map<Integer, Map<String, List<String>>> getAllSitesItemsDetails(Integer transferId)
+    {
+        Transfer newTransfer = transferController.getTransferByTransferId(transferId);
+        Site sourceSite = newTransfer.getSource();
+        Map<Integer, Map<String, List<String>>> sitesItems = new HashMap<>();
+        Map<String, List<String>> sourceItems = getSiteDetailsItems(sourceSite.getSiteId(), transferId);
+        sitesItems.put(sourceSite.getSiteId(), sourceItems);
+
+        List<Site> transferDest = newTransfer.getListOfDestinations();
+        for (int i=0; i<transferDest.size() - 1; i++)
+        {
+            Map<String, List<String>> Items = getSiteDetailsItems(transferDest.get(i).getSiteId(), transferId);
+            sitesItems.put(transferDest.get(i).getSiteId(), Items);
+        }
+        return sitesItems;
     }
 
 }

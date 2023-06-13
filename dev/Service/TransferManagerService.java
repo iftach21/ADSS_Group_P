@@ -12,12 +12,19 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class TransferManagerService {
+    private static TransferManagerService Instance = null;
     private TransferController transferController = TransferController.getInstance();
     private TruckController truckController = TruckController.getInstance();
     private Map<Site, Map<Item_mock, Integer>> orderItems;
     private Integer orderDestinationSiteId;
 
     public TransferManagerService() throws SQLException {
+
+    }
+
+    public static TransferManagerService getInstance() throws SQLException {
+        if(Instance==null){Instance = new TransferManagerService();}
+        return Instance;
     }
 
     /**

@@ -17,7 +17,7 @@ import java.util.Map;
 public class UITransferManager extends JFrame{
 
     private JFrame frame;
-    private TransferManagerService TransferManagerService;
+    private TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();;
 
     private JButton viewTransferDocumentButton;
     private JButton createTransferButton;
@@ -27,7 +27,6 @@ public class UITransferManager extends JFrame{
     private JButton exitTransferSystemButton;
 
     public UITransferManager() throws SQLException {
-        TransferManagerService = new TransferManagerService();
         initializeUI();
     }
 
@@ -36,13 +35,12 @@ public class UITransferManager extends JFrame{
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
+
         final JLabel tf=new JLabel();
-        // Create components
-        //JPanel panel = new JPanel();
-        //panel.setLayout(new GridLayout(6, 1));
         tf.setText("Hello transfer manager, nice to have you back. What would you like to do?");
         tf.setBounds(25, 0, 650, 100);
         frame.add(tf);
+
         viewTransferDocumentButton = new JButton("View and download a transfer document of your choice");
         viewTransferDocumentButton.setBounds(50,100,400, 50);
         createTransferButton = new JButton("Create transfer for pending orders"); //todo : add pending orders number
@@ -116,7 +114,13 @@ public class UITransferManager extends JFrame{
         createTransferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO : call the UICreateTransfer
+                try {
+                    UICreateTransfer uiCreateTransfer = new UICreateTransfer();
+                }
+                catch (Exception ex)
+                {
+                    throw new RuntimeException();
+                }
             }
         });
 

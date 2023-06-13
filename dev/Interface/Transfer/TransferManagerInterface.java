@@ -22,7 +22,15 @@ public class TransferManagerInterface extends AInterface {
     @Override
     public void logIn() throws Exception {
 
-        //clear tables before adding all data
+        loadData();
+
+        controller.startTransferSystem();
+
+        SiteDAO.getInstance().deleteAll();
+        Item_mockDAO.getInstance().deleteAll();
+    }
+
+    public void loadData() throws SQLException {
         SiteDAO.getInstance().deleteAll();
         Item_mockDAO.getInstance().deleteAll();
 
@@ -162,10 +170,5 @@ public class TransferManagerInterface extends AInterface {
         TrucksDAO.getInstance().add(truck2);
         TrucksDAO.getInstance().add(truck3);
         TrucksDAO.getInstance().add(truck4);
-
-        controller.startTransferSystem();
-
-        SiteDAO.getInstance().deleteAll();
-        Item_mockDAO.getInstance().deleteAll();
     }
 }

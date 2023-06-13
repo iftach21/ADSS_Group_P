@@ -19,7 +19,7 @@ public class TransferManagerService {
     private Integer orderDestinationSiteId;
 
     public TransferManagerService() throws SQLException {
-
+        transferController.createMockOrder();
     }
 
     public static TransferManagerService getInstance() throws SQLException {

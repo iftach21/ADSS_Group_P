@@ -15,8 +15,13 @@ public class TransferManagerService {
     private static TransferManagerService Instance = null;
     private TransferController transferController = TransferController.getInstance();
     private TruckController truckController = TruckController.getInstance();
+    private SiteController siteController = SiteController.getInstance();
+
     private Map<Site, Map<Item_mock, Integer>> orderItems;
     private Integer orderDestinationSiteId;
+    private List<Site> destinationSites;
+    private List<Driver> drivers;
+    private Site[] sites;
 
     public TransferManagerService() throws SQLException {
         transferController.createMockOrder();
@@ -39,32 +44,32 @@ public class TransferManagerService {
         orderDestinationSiteId = transferController.getOrderDestinationSiteIdFromQueue();
     }
 
-    private void resetQueueIfNoAvailableTruckOrDriver()
-    {
-        transferController.resetQueue(orderItems, orderDestinationSiteId);
+    private void initializeDestinationsSites(Integer sourceSiteId){
+        Site sourceSite = siteController.getSiteById(sourceSiteId);
+        destinationSites = transferController.initializeDestinationsSites(sites, sourceSite, orderDestinationSiteId);
     }
 
     /**
      * Returns order's sites names
      */
-    public List<String> getOrderSitesNames(){
-        List<String> sitesNames = new LinkedList<>();
+    public Map<Integer, String>  getOrderSitesNames(){
+        Map<Integer, String> sitesNames = new HashMap<>();
+        sites = orderItems.keySet().toArray(new Site[0]);
         initializeOrderItems();
         initializeOrderDestinationSiteId();
-        Site[] sites = orderItems.keySet().toArray(new Site[0]);
+
         for(int i=0; i<sites.length; i++){
-            sitesNames.add(sites[i].getSiteName());
+            sitesNames.put(sites[i].getSiteId(),sites[i].getSiteName());
         }
+
         return sitesNames;
     }
 
     /**
      * Calculate arriving date and time based on leaving date and time.
      */
-    private LocalDateTime calculateArrivingTime(Integer sourceSiteIndex, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
-        Site[] sites = orderItems.keySet().toArray(new Site[0]);
-        Site sourceSite = sites[sourceSiteIndex];
-        List<Site> destinationSites = transferController.initializeDestinationsSites(sites, sourceSite, orderDestinationSiteId);
+    private LocalDateTime calculateArrivingTime(Integer sourceSiteId, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
+        Site sourceSite = siteController.getSiteById(sourceSiteId);
         return transferController.calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
     }
 
@@ -78,8 +83,9 @@ public class TransferManagerService {
     /**
      * check if there is an available storekeeper in the Super-Branch in the arriving date
      */
-    public boolean checkIfStoreKeeperIsThere(Integer sourceSiteIndex, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
-        LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSiteIndex, leavingTime, leavingDate);
+    public boolean checkIfStoreKeeperIsThere(Integer sourceSiteId, LocalTime leavingTime, LocalDate leavingDate) throws SQLException {
+        initializeDestinationsSites(sourceSiteId);
+        LocalDateTime arrivingDateTime = calculateArrivingTime(sourceSiteId, leavingTime, leavingDate);
         return transferController.checkIfStoreKeeperIsThere(arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), orderDestinationSiteId);
     }
 
@@ -91,13 +97,11 @@ public class TransferManagerService {
      */
     public Map<Integer, List<String>> findDriversDetailsForTransfer(LocalDate leavingDate, LocalTime leavingTime) throws SQLException {
         TempLevel currMinTemp = transferController.lowestTempItem(orderItems);
-        List<Driver> drivers = transferController.findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
+        drivers = transferController.findDriversForTransfer(leavingDate, leavingTime, currMinTemp, orderItems, orderDestinationSiteId);
         Map<Integer, List<String>> details = new HashMap<>();
 
-        if(drivers.size() == 0) {
-            resetQueueIfNoAvailableTruckOrDriver();
+        if(drivers.size() == 0)
             return null;
-        }
 
         for(int i=0; i<drivers.size(); i++) {
             Driver currentDriver = drivers.get(i);
@@ -108,35 +112,29 @@ public class TransferManagerService {
             details.put(currentDriver.getId(), currentDetials);
 
         }
-        return details;
-    }
+        return details;    }
 
     /**
         find truck to the transfer
      */
-    public Truck findTruckByDriver(Integer chosenDriverId, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException{
+    private Truck findTruckByDriver(Driver chosenDriver, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime) throws SQLException{
         TempLevel currMinTemp = transferController.lowestTempItem(orderItems);
-        List<Driver> drivers = transferController.findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
-        Driver chosenDriver = null;
-        for(Driver d: drivers){
-            if (d.getId() == chosenDriverId) {
-                chosenDriver = d;
-                break;
-            }
-        }
-        Truck truck = truckController.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
-        if(truck == null)
-        {
-            resetQueueIfNoAvailableTruckOrDriver();
-        }
+        Truck truck = transferController.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime, orderItems, orderDestinationSiteId);
+
         return truck;
     }
 
     /**
      *  create new transfer, and add it to DAO.
      */
-    public Transfer initializeNewTransfer(List<Site> destinationSites, Site[] sites, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, Truck chosenTruck, Driver chosenDriver, Site sourceSite, Map<Site, Map<Item_mock, Integer>> orderItems) throws SQLException{
-        return transferController.initializeNewTransfer(destinationSites, sites, leavingDate, leavingTime, arrivingDate, arrivingTime, chosenTruck, chosenDriver, sourceSite, orderItems);
+    public Transfer initializeNewTransfer(LocalDate leavingDate, LocalTime leavingTime, Integer chosenDriverId, Integer sourceSiteId) throws SQLException{
+        Site sourceSite = siteController.getSiteById(sourceSiteId);
+        LocalDateTime arrivingDateTime = transferController.calculateArrivingTime(sourceSite, destinationSites, leavingTime, leavingDate);
+
+        Driver chosenDriver = getChosenDriver(chosenDriverId);
+
+        Truck chosenTruck = findTruckByDriver(chosenDriver, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime());
+        return transferController.initializeNewTransfer(destinationSites, sites, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), chosenTruck, chosenDriver, sourceSite, orderItems);
     }
 
     /**
@@ -172,6 +170,23 @@ public class TransferManagerService {
      */
     public Map<Integer, List<String>> getDetailsForPlannedTransfers(){
         return transferController.getDetailsForPlannedTransfers();
+    }
+
+    /**
+     *
+     * @param chosenDriverId
+     * @return chosen Driver by id
+     */
+    private Driver getChosenDriver(Integer chosenDriverId)
+    {
+        Driver chosenDriver = null;
+        for(Driver d: drivers){
+            if (d.getId() == chosenDriverId) {
+                chosenDriver = d;
+                break;
+            }
+        }
+        return chosenDriver;
     }
 
 }

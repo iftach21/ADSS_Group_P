@@ -241,23 +241,21 @@ public class TransferController {
         TempLevel currMinTemp = lowestTempItem(orderItems);
 
         //choose driver for transfer
-        List<Driver> drivers = findDriversForTransfer(leavingDate, leavingTime, currMinTemp);
+        List<Driver> drivers = findDriversForTransfer(leavingDate, leavingTime, currMinTemp, orderItems, orderDestinationSiteId);
 
         if (drivers == null)
         {
             System.out.println("Unfortunately, there is no available driver to this transfer.");
-            resetQueue(orderItems, orderDestinationSiteId);
             return;
         }
 
         Driver chosenDriver = chooseDriverForTransfer(drivers);
 
         //choose truck by the chosen driver
-        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
+        Truck chosenTruck = findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime, orderItems, orderDestinationSiteId);
         if (chosenTruck == null)
         {
             System.out.println("Unfortunately, there is no available truck to this transfer. You'll have to start all over again.");
-            resetQueue(orderItems, orderDestinationSiteId);
             return;
         }
 
@@ -267,6 +265,14 @@ public class TransferController {
         startTransfer(newTransfer);
     }
 
+
+    public Truck findTruckByDriver(Driver chosenDriver, TempLevel currMinTemp, LocalDate leavingDate, LocalTime leavingTime, LocalDate arrivingDate, LocalTime arrivingTime, Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId)
+    {
+        Truck chosenTruck = tc.findTruckByDriver(chosenDriver, currMinTemp, leavingDate, leavingTime, arrivingDate, arrivingTime);
+        if (chosenTruck == null)
+            resetQueue(orderItems, orderDestinationSiteId);
+        return  chosenTruck;
+    }
     public List<Site> initializeDestinationsSites(Site[] sites, Site sourceSite, Integer orderDestinationSiteId)
     {
         List<Site> tempList = Arrays.asList(sites);
@@ -845,7 +851,7 @@ public class TransferController {
 
     }
 
-    public List<Driver> findDriversForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp) throws SQLException {
+    public List<Driver> findDriversForTransfer(LocalDate leavingDate, LocalTime leavingTime, TempLevel currMinTemp, Map<Site, Map<Item_mock, Integer>> orderItems, Integer orderDestinationSiteId) throws SQLException {
         //get week num
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         int weekNumber = leavingDate.get(weekFields.weekOfWeekBasedYear());
@@ -866,8 +872,10 @@ public class TransferController {
         //
         List<Driver> Drivers = dc.findDriver(currMinTemp, weekNumber, leavingDate.getYear(), wt.getwidowtype(dayOfWeekNum, shift));
 
-        if (Drivers.size() ==0)
+        if (Drivers.size() ==0) {
+            resetQueue(orderItems, orderDestinationSiteId);
             return null;
+        }
 
         return Drivers;
     }

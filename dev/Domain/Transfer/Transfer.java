@@ -64,24 +64,36 @@ public class Transfer {
             for (Item_mock product : itemsToDelete.get(site).keySet())
             {
                 Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
-                //calculate how much to reduce from each item
 
-                int quantityToUpdate = orderItems.get(site).get(product) - itemsToDelete.get(site).get(product);
-                //update the database
-                _transferItemsDAO.update(_transferId, site.getSiteId(), product.getCatalogNum(), quantityToUpdate);
+                Integer quantityToUpdate = updateQuantityOfItem(orderItems.get(site).get(product), itemsToDelete.get(site).get(product), site, product.getCatalogNum());
+
                 if (quantityToUpdate == 0) {
-                    //update and remove product from the database
-                    _transferItemsDAO.delete(_transferId, product.getCatalogNum(), site.getSiteId(), quantityToUpdate);
-                    //if there are no more products to this destinations
                     if (!orderItems.containsKey(site))
                     {
-                        //remove from the database
-                        removeTransferDestination(site);
                         System.out.println("Please notice that you removed every item from this destination, so the destination has been removed from the transfer!");
                     }
                 }
             }
         }
+    }
+
+    public Integer updateQuantityOfItem(Integer currentQuantity, Integer newQuantity, Site site, String catalogNum)
+    {
+        Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
+        //calculate how much to reduce from each item
+        int quantityToUpdate = currentQuantity - newQuantity;
+        //update the database
+        _transferItemsDAO.update(_transferId, site.getSiteId(), catalogNum, quantityToUpdate);
+        if (quantityToUpdate == 0) {
+            //update and remove product from the database
+            _transferItemsDAO.delete(_transferId, catalogNum, site.getSiteId(), quantityToUpdate);
+            if (!orderItems.containsKey(site))
+            {
+                //remove from the database
+                removeTransferDestination(site);
+            }
+        }
+        return quantityToUpdate;
     }
 
     public void updateTransferTruck(int truck_LicenseNumber)

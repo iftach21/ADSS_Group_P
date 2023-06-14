@@ -282,6 +282,14 @@ public class TransferManagerService {
         return false;
     }
 
+    /**
+     * Update the truck weight at some destination site
+     * @param transferId
+     * @param truckWeight: the weight of the truck (as we received from transfer manager)
+     * @return: true if the weight is valid (greater than 0 && smaller than max weight)
+     * and updated successfully, false otherwise.
+     * If false - need to rearrange
+     **/
     public boolean updatesWeightsAtDestination(int transferId, Integer truckWeight, Integer destId) throws SQLException {
         if(truckWeight>=0) {
             Transfer newTransfer = transferController.getTransferByTransferId(transferId);
@@ -320,6 +328,70 @@ public class TransferManagerService {
         Transfer transfer = transferController.getTransferByTransferId(transferId);
         Site dest = siteController.getSiteById(destId);
         transferController.removeDest(dest, transfer);
+        transferController.updateArrivingTime(transfer);
     }
 
+    /**
+     * get details of available trucks (need to be called when rearrange and change truck)
+     * @param transferId
+     * @return Map<String, List<String>>. The key is the license number and the values are:
+     * Truck model, Temperature Capacity, Weight Capacity
+     */
+    public Map<Integer, List<String>> getAvailableTrucksDetails(Integer transferId)
+    {
+        Map<Integer, List<String>> details = new HashMap<>();
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        for (Integer LicenseNum : truckController.getAllAvailableTrucks(transfer.getLeavingDate(), transfer.getLeavingTime(), transfer.getArrivingDate(), transfer.get_arrivingTime()).keySet())
+        {
+            List<String> currentDetails = new LinkedList<>();
+            currentDetails.add(truckController.getTruck(LicenseNum).getTruckModel());
+            currentDetails.add(truckController.getTruck(LicenseNum).getTempCapacity() + "");
+            currentDetails.add(truckController.getTruck(LicenseNum).getTruckWeightType() + "");
+            details.put(LicenseNum, currentDetails);
+        }
+        return details;
+    }
+
+    /**
+     * Need to be called after the transfer manager chose a new truck for the transfer
+     */
+    public void updateNewChosenTruck(Integer transferId, Integer truckLicenseNumber) throws SQLException {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        transferController.updateTruck(transfer, truckLicenseNumber);
+    }
+
+    /**
+     * returns details of items in destinations which the transfer manager wants to remove items from
+     * @param : transfer id
+     * @param: list containing the ids of the destination that the transfer manager wants to remove
+     * items from.
+     */
+    public Map<Integer, Map<String, List<String>>> getDetailsOfItemsInDestsToRemove(List<Integer> destinationIds, Integer transferId)
+    {
+        Map<Integer, Map<String, List<String>>> sitesItems = new HashMap<>();
+        for (int i=0; i<destinationIds.size() - 1; i++)
+        {
+            Map<String, List<String>> Items = getSiteDetailsItems(destinationIds.get(i), transferId);
+            sitesItems.put(destinationIds.get(i), Items);
+        }
+        return sitesItems;
+    }
+
+    public boolean reduceItemQuantityFromDest(String catalogNumber, Integer newQuantity, Integer destinationId, Integer transferId)
+    {
+        boolean result = true;
+        Site site = siteController.getSiteById(destinationId);
+        Map<String, List<String>>  details = getSiteDetailsItems(destinationId, transferId);
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        Integer currentQuantity = Integer.parseInt(details.get(catalogNumber).get(1));
+        if(!transferController.checkQuantity(newQuantity, currentQuantity))
+        {
+            result = false;
+        }
+        else {
+            transfer.updateQuantityOfItem(currentQuantity, newQuantity, site, catalogNumber);
+        }
+        return result;
+
+    }
 }

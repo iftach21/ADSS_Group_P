@@ -373,11 +373,7 @@ public class TransferController {
         if (selectedOption == 1)
         {
             removeOneDestOfTransfer(transfer);
-            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getListOfDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
-            transfer.setArrivingTime(arrivingTime.toLocalTime());
-            transfersDAO.update(transfer);
-            transfer.setArrivingDate(arrivingTime.toLocalDate());
-            transfersDAO.update(transfer);
+            updateArrivingTime(transfer);
         }
         else if (selectedOption == 2)
         {
@@ -399,6 +395,14 @@ public class TransferController {
         }
     }
 
+    public void updateArrivingTime(Transfer transfer)
+    {
+        LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getListOfDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
+        transfer.setArrivingTime(arrivingTime.toLocalTime());
+        transfersDAO.update(transfer);
+        transfer.setArrivingDate(arrivingTime.toLocalDate());
+        transfersDAO.update(transfer);
+    }
     public TempLevel lowestTempItem(Map<Site, Map<Item_mock, Integer>> orderItems)
     {
         TempLevel currMinTemp = TempLevel.regular;
@@ -635,13 +639,17 @@ public class TransferController {
                 scanner.next();
             }
         }
+        updateTruck(transfer, chosenTruck);
+    }
+
+    public void updateTruck(Transfer transfer, Integer truckLicenseNumber) throws SQLException {
         tc.getTruck(transfer.getTruckLicenseNumber()).deleteFromDAO(transfer.getTransferId());
-        tc.getTruck(chosenTruck).addToDAO(transfer.getTransferId());
+        tc.getTruck(truckLicenseNumber).addToDAO(transfer.getTransferId());
 
         tc.updateTruck(tc.getTruck(transfer.getTruckLicenseNumber()));
-        tc.updateTruck(tc.getTruck(chosenTruck));
+        tc.updateTruck(tc.getTruck(truckLicenseNumber));
 
-        transfer.updateTransferTruck(chosenTruck);
+        transfer.updateTransferTruck(truckLicenseNumber);
         transfersDAO.update(transfer);
         transfer.documentUpdateTruckNumber();
     }
@@ -774,7 +782,7 @@ public class TransferController {
                 {
                     try {
                         chooseQuantity = scanner.nextInt();
-                        if (chooseQuantity >= 0 && chooseQuantity <= itemToChosenDest.get(itemToReduceQuantity))
+                        if (checkQuantity(chooseQuantity, itemToChosenDest.get(itemToReduceQuantity)))
                         {
                             break;
                         }
@@ -830,6 +838,11 @@ public class TransferController {
         transfer.removeTransferItems(orderItemsToDelete);
         transfer.documentUpdateOrderItems();
 
+    }
+
+    public boolean checkQuantity(Integer chooseQuantity, Integer currentQuantity)
+    {
+        return (chooseQuantity >= 0 && chooseQuantity <= currentQuantity);
     }
 
     public LocalDate chooseDateForTransfer()

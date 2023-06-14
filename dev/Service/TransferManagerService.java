@@ -252,4 +252,74 @@ public class TransferManagerService {
         return sitesItems;
     }
 
+    /**
+     * @param siteId
+     * @return: site name by site id
+     */
+    public String getSiteNameBySiteId(Integer siteId)
+    {
+        return siteController.getSiteById(siteId).getSiteName();
+    }
+
+    /**
+     * Update the truck weight at source site
+     * @param transferId
+     * @param truckWeight: the weight of the truck (as we received from transfer manager)
+     * @return: true if the weight is valid (greater than 0 && smaller than max weight)
+     * and updated successfully, false otherwise.
+     * If false - need to rearrange
+     **/
+    public boolean updateTruckWeightAtSource(int transferId, Integer truckWeight)
+    {
+        if(truckWeight>=0) {
+            Transfer newTransfer = transferController.getTransferByTransferId(transferId);
+            transferController.updateWeightAtSource(newTransfer, truckWeight);
+            newTransfer.documentUpdateTruckWeight(truckWeight, newTransfer.getSource());
+            Truck transferTruck = truckController.getTruck(newTransfer.getTruckLicenseNumber());
+            if(transferTruck.checkWeightCapacity())
+                return true;
+        }
+        return false;
+    }
+
+    public boolean updatesWeightsAtDestination(int transferId, Integer truckWeight, Integer destId) throws SQLException {
+        if(truckWeight>=0) {
+            Transfer newTransfer = transferController.getTransferByTransferId(transferId);
+            transferController.updateWeightsAtDestination(newTransfer, truckWeight, destId);
+            Site dest = siteController.getSiteById(destId);
+            newTransfer.documentUpdateTruckWeight(truckWeight, dest);
+            Truck transferTruck = truckController.getTruck(newTransfer.getTruckLicenseNumber());
+            if(transferTruck.checkWeightCapacity())
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns Transfer destination Ids and names
+     * Should be called if the transfer manager choose the option of removing destination (in rearrange)
+     */
+    public Map<Integer, String> getTransferDestinationNames(Integer transferId)
+    {
+        Map<Integer, String> destDetails = new HashMap<>();
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        for (int i = 0; i < transfer.getDestinations().size() - 1; i++)
+        {
+            destDetails.put(transfer.getListOfDestinations().get(i).getSiteId(),transfer.getListOfDestinations().get(i).getSiteName());
+        }
+        return destDetails;
+    }
+
+    /**
+     * Remove specific destination from transfer
+     * @param destId: Id of destination to remove
+     * @param transferId: transfer Id
+     */
+    public void removeDest(Integer destId, Integer transferId)
+    {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        Site dest = siteController.getSiteById(destId);
+        transferController.removeDest(dest, transfer);
+    }
+
 }

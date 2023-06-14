@@ -465,10 +465,7 @@ public class TransferController {
                 truckWeight = scanner.nextInt();
                 if (truckWeight >=0)
                 {
-                    transferTruck.updateWeight(truckWeight);
-                    tc.updateTruck(transferTruck);
-                    newTransfer.setWeightAtSource(truckWeight);
-                    transfersDAO.update(newTransfer);
+                    updateWeightAtSource(newTransfer, truckWeight);
                     break;
                 }
                 else
@@ -522,9 +519,7 @@ public class TransferController {
                     truckWeight = scanner.nextInt();
                     if (truckWeight >=0)
                     {
-                        transferTruck.updateWeight(truckWeight);
-                        tc.updateTruck(transferTruck);
-                        TransferDestinationsDAO.getInstance().update(newTransfer.getTransferId(), transferDest.get(i).getSiteId(), truckWeight);
+                        updateWeightsAtDestination(newTransfer, truckWeight, transferDest.get(i).getSiteId());
                         break;
                     }
                     else
@@ -547,6 +542,22 @@ public class TransferController {
             }
         }
         return transferRearranged;
+    }
+
+    public void updateWeightAtSource(Transfer newTransfer, Integer truckWeight)
+    {
+        Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
+        transferTruck.updateWeight(truckWeight);
+        tc.updateTruck(transferTruck);
+        newTransfer.setWeightAtSource(truckWeight);
+        transfersDAO.update(newTransfer);
+    }
+
+    public void updateWeightsAtDestination(Transfer newTransfer, Integer truckWeight, Integer destId) throws SQLException {
+        Truck transferTruck = tc.getTruck(newTransfer.getTruckLicenseNumber());
+        transferTruck.updateWeight(truckWeight);
+        tc.updateTruck(transferTruck);
+        TransferDestinationsDAO.getInstance().update(newTransfer.getTransferId(), destId, truckWeight);
     }
 
     public Map<Item_mock, Integer> getSiteItems(Integer siteId, Transfer newTransfer)
@@ -586,8 +597,13 @@ public class TransferController {
             }
         }
 
-        transfer.documentRemoveDestination(transfer.getListOfDestinations().get(destToRemove - 1));
-        transfer.removeTransferDestination(transfer.getListOfDestinations().get(destToRemove - 1));
+        removeDest(transfer.getListOfDestinations().get(destToRemove - 1), transfer);
+    }
+
+    public void removeDest(Site destToRemove, Transfer transfer)
+    {
+        transfer.documentRemoveDestination(destToRemove);
+        transfer.removeTransferDestination(destToRemove);
     }
 
     public void changeTruckOfTransfer(Transfer transfer) throws SQLException {

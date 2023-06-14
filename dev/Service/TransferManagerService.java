@@ -369,7 +369,7 @@ public class TransferManagerService {
     public Map<Integer, Map<String, List<String>>> getDetailsOfItemsInDestsToRemove(List<Integer> destinationIds, Integer transferId)
     {
         Map<Integer, Map<String, List<String>>> sitesItems = new HashMap<>();
-        for (int i=0; i<destinationIds.size() - 1; i++)
+        for (int i=0; i<destinationIds.size(); i++)
         {
             Map<String, List<String>> Items = getSiteDetailsItems(destinationIds.get(i), transferId);
             sitesItems.put(destinationIds.get(i), Items);
@@ -377,6 +377,14 @@ public class TransferManagerService {
         return sitesItems;
     }
 
+    /**
+     * This function reduce the quantity of specific item
+     * @param catalogNumber
+     * @param newQuantity
+     * @param destinationId
+     * @param transferId
+     * @return: true if the quantity updated successfully, false if the new quantity is wrong
+     */
     public boolean reduceItemQuantityFromDest(String catalogNumber, Integer newQuantity, Integer destinationId, Integer transferId)
     {
         boolean result = true;
@@ -390,8 +398,21 @@ public class TransferManagerService {
         }
         else {
             transfer.updateQuantityOfItem(currentQuantity, newQuantity, site, catalogNumber);
+            transfer.documentUpdateOrderItems();
+            transferController.updateArrivingTime(transfer);
         }
         return result;
+    }
 
+
+    /**
+     * This function resets the weights of the items to null in document
+     * Need to be called after transfer rearrange!!!
+     * @param transferId
+     */
+    public void resetDocumentAfterRearrange(Integer transferId)
+    {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        transferController.resetDocumentAfterRearrange(transfer);
     }
 }

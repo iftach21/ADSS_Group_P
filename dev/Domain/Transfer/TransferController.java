@@ -382,13 +382,14 @@ public class TransferController {
         else if (selectedOption == 3)
         {
             removeItemsOfTransfer(transfer);
-            LocalDateTime arrivingTime = calculateArrivingTime(transfer.getSource(), transfer.getListOfDestinations(), transfer.getLeavingTime(), transfer.getLeavingDate());
-            transfer.setArrivingTime(arrivingTime.toLocalTime());
-            transfersDAO.update(transfer);
-            transfer.setArrivingDate(arrivingTime.toLocalDate());
-            transfersDAO.update(transfer);
+            updateArrivingTime(transfer);
         }
 
+        resetDocumentAfterRearrange(transfer);
+    }
+
+    public void resetDocumentAfterRearrange(Transfer transfer)
+    {
         transfer.documentUpdateTruckWeight(null, transfer.getSource());
         for(int i=0; i<transfer.getDestinations().size()-1; i++){
             transfer.documentUpdateTruckWeight(null, transfer.getListOfDestinations().get(i));

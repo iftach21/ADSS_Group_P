@@ -358,6 +358,7 @@ public class TransferManagerService {
     public void updateNewChosenTruck(Integer transferId, Integer truckLicenseNumber) throws SQLException {
         Transfer transfer = transferController.getTransferByTransferId(transferId);
         transferController.updateTruck(transfer, truckLicenseNumber);
+        chosenTruck = truckController.getTruck(truckLicenseNumber);
     }
 
     /**

@@ -252,17 +252,22 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
+        boolean IsEmpty = true;
+        int specificAmount = 0;
         for(Item item: itemMapper.findAll())
         {
-            int specificAmount = 0;
+
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
                 specificAmount++;
             }
             if (specificAmount < item.getMinQuantity()){
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+                IsEmpty = false;
             }
         }
+        if (IsEmpty)
+            return null;
         return currentReport;
     }
 
@@ -272,20 +277,25 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
+        boolean IsEmpty = true;
+        int specificAmount = 0;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
-            int specificAmount = 0;
+
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
                 specificAmount++;
             }
             if (specificAmount < item.getMinQuantity()){
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+                IsEmpty = false;
             }
         }
+        if (IsEmpty)
+            return null;
         return currentReport;
     }
 
@@ -295,20 +305,25 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Shortage, currentDate);
+        boolean IsEmpty = true;
+        int specificAmount = 0;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
-            int specificAmount = 0;
+
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
                 specificAmount++;
             }
             if (specificAmount < item.getMinQuantity()){
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
+                IsEmpty = false;
             }
         }
+        if (IsEmpty)
+            return null;
         return currentReport;
     }
 

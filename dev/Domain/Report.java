@@ -39,6 +39,10 @@ public class Report {
         this.reportItems = new LinkedHashMap<>();
     }
 
+//    public Report(){
+//        this.reportNum = nextReportNum;
+//    }
+
     public reportType getType() {
         return type;
     }
@@ -116,5 +120,26 @@ public class Report {
                 ", Report Date: " + reportDate +
                 ", Report Information: \n" + reportInformationString;
         return reportString;
+    }
+
+    public String[][] getAllReportsForJTable(Report report) {
+        String data = report.toString();
+        String[][] reportData = new String[reportItems.size()][4];
+        int index = 0;
+
+        for (Map.Entry<Item, Integer> entry : reportItems.entrySet()) {
+            Item item = entry.getKey();
+            int amount = entry.getValue();
+
+            reportData[index][0] = String.valueOf(type);
+            reportData[index][1] = String.valueOf(reportNum);
+            reportData[index][2] = String.valueOf(reportDate);
+            reportData[index][3] = "Report Information: \n" + reportInformationString + "\n" +
+                    item.getName() + ", Catalog number: " + item.getCatalogNum() + " : " + amount;
+
+            index++;
+        }
+
+        return reportData;
     }
 }

@@ -616,14 +616,13 @@ public class UICreateTransfer {
                             chosenDests.add(Integer.parseInt(input.substring(startIndex + prefix.length())));
                         }
                     }
-                    break;
                 }
             }
             Map<Integer, Map<String, List<String>>> itemDetails = TransferManagerService.getDetailsOfItemsInDestsToRemove(chosenDests, transferId);
             for (Integer destId : itemDetails.keySet()) {
                 showRemoveItemsDialog(destId, itemDetails.get(destId));
             }
-            JOptionPane.showMessageDialog(TransferStartFrame, "Destination removed successfully. You need the insert some info again.",
+            JOptionPane.showMessageDialog(TransferStartFrame, "Items removed successfully. You need the insert some info again.",
                     "Success", JOptionPane.INFORMATION_MESSAGE);
             showStartTransfer();
         }
@@ -639,7 +638,7 @@ public class UICreateTransfer {
             String quantity = details.get(1);
             panel.add(new JLabel("Catalog Number: " + catalogNum));
             panel.add(new JLabel("   Item Name: " + itemName));
-            panel.add(new JLabel("   Quantity:"));
+            panel.add(new JLabel("   Quantity To Reduce:"));
             JTextField quantityField = new JTextField(quantity);
             panel.add(quantityField);
 
@@ -647,9 +646,9 @@ public class UICreateTransfer {
 
         int option = JOptionPane.showConfirmDialog(null, panel, "Change Quantities", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            for (int i = 0; i < panel.getComponentCount(); i += 2) {
+            for (int i = 0; i < panel.getComponentCount(); i += 4) {
                 JLabel catalogNumLabel = (JLabel) panel.getComponent(i);
-                JTextField quantityField = (JTextField) panel.getComponent(i + 1);
+                JTextField quantityField = (JTextField) panel.getComponent(i + 3);
 
                 String catalogNum = catalogNumLabel.getText().replace("Catalog Number: ", "");
                 String quantity = quantityField.getText();

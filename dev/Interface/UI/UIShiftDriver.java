@@ -32,7 +32,7 @@ public class UIShiftDriver {
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
         frame.add(panel);
-        frame.setSize(900, 350);
+        frame.setSize(1200, 450);
         frame.setVisible(true);
 
         createWeeklyShift(WeekNum,yearNum,0, viewOnly);
@@ -86,7 +86,7 @@ public class UIShiftDriver {
 
         // Set row height explicitly
         int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
-        table.setRowHeight(lineHeight * (professions.length + 1));
+        table.setRowHeight(lineHeight * (professions.length + 4));
 
 
         // Create the edit button

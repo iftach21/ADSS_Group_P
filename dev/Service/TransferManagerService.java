@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
+
+
 public class TransferManagerService {
     private static TransferManagerService Instance = null;
     private TransferController transferController = TransferController.getInstance();
@@ -157,13 +159,15 @@ public class TransferManagerService {
     /**
      * get details for chosen truck
      */
-    public List<String> getChosenTruckDetails()
+    public List<String> getChosenTruckDetails(Integer transferId)
     {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        Truck transferTruck = truckController.getTruck(transfer.getTruckLicenseNumber());
         List<String> details = new LinkedList<>();
-        details.add(chosenTruck.getLicenseNumber()+"");
-        details.add(chosenTruck.getTruckModel());
-        details.add(chosenTruck.getMaxWeight()+"");
-        details.add(chosenTruck.getTempCapacity()+"");
+        details.add(transferTruck.getLicenseNumber()+"");
+        details.add(transferTruck.getTruckModel());
+        details.add(transferTruck.getMaxWeight()+"");
+        details.add(transferTruck.getTempCapacity()+"");
 
         return details;
     }
@@ -455,4 +459,16 @@ public class TransferManagerService {
         Transfer transfer = transferController.getTransferByTransferId(transferId);
         transferController.updateArrivingTime(transfer, arrivingDate, arrivingTime);
     }
+
+    /**
+     * @return source site name
+     */
+    public Map<Integer, String> getSourceSiteName(Integer transferId)
+    {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        Map<Integer, String> sourceSite = new HashMap<>();
+        sourceSite.put(transfer.getSource().getSiteId(), transfer.getSource().getSiteName());
+        return sourceSite;
+    }
+
 }

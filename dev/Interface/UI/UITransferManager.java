@@ -242,6 +242,21 @@ public class UITransferManager extends JFrame{
                 JFrame tableFrame = new JFrame("Planned transfers table");
                 Map<Integer, List<String>> plannedTransferDetails = TransferManagerService.getDetailsForPlannedTransfers();
                 String data[][]= new String[plannedTransferDetails.size()][7];
+                int i=0;
+                for(Integer transferId: plannedTransferDetails.keySet())
+                {
+                    for(int j=0; j<7; j++)
+                    {
+                        if(j==0)
+                        {
+                            data[i][j] = transferId+"";
+                        }
+                        else {
+                            data[i][j] = plannedTransferDetails.get(transferId).get(j);
+                        }
+                    }
+                    i++;
+                }
                 String column[]={"ID","Source Site","Last Destination", "Leaving Date", "Leaving Time", "Arriving Date", "Arriving Time"};
                 JTable jt=new JTable(data,column);
                 JScrollPane sp=new JScrollPane(jt);

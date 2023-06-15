@@ -18,7 +18,7 @@ import java.util.Map;
 public class UITransferManager extends JFrame{
 
     private JFrame frame;
-    private TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();;
+    private TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();
 
     private JButton viewTransferDocumentButton;
     private JButton createTransferButton;
@@ -26,6 +26,8 @@ public class UITransferManager extends JFrame{
     private JButton addTruckButton;
     private JButton viewPlannedTransfersButton;
     private JButton exitTransferSystemButton;
+
+    private JCheckBox[] currTransfersCheckbox;
 
     public UITransferManager() throws SQLException {
         initializeUI();
@@ -118,6 +120,67 @@ public class UITransferManager extends JFrame{
                 try {
                     UICreateTransfer uiCreateTransfer = new UICreateTransfer();
                     createTransferButton.setText("Create transfer for pending order. You have " + TransferManagerService.numOfOrders() + " orders to handle");
+                }
+                catch (Exception ex)
+                {
+                    throw new RuntimeException();
+                }
+            }
+        });
+
+        updateCurrentTransfersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JPanel transfersPanel = new JPanel();
+                    transfersPanel.add(new JLabel("These are the current transfer that takes place: "));
+                    transfersPanel.setLayout(new GridLayout(0, 1));
+                    Map<Integer, List<String>> currTransfers = TransferManagerService.getDetailsOfCurrentTransfers();
+                    int i = 0;
+                    ButtonGroup bg = new ButtonGroup();
+                    for (Integer transferId : currTransfers.keySet())
+                    {
+                        List<String> currTransferDetails = currTransfers.get(transferId);
+                        currTransfersCheckbox[i] = new JCheckBox("Transfer ID: " + transferId + "   Source Site: " + currTransferDetails.get(0) + "   Last Destination: " + currTransferDetails.get(1));
+                        bg.add(currTransfersCheckbox[i]);
+                    }
+
+                    transfersPanel.setVisible(true);
+                    int option = JOptionPane.showOptionDialog(
+                            null,
+                            transfersPanel,
+                            "Options",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.PLAIN_MESSAGE,
+                            null,
+                            new Object[]{"OK"},
+                            null
+                    );
+
+                    if (option == JOptionPane.OK_OPTION) {
+                        int chosenLicenseNum = -1;
+                        for(int j = 0; j < currTransfersCheckbox.length; j++)
+                        {
+                            if (currTransfersCheckbox[j].isSelected())
+                            {
+                                String input = currTransfersCheckbox[j].getText();
+                                String prefix = "Transfer ID: ";
+                                int startIndex = input.indexOf(prefix);
+
+                                if (startIndex != -1) {
+                                    int endIndex = input.indexOf(" ", startIndex + prefix.length());
+                                    if (endIndex != -1) {
+                                        chosenLicenseNum =  Integer.parseInt(input.substring(startIndex + prefix.length(), endIndex));
+                                    } else {
+                                        chosenLicenseNum = Integer.parseInt(input.substring(startIndex + prefix.length()));
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        //TODO : start UIUpdateWeights with chosen id
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -240,6 +303,7 @@ public class UITransferManager extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame tableFrame = new JFrame("Planned transfers table");
+
                 Map<Integer, List<String>> plannedTransferDetails = TransferManagerService.getDetailsForPlannedTransfers();
                 String data[][]= new String[plannedTransferDetails.size()][7];
                 int i=0;
@@ -261,7 +325,7 @@ public class UITransferManager extends JFrame{
                 JTable jt=new JTable(data,column);
                 JScrollPane sp=new JScrollPane(jt);
                 tableFrame.add(sp);
-                tableFrame.setSize(600,400);
+                tableFrame.setSize(900,400);
                 tableFrame.setVisible(true);
             }
         });

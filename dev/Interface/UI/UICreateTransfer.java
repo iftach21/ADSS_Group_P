@@ -24,7 +24,6 @@ public class UICreateTransfer {
     private JFrame chooseDriverFrame;
     private JFrame TransferStartFrame;
     private TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();
-    private JCheckBox[] checkboxes;
     private JTextField dateSelected;
     private JButton nextButton;
     private JSpinner spinner;
@@ -35,6 +34,7 @@ public class UICreateTransfer {
     private int sourceId;
     private int transferId;
     JButton[] checkWeightButtons;
+    JButton[] siteDetailsButtons;
 
 
     public UICreateTransfer() throws SQLException {
@@ -286,11 +286,32 @@ public class UICreateTransfer {
         weightAtSource.setBounds(20, 150, 650, 20);
         TransferStartFrame.add(weightAtSource);
 
+        //Add check weight for source button
         JButton checkWeightButton = new JButton("Check Weight");
         checkWeightButton.setBounds(230, 180, 150, 20);
         TransferStartFrame.add(checkWeightButton);
+
+        //Add sourceDetails button
+        JButton sourceDetailsButton = new JButton("Watch Items Picked");
+        sourceDetailsButton.setBounds(390, 180, 150, 20);
+        TransferStartFrame.add(sourceDetailsButton);
+
+        //Add the source textfield for weight
         JTextField weightAtSourceField = new JTextField();
         JPanel inputPanel = new JPanel(new GridLayout(1, 2));
+
+        Map<Integer, Map<String, List<String>>> transferItems =  TransferManagerService.getAllSitesItemsDetails(transferId);
+
+        //Create source items panel
+        JPanel sourceDetailPanel = new JPanel(new GridLayout(0, 2));
+        Map<String, List<String>> sourceItems = transferItems.get(sourceId);
+        for (String catalogNum : sourceItems.keySet()) {
+            String itemName = sourceItems.get(catalogNum).get(0);
+            sourceDetailPanel.add(new JLabel("Item Name: " + itemName));
+            String quantity = sourceItems.get(catalogNum).get(1);
+            sourceDetailPanel.add(new JLabel("   Quantity: " + quantity));
+        }
+
         inputPanel.add(new JLabel("Weight: "));
         inputPanel.add(weightAtSourceField);
         inputPanel.setBounds(20, 180, 180, 20);
@@ -301,8 +322,10 @@ public class UICreateTransfer {
         //Create labels panels and buttons array for each destination
         JLabel[] destinationLabels = new JLabel[destinations.size()];
         checkWeightButtons = new JButton[destinations.size()];
+        siteDetailsButtons = new JButton[destinations.size()];
         JTextField[] weightAtDestField = new JTextField[destinations.size()];
         JPanel[] inputPanels = new JPanel[destinations.size()];
+        JPanel[] detailPanels = new JPanel[destinations.size()];
         int i = 0;
         List<Integer> destsList = destinations.keySet().stream().toList();
         for (Integer destId: destsList) {
@@ -310,16 +333,29 @@ public class UICreateTransfer {
             destinationLabels[i].setText("Please enter the weight at: " + destinations.get(destId));
             destinationLabels[i].setBounds(20, 210 + (i * 50), 650, 20);
             TransferStartFrame.add(destinationLabels[i]);
-
             checkWeightButtons[i] = new JButton("Check Weight");
             checkWeightButtons[i].setBounds(230, 240 + (i * 50), 150, 20);
             TransferStartFrame.add(checkWeightButtons[i]);
+            siteDetailsButtons[i] = new JButton("Watch Items Picked");
+            siteDetailsButtons[i].setBounds(390, 240 + (i * 50), 150, 20);
+            TransferStartFrame.add(siteDetailsButtons[i]);
             weightAtDestField[i] = new JTextField();
             inputPanels[i] = new JPanel(new GridLayout(1, 2));
             inputPanels[i].add(new JLabel("Weight: "));
             inputPanels[i].add(weightAtDestField[i]);
             inputPanels[i].setBounds(20, 240 + (i * 50), 180, 20);
             TransferStartFrame.add(inputPanels[i]);
+
+            //Create the details panel
+            detailPanels[i] = new JPanel(new GridLayout(0, 2));
+            Map<String, List<String>> destItems = transferItems.get(destId);
+            for (String catalogNum : destItems.keySet()) {
+                String itemName = destItems.get(catalogNum).get(0);
+                detailPanels[i].add(new JLabel("Item Name: " + itemName));
+                String quantity = destItems.get(catalogNum).get(1);
+                detailPanels[i].add(new JLabel("   Quantity: " + quantity));
+            }
+
 
             i++;
         }
@@ -350,6 +386,22 @@ public class UICreateTransfer {
                 }
             }
         });
+
+        sourceDetailsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Check if Legal
+                try {
+                    String[] options = {"OK"};
+                    JOptionPane.showOptionDialog(null, sourceDetailPanel, "Items",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(TransferStartFrame, "One of your inputs is illegal. Please try again",
+                            "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         for (int j = 0; j < checkWeightButtons.length; j++)
         {
             checkWeightButtons[j].addActionListener(new ActionListener() {
@@ -389,6 +441,33 @@ public class UICreateTransfer {
                 }
             }
         });
+
+            siteDetailsButtons[j].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //Check if Legal
+                    try {
+                        // Get the button that was pressed
+                        JButton sourceButton = (JButton) e.getSource();
+
+                        // Find the index of the pressed button in the checkWeightButtons array
+                        int pressedButtonIndex = -1;
+                        for (int i = 0; i < siteDetailsButtons.length; i++) {
+                            if (siteDetailsButtons[i] == sourceButton) {
+                                pressedButtonIndex = i;
+                                break;
+                            }
+                        }
+
+                        String[] options = {"OK"};
+                        JOptionPane.showOptionDialog(null, detailPanels[pressedButtonIndex], "Items",
+                                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(TransferStartFrame, "One of your inputs is illegal. Please try again",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
         }
 
         JButton doneButton = new JButton("DONE");
@@ -647,13 +726,22 @@ public class UICreateTransfer {
         int option = JOptionPane.showConfirmDialog(null, panel, "Change Quantities", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             for (int i = 0; i < panel.getComponentCount(); i += 4) {
-                JLabel catalogNumLabel = (JLabel) panel.getComponent(i);
-                JTextField quantityField = (JTextField) panel.getComponent(i + 3);
+                try {
+                    JLabel catalogNumLabel = (JLabel) panel.getComponent(i);
+                    JTextField quantityField = (JTextField) panel.getComponent(i + 3);
 
-                String catalogNum = catalogNumLabel.getText().replace("Catalog Number: ", "");
-                String quantity = quantityField.getText();
-                // Perform necessary actions with the updated quantity, such as updating the map or calling a method
-                TransferManagerService.reduceItemQuantityFromDest(catalogNum, Integer.parseInt(quantity), destId, transferId);
+                    String catalogNum = catalogNumLabel.getText().replace("Catalog Number: ", "");
+                    String quantity = quantityField.getText();
+                    // Perform necessary actions with the updated quantity, such as updating the map or calling a method
+                    if (!TransferManagerService.reduceItemQuantityFromDest(catalogNum, Integer.parseInt(quantity), destId, transferId))
+                        JOptionPane.showMessageDialog(TransferStartFrame, "Item with catalog num" + catalogNum + " didn't reduced because the quantity entered is illegal",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+                catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(TransferStartFrame, "One of your inputs is illegal. Please try again",
+                            "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }

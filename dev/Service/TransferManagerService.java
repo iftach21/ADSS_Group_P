@@ -40,6 +40,14 @@ public class TransferManagerService {
     }
 
     /**
+     * get num of orders
+     */
+    public int numOfOrders()
+    {
+        return transferController.getNumOfOrders();
+    }
+
+    /**
      * Initialize orderDestinationSiteId from queue
      */
     private void initializeOrderDestinationSiteId()

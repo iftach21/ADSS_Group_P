@@ -1508,4 +1508,9 @@ public class TransferController {
         newOrderReceived(order5, SuperLiPetahTikva.getSiteId());
 
     }
+
+    public int getNumOfOrders()
+    {
+        return _orderDestinationSiteIdQueue.size();
+    }
 }

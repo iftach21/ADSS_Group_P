@@ -1,5 +1,6 @@
 package Interface.UI;
 
+import Domain.Transfer.Transfer;
 import Service.TransferManagerService;
 
 import javax.swing.*;
@@ -42,17 +43,17 @@ public class UITransferManager extends JFrame{
         frame.add(tf);
 
         viewTransferDocumentButton = new JButton("View and download a transfer document of your choice");
-        viewTransferDocumentButton.setBounds(50,100,400, 50);
-        createTransferButton = new JButton("Create transfer for pending orders"); //todo : add pending orders number
-        createTransferButton.setBounds(50,150,400, 50);
+        viewTransferDocumentButton.setBounds(40,100,410, 50);
+        createTransferButton = new JButton("Create transfer for pending order. You have " + TransferManagerService.numOfOrders() + " orders to handle");
+        createTransferButton.setBounds(40,150,410, 50);
         updateCurrentTransfersButton = new JButton("Update current transfers");
-        updateCurrentTransfersButton.setBounds(50,200,400, 50);
+        updateCurrentTransfersButton.setBounds(40,200,410, 50);
         addTruckButton = new JButton("Add a new truck to the system");
-        addTruckButton.setBounds(50,250,400, 50);
+        addTruckButton.setBounds(40,250,410, 50);
         viewPlannedTransfersButton = new JButton("View planned transfers");
-        viewPlannedTransfersButton.setBounds(50,300,400, 50);
+        viewPlannedTransfersButton.setBounds(40,300,410, 50);
         exitTransferSystemButton = new JButton("Exit the transfer system");
-        exitTransferSystemButton.setBounds(50,350,400, 50);
+        exitTransferSystemButton.setBounds(40,350,410, 50);
 
         frame.add(viewTransferDocumentButton);
         frame.add(createTransferButton);
@@ -116,6 +117,7 @@ public class UITransferManager extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     UICreateTransfer uiCreateTransfer = new UICreateTransfer();
+                    createTransferButton.setText("Create transfer for pending order. You have " + TransferManagerService.numOfOrders() + " orders to handle");
                 }
                 catch (Exception ex)
                 {
@@ -134,7 +136,7 @@ public class UITransferManager extends JFrame{
                 JTextField maxWeightField = new JTextField();
 
                 // Create the panel to hold the input fields
-                JPanel inputPanel = new JPanel(new GridLayout(5, 2));
+                JPanel inputPanel = new JPanel(new GridLayout(0, 2));
                 inputPanel.add(new JLabel("License Number:"));
                 inputPanel.add(licenseNumberField);
                 inputPanel.add(new JLabel("Truck Model:"));
@@ -246,6 +248,13 @@ public class UITransferManager extends JFrame{
                 tableFrame.add(sp);
                 tableFrame.setSize(600,400);
                 tableFrame.setVisible(true);
+            }
+        });
+
+        exitTransferSystemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }

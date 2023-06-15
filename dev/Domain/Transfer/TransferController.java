@@ -1273,10 +1273,17 @@ public class TransferController {
         else
         {
             System.out.println("There are " + allTransfers.size() + " transfers documents in the system. here are basic details on some of them: ");
-            for (int i = 0; i < 5 && i < allTransfers.size(); i++)
+            int counter = 0;
+            for (Integer transferId: allTransfers.keySet())
             {
-                System.out.println((i+1) + ". Transfer ID: " + allTransfers.get(i).getTransferId() + ", Source Site: " + allTransfers.get(i).getSource().getSiteName() + ", Final Destination: " + allTransfers.get(i).getListOfDestinations().get(allTransfers.get(i).getDestinations().size() - 1).getSiteName());
+                if(counter<5) {
+                    System.out.println((counter + 1) + ". Transfer ID: " + allTransfers.get(transferId).getTransferId() + ", Source Site: " + allTransfers.get(transferId).getSource().getSiteName() + ", Final Destination: " + allTransfers.get(transferId).getListOfDestinations().get(allTransfers.get(transferId).getDestinations().size() - 1).getSiteName());
+                    counter++;
+                }
+                else
+                    break;
             }
+
             System.out.println("Please enter the transfer id of the transfer document you would like to download: ");
             int transferId;
             while(true) {

@@ -404,6 +404,15 @@ public class TransferController {
         transfer.setArrivingDate(arrivingTime.toLocalDate());
         transfersDAO.update(transfer);
     }
+
+    public void updateArrivingTime(Transfer transfer, LocalDate arrivingDate, LocalTime arrivingTime)
+    {
+        transfer.setArrivingTime(arrivingTime);
+        transfersDAO.update(transfer);
+        transfer.setArrivingDate(arrivingDate);
+        transfersDAO.update(transfer);
+    }
+
     public TempLevel lowestTempItem(Map<Site, Map<Item_mock, Integer>> orderItems)
     {
         TempLevel currMinTemp = TempLevel.regular;

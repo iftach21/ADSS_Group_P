@@ -109,7 +109,7 @@ public class TransferDestinationsDAO {
             if (rowsAffected == 0) {
                 System.out.println("No transfer destination found with transfer Id " + transferId + "and site Id" + siteId);
             } else {
-                System.out.println("transfer destination with transfer Id " + transferId + "and site Id" + siteId +" deleted successfully");
+                //System.out.println("transfer destination with transfer Id " + transferId + "and site Id" + siteId +" deleted successfully");
                 deleteFromCache(transferId, siteId);
             }
         } catch (SQLException e) {

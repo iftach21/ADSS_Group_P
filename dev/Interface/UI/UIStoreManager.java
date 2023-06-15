@@ -1,247 +1,87 @@
 package Interface.UI;
-
-import Service.HRManagerService;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.SQLException;
 
-public class UIStoreManager extends JFrame {
-    private HRManagerService controller = new HRManagerService();
-    private JButton btnListOfEmployees;
-    private JButton btnWriteEventToShift;
-    private JButton btnGetEventsFromShifts;
-    private JButton btnGetEmployeesForWeeklyShift;
+public class UIStoreManager extends JFrame implements ActionListener {
+    private JButton employeeButton;
+    private JButton hrManagerButton;
+    private JButton transferManagerButton;
 
-    public UIStoreManager() throws SQLException {
-        setTitle("Store Manager");
+    public UIStoreManager() {
+        // Set up the JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridBagLayout()); // Use GridBagLayout
+        setTitle("UIStoreManager");
+        setLayout(new GridLayout(3, 1));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5, 5, 5, 5); // Add some spacing
+        // Create the buttons
+        employeeButton = new JButton("Employee");
+        hrManagerButton = new JButton("HRManager");
+        transferManagerButton = new JButton("TransferManager");
 
-        btnListOfEmployees = new JButton("List of all employees");
-        btnWriteEventToShift = new JButton("Write event to Shift");
-        btnGetEventsFromShifts = new JButton("Get events from Shifts");
-        btnGetEmployeesForWeeklyShift = new JButton("Get employees for WeeklyShift");
+        // Set button properties
+        employeeButton.addActionListener(this);
+        hrManagerButton.addActionListener(this);
+        transferManagerButton.addActionListener(this);
+        employeeButton.setPreferredSize(new Dimension(200, 50));
+        hrManagerButton.setPreferredSize(new Dimension(200, 50));
+        transferManagerButton.setPreferredSize(new Dimension(200, 50));
 
-        btnListOfEmployees.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                listOfEmployeesClicked();
-            }
-        });
+        // Add buttons to the JFrame
+        add(employeeButton);
+        add(hrManagerButton);
+        add(transferManagerButton);
 
-        btnWriteEventToShift.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    writeEventToShiftClicked();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        btnGetEventsFromShifts.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    getEventsFromShiftsClicked();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        btnGetEmployeesForWeeklyShift.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    getEmployeesForWeeklyShiftClicked();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        gbc.gridy = 0;
-        add(btnListOfEmployees, gbc);
-
-        gbc.gridy = 1;
-        add(btnWriteEventToShift, gbc);
-
-        gbc.gridy = 2;
-        add(btnGetEventsFromShifts, gbc);
-
-        gbc.gridy = 3;
-        add(btnGetEmployeesForWeeklyShift, gbc);
-
+        // Set JFrame properties
         pack();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // Center the JFrame on the screen
         setVisible(true);
     }
 
-    private void listOfEmployeesClicked() {
-        String text = "This is the list of all employees:\n"; // Replace with your actual text
-        text += controller.getAllworkersString();
-
-        // Define the buttons
-        Object[] options = { "OK", "Save to file" };
-
-        // Show option dialog box with the text and buttons
-        int choice = JOptionPane.showOptionDialog(this, text, "List of Employees", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-        if (choice == 1) { // User selected "Save"
-            // Save text to a file
-            JFileChooser fileChooser = new JFileChooser();
-            int userOption = fileChooser.showSaveDialog(this);
-
-            if (userOption == JFileChooser.APPROVE_OPTION) {
-                try {
-                    String filePath = fileChooser.getSelectedFile().getPath();
-                    FileWriter fileWriter = new FileWriter(filePath);
-                    fileWriter.write(text);
-                    fileWriter.close();
-                    JOptionPane.showMessageDialog(this, "File saved successfully!", "File Saved",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == employeeButton) {
+            // Call the function for Employee
+            try {
+                handleEmployee();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else if (e.getSource() == hrManagerButton) {
+            // Call the function for HRManager
+            try {
+                handleHRManager();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else if (e.getSource() == transferManagerButton) {
+            // Call the function for TransferManager
+            try {
+                handleTransferManager();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
         }
     }
 
-
-
-    private void writeEventToShiftClicked() throws SQLException {
-        String weeknumStr = JOptionPane.showInputDialog(this, "Enter week number:");
-        String yearStr = JOptionPane.showInputDialog(this, "Enter year:");
-        String supernumStr = JOptionPane.showInputDialog(this, "Enter super number:");
-        String daynumStr = JOptionPane.showInputDialog(this, "Enter day number:");
-        String dayornight = JOptionPane.showInputDialog(this, "Enter day or night:");
-        String report = JOptionPane.showInputDialog(this, "Enter report:");
-
-        // Parse the input to integers
-        int weeknum = Integer.parseInt(weeknumStr);
-        int year = Integer.parseInt(yearStr);
-        int supernum = Integer.parseInt(supernumStr);
-        int daynum = Integer.parseInt(daynumStr);
-
-
-        controller.writeToEventOfShift(weeknum, year, supernum, daynum, dayornight,report);
-
-        JOptionPane.showMessageDialog(this, "report saved successfully!", "report adding",
-                JOptionPane.INFORMATION_MESSAGE);
+    // Insert your function implementations here
+    private void handleEmployee() throws SQLException {
+        UIEmployee employeeUI = new UIEmployee();
+        employeeUI.setVisible(true);
     }
 
-    private void getEventsFromShiftsClicked() throws SQLException {
-        String text = "This is the events in the shift:\n"; // Replace with your actual text
-        // Prompt the user for input
-        String weeknumStr = JOptionPane.showInputDialog(this, "Enter week number:");
-        String yearStr = JOptionPane.showInputDialog(this, "Enter year:");
-        String supernumStr = JOptionPane.showInputDialog(this, "Enter super number:");
-        String daynumStr = JOptionPane.showInputDialog(this, "Enter day number:");
-        String dayornight = JOptionPane.showInputDialog(this, "Enter day or night:");
-
-        // Parse the input to integers
-        int weeknum = Integer.parseInt(weeknumStr);
-        int year = Integer.parseInt(yearStr);
-        int supernum = Integer.parseInt(supernumStr);
-        int daynum = Integer.parseInt(daynumStr);
-
-        // Call the function and get the result
-        String result = controller.getEventOfShift(weeknum, year, supernum, daynum, dayornight);
-
-        text += result;
-
-        // Define the buttons
-        Object[] options = { "OK", "Save to file" };
-
-        // Show option dialog box with the text and buttons
-        int choice = JOptionPane.showOptionDialog(this, text, "This is the events in the shift:", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-        if (choice == 1) { // User selected "Save"
-            // Save text to a file
-            JFileChooser fileChooser = new JFileChooser();
-            int userOption = fileChooser.showSaveDialog(this);
-
-            if (userOption == JFileChooser.APPROVE_OPTION) {
-                try {
-                    String filePath = fileChooser.getSelectedFile().getPath();
-                    FileWriter fileWriter = new FileWriter(filePath);
-                    fileWriter.write(text);
-                    fileWriter.close();
-                    JOptionPane.showMessageDialog(this, "File saved successfully!", "File Saved",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
+    private void handleHRManager() throws SQLException{
+        UIHRManager ui = new UIHRManager();
     }
 
-    private void getEmployeesForWeeklyShiftClicked() throws SQLException {
-        String text = "This is the events in the shift:\n"; // Replace with your actual text
-        // Prompt the user for input
-        String weeknumStr = JOptionPane.showInputDialog(this, "Enter week number:");
-        String yearStr = JOptionPane.showInputDialog(this, "Enter year:");
-        String supernumStr = JOptionPane.showInputDialog(this, "Enter super number:");
-
-
-        // Parse the input to integers
-        int weeknum = Integer.parseInt(weeknumStr);
-        int year = Integer.parseInt(yearStr);
-        int supernum = Integer.parseInt(supernumStr);
-
-        // Call the function and get the result
-        String result = controller.getAllWorkersThatWorkedInSpecificWeek(weeknum, year, supernum);
-
-        text += result;
-
-        // Define the buttons
-        Object[] options = { "OK", "Save to file" };
-
-        // Show option dialog box with the text and buttons
-        int choice = JOptionPane.showOptionDialog(this, text, "This is the events in the shift:", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
-        if (choice == 1) { // User selected "Save"
-            // Save text to a file
-            JFileChooser fileChooser = new JFileChooser();
-            int userOption = fileChooser.showSaveDialog(this);
-
-            if (userOption == JFileChooser.APPROVE_OPTION) {
-                try {
-                    String filePath = fileChooser.getSelectedFile().getPath();
-                    FileWriter fileWriter = new FileWriter(filePath);
-                    fileWriter.write(text);
-                    fileWriter.close();
-                    JOptionPane.showMessageDialog(this, "File saved successfully!", "File Saved",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
+    private void handleTransferManager() throws SQLException {
+        UITransferManager ui = new UITransferManager();
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new UIStoreManager();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+        SwingUtilities.invokeLater(() -> new UIStoreManager());
     }
 }
+

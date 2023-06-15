@@ -221,8 +221,8 @@ public class TransferManagerService {
         Transfer newTransfer = transferController.getTransferByTransferId(transferId);
         Map<Item_mock, Integer> siteItems = transferController.getSiteItems(siteId, newTransfer);
         Map<String, List<String>> siteItemsDetails = new HashMap<>();
-        List<String> details = new LinkedList<>();
         for (Item_mock item : siteItems.keySet()) {
+            List<String> details = new LinkedList<>();
             details.add(item.getItemName());
             details.add(siteItems.get(item)+"");
             siteItemsDetails.put(item.getCatalogNum(), details);
@@ -415,5 +415,26 @@ public class TransferManagerService {
     {
         Transfer transfer = transferController.getTransferByTransferId(transferId);
         transferController.resetDocumentAfterRearrange(transfer);
+    }
+
+    /**
+     * This function return details of current transfers 
+     * @return: Map<Integer, List<String>>. The key is the transfer id, The value is a list contains:
+     * Source site name, last destination name.
+     * If no current transfers occurs, then the map returns is empty!!
+     */
+    public Map<Integer, List<String>> getDetailsOfCurrentTransfers()
+    {
+        Map<Integer, Transfer> currentTransfers = transferController.getCurrentTransfers();
+        Map<Integer, List<String>> details = new HashMap<>();
+        for(Integer transferId: currentTransfers.keySet())
+        {
+            Transfer transfer = currentTransfers.get(transferId);
+            List<String> currentDetails = new LinkedList<>();
+            currentDetails.add(transfer.getSource().getSiteName());
+            currentDetails.add(transfer.getListOfDestinations().get(transfer.getDestinations().size()-1).getSiteName());
+            details.put(transferId, currentDetails);
+        }
+        return details;
     }
 }

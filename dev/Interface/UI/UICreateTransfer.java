@@ -168,7 +168,8 @@ public class UICreateTransfer {
     private void showDriverFrame() throws SQLException {
         chooseDriverFrame = new JFrame("Choose Driver");
         chooseDriverFrame.setSize(700, 430);
-        chooseDriverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        chooseDriverFrame.addWindowListener(exitSystemOnX());
+        chooseDriverFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         chooseDriverFrame.setLayout(null);
         chooseDriverFrame.setVisible(true);
 

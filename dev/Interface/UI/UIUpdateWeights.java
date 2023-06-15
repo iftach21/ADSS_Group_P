@@ -16,12 +16,15 @@ public class UIUpdateWeights {
     private JFrame TransferStartFrame;
     private Service.TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();
     private int sourceId;
+    private Map<Integer, String> sourceSiteName;
     private int transferId;
     JButton[] checkWeightButtons;
     JButton[] siteDetailsButtons;
 
     public UIUpdateWeights(int transferId) throws SQLException {
         this.transferId = transferId;
+        this.sourceSiteName = TransferManagerService.getSourceSiteName(transferId);
+        this.sourceId = sourceSiteName.keySet().stream().findFirst().get();
         showStartTransfer();
     }
 
@@ -38,7 +41,7 @@ public class UIUpdateWeights {
         TransferStartFrame.add(mainHeadline);
 
         //Print the details
-        List<String> truckChosen = TransferManagerService.getChosenTruckDetails();
+        List<String> truckChosen = TransferManagerService.getChosenTruckDetails(transferId);
         final JLabel licenseNumHeadline=new JLabel();
         licenseNumHeadline.setText("License Number: " + truckChosen.get(0));
         licenseNumHeadline.setBounds(20, 50, 650, 20);
@@ -60,7 +63,7 @@ public class UIUpdateWeights {
         TransferStartFrame.add(tempCapacityHeadline);
 
         final JLabel weightAtSource=new JLabel();
-        weightAtSource.setText("Your source site is: " + sites.get(sourceId) + ". Please enter the weight at this source: ");
+        weightAtSource.setText("Your source site is: " + sourceSiteName.get(sourceId) + ". Please enter the weight at this source: ");
         weightAtSource.setBounds(20, 150, 650, 20);
         TransferStartFrame.add(weightAtSource);
 

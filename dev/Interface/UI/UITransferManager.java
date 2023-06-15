@@ -10,10 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class UITransferManager extends JFrame{
 
@@ -158,7 +161,7 @@ public class UITransferManager extends JFrame{
                     );
 
                     if (option == JOptionPane.OK_OPTION) {
-                        int chosenLicenseNum = -1;
+                        int chosenTransferId = -1;
                         for(int j = 0; j < currTransfersCheckbox.length; j++)
                         {
                             if (currTransfersCheckbox[j].isSelected())
@@ -170,14 +173,15 @@ public class UITransferManager extends JFrame{
                                 if (startIndex != -1) {
                                     int endIndex = input.indexOf(" ", startIndex + prefix.length());
                                     if (endIndex != -1) {
-                                        chosenLicenseNum =  Integer.parseInt(input.substring(startIndex + prefix.length(), endIndex));
+                                        chosenTransferId =  Integer.parseInt(input.substring(startIndex + prefix.length(), endIndex));
                                     } else {
-                                        chosenLicenseNum = Integer.parseInt(input.substring(startIndex + prefix.length()));
+                                        chosenTransferId = Integer.parseInt(input.substring(startIndex + prefix.length()));
                                     }
                                 }
                                 break;
                             }
                         }
+                        showUpdateOptionsDialog(chosenTransferId);
                         //TODO : start UIUpdateWeights with chosen id
                     }
 
@@ -334,6 +338,120 @@ public class UITransferManager extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+    }
+
+    private void showUpdateOptionsDialog(int transferId) throws SQLException {
+        JCheckBox updateWeightsCheckbox = new JCheckBox("Update truck weights");
+        JCheckBox updateTimeCheckbox = new JCheckBox("Update arriving date and time");
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(updateWeightsCheckbox);
+        bg.add(updateTimeCheckbox);
+
+        // Create a panel to hold the checkboxes
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 1));
+        panel.add(updateWeightsCheckbox);
+        panel.add(updateTimeCheckbox);
+        panel.setVisible(true);
+        int option = JOptionPane.showOptionDialog(
+                null,
+                panel,
+                "Options",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                new Object[]{"OK"},
+                null
+        );
+        if (option == JOptionPane.OK_OPTION) {
+            if (updateWeightsCheckbox.isSelected()) {
+                UIUpdateWeights toUpdate = new UIUpdateWeights(transferId);
+            }
+            if (updateTimeCheckbox.isSelected()) {
+                showChangeTimeDialog(transferId);
+            }
+        }
+    }
+
+    private void showChangeTimeDialog(int transferId) {
+        JFrame dateFrame = new JFrame();
+        dateFrame.setSize(200, 200);
+        dateFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dateFrame.setLayout(null);
+
+        JLabel label = new JLabel("Choose Arriving Date:");
+        JTextField dateSelected = new JTextField(20);
+        JButton b = new JButton("Open Calender");
+        JPanel p = new JPanel();
+        p.add(label);
+        p.add(dateSelected);
+        p.add(b);
+        p.setBounds(-110, 50, 200, 40);
+        dateFrame.add(p);
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                dateSelected.setText(new DatePicker(dateFrame).setPickedDate());
+            }
+        });
+
+        //Add time picker
+        SpinnerDateModel spinnerDateModel = new SpinnerDateModel();
+        spinnerDateModel.setCalendarField(Calendar.MINUTE); // Set the field to modify (in this case, minutes)
+        JSpinner spinner = new JSpinner(spinnerDateModel);
+
+        // Set a custom date format for the spinner
+        JSpinner.DateEditor spinnerEditor = new JSpinner.DateEditor(spinner, "HH:mm");
+        SimpleDateFormat dateFormat = ((SimpleDateFormat) spinnerEditor.getFormat());
+        dateFormat.setLenient(false); // Enforce strict parsing of time format
+        spinner.setEditor(spinnerEditor);
+
+        final JLabel selectTimeLabel=new JLabel();
+        selectTimeLabel.setText("Please choose transfer leaving time: ");
+        selectTimeLabel.setBounds(20, 100, 70, 35);
+        dateFrame.add(selectTimeLabel);
+
+        spinner.setBounds(100, 100, 100, 20);
+        dateFrame.add(spinner);
+
+        JButton okButton = new JButton("OK");
+        okButton.setBounds(80, 160, 40, 20);
+
+        dateFrame.setVisible(true);
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Check if Legal
+                try {
+
+                    int lastDest = TransferManagerService.getLastDestinationId(transferId);
+                    //Check if Date and time are legal
+                    //Time parser to LocalTime
+                    Date selectedDate = (Date) spinner.getValue();
+                    java.time.Instant instant = selectedDate.toInstant();
+                    // Convert Instant to LocalTime
+                    LocalTime arrivingTime = instant.atZone(ZoneId.systemDefault()).toLocalTime();
+
+                    //Date parser to LocalDate
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    LocalDate arrivingDate = LocalDate.parse(dateSelected.getText(), formatter);
+                    if (!TransferManagerService.checkIfDateIsLegal(arrivingDate, arrivingTime)) {
+                        JOptionPane.showMessageDialog(dateFrame, "Your Date is not Legal! Please try again",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else if (!TransferManagerService.checkIfStoreKeeperIsThereByArrivingTime(lastDest, arrivingTime, arrivingDate)) {
+                        JOptionPane.showMessageDialog(dateFrame, "There is no storekeeper in the final destination. Please try again",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        dateFrame.dispose();
+                        TransferManagerService.updateArrivingDateTime(transferId, arrivingTime, arrivingDate);
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(dateFrame, "One of your inputs is illegal. Please try again",
+                            "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

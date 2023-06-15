@@ -134,6 +134,7 @@ public class Main {
     }
 
     private static void GUITransferManager() throws Exception {
+        transferInterface.loadData();
         UITransferManager ui = new UITransferManager();
     }
     private static void GUIStoreManager() throws Exception {

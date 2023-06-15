@@ -106,6 +106,10 @@ public class TransferManagerService {
         return transferController.checkIfStoreKeeperIsThere(arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), orderDestinationSiteId);
     }
 
+    public boolean checkIfStoreKeeperIsThereByArrivingTime(Integer lastDestID, LocalTime arrivingTime, LocalDate arrivingDate) throws SQLException {
+        return transferController.checkIfStoreKeeperIsThere(arrivingDate, arrivingTime, lastDestID);
+    }
+
     /**
         find all the details of available drivers based on the transfer's leaving time
         * return: Map<Integer, List<String>>.The key is driverID, The value is list which contains the next details:

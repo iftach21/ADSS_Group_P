@@ -3,8 +3,7 @@ package Interface.UI;
 import Service.TransferManagerService;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,10 +15,8 @@ import java.util.List;
 
 
 public class UICreateTransfer {
-    private static final int DELAY = 3000;
     private JFrame Transferframe;
     private JFrame chooseDriverFrame;
-    private JFrame TransferStartFrame;
     private TransferManagerService TransferManagerService = Service.TransferManagerService.getInstance();
     private JTextField dateSelected;
     private JButton nextButton;
@@ -40,7 +37,8 @@ public class UICreateTransfer {
     private void initializeUI() {
         Transferframe = new JFrame("Create a transfer");
         Transferframe.setSize(500, 430);
-        Transferframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Transferframe.addWindowListener(exitSystemOnX());
+        Transferframe.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         Transferframe.setLayout(null);
 
         //Add components
@@ -240,5 +238,21 @@ public class UICreateTransfer {
                 }
             }
         });
+    }
+
+    public static WindowListener exitSystemOnX() {
+        WindowListener exitListener = new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int confirm = JOptionPane.showOptionDialog(
+                        null, "Are you sure you want to exit? Note that if you exit during creating a transfer the system will close.",
+                        "Exit Confirmation", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        };
+        return exitListener;
     }
 }

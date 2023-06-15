@@ -31,7 +31,7 @@ public class UIUpdateWeights {
     private void showStartTransfer() {
         TransferStartFrame = new JFrame("Choose Weights");
         TransferStartFrame.setSize(700, 430);
-        TransferStartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        TransferStartFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         TransferStartFrame.setLayout(null);
         TransferStartFrame.setVisible(true);
 

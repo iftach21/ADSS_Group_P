@@ -160,7 +160,7 @@ public class UICreateTransfer {
                         showDriverFrame();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(Transferframe, "One of your inputs is illegal. Please try again",
+                    JOptionPane.showMessageDialog(Transferframe, "One of your inputs is illegal or there is no storekeeper in the last destination. Please try again",
                             "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }

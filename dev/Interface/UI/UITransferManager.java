@@ -135,10 +135,16 @@ public class UITransferManager extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    Map<Integer, List<String>> currTransfers = TransferManagerService.getDetailsOfCurrentTransfers();
+                    if (currTransfers.size() == 0)
+                    {
+                        JOptionPane.showMessageDialog(frame, "Sorry, there are no transfers that takes place currently.",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     JPanel transfersPanel = new JPanel();
                     transfersPanel.add(new JLabel("These are the current transfer that takes place: "));
                     transfersPanel.setLayout(new GridLayout(0, 1));
-                    Map<Integer, List<String>> currTransfers = TransferManagerService.getDetailsOfCurrentTransfers();
                     int i = 0;
                     ButtonGroup bg = new ButtonGroup();
                     for (Integer transferId : currTransfers.keySet())
@@ -182,7 +188,6 @@ public class UITransferManager extends JFrame{
                             }
                         }
                         showUpdateOptionsDialog(chosenTransferId);
-                        //TODO : start UIUpdateWeights with chosen id
                     }
 
                 }

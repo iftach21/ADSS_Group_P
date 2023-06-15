@@ -513,7 +513,6 @@ public class UIUpdateWeights {
 
                     String catalogNum = catalogNumLabel.getText().replace("Catalog Number: ", "");
                     String quantity = quantityField.getText();
-                    // Perform necessary actions with the updated quantity, such as updating the map or calling a method
                     if (!TransferManagerService.reduceItemQuantityFromDest(catalogNum, Integer.parseInt(quantity), destId, transferId))
                         JOptionPane.showMessageDialog(TransferStartFrame, "Item with catalog num" + catalogNum + " didn't reduced because the quantity entered is illegal",
                                 "ERROR", JOptionPane.ERROR_MESSAGE);

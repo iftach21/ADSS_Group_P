@@ -471,4 +471,13 @@ public class TransferManagerService {
         return sourceSite;
     }
 
+    /**
+     * @return last destination id of the transfer
+     */
+    public Integer getLastDestinationId(Integer transferId)
+    {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        return transfer.getListOfDestinations().get(transfer.getDestinations().size()-1).getSiteId();
+    }
+
 }

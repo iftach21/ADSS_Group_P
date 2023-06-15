@@ -68,6 +68,7 @@ public class Transfer {
                 Integer quantityToUpdate = updateQuantityOfItem(orderItems.get(site).get(product), itemsToDelete.get(site).get(product), site, product.getCatalogNum());
 
                 if (quantityToUpdate == 0) {
+                    orderItems = _transferItemsDAO.get(_transferId);
                     if (!orderItems.containsKey(site))
                     {
                         System.out.println("Please notice that you removed every item from this destination, so the destination has been removed from the transfer!");
@@ -79,7 +80,6 @@ public class Transfer {
 
     public Integer updateQuantityOfItem(Integer currentQuantity, Integer newQuantity, Site site, String catalogNum)
     {
-        Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
         //calculate how much to reduce from each item
         int quantityToUpdate = currentQuantity - newQuantity;
         //update the database
@@ -87,6 +87,7 @@ public class Transfer {
         if (quantityToUpdate == 0) {
             //update and remove product from the database
             _transferItemsDAO.delete(_transferId, catalogNum, site.getSiteId(), quantityToUpdate);
+            Map<Site, Map<Item_mock, Integer>> orderItems = _transferItemsDAO.get(_transferId);
             if (!orderItems.containsKey(site))
             {
                 //remove from the database

@@ -418,10 +418,10 @@ public class TransferManagerService {
     }
 
     /**
-     * This function return details of current transfers 
+     * This function returns details of current transfers
      * @return: Map<Integer, List<String>>. The key is the transfer id, The value is a list contains:
      * Source site name, last destination name.
-     * If no current transfers occurs, then the map returns is empty!!
+     * If no current transfers occurs, then the returned map is empty!!
      */
     public Map<Integer, List<String>> getDetailsOfCurrentTransfers()
     {
@@ -437,4 +437,15 @@ public class TransferManagerService {
         }
         return details;
     }
+
+    /**
+     * This function should be called if the transfer manager chose the option of update arriving
+     * date and time of current transfer
+     */
+    public void updateArrivingDateTime(Integer transferId, LocalTime arrivingTime, LocalDate arrivingDate)
+    {
+        Transfer transfer = transferController.getTransferByTransferId(transferId);
+        transferController.updateArrivingTime(transfer, arrivingDate, arrivingTime);
+    }
+    
 }

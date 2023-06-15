@@ -517,8 +517,145 @@ public class UICreateTransfer {
     }
 
     private void showChangeDestinationsDialog() {
+        Map<Integer, String> transferDestinations = TransferManagerService.getTransferDestinationNames(transferId);
+        JCheckBox[] destCheckboxes = new JCheckBox[transferDestinations.size()];
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("These are the transfer destinations. Please choose the destination you would like to remove: "));
+        panel.setLayout(new GridLayout(0, 1));
+        ButtonGroup bg = new ButtonGroup();
+        int i = 0;
+        //Create the checkboxes
+        for (Integer destId : transferDestinations.keySet()) {
+            destCheckboxes[i] = new JCheckBox("Destination ID: " + destId + "   Destination Name: " + transferDestinations.get(destId));
+            panel.add(destCheckboxes[i]);
+            bg.add(destCheckboxes[i]);
+            i++;
+        }
+
+        panel.setVisible(true);
+        int option = JOptionPane.showOptionDialog(
+                null,
+                panel,
+                "Options",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                new Object[]{"OK"},
+                null
+        );
+
+        if (option == JOptionPane.OK_OPTION) {
+            int chosenDestId = -1;
+            for(int j = 0; j < destCheckboxes.length; j++)
+            {
+                if (destCheckboxes[j].isSelected())
+                {
+                    String input = destCheckboxes[j].getText();
+                    String prefix = "Destination ID: ";
+                    int startIndex = input.indexOf(prefix);
+
+                    if (startIndex != -1) {
+                        int endIndex = input.indexOf(" ", startIndex + prefix.length());
+                        if (endIndex != -1) {
+                            chosenDestId =  Integer.parseInt(input.substring(startIndex + prefix.length(), endIndex));
+                        } else {
+                            chosenDestId = Integer.parseInt(input.substring(startIndex + prefix.length()));
+                        }
+                    }
+                    break;
+                }
+            }
+            TransferManagerService.removeDest(chosenDestId, transferId);
+            JOptionPane.showMessageDialog(TransferStartFrame, "Destination removed successfully. You need the insert some info again.",
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+            showStartTransfer();
+        }
     }
 
     private void showChangeItemsDialog() {
+        Map<Integer, String> transferDestinations = TransferManagerService.getTransferDestinationNames(transferId);
+        JCheckBox[] destCheckboxes = new JCheckBox[transferDestinations.size()];
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("These are the transfer destinations. Please choose the destination you would like to remove: "));
+        panel.setLayout(new GridLayout(0, 1));
+        int i = 0;
+        //Create the checkboxes
+        for (Integer destId : transferDestinations.keySet()) {
+            destCheckboxes[i] = new JCheckBox("Destination ID: " + destId + "   Destination Name: " + transferDestinations.get(destId));
+            panel.add(destCheckboxes[i]);
+            i++;
+        }
+
+        panel.setVisible(true);
+        int option = JOptionPane.showOptionDialog(
+                null,
+                panel,
+                "Options",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                new Object[]{"OK"},
+                null
+        );
+
+        if (option == JOptionPane.OK_OPTION) {
+            List<Integer> chosenDests = new LinkedList<>();
+            for(int j = 0; j < destCheckboxes.length; j++)
+            {
+                if (destCheckboxes[j].isSelected())
+                {
+                    String input = destCheckboxes[j].getText();
+                    String prefix = "Destination ID: ";
+                    int startIndex = input.indexOf(prefix);
+
+                    if (startIndex != -1) {
+                        int endIndex = input.indexOf(" ", startIndex + prefix.length());
+                        if (endIndex != -1) {
+                            chosenDests.add(Integer.parseInt(input.substring(startIndex + prefix.length(), endIndex)));
+                        } else {
+                            chosenDests.add(Integer.parseInt(input.substring(startIndex + prefix.length())));
+                        }
+                    }
+                    break;
+                }
+            }
+            Map<Integer, Map<String, List<String>>> itemDetails = TransferManagerService.getDetailsOfItemsInDestsToRemove(chosenDests, transferId);
+            for (Integer destId : itemDetails.keySet()) {
+                showRemoveItemsDialog(destId, itemDetails.get(destId));
+            }
+            JOptionPane.showMessageDialog(TransferStartFrame, "Destination removed successfully. You need the insert some info again.",
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+            showStartTransfer();
+        }
+    }
+
+    private void showRemoveItemsDialog(int destId, Map<String, List<String>> itemDetails) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 4));
+
+        for (String catalogNum : itemDetails.keySet()) {
+            List<String> details = itemDetails.get(catalogNum);
+            String itemName = details.get(0);
+            String quantity = details.get(1);
+            panel.add(new JLabel("Catalog Number: " + catalogNum));
+            panel.add(new JLabel("   Item Name: " + itemName));
+            panel.add(new JLabel("   Quantity:"));
+            JTextField quantityField = new JTextField(quantity);
+            panel.add(quantityField);
+
+        }
+
+        int option = JOptionPane.showConfirmDialog(null, panel, "Change Quantities", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            for (int i = 0; i < panel.getComponentCount(); i += 2) {
+                JLabel catalogNumLabel = (JLabel) panel.getComponent(i);
+                JTextField quantityField = (JTextField) panel.getComponent(i + 1);
+
+                String catalogNum = catalogNumLabel.getText().replace("Catalog Number: ", "");
+                String quantity = quantityField.getText();
+                // Perform necessary actions with the updated quantity, such as updating the map or calling a method
+                TransferManagerService.reduceItemQuantityFromDest(catalogNum, Integer.parseInt(quantity), destId, transferId);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class UIStoreManager extends JFrame implements ActionListener {
     private JButton employeeButton;
@@ -43,30 +44,40 @@ public class UIStoreManager extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == employeeButton) {
             // Call the function for Employee
-            handleEmployee();
+            try {
+                handleEmployee();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getSource() == hrManagerButton) {
             // Call the function for HRManager
-            handleHRManager();
+            try {
+                handleHRManager();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getSource() == transferManagerButton) {
             // Call the function for TransferManager
-            handleTransferManager();
+            try {
+                handleTransferManager();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
     // Insert your function implementations here
-    private void handleEmployee() {
-        // Function implementation for Employee
-        System.out.println("Employee selected");
+    private void handleEmployee() throws SQLException {
+        UIEmployee employeeUI = new UIEmployee();
+        employeeUI.setVisible(true);
     }
 
-    private void handleHRManager() {
-        // Function implementation for HRManager
-        System.out.println("HRManager selected");
+    private void handleHRManager() throws SQLException{
+        UIHRManager ui = new UIHRManager();
     }
 
-    private void handleTransferManager() {
-        // Function implementation for TransferManager
-        System.out.println("TransferManager selected");
+    private void handleTransferManager() throws SQLException {
+        UITransferManager ui = new UITransferManager();
     }
 
     public static void main(String[] args) {

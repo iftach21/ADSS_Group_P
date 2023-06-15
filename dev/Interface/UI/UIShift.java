@@ -32,7 +32,7 @@ public class UIShift {
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
         frame.add(panel);
-        frame.setSize(900, 350);
+        frame.setSize(1200, 450);
         frame.setVisible(true);
 
         createWeeklyShift(WeekNum,yearNum,superNum, viewOnly);
@@ -93,7 +93,7 @@ public class UIShift {
 
         // Set row height explicitly
         int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
-        table.setRowHeight(lineHeight * (professions.length + 1));
+        table.setRowHeight(lineHeight * (professions.length + 4));
 
         // Set row height dynamically based on content
 //        adjustRowHeight();

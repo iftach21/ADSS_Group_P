@@ -169,6 +169,7 @@ public class UIShiftDriver {
             panel.add(editButton, BorderLayout.SOUTH);
         }
     }
+
     private ArrayList<Integer> getAllWorkerAvelibel(int day, int shiftType, String profession) throws SQLException {
         //, int WeekNum, int yearNum, int superNum
         HRManagerService hr = new HRManagerService();

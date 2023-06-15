@@ -95,6 +95,8 @@ public class UIShift {
         int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
         table.setRowHeight(lineHeight * (professions.length + 1));
 
+        // Set row height dynamically based on content
+//        adjustRowHeight();
 
         // Create the edit button
         JButton editButton = new JButton("Edit");
@@ -176,6 +178,22 @@ public class UIShift {
         // Add the edit button to the panel only if it's not view only
         if(! viewOnly) {
             panel.add(editButton, BorderLayout.SOUTH);
+        }
+    }
+    private void adjustRowHeight() {
+        int lineHeight = table.getFontMetrics(table.getFont()).getHeight();
+
+        for (int row = 0; row < table.getRowCount(); row++) {
+            int maxLines = 0;
+
+            for (int column = 0; column < table.getColumnCount(); column++) {
+                Object value = table.getValueAt(row, column);
+                String cellValue = value != null ? value.toString() : "";
+                int lines = cellValue.split("<br>").length;
+                maxLines = Math.max(maxLines, lines);
+            }
+
+            table.setRowHeight(row, lineHeight * maxLines);
         }
     }
     private ArrayList<Integer> getAllWorkerAvelibel(int day, int shiftType, String profession) throws SQLException {

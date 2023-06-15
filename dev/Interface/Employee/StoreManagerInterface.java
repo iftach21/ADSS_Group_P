@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class StoreManagerInterface extends AInterface{
     private final WeeklyShiftAndWorkersManager controller;
     private final WorkerInterface workerInterface = new WorkerInterface();
-    private BossInterface bossInterface = new BossInterface();
+    private final BossInterface bossInterface = new BossInterface();
 
-    private TransferManagerInterface transferInterface = new TransferManagerInterface();
+    private final TransferManagerInterface transferInterface = new TransferManagerInterface();
 
 
 

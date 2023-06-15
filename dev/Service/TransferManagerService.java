@@ -447,5 +447,4 @@ public class TransferManagerService {
         Transfer transfer = transferController.getTransferByTransferId(transferId);
         transferController.updateArrivingTime(transfer, arrivingDate, arrivingTime);
     }
-    
 }

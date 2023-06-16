@@ -9,17 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="start InventoryMangerGUI">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="continue InventoryMangerGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Domain/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Domain/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/Report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Domain/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Domain/Report.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/Report.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Domain/InventoryController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/InventoryController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Domain/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/InventoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Domain/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/ReportController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +146,7 @@
       <workItem from="1686477726441" duration="6039000" />
       <workItem from="1686483802933" duration="10756000" />
       <workItem from="1686723217670" duration="1259000" />
-      <workItem from="1686725663648" duration="28296000" />
+      <workItem from="1686725663648" duration="57609000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -275,7 +274,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686664255938</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL‎-00019" summary="continue InventoryMangerGUI">
+      <created>1686783688591</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL‎-00019" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686783688591</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,7 +303,8 @@
     <MESSAGE value="update the period ireder in the interface" />
     <MESSAGE value="test update" />
     <MESSAGE value="start InventoryMangerGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="start InventoryMangerGUI" />
+    <MESSAGE value="continue InventoryMangerGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="continue InventoryMangerGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -357,6 +364,11 @@
           <line>14</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/services/InventoryMangerGUI.java</url>
+          <line>703</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>
           <line>45</line>
@@ -365,6 +377,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/dev/Domain/InventoryController.java</url>
+          <line>335</line>
+          <properties class="Domain.InventoryController" method="priceHistoryReport">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="108" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

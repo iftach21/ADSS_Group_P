@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ReportController {
     private List<Report> reportsList;
-
     private ReportMapper reportMapper;
     private ReportItemsMapper reportItemsMapper;
 
@@ -68,10 +67,5 @@ public class ReportController {
         }
         return report;
     }
-
-//    public void addReportHistory(Report priceHistoryReport) {
-//        System.out.println(priceHistoryReport.printPriceHistory());
-//        reportsList.add(priceHistoryReport);
-//    }
 
 }

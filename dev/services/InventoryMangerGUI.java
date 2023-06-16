@@ -11,6 +11,8 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Map;
 
 
 public class InventoryMangerGUI implements ActionListener {
@@ -91,28 +93,24 @@ public class InventoryMangerGUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //******************* this is the switch case *******************/
         if(e.getSource() == ShortageReportButton) {
-//
             String[] options = {"For all products", "For Category", "For specific product", "Return"};
             // Create a custom panel with FlowLayout
             JLabel label = new JLabel();
             label.setText("Which report to provide ?");
             JPanel panel = new JPanel(new FlowLayout());
             panel.add(label);
-//            for (String option : options) {
-//                JButton button = new JButton(option);
-//                panel.add(button);
-//            }
+
             int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
             if (choiceNum == -1) {
                 return;
             }
-            String column[] = {"Report Type", "Report Number", "Report Date", "Report Information"};
+            String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Amount"};
             Report report = null;
             String reportType;
             String reportNumber;
             String reportDate;
-            String reportInformation;
+            String reportString = "";
 
             switch (choiceNum) {
                 case 0:
@@ -132,20 +130,30 @@ public class InventoryMangerGUI implements ActionListener {
                     reportType = report.getType().toString();
                     reportNumber = Integer.toString(report.getReportNum());
                     reportDate = report.getReportDate().toString();
-                    reportInformation = report.toString();
 
-                    tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,reportInformation});
+                    for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines[] = reportString.split("\n");
+                    for (String line : lines) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1]});;
+                    }
 
                     JScrollPane sp = new JScrollPane(jtable);
                     jframe.add(sp);
-
                     sp.setPreferredSize(new Dimension(1000,400));
-
                     JOptionPane.showMessageDialog(null,sp,"Shortage Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 1:
-                    //TODO fix - the shortageReportCategory not check if the category really exist
+                    //TODO fix - the reportNumber jump by 2
 
                     // for category
                     String nameCategory =   JOptionPane.showInputDialog("For which category ?");
@@ -165,14 +173,25 @@ public class InventoryMangerGUI implements ActionListener {
                     String reportType2 = report2.getType().toString();
                     String reportNumber2 = Integer.toString(report2.getReportNum());
                     String reportDate2 = report2.getReportDate().toString();
-                    String reportInformation2 = report2.toString();
 
-                    tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,reportInformation2});
+                    for (Map.Entry<Item, Integer> entry : report2.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines2[] = reportString.split("\n");
+                    for (String line : lines2) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,columns[0],columns[1]});;
+                    }
 
                     JScrollPane sp2 = new JScrollPane(jtable2);
                     jframe.add(sp2);
                     sp2.setPreferredSize(new Dimension(1000,400));
-
                     JOptionPane.showMessageDialog(null,sp2,"Shortage Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
@@ -195,14 +214,25 @@ public class InventoryMangerGUI implements ActionListener {
                     String reportType3 = report3.getType().toString();
                     String reportNumber3 = Integer.toString(report3.getReportNum());
                     String reportDate3 = report3.getReportDate().toString();
-                    String reportInformation3 = report3.toString();
 
-                    tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,reportInformation3});
+                    for (Map.Entry<Item, Integer> entry : report3.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines3[] = reportString.split("\n");
+                    for (String line : lines3) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,columns[0],columns[1]});;
+                    }
 
                     JScrollPane sp3 = new JScrollPane(jtable3);
                     jframe.add(sp3);
                     sp3.setPreferredSize(new Dimension(1000,400));
-
                     JOptionPane.showMessageDialog(null,sp3,"Shortage Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
@@ -224,7 +254,8 @@ public class InventoryMangerGUI implements ActionListener {
             }
 
 
-        } else if (e.getSource() == UpdateInventoryButton) {
+        }
+        else if (e.getSource() == UpdateInventoryButton) {
             String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add a new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
             JLabel label = new JLabel();
             label.setText("which action you would like to do ?");
@@ -275,23 +306,466 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
             }
 
+        }
+        //TODO - fix the amount, now is always 0
+        //provide counting report
+        else if (e.getSource() == CountingReportButton) {
+            String[] options = {"For all products", "For Category", "For specific product", "Return"};
+            // Create a custom panel with FlowLayout
+            JLabel label = new JLabel();
+            label.setText("Which report to provide ?");
+            JPanel panel = new JPanel(new FlowLayout());
+            panel.add(label);
+
+            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Counting Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            if (choiceNum == -1) {
+                return;
+            }
+            String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Amount"};
+            Report report = null;
+            String reportType;
+            String reportNumber;
+            String reportDate;
+            String reportString = "";
+
+            switch (choiceNum) {
+                case 0:
+                    // for all products
+                    if (inventoryController.FullCountingReport() == null){
+                        JOptionPane.showInternalMessageDialog(null,"No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+
+                    DefaultTableModel tableModel = new DefaultTableModel(column,0);
+                    JTable jtable = new JTable(tableModel);
+                    jtable.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                    jtable.setFont(new Font("Arial", Font.PLAIN,10));
+
+                    report = inventoryController.FullCountingReport();
+                    reportType = report.getType().toString();
+                    reportNumber = Integer.toString(report.getReportNum());
+                    reportDate = report.getReportDate().toString();
+
+                    for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines[] = reportString.split("\n");
+                    for (String line : lines) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1]});;
+                    }
+
+                    JScrollPane sp = new JScrollPane(jtable);
+                    jframe.add(sp);
+                    sp.setPreferredSize(new Dimension(1000,400));
+                    JOptionPane.showMessageDialog(null,sp,"Counting Report", JOptionPane.PLAIN_MESSAGE);
+
+                    break;
+                case 1:
+                    //TODO fix - the reportNumber jump by 2
+
+                    // for category
+                    String nameCategory =   JOptionPane.showInputDialog("For which category ?");
+
+                    if (inventoryController.CategoryCountingReport(nameCategory) == null){
+                        JOptionPane.showInternalMessageDialog(null,"No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+
+                    DefaultTableModel tableModel2 = new DefaultTableModel(column,0);
+                    JTable jtable2 = new JTable(tableModel2);
+                    jtable2.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                    jtable2.setFont(new Font("Arial", Font.PLAIN,10));
+
+                    Report report2 = inventoryController.CategoryCountingReport(nameCategory);
+                    String reportType2 = report2.getType().toString();
+                    String reportNumber2 = Integer.toString(report2.getReportNum());
+                    String reportDate2 = report2.getReportDate().toString();
+
+                    for (Map.Entry<Item, Integer> entry : report2.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines2[] = reportString.split("\n");
+                    for (String line : lines2) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,columns[0],columns[1]});;
+                    }
+
+                    JScrollPane sp2 = new JScrollPane(jtable2);
+                    jframe.add(sp2);
+                    sp2.setPreferredSize(new Dimension(1000,400));
+                    JOptionPane.showMessageDialog(null,sp2,"Counting Report", JOptionPane.PLAIN_MESSAGE);
+
+                    break;
+                case 2:
+                    // for specific item
+                    String nameSpecific =   JOptionPane.showInputDialog("What is the catalog number ?");
+
+                    if (inventoryController.ItemCountingReport(nameSpecific) == null){
+                        JOptionPane.showInternalMessageDialog(null,"No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+
+                    DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                    JTable jtable3 = new JTable(tableModel3);
+                    jtable3.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                    jtable3.setFont(new Font("Arial", Font.PLAIN,10));
+
+                    Report report3 = inventoryController.ItemCountingReport(nameSpecific);
+                    String reportType3 = report3.getType().toString();
+                    String reportNumber3 = Integer.toString(report3.getReportNum());
+                    String reportDate3 = report3.getReportDate().toString();
+
+                    for (Map.Entry<Item, Integer> entry : report3.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines3[] = reportString.split("\n");
+                    for (String line : lines3) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,columns[0],columns[1]});;
+                    }
+
+                    JScrollPane sp3 = new JScrollPane(jtable3);
+                    jframe.add(sp3);
+                    sp3.setPreferredSize(new Dimension(1000,400));
+                    JOptionPane.showMessageDialog(null,sp3,"Counting Report", JOptionPane.PLAIN_MESSAGE);
+
+                    break;
+                case 3:
+                    // return
+                    JButton backButton = new JButton("Back");
+                    backButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            // Handle the back button click event
+                            // Add your code here to go back to the previous view or screen
+
+                            // For example, you can close the current JFrame
+                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                            frame.dispose();
+                        }
+                    });
+                    break;
+            }
+
+        }
 
 
 
-        } else if (e.getSource() == CountingReportButton) {
+        //provide Defective Report
+        else if (e.getSource() == DefectiveReportButton) {
+            String[] options = {"For all products", "For Category", "For specific product", "Return"};
+            // Create a custom panel with FlowLayout
+            JLabel label = new JLabel();
+            label.setText("Which report to provide ?");
+            JPanel panel = new JPanel(new FlowLayout());
+            panel.add(label);
+
+            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Defective Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (choiceNum == -1) {
+                return;
+            }
+
+            String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Amount"};
+            Report report = null;
+            String reportType;
+            String reportNumber;
+            String reportDate;
+            String reportString = "";
+
+            switch (choiceNum) {
+                case 0:
+                    // for all products
+                    if (inventoryController.FullDefectiveReport() == null){
+                        JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+
+                    DefaultTableModel tableModel = new DefaultTableModel(column,0);
+                    JTable jtable = new JTable(tableModel);
+                    jtable.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                    jtable.setFont(new Font("Arial", Font.PLAIN,10));
+
+                    report = inventoryController.FullDefectiveReport();
+                    reportType = report.getType().toString();
+                    reportNumber = Integer.toString(report.getReportNum());
+                    reportDate = report.getReportDate().toString();
+
+                    for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines[] = reportString.split("\n");
+                    for (String line : lines) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1]});;
+                    }
+
+                    JScrollPane sp = new JScrollPane(jtable);
+                    jframe.add(sp);
+                    sp.setPreferredSize(new Dimension(1000,400));
+                    JOptionPane.showMessageDialog(null,sp,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                    break;
+
+                case 1:
+                    //TODO fix - the reportNumber jump by 2
+
+                    // for category
+                    String nameCategory = JOptionPane.showInputDialog("For which category ?");
+
+                    if (inventoryController.CategoryDefectiveReport(nameCategory) == null){
+                        JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+
+                    DefaultTableModel tableModel2 = new DefaultTableModel(column,0);
+                    JTable jtable2 = new JTable(tableModel2);
+                    jtable2.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                    jtable2.setFont(new Font("Arial", Font.PLAIN,10));
+
+                    Report report2 = inventoryController.CategoryDefectiveReport(nameCategory);
+                    String reportType2 = report2.getType().toString();
+                    String reportNumber2 = Integer.toString(report2.getReportNum());
+                    String reportDate2 = report2.getReportDate().toString();
+
+                    for (Map.Entry<Item, Integer> entry : report2.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines2[] = reportString.split("\n");
+                    for (String line : lines2) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,columns[0],columns[1]});;
+                    }
+
+                    JScrollPane sp2 = new JScrollPane(jtable2);
+                    jframe.add(sp2);
+                    sp2.setPreferredSize(new Dimension(1000,400));
+                    JOptionPane.showMessageDialog(null,sp2,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                    break;
+
+                case 2:
+                    // for specific item
+                    String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
+
+                    if (inventoryController.ItemDefectiveReport(nameSpecific) == null){
+                        JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    }
+
+                    DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                    JTable jtable3 = new JTable(tableModel3);
+                    jtable3.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                    jtable3.setFont(new Font("Arial", Font.PLAIN,10));
+
+                    Report report3 = inventoryController.ItemDefectiveReport(nameSpecific);
+                    String reportType3 = report3.getType().toString();
+                    String reportNumber3 = Integer.toString(report3.getReportNum());
+                    String reportDate3 = report3.getReportDate().toString();
+
+                    for (Map.Entry<Item, Integer> entry : report3.getReportItems().entrySet()) {
+                        Item item = entry.getKey();
+                        int amount = entry.getValue();
+                        reportString += item.getCatalogNum() + ":" + amount + "\n";
+                    }
+
+                    String lines3[] = reportString.split("\n");
+                    for (String line : lines3) {
+                        // Split the line into columns
+                        String[] columns = line.split(":");
+
+                        // Add the columns as a new row to the table model
+                        tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,columns[0],columns[1]});;
+                    }
+
+                    JScrollPane sp3 = new JScrollPane(jtable3);
+                    jframe.add(sp3);
+                    sp3.setPreferredSize(new Dimension(1000,400));
+                    JOptionPane.showMessageDialog(null,sp3,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                    break;
+
+                case 3:
+                    // return
+                    JButton backButton = new JButton("Back");
+                    backButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            // Handle the back button click event
+                            // Add your code here to go back to the previous view or screen
+
+                            // For example, you can close the current JFrame
+                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                            frame.dispose();
+                        }
+                    });
+                    break;
+
+            }
+        }
 
 
+        //update discount for products
+        else if (e.getSource() == UpdateDiscountButton) {
 
-        } else if (e.getSource() == DefectiveReportButton) {
+        }
 
 
-        } else if (e.getSource() == UpdateDiscountButton) {
+        //provide price history report
+        else if (e.getSource() == PriceHistoryReportButton) {
+            String catalogNumber = JOptionPane.showInputDialog("What is the catalog number ?");
 
-        } else if (  e.getSource() == PriceHistoryReportButton) {
+            if (inventoryController.priceHistoryReport(catalogNumber) == null)
+            {
+                JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
 
-        } else if (e.getSource() == InsertDefectiveButton) {
+                String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Buy Price", "Sell Price"};
+                Report report = null;
+                String reportType;
+                String reportNumber;
+                String reportDate;
+                String reportString = "";
+                DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                JTable jtable = new JTable(tableModel3);
+                jtable.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                jtable.setFont(new Font("Arial", Font.PLAIN,10));
 
-        } else if (e.getSource() == PrintFullInventoryButton){
+
+                report = inventoryController.priceHistoryReport(catalogNumber);
+                reportType = report.getType().toString();
+                reportNumber = Integer.toString(report.getReportNum());
+                reportDate = report.getReportDate().toString();
+                reportString = report.printPriceHistory();
+
+                for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
+                    Item item = entry.getKey();
+                    int amount = entry.getValue();
+                    reportString += item.getCatalogNum() + ":" + amount + "\n";
+                }
+
+                String lines3[] = reportString.split("\n");
+                for (String line : lines3) {
+                    // Split the line into columns
+                    String[] columns = line.split(":");
+
+                    // Add the columns as a new row to the table model
+                    tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1],columns[2]});
+                }
+
+                JScrollPane sp = new JScrollPane(jtable);
+                jframe.add(sp);
+                sp.setPreferredSize(new Dimension(1000,400));
+                JOptionPane.showMessageDialog(null,sp,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+
+            }
+
+
+        }
+
+
+        //move defective product to storage and tag it as "defective"
+        else if (e.getSource() == InsertDefectiveButton) {
+            boolean validInput = false;
+            String defectedSerialNumberInput = null;
+            while (!validInput) {
+                defectedSerialNumberInput = JOptionPane.showInputDialog("What is the serial number for the item to be set as defected ?");
+
+                // Check if the input consists only of numeric characters
+                if (defectedSerialNumberInput.matches("\\d+")) {
+                    validInput = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                }
+            }
+            int defectedSerialNumber = Integer.parseInt(defectedSerialNumberInput);
+            inventoryController.moveSpecificItemToDefectiveMapper(defectedSerialNumber);
+            JOptionPane.showInternalMessageDialog(null,"Item numbered " + defectedSerialNumber + " has been set as defected and moved into the warehouse storage", "Alert", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
+        //print all the products in the inventory
+        else if (e.getSource() == PrintFullInventoryButton){
+            String column[] = {"Catalog Number", "Item ID", "Expiration Date", "isDefected", "location", "Buy Price", "Sell Price", "Minimum Qauntity"};
+
+            String catalogNumber;
+            Integer serialNumber;
+            String expriryDate;
+            String isDefected;
+            String location;
+            double buyPrice;
+            double sellPrice;
+            int minimumQantity;
+
+            String reportString = "";
+            DefaultTableModel tableModel = new DefaultTableModel(column,0);
+            JTable jtable = new JTable(tableModel);
+            jtable.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+            jtable.setFont(new Font("Arial", Font.PLAIN,10));
+
+
+            for(Item item: inventoryController.getItemMapper().findAll())
+            {
+
+                for(specificItem specificItem: inventoryController.getSpecificItemMapper().findByCatalogNum(item.getCatalogNum()))
+                {
+                    catalogNumber = specificItem.getCatalogNum();
+                    serialNumber = specificItem.getSerialNumber();
+                    expriryDate = String.valueOf(specificItem.getDate());
+                    isDefected = String.valueOf(specificItem.isDefected());
+                    location = String.valueOf(specificItem.getLocation());
+                    buyPrice = 20;
+                    sellPrice = 30;
+                    minimumQantity = item.getMinQuantity();
+//                    String lines[] = reportString.split("\n");
+
+                    // Add all the variables as a new row to the table model
+                    tableModel.addRow(new Object[]{catalogNumber,serialNumber,expriryDate,isDefected,location,buyPrice,sellPrice,minimumQantity });
+
+                }
+            }
+
+            JScrollPane sp = new JScrollPane(jtable);
+            jframe.add(sp);
+            sp.setPreferredSize(new Dimension(1000,400));
+            JOptionPane.showMessageDialog(null,sp,"Inventory Products", JOptionPane.PLAIN_MESSAGE);
 
         }
 

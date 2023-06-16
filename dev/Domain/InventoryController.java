@@ -259,11 +259,13 @@ public class InventoryController {
 
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
-                specificAmount++;
+                if (!specificItem.getisDefected())
+                    specificAmount++;
             }
             if (specificAmount < item.getMinQuantity()){
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
                 IsEmpty = false;
+                specificAmount = 0;
             }
         }
         if (IsEmpty)
@@ -287,11 +289,13 @@ public class InventoryController {
 
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
-                specificAmount++;
+                if (!specificItem.getisDefected())
+                    specificAmount++;
             }
             if (specificAmount < item.getMinQuantity()){
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
                 IsEmpty = false;
+                specificAmount = 0;
             }
         }
         if (IsEmpty)
@@ -315,11 +319,13 @@ public class InventoryController {
 
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
-                specificAmount++;
+                if (!specificItem.getisDefected())
+                    specificAmount++;
             }
             if (specificAmount < item.getMinQuantity()){
                 currentReport.addReportItem(item, item.getMinQuantity() - specificAmount);
                 IsEmpty = false;
+                specificAmount = 0;
             }
         }
         if (IsEmpty)
@@ -332,15 +338,18 @@ public class InventoryController {
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.PriceHistory, currentDate);
         String reportInformationString = "";
-
+        boolean IsEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
             reportInformationString += item.getPriceHistory().toString();
+            IsEmpty = false;
         }
         currentReport.setReportData(reportInformationString);
+        if (IsEmpty)
+            return null;
         return currentReport;
     }
 
@@ -384,15 +393,19 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
+        boolean isEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             int specificAmount = 0;
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
+                isEmpty = false;
                 specificAmount++;
             }
             currentReport.addReportItem(item, specificAmount);
         }
+        if (isEmpty)
+            return null;
         return currentReport;
     }
 
@@ -400,11 +413,13 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
+        boolean isEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
+            isEmpty = false;
             int specificAmount = 0;
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
@@ -412,6 +427,8 @@ public class InventoryController {
             }
             currentReport.addReportItem(item, specificAmount);
         }
+        if (isEmpty)
+            return null;
         return currentReport;
     }
 
@@ -421,11 +438,13 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Inventory, currentDate);
+        boolean isEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(catalogNumber)){
                 continue;
             }
+            isEmpty = false;
             int specificAmount = 0;
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
@@ -433,6 +452,8 @@ public class InventoryController {
             }
             currentReport.addReportItem(item, specificAmount);
         }
+        if (isEmpty)
+            return null;
         return currentReport;
     }
 
@@ -441,12 +462,14 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Defective, currentDate);
+        boolean isEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             int defectiveAmount = 0;
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
                 if (specificItem.getisDefected()){
+                    isEmpty = false;
                     defectiveAmount++;
                 }
             }
@@ -458,19 +481,22 @@ public class InventoryController {
         } catch (SQLException var8) {
             throw new RuntimeException(var8);
         }
+        if (isEmpty)
+            return null;
         return currentReport;
     }
 
     public Report CategoryDefectiveReport(String categoryName) {
         //Set variables for method
-        //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Defective, currentDate);
+        boolean isEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogName().equals(categoryName)){
                 continue;
             }
+            isEmpty = false;
             int defectiveAmount = 0;
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
@@ -480,6 +506,8 @@ public class InventoryController {
             }
             currentReport.addReportItem(item, defectiveAmount);
         }
+        if (isEmpty)
+            return null;
         return currentReport;
     }
 
@@ -489,11 +517,13 @@ public class InventoryController {
         //Set variables for method
         Date currentDate = new Date();
         Report currentReport = new Report(reportType.Defective, currentDate);
+        boolean isEmpty = true;
         for(Item item: itemMapper.findAll())
         {
             if (!item.getCatalogNum().equals(CatalogNum)){
                 continue;
             }
+            isEmpty = false;
             int defectiveAmount = 0;
             for(specificItem specificItem: specificItemMapper.findByCatalogNum(item.getCatalogNum()))
             {
@@ -503,6 +533,8 @@ public class InventoryController {
             }
             currentReport.addReportItem(item, defectiveAmount);
         }
+        if (isEmpty)
+            return null;
         return currentReport;
     }
 
@@ -678,4 +710,11 @@ public class InventoryController {
         }
     }
 
+    public ItemMapper getItemMapper() {
+        return itemMapper;
+    }
+
+    public DataAccesObject.specificItemMapper getSpecificItemMapper() {
+        return specificItemMapper;
+    }
 }

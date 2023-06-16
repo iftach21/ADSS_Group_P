@@ -6,6 +6,7 @@ import Interface.Employee.WorkerInterface;
 import Interface.Transfer.TransferManagerInterface;
 import Interface.UI.UIEmployee;
 import Interface.UI.UIHRManager;
+import Interface.UI.UIStoreManager;
 import Interface.UI.UITransferManager;
 
 import java.net.StandardSocketOptions;
@@ -138,7 +139,7 @@ public class Main {
         UITransferManager ui = new UITransferManager();
     }
     private static void GUIStoreManager() throws Exception {
-        //todo: complete later
+        UIStoreManager storeManager= new UIStoreManager();
     }
 
 

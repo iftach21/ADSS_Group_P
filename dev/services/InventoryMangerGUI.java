@@ -26,6 +26,13 @@ public class InventoryMangerGUI implements ActionListener {
     private  JButton PriceHistoryReportButton;
     private  JButton InsertDefectiveButton;
     private  JButton PrintFullInventoryButton;
+
+    private JButton addPeriodOrderButton;
+
+    private JButton UpdatePeriodOrder;
+    private  JButton PrintAllPeriodOrder;
+
+    private  JButton PrintAllShortageOrder;
     private  JPanel buttonPanel;
     private InventoryController inventoryController;
 

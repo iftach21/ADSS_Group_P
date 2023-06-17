@@ -86,6 +86,29 @@ public class Period_Order extends Order {
     }
 
 
+    public String orderString() {
+        String details = "Order number: " + this.getOrderNum()+
+                "\nStore number: " + this.getStore_number() +
+                "\nCost of the order: " + this.getCost() +
+                "\nDate: " + this.currentDate +
+                "\nSupplier name: " + this.getSupplier().getName() +
+                "\n cycle number of days :" +this.days_to_cycle +
+                "\n day left until new order emarge:" + this.day_left +
+                "\nItems:\n";
+
+        for (Item item : this.getItemList().keySet()) {
+            details += "-------------------------------------------------------------\n";
+            details += item.toString() + "\n";
+            details += "Base price per unit (no discounts): " + this.getSupplier().getItems().get(item).getSecond() + "\n";
+            details += "Amount: " + this.getItemList().get(item).getFirst() + "\n";
+            details += "Price: " + this.getItemList().get(item).getSecond() + "\n";
+            details += "-------------------------------------------------------------\n";
+        }
+
+        return details;
+    }
+
+
 
 
 }

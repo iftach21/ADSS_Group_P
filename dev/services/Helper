@@ -51,3 +51,34 @@ jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
                           JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
                           frame.dispose();
                       }
+
+
+    // private void ad_table(JTable jTable){
+              TableColumnModel columnModel = jTable.getColumnModel();
+
+
+              for (int columnIndex = 0; columnIndex < columnModel.getColumnCount(); columnIndex++) {
+                  TableColumn column = columnModel.getColumn(columnIndex);
+                  int preferredWidth = column.getPreferredWidth();
+                  int maxWidth = column.getMaxWidth();
+
+                  // Get the renderer for the column
+                  TableCellRenderer headerRenderer = column.getHeaderRenderer();
+                  if (headerRenderer == null) {
+                      headerRenderer = jTable.getTableHeader().getDefaultRenderer();
+                  }
+                  Component headerComponent = headerRenderer.getTableCellRendererComponent(
+                          jTable, column.getHeaderValue(), false, false, -1, columnIndex);
+
+                  // Determine the maximum width needed for the column
+                  int headerWidth = headerComponent.getPreferredSize().width;
+                  int cellWidth = jTable.getCellRenderer(0, columnIndex)
+                          .getTableCellRendererComponent(jTable,
+                                  jTable.getValueAt(0, columnIndex), false, false, 0, columnIndex)
+                          .getPreferredSize().width;
+                  int maxWidthNeeded = Math.max(headerWidth, cellWidth) + 10; // Add some padding
+
+                  // Adjust the preferred width and maximum width of the column
+                  column.setPreferredWidth(Math.min(maxWidthNeeded, preferredWidth));
+                  column.setMaxWidth(maxWidth > 0 ? Math.min(maxWidthNeeded, maxWidth) : maxWidthNeeded);
+              }

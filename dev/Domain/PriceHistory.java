@@ -2,6 +2,7 @@ package Domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class PriceHistory {
     private double buyPrice;
@@ -11,7 +12,7 @@ public class PriceHistory {
     public PriceHistory(double buyPrice, double sellPrice, Date currentDate) {
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
-        this.currentDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        this.currentDate  = new SimpleDateFormat("dd/MM/yyyy", new Locale("en"));
         this.currentDate.setLenient(false);
         this.currentDate.format(currentDate);
     }

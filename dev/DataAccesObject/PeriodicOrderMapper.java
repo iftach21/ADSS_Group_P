@@ -315,4 +315,25 @@ public class PeriodicOrderMapper {
             }
         }
     }
+
+
+    public String getTableString() {
+        List<Period_Order> orders = findAll();
+        StringBuilder tableString = new StringBuilder();
+
+        // Append table headers
+
+
+        // Append order data
+        for (Period_Order order : orders) {
+            tableString.append(order.getOrderNum()).append("\t")
+                    .append(order.getSupplier().getSupplierID()).append("\t")
+                    .append(order.getCost()).append("\t")
+                    .append(order.getStore_number()).append("\t")
+                    .append(order.getDays_to_cycle()).append("\t")
+                    .append(order.getDay_left()).append("\n");
+        }
+
+        return tableString.toString();
+    }
 }

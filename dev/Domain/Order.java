@@ -136,6 +136,25 @@ public class Order {
             System.out.println("-------------------------------------------------------------");
         }
     }
+    public String orderString() {
+        String details = "Order number: " + this.orderNum +
+                "\nStore number: " + this. Store_number +
+                "\nCost of the order: " + this.getCost() +
+                "\nDate: " + this.currentDate +
+                "\nSupplier name: " + this.supplier.getName() +
+                "\nItems:\n";
+
+        for (Item item : this.itemList.keySet()) {
+            details += "-------------------------------------------------------------\n";
+            details += item.toString() + "\n";
+            details += "Base price per unit (no discounts): " + this.supplier.getItems().get(item).getSecond() + "\n";
+            details += "Amount: " + this.itemList.get(item).getFirst() + "\n";
+            details += "Price: " + this.itemList.get(item).getSecond() + "\n";
+            details += "-------------------------------------------------------------\n";
+        }
+
+        return details;
+    }
 
     //This method sets the static variable number to the provided sum plus 1.
     public void set_number(int sum){

@@ -427,6 +427,10 @@ public class OrderManger {
             }
         }
     }
+    public Order get_order(String num){
+        return orderMapper.findByOrderNum(num);
+
+    }
 
 }
 

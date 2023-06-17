@@ -141,7 +141,7 @@
       <workItem from="1686477726441" duration="6039000" />
       <workItem from="1686483802933" duration="10756000" />
       <workItem from="1686723217670" duration="1259000" />
-      <workItem from="1686725663648" duration="75123000" />
+      <workItem from="1686725663648" duration="95461000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -283,7 +283,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686908483716</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL‎-00021" summary="continue InventoryMangerGUI">
+      <created>1686994603974</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL‎-00021" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686994603974</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +375,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/InventoryMangerGUI.java</url>
-          <line>997</line>
+          <line>1477</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

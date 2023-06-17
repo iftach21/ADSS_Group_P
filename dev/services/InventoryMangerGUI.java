@@ -55,7 +55,7 @@ public class InventoryMangerGUI implements ActionListener {
         imagePanel.setBackground(Color.WHITE);
 
         JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("docs/Superli.jpeg"); // Replace with the actual image file path
+        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg"); // Replace with the actual image file path
         Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon = new ImageIcon(image);
         imageLabel.setIcon(scaledImageIcon);
@@ -1586,6 +1586,7 @@ public class InventoryMangerGUI implements ActionListener {
                 String reportNumber;
                 String reportDate;
                 String reportString = "";
+                Item reportItem = null;
                 DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
                 JTable jtable = new JTable(tableModel3);
                 jtable.setRowHeight(20);
@@ -1597,30 +1598,47 @@ public class InventoryMangerGUI implements ActionListener {
                 reportType = report.getType().toString();
                 reportNumber = Integer.toString(report.getReportNum());
                 reportDate = report.getReportDate().toString();
-                reportString = report.printPriceHistory();
+//                reportString = item.getPriceHistory().toString();
 
-                for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
-                    Item item = entry.getKey();
-                    int amount = entry.getValue();
-                    reportString += item.getCatalogNum() + ":" + amount + "\n";
-                }
+                reportItem = inventoryController.findItemByCatalogNum(catalogNumber);
+                double buyPrice = reportItem.getBuyPrice();
+                double sellPrice = reportItem.getSellPrice();
 
-                String lines3[] = reportString.split("\n");
-                for (String line : lines3) {
-                    // Split the line into columns
-                    String[] columns = line.split(":");
 
-                    // Add the columns as a new row to the table model
-                    tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1],columns[2]});
-                }
+//                for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
+//                    Item item = entry.getKey();
+//                    int amount = entry.getValue();
+//                    reportString += item.getPriceHistory().toString();
+//                }
+
+//                String lines3[] = reportString.split("\n");
+//                for (String line : lines3) {
+//                    if (line.contains("Buy price:")){
+//                        int start = line.indexOf("Buy price:") + 11;
+//                        int end = line.indexOf(",", start);
+//                        String buyPriceStr = line.substring(start, end).trim();
+//                        buyPrice = Double.parseDouble(buyPriceStr);
+//                    }
+//                    else if (line.contains("sell price:")){
+//                        int start = line.indexOf("sell price:") + 12;
+//                        int end = line.indexOf(",", start);
+//                        String sellPriceStr = line.substring(start, end).trim();
+//                        sellPrice = Double.parseDouble(sellPriceStr);
+//                    }
+//
+//                    // Split the line into columns
+////                    String[] columns = line.split(":");
+//
+//                    // Add the columns as a new row to the table model
+//                    tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,catalogNumber,buyPrice,sellPrice});
+//                }
+                tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,catalogNumber,buyPrice,sellPrice});
 
                 JScrollPane sp = new JScrollPane(jtable);
                 jframe.add(sp);
                 sp.setPreferredSize(new Dimension(1000,400));
                 JOptionPane.showMessageDialog(null,sp,"Defective Report", JOptionPane.PLAIN_MESSAGE);
-
             }
-
         }
 
 
@@ -1675,8 +1693,8 @@ public class InventoryMangerGUI implements ActionListener {
                     expriryDate = String.valueOf(specificItem.getDate());
                     isDefected = String.valueOf(specificItem.isDefected());
                     location = String.valueOf(specificItem.getLocation());
-                    buyPrice = 20;
-                    sellPrice = 30;
+                    buyPrice = item.getBuyPrice();
+                    sellPrice = item.getSellPrice();
                     minimumQantity = item.getMinQuantity();
 //                    String lines[] = reportString.split("\n");
 

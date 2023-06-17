@@ -9,24 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="continue InventoryMangerGUI">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="InventoryMangerGUI almost done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Manger.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,7 +292,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686994603974</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL‎-00022" summary="InventoryMangerGUI almost done">
+      <created>1687024215413</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL‎-00022" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687024215413</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +322,8 @@
     <MESSAGE value="test update" />
     <MESSAGE value="start InventoryMangerGUI" />
     <MESSAGE value="continue InventoryMangerGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="continue InventoryMangerGUI" />
+    <MESSAGE value="InventoryMangerGUI almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="InventoryMangerGUI almost done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -385,11 +382,6 @@
           <url>file://$PROJECT_DIR$/dev/Interface/Main.java</url>
           <line>14</line>
           <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/services/InventoryMangerGUI.java</url>
-          <line>1624</line>
-          <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>

@@ -43,6 +43,17 @@ public class Manger implements ActionListener {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle("Supplier Manager");
 
+
+
+
+        JLabel label = new JLabel("Manager Menu");
+        label.setFont(new Font("Arial", Font.BOLD, 24)); // Customize the font and size as desired
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setForeground(Color.WHITE);
+        label.setOpaque(true);
+        label.setBackground(Color.BLACK);
+        jframe.add(label, BorderLayout.NORTH);
+
         buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         buttonPanel.setBackground(Color.WHITE);
@@ -75,6 +86,7 @@ public class Manger implements ActionListener {
         buttonPanel.add(print_all_Period_Orders);
         buttonPanel.add(getPeriod_Order_by_id);
         buttonPanel.add(get_Shortage_order_by_id);
+        buttonPanel.setBackground(new Color(135, 0, 0));
 
         jframe.add(buttonPanel);
         jframe.setVisible(true);

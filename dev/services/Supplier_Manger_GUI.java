@@ -40,10 +40,20 @@ public class Supplier_Manger_GUI   implements ActionListener {
         jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle("Supplier Manager");
+        JLabel label = new JLabel("Supplier  Menu");
+        label.setFont(new Font("Arial", Font.BOLD, 24)); // Customize the font and size as desired
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setForeground(Color.WHITE);
+        label.setOpaque(true);
+        label.setBackground(Color.BLACK);
+        jframe.add(label, BorderLayout.NORTH);
+
+
+
 
         buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBackground(new Color(135, 0, 0));
 
         addnewSupplierButton = createStyledButton("Add new Supplier");
         removeSupplierButton = createStyledButton("Remove Supplier");

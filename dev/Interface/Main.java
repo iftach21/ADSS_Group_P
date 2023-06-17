@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Supplier_Manger_GUI supplierMangerGui =new Supplier_Manger_GUI();
+       Supplier_Manger_GUI supplierMangerGui =new Supplier_Manger_GUI();
         InventoryMangerGUI inventoryMangerGUI = new InventoryMangerGUI();
-//        Manger manger = new Manger();
+        Manger manger = new Manger();
 
 
 

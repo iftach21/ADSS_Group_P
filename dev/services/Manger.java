@@ -3,6 +3,7 @@ package services;
 import DataAccesObject.FixedDaySupplierMapper;
 import DataAccesObject.NonDeliveringSupplierMapper;
 import DataAccesObject.NonFixedDaySupplierMapper;
+import DataAccesObject.PeriodicOrderMapper;
 import Domain.OrderManger;
 import Domain.Supplier_Manger;
 
@@ -21,11 +22,11 @@ public class Manger implements ActionListener {
 
     private  JButton print_all_suppliers;
     private  JButton print_supplierby_id;
-    private  JButton Get_Shortage_order_by_id;
+    private  JButton get_Shortage_order_by_id;
     private  JButton getPeriod_Order_by_id;
 
-    private  JButton Print_all_orders_shortage;
-    private  JButton Print_all_Period_Orders;
+    private  JButton print_all_orders_shortage;
+    private  JButton print_all_Period_Orders;
 
 
     private  JPanel buttonPanel;
@@ -49,16 +50,37 @@ public class Manger implements ActionListener {
         print_all_suppliers = createStyledButton("Present All Suppliers");
         print_supplierby_id = createStyledButton("Get Supplier by ID");
 
-        print_supplierby_id = createStyledButton("Get Supplier by ID");
+
+
+        print_all_orders_shortage  = createStyledButton("Get all  Order's");
+        print_all_Period_Orders = createStyledButton("Period order's");
+
+        getPeriod_Order_by_id =createStyledButton("Get Period order by id's");
+        get_Shortage_order_by_id =createStyledButton("Get Order by id's");
+
+
+
+
+
+
 
         // Register the ActionListener for each button
 
         print_all_suppliers.addActionListener(this);
         print_supplierby_id.addActionListener(this);
+        print_all_orders_shortage.addActionListener(this);
+        print_all_Period_Orders.addActionListener(this);
+        getPeriod_Order_by_id.addActionListener(this);
+        get_Shortage_order_by_id.addActionListener(this);
+
 
 
         buttonPanel.add(print_all_suppliers);
         buttonPanel.add(print_supplierby_id);
+        buttonPanel.add( print_all_orders_shortage);
+        buttonPanel.add( print_all_Period_Orders);
+        buttonPanel.add(getPeriod_Order_by_id);
+        buttonPanel.add(get_Shortage_order_by_id);
 
         jframe.add(buttonPanel);
         jframe.setVisible(true);
@@ -168,6 +190,75 @@ public class Manger implements ActionListener {
                 }
 
             }
+        } else if (e.getSource() ==print_all_orders_shortage) {
+            PeriodicOrderMapper pb =new PeriodicOrderMapper();
+
+
+
+
+
+            // Create an instance of FixedDaySupplierMapper
+
+
+            // Get the data for the jTable
+            String data = pb.getTableString();
+
+
+
+            // Create a DefaultTableModel with empty rows and column headers
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number", "Supplier", "Cost", "Days to Cycle", "Days Left until append new order"});
+
+
+
+            // Split the data into lines
+            String[] lines = data.split("\n");
+
+
+            // Iterate over the lines and add each row to the table model
+            for (String line : lines) {
+                // Split the line into columns
+                String[] columns = line.split(", ");
+
+                // Add the columns as a new row to the table model
+                tableModel.addRow(columns);
+            }
+
+
+            // Create a JTable using the table model
+            JTable jTable = new JTable(tableModel);
+
+
+
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Handle the back button click event
+                    // Add your code here to go back to the previous view or screen
+
+                    // For example, you can close the current JFrame
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                    frame.dispose();
+                }
+
+            });
+            // Create a JPanel to hold the JTable and the back button
+            JPanel panel = new JPanel();
+            panel.add(new JScrollPane(jTable));
+
+            panel.add(backButton);
+
+            // Display the JPanel in a JFrame
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(panel);
+            frame.pack();
+
+            frame.setVisible(true);
+
+
+
+
         }
     }
 

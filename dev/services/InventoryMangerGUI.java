@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -299,72 +300,695 @@ public class InventoryMangerGUI implements ActionListener {
 
 
         }
+
+
+        // update the inventory - creation and deletion
         else if (e.getSource() == UpdateInventoryButton) {
             //Report issuance options
-//            String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add a new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
-//            JLabel label = new JLabel();
-//            label.setText("which action you would like to do ?");
-//            JPanel panel = new JPanel(new FlowLayout());
-//            panel.add(label);
-//            panel.setPreferredSize(new Dimension(300,80));
-//            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
-            String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add a new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
-
+            String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
             JLabel label = new JLabel("Which action would you like to do?");
-            JPanel panel = new JPanel(new GridLayout(2, options.length / 2));
+            JPanel panel = new JPanel(new GridLayout(3, 3,10,10));
+            panel.setPreferredSize(new Dimension(600,300));
+
+            final boolean[] validInput = {false};
 
             for (String option : options) {
                 JButton button = new JButton(option);
+                button.setFocusable(false);
+                button.setPreferredSize(new Dimension(80,40));
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Perform the specific action based on the selected option
+                        String selectedOption = option;
+
+
+                        // create new category
+                        if (selectedOption.equals("Create new category")) {
+                            String categoryInput = null;
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("How would you like to name the new category ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    categoryInput = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(categoryInput==null)
+                                return;
+
+                            inventoryController.addCategoryToMapper(categoryInput);
+                            JOptionPane.showInternalMessageDialog(null,"Category added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+
+
+                        // create new subcategory
+                        else if (selectedOption.equals("Create new subcategory")) {
+                            String subCategoryInput = null;
+                            String categoryInput = null;
+                            validInput[0] = false;
+
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("How would you like to name the new sub-category ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    subCategoryInput = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(subCategoryInput == null)
+                                return;
+
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("Which category will store this sub-category ?");
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    categoryInput = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(categoryInput==null)
+                                return;
+                            subCategory subCategory = new subCategory(subCategoryInput);
+                            inventoryController.addSubCatToMapper(categoryInput,subCategory);
+                            JOptionPane.showInternalMessageDialog(null,"Sub-Category added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+
+
+                        // create new general Item
+                        else if (selectedOption.equals("Create new general Item")) {
+                            String itemName = null;
+                            String catalogNumber = null;
+                            String categoryName = null;
+                            String subCategoryName = null;
+                            double itemWeight = 0;
+                            String itemManufacturer = null;
+                            TempLevel itemTempeture = null;
+                            int itemMinimumQantity = 0;
+                            double itemBuyPrice= 0;
+                            double itemSellPrice = 0;
+                            Item currentItem = null;
+                            validInput[0] = false;
+
+
+                            // item name
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("How would you like to name the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    itemName = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(itemName == null)
+                                return;
+
+
+                            // catelog number
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the catalog number for the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("\\d+")) {
+                                    catalogNumber = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(catalogNumber==null)
+                                return;
+
+
+                            // category name
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("Which category will store the new item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    categoryName = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(categoryName == null)
+                                return;
+
+
+                            // sub-category name
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("Which sub-category will store the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    subCategoryName = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(subCategoryName == null)
+                                return;
+
+
+
+                            // item weight
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the weight for the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters
+                                if (input.matches("^\\s*\\d+(\\.\\d+)?\\s*$")) {
+                                    itemWeight = Double.parseDouble(input.trim());
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(itemWeight == 0)
+                                return;
+
+
+
+                            // item manufacturer
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("Who is the manufacturer of the general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    itemManufacturer = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(itemManufacturer == null)
+                                return;
+
+
+                            // item temperature
+                            String[] options = {"Regular", "Cold", "Frozen"};
+                            // Create a custom panel with FlowLayout
+                            JLabel label = new JLabel();
+                            label.setText("What is the recommended temperature for the product ?");
+                            JPanel panel = new JPanel(new FlowLayout());
+                            panel.add(label);
+
+                            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Temperature", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                            if (choiceNum == -1) {
+                                return;
+                            }
+                            switch (choiceNum) {
+                                case 0:
+                                    // regular
+                                    itemTempeture = inventoryController.returnTempLevel("A");
+                                    break;
+
+                                case 1:
+                                    // cold
+                                    itemTempeture = inventoryController.returnTempLevel("B");
+                                    break;
+
+                                case 2:
+                                    // frozen
+                                    itemTempeture = inventoryController.returnTempLevel("C");
+                                    break;
+                            }
+
+                            // item creation
+                            currentItem = new Item(itemName,catalogNumber,itemWeight,categoryName,itemTempeture,itemManufacturer);
+                            if (currentItem == null)
+                                return;
+
+
+                            // minimum quantity
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the minimum quantity of the general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters
+                                if (input.matches("\\d+")) {
+                                    itemMinimumQantity = Integer.parseInt(input);
+                                    currentItem.setMinQuantity(itemMinimumQantity);
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(itemMinimumQantity == 0)
+                                return;
+
+
+
+                            // price
+                            // buying price
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("what is the buying price of the item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters
+                                if (input.matches("^\\s*\\d+(\\.\\d+)?\\s*$")) {
+                                    itemBuyPrice = Double.parseDouble(input.trim());
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(itemBuyPrice == 0)
+                                return;
+
+                            // selling price
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("what is the selling price of the item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters
+                                if (input.matches("^\\s*\\d+(\\.\\d+)?\\s*$")) {
+                                    itemSellPrice = Double.parseDouble(input.trim());
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(itemSellPrice == 0)
+                                return;
+
+                            // add the prices
+                            currentItem.addNewPrice(itemBuyPrice,itemSellPrice);
+                            currentItem.setCatalogName(categoryName);
+
+                            // add the new item
+                            inventoryController.insertNewItemToMapper(currentItem);
+                            JOptionPane.showInternalMessageDialog(null,"New general item added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+
+
+                        // add new specific item
+                        else if (selectedOption.equals("Add new specific item")) {
+                            String catalogNumber = null;
+                            Item currentItem = null;
+                            specificItem specificItemAddition = null;
+                            Date currentDate = new Date();
+                            currentDate = null;
+                            validInput[0] = false;
+
+
+                            // catelog number
+                            validInput[0] = false;
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the catalog number of the general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of alphabetic characters
+                                if (input.matches("\\d+")) {
+                                    catalogNumber = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(catalogNumber == null)
+                                return;
+
+                            currentItem = inventoryController.findItemByCatalogNum(catalogNumber);
+
+
+                            // has expiry date
+                            int expiryInput = JOptionPane.showConfirmDialog(null,"Does the product have an expiration date", "Expiration Date", JOptionPane.YES_NO_OPTION);
+                            if (expiryInput == -1)
+                                return;
+
+                            // if the product have expiration date
+                            if (expiryInput == 0)
+                            {
+                                String yearInput = JOptionPane.showInputDialog("What is the expiration year ?");
+                                int expiryYear = Integer.parseInt(yearInput);
+                                String monthInput = JOptionPane.showInputDialog("What is the expiration month ?");
+                                int expiryMonth = Integer.parseInt(monthInput);
+                                String dayInput = JOptionPane.showInputDialog("What is the expiration day ?");
+                                int expiryDay = Integer.parseInt(dayInput);
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(Calendar.YEAR,expiryYear);
+                                calendar.set(Calendar.MONTH,expiryMonth - 1);
+                                calendar.set(Calendar.DAY_OF_MONTH,expiryDay);
+                                currentDate = calendar.getTime();
+
+                            }
+
+                            // create new specific item and then add it to the inventory
+                            specificItemAddition = new specificItem(currentDate,false,Location.Storage,currentItem);
+                            inventoryController.addSpecificItem(currentItem, specificItemAddition);
+                            inventoryController.insertNewSpecificToMapper(specificItemAddition);
+                            JOptionPane.showInternalMessageDialog(null,"The item has been added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+
+
+
+                        // delete category
+                        else if (selectedOption.equals("Delete category")) {
+
+                            String categoryName = null;
+                            validInput[0] = false;
+
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("Which category would you like to delete ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters
+                                if (input.matches("[a-zA-Z\\s]+")) {
+                                    categoryName = input;
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(categoryName == null)
+                                return;
+
+                            inventoryController.removeCategoryFromMapper(categoryName);
+                            JOptionPane.showInternalMessageDialog(null,"The category has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+
+
+                        // delete general item
+                        else if (selectedOption.equals("Delete general item")) {
+                            String catalogNumber = null;
+                            Item tempItem = null;
+                            validInput[0] = false;
+
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the Catalog Number of the general item you wish to remove ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters and if exist
+                                if (input.matches("\\d+")) {
+                                    catalogNumber = input;
+                                    tempItem = inventoryController.findItemByCatalogNum(input);
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
+                                }
+                            }
+                            if(catalogNumber == null)
+                                return;
+
+                            if (tempItem == null) {
+                                JOptionPane.showMessageDialog(null, "Could not find such an item");
+                                return;
+                            }
+                            else{
+                                inventoryController.deleteItemFromMapper(tempItem);
+                                JOptionPane.showInternalMessageDialog(null,"Item: " + catalogNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+
+
+
+                        // delete specific item
+                        else if (selectedOption.equals("Delete specific item")) {
+                            int specificSerialNumber = -1;
+                            specificItem tempItem = null;
+                            validInput[0] = false;
+
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the serial number of the specific item you wish to remove ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters and if exist
+                                if (input.matches("\\d+")) {
+                                    specificSerialNumber = Integer.parseInt(input);
+
+                                    //TODO fix the method
+//                                    tempItem = inventoryController.findSpecificItemBySerialNumber(specificSerialNumber);
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(specificSerialNumber == -1)
+                                return;
+
+
+                            // TODO keep it - will work when the method will work
+//                            if (tempItem == null) {
+//                                JOptionPane.showMessageDialog(null, "Could not find such an item");
+//                                return;
+//                            }
+//                            else{
+//                                inventoryController.deleteSpecificFromMapper(tempItem);
+//                                JOptionPane.showInternalMessageDialog(null,"Item" + specificSerialNumber + "has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+//
+//                            }
+                        }
+
+
+                        // change item location - from the storage to the store and from the store to storage
+                        else if (selectedOption.equals("Move a specific item")) {
+                            int specificSerialNumber = 0;
+                            specificItem tempItem;
+                            validInput[0] = false;
+
+                            while (!validInput[0]) {
+                                String input = JOptionPane.showInputDialog("What is the serial number of the specific item you wish to remove ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
+                                // Check if the input consists only of numeric characters and if exist
+                                if (input.matches("\\d+")) {
+                                    specificSerialNumber = Integer.parseInt(input);
+
+                                    // TODO fix the method
+//                                    tempItem = inventoryController.findSpecificItemBySerialNumber(specificSerialNumber);
+                                    validInput[0] = true;
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
+                                }
+                            }
+                            if(specificSerialNumber == 0)
+                                return;
+
+                            inventoryController.moveSpecificItemMapper(specificSerialNumber);
+                            JOptionPane.showInternalMessageDialog(null,"Item: " + specificSerialNumber + " has been moved to the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+
+                            // TODO keep it - will work when the method will work
+//                            if (tempItem == null) {
+//                                JOptionPane.showMessageDialog(null, "Could not find such an item");
+//                                return;
+//                            }
+//                            else{
+//                                inventoryController.moveSpecificItemMapper(specificSerialNumber);
+//                                JOptionPane.showInternalMessageDialog(null,"Item" + specificSerialNumber + "has been moved to the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+
+//                            }
+
+                        }
+
+                        // return to the main page
+                        else if (selectedOption.equals("Return")) {
+
+                        }
+
+                        // Close the dialog box after performing the action
+                        Window window = SwingUtilities.getWindowAncestor(button);
+                        if (window instanceof JDialog) {
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                    }
+                });
                 panel.add(button);
             }
-
-            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
-
-
-            switch (choiceNum) {
-                case 0:
-                    // create new category
-                    break;
-                case 1:
-                    // Create new subcategory
-                    break;
-                case 2:
-                    // Create new general Item
-                    break;
-                case 3:
-                    // Add a new specific item
-                    break;
-                case 4:
-                    // Delete category
-                    break;
-                case 5:
-                    // Delete general item
-                    break;
-                case 6:
-                    // Delete specific item
-                    break;
-                case 7:
-                    // Move a specific item
-                    break;
-                case 8:
-                    // return
-                    JButton backButton = new JButton("Back");
-                    backButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            // Handle the back button click event
-                            // Add your code here to go back to the previous view or screen
-
-                            // For example, you can close the current JFrame
-                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
-                            frame.dispose();
-                        }
-                    });
-                    break;
-            }
-
+            JOptionPane.showOptionDialog(null, panel, "Update Inventory", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
         }
+
+
+
         //TODO - fix the amount, now is always 0
         //provide counting report
         else if (e.getSource() == CountingReportButton) {
@@ -997,7 +1621,6 @@ public class InventoryMangerGUI implements ActionListener {
 
             }
 
-
         }
 
 
@@ -1082,29 +1705,6 @@ public class InventoryMangerGUI implements ActionListener {
         }
     }
 
-    /* //showConfirmDialog - ask if are you sure
-    import javax.swing.*;
-    import java.awt.event.*;
-    public class OptionPaneExample extends WindowAdapter{
-    JFrame f;
-    OptionPaneExample(){
-        f=new JFrame();
-        f.addWindowListener(this);
-        f.setSize(300, 300);
-        f.setLayout(null);
-        f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        f.setVisible(true);
-    }
-    public void windowClosing(WindowEvent e) {
-        int a=JOptionPane.showConfirmDialog(f,"Are you sure?");
-    if(a==JOptionPane.YES_OPTION){
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    }
-    public static void main(String[] args) {
-        new  OptionPaneExample();
-    }
-}  */
 
 }
 

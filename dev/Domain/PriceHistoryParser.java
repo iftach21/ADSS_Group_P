@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PriceHistoryParser {
     public List<PriceHistory> parse(String input) {
@@ -24,7 +25,7 @@ public class PriceHistoryParser {
             String dateString = (String) getValueFromEntry(entries[i].substring(0,temp.length()-1), "updated in");
             Date currentDate;
             try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("en"));
                 currentDate = dateFormat.parse(dateString);
             } catch (ParseException e) {
                 // Handle parse exception if required

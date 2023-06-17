@@ -11,8 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="continue InventoryMangerGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/services/Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/Manger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Domain/PriceHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/PriceHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Domain/PriceHistoryParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/PriceHistoryParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +156,7 @@
       <workItem from="1686725663648" duration="75123000" />
       <workItem from="1686995411408" duration="705000" />
       <workItem from="1686997901138" duration="3249000" />
-      <workItem from="1687007496771" duration="948000" />
+      <workItem from="1687007496771" duration="3061000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>

@@ -8,10 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TransferDestinationsDAO {
     private Connection conn = DataAccesObjects.Connection.getConnectionToDatabase();
@@ -20,7 +17,7 @@ public class TransferDestinationsDAO {
 
     private TransferDestinationsDAO() throws SQLException
     {
-        destinationsList = new HashMap<>();
+        destinationsList = new LinkedHashMap<>();
     }
 
     public static TransferDestinationsDAO getInstance() throws SQLException {
@@ -32,10 +29,9 @@ public class TransferDestinationsDAO {
 
 
     public Map<Site, Integer> get(int transferId){
-        Map<Site, Integer> destsAndWeightsToReturn = this.getFromCache(transferId);
-        if(destsAndWeightsToReturn != null){return destsAndWeightsToReturn;}
-
-        destsAndWeightsToReturn = new HashMap<>();
+        Map<Site, Integer> destsAndWeightsToReturn1 = this.getFromCache(transferId);
+        if(destsAndWeightsToReturn1 != null){return destsAndWeightsToReturn1;}
+        Map<Site, Integer> destsAndWeightsToReturn = new LinkedHashMap<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {

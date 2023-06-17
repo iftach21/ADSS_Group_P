@@ -136,6 +136,7 @@ public class UITransferManager extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     Map<Integer, List<String>> currTransfers = TransferManagerService.getDetailsOfCurrentTransfers();
+                    currTransfersCheckbox = new JCheckBox[currTransfers.size()];
                     if (currTransfers.size() == 0)
                     {
                         JOptionPane.showMessageDialog(frame, "Sorry, there are no transfers that takes place currently.",
@@ -151,6 +152,7 @@ public class UITransferManager extends JFrame{
                     {
                         List<String> currTransferDetails = currTransfers.get(transferId);
                         currTransfersCheckbox[i] = new JCheckBox("Transfer ID: " + transferId + "   Source Site: " + currTransferDetails.get(0) + "   Last Destination: " + currTransferDetails.get(1));
+                        transfersPanel.add(currTransfersCheckbox[i]);
                         bg.add(currTransfersCheckbox[i]);
                     }
 
@@ -382,8 +384,8 @@ public class UITransferManager extends JFrame{
 
     private void showChangeTimeDialog(int transferId) {
         JFrame dateFrame = new JFrame();
-        dateFrame.setSize(200, 200);
-        dateFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dateFrame.setSize(570, 250);
+        dateFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dateFrame.setLayout(null);
 
         JLabel label = new JLabel("Choose Arriving Date:");
@@ -393,7 +395,7 @@ public class UITransferManager extends JFrame{
         p.add(label);
         p.add(dateSelected);
         p.add(b);
-        p.setBounds(-110, 50, 200, 40);
+        p.setBounds(20, 50, 500, 40);
         dateFrame.add(p);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -413,15 +415,16 @@ public class UITransferManager extends JFrame{
         spinner.setEditor(spinnerEditor);
 
         final JLabel selectTimeLabel=new JLabel();
-        selectTimeLabel.setText("Please choose transfer leaving time: ");
-        selectTimeLabel.setBounds(20, 100, 70, 35);
+        selectTimeLabel.setText("Please choose transfer arriving time: ");
+        selectTimeLabel.setBounds(50, 100, 250, 35);
         dateFrame.add(selectTimeLabel);
 
-        spinner.setBounds(100, 100, 100, 20);
+        spinner.setBounds(330, 107, 100, 20);
         dateFrame.add(spinner);
 
         JButton okButton = new JButton("OK");
-        okButton.setBounds(80, 160, 40, 20);
+        okButton.setBounds(180, 160, 100, 20);
+        dateFrame.add(okButton);
 
         dateFrame.setVisible(true);
         okButton.addActionListener(new ActionListener() {
@@ -454,7 +457,7 @@ public class UITransferManager extends JFrame{
                         TransferManagerService.updateArrivingDateTime(transferId, arrivingTime, arrivingDate);
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dateFrame, "One of your inputs is illegal. Please try again",
+                    JOptionPane.showMessageDialog(dateFrame, "One of your inputs is illegal or There is no storekeeper in the final destination. Please try again",
                             "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }

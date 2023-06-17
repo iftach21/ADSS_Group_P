@@ -24,9 +24,11 @@ public class TransferManagerService {
     private List<Driver> drivers;
     private Site[] sites;
     private Truck chosenTruck;
+    private Map<Integer, Integer> lastDestination;
 
     public TransferManagerService() throws SQLException {
         transferController.createMockOrder();
+        lastDestination = new LinkedHashMap<>();
     }
 
     public static TransferManagerService getInstance() throws SQLException {
@@ -156,6 +158,7 @@ public class TransferManagerService {
         findTruckByDriver(chosenDriver, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime());
 
         Transfer newTransfer = transferController.initializeNewTransfer(destinationSites, sites, leavingDate, leavingTime, arrivingDateTime.toLocalDate(), arrivingDateTime.toLocalTime(), chosenTruck, chosenDriver, sourceSite, orderItems);
+        lastDestination.put(newTransfer.getTransferId(), newTransfer.getListOfDestinations().get(newTransfer.getListOfDestinations().size()-1).getSiteId());
         transferController.addTransferTruckToDao(newTransfer);
         return newTransfer.getTransferId();
     }

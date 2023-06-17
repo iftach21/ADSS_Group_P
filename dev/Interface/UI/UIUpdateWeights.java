@@ -268,7 +268,7 @@ public class UIUpdateWeights {
                             return;
                         }
                     }
-                    JOptionPane.showMessageDialog(TransferStartFrame, "Transfer created successfully",
+                    JOptionPane.showMessageDialog(TransferStartFrame, "Weights updated successfully",
                             "Success", JOptionPane.INFORMATION_MESSAGE);
                     TransferStartFrame.dispose();
                 } catch (Exception ex) {

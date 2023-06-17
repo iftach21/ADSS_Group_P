@@ -576,9 +576,12 @@ public class TransferController {
 
     public Map<Item_mock, Integer> getSiteItems(Integer siteId, Transfer newTransfer)
     {
-        Site site = sc.getSiteById(siteId);
         Map<Site, Map<Item_mock, Integer>> transferOrderItems = newTransfer.getOrderItems();
-        return transferOrderItems.get(site);
+        for (Site siteInMap : transferOrderItems.keySet()) {
+            if (siteInMap.getSiteId() == siteId)
+                return transferOrderItems.get(siteInMap);
+        }
+        return null;
     }
 
     public void removeOneDestOfTransfer(Transfer transfer)

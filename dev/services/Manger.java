@@ -275,7 +275,7 @@ public class Manger implements ActionListener {
 
 
             // Create a DefaultTableModel with empty rows and column headers
-            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number","Supplier","Item's number","Cost","Store Number","Status"});
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number","Supplier","Cost","Store Number","Status"});
 
 
 

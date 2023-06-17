@@ -300,6 +300,9 @@ public class InventoryMangerGUI implements ActionListener {
 
 
         }
+
+
+        // update the inventory - creation and deletion
         else if (e.getSource() == UpdateInventoryButton) {
             //Report issuance options
             String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
@@ -319,12 +322,23 @@ public class InventoryMangerGUI implements ActionListener {
                         // Perform the specific action based on the selected option
                         String selectedOption = option;
 
+
                         // create new category
                         if (selectedOption.equals("Create new category")) {
                             String categoryInput = null;
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("How would you like to name the new category ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
 
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
@@ -351,6 +365,17 @@ public class InventoryMangerGUI implements ActionListener {
 
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("How would you like to name the new sub-category ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     subCategoryInput = input;
@@ -401,6 +426,17 @@ public class InventoryMangerGUI implements ActionListener {
                             // item name
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("How would you like to name the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     itemName = input;
@@ -417,6 +453,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the catalog number for the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("\\d+")) {
                                     catalogNumber = input;
@@ -433,6 +480,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("Which category will store the new item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     categoryName = input;
@@ -449,6 +507,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("Which sub-category will store the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     subCategoryName = input;
@@ -466,6 +535,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the weight for the new general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters
                                 if (input.matches("^\\s*\\d+(\\.\\d+)?\\s*$")) {
                                     itemWeight = Double.parseDouble(input.trim());
@@ -483,6 +563,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("Who is the manufacturer of the general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     itemManufacturer = input;
@@ -534,6 +625,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the minimum quantity of the general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters
                                 if (input.matches("\\d+")) {
                                     itemMinimumQantity = Integer.parseInt(input);
@@ -553,6 +655,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("what is the buying price of the item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters
                                 if (input.matches("^\\s*\\d+(\\.\\d+)?\\s*$")) {
                                     itemBuyPrice = Double.parseDouble(input.trim());
@@ -568,6 +681,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("what is the selling price of the item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters
                                 if (input.matches("^\\s*\\d+(\\.\\d+)?\\s*$")) {
                                     itemSellPrice = Double.parseDouble(input.trim());
@@ -604,6 +728,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the catalog number of the general item ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("\\d+")) {
                                     catalogNumber = input;
@@ -649,6 +784,7 @@ public class InventoryMangerGUI implements ActionListener {
                         }
 
 
+
                         // delete category
                         else if (selectedOption.equals("Delete category")) {
 
@@ -657,6 +793,17 @@ public class InventoryMangerGUI implements ActionListener {
 
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("Which category would you like to delete ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     categoryName = input;
@@ -673,6 +820,7 @@ public class InventoryMangerGUI implements ActionListener {
                         }
 
 
+
                         // delete general item
                         else if (selectedOption.equals("Delete general item")) {
                             String catalogNumber = null;
@@ -681,6 +829,25 @@ public class InventoryMangerGUI implements ActionListener {
 
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the Catalog Number of the general item you wish to remove ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
 
                                 // Check if the input consists only of numeric characters and if exist
                                 if (input.matches("\\d+")) {
@@ -705,6 +872,7 @@ public class InventoryMangerGUI implements ActionListener {
                         }
 
 
+
                         // delete specific item
                         else if (selectedOption.equals("Delete specific item")) {
                             int specificSerialNumber = -1;
@@ -713,6 +881,17 @@ public class InventoryMangerGUI implements ActionListener {
 
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the serial number of the specific item you wish to remove ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters and if exist
                                 if (input.matches("\\d+")) {
                                     specificSerialNumber = Integer.parseInt(input);
@@ -749,6 +928,17 @@ public class InventoryMangerGUI implements ActionListener {
 
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("What is the serial number of the specific item you wish to remove ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of numeric characters and if exist
                                 if (input.matches("\\d+")) {
                                     specificSerialNumber = Integer.parseInt(input);
@@ -779,9 +969,8 @@ public class InventoryMangerGUI implements ActionListener {
 
                         }
 
-
+                        // return to the main page
                         else if (selectedOption.equals("Return")) {
-                            //
 
                         }
 
@@ -795,53 +984,11 @@ public class InventoryMangerGUI implements ActionListener {
                 });
                 panel.add(button);
             }
-
-            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
-
-
-            switch (choiceNum) {
-                case 0:
-                    // create new category
-                    break;
-                case 1:
-                    // Create new subcategory
-                    break;
-                case 2:
-                    // Create new general Item
-                    break;
-                case 3:
-                    // Add a new specific item
-                    break;
-                case 4:
-                    // Delete category
-                    break;
-                case 5:
-                    // Delete general item
-                    break;
-                case 6:
-                    // Delete specific item
-                    break;
-                case 7:
-                    // Move a specific item
-                    break;
-                case 8:
-                    // return
-                    JButton backButton = new JButton("Back");
-                    backButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            // Handle the back button click event
-                            // Add your code here to go back to the previous view or screen
-
-                            // For example, you can close the current JFrame
-                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
-                            frame.dispose();
-                        }
-                    });
-                    break;
-            }
-
+            JOptionPane.showOptionDialog(null, panel, "Update Inventory", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
         }
+
+
+
         //TODO - fix the amount, now is always 0
         //provide counting report
         else if (e.getSource() == CountingReportButton) {
@@ -1558,29 +1705,6 @@ public class InventoryMangerGUI implements ActionListener {
         }
     }
 
-    /* //showConfirmDialog - ask if are you sure
-    import javax.swing.*;
-    import java.awt.event.*;
-    public class OptionPaneExample extends WindowAdapter{
-    JFrame f;
-    OptionPaneExample(){
-        f=new JFrame();
-        f.addWindowListener(this);
-        f.setSize(300, 300);
-        f.setLayout(null);
-        f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        f.setVisible(true);
-    }
-    public void windowClosing(WindowEvent e) {
-        int a=JOptionPane.showConfirmDialog(f,"Are you sure?");
-    if(a==JOptionPane.YES_OPTION){
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    }
-    public static void main(String[] args) {
-        new  OptionPaneExample();
-    }
-}  */
 
 }
 

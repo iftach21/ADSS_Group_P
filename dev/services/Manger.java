@@ -1,9 +1,6 @@
 package services;
 
-import DataAccesObject.FixedDaySupplierMapper;
-import DataAccesObject.NonDeliveringSupplierMapper;
-import DataAccesObject.NonFixedDaySupplierMapper;
-import DataAccesObject.PeriodicOrderMapper;
+import DataAccesObject.*;
 import Domain.OrderManger;
 import Domain.Supplier_Manger;
 
@@ -190,7 +187,7 @@ public class Manger implements ActionListener {
                 }
 
             }
-        } else if (e.getSource() ==print_all_orders_shortage) {
+        } else if (e.getSource() ==print_all_Period_Orders) {
             PeriodicOrderMapper pb =new PeriodicOrderMapper();
 
 
@@ -260,6 +257,82 @@ public class Manger implements ActionListener {
 
 
         }
+        else if (e.getSource() ==print_all_orders_shortage) {
+            OrderMapper pb =new OrderMapper();
+
+
+
+
+
+
+            // Create an instance of FixedDaySupplierMapper
+
+
+            // Get the data for the jTable
+            String data = pb.getAllOrdersAsString();
+
+
+
+
+            // Create a DefaultTableModel with empty rows and column headers
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number","Supplier","Item's number","Cost","Store Number","Status"});
+
+
+
+            // Split the data into lines
+            String[] lines = data.split("\n");
+
+
+            // Iterate over the lines and add each row to the table model
+            for (String line : lines) {
+                // Split the line into columns
+                String[] columns = line.split(", ");
+
+                // Add the columns as a new row to the table model
+                tableModel.addRow(columns);
+            }
+
+
+            // Create a JTable using the table model
+            JTable jTable = new JTable(tableModel);
+
+
+
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Handle the back button click event
+                    // Add your code here to go back to the previous view or screen
+
+                    // For example, you can close the current JFrame
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                    frame.dispose();
+                }
+
+            });
+            // Create a JPanel to hold the JTable and the back button
+            JPanel panel = new JPanel();
+            panel.add(new JScrollPane(jTable));
+
+            panel.add(backButton);
+
+            // Display the JPanel in a JFrame
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(panel);
+            frame.pack();
+
+            frame.setVisible(true);
+
+
+
+
+        }
+
+
+
+
     }
 
 

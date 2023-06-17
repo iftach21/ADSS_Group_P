@@ -364,4 +364,32 @@ public class OrderMapper
 
         }
     }
+
+
+    public String getAllOrdersAsString() {
+        List<Order> orders = findAll(); // Get all the orders from the database
+
+        // Create a StringBuilder to build the string representation
+        StringBuilder sb = new StringBuilder();
+
+        // Append column headers
+
+
+        // Append each order's details
+        for (Order order : orders) {
+            sb.append(order.getOrderNum()).append("\t");
+            sb.append(order.getSupplier().getSupplierID()).append("\t");
+
+            // Append item details
+            sb.append(order.getItemList().size());
+            sb.setLength(sb.length() - 2); // Remove the last comma and space
+            sb.append("\t");
+
+            sb.append(order.getCost()).append("\t");
+            sb.append(order.getStore_number()).append("\t");
+            sb.append(order.getStatusOrder()).append("\n");
+        }
+
+        return sb.toString();
+    }
 }

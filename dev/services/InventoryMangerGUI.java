@@ -32,6 +32,31 @@ public class InventoryMangerGUI implements ActionListener {
 
     public InventoryMangerGUI() {
         this.inventoryController = new InventoryController();
+
+        //welcome page
+        JFrame welcomeFrame = new JFrame("Welcome Page");
+        welcomeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //welcome page size
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        JPanel imagePanel = new JPanel(new BorderLayout());
+        imagePanel.setBackground(Color.WHITE);
+
+        JLabel imageLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("docs/Superli.jpeg"); // Replace with the actual image file path
+        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+        ImageIcon scaledImageIcon = new ImageIcon(image);
+        imageLabel.setIcon(scaledImageIcon);
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        imagePanel.add(imageLabel, BorderLayout.CENTER);
+        welcomeFrame.setContentPane(imageLabel);
+
+
+        //main frame
         jframe = new JFrame();
         jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +96,17 @@ public class InventoryMangerGUI implements ActionListener {
         buttonPanel.add(PrintFullInventoryButton);
 
         jframe.add(buttonPanel);
-        jframe.setVisible(true);
+
+        Timer timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Hide the welcome frame and show the main frame
+                welcomeFrame.dispose();
+                jframe.setVisible(true);
+            }
+        });
+        timer.start();
+        welcomeFrame.setVisible(true);
     }
 
 
@@ -93,6 +128,7 @@ public class InventoryMangerGUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //******************* this is the switch case *******************/
         if(e.getSource() == ShortageReportButton) {
+            //Report issuance options
             String[] options = {"For all products", "For Category", "For specific product", "Return"};
             // Create a custom panel with FlowLayout
             JLabel label = new JLabel();
@@ -101,10 +137,11 @@ public class InventoryMangerGUI implements ActionListener {
             panel.add(label);
 
             int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
             if (choiceNum == -1) {
                 return;
             }
+
+            //titles of the Columns in the table
             String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Amount"};
             Report report = null;
             String reportType;
@@ -256,13 +293,27 @@ public class InventoryMangerGUI implements ActionListener {
 
         }
         else if (e.getSource() == UpdateInventoryButton) {
+            //Report issuance options
+//            String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add a new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
+//            JLabel label = new JLabel();
+//            label.setText("which action you would like to do ?");
+//            JPanel panel = new JPanel(new FlowLayout());
+//            panel.add(label);
+//            panel.setPreferredSize(new Dimension(300,80));
+//            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
             String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add a new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
-            JLabel label = new JLabel();
-            label.setText("which action you would like to do ?");
-            JPanel panel = new JPanel(new FlowLayout());
-            panel.add(label);
-            panel.setPreferredSize(new Dimension(300,80));
-            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            JLabel label = new JLabel("Which action would you like to do?");
+            JPanel panel = new JPanel(new GridLayout(2, options.length / 2));
+
+            for (String option : options) {
+                JButton button = new JButton(option);
+                panel.add(button);
+            }
+
+            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Shortage Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
 
             switch (choiceNum) {
                 case 0:
@@ -310,6 +361,7 @@ public class InventoryMangerGUI implements ActionListener {
         //TODO - fix the amount, now is always 0
         //provide counting report
         else if (e.getSource() == CountingReportButton) {
+            //Report issuance options
             String[] options = {"For all products", "For Category", "For specific product", "Return"};
             // Create a custom panel with FlowLayout
             JLabel label = new JLabel();
@@ -318,10 +370,11 @@ public class InventoryMangerGUI implements ActionListener {
             panel.add(label);
 
             int choiceNum = JOptionPane.showOptionDialog(null, panel, "Counting Report", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
             if (choiceNum == -1) {
                 return;
             }
+
+            //titles of the Columns in the table
             String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Amount"};
             Report report = null;
             String reportType;
@@ -376,7 +429,7 @@ public class InventoryMangerGUI implements ActionListener {
                     String nameCategory =   JOptionPane.showInputDialog("For which category ?");
 
                     if (inventoryController.CategoryCountingReport(nameCategory) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showInternalMessageDialog(null,"No products with that category name in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
@@ -417,7 +470,7 @@ public class InventoryMangerGUI implements ActionListener {
                     String nameSpecific =   JOptionPane.showInputDialog("What is the catalog number ?");
 
                     if (inventoryController.ItemCountingReport(nameSpecific) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showInternalMessageDialog(null,"No products with that catalog number in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
@@ -469,13 +522,12 @@ public class InventoryMangerGUI implements ActionListener {
                     });
                     break;
             }
-
         }
-
 
 
         //provide Defective Report
         else if (e.getSource() == DefectiveReportButton) {
+            //Report issuance options
             String[] options = {"For all products", "For Category", "For specific product", "Return"};
             // Create a custom panel with FlowLayout
             JLabel label = new JLabel();
@@ -488,6 +540,7 @@ public class InventoryMangerGUI implements ActionListener {
                 return;
             }
 
+            //titles of the Columns in the table
             String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Amount"};
             Report report = null;
             String reportType;
@@ -537,7 +590,6 @@ public class InventoryMangerGUI implements ActionListener {
 
                 case 1:
                     //TODO fix - the reportNumber jump by 2
-
                     // for category
                     String nameCategory = JOptionPane.showInputDialog("For which category ?");
 
@@ -641,7 +693,249 @@ public class InventoryMangerGUI implements ActionListener {
 
         //update discount for products
         else if (e.getSource() == UpdateDiscountButton) {
+            //Discount update options
+            String[] options = {"For all products", "For Category", "For specific product", "Return"};
+            // Create a custom panel with FlowLayout
+            JLabel label = new JLabel();
+            label.setText("Which discount to provide ?");
+            JPanel panel = new JPanel(new FlowLayout());
+            panel.add(label);
 
+            int choiceNum = JOptionPane.showOptionDialog(null, panel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (choiceNum == -1) {
+                return;
+            }
+
+            String[] updateDiscountOptions = {"Percentage Discount", "Standard discount", "Return"};
+            // Create a custom panel with FlowLayout
+            JLabel updateDiscountLabel = new JLabel();
+            updateDiscountLabel.setText("Discount Type ?");
+            JPanel UpdateDiscountPanel = new JPanel(new FlowLayout());
+            UpdateDiscountPanel.add(updateDiscountLabel);
+
+            boolean validInput = false;
+            Integer discountSize = null;
+            String categoryName = null;
+            String catalonNumber = null;
+
+
+            switch (choiceNum) {
+                // for all the products
+                case 0:
+                    int choiceNum1 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
+                    if (choiceNum1 == -1) {
+                        return;
+                    }
+                    switch (choiceNum1){
+
+                        case 0:
+                            validInput = false;
+                            discountSize = null;
+                            while (!validInput) {
+                                String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+                                discountSize = Integer.parseInt(discountSizeInput);
+
+                                // Check if the input consists only of numeric characters
+                                if ((discountSize < 100) && (discountSize > 0)) {
+                                    validInput = true;
+                                } else {
+                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                            inventoryController.FullPercentageDiscount(discountSize);
+                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+
+                        case 1:
+                            validInput = false;
+                            discountSize = null;
+                            while (!validInput) {
+                                String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+                                discountSize = Integer.parseInt(discountSizeInput);
+
+                                // Check if the input consists only of numeric characters
+                                if ((discountSize < 100) && (discountSize > 0)) {
+                                    validInput = true;
+                                } else {
+                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+
+                                }
+                            }
+                            inventoryController.FullStandardDiscount(discountSize);
+                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+
+                        case 2:
+                            // return
+                            JButton backButton = new JButton("Back");
+                            backButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    // Handle the back button click event
+                                    // Add your code here to go back to the previous view or screen
+
+                                    // For example, you can close the current JFrame
+                                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                                    frame.dispose();
+                                }
+                            });
+                            break;
+                    }
+                    break;
+
+
+
+                case 1:
+                    // for category
+                    int choiceNum2 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
+                    if (choiceNum2 == -1) {
+                        return;
+                    }
+                    switch (choiceNum2){
+                        case 0:
+                            //Percentage Discount
+                            validInput = false;
+                            discountSize = null;
+                            while (!validInput) {
+                                String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+                                discountSize = Integer.parseInt(discountSizeInput);
+
+                                // Check if the input consists only of numeric characters
+                                if ((discountSize < 100) && (discountSize > 0)) {
+                                    validInput = true;
+                                } else {
+                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                            categoryName = JOptionPane.showInputDialog("What category to update discount for ?");
+                            inventoryController.CategoryPercentageDiscount(discountSize, categoryName);
+                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+
+                        case 1:
+                            //Standard Discount
+                            validInput = false;
+                            discountSize = null;
+                            while (!validInput) {
+                                String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+                                discountSize = Integer.parseInt(discountSizeInput);
+
+                                // Check if the input consists only of numeric characters
+                                if ((discountSize < 100) && (discountSize > 0)) {
+                                    validInput = true;
+                                } else {
+                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+
+                                }
+                            }
+                            categoryName = JOptionPane.showInputDialog("What category to update discount for ?");
+                            inventoryController.CategoryStandardDiscount(discountSize, categoryName);
+                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+
+                        case 2:
+                            // return
+                            JButton backButton = new JButton("Back");
+                            backButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    // Handle the back button click event
+                                    // Add your code here to go back to the previous view or screen
+
+                                    // For example, you can close the current JFrame
+                                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                                    frame.dispose();
+                                }
+                            });
+                            break;
+                    }
+                    break;
+
+
+                case 2:
+                    // for specific product
+                    int choiceNum3 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
+                    if (choiceNum3 == -1) {
+                        return;
+                    }
+                    switch (choiceNum3){
+                        case 0:
+                            //Percentage Discount
+                            validInput = false;
+                            discountSize = null;
+                            while (!validInput) {
+                                String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+                                discountSize = Integer.parseInt(discountSizeInput);
+
+                                // Check if the input consists only of numeric characters
+                                if ((discountSize < 100) && (discountSize > 0)) {
+                                    validInput = true;
+                                } else {
+                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                            catalonNumber = JOptionPane.showInputDialog("What is the catalog number of the product to update the discount for ?");
+                            inventoryController.SpecificPercentageDiscount(discountSize, catalonNumber);
+                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+
+                        case 1:
+                            //Standard Discount
+                            validInput = false;
+                            discountSize = null;
+                            while (!validInput) {
+                                String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+                                discountSize = Integer.parseInt(discountSizeInput);
+
+                                // Check if the input consists only of numeric characters
+                                if ((discountSize < 100) && (discountSize > 0)) {
+                                    validInput = true;
+                                } else {
+                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+
+                                }
+                            }
+                            catalonNumber = JOptionPane.showInputDialog("What is the catalog number of the product to update the discount for ?");
+                            //TODO check what is the problame with that func
+                            inventoryController.SpecificStandardDiscount(discountSize, categoryName);
+                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+
+                        case 2:
+                            // return
+                            JButton backButton = new JButton("Back");
+                            backButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    // Handle the back button click event
+                                    // Add your code here to go back to the previous view or screen
+
+                                    // For example, you can close the current JFrame
+                                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                                    frame.dispose();
+                                }
+                            });
+                            break;
+                    }
+                    break;
+
+
+                case 3:
+                    // return
+                    JButton backButton = new JButton("Back");
+                    backButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            // Handle the back button click event
+                            // Add your code here to go back to the previous view or screen
+
+                            // For example, you can close the current JFrame
+                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                            frame.dispose();
+                        }
+                    });
+                    break;
+            }
         }
 
 
@@ -733,7 +1027,7 @@ public class InventoryMangerGUI implements ActionListener {
             double sellPrice;
             int minimumQantity;
 
-            String reportString = "";
+
             DefaultTableModel tableModel = new DefaultTableModel(column,0);
             JTable jtable = new JTable(tableModel);
             jtable.setRowHeight(20);

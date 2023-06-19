@@ -4,17 +4,23 @@ package services;
 import Domain.*;
 import DataAccesObject.*;
 
+
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
+
+
+import static Interface.OrderInterface.checkNumberWithDot;
 
 
 public class InventoryMangerGUI implements ActionListener {
@@ -29,12 +35,16 @@ public class InventoryMangerGUI implements ActionListener {
     private  JButton InsertDefectiveButton;
     private  JButton PrintFullInventoryButton;
 
+
+
     private JButton addPeriodOrderButton;
     private JButton UpdatePeriodOrder;
     private  JButton PrintAllPeriodOrder;
     private  JButton PrintAllShortageOrder;
     private  JPanel buttonPanel;
     private InventoryController inventoryController;
+    private  OrderManger orderManger;
+    private  Supplier_Manger supplier_manger;
 
 
 
@@ -44,30 +54,33 @@ public class InventoryMangerGUI implements ActionListener {
     private boolean isKeyActive = false;
 
 
-    public InventoryMangerGUI() {
+    public InventoryMangerGUI(JFrame welcomeFrame) {
         this.inventoryController = new InventoryController();
+        this.orderManger =new OrderManger();
+        this.supplier_manger =new Supplier_Manger();
 
-        //welcome page
-        JFrame welcomeFrame = new JFrame("Welcome Page");
-        welcomeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //welcome page size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-
-        JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setBackground(Color.WHITE);
-
-        JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
-        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-        ImageIcon scaledImageIcon = new ImageIcon(image);
-        imageLabel.setIcon(scaledImageIcon);
-        imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        imagePanel.add(imageLabel, BorderLayout.CENTER);
-        welcomeFrame.setContentPane(imageLabel);
+//        //welcome page
+//        JFrame welcomeFrame = new JFrame("Welcome Page");
+//        welcomeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //welcome page size
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        int screenWidth = (int) screenSize.getWidth();
+//        int screenHeight = (int) screenSize.getHeight();
+//
+//        JPanel imagePanel = new JPanel(new BorderLayout());
+//        imagePanel.setBackground(Color.WHITE);
+//
+//        JLabel imageLabel = new JLabel();
+//        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
+//        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+//        ImageIcon scaledImageIcon = new ImageIcon(image);
+//        imageLabel.setIcon(scaledImageIcon);
+//        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+//        imagePanel.add(imageLabel, BorderLayout.CENTER);
+//        welcomeFrame.setContentPane(imageLabel);
 
 
         // main frame
@@ -97,6 +110,12 @@ public class InventoryMangerGUI implements ActionListener {
         InsertDefectiveButton = createStyledButton("Defective insertion");
         PrintFullInventoryButton = createStyledButton("Print full inventory");
 
+        PrintAllShortageOrder = createStyledButton("Print all Order's");
+        PrintAllPeriodOrder = createStyledButton("Print all Period's Order's");
+        addPeriodOrderButton  = createStyledButton("Add Period Order");
+
+
+
         // Register the ActionListener for each button
         ShortageReportButton.addActionListener(this);
         UpdateInventoryButton.addActionListener(this);
@@ -107,6 +126,10 @@ public class InventoryMangerGUI implements ActionListener {
         InsertDefectiveButton.addActionListener(this);
         PrintFullInventoryButton.addActionListener(this);
 
+        PrintAllShortageOrder.addActionListener(this);
+        PrintAllPeriodOrder.addActionListener(this);
+        addPeriodOrderButton.addActionListener(this);
+
 
         buttonPanel.add(ShortageReportButton);
         buttonPanel.add(UpdateInventoryButton);
@@ -116,6 +139,11 @@ public class InventoryMangerGUI implements ActionListener {
         buttonPanel.add(PriceHistoryReportButton);
         buttonPanel.add(InsertDefectiveButton);
         buttonPanel.add(PrintFullInventoryButton);
+
+        buttonPanel.add(PrintAllShortageOrder);
+        buttonPanel.add(PrintAllPeriodOrder);
+        buttonPanel.add(addPeriodOrderButton);
+
 
         jframe.add(buttonPanel);
 
@@ -137,8 +165,23 @@ public class InventoryMangerGUI implements ActionListener {
             }
         });
 
-        startIdleTimer();
+            // for the screen saver
+//        startIdleTimer();
 
+
+//        Timer timer = new Timer(5000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // Hide the welcome frame and show the main frame
+//                welcomeFrame.dispose();
+//                jframe.setVisible(true);
+//            }
+//        });
+//        timer.start();
+//        welcomeFrame.setVisible(true);
+
+
+        // timer for the welcome page
         Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,8 +190,10 @@ public class InventoryMangerGUI implements ActionListener {
                 jframe.setVisible(true);
             }
         });
+        timer.setRepeats(false);
         timer.start();
         welcomeFrame.setVisible(true);
+
     }
 
 
@@ -316,7 +361,7 @@ public class InventoryMangerGUI implements ActionListener {
 
 
 
-    // todo - end of Screen Saver
+    // creating stylish buttons for the main frame
     private JButton createStyledButton(String text) {
         JButton button = new JButton("<html><center>" + text.replaceAll("\\n", "<br>") + "</center></html>");
         button.setPreferredSize(new Dimension(180, 60));
@@ -379,6 +424,7 @@ public class InventoryMangerGUI implements ActionListener {
 
         return button;
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -2176,6 +2222,202 @@ public class InventoryMangerGUI implements ActionListener {
             JOptionPane.showMessageDialog(null,sp,"Inventory Products", JOptionPane.PLAIN_MESSAGE);
 
         }
+        else if (e.getSource() == this.PrintAllShortageOrder) {
+            OrderMapper pb = new OrderMapper();
+
+
+            // Create an instance of FixedDaySupplierMapper
+
+
+            // Get the data for the jTable
+            String data = pb.getAllOrdersAsString();
+
+
+            // Create a DefaultTableModel with empty rows and column headers
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number", "Supplier", "Cost", "Store Number", "Status"});
+
+
+            // Split the data into lines
+            String[] lines = data.split("\n");
+
+
+            // Iterate over the lines and add each row to the table model
+            for (String line : lines) {
+                // Split the line into columns
+                String[] columns = line.split("\t");
+
+                // Add the columns as a new row to the table model
+                tableModel.addRow(columns);
+            }
+
+
+            // Create a JTable using the table model
+            JTable jTable = new JTable(tableModel);
+            jTable = ad_table(jTable);
+
+
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Handle the back button click event
+                    // Add your code here to go back to the previous view or screen
+
+                    // For example, you can close the current JFrame
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                    frame.dispose();
+                }
+
+            });
+            // Create a JPanel to hold the JTable and the back button
+            JPanel panel = new JPanel();
+            panel.add(new JScrollPane(jTable));
+
+            panel.add(backButton);
+
+            // Display the JPanel in a JFrame
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(panel);
+            frame.pack();
+
+            frame.setVisible(true);
+
+        } else if (e.getSource() == PrintAllPeriodOrder) {
+            PeriodicOrderMapper pb = new PeriodicOrderMapper();
+
+
+            // Create an instance of FixedDaySupplierMapper
+
+
+            // Get the data for the jTable
+            String data = pb.getTableString();
+
+
+            // Create a DefaultTableModel with empty rows and column headers
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number", "Supplier", "Cost", "Days to Cycle", "Days Left until append new order"});
+
+
+            // Split the data into lines
+            String[] lines = data.split("\n");
+
+
+            // Iterate over the lines and add each row to the table model
+            for (String line : lines) {
+                // Split the line into columns
+                String[] columns = line.split(", ");
+
+                // Add the columns as a new row to the table model
+                tableModel.addRow(columns);
+            }
+
+
+            // Create a JTable using the table model
+            JTable jTable = new JTable(tableModel);
+            jTable = this.ad_table(jTable);
+
+
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Handle the back button click event
+                    // Add your code here to go back to the previous view or screen
+
+                    // For example, you can close the current JFrame
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                    frame.dispose();
+                }
+
+            });
+            // Create a JPanel to hold the JTable and the back button
+            JPanel panel = new JPanel();
+            panel.add(new JScrollPane(jTable));
+
+            panel.add(backButton);
+
+            // Display the JPanel in a JFrame
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(panel);
+            frame.pack();
+
+            frame.setVisible(true);
+
+
+        } else if (e.getSource() ==this.addPeriodOrderButton) {
+
+
+            System.out.println("add new Period Order:");
+
+            Map<Item, Integer> itemlist1 = new HashMap<Item, Integer>();
+
+            String store_numberInput1 = JOptionPane.showInputDialog("store number:");
+            store_numberInput1 = checkNumber(store_numberInput1);
+            int store_number1 = Integer.parseInt(store_numberInput1);
+
+            String days = JOptionPane.showInputDialog("number of days until new cycle:");
+            days = checkNumber(days);
+            int days1 = Integer.parseInt(days);
+
+            String supplier_id = JOptionPane.showInputDialog("Supplier id:");
+
+            supplier_manger.update_suppliers();
+
+            Supplier supplier1 = supplier_manger.get_supplier_by_id(supplier_id);
+
+            while (true) {
+                String optionInput = JOptionPane.showInputDialog(
+                        "1. add item to list\n" +
+                                "2. done and ready to go to orders"
+                );
+                optionInput = checkNumber(optionInput);
+                int option_11 = Integer.parseInt(optionInput);
+
+                // Option 1: add item to the order list
+                if (option_11 == 1) {
+                    List<Item> itemList_sub= new ArrayList<>();
+                    int op = 1;
+                    for (Item item : supplier1.getItems().keySet()) {
+                        if (supplier1.getItems().keySet().size() > 0) {
+                            itemList_sub.add(item);
+                            op++;
+                        }
+                    }
+                    StringBuilder itemsPrompt = new StringBuilder();
+                    for (int i = 0; i < itemList_sub.size(); i++) {
+                        itemsPrompt.append((i + 1)).append(". ").append(itemList_sub.get(i)).append("\n");
+                    }
+                    String item_numberInput = JOptionPane.showInputDialog(
+                            "Enter the number of the item you want to add:\n" + itemsPrompt.toString()
+                    );
+                    item_numberInput = checkNumber(item_numberInput);
+                    int item_number = Integer.parseInt(item_numberInput);
+
+                    int count = 1;
+                    for (Item item : itemList_sub) {
+                        if (count == item_number) {
+                            String quantityInput = JOptionPane.showInputDialog("Enter the quantity:");
+                            quantityInput = checkNumberWithDot(quantityInput);
+                            int quantity = Integer.parseInt(quantityInput);
+                            itemlist1.put(item, quantity);
+                            break;
+                        }
+                        count++;
+                    }
+                }
+
+                if (option_11 == 2) {
+                    if (!orderManger.period_order(supplier1, itemlist1, store_number1, days1)) {
+                        System.out.println("failed to make an order make sure that the items can be provided");
+                    }
+                    break;
+                }
+            }
+        }
+
+
+
 
 
     }
@@ -2189,7 +2431,91 @@ public class InventoryMangerGUI implements ActionListener {
         }
     }
 
+    private JTable ad_table(JTable jTable){
+        TableColumnModel columnModel = jTable.getColumnModel();
+
+
+        for (int columnIndex = 0; columnIndex < columnModel.getColumnCount(); columnIndex++) {
+            TableColumn column = columnModel.getColumn(columnIndex);
+            int preferredWidth = column.getPreferredWidth();
+            int maxWidth = column.getMaxWidth();
+
+            // Get the renderer for the column
+            TableCellRenderer headerRenderer = column.getHeaderRenderer();
+            if (headerRenderer == null) {
+                headerRenderer = jTable.getTableHeader().getDefaultRenderer();
+            }
+            Component headerComponent = headerRenderer.getTableCellRendererComponent(
+                    jTable, column.getHeaderValue(), false, false, -1, columnIndex);
+
+            // Determine the maximum width needed for the column
+            int headerWidth = headerComponent.getPreferredSize().width;
+            int cellWidth = jTable.getCellRenderer(0, columnIndex)
+                    .getTableCellRendererComponent(jTable,
+                            jTable.getValueAt(0, columnIndex), false, false, 0, columnIndex)
+                    .getPreferredSize().width;
+            int maxWidthNeeded = Math.max(headerWidth, cellWidth) + 10; // Add some padding
+
+            // Adjust the preferred width and maximum width of the column
+            column.setPreferredWidth(Math.min(maxWidthNeeded, preferredWidth));
+            column.setMaxWidth(maxWidth > 0 ? Math.min(maxWidthNeeded, maxWidth) : maxWidthNeeded);
+        }
+        return jTable;
+
+
+    }
+
+
+    public static String checkName(String input) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (Character.isDigit(input.charAt(i))) {
+                    System.out.println("A name has to be letters only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length()) {
+                return input;
+            } else {
+                System.out.println("name:");
+                input = scanner.next();
+            }
+        }
+    }
+
+
+    public static String checkNumber(String input) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    System.out.println("has to be numbers only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length()) {
+                return input;
+            } else {
+                System.out.println("number:");
+                input = scanner.next();
+            }
+        }
+    }
+
+
+
+
 
 }
+
+
+
 
 

@@ -7,45 +7,19 @@ import services.*;
 import DataAccesObject.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
-
-        //welcome page
-        JFrame welcomeFrame = new JFrame("Welcome Page");
-        welcomeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //welcome page size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-
-        JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setBackground(Color.WHITE);
-
-        JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
-        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-        ImageIcon scaledImageIcon = new ImageIcon(image);
-        imageLabel.setIcon(scaledImageIcon);
-        imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        imagePanel.add(imageLabel, BorderLayout.CENTER);
-        welcomeFrame.setContentPane(imageLabel);
-
-
-
-//       Supplier_Manger_GUI supplierMangerGui = new Supplier_Manger_GUI();
+        Supplier_Manger_GUI supplierMangerGui = new Supplier_Manger_GUI();
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new InventoryMangerGUI(welcomeFrame);
+                new InventoryMangerGUI();
             }
         });
-//        Manger manger = new Manger();
+            Manger manger = new Manger();
 
 
 

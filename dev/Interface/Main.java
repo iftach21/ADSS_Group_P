@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        if(args[0].equals("GUI")) {
 
         //welcome page
         JFrame welcomeFrame = new JFrame("Welcome Page");
@@ -39,7 +40,7 @@ public class Main {
 
         welcomeFrame.setVisible(true);
 
-        // Hide the frame after one second (1000 milliseconds)
+        // Hide the frame for 1 sshina
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -49,7 +50,7 @@ public class Main {
 
 
 
-        if(args[0].equals("GUI")) {
+
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
 
@@ -64,7 +65,9 @@ public class Main {
                     }
                 }
 
-            });
+            });}
+        if(args[0].equals("CUI")){
+
 
 
 
@@ -83,7 +86,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         while(true)
         {
-            System.out.println("Hello this is the manger suppliers board press on the right option");
+            if(args[1].equals("Manger")){
+            System.out.println("Hello this is the manger  board press on the right option");
             System.out.println("1.Supplier manger");
             System.out.println("2.Order manger");
             System.out.println("3.Stock manger");
@@ -255,6 +259,16 @@ public class Main {
 
             }
 
+        } else if (args[1].equals("Supplier-Manger")) {
+                interfaces[0].interfaceStartup();
+
+                
+            } else if (args[1].equals("InventoryManger")) {
+                interfaces[1].interfaceStartup();
+
+
+
+            }
         }
 
     }

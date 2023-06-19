@@ -142,22 +142,8 @@ public class InventoryMangerGUI implements ActionListener {
         jframe.add(buttonPanel);
 
 
-        jframe.getContentPane().addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-//                resetIdleTimer();
-                isMouseActive = true;
-            }
-        });
 
-        jframe.getContentPane().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-//                resetIdleTimer();
-                isKeyActive = true;
-
-            }
-        });
+        jframe.setVisible(true);
 
 
 

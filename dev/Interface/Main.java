@@ -5,15 +5,21 @@ import Interface.interfaceManager;
 import  Domain.*;
 import services.*;
 import DataAccesObject.*;
+
+import javax.swing.*;
 import java.util.*;
 import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
-       Supplier_Manger_GUI supplierMangerGui =new Supplier_Manger_GUI();
-        InventoryMangerGUI inventoryMangerGUI = new InventoryMangerGUI();
-        Manger manger = new Manger();
+//       Supplier_Manger_GUI supplierMangerGui = new Supplier_Manger_GUI();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new InventoryMangerGUI();
+            }
+        });
+//        Manger manger = new Manger();
 
 
 

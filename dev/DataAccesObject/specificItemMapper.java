@@ -27,6 +27,41 @@ public class specificItemMapper {
         return null;
     }
 
+        //TODO - erase if deleteBySerialNumber work
+//    public specificItem getBySerialNumber(int serialNumber) throws SQLException {
+//        for (List <specificItem> specificitemList: cache.values()){
+//            for (specificItem specificitem : specificitemList){
+//                if (specificitem.getSerialNumber() == serialNumber)
+//                    return specificitem;
+//            }
+//        }
+//
+//        getConnection();
+//        String sql = "SELECT * FROM specific_items WHERE serial_number = ?";
+//        try (PreparedStatement statement = conn.prepareStatement(sql)){
+//            statement.setInt(1,serialNumber);
+//            ResultSet rs = statement.executeQuery();
+//            if (rs.next()){
+//                String categoryName = rs.getString("categoryName");
+//                int amount = rs.getInt("amount");
+//                Category category = new Category(serialNumber, amount);
+////                category.setAmount(amount);
+//                identityMap.add(category);
+//                return category;
+//            }
+//        }
+//        catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        try {
+//            conn.close();
+//        }
+//        catch (SQLException e){}
+//        return null;
+//    }
+
+
+
     public List<specificItem> findByCatalogNum(String catalogNum)
     {
         if(cache.containsKey(catalogNum))
@@ -222,6 +257,27 @@ public class specificItemMapper {
                 System.out.println("Successfully updated specific item: " + item.getSerialNumberString());
                 cache.remove(item.getSerialNumberString()); // remove item from cache to refresh from database on next access
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void deleteBySerialNumber(int serialNumber) {
+        PreparedStatement stmt;
+        getConnection();
+
+        try {
+            stmt = conn.prepareStatement("DELETE FROM specific_items WHERE serial_number = ?");
+            stmt.setInt(1, serialNumber);
+            stmt.executeUpdate();
+            cache.clear(); // clear cache since it's outdated
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

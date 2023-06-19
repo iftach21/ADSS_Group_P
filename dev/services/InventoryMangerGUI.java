@@ -5,12 +5,13 @@ import Domain.*;
 import DataAccesObject.*;
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -29,13 +30,18 @@ public class InventoryMangerGUI implements ActionListener {
     private  JButton PrintFullInventoryButton;
 
     private JButton addPeriodOrderButton;
-
     private JButton UpdatePeriodOrder;
     private  JButton PrintAllPeriodOrder;
-
     private  JButton PrintAllShortageOrder;
     private  JPanel buttonPanel;
     private InventoryController inventoryController;
+
+
+
+    private ScreenSaverFrame screenSaverFrame;
+    private boolean isIdle;
+    private boolean isMouseActive = false;
+    private boolean isKeyActive = false;
 
 
     public InventoryMangerGUI() {
@@ -55,7 +61,7 @@ public class InventoryMangerGUI implements ActionListener {
         imagePanel.setBackground(Color.WHITE);
 
         JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg"); // Replace with the actual image file path
+        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
         Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon = new ImageIcon(image);
         imageLabel.setIcon(scaledImageIcon);
@@ -64,15 +70,23 @@ public class InventoryMangerGUI implements ActionListener {
         welcomeFrame.setContentPane(imageLabel);
 
 
-        //main frame
+        // main frame
         jframe = new JFrame();
         jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle("Inventory Manger");
 
+        JLabel label = new JLabel("Inventory Menu");
+        label.setFont(new Font("Bauhaus 93", Font.BOLD, 30));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setForeground(Color.WHITE);
+        label.setOpaque(true);
+        label.setBackground(Color.BLACK);
+        jframe.add(label, BorderLayout.NORTH);
+
         buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBackground(new Color(173, 216, 230));
 
         ShortageReportButton = createStyledButton("Product Shortage Report");
         UpdateInventoryButton = createStyledButton("Update inventory");
@@ -105,6 +119,26 @@ public class InventoryMangerGUI implements ActionListener {
 
         jframe.add(buttonPanel);
 
+
+        jframe.getContentPane().addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+//                resetIdleTimer();
+                isMouseActive = true;
+            }
+        });
+
+        jframe.getContentPane().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+//                resetIdleTimer();
+                isKeyActive = true;
+
+            }
+        });
+
+        startIdleTimer();
+
         Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,19 +152,233 @@ public class InventoryMangerGUI implements ActionListener {
     }
 
 
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(180, 60));
-        button.setFont(new Font("Arial", Font.BOLD, 14));
-        button.setBackground(new Color(235, 235, 235));
-        button.setForeground(Color.DARK_GRAY);
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setFocusable(false);
-        return button;
+
+
+
+
+
+
+
+
+    // todo - Screen Saver
+    private static class ScreenSaverPanel extends JPanel {
+
+        private Timer timer;
+        private long lastRepaintTime;
+
+        public ScreenSaverPanel() {
+            setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+            setBackground(Color.BLACK);
+
+
+
+            timer = new Timer(50, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    long currentTime = System.currentTimeMillis();
+                    long elapsed = currentTime - lastRepaintTime;
+                    lastRepaintTime = currentTime;
+
+                    // Update screen saver logic here
+
+                    repaint();
+
+//                    // Adjust the timer delay based on the time taken to repaint
+//                    int desiredDelay = 33; // Desired delay in milliseconds
+//                    int actualDelay = (int) (desiredDelay - elapsed);
+//                    if (actualDelay < 0) {
+//                        actualDelay = 0;
+//                    }
+//                    timer.setDelay(actualDelay);
+                }
+            });
+            lastRepaintTime = System.currentTimeMillis();
+            timer.start();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g.create();
+
+            // Load the image
+            ImageIcon imageIcon = new ImageIcon("docs/Superli.jpeg");
+            Image image = imageIcon.getImage();
+
+            // Calculate the position to center the image on the panel
+//            int x = (getWidth() - image.getWidth(this)) / 2;
+//            int y = (getHeight() - image.getHeight(this)) / 2;
+
+            // Draw the image
+            g2d.drawImage(image, 0, 0, getWidth(),getHeight(),this);
+
+            g2d.dispose();
+        }
+        public void startAnimation(){
+            timer.start();
+        }
     }
 
+
+
+
+    private void resetIdleTimer() {
+        isIdle = false;
+    }
+
+
+    private void startIdleTimer() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            private int idleTime = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (isMouseActive || isKeyActive) {
+                    // Reset the idle time if there is activity
+                    idleTime = 0;
+                    isMouseActive = false;
+                    isKeyActive = false;
+                } else {
+                    idleTime++;
+                    if (idleTime >= 10) {
+                        // Show the screen saver
+                        jframe.setVisible(false);
+                        screenSaverFrame = new ScreenSaverFrame();
+                        screenSaverFrame.setVisible(true);
+                        screenSaverFrame.setAlwaysOnTop(true);
+                        screenSaverFrame.startAnimation();
+                    }
+                }
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
+    }
+
+
+
+//    private void startIdleTimer() {
+//        Timer idleTimer = new Timer(10000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (!isMouseActive && !isKeyActive) {
+//                    jframe.setVisible(false);
+//                    screenSaverFrame = new ScreenSaverFrame();
+//                    screenSaverFrame.setVisible(true);
+//                    screenSaverFrame.setAlwaysOnTop(true);
+//                    screenSaverFrame.startAnimation();
+//                }
+//            }
+//        });
+//        idleTimer.setRepeats(false); // Set repeats to false to prevent continuous execution
+//        idleTimer.start(); // Restart the timer on each activity
+//    }
+
+
+
+
+    private class ScreenSaverFrame extends JFrame {
+        private ScreenSaverPanel panel;
+
+        public ScreenSaverFrame() {
+            setTitle("Screen Saver");
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
+            setUndecorated(true);
+
+            panel = new ScreenSaverPanel();
+            getContentPane().add(panel);
+
+            // Add mouse motion listener to exit screen saver
+            panel.addMouseMotionListener(new MouseAdapter() {
+                @Override
+                public void mouseMoved(MouseEvent e) {
+                    dispose();
+                    jframe.setVisible(true);
+//                    startIdleTimer();
+                }
+            });
+
+            // Add key listener to exit screen saver
+            panel.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    dispose();
+                    jframe.setVisible(true);
+//                    startIdleTimer();
+                }
+            });
+        }
+
+        public void startAnimation(){
+            panel.startAnimation();
+        }
+    }
+
+
+
+    // todo - end of Screen Saver
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton("<html><center>" + text.replaceAll("\\n", "<br>") + "</center></html>");
+        button.setPreferredSize(new Dimension(180, 60));
+
+        // font options
+//        button.setFont(new Font("Harlow Solid Italic", Font.BOLD, 22));
+//        button.setFont(new Font("Sitka", Font.BOLD, 20));
+//        button.setFont(new Font("Segoe Print", Font.BOLD, 20));
+        button.setFont(new Font("Haettenschweiler", Font.BOLD, 26));
+
+        //color options
+//        Color buttonColor = new Color(235, 235, 235);
+        Color buttonColor = new Color(255, 212, 121);
+
+        button.setBackground(buttonColor);
+        button.setForeground(Color.DARK_GRAY);
+
+
+        int cornerRadius = 20;
+        Border roundedBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
+        Border emptyBorder = BorderFactory.createEmptyBorder(5, 15, 5, 15);
+        Border compoundBorder = BorderFactory.createCompoundBorder(roundedBorder, emptyBorder);
+
+        // Create a rounded border using the corner radius
+        Border roundedCornerBorder = new Border() {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setColor(Color.LIGHT_GRAY);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawRoundRect(x, y, width - 1, height - 1, cornerRadius, cornerRadius);
+                g2d.dispose();
+            }
+            @Override
+            public Insets getBorderInsets(Component c) {
+                return new Insets(cornerRadius, cornerRadius, cornerRadius, cornerRadius);
+            }
+            @Override
+            public boolean isBorderOpaque() {
+                return true;
+            }
+        };
+
+        // Apply the rounded corner border and compound border to the button
+        button.setBorder(BorderFactory.createCompoundBorder(roundedCornerBorder, compoundBorder));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setFocusable(false);
+
+
+        // mark the button when the mouse is on
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(buttonColor.brighter());
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(buttonColor);
+            }
+        });
+
+        return button;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -907,6 +1155,9 @@ public class InventoryMangerGUI implements ActionListener {
                                 return;
 
 
+                            inventoryController.deleteSpecificFromMapper(specificSerialNumber);
+                            JOptionPane.showInternalMessageDialog(null,"Item " + specificSerialNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+
                             // TODO keep it - will work when the method will work
 //                            if (tempItem == null) {
 //                                JOptionPane.showMessageDialog(null, "Could not find such an item");
@@ -1587,57 +1838,48 @@ public class InventoryMangerGUI implements ActionListener {
                 String reportDate;
                 String reportString = "";
                 Item reportItem = null;
+                double buyPrice = 0;
+                double sellPrice = 0;
+
                 DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
                 JTable jtable = new JTable(tableModel3);
                 jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
                 jtable.setFont(new Font("Arial", Font.PLAIN,10));
 
-
                 report = inventoryController.priceHistoryReport(catalogNumber);
                 reportType = report.getType().toString();
                 reportNumber = Integer.toString(report.getReportNum());
                 reportDate = report.getReportDate().toString();
-//                reportString = item.getPriceHistory().toString();
 
                 reportItem = inventoryController.findItemByCatalogNum(catalogNumber);
-                double buyPrice = reportItem.getBuyPrice();
-                double sellPrice = reportItem.getSellPrice();
+                reportString = reportItem.getPriceHistory().toString();
 
 
-//                for (Map.Entry<Item, Integer> entry : report.getReportItems().entrySet()) {
-//                    Item item = entry.getKey();
-//                    int amount = entry.getValue();
-//                    reportString += item.getPriceHistory().toString();
-//                }
+                String lines3[] = reportString.split("\n");
+                for (String line : lines3) {
+                    if (line.contains("Buy price:")){
+                        int start = line.indexOf("Buy price:") + 11;
+                        int end = line.indexOf(",", start);
+                        String buyPriceStr = line.substring(start, end).trim();
+                        buyPrice = Double.parseDouble(buyPriceStr);
+                    }
+                    if (line.contains("sell price:")){
+                        int start = line.indexOf("sell price:") + 12;
+                        int end = line.indexOf(",", start);
+                        String sellPriceStr = line.substring(start, end).trim();
+                        sellPrice = Double.parseDouble(sellPriceStr);
+                    }
 
-//                String lines3[] = reportString.split("\n");
-//                for (String line : lines3) {
-//                    if (line.contains("Buy price:")){
-//                        int start = line.indexOf("Buy price:") + 11;
-//                        int end = line.indexOf(",", start);
-//                        String buyPriceStr = line.substring(start, end).trim();
-//                        buyPrice = Double.parseDouble(buyPriceStr);
-//                    }
-//                    else if (line.contains("sell price:")){
-//                        int start = line.indexOf("sell price:") + 12;
-//                        int end = line.indexOf(",", start);
-//                        String sellPriceStr = line.substring(start, end).trim();
-//                        sellPrice = Double.parseDouble(sellPriceStr);
-//                    }
-//
-//                    // Split the line into columns
-////                    String[] columns = line.split(":");
-//
-//                    // Add the columns as a new row to the table model
-//                    tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,catalogNumber,buyPrice,sellPrice});
-//                }
-                tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,catalogNumber,buyPrice,sellPrice});
+                    // Add the columns as a new row to the table model
+                    tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,catalogNumber,buyPrice,sellPrice});
+
+                }
 
                 JScrollPane sp = new JScrollPane(jtable);
                 jframe.add(sp);
                 sp.setPreferredSize(new Dimension(1000,400));
-                JOptionPane.showMessageDialog(null,sp,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null,sp,"Price History", JOptionPane.PLAIN_MESSAGE);
             }
         }
 

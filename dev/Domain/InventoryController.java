@@ -90,7 +90,7 @@ public class InventoryController {
     /*
 
      */
-    public void deleteSpecificFromMapper(specificItem currentSpecific) {specificItemMapper.delete(currentSpecific);}
+    public void deleteSpecificFromMapper(int currentSpecific) {specificItemMapper.deleteBySerialNumber(currentSpecific);}
     /*
 
      */
@@ -117,19 +117,24 @@ public class InventoryController {
 
     public void moveSpecificItemMapper(int serialNumber){
         List<specificItem> itemList = specificItemMapper.findAll();
+        System.out.println("Check1");
         if (itemList != null) {
-            Iterator<specificItem> iterator = itemList.iterator();
-            while (iterator.hasNext()) {
-                specificItem specificItem = iterator.next();
+            System.out.println("Check2");
+            for (specificItem specificItem : itemList){
+//            Iterator<specificItem> iterator = itemList.iterator();
+//            while (iterator.hasNext()) {
+//                specificItem specificItem = iterator.next();
+                System.out.println("Check3");
                 if (specificItem.getserialNumber() == serialNumber) {
-                    if (specificItem.getLocationString() == "Store"){
+                    if (specificItem.getLocationString().equals("Store")){
                         specificItem.setLocation(Location.Storage);
                     }
-                    else {
+                    else if(specificItem.getLocationString().equals( "Storage")) {
                         specificItem.setLocation(Location.Store);
                     }
-                    specificItemMapper.delete(specificItem);
-                    specificItemMapper.insert(specificItem);
+//                    specificItemMapper.delete(specificItem);
+                    specificItemMapper.update(specificItem);
+//                    specificItemMapper.insert(specificItem);
                 }
             }
         }

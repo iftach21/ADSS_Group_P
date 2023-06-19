@@ -1929,7 +1929,6 @@ public class InventoryMangerGUI implements ActionListener {
                                     }
                                     return;
                                 }
-
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1982,7 +1981,6 @@ public class InventoryMangerGUI implements ActionListener {
                                 }
                                 return;
                             }
-                            //TODO check what is the problame with that func
                             inventoryController.SpecificStandardDiscount(discountSize, catalonNumber);
                             JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;

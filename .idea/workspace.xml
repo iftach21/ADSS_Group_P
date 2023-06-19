@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="InventoryMangerGUI few changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="InventoryMangerGUI cancel option">
+      <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -334,7 +333,8 @@
     <MESSAGE value="continue InventoryMangerGUI" />
     <MESSAGE value="InventoryMangerGUI almost done" />
     <MESSAGE value="InventoryMangerGUI few changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="InventoryMangerGUI few changes" />
+    <MESSAGE value="InventoryMangerGUI cancel option" />
+    <option name="LAST_COMMIT_MESSAGE" value="InventoryMangerGUI cancel option" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

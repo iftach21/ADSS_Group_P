@@ -264,7 +264,7 @@ public class Main {
 
                 
             } else if (args[1].equals("InventoryManger")) {
-                interfaces[1].interfaceStartup();
+                interfaces[2].interfaceStartup();
 
 
 

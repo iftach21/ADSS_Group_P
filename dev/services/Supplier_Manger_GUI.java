@@ -52,6 +52,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
+
         buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         buttonPanel.setBackground(new Color(3, 3, 3));

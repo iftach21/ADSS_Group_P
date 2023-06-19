@@ -4,17 +4,22 @@ package services;
 import Domain.*;
 import DataAccesObject.*;
 
+
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
+
+import static Interface.OrderInterface.checkNumberWithDot;
 
 
 public class InventoryMangerGUI implements ActionListener {
@@ -36,6 +41,9 @@ public class InventoryMangerGUI implements ActionListener {
     private  JPanel buttonPanel;
     private InventoryController inventoryController;
 
+    private  OrderManger orderManger;
+    private  Supplier_Manger supplier_manger;
+
 
 
     private ScreenSaverFrame screenSaverFrame;
@@ -46,6 +54,8 @@ public class InventoryMangerGUI implements ActionListener {
 
     public InventoryMangerGUI() {
         this.inventoryController = new InventoryController();
+        this.orderManger =new OrderManger();
+        this.supplier_manger =new Supplier_Manger();
 
         //welcome page
         JFrame welcomeFrame = new JFrame("Welcome Page");
@@ -96,6 +106,9 @@ public class InventoryMangerGUI implements ActionListener {
         PriceHistoryReportButton = createStyledButton("Price history report");
         InsertDefectiveButton = createStyledButton("Defective insertion");
         PrintFullInventoryButton = createStyledButton("Print full inventory");
+        PrintAllShortageOrder =createStyledButton("Print all Order's");
+        PrintAllPeriodOrder =createStyledButton("Print all Period's Order's");
+        addPeriodOrderButton =createStyledButton("Add Period Order");
 
         // Register the ActionListener for each button
         ShortageReportButton.addActionListener(this);
@@ -106,6 +119,9 @@ public class InventoryMangerGUI implements ActionListener {
         PriceHistoryReportButton.addActionListener(this);
         InsertDefectiveButton.addActionListener(this);
         PrintFullInventoryButton.addActionListener(this);
+        PrintAllShortageOrder.addActionListener(this);
+        PrintAllPeriodOrder.addActionListener(this);
+        addPeriodOrderButton.addActionListener(this);
 
 
         buttonPanel.add(ShortageReportButton);
@@ -116,6 +132,9 @@ public class InventoryMangerGUI implements ActionListener {
         buttonPanel.add(PriceHistoryReportButton);
         buttonPanel.add(InsertDefectiveButton);
         buttonPanel.add(PrintFullInventoryButton);
+        buttonPanel.add(PrintAllPeriodOrder);
+        buttonPanel.add(PrintAllShortageOrder);
+        buttonPanel.add(addPeriodOrderButton);
 
         jframe.add(buttonPanel);
 
@@ -228,7 +247,7 @@ public class InventoryMangerGUI implements ActionListener {
 
 
     private void startIdleTimer() {
-        Timer timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
             private int idleTime = 0;
 
             @Override
@@ -305,6 +324,7 @@ public class InventoryMangerGUI implements ActionListener {
                     dispose();
                     jframe.setVisible(true);
 //                    startIdleTimer();
+                    //change it
                 }
             });
         }
@@ -383,7 +403,7 @@ public class InventoryMangerGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //******************* this is the switch case *******************/
-        if(e.getSource() == ShortageReportButton) {
+        if (e.getSource() == ShortageReportButton) {
             //Report issuance options
             String[] options = {"For all products", "For Category", "For specific product", "Return"};
             // Create a custom panel with FlowLayout
@@ -408,16 +428,16 @@ public class InventoryMangerGUI implements ActionListener {
             switch (choiceNum) {
                 case 0:
                     // for all products
-                    if (inventoryController.shortageReportFull() == null){
-                        JOptionPane.showInternalMessageDialog(null,"No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.shortageReportFull() == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     report = inventoryController.shortageReportFull();
                     reportType = report.getType().toString();
@@ -436,39 +456,32 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1]});;
+                        tableModel.addRow(new Object[]{reportType, reportNumber, reportDate, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp = new JScrollPane(jtable);
                     jframe.add(sp);
-                    sp.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp,"Shortage Report", JOptionPane.PLAIN_MESSAGE);
+                    sp.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp, "Shortage Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 1:
+                    //TODO fix - the reportNumber jump by 2
+
                     // for category
                     String nameCategory = JOptionPane.showInputDialog("For which category ?");
 
-                    // if clicked "cancel"
-                    if (nameCategory == null) {
-                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                        if (window instanceof JDialog){
-                            JDialog dialog = (JDialog) window;
-                            dialog.dispose();
-                        }
-                        return;
-                    }
-
-                    if (inventoryController.shortageReportCategory(nameCategory) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.shortageReportCategory(nameCategory) == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel2 = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel2 = new DefaultTableModel(column, 0);
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable2.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     Report report2 = inventoryController.shortageReportCategory(nameCategory);
                     String reportType2 = report2.getType().toString();
@@ -487,39 +500,30 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,columns[0],columns[1]});;
+                        tableModel2.addRow(new Object[]{reportType2, reportNumber2, reportDate2, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp2 = new JScrollPane(jtable2);
                     jframe.add(sp2);
-                    sp2.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp2,"Shortage Report", JOptionPane.PLAIN_MESSAGE);
+                    sp2.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp2, "Shortage Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 2:
                     // for specific item
                     String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
 
-                    // if clicked "cancel"
-                    if (nameSpecific == null) {
-                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                        if (window instanceof JDialog){
-                            JDialog dialog = (JDialog) window;
-                            dialog.dispose();
-                        }
-                        return;
-                    }
-
-                    if (inventoryController.shortageReportGeneralItem(nameSpecific) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.shortageReportGeneralItem(nameSpecific) == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable3.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     Report report3 = inventoryController.shortageReportGeneralItem(nameSpecific);
                     String reportType3 = report3.getType().toString();
@@ -538,13 +542,14 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,columns[0],columns[1]});;
+                        tableModel3.addRow(new Object[]{reportType3, reportNumber3, reportDate3, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp3 = new JScrollPane(jtable3);
                     jframe.add(sp3);
-                    sp3.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp3,"Shortage Report", JOptionPane.PLAIN_MESSAGE);
+                    sp3.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp3, "Shortage Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 3:
@@ -573,15 +578,15 @@ public class InventoryMangerGUI implements ActionListener {
             //Report issuance options
             String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
             JLabel label = new JLabel("Which action would you like to do?");
-            JPanel panel = new JPanel(new GridLayout(3, 3,10,10));
-            panel.setPreferredSize(new Dimension(600,300));
+            JPanel panel = new JPanel(new GridLayout(3, 3, 10, 10));
+            panel.setPreferredSize(new Dimension(600, 300));
 
             final boolean[] validInput = {false};
 
             for (String option : options) {
                 JButton button = new JButton(option);
                 button.setFocusable(false);
-                button.setPreferredSize(new Dimension(80,40));
+                button.setPreferredSize(new Dimension(80, 40));
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -599,7 +604,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -614,13 +619,12 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(categoryInput==null)
+                            if (categoryInput == null)
                                 return;
 
                             inventoryController.addCategoryToMapper(categoryInput);
-                            JOptionPane.showInternalMessageDialog(null,"Category added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Category added", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         }
-
 
 
                         // create new subcategory
@@ -635,17 +639,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
-                                // if clicked "cancel"
-                                if (input == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -660,23 +654,12 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(subCategoryInput == null)
+                            if (subCategoryInput == null)
                                 return;
 
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("Which category will store this sub-category ?");
-
-                                // if clicked "cancel"
-                                if (input == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     categoryInput = input;
@@ -685,13 +668,12 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(categoryInput==null)
+                            if (categoryInput == null)
                                 return;
                             subCategory subCategory = new subCategory(subCategoryInput);
-                            inventoryController.addSubCatToMapper(categoryInput,subCategory);
-                            JOptionPane.showInternalMessageDialog(null,"Sub-Category added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            inventoryController.addSubCatToMapper(categoryInput, subCategory);
+                            JOptionPane.showInternalMessageDialog(null, "Sub-Category added", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         }
-
 
 
                         // create new general Item
@@ -704,7 +686,7 @@ public class InventoryMangerGUI implements ActionListener {
                             String itemManufacturer = null;
                             TempLevel itemTempeture = null;
                             int itemMinimumQantity = 0;
-                            double itemBuyPrice= 0;
+                            double itemBuyPrice = 0;
                             double itemSellPrice = 0;
                             Item currentItem = null;
                             validInput[0] = false;
@@ -717,7 +699,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -732,7 +714,7 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(itemName == null)
+                            if (itemName == null)
                                 return;
 
 
@@ -744,7 +726,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -759,7 +741,7 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(catalogNumber==null)
+                            if (catalogNumber == null)
                                 return;
 
 
@@ -771,7 +753,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -786,7 +768,7 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(categoryName == null)
+                            if (categoryName == null)
                                 return;
 
 
@@ -798,7 +780,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -813,9 +795,8 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(subCategoryName == null)
+                            if (subCategoryName == null)
                                 return;
-
 
 
                             // item weight
@@ -826,7 +807,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -841,9 +822,8 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(itemWeight == 0)
+                            if (itemWeight == 0)
                                 return;
-
 
 
                             // item manufacturer
@@ -854,7 +834,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -869,7 +849,7 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(itemManufacturer == null)
+                            if (itemManufacturer == null)
                                 return;
 
 
@@ -903,7 +883,7 @@ public class InventoryMangerGUI implements ActionListener {
                             }
 
                             // item creation
-                            currentItem = new Item(itemName,catalogNumber,itemWeight,categoryName,itemTempeture,itemManufacturer);
+                            currentItem = new Item(itemName, catalogNumber, itemWeight, categoryName, itemTempeture, itemManufacturer);
                             if (currentItem == null)
                                 return;
 
@@ -916,7 +896,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -932,9 +912,8 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(itemMinimumQantity == 0)
+                            if (itemMinimumQantity == 0)
                                 return;
-
 
 
                             // price
@@ -946,7 +925,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -961,7 +940,7 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(itemBuyPrice == 0)
+                            if (itemBuyPrice == 0)
                                 return;
 
                             // selling price
@@ -972,7 +951,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -987,18 +966,17 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(itemSellPrice == 0)
+                            if (itemSellPrice == 0)
                                 return;
 
                             // add the prices
-                            currentItem.addNewPrice(itemBuyPrice,itemSellPrice);
+                            currentItem.addNewPrice(itemBuyPrice, itemSellPrice);
                             currentItem.setCatalogName(categoryName);
 
                             // add the new item
                             inventoryController.insertNewItemToMapper(currentItem);
-                            JOptionPane.showInternalMessageDialog(null,"New general item added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "New general item added", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         }
-
 
 
                         // add new specific item
@@ -1019,7 +997,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -1034,72 +1012,40 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(catalogNumber == null)
+                            if (catalogNumber == null)
                                 return;
 
                             currentItem = inventoryController.findItemByCatalogNum(catalogNumber);
 
 
                             // has expiry date
-                            int expiryInput = JOptionPane.showConfirmDialog(null,"Does the product have an expiration date", "Expiration Date", JOptionPane.YES_NO_OPTION);
+                            int expiryInput = JOptionPane.showConfirmDialog(null, "Does the product have an expiration date", "Expiration Date", JOptionPane.YES_NO_OPTION);
                             if (expiryInput == -1)
                                 return;
 
                             // if the product have expiration date
-                            if (expiryInput == 0)
-                            {
+                            if (expiryInput == 0) {
                                 String yearInput = JOptionPane.showInputDialog("What is the expiration year ?");
-                                // if clicked "cancel"
-                                if (yearInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
                                 int expiryYear = Integer.parseInt(yearInput);
-
                                 String monthInput = JOptionPane.showInputDialog("What is the expiration month ?");
-                                // if clicked "cancel"
-                                if (monthInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
                                 int expiryMonth = Integer.parseInt(monthInput);
-
                                 String dayInput = JOptionPane.showInputDialog("What is the expiration day ?");
-                                // if clicked "cancel"
-                                if (dayInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
                                 int expiryDay = Integer.parseInt(dayInput);
-
                                 Calendar calendar = Calendar.getInstance();
-                                calendar.set(Calendar.YEAR,expiryYear);
-                                calendar.set(Calendar.MONTH,expiryMonth - 1);
-                                calendar.set(Calendar.DAY_OF_MONTH,expiryDay);
+                                calendar.set(Calendar.YEAR, expiryYear);
+                                calendar.set(Calendar.MONTH, expiryMonth - 1);
+                                calendar.set(Calendar.DAY_OF_MONTH, expiryDay);
                                 currentDate = calendar.getTime();
 
                             }
 
                             // create new specific item and then add it to the inventory
-                            specificItemAddition = new specificItem(currentDate,false,Location.Storage,currentItem);
+                            specificItemAddition = new specificItem(currentDate, false, Location.Storage, currentItem);
                             inventoryController.addSpecificItem(currentItem, specificItemAddition);
                             inventoryController.insertNewSpecificToMapper(specificItemAddition);
-                            JOptionPane.showInternalMessageDialog(null,"The item has been added", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "The item has been added", "Alert", JOptionPane.INFORMATION_MESSAGE);
 
                         }
-
 
 
                         // delete category
@@ -1114,7 +1060,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -1129,13 +1075,12 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(categoryName == null)
+                            if (categoryName == null)
                                 return;
 
                             inventoryController.removeCategoryFromMapper(categoryName);
-                            JOptionPane.showInternalMessageDialog(null,"The category has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "The category has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         }
-
 
 
                         // delete general item
@@ -1150,7 +1095,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -1159,7 +1104,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -1175,19 +1120,17 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a string value.");
                                 }
                             }
-                            if(catalogNumber == null)
+                            if (catalogNumber == null)
                                 return;
 
                             if (tempItem == null) {
                                 JOptionPane.showMessageDialog(null, "Could not find such an item");
                                 return;
-                            }
-                            else{
+                            } else {
                                 inventoryController.deleteItemFromMapper(tempItem);
-                                JOptionPane.showInternalMessageDialog(null,"Item: " + catalogNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showInternalMessageDialog(null, "Item: " + catalogNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
-
 
 
                         // delete specific item
@@ -1202,7 +1145,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -1220,12 +1163,12 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(specificSerialNumber == -1)
+                            if (specificSerialNumber == -1)
                                 return;
 
 
                             inventoryController.deleteSpecificFromMapper(specificSerialNumber);
-                            JOptionPane.showInternalMessageDialog(null,"Item " + specificSerialNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Item " + specificSerialNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
 
                             // TODO keep it - will work when the method will work
 //                            if (tempItem == null) {
@@ -1252,7 +1195,7 @@ public class InventoryMangerGUI implements ActionListener {
                                 // if clicked "cancel"
                                 if (input == null) {
                                     Window window = SwingUtilities.getWindowAncestor(button);
-                                    if (window instanceof JDialog){
+                                    if (window instanceof JDialog) {
                                         JDialog dialog = (JDialog) window;
                                         dialog.dispose();
                                     }
@@ -1270,11 +1213,11 @@ public class InventoryMangerGUI implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
                                 }
                             }
-                            if(specificSerialNumber == 0)
+                            if (specificSerialNumber == 0)
                                 return;
 
                             inventoryController.moveSpecificItemMapper(specificSerialNumber);
-                            JOptionPane.showInternalMessageDialog(null,"Item: " + specificSerialNumber + " has been moved to the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Item: " + specificSerialNumber + " has been moved to the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
 
                             // TODO keep it - will work when the method will work
 //                            if (tempItem == null) {
@@ -1308,7 +1251,6 @@ public class InventoryMangerGUI implements ActionListener {
         }
 
 
-
         //TODO - fix the amount, now is always 0
         //provide counting report
         else if (e.getSource() == CountingReportButton) {
@@ -1336,16 +1278,16 @@ public class InventoryMangerGUI implements ActionListener {
             switch (choiceNum) {
                 case 0:
                     // for all products
-                    if (inventoryController.FullCountingReport() == null){
-                        JOptionPane.showInternalMessageDialog(null,"No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.FullCountingReport() == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     report = inventoryController.FullCountingReport();
                     reportType = report.getType().toString();
@@ -1364,39 +1306,32 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1]});;
+                        tableModel.addRow(new Object[]{reportType, reportNumber, reportDate, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp = new JScrollPane(jtable);
                     jframe.add(sp);
-                    sp.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp,"Counting Report", JOptionPane.PLAIN_MESSAGE);
+                    sp.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp, "Counting Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 1:
+                    //TODO fix - the reportNumber jump by 2
+
                     // for category
-                    String nameCategory =   JOptionPane.showInputDialog("For which category ?");
+                    String nameCategory = JOptionPane.showInputDialog("For which category ?");
 
-                    // if clicked "cancel"
-                    if (nameCategory == null) {
-                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                        if (window instanceof JDialog){
-                            JDialog dialog = (JDialog) window;
-                            dialog.dispose();
-                        }
-                        return;
-                    }
-
-                    if (inventoryController.CategoryCountingReport(nameCategory) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No products with that category name in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.CategoryCountingReport(nameCategory) == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No products with that category name in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel2 = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel2 = new DefaultTableModel(column, 0);
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable2.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     Report report2 = inventoryController.CategoryCountingReport(nameCategory);
                     String reportType2 = report2.getType().toString();
@@ -1415,39 +1350,30 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,columns[0],columns[1]});;
+                        tableModel2.addRow(new Object[]{reportType2, reportNumber2, reportDate2, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp2 = new JScrollPane(jtable2);
                     jframe.add(sp2);
-                    sp2.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp2,"Counting Report", JOptionPane.PLAIN_MESSAGE);
+                    sp2.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp2, "Counting Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 2:
                     // for specific item
-                    String nameSpecific =   JOptionPane.showInputDialog("What is the catalog number ?");
+                    String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
 
-                    // if clicked "cancel"
-                    if (nameSpecific == null) {
-                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                        if (window instanceof JDialog){
-                            JDialog dialog = (JDialog) window;
-                            dialog.dispose();
-                        }
-                        return;
-                    }
-
-                    if (inventoryController.ItemCountingReport(nameSpecific) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No products with that catalog number in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.ItemCountingReport(nameSpecific) == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No products with that catalog number in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable3.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     Report report3 = inventoryController.ItemCountingReport(nameSpecific);
                     String reportType3 = report3.getType().toString();
@@ -1466,13 +1392,14 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,columns[0],columns[1]});;
+                        tableModel3.addRow(new Object[]{reportType3, reportNumber3, reportDate3, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp3 = new JScrollPane(jtable3);
                     jframe.add(sp3);
-                    sp3.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp3,"Counting Report", JOptionPane.PLAIN_MESSAGE);
+                    sp3.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp3, "Counting Report", JOptionPane.PLAIN_MESSAGE);
 
                     break;
                 case 3:
@@ -1520,16 +1447,16 @@ public class InventoryMangerGUI implements ActionListener {
             switch (choiceNum) {
                 case 0:
                     // for all products
-                    if (inventoryController.FullDefectiveReport() == null){
-                        JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.FullDefectiveReport() == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     report = inventoryController.FullDefectiveReport();
                     reportType = report.getType().toString();
@@ -1548,39 +1475,31 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel.addRow(new Object[]{reportType,reportNumber,reportDate,columns[0],columns[1]});;
+                        tableModel.addRow(new Object[]{reportType, reportNumber, reportDate, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp = new JScrollPane(jtable);
                     jframe.add(sp);
-                    sp.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                    sp.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp, "Defective Report", JOptionPane.PLAIN_MESSAGE);
                     break;
 
                 case 1:
+                    //TODO fix - the reportNumber jump by 2
                     // for category
                     String nameCategory = JOptionPane.showInputDialog("For which category ?");
 
-                    // if clicked "cancel"
-                    if (nameCategory == null) {
-                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                        if (window instanceof JDialog){
-                            JDialog dialog = (JDialog) window;
-                            dialog.dispose();
-                        }
-                        return;
-                    }
-
-                    if (inventoryController.CategoryDefectiveReport(nameCategory) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.CategoryDefectiveReport(nameCategory) == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel2 = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel2 = new DefaultTableModel(column, 0);
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable2.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     Report report2 = inventoryController.CategoryDefectiveReport(nameCategory);
                     String reportType2 = report2.getType().toString();
@@ -1599,39 +1518,30 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel2.addRow(new Object[]{reportType2,reportNumber2,reportDate2,columns[0],columns[1]});;
+                        tableModel2.addRow(new Object[]{reportType2, reportNumber2, reportDate2, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp2 = new JScrollPane(jtable2);
                     jframe.add(sp2);
-                    sp2.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp2,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                    sp2.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp2, "Defective Report", JOptionPane.PLAIN_MESSAGE);
                     break;
 
                 case 2:
                     // for specific item
                     String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
 
-                    // if clicked "cancel"
-                    if (nameSpecific == null) {
-                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                        if (window instanceof JDialog){
-                            JDialog dialog = (JDialog) window;
-                            dialog.dispose();
-                        }
-                        return;
-                    }
-
-                    if (inventoryController.ItemDefectiveReport(nameSpecific) == null){
-                        JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if (inventoryController.ItemDefectiveReport(nameSpecific) == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
-                    DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                    DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable3.setFont(new Font("Arial", Font.PLAIN,10));
+                    jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     Report report3 = inventoryController.ItemDefectiveReport(nameSpecific);
                     String reportType3 = report3.getType().toString();
@@ -1650,13 +1560,14 @@ public class InventoryMangerGUI implements ActionListener {
                         String[] columns = line.split(":");
 
                         // Add the columns as a new row to the table model
-                        tableModel3.addRow(new Object[]{reportType3,reportNumber3,reportDate3,columns[0],columns[1]});;
+                        tableModel3.addRow(new Object[]{reportType3, reportNumber3, reportDate3, columns[0], columns[1]});
+                        ;
                     }
 
                     JScrollPane sp3 = new JScrollPane(jtable3);
                     jframe.add(sp3);
-                    sp3.setPreferredSize(new Dimension(1000,400));
-                    JOptionPane.showMessageDialog(null,sp3,"Defective Report", JOptionPane.PLAIN_MESSAGE);
+                    sp3.setPreferredSize(new Dimension(1000, 400));
+                    JOptionPane.showMessageDialog(null, sp3, "Defective Report", JOptionPane.PLAIN_MESSAGE);
                     break;
 
                 case 3:
@@ -1714,35 +1625,24 @@ public class InventoryMangerGUI implements ActionListener {
                     if (choiceNum1 == -1) {
                         return;
                     }
-                    switch (choiceNum1){
+                    switch (choiceNum1) {
 
                         case 0:
                             validInput = false;
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
-
-                                // if clicked "cancel"
-                                if (discountSizeInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
                                 if ((discountSize < 100) && (discountSize > 0)) {
                                     validInput = true;
                                 } else {
-                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showInternalMessageDialog(null, "Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                             inventoryController.FullPercentageDiscount(discountSize);
-                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
                         case 1:
@@ -1750,29 +1650,18 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
-
-                                // if clicked "cancel"
-                                if (discountSizeInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
                                 if ((discountSize < 100) && (discountSize > 0)) {
                                     validInput = true;
                                 } else {
-                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showInternalMessageDialog(null, "Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
 
                                 }
                             }
                             inventoryController.FullStandardDiscount(discountSize);
-                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
                         case 2:
@@ -1794,54 +1683,31 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
 
 
-                // for category
                 case 1:
                     // for category
                     int choiceNum2 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
                     if (choiceNum2 == -1) {
                         return;
                     }
-                    switch (choiceNum2){
+                    switch (choiceNum2) {
                         case 0:
                             //Percentage Discount
                             validInput = false;
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
-
-                                // if clicked "cancel"
-                                if (discountSizeInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
                                 if ((discountSize < 100) && (discountSize > 0)) {
                                     validInput = true;
                                 } else {
-                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showInternalMessageDialog(null, "Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                             categoryName = JOptionPane.showInputDialog("What category to update discount for ?");
-
-                            // if clicked "cancel"
-                            if (categoryName == null) {
-                                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                if (window instanceof JDialog){
-                                    JDialog dialog = (JDialog) window;
-                                    dialog.dispose();
-                                }
-                                return;
-                            }
-
                             inventoryController.CategoryPercentageDiscount(discountSize, categoryName);
-                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
                         case 1:
@@ -1850,41 +1716,19 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
-
-                                // if clicked "cancel"
-                                if (discountSizeInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
                                 if ((discountSize < 100) && (discountSize > 0)) {
                                     validInput = true;
                                 } else {
-                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showInternalMessageDialog(null, "Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
 
                                 }
                             }
                             categoryName = JOptionPane.showInputDialog("What category to update discount for ?");
-
-                            // if clicked "cancel"
-                            if (categoryName == null) {
-                                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                if (window instanceof JDialog){
-                                    JDialog dialog = (JDialog) window;
-                                    dialog.dispose();
-                                }
-                                return;
-                            }
-
                             inventoryController.CategoryStandardDiscount(discountSize, categoryName);
-                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
                         case 2:
@@ -1905,42 +1749,32 @@ public class InventoryMangerGUI implements ActionListener {
                     }
                     break;
 
-                // for specific item
+
                 case 2:
                     // for specific product
                     int choiceNum3 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
                     if (choiceNum3 == -1) {
                         return;
                     }
-                    switch (choiceNum3){
+                    switch (choiceNum3) {
                         case 0:
                             //Percentage Discount
                             validInput = false;
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
-
-                                // if clicked "cancel"
-                                if (discountSizeInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
                                 if ((discountSize < 100) && (discountSize > 0)) {
                                     validInput = true;
                                 } else {
-                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showInternalMessageDialog(null, "Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                             catalonNumber = JOptionPane.showInputDialog("What is the catalog number of the product to update the discount for ?");
                             inventoryController.SpecificPercentageDiscount(discountSize, catalonNumber);
-                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
                         case 1:
@@ -1949,40 +1783,20 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
-
-                                // if clicked "cancel"
-                                if (discountSizeInput == null) {
-                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                    if (window instanceof JDialog){
-                                        JDialog dialog = (JDialog) window;
-                                        dialog.dispose();
-                                    }
-                                    return;
-                                }
-
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
                                 if ((discountSize < 100) && (discountSize > 0)) {
                                     validInput = true;
                                 } else {
-                                    JOptionPane.showInternalMessageDialog(null,"Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showInternalMessageDialog(null, "Invalid input! Please enter a number between 1-99 ", "Error", JOptionPane.ERROR_MESSAGE);
 
                                 }
                             }
                             catalonNumber = JOptionPane.showInputDialog("What is the catalog number of the product to update the discount for ?");
-
-                            // if clicked "cancel"
-                            if (catalonNumber == null) {
-                                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                                if (window instanceof JDialog){
-                                    JDialog dialog = (JDialog) window;
-                                    dialog.dispose();
-                                }
-                                return;
-                            }
-                            inventoryController.SpecificStandardDiscount(discountSize, catalonNumber);
-                            JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            //TODO check what is the problame with that func
+                            inventoryController.SpecificStandardDiscount(discountSize, categoryName);
+                            JOptionPane.showInternalMessageDialog(null, "Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
                         case 2:
@@ -2027,21 +1841,9 @@ public class InventoryMangerGUI implements ActionListener {
         else if (e.getSource() == PriceHistoryReportButton) {
             String catalogNumber = JOptionPane.showInputDialog("What is the catalog number ?");
 
-            // if clicked "cancel"
-            if (catalogNumber == null) {
-                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                if (window instanceof JDialog){
-                    JDialog dialog = (JDialog) window;
-                    dialog.dispose();
-                }
-                return;
-            }
-
-            if (inventoryController.priceHistoryReport(catalogNumber) == null)
-            {
-                JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
+            if (inventoryController.priceHistoryReport(catalogNumber) == null) {
+                JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+            } else {
 
                 String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Buy Price", "Sell Price"};
                 Report report = null;
@@ -2053,11 +1855,11 @@ public class InventoryMangerGUI implements ActionListener {
                 double buyPrice = 0;
                 double sellPrice = 0;
 
-                DefaultTableModel tableModel3 = new DefaultTableModel(column,0);
+                DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                 JTable jtable = new JTable(tableModel3);
                 jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                jtable.setFont(new Font("Arial", Font.PLAIN,10));
+                jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                 report = inventoryController.priceHistoryReport(catalogNumber);
                 reportType = report.getType().toString();
@@ -2070,13 +1872,13 @@ public class InventoryMangerGUI implements ActionListener {
 
                 String lines3[] = reportString.split("\n");
                 for (String line : lines3) {
-                    if (line.contains("Buy price:")){
+                    if (line.contains("Buy price:")) {
                         int start = line.indexOf("Buy price:") + 11;
                         int end = line.indexOf(",", start);
                         String buyPriceStr = line.substring(start, end).trim();
                         buyPrice = Double.parseDouble(buyPriceStr);
                     }
-                    if (line.contains("sell price:")){
+                    if (line.contains("sell price:")) {
                         int start = line.indexOf("sell price:") + 12;
                         int end = line.indexOf(",", start);
                         String sellPriceStr = line.substring(start, end).trim();
@@ -2084,14 +1886,14 @@ public class InventoryMangerGUI implements ActionListener {
                     }
 
                     // Add the columns as a new row to the table model
-                    tableModel3.addRow(new Object[]{reportType,reportNumber,reportDate,catalogNumber,buyPrice,sellPrice});
+                    tableModel3.addRow(new Object[]{reportType, reportNumber, reportDate, catalogNumber, buyPrice, sellPrice});
 
                 }
 
                 JScrollPane sp = new JScrollPane(jtable);
                 jframe.add(sp);
-                sp.setPreferredSize(new Dimension(1000,400));
-                JOptionPane.showMessageDialog(null,sp,"Price History", JOptionPane.PLAIN_MESSAGE);
+                sp.setPreferredSize(new Dimension(1000, 400));
+                JOptionPane.showMessageDialog(null, sp, "Price History", JOptionPane.PLAIN_MESSAGE);
             }
         }
 
@@ -2103,18 +1905,6 @@ public class InventoryMangerGUI implements ActionListener {
             while (!validInput) {
                 defectedSerialNumberInput = JOptionPane.showInputDialog("What is the serial number for the item to be set as defected ?");
 
-
-                // if clicked "cancel"
-                if (defectedSerialNumberInput == null) {
-                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
-                    if (window instanceof JDialog){
-                        JDialog dialog = (JDialog) window;
-                        dialog.dispose();
-                    }
-                    return;
-                }
-
-
                 // Check if the input consists only of numeric characters
                 if (defectedSerialNumberInput.matches("\\d+")) {
                     validInput = true;
@@ -2124,12 +1914,12 @@ public class InventoryMangerGUI implements ActionListener {
             }
             int defectedSerialNumber = Integer.parseInt(defectedSerialNumberInput);
             inventoryController.moveSpecificItemToDefectiveMapper(defectedSerialNumber);
-            JOptionPane.showInternalMessageDialog(null,"Item numbered " + defectedSerialNumber + " has been set as defected and moved into the warehouse storage", "Alert", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showInternalMessageDialog(null, "Item numbered " + defectedSerialNumber + " has been set as defected and moved into the warehouse storage", "Alert", JOptionPane.INFORMATION_MESSAGE);
         }
 
 
         //print all the products in the inventory
-        else if (e.getSource() == PrintFullInventoryButton){
+        else if (e.getSource() == PrintFullInventoryButton) {
             String column[] = {"Catalog Number", "Item ID", "Expiration Date", "isDefected", "location", "Buy Price", "Sell Price", "Minimum Qauntity"};
 
             String catalogNumber;
@@ -2142,18 +1932,16 @@ public class InventoryMangerGUI implements ActionListener {
             int minimumQantity;
 
 
-            DefaultTableModel tableModel = new DefaultTableModel(column,0);
+            DefaultTableModel tableModel = new DefaultTableModel(column, 0);
             JTable jtable = new JTable(tableModel);
             jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-            jtable.setFont(new Font("Arial", Font.PLAIN,10));
+            jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
 
-            for(Item item: inventoryController.getItemMapper().findAll())
-            {
+            for (Item item : inventoryController.getItemMapper().findAll()) {
 
-                for(specificItem specificItem: inventoryController.getSpecificItemMapper().findByCatalogNum(item.getCatalogNum()))
-                {
+                for (specificItem specificItem : inventoryController.getSpecificItemMapper().findByCatalogNum(item.getCatalogNum())) {
                     catalogNumber = specificItem.getCatalogNum();
                     serialNumber = specificItem.getSerialNumber();
                     expriryDate = String.valueOf(specificItem.getDate());
@@ -2165,20 +1953,215 @@ public class InventoryMangerGUI implements ActionListener {
 //                    String lines[] = reportString.split("\n");
 
                     // Add all the variables as a new row to the table model
-                    tableModel.addRow(new Object[]{catalogNumber,serialNumber,expriryDate,isDefected,location,buyPrice,sellPrice,minimumQantity });
+                    tableModel.addRow(new Object[]{catalogNumber, serialNumber, expriryDate, isDefected, location, buyPrice, sellPrice, minimumQantity});
 
                 }
             }
 
             JScrollPane sp = new JScrollPane(jtable);
             jframe.add(sp);
-            sp.setPreferredSize(new Dimension(1000,400));
-            JOptionPane.showMessageDialog(null,sp,"Inventory Products", JOptionPane.PLAIN_MESSAGE);
+            sp.setPreferredSize(new Dimension(1000, 400));
+            JOptionPane.showMessageDialog(null, sp, "Inventory Products", JOptionPane.PLAIN_MESSAGE);
 
+        } else if (e.getSource() == this.PrintAllShortageOrder) {
+            OrderMapper pb = new OrderMapper();
+
+
+            // Create an instance of FixedDaySupplierMapper
+
+
+            // Get the data for the jTable
+            String data = pb.getAllOrdersAsString();
+
+
+            // Create a DefaultTableModel with empty rows and column headers
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number", "Supplier", "Cost", "Store Number", "Status"});
+
+
+            // Split the data into lines
+            String[] lines = data.split("\n");
+
+
+            // Iterate over the lines and add each row to the table model
+            for (String line : lines) {
+                // Split the line into columns
+                String[] columns = line.split("\t");
+
+                // Add the columns as a new row to the table model
+                tableModel.addRow(columns);
+            }
+
+
+            // Create a JTable using the table model
+            JTable jTable = new JTable(tableModel);
+            jTable = ad_table(jTable);
+
+
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Handle the back button click event
+                    // Add your code here to go back to the previous view or screen
+
+                    // For example, you can close the current JFrame
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                    frame.dispose();
+                }
+
+            });
+            // Create a JPanel to hold the JTable and the back button
+            JPanel panel = new JPanel();
+            panel.add(new JScrollPane(jTable));
+
+            panel.add(backButton);
+
+            // Display the JPanel in a JFrame
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(panel);
+            frame.pack();
+
+            frame.setVisible(true);
+
+        } else if (e.getSource() == PrintAllPeriodOrder) {
+            PeriodicOrderMapper pb = new PeriodicOrderMapper();
+
+
+            // Create an instance of FixedDaySupplierMapper
+
+
+            // Get the data for the jTable
+            String data = pb.getTableString();
+
+
+            // Create a DefaultTableModel with empty rows and column headers
+            DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Order Number", "Supplier", "Cost", "Days to Cycle", "Days Left until append new order"});
+
+
+            // Split the data into lines
+            String[] lines = data.split("\n");
+
+
+            // Iterate over the lines and add each row to the table model
+            for (String line : lines) {
+                // Split the line into columns
+                String[] columns = line.split(", ");
+
+                // Add the columns as a new row to the table model
+                tableModel.addRow(columns);
+            }
+
+
+            // Create a JTable using the table model
+            JTable jTable = new JTable(tableModel);
+            jTable = this.ad_table(jTable);
+
+
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Handle the back button click event
+                    // Add your code here to go back to the previous view or screen
+
+                    // For example, you can close the current JFrame
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                    frame.dispose();
+                }
+
+            });
+            // Create a JPanel to hold the JTable and the back button
+            JPanel panel = new JPanel();
+            panel.add(new JScrollPane(jTable));
+
+            panel.add(backButton);
+
+            // Display the JPanel in a JFrame
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(panel);
+            frame.pack();
+
+            frame.setVisible(true);
+
+
+        } else if (e.getSource() ==this.addPeriodOrderButton) {
+
+
+            System.out.println("add new Period Order:");
+
+            Map<Item, Integer> itemlist1 = new HashMap<Item, Integer>();
+
+            String store_numberInput1 = JOptionPane.showInputDialog("store number:");
+            store_numberInput1 = checkNumber(store_numberInput1);
+            int store_number1 = Integer.parseInt(store_numberInput1);
+
+            String days = JOptionPane.showInputDialog("number of days until new cycle:");
+            days = checkNumber(days);
+            int days1 = Integer.parseInt(days);
+
+            String supplier_id = JOptionPane.showInputDialog("Supplier id:");
+
+            supplier_manger.update_suppliers();
+
+            Supplier supplier1 = supplier_manger.get_supplier_by_id(supplier_id);
+
+            while (true) {
+                String optionInput = JOptionPane.showInputDialog(
+                        "1. add item to list\n" +
+                                "2. done and ready to go to orders"
+                );
+                optionInput = checkNumber(optionInput);
+                int option_11 = Integer.parseInt(optionInput);
+
+                // Option 1: add item to the order list
+                if (option_11 == 1) {
+                    List<Item> itemList_sub= new ArrayList<>();
+                    int op = 1;
+                    for (Item item : supplier1.getItems().keySet()) {
+                        if (supplier1.getItems().keySet().size() > 0) {
+                            itemList_sub.add(item);
+                            op++;
+                        }
+                    }
+                    StringBuilder itemsPrompt = new StringBuilder();
+                    for (int i = 0; i < itemList_sub.size(); i++) {
+                        itemsPrompt.append((i + 1)).append(". ").append(itemList_sub.get(i)).append("\n");
+                    }
+                    String item_numberInput = JOptionPane.showInputDialog(
+                            "Enter the number of the item you want to add:\n" + itemsPrompt.toString()
+                    );
+                    item_numberInput = checkNumber(item_numberInput);
+                    int item_number = Integer.parseInt(item_numberInput);
+
+                    int count = 1;
+                    for (Item item : itemList_sub) {
+                        if (count == item_number) {
+                            String quantityInput = JOptionPane.showInputDialog("Enter the quantity:");
+                            quantityInput = checkNumberWithDot(quantityInput);
+                            int quantity = Integer.parseInt(quantityInput);
+                            itemlist1.put(item, quantity);
+                            break;
+                        }
+                        count++;
+                    }
+                }
+
+                if (option_11 == 2) {
+                    if (!orderManger.period_order(supplier1, itemlist1, store_number1, days1)) {
+                        System.out.println("failed to make an order make sure that the items can be provided");
+                    }
+                    break;
+                }
+            }
         }
 
 
+
+
     }
+
 
     public static boolean isDoubleString(String input) {
         try {
@@ -2188,6 +2171,87 @@ public class InventoryMangerGUI implements ActionListener {
             return false;
         }
     }
+
+
+    private JTable ad_table(JTable jTable){
+        TableColumnModel columnModel = jTable.getColumnModel();
+
+
+        for (int columnIndex = 0; columnIndex < columnModel.getColumnCount(); columnIndex++) {
+            TableColumn column = columnModel.getColumn(columnIndex);
+            int preferredWidth = column.getPreferredWidth();
+            int maxWidth = column.getMaxWidth();
+
+            // Get the renderer for the column
+            TableCellRenderer headerRenderer = column.getHeaderRenderer();
+            if (headerRenderer == null) {
+                headerRenderer = jTable.getTableHeader().getDefaultRenderer();
+            }
+            Component headerComponent = headerRenderer.getTableCellRendererComponent(
+                    jTable, column.getHeaderValue(), false, false, -1, columnIndex);
+
+            // Determine the maximum width needed for the column
+            int headerWidth = headerComponent.getPreferredSize().width;
+            int cellWidth = jTable.getCellRenderer(0, columnIndex)
+                    .getTableCellRendererComponent(jTable,
+                            jTable.getValueAt(0, columnIndex), false, false, 0, columnIndex)
+                    .getPreferredSize().width;
+            int maxWidthNeeded = Math.max(headerWidth, cellWidth) + 10; // Add some padding
+
+            // Adjust the preferred width and maximum width of the column
+            column.setPreferredWidth(Math.min(maxWidthNeeded, preferredWidth));
+            column.setMaxWidth(maxWidth > 0 ? Math.min(maxWidthNeeded, maxWidth) : maxWidthNeeded);
+        }
+        return jTable;
+
+
+    }
+
+
+    public static String checkName(String input) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (Character.isDigit(input.charAt(i))) {
+                    System.out.println("A name has to be letters only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length()) {
+                return input;
+            } else {
+                System.out.println("name:");
+                input = scanner.next();
+            }
+        }
+    }
+
+    public static String checkNumber(String input) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int counter = 0;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    System.out.println("has to be numbers only");
+                    break;
+                } else {
+                    counter++;
+                }
+            }
+            if (counter == input.length()) {
+                return input;
+            } else {
+                System.out.println("number:");
+                input = scanner.next();
+            }
+        }
+    }
+
+
+
 
 
 }

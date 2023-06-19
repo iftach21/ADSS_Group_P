@@ -753,6 +753,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
             String input = null;
 
             while (!validInteger) {
+
                 input = JOptionPane.showInputDialog("Enter an integer value fot he amount:");
 
                 try {

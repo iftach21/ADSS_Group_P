@@ -45,12 +45,14 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        welcomeFrame.setVisible(false);
 
 
 
         if(args[0].equals("GUI")) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
+
                     if(args[1].equals("Supplier-Manger")){
                     new Supplier_Manger_GUI();
                     }

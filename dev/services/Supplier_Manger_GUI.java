@@ -41,11 +41,12 @@ public class Supplier_Manger_GUI   implements ActionListener {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle("Supplier Manager");
         JLabel label = new JLabel("Supplier  Menu");
-        label.setFont(new Font("Arial", Font.BOLD, 24)); // Customize the font and size as desired
+        label.setFont(new Font("Arial", Font.BOLD, 40)); // Customize the font and size as desired
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
         label.setOpaque(true);
         label.setBackground(Color.BLACK);
+        label.setForeground(new Color(220, 20, 60));
         jframe.add(label, BorderLayout.NORTH);
 
 
@@ -53,7 +54,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
         buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        buttonPanel.setBackground(new Color(135, 0, 0));
+        buttonPanel.setBackground(new Color(3, 3, 3));
 
         addnewSupplierButton = createStyledButton("Add new Supplier");
         removeSupplierButton = createStyledButton("Remove Supplier");
@@ -88,15 +89,27 @@ public class Supplier_Manger_GUI   implements ActionListener {
         this.supplier_manger=new Supplier_Manger();
     }
 
-   private JButton createStyledButton(String text) {
+    private static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(180, 60));
-        button.setFont(new Font("Arial", Font.BOLD, 14));
-        button.setBackground(new Color(235, 235, 235));
-        button.setForeground(Color.DARK_GRAY);
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setBackground(new Color(220, 20, 60)); // Red button background
+        button.setForeground(Color.WHITE); // White text color
+        button.setFocusPainted(false); // Remove focus border
+
+        // Set font style
+        Font buttonFont = new Font("Arial", Font.BOLD, 16);
+        button.setFont(buttonFont);
+
+        // Add hover effect
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(255, 99, 71)); // Orange hover background
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(220, 20, 60)); // Red button background
+            }
+        });
+
         return button;
     }
 

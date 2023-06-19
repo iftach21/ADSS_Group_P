@@ -35,7 +35,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-    public Supplier_Manger_GUI(JFrame welcomeFrame) {
+    public Supplier_Manger_GUI() {
         jframe = new JFrame();
         jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,18 +90,6 @@ public class Supplier_Manger_GUI   implements ActionListener {
         this.supplier_manger=new Supplier_Manger();
 
 
-        // timer for the welcome page
-        Timer timer = new Timer(5000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Hide the welcome frame and show the main frame
-                welcomeFrame.dispose();
-                jframe.setVisible(true);
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-        welcomeFrame.setVisible(true);
 
 
 
@@ -816,6 +804,22 @@ public class Supplier_Manger_GUI   implements ActionListener {
             jFrame2.setVisible(true);
 
 
+        } else if (e.getSource()==UpdateitemonContract) {
+            String name_s6 = getInputWithValidation("Name of the supplier:");
+            String item_c6 = getInputWithValidation("Catalog number of the item:");
+            int amount_6 = Integer.parseInt(getInputWithValidation("Amount:", "integer"));
+            double discount_6 = Double.parseDouble(getInputWithValidation("Discount:", "double"));
+            supplier_manger.add_item_discount_to_supplier(name_s6, item_c6, amount_6, discount_6);
+
+
+
+
+
+
+
+
+
+
         }
 
 
@@ -843,6 +847,37 @@ public class Supplier_Manger_GUI   implements ActionListener {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+    public static String getInputWithValidation(String message) {
+        while (true) {
+            String input = JOptionPane.showInputDialog(null, message);
+            if (input != null && !input.isEmpty()) {
+                return input;
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please try again.");
+            }
+        }
+    }
+
+    public static String getInputWithValidation(String message, String type) {
+        while (true) {
+            String input = JOptionPane.showInputDialog(null, message);
+            if (input != null && !input.isEmpty()) {
+                try {
+                    if (type.equalsIgnoreCase("integer")) {
+                        Integer.parseInt(input);
+                        return input;
+                    } else if (type.equalsIgnoreCase("double")) {
+                        Double.parseDouble(input);
+                        return input;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Invalid " + type + " input. Please try again.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please try again.");
+            }
         }
     }
 

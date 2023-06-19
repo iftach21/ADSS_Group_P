@@ -52,7 +52,7 @@ public class InventoryMangerGUI implements ActionListener {
     private boolean isKeyActive = false;
 
 
-    public InventoryMangerGUI(JFrame welcomeFrame) {
+    public InventoryMangerGUI() {
         this.inventoryController = new InventoryController();
         this.orderManger =new OrderManger();
         this.supplier_manger =new Supplier_Manger();
@@ -109,6 +109,7 @@ public class InventoryMangerGUI implements ActionListener {
         PrintAllShortageOrder =createStyledButton("Print all Order's");
         PrintAllPeriodOrder =createStyledButton("Print all Period's Order's");
         addPeriodOrderButton =createStyledButton("Add Period Order");
+        UpdatePeriodOrder =createStyledButton("Update a Period Order");
 
         // Register the ActionListener for each button
         ShortageReportButton.addActionListener(this);
@@ -122,6 +123,7 @@ public class InventoryMangerGUI implements ActionListener {
         PrintAllShortageOrder.addActionListener(this);
         PrintAllPeriodOrder.addActionListener(this);
         addPeriodOrderButton.addActionListener(this);
+        UpdatePeriodOrder.addActionListener(this);
 
 
         buttonPanel.add(ShortageReportButton);
@@ -135,6 +137,7 @@ public class InventoryMangerGUI implements ActionListener {
         buttonPanel.add(PrintAllPeriodOrder);
         buttonPanel.add(PrintAllShortageOrder);
         buttonPanel.add(addPeriodOrderButton);
+        buttonPanel.add(UpdatePeriodOrder);
 
         jframe.add(buttonPanel);
 
@@ -157,33 +160,7 @@ public class InventoryMangerGUI implements ActionListener {
         });
 
 
-        // start the screen saver
-//        startIdleTimer();
 
-//        Timer timer = new Timer(5000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // Hide the welcome frame and show the main frame
-//                welcomeFrame.dispose();
-//                jframe.setVisible(true);
-//            }
-//        });
-//        timer.start();
-//        welcomeFrame.setVisible(true);
-
-
-        // timer for the welcome page
-        Timer timer = new Timer(5000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Hide the welcome frame and show the main frame
-                welcomeFrame.dispose();
-                jframe.setVisible(true);
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-        welcomeFrame.setVisible(true);
 
 
 
@@ -2174,9 +2151,76 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
                 }
             }
+        } else if (e.getSource()==this.UpdatePeriodOrder) {
+            String id = JOptionPane.showInputDialog("Enter a period id:");
+            if (!orderManger.contain_Period_order(id)) {
+                JOptionPane.showMessageDialog(null, "ID not in the system");
+            } else {
+                Period_Order periodOrder = orderManger.get_period_order_by_id(id);
+                if (!orderManger.can_update_period_order(periodOrder)) {
+                    JOptionPane.showMessageDialog(null, "Can't update a day before");
+                } else {
+                    String choice_14 = JOptionPane.showInputDialog("Choose what you want to do:\n" +
+                            "1. Delete period order\n" +
+                            "2. Add item to order");
+                    int option_14 = 0;
+                    while (true) {
+                        try {
+                            option_14 = Integer.parseInt(choice_14);
+                            if (option_14 < 1 || option_14 > 2) {
+                                JOptionPane.showMessageDialog(null, "Please enter a valid option");
+                                choice_14 = JOptionPane.showInputDialog("Choose what you want to do:\n" +
+                                        "1. Delete period order\n" +
+                                        "2. Add item to order");
+                                continue;
+                            }
+                            break;
+                        } catch (NumberFormatException ignored) {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid option");
+                            choice_14 = JOptionPane.showInputDialog("Choose what you want to do:\n" +
+                                    "1. Delete period order\n" +
+                                    "2. Add item to order");
+                        }
+                    }
+
+                    switch (option_14) {
+                        case 1:
+                            this.orderManger.delete_a_period_order(id);
+                            break;
+                        case 2:
+                            int op = 0;
+                            List<Item> itemList2 = new ArrayList<>();
+                            Supplier supplier2 = supplier_manger.get_supplier_by_id(periodOrder.getSupplier().getSupplierID());
+                            for (Item item : supplier2.getItems().keySet()) {
+                                if (supplier2.getItems().keySet().size() > 0) {
+                                    op++;
+                                    String itemDetails = op + ". " + item.toString();
+                                    itemList2.add(item);
+                                    JOptionPane.showMessageDialog(null, itemDetails);
+                                }
+                            }
+
+                            String item_numberInput = JOptionPane.showInputDialog("Enter the number of the item you want to add:");
+                            item_numberInput = checkNumber(item_numberInput);
+                            int item_number = Integer.parseInt(item_numberInput);
+                            int count = 1;
+                            for (Item item : itemList2) {
+                                if (count == item_number) {
+                                    String quantityInput = JOptionPane.showInputDialog("Enter the quantity:");
+                                    quantityInput = checkNumberWithDot(quantityInput);
+                                    int quantity = Integer.parseInt(quantityInput);
+                                    String id40 = "" + periodOrder.getOrderNum();
+                                    orderManger.update_add_to_period_order(id40, item, quantity, supplier2.getItems().get(item).getSecond());
+                                    break;
+                                }
+                                count++;
+                            }
+                    }
+                }
+            }
+
+
         }
-
-
 
 
     }

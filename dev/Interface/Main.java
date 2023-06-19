@@ -37,17 +37,28 @@ public class Main {
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         welcomeFrame.setContentPane(imageLabel);
 
+        welcomeFrame.setVisible(true);
+
+        // Hide the frame after one second (1000 milliseconds)
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
-        if(args[0]=="GUI") {
+
+        if(args[0].equals("GUI")) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    if(args[1]=="Supplier Manger"){
-                    new Supplier_Manger_GUI(welcomeFrame);
+                    if(args[1].equals("Supplier-Manger")){
+                    new Supplier_Manger_GUI();
                     }
-                    else if(args[1]=="InventoryManger"){
+                    else if(args[1].equals("InventoryManger")){
 
-                        new InventoryMangerGUI(welcomeFrame);
+                        new InventoryMangerGUI();
+                    } else if (args[2].equals("Store Manger")) {
+                        
                     }
                 }
 

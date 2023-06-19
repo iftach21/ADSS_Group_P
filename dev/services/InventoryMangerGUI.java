@@ -228,7 +228,7 @@ public class InventoryMangerGUI implements ActionListener {
 
 
     private void startIdleTimer() {
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(5000, new ActionListener() {
             private int idleTime = 0;
 
             @Override
@@ -446,10 +446,18 @@ public class InventoryMangerGUI implements ActionListener {
 
                     break;
                 case 1:
-                    //TODO fix - the reportNumber jump by 2
-
                     // for category
-                    String nameCategory =   JOptionPane.showInputDialog("For which category ?");
+                    String nameCategory = JOptionPane.showInputDialog("For which category ?");
+
+                    // if clicked "cancel"
+                    if (nameCategory == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog){
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
 
                     if (inventoryController.shortageReportCategory(nameCategory) == null){
                         JOptionPane.showInternalMessageDialog(null,"No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -490,7 +498,17 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
                 case 2:
                     // for specific item
-                    String nameSpecific =   JOptionPane.showInputDialog("What is the catalog number ?");
+                    String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
+
+                    // if clicked "cancel"
+                    if (nameSpecific == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog){
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
 
                     if (inventoryController.shortageReportGeneralItem(nameSpecific) == null){
                         JOptionPane.showInternalMessageDialog(null,"No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -624,6 +642,16 @@ public class InventoryMangerGUI implements ActionListener {
                                     return;
                                 }
 
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     subCategoryInput = input;
@@ -638,6 +666,17 @@ public class InventoryMangerGUI implements ActionListener {
                             validInput[0] = false;
                             while (!validInput[0]) {
                                 String input = JOptionPane.showInputDialog("Which category will store this sub-category ?");
+
+                                // if clicked "cancel"
+                                if (input == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 // Check if the input consists only of alphabetic characters
                                 if (input.matches("[a-zA-Z\\s]+")) {
                                     categoryInput = input;
@@ -1010,11 +1049,41 @@ public class InventoryMangerGUI implements ActionListener {
                             if (expiryInput == 0)
                             {
                                 String yearInput = JOptionPane.showInputDialog("What is the expiration year ?");
+                                // if clicked "cancel"
+                                if (yearInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
                                 int expiryYear = Integer.parseInt(yearInput);
+
                                 String monthInput = JOptionPane.showInputDialog("What is the expiration month ?");
+                                // if clicked "cancel"
+                                if (monthInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
                                 int expiryMonth = Integer.parseInt(monthInput);
+
                                 String dayInput = JOptionPane.showInputDialog("What is the expiration day ?");
+                                // if clicked "cancel"
+                                if (dayInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(button);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
                                 int expiryDay = Integer.parseInt(dayInput);
+
                                 Calendar calendar = Calendar.getInstance();
                                 calendar.set(Calendar.YEAR,expiryYear);
                                 calendar.set(Calendar.MONTH,expiryMonth - 1);
@@ -1305,10 +1374,18 @@ public class InventoryMangerGUI implements ActionListener {
 
                     break;
                 case 1:
-                    //TODO fix - the reportNumber jump by 2
-
                     // for category
                     String nameCategory =   JOptionPane.showInputDialog("For which category ?");
+
+                    // if clicked "cancel"
+                    if (nameCategory == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog){
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
 
                     if (inventoryController.CategoryCountingReport(nameCategory) == null){
                         JOptionPane.showInternalMessageDialog(null,"No products with that category name in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -1350,6 +1427,16 @@ public class InventoryMangerGUI implements ActionListener {
                 case 2:
                     // for specific item
                     String nameSpecific =   JOptionPane.showInputDialog("What is the catalog number ?");
+
+                    // if clicked "cancel"
+                    if (nameSpecific == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog){
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
 
                     if (inventoryController.ItemCountingReport(nameSpecific) == null){
                         JOptionPane.showInternalMessageDialog(null,"No products with that catalog number in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -1471,9 +1558,18 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
 
                 case 1:
-                    //TODO fix - the reportNumber jump by 2
                     // for category
                     String nameCategory = JOptionPane.showInputDialog("For which category ?");
+
+                    // if clicked "cancel"
+                    if (nameCategory == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog){
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
 
                     if (inventoryController.CategoryDefectiveReport(nameCategory) == null){
                         JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -1515,6 +1611,16 @@ public class InventoryMangerGUI implements ActionListener {
                 case 2:
                     // for specific item
                     String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
+
+                    // if clicked "cancel"
+                    if (nameSpecific == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog){
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
 
                     if (inventoryController.ItemDefectiveReport(nameSpecific) == null){
                         JOptionPane.showInternalMessageDialog(null,"No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
@@ -1615,6 +1721,17 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+
+                                // if clicked "cancel"
+                                if (discountSizeInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1633,6 +1750,17 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+
+                                // if clicked "cancel"
+                                if (discountSizeInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1666,7 +1794,7 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
 
 
-
+                // for category
                 case 1:
                     // for category
                     int choiceNum2 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
@@ -1680,6 +1808,17 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+
+                                // if clicked "cancel"
+                                if (discountSizeInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1690,6 +1829,17 @@ public class InventoryMangerGUI implements ActionListener {
                                 }
                             }
                             categoryName = JOptionPane.showInputDialog("What category to update discount for ?");
+
+                            // if clicked "cancel"
+                            if (categoryName == null) {
+                                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                if (window instanceof JDialog){
+                                    JDialog dialog = (JDialog) window;
+                                    dialog.dispose();
+                                }
+                                return;
+                            }
+
                             inventoryController.CategoryPercentageDiscount(discountSize, categoryName);
                             JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
@@ -1700,6 +1850,17 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+
+                                // if clicked "cancel"
+                                if (discountSizeInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1711,6 +1872,17 @@ public class InventoryMangerGUI implements ActionListener {
                                 }
                             }
                             categoryName = JOptionPane.showInputDialog("What category to update discount for ?");
+
+                            // if clicked "cancel"
+                            if (categoryName == null) {
+                                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                if (window instanceof JDialog){
+                                    JDialog dialog = (JDialog) window;
+                                    dialog.dispose();
+                                }
+                                return;
+                            }
+
                             inventoryController.CategoryStandardDiscount(discountSize, categoryName);
                             JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
@@ -1733,7 +1905,7 @@ public class InventoryMangerGUI implements ActionListener {
                     }
                     break;
 
-
+                // for specific item
                 case 2:
                     // for specific product
                     int choiceNum3 = JOptionPane.showOptionDialog(null, UpdateDiscountPanel, "Discount Update", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, updateDiscountOptions, updateDiscountOptions[0]);
@@ -1747,6 +1919,17 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+
+                                // if clicked "cancel"
+                                if (discountSizeInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1767,6 +1950,17 @@ public class InventoryMangerGUI implements ActionListener {
                             discountSize = null;
                             while (!validInput) {
                                 String discountSizeInput = JOptionPane.showInputDialog("What is the size of the discount ?");
+
+                                // if clicked "cancel"
+                                if (discountSizeInput == null) {
+                                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                    if (window instanceof JDialog){
+                                        JDialog dialog = (JDialog) window;
+                                        dialog.dispose();
+                                    }
+                                    return;
+                                }
+
                                 discountSize = Integer.parseInt(discountSizeInput);
 
                                 // Check if the input consists only of numeric characters
@@ -1778,8 +1972,18 @@ public class InventoryMangerGUI implements ActionListener {
                                 }
                             }
                             catalonNumber = JOptionPane.showInputDialog("What is the catalog number of the product to update the discount for ?");
+
+                            // if clicked "cancel"
+                            if (catalonNumber == null) {
+                                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                                if (window instanceof JDialog){
+                                    JDialog dialog = (JDialog) window;
+                                    dialog.dispose();
+                                }
+                                return;
+                            }
                             //TODO check what is the problame with that func
-                            inventoryController.SpecificStandardDiscount(discountSize, categoryName);
+                            inventoryController.SpecificStandardDiscount(discountSize, catalonNumber);
                             JOptionPane.showInternalMessageDialog(null,"Discount updated", "Alert", JOptionPane.INFORMATION_MESSAGE);
                             break;
 
@@ -1824,6 +2028,16 @@ public class InventoryMangerGUI implements ActionListener {
         //provide price history report
         else if (e.getSource() == PriceHistoryReportButton) {
             String catalogNumber = JOptionPane.showInputDialog("What is the catalog number ?");
+
+            // if clicked "cancel"
+            if (catalogNumber == null) {
+                Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                if (window instanceof JDialog){
+                    JDialog dialog = (JDialog) window;
+                    dialog.dispose();
+                }
+                return;
+            }
 
             if (inventoryController.priceHistoryReport(catalogNumber) == null)
             {
@@ -1890,6 +2104,18 @@ public class InventoryMangerGUI implements ActionListener {
             String defectedSerialNumberInput = null;
             while (!validInput) {
                 defectedSerialNumberInput = JOptionPane.showInputDialog("What is the serial number for the item to be set as defected ?");
+
+
+                // if clicked "cancel"
+                if (defectedSerialNumberInput == null) {
+                    Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                    if (window instanceof JDialog){
+                        JDialog dialog = (JDialog) window;
+                        dialog.dispose();
+                    }
+                    return;
+                }
+
 
                 // Check if the input consists only of numeric characters
                 if (defectedSerialNumberInput.matches("\\d+")) {

@@ -9,31 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="InventoryMangerGUI few changes">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="InventoryMangerGUI few fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/specificItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Domain/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Domain/specificItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/specificItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Interface/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/interfaceManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Domain/InventoryController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/InventoryController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Domain/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/InventoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$14.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/Manger$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Manger$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Manger.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -331,7 +318,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1687036913085</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL‎-00025" summary="InventoryMangerGUI few fixes">
+      <created>1687177678487</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL‎-00025" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687177678487</updated>
+    </task>
+    <task id="LOCAL‎-00026" summary="InventoryMangerGUI few fixes">
+      <created>1687177702265</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL‎-00026" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687177702265</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,7 +357,8 @@
     <MESSAGE value="continue InventoryMangerGUI" />
     <MESSAGE value="InventoryMangerGUI almost done" />
     <MESSAGE value="InventoryMangerGUI few changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="InventoryMangerGUI few changes" />
+    <MESSAGE value="InventoryMangerGUI few fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="InventoryMangerGUI few fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

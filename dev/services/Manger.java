@@ -269,6 +269,10 @@ public class Manger implements ActionListener {
             jTable =this.ad_table(jTable);
 
 
+
+
+
+
             JButton backButton = new JButton("Back");
             backButton.addActionListener(new ActionListener() {
                 @Override

@@ -131,7 +131,8 @@ public class Main {
 
 
     private static void GUIEmployee() throws Exception {
-        UIEmployee ui = new UIEmployee();
+        UIEmployee employeeUI = new UIEmployee();
+        employeeUI.setVisible(true);
     }
 
     private static void GUITransferManager() throws Exception {

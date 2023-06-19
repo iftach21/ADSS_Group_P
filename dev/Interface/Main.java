@@ -140,6 +140,7 @@ public class Main {
         UITransferManager ui = new UITransferManager();
     }
     private static void GUIStoreManager() throws Exception {
+        transferInterface.loadData();
         UIStoreManager storeManager= new UIStoreManager();
     }
 

@@ -39,18 +39,26 @@ public class Main {
 
 
 
+        if(args[0]=="GUI") {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    if(args[1]=="Supplier Manger"){
+                    new Supplier_Manger_GUI(welcomeFrame);
+                    }
+                    else if(args[1]=="InventoryManger"){
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Supplier_Manger_GUI(welcomeFrame);
-            }
-        });
+                        new InventoryMangerGUI(welcomeFrame);
+                    }
+                }
+
+            });
 //        SwingUtilities.invokeLater(new Runnable() {
 //            public void run() {
 //                new InventoryMangerGUI(welcomeFrame);
 //            }
 //        });
 //            Manger manger = new Manger();
+        }
 
 
 

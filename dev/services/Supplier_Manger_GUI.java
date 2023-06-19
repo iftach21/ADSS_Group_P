@@ -35,7 +35,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-    public Supplier_Manger_GUI() {
+    public Supplier_Manger_GUI(JFrame welcomeFrame) {
         jframe = new JFrame();
         jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,6 +88,23 @@ public class Supplier_Manger_GUI   implements ActionListener {
         jframe.add(buttonPanel);
         jframe.setVisible(true);
         this.supplier_manger=new Supplier_Manger();
+
+
+        // timer for the welcome page
+        Timer timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Hide the welcome frame and show the main frame
+                welcomeFrame.dispose();
+                jframe.setVisible(true);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+        welcomeFrame.setVisible(true);
+
+
+
     }
 
     private static JButton createStyledButton(String text) {

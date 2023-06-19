@@ -52,32 +52,32 @@ public class InventoryMangerGUI implements ActionListener {
     private boolean isKeyActive = false;
 
 
-    public InventoryMangerGUI() {
+    public InventoryMangerGUI(JFrame welcomeFrame) {
         this.inventoryController = new InventoryController();
         this.orderManger =new OrderManger();
         this.supplier_manger =new Supplier_Manger();
 
-        //welcome page
-        JFrame welcomeFrame = new JFrame("Welcome Page");
-        welcomeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //welcome page size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-
-        JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setBackground(Color.WHITE);
-
-        JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
-        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-        ImageIcon scaledImageIcon = new ImageIcon(image);
-        imageLabel.setIcon(scaledImageIcon);
-        imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        imagePanel.add(imageLabel, BorderLayout.CENTER);
-        welcomeFrame.setContentPane(imageLabel);
+//        //welcome page
+//        JFrame welcomeFrame = new JFrame("Welcome Page");
+//        welcomeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //welcome page size
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        int screenWidth = (int) screenSize.getWidth();
+//        int screenHeight = (int) screenSize.getHeight();
+//
+//        JPanel imagePanel = new JPanel(new BorderLayout());
+//        imagePanel.setBackground(Color.WHITE);
+//
+//        JLabel imageLabel = new JLabel();
+//        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
+//        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+//        ImageIcon scaledImageIcon = new ImageIcon(image);
+//        imageLabel.setIcon(scaledImageIcon);
+//        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+//        imagePanel.add(imageLabel, BorderLayout.CENTER);
+//        welcomeFrame.setContentPane(imageLabel);
 
 
         // main frame
@@ -156,8 +156,23 @@ public class InventoryMangerGUI implements ActionListener {
             }
         });
 
-        startIdleTimer();
 
+        // start the screen saver
+//        startIdleTimer();
+
+//        Timer timer = new Timer(5000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // Hide the welcome frame and show the main frame
+//                welcomeFrame.dispose();
+//                jframe.setVisible(true);
+//            }
+//        });
+//        timer.start();
+//        welcomeFrame.setVisible(true);
+
+
+        // timer for the welcome page
         Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -166,8 +181,12 @@ public class InventoryMangerGUI implements ActionListener {
                 jframe.setVisible(true);
             }
         });
+        timer.setRepeats(false);
         timer.start();
         welcomeFrame.setVisible(true);
+
+
+
     }
 
 

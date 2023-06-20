@@ -33,19 +33,15 @@ public class InventoryMangerGUI implements ActionListener {
     private  JButton PriceHistoryReportButton;
     private  JButton InsertDefectiveButton;
     private  JButton PrintFullInventoryButton;
-
     private JButton addPeriodOrderButton;
     private JButton UpdatePeriodOrder;
     private  JButton PrintAllPeriodOrder;
     private  JButton PrintAllShortageOrder;
+    private JButton ReturnToManger;
     private  JPanel buttonPanel;
     private InventoryController inventoryController;
-
     private  OrderManger orderManger;
     private  Supplier_Manger supplier_manger;
-
-
-
     private ScreenSaverFrame screenSaverFrame;
     private boolean isIdle;
     private boolean isMouseActive = false;
@@ -106,10 +102,11 @@ public class InventoryMangerGUI implements ActionListener {
         PriceHistoryReportButton = createStyledButton("Price history report");
         InsertDefectiveButton = createStyledButton("Defective insertion");
         PrintFullInventoryButton = createStyledButton("Print full inventory");
-        PrintAllShortageOrder =createStyledButton("Print all Order's");
-        PrintAllPeriodOrder =createStyledButton("Print all Period's Order's");
-        addPeriodOrderButton =createStyledButton("Add Period Order");
-        UpdatePeriodOrder =createStyledButton("Update a Period Order");
+        PrintAllShortageOrder = createStyledButton("Print all Order's");
+        PrintAllPeriodOrder = createStyledButton("Print all Period's Order's");
+        addPeriodOrderButton = createStyledButton("Add Period Order");
+        UpdatePeriodOrder = createStyledButton("Update a Period Order");
+        ReturnToManger = createStyledButton("Return to Manger Manu");
 
         // Register the ActionListener for each button
         ShortageReportButton.addActionListener(this);
@@ -124,6 +121,8 @@ public class InventoryMangerGUI implements ActionListener {
         PrintAllPeriodOrder.addActionListener(this);
         addPeriodOrderButton.addActionListener(this);
         UpdatePeriodOrder.addActionListener(this);
+        ReturnToManger.addActionListener(this);
+
 
 
         buttonPanel.add(ShortageReportButton);
@@ -138,17 +137,11 @@ public class InventoryMangerGUI implements ActionListener {
         buttonPanel.add(PrintAllShortageOrder);
         buttonPanel.add(addPeriodOrderButton);
         buttonPanel.add(UpdatePeriodOrder);
+        buttonPanel.add(ReturnToManger);
 
         jframe.add(buttonPanel);
 
-
-
         jframe.setVisible(true);
-
-
-
-
-
 
     }
 
@@ -318,7 +311,7 @@ public class InventoryMangerGUI implements ActionListener {
 
 
 
-    // todo - end of Screen Saver
+    // staled Buttons
     private JButton createStyledButton(String text) {
         JButton button = new JButton("<html><center>" + text.replaceAll("\\n", "<br>") + "</center></html>");
         button.setPreferredSize(new Dimension(180, 60));
@@ -1945,7 +1938,8 @@ public class InventoryMangerGUI implements ActionListener {
             sp.setPreferredSize(new Dimension(1000, 400));
             JOptionPane.showMessageDialog(null, sp, "Inventory Products", JOptionPane.PLAIN_MESSAGE);
 
-        } else if (e.getSource() == this.PrintAllShortageOrder) {
+        }
+        else if (e.getSource() == this.PrintAllShortageOrder) {
             OrderMapper pb = new OrderMapper();
 
 
@@ -2006,7 +2000,8 @@ public class InventoryMangerGUI implements ActionListener {
 
             frame.setVisible(true);
 
-        } else if (e.getSource() == PrintAllPeriodOrder) {
+        }
+        else if (e.getSource() == PrintAllPeriodOrder) {
             PeriodicOrderMapper pb = new PeriodicOrderMapper();
 
 
@@ -2068,7 +2063,8 @@ public class InventoryMangerGUI implements ActionListener {
             frame.setVisible(true);
 
 
-        } else if (e.getSource() ==this.addPeriodOrderButton) {
+        }
+        else if (e.getSource() == this.addPeriodOrderButton) {
 
 
             System.out.println("add new Period Order:");
@@ -2137,7 +2133,8 @@ public class InventoryMangerGUI implements ActionListener {
                     break;
                 }
             }
-        } else if (e.getSource()==this.UpdatePeriodOrder) {
+        }
+        else if (e.getSource() == this.UpdatePeriodOrder) {
             String id = JOptionPane.showInputDialog("Enter a period id:");
             if (!orderManger.contain_Period_order(id)) {
                 JOptionPane.showMessageDialog(null, "ID not in the system");
@@ -2205,9 +2202,11 @@ public class InventoryMangerGUI implements ActionListener {
                 }
             }
 
-
         }
-
+        else if (e.getSource() == ReturnToManger) {
+            jframe.dispose();
+            new Manger();
+        }
 
     }
 

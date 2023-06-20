@@ -40,15 +40,16 @@ public class Main {
 
         welcomeFrame.setVisible(true);
 
-        // Hide the frame for 1 sshina
+        // Hide the frame for 3 sshina
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         welcomeFrame.setVisible(false);
 
 
+//        Manger manger = new Manger();
 
 
             SwingUtilities.invokeLater(new Runnable() {
@@ -58,10 +59,10 @@ public class Main {
                     new Supplier_Manger_GUI();
                     }
                     else if(args[1].equals("InventoryManger")){
-
                         new InventoryMangerGUI();
-                    } else if (args[2].equals("Store Manger")) {
-                        
+                    } else if (args[1].equals("StoreManger")) {
+                        new Manger();
+
                     }
                 }
 

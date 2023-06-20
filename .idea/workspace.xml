@@ -12,6 +12,37 @@
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="InventoryMangerGUI few changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Interface/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/services/Manger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/Manger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Manger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Manger$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Manger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Manger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,25 +68,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "320827637__209512722__206719346__311451058",
-    "last_opened_file_path": "C:/Users/laufe/OneDrive/Documents/GitHub/ADSS_Group_P",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;320827637__209512722__206719346__311451058&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/laufe/OneDrive/Documents/GitHub/ADSS_Group_P&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release" />
@@ -66,7 +97,7 @@
     <configuration name="Interface.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Interface.Main" />
       <module name="ADSS_Group_P" />
-      <option name="PROGRAM_PARAMETERS" value="GUI Supplier-Manger" />
+      <option name="PROGRAM_PARAMETERS" value="GUI StoreManger" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Interface.*" />
@@ -114,6 +145,13 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Interface.Main" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Supplier_GUI" />
+      <item itemvalue="Application.Supplier_Manger_GUI" />
+      <item itemvalue="JAR Application.ADSS_Group_P.jar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Interface.Main" />
@@ -384,18 +422,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>257</line>
+          <line>337</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>786</line>
+          <line>866</line>
           <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/Interface/Main.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>

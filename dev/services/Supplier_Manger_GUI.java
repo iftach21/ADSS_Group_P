@@ -6,6 +6,7 @@ import DataAccesObject.NonFixedDaySupplierMapper;
 import Domain.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -28,9 +29,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
     private  JButton UpdateitemonContract;
     private  JButton print_all_suppliers;
     private  JButton print_supplierby_id;
-
+    private JButton ReturnToManger;
     private  JPanel buttonPanel;
-
     private Supplier_Manger supplier_manger;
 
 
@@ -41,21 +41,30 @@ public class Supplier_Manger_GUI   implements ActionListener {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle("Supplier Manager");
         JLabel label = new JLabel("Supplier  Menu");
-        label.setFont(new Font("Arial", Font.BOLD, 40)); // Customize the font and size as desired
+        label.setFont(new Font("Bauhaus 93", Font.BOLD, 30)); // Customize the font and size as desired
+//        label.setHorizontalAlignment(SwingConstants.CENTER);
+//        label.setForeground(Color.WHITE);
+//        label.setOpaque(true);
+//        label.setBackground(Color.BLACK);
+//        label.setForeground(new Color(220, 20, 60));
+//        jframe.add(label, BorderLayout.NORTH);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
         label.setOpaque(true);
         label.setBackground(Color.BLACK);
-        label.setForeground(new Color(220, 20, 60));
         jframe.add(label, BorderLayout.NORTH);
 
 
 
 
+            // previous
+//        buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
+//        buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+//        buttonPanel.setBackground(new Color(3, 3, 3));
 
         buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        buttonPanel.setBackground(new Color(3, 3, 3));
+        buttonPanel.setBackground(new Color(173, 216, 230));
 
         addnewSupplierButton = createStyledButton("Add new Supplier");
         removeSupplierButton = createStyledButton("Remove Supplier");
@@ -65,6 +74,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
         UpdateitemonContract = createStyledButton("Update Item on Contract");
         print_all_suppliers = createStyledButton("Present All Suppliers");
         print_supplierby_id = createStyledButton("Get Supplier by ID");
+        ReturnToManger = createStyledButton("Return to Manger Manu");
 
         // Register the ActionListener for each button
         addnewSupplierButton.addActionListener(this);
@@ -75,6 +85,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
         UpdateitemonContract.addActionListener(this);
         print_all_suppliers.addActionListener(this);
         print_supplierby_id.addActionListener(this);
+        ReturnToManger.addActionListener(this);
 
         buttonPanel.add(addnewSupplierButton);
         buttonPanel.add(removeSupplierButton);
@@ -84,6 +95,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
         buttonPanel.add(UpdateitemonContract);
         buttonPanel.add(print_all_suppliers);
         buttonPanel.add(print_supplierby_id);
+        buttonPanel.add(ReturnToManger);
 
         jframe.add(buttonPanel);
         jframe.setVisible(true);
@@ -94,30 +106,98 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
     }
+        // previous
+//    private static JButton createStyledButton(String text) {
+//        JButton button = new JButton(text);
+//        button.setBackground(new Color(220, 20, 60)); // Red button background
+//        button.setForeground(Color.WHITE); // White text color
+//        button.setFocusPainted(false); // Remove focus border
+//
+//        // Set font style
+//        Font buttonFont = new Font("Arial", Font.BOLD, 16);
+//        button.setFont(buttonFont);
+//
+//        // Add hover effect
+//        button.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseEntered(java.awt.event.MouseEvent evt) {
+//                button.setBackground(new Color(255, 99, 71)); // Orange hover background
+//            }
+//
+//            public void mouseExited(java.awt.event.MouseEvent evt) {
+//                button.setBackground(new Color(220, 20, 60)); // Red button background
+//            }
+//        });
+//
+//        return button;
+//    }
 
-    private static JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setBackground(new Color(220, 20, 60)); // Red button background
-        button.setForeground(Color.WHITE); // White text color
-        button.setFocusPainted(false); // Remove focus border
 
-        // Set font style
-        Font buttonFont = new Font("Arial", Font.BOLD, 16);
-        button.setFont(buttonFont);
+    // staled Buttons
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton("<html><center>" + text.replaceAll("\\n", "<br>") + "</center></html>");
+        button.setPreferredSize(new Dimension(180, 60));
 
-        // Add hover effect
+        // font options
+//        button.setFont(new Font("Harlow Solid Italic", Font.BOLD, 22));
+//        button.setFont(new Font("Sitka", Font.BOLD, 20));
+//        button.setFont(new Font("Segoe Print", Font.BOLD, 20));
+        button.setFont(new Font("Haettenschweiler", Font.BOLD, 26));
+
+        //color options
+//        Color buttonColor = new Color(235, 235, 235);
+        Color buttonColor = new Color(255, 212, 121);
+
+        button.setBackground(buttonColor);
+        button.setForeground(Color.DARK_GRAY);
+
+
+        int cornerRadius = 20;
+        Border roundedBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
+        Border emptyBorder = BorderFactory.createEmptyBorder(5, 15, 5, 15);
+        Border compoundBorder = BorderFactory.createCompoundBorder(roundedBorder, emptyBorder);
+
+        // Create a rounded border using the corner radius
+        Border roundedCornerBorder = new Border() {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setColor(Color.LIGHT_GRAY);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawRoundRect(x, y, width - 1, height - 1, cornerRadius, cornerRadius);
+                g2d.dispose();
+            }
+            @Override
+            public Insets getBorderInsets(Component c) {
+                return new Insets(cornerRadius, cornerRadius, cornerRadius, cornerRadius);
+            }
+            @Override
+            public boolean isBorderOpaque() {
+                return true;
+            }
+        };
+
+        // Apply the rounded corner border and compound border to the button
+        button.setBorder(BorderFactory.createCompoundBorder(roundedCornerBorder, compoundBorder));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setFocusable(false);
+
+
+        // mark the button when the mouse is on
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(255, 99, 71)); // Orange hover background
+                button.setBackground(buttonColor.brighter());
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(220, 20, 60)); // Red button background
+                button.setBackground(buttonColor);
             }
         });
 
         return button;
     }
+
+
+
 
 
     @Override
@@ -813,16 +893,11 @@ public class Supplier_Manger_GUI   implements ActionListener {
             supplier_manger.add_item_discount_to_supplier(name_s6, item_c6, amount_6, discount_6);
 
 
-
-
-
-
-
-
-
-
         }
-
+        else if (e.getSource() == ReturnToManger) {
+            jframe.dispose();
+            new Manger();
+        }
 
     }
 

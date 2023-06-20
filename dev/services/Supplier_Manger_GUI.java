@@ -8,6 +8,7 @@ import Domain.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -102,9 +103,26 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
         jframe.add(buttonPanel);
         jframe.setVisible(true);
-        this.supplier_manger=new Supplier_Manger();
+        this.supplier_manger = new Supplier_Manger();
 
 
+        // dialog box style
+        UIManager.put("OptionPane.background", new Color(173, 216, 230));
+        UIManager.put("Panel.background", new Color(173, 216, 230));
+        UIManager.put("Label.font", new Font("Haettenschweiler", Font.PLAIN, 20));
+        UIManager.put("OptionPane.messageFont", new Font("Haettenschweiler", Font.PLAIN, 16));
+        UIManager.put("OptionPane.messageForeground", Color.DARK_GRAY);
+        UIManager.put("OptionPane.font", new Font("Haettenschweiler", Font.PLAIN, 16));
+        UIManager.put("Button.background",  new Color(255, 212, 121));
+        UIManager.put("Button.foreground", Color.DARK_GRAY);
+        UIManager.put("Button.font", new Font("Haettenschweiler", Font.PLAIN, 16));
+        UIManager.put("Button.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("ToggleButton.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+
+        UIManager.put("CheckBox.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("TabbedPane.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("RadioButton.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("Slider.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
 
 
 

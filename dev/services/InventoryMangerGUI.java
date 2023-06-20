@@ -1844,11 +1844,12 @@ public class InventoryMangerGUI implements ActionListener {
                 double buyPrice = 0;
                 double sellPrice = 0;
 
-                DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
-                JTable jtable = new JTable(tableModel3);
-                jtable.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
-                jtable.setFont(new Font("Arial", Font.PLAIN, 10));
+                DefaultTableModel tableModel = new DefaultTableModel(column, 0);
+//                JTable jtable = new JTable(tableModel);
+//                jtable.setRowHeight(20);
+////                    jtable.setBounds(30,100,200,300);
+//                jtable.setFont(new Font("Arial", Font.PLAIN, 10));
+
 
                 report = inventoryController.priceHistoryReport(catalogNumber);
                 reportType = report.getType().toString();
@@ -1875,9 +1876,21 @@ public class InventoryMangerGUI implements ActionListener {
                     }
 
                     // Add the columns as a new row to the table model
-                    tableModel3.addRow(new Object[]{reportType, reportNumber, reportDate, catalogNumber, buyPrice, sellPrice});
+                    tableModel.addRow(new Object[]{reportType, reportNumber, reportDate, catalogNumber, buyPrice, sellPrice});
 
                 }
+                JTable jtable = new JTable(tableModel);
+                jtable.setRowHeight(20);
+//                    jtable.setBounds(30,100,200,300);
+                jtable.setFont(new Font("Arial", Font.PLAIN, 10));
+
+                TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
+                jtable.setRowSorter(sortTable);
+
+                DefaultTableCellRenderer rowRenderer = new DefaultTableCellRenderer();
+                rowRenderer.setBackground(Color.LIGHT_GRAY);
+                jtable.setDefaultRenderer(Object.class, rowRenderer);
+
 
                 JScrollPane sp = new JScrollPane(jtable);
                 jframe.add(sp);

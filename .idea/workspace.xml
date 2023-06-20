@@ -9,31 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="buttons style and Return button">
-      <change afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$4.class" afterDir="false" />
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="style">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$12.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$ScreenSaverPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -348,7 +337,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1687253339627</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL‎-00026" summary="style">
+      <created>1687273404560</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL‎-00026" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687273404560</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +370,8 @@
     <MESSAGE value="InventoryMangerGUI almost done" />
     <MESSAGE value="InventoryMangerGUI few changes" />
     <MESSAGE value="buttons style and Return button" />
-    <option name="LAST_COMMIT_MESSAGE" value="buttons style and Return button" />
+    <MESSAGE value="style" />
+    <option name="LAST_COMMIT_MESSAGE" value="style" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -421,12 +418,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>337</line>
+          <line>355</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>866</line>
+          <line>884</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

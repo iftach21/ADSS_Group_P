@@ -56,11 +56,11 @@ public class Main {
                 public void run() {
 
                     if(args[1].equals("Supplier-Manger")){
-                    new Supplier_Manger_GUI();
+                    new Supplier_Manger_GUI(false);
                     }
-                    else if(args[1].equals("InventoryManger")){
-                        new InventoryMangerGUI();
-                    } else if (args[1].equals("StoreManger")) {
+                    else if(args[1].equals("Inventory-Manger")){
+                        new InventoryMangerGUI(false);
+                    } else if (args[1].equals("Store-Manger")) {
                         new Manger();
 
                     }

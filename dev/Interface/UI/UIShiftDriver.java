@@ -206,14 +206,7 @@ public class UIShiftDriver {
     private void addWorkerToShift(int day, String shiftType, String profession, int WeekNum, int yearNum, int superNum, int workerID) throws SQLException {
         HRManagerService hr = new HRManagerService();
         String[] professions = {"manager", "cashier", "stock", "security", "cleaning", "shelf-stocking", "general-worker"};
-        int index = -1;  // Default index if string is not found
 
-        for (int i = 0; i < professions.length; i++) {
-            if (professions[i].equals(profession)) {
-                index = i;  // Update the index if the string is found
-                break;
-            }
-        }
         String shift = "";
         if(shiftType.equals("Day Shift")){
             shift = "day";
@@ -222,7 +215,7 @@ public class UIShiftDriver {
             shift = "night";
         }
 
-        hr.addWorkerToShift(WeekNum,yearNum,superNum,day,shift,index, workerID);
+        hr.addWorkerToShift(WeekNum,yearNum,superNum,day,shift,7, workerID);
     }
 
     private String getStringWorker(ArrayList<String> list ){

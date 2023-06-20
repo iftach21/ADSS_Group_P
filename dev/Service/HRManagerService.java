@@ -153,7 +153,9 @@ public class HRManagerService {
     public void addWorkerToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
         controller.addWorkerToShift(weeknum,year,supernum,daynum,don,prof,workerID);
     }
-
+    public void addDriverToShift(int weeknum, int year,int supernum, int daynum, String don,int prof,int workerID) throws SQLException {
+        controller.addDriverToShift(weeknum,year,supernum,daynum,don,prof,workerID);
+    }
     /**
      * return a string of all the workers in the company
      * */

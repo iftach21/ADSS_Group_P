@@ -161,9 +161,9 @@ public class Manger implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.go_to_supplier){
             //open a new frame
-            Supplier_Manger_GUI supplier_manger = new Supplier_Manger_GUI();
+            Supplier_Manger_GUI supplier_manger = new Supplier_Manger_GUI(true);
         } else if (e.getSource()==this.go_to_inventory) {
-            InventoryMangerGUI inventoryMangerGUI = new InventoryMangerGUI();
+            InventoryMangerGUI inventoryMangerGUI = new InventoryMangerGUI(true);
 
 
         }

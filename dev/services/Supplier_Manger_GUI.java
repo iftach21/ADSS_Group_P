@@ -34,9 +34,11 @@ public class Supplier_Manger_GUI   implements ActionListener {
     private  JPanel buttonPanel;
     private Supplier_Manger supplier_manger;
 
+    private  boolean pulse;
 
 
-    public Supplier_Manger_GUI() {
+
+    public Supplier_Manger_GUI(boolean pulse) {
         jframe = new JFrame();
         jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +98,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
         buttonPanel.add(UpdateitemonContract);
         buttonPanel.add(print_all_suppliers);
         buttonPanel.add(print_supplierby_id);
-        buttonPanel.add(ReturnToManger);
+        if(pulse==true){
+        buttonPanel.add(ReturnToManger);}
 
         jframe.add(buttonPanel);
         jframe.setVisible(true);

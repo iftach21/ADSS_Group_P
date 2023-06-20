@@ -63,9 +63,9 @@ public class specificItem extends Item{
     public int getSerialNumber() {return this.serialNumber; }
     public String getSerialNumberString() {
         String nameSerial = this.getName();
-        String serialNumber = String.valueOf(this.serialNumber);
-        String returnName = nameSerial + serialNumber;
-        return returnName;
+//        String serialNumber = String.valueOf(this.serialNumber);
+//        String returnName = nameSerial + serialNumber;
+        return nameSerial;
     }
 
     public boolean isDefected()

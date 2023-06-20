@@ -40,7 +40,7 @@ public class Main {
 
         welcomeFrame.setVisible(true);
 
-        // Hide the frame for 3 sshina
+        // Hide the frame for 3 seconds
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -60,7 +60,8 @@ public class Main {
                     }
                     else if(args[1].equals("Inventory-Manger")){
                         new InventoryMangerGUI(false);
-                    } else if (args[1].equals("Store-Manger")) {
+                    }
+                    else if (args[1].equals("Store-Manger")) {
                         new Manger();
 
                     }

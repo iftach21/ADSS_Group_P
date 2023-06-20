@@ -99,6 +99,7 @@ public class InventoryController {
         return currentSpecific;
     }
 
+
     public void moveSpecificItemToDefectiveMapper(int serialNumber) {
         List<specificItem> itemList = specificItemMapper.findAll();
         if (itemList != null) {
@@ -117,28 +118,41 @@ public class InventoryController {
 
     public void moveSpecificItemMapper(int serialNumber){
         List<specificItem> itemList = specificItemMapper.findAll();
-        System.out.println("Check1");
         if (itemList != null) {
-            System.out.println("Check2");
-            for (specificItem specificItem : itemList){
-//            Iterator<specificItem> iterator = itemList.iterator();
-//            while (iterator.hasNext()) {
-//                specificItem specificItem = iterator.next();
-                System.out.println("Check3");
+            Iterator<specificItem> iterator = itemList.iterator();
+            while (iterator.hasNext()) {
+                specificItem specificItem = iterator.next();
                 if (specificItem.getserialNumber() == serialNumber) {
-                    if (specificItem.getLocationString().equals("Store")){
+                    if (specificItem.getLocationString().equals("store")){
                         specificItem.setLocation(Location.Storage);
                     }
-                    else if(specificItem.getLocationString().equals( "Storage")) {
+                    else if(specificItem.getLocationString().equals( "storage")) {
                         specificItem.setLocation(Location.Store);
                     }
-//                    specificItemMapper.delete(specificItem);
-                    specificItemMapper.update(specificItem);
-//                    specificItemMapper.insert(specificItem);
+                    specificItemMapper.delete(specificItem);
+                    specificItemMapper.insert(specificItem);
                 }
             }
         }
     }
+
+
+
+//    public void moveSpecificItemToDefectiveMapper(int serialNumber) {
+//        List<specificItem> itemList = specificItemMapper.findAll();
+//        if (itemList != null) {
+//            Iterator<specificItem> iterator = itemList.iterator();
+//            while (iterator.hasNext()) {
+//                specificItem specificItem = iterator.next();
+//                if (specificItem.getserialNumber() == serialNumber) {
+//                    specificItem.setDefected(true);
+//                    specificItem.setLocation(Location.Storage);
+//                    specificItemMapper.delete(specificItem);
+//                    specificItemMapper.insert(specificItem);
+//                }
+//            }
+//        }
+//    }
 
 
     //END M

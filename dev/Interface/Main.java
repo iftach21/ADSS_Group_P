@@ -60,9 +60,9 @@ public class Main {
                     }
                     else if(args[1].equals("InventoryManger")){
                         new InventoryMangerGUI();
-                    } else if (args[1].equals("StoreManger")) {
+                    }
+                    else if (args[1].equals("StoreManger")) {
                         new Manger();
-
                     }
                 }
 

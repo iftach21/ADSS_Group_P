@@ -10,10 +10,8 @@ import javax.swing.Timer;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -49,9 +47,52 @@ public class InventoryMangerGUI implements ActionListener {
 
 
     public InventoryMangerGUI() {
+
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+
         this.inventoryController = new InventoryController();
         this.orderManger =new OrderManger();
         this.supplier_manger =new Supplier_Manger();
+
+        // dialog box style
+        UIManager.put("OptionPane.background", new Color(173, 216, 230));
+        UIManager.put("Panel.background", new Color(173, 216, 230));
+        UIManager.put("Label.font", new Font("Haettenschweiler", Font.PLAIN, 20));
+        UIManager.put("OptionPane.messageFont", new Font("Haettenschweiler", Font.PLAIN, 16));
+        UIManager.put("OptionPane.messageForeground", Color.DARK_GRAY);
+        UIManager.put("OptionPane.font", new Font("Haettenschweiler", Font.PLAIN, 16));
+        UIManager.put("Button.background",  new Color(255, 212, 121));
+        UIManager.put("Button.foreground", Color.DARK_GRAY);
+        UIManager.put("Button.font", new Font("Haettenschweiler", Font.PLAIN, 16));
+        UIManager.put("Button.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("ToggleButton.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+
+        UIManager.put("CheckBox.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("TabbedPane.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("RadioButton.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+        UIManager.put("Slider.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+
+
+//        UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+//        defaults.put("Button.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
+
+            // Font options
+//        UIManager.put("Button.focusable", Boolean.FALSE);
+//        UIManager.put("Button.select", new Color(255, 255, 255).brighter());
+//        UIManager.put("Button[MouseOver].backgroundPainter", new ButtonMouseOverBackgroundPainter());
+
+
+
+
+//        button.setFont(new Font("Harlow Solid Italic", Font.BOLD, 22));
+//        button.setFont(new Font("Sitka", Font.BOLD, 20));
+//        button.setFont(new Font("Segoe Print", Font.BOLD, 20));
+//        button.setFont(new Font("Haettenschweiler", Font.BOLD, 26));
+
 
 //        //welcome page
 //        JFrame welcomeFrame = new JFrame("Welcome Page");
@@ -146,8 +187,16 @@ public class InventoryMangerGUI implements ActionListener {
     }
 
 
-
-
+    static class ButtonMouseOverBackgroundPainter implements Painter<JButton> {
+        @Override
+        public void paint(Graphics2D g, JButton button, int width, int height) {
+            if (button.getModel().isRollover()) {
+                Color brighterColor = button.getBackground().brighter();
+                g.setColor(brighterColor);
+                g.fillRect(0, 0, width, height);
+            }
+        }
+    }
 
 
 
@@ -553,14 +602,22 @@ public class InventoryMangerGUI implements ActionListener {
             //Report issuance options
             String[] options = {"Create new category", "Create new subcategory", "Create new general Item", "Add new specific item", "Delete category", "Delete general item", "Delete specific item", "Move a specific item", "Return"};
             JLabel label = new JLabel("Which action would you like to do?");
+
             JPanel panel = new JPanel(new GridLayout(3, 3, 10, 10));
-            panel.setPreferredSize(new Dimension(600, 300));
+            panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+            panel.setBackground(new Color(173, 216, 230));
+            panel.setPreferredSize(new Dimension(700, 400));
+
+            label.setFont(new Font("Bauhaus 93", Font.PLAIN, 20));
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setForeground(Color.WHITE);
+            label.setOpaque(true);
+            label.setBackground(Color.BLACK);
 
             final boolean[] validInput = {false};
 
             for (String option : options) {
-                JButton button = new JButton(option);
-                button.setFocusable(false);
+                JButton button = createStyledButton(option);
                 button.setPreferredSize(new Dimension(80, 40));
                 button.addActionListener(new ActionListener() {
                     @Override
@@ -1419,6 +1476,7 @@ public class InventoryMangerGUI implements ActionListener {
             String reportDate;
             String reportString = "";
 
+
             switch (choiceNum) {
                 case 0:
                     // for all products
@@ -1431,7 +1489,16 @@ public class InventoryMangerGUI implements ActionListener {
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable.setFont(new Font("Arial", Font.PLAIN, 10));
+                    jtable.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                    TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
+                    jtable.setRowSorter(sortTable);
+
+
+                    DefaultTableCellRenderer rowRenderer = new DefaultTableCellRenderer();
+                    rowRenderer.setBackground(Color.LIGHT_GRAY);
+                    jtable.setDefaultRenderer(Object.class, rowRenderer);
+
 
                     report = inventoryController.FullDefectiveReport();
                     reportType = report.getType().toString();
@@ -1474,7 +1541,11 @@ public class InventoryMangerGUI implements ActionListener {
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
+                    jtable2.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                    TableRowSorter<TableModel> sortTable2 = new TableRowSorter<>(tableModel2);
+                    jtable2.setRowSorter(sortTable2);
+
 
                     Report report2 = inventoryController.CategoryDefectiveReport(nameCategory);
                     String reportType2 = report2.getType().toString();
@@ -1516,7 +1587,11 @@ public class InventoryMangerGUI implements ActionListener {
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
 //                    jtable.setBounds(30,100,200,300);
-                    jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
+                    jtable3.setFont(new Font("Arial", Font.PLAIN, 12));
+
+                    TableRowSorter<TableModel> sortTable3 = new TableRowSorter<>(tableModel3);
+                    jtable3.setRowSorter(sortTable3);
+
 
                     Report report3 = inventoryController.ItemDefectiveReport(nameSpecific);
                     String reportType3 = report3.getType().toString();

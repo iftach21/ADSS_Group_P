@@ -594,9 +594,10 @@ public class Supplier_Manger_GUI   implements ActionListener {
             String[] options = {"Regular", "Frozen", "Cold"};
             int selectedOption = JOptionPane.showOptionDialog(null, "Select an option:", "Temperature",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-            String selectedOptionString = options[selectedOption].toLowerCase(); // Convert to lowercase
-            TempLevel tempLevel = TempLevel.valueOf(selectedOptionString);
 
+            String temp =String.valueOf(selectedOption);
+
+            TempLevel tempLevel = TempLevel.valueOf(temp);
 
             String manufacturer= JOptionPane.showInputDialog("manufacturer name:");
 
@@ -618,7 +619,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
             float floatValue = 0;
 
             while (!validFloat) {
-                String input = JOptionPane.showInputDialog("Enter a float value for the cost per unit:");
+                String input = JOptionPane.showInputDialog("Enter a float value:");
 
                 try {
                     floatValue = Float.parseFloat(input);

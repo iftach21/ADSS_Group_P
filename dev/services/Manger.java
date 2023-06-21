@@ -162,8 +162,11 @@ public class Manger implements ActionListener {
         if(e.getSource()==this.go_to_supplier){
             //open a new frame
             Supplier_Manger_GUI supplier_manger = new Supplier_Manger_GUI(true);
+            jframe.setVisible(false);
+
         } else if (e.getSource()==this.go_to_inventory) {
             InventoryMangerGUI inventoryMangerGUI = new InventoryMangerGUI(true);
+            jframe.setVisible(false);
 
 
         }

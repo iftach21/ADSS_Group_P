@@ -711,20 +711,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
             }
 
 
-            boolean validDouble = false;
-            double doubleValue = 0.0;
 
-            while (!validDouble) {
-                String input = JOptionPane.showInputDialog("Enter a double value for the discount:");
-
-                try {
-                    doubleValue = Double.parseDouble(input);
-                    validDouble = true;
-                } catch (NumberFormatException es) {
-                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid double.");
-                }
-            }
-            supplier_manger.add_item_discount_to_supplier(input1, catlog_number, integerValue , doubleValue);
+            supplier_manger.remove_item_to_supplier(input1, catlog_number);
 
 
 

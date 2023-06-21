@@ -9,7 +9,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,8 +101,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
         buttonPanel.add(UpdateitemonContract);
         buttonPanel.add(print_all_suppliers);
         buttonPanel.add(print_supplierby_id);
-        if(pulse==true){
-        buttonPanel.add(ReturnToManger);}
+        if(pulse == true){
+            buttonPanel.add(ReturnToManger);}
 
         jframe.add(buttonPanel);
         jframe.setVisible(true);
@@ -157,20 +160,10 @@ public class Supplier_Manger_GUI   implements ActionListener {
     private JButton createStyledButton(String text) {
         JButton button = new JButton("<html><center>" + text.replaceAll("\\n", "<br>") + "</center></html>");
         button.setPreferredSize(new Dimension(180, 60));
-
-        // font options
-//        button.setFont(new Font("Harlow Solid Italic", Font.BOLD, 22));
-//        button.setFont(new Font("Sitka", Font.BOLD, 20));
-//        button.setFont(new Font("Segoe Print", Font.BOLD, 20));
         button.setFont(new Font("Haettenschweiler", Font.BOLD, 26));
-
-        //color options
-//        Color buttonColor = new Color(235, 235, 235);
         Color buttonColor = new Color(255, 212, 121);
-
         button.setBackground(buttonColor);
         button.setForeground(Color.DARK_GRAY);
-
 
         int cornerRadius = 20;
         Border roundedBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
@@ -224,7 +217,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //**************this is the option case switch*****************************************************************/
-        if(e.getSource()==addnewSupplierButton){
+        if(e.getSource() == addnewSupplierButton){
 
             String name_suppleir=   JOptionPane.showInputDialog("What is the Supplier name:");
 
@@ -425,7 +418,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-        } else if (e.getSource()==removeSupplierButton) {
+        } else if (e.getSource() == removeSupplierButton) {
             boolean valid =false;
             while ((!valid)) {
                 String input = JOptionPane.showInputDialog("Name of the Supplier");
@@ -446,7 +439,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-        } else if (e.getSource() ==UpdateContactToSupplier) {
+        } else if (e.getSource() == UpdateContactToSupplier) {
 
             //first cheak the supplier name
             boolean valid = false;
@@ -512,15 +505,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-
-
-
-
-
-
-
-
-        } else if (e.getSource()==addItemtoSupplier) {
+        }
+        else if (e.getSource() == addItemtoSupplier) {
 
             //supplier aname cheak
             boolean valid =false;
@@ -665,22 +651,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        } else if (e.getSource()==removeItemFromSupplier) {
+        }
+        else if (e.getSource() == removeItemFromSupplier) {
             //supplier aname cheak
             boolean valid =false;
             String input1 =null;
@@ -763,7 +735,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
 
 
-        } else if (  e.getSource()==print_all_suppliers) {
+        }
+        else if (  e.getSource()==print_all_suppliers) {
 
                 // Create an instance of FixedDaySupplierMapper
                 FixedDaySupplierMapper mapper = new FixedDaySupplierMapper();
@@ -772,8 +745,8 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
                 // Get the data for the jTable
                 String data = mapper.getAllSuppliersForJTable();
-                String data2 =mapper2.getAllSuppliersForJTable();
-                String data3 =mapper3.getAllSuppliersForJTable();
+                String data2 = mapper2.getAllSuppliersForJTable();
+                String data3 = mapper3.getAllSuppliersForJTable();
 
                 // Create a DefaultTableModel with empty rows and column headers
                 DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Supplier ID", "Name", "Business ID", "Payment Method", "Contract Person Name", "Contract Phone Number", "Current Delivery Day"});
@@ -814,7 +787,25 @@ public class Supplier_Manger_GUI   implements ActionListener {
                 JTable jTable2 = new JTable(tableModel2);
                 JTable jTable3 = new JTable(tableModel2);
 
+            TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
+            jTable.setRowSorter(sortTable);
+            DefaultTableCellRenderer rowRenderer = new DefaultTableCellRenderer();
+            rowRenderer.setBackground(Color.LIGHT_GRAY.brighter());
+            jTable.setDefaultRenderer(Object.class, rowRenderer);
 
+
+            TableRowSorter<TableModel> sortTable2 = new TableRowSorter<>(tableModel2);
+            jTable2.setRowSorter(sortTable2);
+            DefaultTableCellRenderer rowRenderer2 = new DefaultTableCellRenderer();
+            rowRenderer2.setBackground(Color.LIGHT_GRAY.brighter());
+            jTable2.setDefaultRenderer(Object.class, rowRenderer2);
+
+
+            TableRowSorter<TableModel> sortTable3 = new TableRowSorter<>(tableModel3);
+            jTable3.setRowSorter(sortTable3);
+            DefaultTableCellRenderer rowRenderer3 = new DefaultTableCellRenderer();
+            rowRenderer3.setBackground(Color.LIGHT_GRAY.brighter());
+            jTable3.setDefaultRenderer(Object.class, rowRenderer3);
 
 
 
@@ -906,13 +897,13 @@ public class Supplier_Manger_GUI   implements ActionListener {
             jFrame2.setVisible(true);
 
 
-        } else if (e.getSource()==UpdateitemonContract) {
+        }
+        else if (e.getSource() == UpdateitemonContract) {
             String name_s6 = getInputWithValidation("Name of the supplier:");
             String item_c6 = getInputWithValidation("Catalog number of the item:");
             int amount_6 = Integer.parseInt(getInputWithValidation("Amount:", "integer"));
             double discount_6 = Double.parseDouble(getInputWithValidation("Discount:", "double"));
             supplier_manger.add_item_discount_to_supplier(name_s6, item_c6, amount_6, discount_6);
-
 
         }
         else if (e.getSource() == ReturnToManger) {

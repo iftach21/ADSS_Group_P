@@ -137,19 +137,20 @@ public class specificItemMapper {
                 }
                 Location location = Location.valueOf(locationString);
                 currentSpecific.setLocation(location);
-                String currentDate = rs.getString("expiration_date");
+                Date currentDate = rs.getDate("expiration_date");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = dateFormat.parse(currentDate);
-                currentSpecific.setDate(date);
+//                Date date = dateFormat.parse(currentDate);
+                currentSpecific.setDate(currentDate);
                 currentSpecific.setDefected(rs.getBoolean("defected"));
                 currentSpecific.setSerialNumber(rs.getInt("serial_number"));
                 specificItems.add(currentSpecific);
+
             }
             cache.put("", specificItems);
             return specificItems;
         }
         catch(SQLException e){}
-        catch(ParseException e){}
+//        catch(ParseException e){}
         try
         {
             conn.close();

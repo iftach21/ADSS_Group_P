@@ -13,7 +13,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +44,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Reverting in 320827637__209512722__206719346__311451058",
+    "git-widget-placeholder": "320827637__209512722__206719346__311451058",
     "last_opened_file_path": "C:/Users/laufe/OneDrive/Documents/GitHub/ADSS_Group_P",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -153,6 +153,7 @@
       <workItem from="1686725663648" duration="95461000" />
       <workItem from="1687187788491" duration="10800000" />
       <workItem from="1687375343892" duration="2482000" />
+      <workItem from="1687380407968" duration="3004000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>
@@ -438,13 +439,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>868</line>
+          <line>887</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/services/Supplier_Manger_GUI.java</url>
-          <line>597</line>
-          <option name="timeStamp" value="111" />
+          <line>599</line>
+          <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/dev/categoryMapper.java</url>
@@ -463,6 +464,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/dev/Domain/Supplier_Manger.java</url>
+          <line>214</line>
+          <properties class="Domain.Supplier_Manger" method="add_item_to_supplier">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="113" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

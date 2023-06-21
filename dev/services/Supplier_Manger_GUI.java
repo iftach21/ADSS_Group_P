@@ -534,7 +534,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
             String item_name = null;
             boolean validInput = false;
             while (!validInput) {
-                String input = JOptionPane.showInputDialog("Contact Name:");
+                String input = JOptionPane.showInputDialog("Item name:");
 
                 // Check if the input consists only of alphabetic characters
                 if (input.matches("[a-zA-Z]+")) {
@@ -597,7 +597,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
 
             String temp =String.valueOf(selectedOption);
 
-            TempLevel tempLevel = TempLevel.valueOf(temp);
+            TempLevel tempLevel = TempLevel.values()[selectedOption];
 
             String manufacturer= JOptionPane.showInputDialog("manufacturer name:");
 
@@ -619,7 +619,7 @@ public class Supplier_Manger_GUI   implements ActionListener {
             float floatValue = 0;
 
             while (!validFloat) {
-                String input = JOptionPane.showInputDialog("Enter a float value:");
+                String input = JOptionPane.showInputDialog("Enter a float value for a price per unit:");
 
                 try {
                     floatValue = Float.parseFloat(input);
@@ -824,10 +824,28 @@ public class Supplier_Manger_GUI   implements ActionListener {
             });
             // Create a JPanel to hold the JTable and the back button
             JPanel panel = new JPanel();
-            panel.add(new JScrollPane(jTable));
-            panel.add(new JScrollPane(jTable2));
-            panel.add(new JScrollPane(jTable3));
-            panel.add(backButton);
+            JScrollPane jScrollPane1=new JScrollPane(jTable);
+            JScrollPane jScrollPane2=new JScrollPane(jTable2);
+            JScrollPane jScrollPane3=new JScrollPane(jTable3);
+
+            jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+            jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+            jScrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+            jScrollPane3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+            jScrollPane3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            JLabel label1 = new JLabel("Fixed Day Supplier ");
+            JLabel label2 = new JLabel(" Non Delivering Supplier ");
+            JLabel label3 = new JLabel("Non Fixed Day Supplier");
+            panel.add(label1,BorderLayout.NORTH);
+            panel.add(jScrollPane1,BorderLayout.SOUTH);
+
+
+           // panel.add(jScrollPane2);
+
+           // panel.add(jScrollPane3);
+         //   panel.add(backButton);
 
             // Display the JPanel in a JFrame
             JFrame frame = new JFrame();

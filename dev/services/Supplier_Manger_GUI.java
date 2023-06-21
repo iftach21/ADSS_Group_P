@@ -16,8 +16,6 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Supplier_Manger_GUI   implements ActionListener {
@@ -838,17 +836,59 @@ public class Supplier_Manger_GUI   implements ActionListener {
             JLabel label1 = new JLabel("Fixed Day Supplier ");
             JLabel label2 = new JLabel(" Non Delivering Supplier ");
             JLabel label3 = new JLabel("Non Fixed Day Supplier");
-            panel.add(label1,BorderLayout.NORTH);
-            panel.add(jScrollPane1,BorderLayout.SOUTH);
 
 
-           // panel.add(jScrollPane2);
-
-           // panel.add(jScrollPane3);
-         //   panel.add(backButton);
-
-            // Display the JPanel in a JFrame
+            JComboBox<String> tableSelector = new JComboBox<>();
+            tableSelector.addItem("Fixed Day Suppliers");
+            tableSelector.addItem("Non Delivering Suppliers");
+            tableSelector.addItem("Non Fixed Day Suppliers");
             JFrame frame = new JFrame();
+
+
+
+
+
+            tableSelector.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Update the displayed table based on the selected option
+                    String selectedTable = (String) tableSelector.getSelectedItem();
+                    if (selectedTable.equals("Fixed Day Suppliers")) {
+                        panel.removeAll();
+                        panel.add(label1, BorderLayout.NORTH);
+                        panel.add(jScrollPane1, BorderLayout.CENTER);
+                        panel.add(backButton, BorderLayout.SOUTH);
+                    } else if (selectedTable.equals("Non Delivering Suppliers")) {
+                        panel.removeAll();
+                        panel.add(label2, BorderLayout.NORTH);
+                        panel.add(jScrollPane2, BorderLayout.CENTER);
+                        panel.add(backButton, BorderLayout.SOUTH);
+
+                    } else if (selectedTable.equals("Non Fixed Day Suppliers")) {
+                        panel.removeAll();
+                        panel.add(label3, BorderLayout.NORTH);
+                        panel.add(jScrollPane3, BorderLayout.CENTER);
+                        panel.add(backButton, BorderLayout.SOUTH);
+                    }
+
+                    // Refresh the panel to reflect the changes
+                    panel.revalidate();
+                    panel.repaint();
+                    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                }
+            });
+
+
+            tableSelector.setSelectedIndex(0);
+
+            // Set the layout manager for the panel
+            panel.setLayout(new BorderLayout());
+
+            // Add the table selector to the panel
+            panel.add(tableSelector, BorderLayout.NORTH);
+
+
+
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.getContentPane().add(panel);
             frame.pack();

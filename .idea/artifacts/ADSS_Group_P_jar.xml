@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="ADSS_Group_P:jar">
+  <artifact type="jar" build-on-make="true" name="ADSS_Group_P:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar</output-path>
     <root id="archive" name="ADSS_Group_P.jar">
       <element id="directory" name="META-INF">

@@ -8,6 +8,8 @@ import DataAccesObject.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Scanner;
 
@@ -30,7 +32,9 @@ public class Main {
         imagePanel.setBackground(Color.WHITE);
 
         JLabel imageLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("docs/LogoWelcome.jpg");
+        Path path = Paths.get("docs/LogoWelcome.jpg");
+        Path absolutePath = path.toAbsolutePath();
+        ImageIcon imageIcon = new ImageIcon(absolutePath.toString());
         Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon = new ImageIcon(image);
         imageLabel.setIcon(scaledImageIcon);

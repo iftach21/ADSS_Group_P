@@ -10,7 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="finish">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/release/docs/LogoWelcome.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/release/docs/Superli.jpeg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +44,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "320827637__209512722__206719346__311451058",
-    "last_opened_file_path": "C:/Users/laufe/OneDrive/Documents/GitHub/ADSS_Group_P/release",
+    "last_opened_file_path": "C:/Users/laufe/OneDrive/Documents/GitHub/ADSS_Group_P/docs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,9 +59,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\docs" />
+      <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release\docs" />
       <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release\docs" />
       <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release" />
       <recent name="C:\Users\laufe\OneDrive\Documents\GitHub\ADSS_Group_P\release\dev" />
     </key>
@@ -157,7 +161,7 @@
       <workItem from="1687380407968" duration="3004000" />
       <workItem from="1687383928760" duration="757000" />
       <workItem from="1687384763977" duration="831000" />
-      <workItem from="1687446428111" duration="1834000" />
+      <workItem from="1687446428111" duration="2206000" />
     </task>
     <task id="LOCAL-00001" summary="fix the period order need also to cheak why the price history dont work there">
       <created>1684102806712</created>

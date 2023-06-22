@@ -16,50 +16,67 @@ public class specificItemMapper {
         this.cache = new HashMap<>();
     }
 
-    public specificItem findSpecificItemBySerial(int serialNumber) {
-        for (List<specificItem> itemList : cache.values()) {
+//    public specificItem findSpecificItemBySerial(int serialNumber) {
+//        for (List<specificItem> itemList : cache.values()) {
+//            for (specificItem item : itemList) {
+//                if (item.getserialNumber() == serialNumber) {
+//                    return item;
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
+    public specificItem findSpecificItemBySerial(String serialNumber) {
+        for (List<specificItem> itemList : cache.values()){
             for (specificItem item : itemList) {
-                if (item.getserialNumber() == serialNumber) {
+                if (item.getSerialNumberString() == serialNumber) {
                     return item;
                 }
             }
         }
+        PreparedStatement stmt;
+        ResultSet rs;
+        getConnection();
+        specificItem currentSpecific = null;
+        List<specificItem> specificItems;
+        int serial = Integer.parseInt(serialNumber);
+        try
+        {
+            stmt = conn.prepareStatement("SELECT * FROM specific_items WHERE serial_number = ?");
+            stmt.setInt(1, serial);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                currentSpecific = new specificItem();
+                currentSpecific.setName(rs.getString("name"));
+                String catalog_number = rs.getString("catalog_number");
+                currentSpecific.setCatalogNum(catalog_number);
+                String locationString = rs.getString("location");
+                if (locationString != null && !locationString.isEmpty()) {
+                    locationString = locationString.substring(0, 1).toUpperCase() + locationString.substring(1).toLowerCase();
+                }
+                Location location = Location.valueOf(locationString);
+                currentSpecific.setLocation(location);
+                long currentDate = rs.getLong("expiration_date");
+                currentSpecific.setDate(new Date(currentDate));
+                currentSpecific.setDefected(rs.getBoolean("defected"));
+                currentSpecific.setSerialNumber(rs.getInt("serial_number"));
+                specificItems = this.findByCatalogNum(catalog_number);
+                specificItems.add(currentSpecific);
+                cache.put(catalog_number, specificItems);
+            }
+
+            return currentSpecific;
+        }
+        catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
         return null;
     }
-
-        //TODO - erase if deleteBySerialNumber work
-//    public specificItem getBySerialNumber(int serialNumber) throws SQLException {
-//        for (List <specificItem> specificitemList: cache.values()){
-//            for (specificItem specificitem : specificitemList){
-//                if (specificitem.getSerialNumber() == serialNumber)
-//                    return specificitem;
-//            }
-//        }
-//
-//        getConnection();
-//        String sql = "SELECT * FROM specific_items WHERE serial_number = ?";
-//        try (PreparedStatement statement = conn.prepareStatement(sql)){
-//            statement.setInt(1,serialNumber);
-//            ResultSet rs = statement.executeQuery();
-//            if (rs.next()){
-//                String categoryName = rs.getString("categoryName");
-//                int amount = rs.getInt("amount");
-//                Category category = new Category(serialNumber, amount);
-////                category.setAmount(amount);
-//                identityMap.add(category);
-//                return category;
-//            }
-//        }
-//        catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//        try {
-//            conn.close();
-//        }
-//        catch (SQLException e){}
-//        return null;
-//    }
-
 
 
     public List<specificItem> findByCatalogNum(String catalogNum)
@@ -288,6 +305,47 @@ public class specificItemMapper {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public int getSpecificAmount(String catalogNum)
+    {
+        List<specificItem> specificItems = new ArrayList<>();
+        int amount = 0;
+        PreparedStatement stmt;
+        ResultSet rs;
+        getConnection();
+        try
+        {
+            stmt = conn.prepareStatement("SELECT * FROM specific_items WHERE catalog_number = ?");
+            stmt.setString(1, catalogNum);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                specificItem currentSpecific = new specificItem();
+                currentSpecific.setName(rs.getString("name"));
+                currentSpecific.setCatalogNum(rs.getString("catalog_number"));
+                String locationString = rs.getString("location");
+                if (locationString != null && !locationString.isEmpty()) {
+                    locationString = locationString.substring(0, 1).toUpperCase() + locationString.substring(1).toLowerCase();
+                }
+                Location location = Location.valueOf(locationString);
+                currentSpecific.setLocation(location);
+                long currentDate = rs.getLong("expiration_date");
+                currentSpecific.setDate(new Date(currentDate));
+                currentSpecific.setDefected(rs.getBoolean("defected"));
+                currentSpecific.setSerialNumber(rs.getInt("serial_number"));
+                specificItems.add(currentSpecific);
+            }
+            return specificItems.size();
+        }
+        catch(SQLException e){}
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
+        return amount;
     }
 
 

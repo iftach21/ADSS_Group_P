@@ -40,31 +40,8 @@ public class Item {
         this.manufacturer = manufacturer;
         this.minimum_quantity = 0;
 
-//        try
-//        {
-//            Class.forName("org.sqlite.JDBC");
-//            String url = "jdbc:sqlite:dev/res/db/SuperLeeDataBase.db.db";
-//            conn = DriverManager.getConnection(url);
-//        }
-//
-//        catch(SQLException ignored){} catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } finally
-//        {
-//            try
-//            {
-//                if(conn != null)
-//                {
-//                    conn.close();
-//                }
-//            }
-//            catch(SQLException ignored){}
-//        }
-//
-//        if (itemMapper == null){
-//            itemMapper = new DataAccesObject.ItemMapper(conn);}
-//
     }
+
 
     public Item(String name, String catalogNum, double weight, String catalogName, TempLevel temperature, String manufacturer, int minimumQuantity) {
         this.name = name;
@@ -213,14 +190,6 @@ public class Item {
         return 0;
     }
 
-    //TO DELETE
-    public specificItem getSpecificItemList(int j) {
-        return null;
-    }
-
-    //TO DELETE
-    public void removeSpecificItem(specificItem currentSpecificItem) {
-    }
 
     public int getMinQuantity() {
         return this.minimum_quantity;

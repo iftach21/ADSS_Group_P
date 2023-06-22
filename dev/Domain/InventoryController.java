@@ -95,7 +95,8 @@ public class InventoryController {
 
      */
     public specificItem findSpecificItemBySerialNumber(int serialNumber){
-        specificItem currentSpecific = specificItemMapper.findSpecificItemBySerial(serialNumber);
+        String stringSerialNumber = String.valueOf(serialNumber);
+        specificItem currentSpecific = specificItemMapper.findSpecificItemBySerial(stringSerialNumber);
         return currentSpecific;
     }
 
@@ -176,14 +177,14 @@ public class InventoryController {
 
     public Item getItemByCatalogNumber(String itemCatalogNumber) {
         Item currentItem;
-        for (Map.Entry<Item, List<specificItem>> entry : specificItemsMap.entrySet()) {
-            Item key = entry.getKey();
-            if (key.getCatalogNum().equals(itemCatalogNumber)){
-                return key;
-            }
+        currentItem = itemMapper.findByCatalogNum(itemCatalogNumber);
+        if (currentItem == null) {
+            return null;
         }
-        return null;
+        return currentItem;
     }
+
+
     //Method: deleteSpecificItem
     //This method deleted a specific item from the entire inventory
     public boolean deleteSpecificItem(int serialNumber){
@@ -735,5 +736,10 @@ public class InventoryController {
 
     public DataAccesObject.specificItemMapper getSpecificItemMapper() {
         return specificItemMapper;
+    }
+
+    public int getItemsAmount(String catalogNumber){
+
+        return specificItemMapper.getSpecificAmount(catalogNumber);
     }
 }

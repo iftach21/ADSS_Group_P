@@ -226,7 +226,8 @@ public class InventoryMangerGUI implements ActionListener {
             switch (choiceNum) {
                 case 0:
                     // for all products
-                    if (inventoryController.shortageReportFull() == null) {
+                    report = inventoryController.shortageReportFull();
+                    if (report == null) {
                         JOptionPane.showInternalMessageDialog(null, "No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -234,7 +235,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
@@ -244,7 +244,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable.setDefaultRenderer(Object.class, rowRenderer);
 
-                    report = inventoryController.shortageReportFull();
                     reportType = report.getType().toString();
                     reportNumber = Integer.toString(report.getReportNum());
                     reportDate = report.getReportDate().toString();
@@ -272,11 +271,21 @@ public class InventoryMangerGUI implements ActionListener {
 
                     break;
                 case 1:
-                    //TODO fix - the reportNumber jump by 2
                     // for category
                     String nameCategory = JOptionPane.showInputDialog("For which category ?");
 
-                    if (inventoryController.shortageReportCategory(nameCategory) == null) {
+                    // if clicked "cancel"
+                    if (nameCategory == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog) {
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
+
+                    Report report2 = inventoryController.shortageReportCategory(nameCategory);
+                    if (report2 == null) {
                         JOptionPane.showInternalMessageDialog(null, "No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -284,7 +293,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel2 = new DefaultTableModel(column, 0);
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable2 = new TableRowSorter<>(tableModel2);
@@ -294,7 +302,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer2.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable2.setDefaultRenderer(Object.class, rowRenderer2);
 
-                    Report report2 = inventoryController.shortageReportCategory(nameCategory);
                     String reportType2 = report2.getType().toString();
                     String reportNumber2 = Integer.toString(report2.getReportNum());
                     String reportDate2 = report2.getReportDate().toString();
@@ -325,7 +332,18 @@ public class InventoryMangerGUI implements ActionListener {
                     // for specific item
                     String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
 
-                    if (inventoryController.shortageReportGeneralItem(nameSpecific) == null) {
+                    // if clicked "cancel"
+                    if (nameSpecific == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog) {
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
+
+                    Report report3 = inventoryController.shortageReportGeneralItem(nameSpecific);
+                    if (report3 == null) {
                         JOptionPane.showInternalMessageDialog(null, "No missing products", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -333,7 +351,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable3 = new TableRowSorter<>(tableModel3);
@@ -343,7 +360,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer3.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable3.setDefaultRenderer(Object.class, rowRenderer3);
 
-                    Report report3 = inventoryController.shortageReportGeneralItem(nameSpecific);
                     String reportType3 = report3.getType().toString();
                     String reportNumber3 = Integer.toString(report3.getReportNum());
                     String reportDate3 = report3.getReportDate().toString();
@@ -838,8 +854,6 @@ public class InventoryMangerGUI implements ActionListener {
 
                             // has expiry date
                             int expiryInput = JOptionPane.showConfirmDialog(null, "Does the product have an expiration date", "Expiration Date", JOptionPane.YES_NO_OPTION);
-                            if (expiryInput == -1)
-                                return;
 
                             // if the product have expiration date
                             if (expiryInput == 0) {
@@ -955,6 +969,8 @@ public class InventoryMangerGUI implements ActionListener {
                         else if (selectedOption.equals("Delete specific item")) {
                             int specificSerialNumber = -1;
                             specificItem tempItem = null;
+
+                            Item currItem = null;
                             validInput[0] = false;
 
                             while (!validInput[0]) {
@@ -974,8 +990,14 @@ public class InventoryMangerGUI implements ActionListener {
                                 if (input.matches("\\d+")) {
                                     specificSerialNumber = Integer.parseInt(input);
 
-                                    //TODO fix the method
-//                                    tempItem = inventoryController.findSpecificItemBySerialNumber(specificSerialNumber);
+                                    tempItem = inventoryController.findSpecificItemBySerialNumber(specificSerialNumber);
+                                    // alert if the item is not in the store
+                                    if (tempItem == null){
+                                        JOptionPane.showInternalMessageDialog(null, "Item " + specificSerialNumber + " has not fount in the inventory", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                                        return;
+                                    }
+                                    currItem = inventoryController.getItemByCatalogNumber(tempItem.getCatalogNum());
+
                                     validInput[0] = true;
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
@@ -986,8 +1008,10 @@ public class InventoryMangerGUI implements ActionListener {
 
 
                             inventoryController.deleteSpecificFromMapper(specificSerialNumber);
+                            // alert if there is Shortage
+                            if (inventoryController.getItemsAmount(tempItem.getCatalogNum()) <= currItem.getMinQuantity())
+                                JOptionPane.showInternalMessageDialog(null, "There is a shortage!\nMinmum quantity: "+currItem.getMinQuantity() +"\nCurrent amount: " + inventoryController.getItemsAmount(tempItem.getCatalogNum()), "Alert", JOptionPane.INFORMATION_MESSAGE);
                             JOptionPane.showInternalMessageDialog(null, "Item " + specificSerialNumber + " has been removed", "Alert", JOptionPane.INFORMATION_MESSAGE);
-
                         }
 
 
@@ -1014,8 +1038,6 @@ public class InventoryMangerGUI implements ActionListener {
                                 if (input.matches("\\d+")) {
                                     specificSerialNumber = Integer.parseInt(input);
 
-                                    // TODO fix the method
-//                                    tempItem = inventoryController.findSpecificItemBySerialNumber(specificSerialNumber);
                                     validInput[0] = true;
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Invalid input! Please enter a numeric value.");
@@ -1025,17 +1047,8 @@ public class InventoryMangerGUI implements ActionListener {
                                 return;
 
                             inventoryController.moveSpecificItemMapper(specificSerialNumber);
-                            JOptionPane.showInternalMessageDialog(null, "Item: " + specificSerialNumber + " has been moved to the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showInternalMessageDialog(null, "Item: " + specificSerialNumber + " has been moved", "Alert", JOptionPane.INFORMATION_MESSAGE);
 
-                            // TODO keep it - will work when the method will work
-//                            if (tempItem == null) {
-//                                JOptionPane.showMessageDialog(null, "Could not find such an item");
-//                                return;
-//                            }
-//                            else{
-//                                inventoryController.moveSpecificItemMapper(specificSerialNumber);
-//                                JOptionPane.showInternalMessageDialog(null,"Item" + specificSerialNumber + "has been moved to the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
-//                            }
                         }
 
                         // return to the main page
@@ -1081,7 +1094,8 @@ public class InventoryMangerGUI implements ActionListener {
             switch (choiceNum) {
                 case 0:
                     // for all products
-                    if (inventoryController.FullCountingReport() == null) {
+                    report = inventoryController.FullCountingReport();
+                    if (report == null) {
                         JOptionPane.showInternalMessageDialog(null, "No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -1089,7 +1103,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
@@ -1099,7 +1112,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable.setDefaultRenderer(Object.class, rowRenderer);
 
-                    report = inventoryController.FullCountingReport();
                     reportType = report.getType().toString();
                     reportNumber = Integer.toString(report.getReportNum());
                     reportDate = report.getReportDate().toString();
@@ -1127,20 +1139,29 @@ public class InventoryMangerGUI implements ActionListener {
 
                     break;
                 case 1:
-                    //TODO fix - the reportNumber jump by 2
 
                     // for category
                     String nameCategory = JOptionPane.showInputDialog("For which category ?");
 
-                    if (inventoryController.CategoryCountingReport(nameCategory) == null) {
-                        JOptionPane.showInternalMessageDialog(null, "No products with that category name in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    // if clicked "cancel"
+                    if (nameCategory == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog) {
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
+
+                    Report report2 = inventoryController.CategoryCountingReport(nameCategory);
+                    if (report2 == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
                     DefaultTableModel tableModel2 = new DefaultTableModel(column, 0);
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable2 = new TableRowSorter<>(tableModel2);
@@ -1150,7 +1171,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer2.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable2.setDefaultRenderer(Object.class, rowRenderer2);
 
-                    Report report2 = inventoryController.CategoryCountingReport(nameCategory);
                     String reportType2 = report2.getType().toString();
                     String reportNumber2 = Integer.toString(report2.getReportNum());
                     String reportDate2 = report2.getReportDate().toString();
@@ -1181,15 +1201,25 @@ public class InventoryMangerGUI implements ActionListener {
                     // for specific item
                     String nameSpecific = JOptionPane.showInputDialog("What is the catalog number ?");
 
-                    if (inventoryController.ItemCountingReport(nameSpecific) == null) {
-                        JOptionPane.showInternalMessageDialog(null, "No products with that catalog number in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    // if clicked "cancel"
+                    if (nameSpecific == null) {
+                        Window window = SwingUtilities.getWindowAncestor(buttonPanel);
+                        if (window instanceof JDialog) {
+                            JDialog dialog = (JDialog) window;
+                            dialog.dispose();
+                        }
+                        return;
+                    }
+
+                    Report report3 = inventoryController.ItemCountingReport(nameSpecific);
+                    if (report3 == null) {
+                        JOptionPane.showInternalMessageDialog(null, "No products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
 
                     DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable3 = new TableRowSorter<>(tableModel3);
@@ -1199,7 +1229,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer3.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable3.setDefaultRenderer(Object.class, rowRenderer3);
 
-                    Report report3 = inventoryController.ItemCountingReport(nameSpecific);
                     String reportType3 = report3.getType().toString();
                     String reportNumber3 = Integer.toString(report3.getReportNum());
                     String reportDate3 = report3.getReportDate().toString();
@@ -1271,7 +1300,8 @@ public class InventoryMangerGUI implements ActionListener {
             switch (choiceNum) {
                 case 0:
                     // for all products
-                    if (inventoryController.FullDefectiveReport() == null) {
+                    report = inventoryController.FullDefectiveReport();
+                    if (report == null) {
                         JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -1279,7 +1309,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                     JTable jtable = new JTable(tableModel);
                     jtable.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
@@ -1289,7 +1318,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable.setDefaultRenderer(Object.class, rowRenderer);
 
-                    report = inventoryController.FullDefectiveReport();
                     reportType = report.getType().toString();
                     reportNumber = Integer.toString(report.getReportNum());
                     reportDate = report.getReportDate().toString();
@@ -1330,7 +1358,8 @@ public class InventoryMangerGUI implements ActionListener {
                         return;
                     }
 
-                    if (inventoryController.CategoryDefectiveReport(nameCategory) == null) {
+                    Report report2 = inventoryController.CategoryDefectiveReport(nameCategory);
+                    if (report2 == null) {
                         JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -1338,7 +1367,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel2 = new DefaultTableModel(column, 0);
                     JTable jtable2 = new JTable(tableModel2);
                     jtable2.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable2.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable2 = new TableRowSorter<>(tableModel2);
@@ -1348,7 +1376,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer2.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable2.setDefaultRenderer(Object.class, rowRenderer2);
 
-                    Report report2 = inventoryController.CategoryDefectiveReport(nameCategory);
                     String reportType2 = report2.getType().toString();
                     String reportNumber2 = Integer.toString(report2.getReportNum());
                     String reportDate2 = report2.getReportDate().toString();
@@ -1389,7 +1416,8 @@ public class InventoryMangerGUI implements ActionListener {
                         return;
                     }
 
-                    if (inventoryController.ItemDefectiveReport(nameSpecific) == null) {
+                    Report report3 = inventoryController.ItemDefectiveReport(nameSpecific);
+                    if (report3 == null) {
                         JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     }
@@ -1397,7 +1425,6 @@ public class InventoryMangerGUI implements ActionListener {
                     DefaultTableModel tableModel3 = new DefaultTableModel(column, 0);
                     JTable jtable3 = new JTable(tableModel3);
                     jtable3.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                     jtable3.setFont(new Font("Arial", Font.PLAIN, 10));
 
                     TableRowSorter<TableModel> sortTable3 = new TableRowSorter<>(tableModel3);
@@ -1407,7 +1434,6 @@ public class InventoryMangerGUI implements ActionListener {
                     rowRenderer3.setBackground(Color.LIGHT_GRAY.brighter());
                     jtable3.setDefaultRenderer(Object.class, rowRenderer3);
 
-                    Report report3 = inventoryController.ItemDefectiveReport(nameSpecific);
                     String reportType3 = report3.getType().toString();
                     String reportNumber3 = Integer.toString(report3.getReportNum());
                     String reportDate3 = report3.getReportDate().toString();
@@ -1812,6 +1838,7 @@ public class InventoryMangerGUI implements ActionListener {
 
         //provide price history report
         else if (e.getSource() == PriceHistoryReportButton) {
+            Report report = null;
             String catalogNumber = JOptionPane.showInputDialog("What is the catalog number ?");
 
             // if clicked "cancel"
@@ -1824,12 +1851,12 @@ public class InventoryMangerGUI implements ActionListener {
                 return;
             }
 
-            if (inventoryController.priceHistoryReport(catalogNumber) == null) {
+            report = inventoryController.priceHistoryReport(catalogNumber);
+            if (report == null)
                 JOptionPane.showInternalMessageDialog(null, "No defective products in the store", "Alert", JOptionPane.INFORMATION_MESSAGE);
-            } else {
 
+            else {
                 String column[] = {"Report Type", "Report Number", "Report Date", "Catalog Number", "Buy Price", "Sell Price"};
-                Report report = null;
                 String reportType;
                 String reportNumber;
                 String reportDate;
@@ -1841,7 +1868,6 @@ public class InventoryMangerGUI implements ActionListener {
                 DefaultTableModel tableModel = new DefaultTableModel(column, 0);
                 JTable jtable = new JTable(tableModel);
                 jtable.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
                 jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
                 TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);
@@ -1851,7 +1877,6 @@ public class InventoryMangerGUI implements ActionListener {
                 rowRenderer.setBackground(Color.LIGHT_GRAY.brighter());
                 jtable.setDefaultRenderer(Object.class, rowRenderer);
 
-                report = inventoryController.priceHistoryReport(catalogNumber);
                 reportType = report.getType().toString();
                 reportNumber = Integer.toString(report.getReportNum());
                 reportDate = report.getReportDate().toString();
@@ -1934,7 +1959,6 @@ public class InventoryMangerGUI implements ActionListener {
             DefaultTableModel tableModel = new DefaultTableModel(column, 0);
             JTable jtable = new JTable(tableModel);
             jtable.setRowHeight(20);
-//                    jtable.setBounds(30,100,200,300);
             jtable.setFont(new Font("Arial", Font.PLAIN, 10));
 
             TableRowSorter<TableModel> sortTable = new TableRowSorter<>(tableModel);

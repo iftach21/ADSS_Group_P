@@ -68,7 +68,7 @@ public class Main {
                 }
 
             });}
-        if(args[0].equals("CUI")){
+        else if(args[0].equals("CUI")){
 
 
 
@@ -77,7 +77,9 @@ public class Main {
 
 
 
-        AInterface[] interfaces = new AInterface[4];
+
+
+            AInterface[] interfaces = new AInterface[4];
         interfaces[0] = new SupplierInterface();
         interfaces[1] = new OrderInterface(interfaces[0].getSupplier_manger());
         interfaces[2] = new interfaceManager();
@@ -261,7 +263,8 @@ public class Main {
 
             }
 
-        } else if (args[1].equals("Supplier-Manger")) {
+        }
+            else if (args[1].equals("Supplier-Manger")) {
                 interfaces[0].interfaceStartup();
 
                 

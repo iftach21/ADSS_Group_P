@@ -280,6 +280,11 @@ public class FixedDaySupplierMapper{
             stringBuilder.append(supplier.getPerson().getPhoneNumber()).append(", ");
             stringBuilder.append(supplier.getCurrentDeliveryDay().name()).append("\n");
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
         return stringBuilder.toString();
     }

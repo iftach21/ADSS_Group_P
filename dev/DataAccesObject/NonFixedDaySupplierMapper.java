@@ -295,6 +295,12 @@ public class NonFixedDaySupplierMapper{
 
         }
 
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
+
         return stringBuilder.toString();
     }
 

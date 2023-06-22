@@ -275,6 +275,11 @@ public class NonDeliveringSupplierMapper {
             stringBuilder.append(supplier.getPerson().getPhoneNumber()).append(", ");
 
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
         return stringBuilder.toString();
     }

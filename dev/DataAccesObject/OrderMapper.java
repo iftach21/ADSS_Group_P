@@ -383,6 +383,11 @@ public class OrderMapper
             sb.append(order.getStore_number()).append("\t");
             sb.append(order.getStatusOrder()).append("\n");
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
         return sb.toString();
     }

@@ -333,6 +333,11 @@ public class PeriodicOrderMapper {
                     .append(order.getDays_to_cycle()).append("\t")
                     .append(order.getDay_left()).append("\n");
         }
+        try
+        {
+            conn.close();
+        }
+        catch (SQLException e){}
 
         return tableString.toString();
     }

@@ -400,7 +400,7 @@ public class interfaceManager extends AInterface {
                                 Input = new Scanner(System.in);
                                 int serialNumber = Integer.parseInt(Input.nextLine());
                                 specificItem currentSpecific = Inventory.findSpecificItemBySerialNumber(serialNumber);
-//                                Inventory.deleteSpecificFromMapper(currentSpecific);
+                                Inventory.deleteSpecificFromMapper(serialNumber);
                                 if (currentSpecific == null){
                                     System.out.println("item was not found.");
                                 }

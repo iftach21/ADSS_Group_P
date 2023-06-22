@@ -9,35 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="Program visibility">
+    <list default="true" id="427cb638-22e0-4f11-8c89-5bc9e9e8af18" name="Changes" comment="finish">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/categoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/categoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DataAccesObject/specificItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DataAccesObject/specificItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Domain/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Domain/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Domain/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Interface/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Interface/interfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Interface/interfaceManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/res/SuperLeeDataBase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/services/InventoryMangerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/ADSS_Group_P_jar/ADSS_Group_P.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DataAccesObject/specificItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DataAccesObject/specificItemMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Domain/InventoryController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/InventoryController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Domain/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/InventoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/InventoryMangerGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/Supplier_Manger_GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DataAccesObject/ItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DataAccesObject/ItemMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DataAccesObject/categoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DataAccesObject/categoryMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Domain/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Domain/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Interface/interfaceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Interface/interfaceManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +74,7 @@
     <configuration name="Interface.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Interface.Main" />
       <module name="ADSS_Group_P" />
-      <option name="PROGRAM_PARAMETERS" value="CUI Manger" />
+      <option name="PROGRAM_PARAMETERS" value="CLI StoreManger" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Interface.*" />
@@ -384,7 +366,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1687302307488</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL‎-00030" summary="finish">
+      <created>1687430365884</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL‎-00030" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687430365884</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +402,8 @@
     <MESSAGE value="style" />
     <MESSAGE value="more style changes" />
     <MESSAGE value="Program visibility" />
-    <option name="LAST_COMMIT_MESSAGE" value="Program visibility" />
+    <MESSAGE value="finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

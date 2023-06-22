@@ -49,32 +49,23 @@ public class Main {
         welcomeFrame.setVisible(false);
 
 
-//        Manger manger = new Manger();
-
-
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
 
-                    if(args[1].equals("Supplier-Manger")){
+                    if(args[1].equals("SupplierManger")){
                     new Supplier_Manger_GUI(false);
                     }
-                    else if(args[1].equals("Inventory-Manger")){
+                    else if(args[1].equals("InventoryManger")){
                         new InventoryMangerGUI(false);
                     }
-                    else if (args[1].equals("Store-Manger")) {
+                    else if (args[1].equals("StoreManger")) {
                         new Manger();
 
                     }
                 }
 
             });}
-        else if(args[0].equals("CUI")){
-
-
-
-
-
-
+        else if(args[0].equals("CLI")){
 
 
 
@@ -90,7 +81,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         while(true)
         {
-            if(args[1].equals("Manger")){
+            if(args[1].equals("StoreManger")){
             System.out.println("Hello this is the manger  board press on the right option");
             System.out.println("1.Supplier manger");
             System.out.println("2.Order manger");
@@ -264,7 +255,7 @@ public class Main {
             }
 
         }
-            else if (args[1].equals("Supplier-Manger")) {
+            else if (args[1].equals("SupplierManger")) {
                 interfaces[0].interfaceStartup();
 
                 
